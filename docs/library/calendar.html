@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>calendar — General calendar-related functions &#8212; Python 3.9.0a3 documentation</title>
+    <title>calendar — General calendar-related functions &#8212; Python 3.9.0a4 documentation</title>
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments-monokai.css" />
+    <link rel="stylesheet" href="../_static/pygments_dark.css" type="text/css" media="(prefers-color-scheme: dark)" id="pygments_dark_css" />
     
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -18,7 +18,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.9.0a3 documentation"
+          title="Search within Python 3.9.0a4 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -41,9 +41,11 @@
       }
     </style>
 
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png" />
+    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
     
     <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <script type="text/javascript" src="../_static/themetoggle.js"></script>
     
      
 
@@ -72,7 +74,7 @@
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
@@ -91,6 +93,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -107,7 +110,7 @@
 <p>This module allows you to output calendars like the Unix <strong class="program">cal</strong> program,
 and provides additional useful functions related to the calendar. By default,
 these calendars have Monday as the first day of the week, and Sunday as the last
-(the European convention). Use <a class="reference internal" href="#calendar.setfirstweekday" title="calendar.setfirstweekday"><code class="xref py py-func docutils literal notranslate"><span class="pre">setfirstweekday()</span></code></a> to set the first day of
+(the European convention). Use <a class="reference internal" href="#calendar-setfirstweekday" title="calendar.setfirstweekday"><code class="xref py py-func docutils literal notranslate"><span class="pre">setfirstweekday()</span></code></a> to set the first day of
 the week to Sunday (6) or to any other weekday.  Parameters that specify dates
 are given as integers. For related
 functionality, see also the <a class="reference internal" href="datetime.html#module-datetime" title="datetime: Basic date and time types."><code class="xref py py-mod docutils literal notranslate"><span class="pre">datetime</span></code></a> and <a class="reference internal" href="time.html#module-time" title="time: Time access and conversions."><code class="xref py py-mod docutils literal notranslate"><span class="pre">time</span></code></a> modules.</p>
@@ -118,55 +121,55 @@ calendar in Dershowitz and Reingold’s book “Calendrical Calculations”, whe
 it’s the base calendar for all computations.  Zero and negative years are
 interpreted as prescribed by the ISO 8601 standard.  Year 0 is 1 BC, year -1 is
 2 BC, and so on.</p>
-<dl class="class">
-<dt id="calendar.Calendar">
-<em class="property">class </em><code class="sig-prename descclassname">calendar.</code><code class="sig-name descname">Calendar</code><span class="sig-paren">(</span><em class="sig-param">firstweekday=0</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar.Calendar" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates a <a class="reference internal" href="#calendar.Calendar" title="calendar.Calendar"><code class="xref py py-class docutils literal notranslate"><span class="pre">Calendar</span></code></a> object. <em>firstweekday</em> is an integer specifying the
+<dl class="py class">
+<dt id="calendar-calendar">
+<span id="calendar.Calendar"></span><em class="property">class </em><code class="sig-prename descclassname">calendar.</code><code class="sig-name descname">Calendar</code><span class="sig-paren">(</span><em class="sig-param">firstweekday=0</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar-calendar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a <a class="reference internal" href="#calendar-calendar" title="calendar.Calendar"><code class="xref py py-class docutils literal notranslate"><span class="pre">Calendar</span></code></a> object. <em>firstweekday</em> is an integer specifying the
 first day of the week. <code class="docutils literal notranslate"><span class="pre">0</span></code> is Monday (the default), <code class="docutils literal notranslate"><span class="pre">6</span></code> is Sunday.</p>
-<p>A <a class="reference internal" href="#calendar.Calendar" title="calendar.Calendar"><code class="xref py py-class docutils literal notranslate"><span class="pre">Calendar</span></code></a> object provides several methods that can be used for
+<p>A <a class="reference internal" href="#calendar-calendar" title="calendar.Calendar"><code class="xref py py-class docutils literal notranslate"><span class="pre">Calendar</span></code></a> object provides several methods that can be used for
 preparing the calendar data for formatting. This class doesn’t do any formatting
 itself. This is the job of subclasses.</p>
-<p><a class="reference internal" href="#calendar.Calendar" title="calendar.Calendar"><code class="xref py py-class docutils literal notranslate"><span class="pre">Calendar</span></code></a> instances have the following methods:</p>
-<dl class="method">
-<dt id="calendar.Calendar.iterweekdays">
-<code class="sig-name descname">iterweekdays</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#calendar.Calendar.iterweekdays" title="Permalink to this definition">¶</a></dt>
+<p><a class="reference internal" href="#calendar-calendar" title="calendar.Calendar"><code class="xref py py-class docutils literal notranslate"><span class="pre">Calendar</span></code></a> instances have the following methods:</p>
+<dl class="py method">
+<dt id="calendar-calendar-iterweekdays">
+<span id="calendar.Calendar.iterweekdays"></span><code class="sig-name descname">iterweekdays</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#calendar-calendar-iterweekdays" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return an iterator for the week day numbers that will be used for one
 week.  The first value from the iterator will be the same as the value of
-the <a class="reference internal" href="#calendar.firstweekday" title="calendar.firstweekday"><code class="xref py py-attr docutils literal notranslate"><span class="pre">firstweekday</span></code></a> property.</p>
+the <a class="reference internal" href="#calendar-firstweekday" title="calendar.firstweekday"><code class="xref py py-attr docutils literal notranslate"><span class="pre">firstweekday</span></code></a> property.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="calendar.Calendar.itermonthdates">
-<code class="sig-name descname">itermonthdates</code><span class="sig-paren">(</span><em class="sig-param">year</em>, <em class="sig-param">month</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar.Calendar.itermonthdates" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="calendar-calendar-itermonthdates">
+<span id="calendar.Calendar.itermonthdates"></span><code class="sig-name descname">itermonthdates</code><span class="sig-paren">(</span><em class="sig-param">year</em>, <em class="sig-param">month</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar-calendar-itermonthdates" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return an iterator for the month <em>month</em> (1–12) in the year <em>year</em>. This
-iterator will return all days (as <a class="reference internal" href="datetime.html#datetime.date" title="datetime.date"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.date</span></code></a> objects) for the
+iterator will return all days (as <a class="reference internal" href="datetime.html#datetime-1" title="datetime.date"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.date</span></code></a> objects) for the
 month and all days before the start of the month or after the end of the
 month that are required to get a complete week.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="calendar.Calendar.itermonthdays">
-<code class="sig-name descname">itermonthdays</code><span class="sig-paren">(</span><em class="sig-param">year</em>, <em class="sig-param">month</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar.Calendar.itermonthdays" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="calendar-calendar-itermonthdays">
+<span id="calendar.Calendar.itermonthdays"></span><code class="sig-name descname">itermonthdays</code><span class="sig-paren">(</span><em class="sig-param">year</em>, <em class="sig-param">month</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar-calendar-itermonthdays" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return an iterator for the month <em>month</em> in the year <em>year</em> similar to
-<a class="reference internal" href="#calendar.Calendar.itermonthdates" title="calendar.Calendar.itermonthdates"><code class="xref py py-meth docutils literal notranslate"><span class="pre">itermonthdates()</span></code></a>, but not restricted by the <a class="reference internal" href="datetime.html#datetime.date" title="datetime.date"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.date</span></code></a>
+<a class="reference internal" href="#calendar-calendar-itermonthdates" title="calendar.Calendar.itermonthdates"><code class="xref py py-meth docutils literal notranslate"><span class="pre">itermonthdates()</span></code></a>, but not restricted by the <a class="reference internal" href="datetime.html#datetime-1" title="datetime.date"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.date</span></code></a>
 range. Days returned will simply be day of the month numbers.  For the
 days outside of the specified month, the day number is <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="calendar.Calendar.itermonthdays2">
-<code class="sig-name descname">itermonthdays2</code><span class="sig-paren">(</span><em class="sig-param">year</em>, <em class="sig-param">month</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar.Calendar.itermonthdays2" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="calendar-calendar-itermonthdays2">
+<span id="calendar.Calendar.itermonthdays2"></span><code class="sig-name descname">itermonthdays2</code><span class="sig-paren">(</span><em class="sig-param">year</em>, <em class="sig-param">month</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar-calendar-itermonthdays2" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return an iterator for the month <em>month</em> in the year <em>year</em> similar to
-<a class="reference internal" href="#calendar.Calendar.itermonthdates" title="calendar.Calendar.itermonthdates"><code class="xref py py-meth docutils literal notranslate"><span class="pre">itermonthdates()</span></code></a>, but not restricted by the <a class="reference internal" href="datetime.html#datetime.date" title="datetime.date"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.date</span></code></a>
+<a class="reference internal" href="#calendar-calendar-itermonthdates" title="calendar.Calendar.itermonthdates"><code class="xref py py-meth docutils literal notranslate"><span class="pre">itermonthdates()</span></code></a>, but not restricted by the <a class="reference internal" href="datetime.html#datetime-1" title="datetime.date"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.date</span></code></a>
 range. Days returned will be tuples consisting of a day of the month
 number and a week day number.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="calendar.Calendar.itermonthdays3">
-<code class="sig-name descname">itermonthdays3</code><span class="sig-paren">(</span><em class="sig-param">year</em>, <em class="sig-param">month</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar.Calendar.itermonthdays3" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="calendar-calendar-itermonthdays3">
+<span id="calendar.Calendar.itermonthdays3"></span><code class="sig-name descname">itermonthdays3</code><span class="sig-paren">(</span><em class="sig-param">year</em>, <em class="sig-param">month</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar-calendar-itermonthdays3" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return an iterator for the month <em>month</em> in the year <em>year</em> similar to
-<a class="reference internal" href="#calendar.Calendar.itermonthdates" title="calendar.Calendar.itermonthdates"><code class="xref py py-meth docutils literal notranslate"><span class="pre">itermonthdates()</span></code></a>, but not restricted by the <a class="reference internal" href="datetime.html#datetime.date" title="datetime.date"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.date</span></code></a>
+<a class="reference internal" href="#calendar-calendar-itermonthdates" title="calendar.Calendar.itermonthdates"><code class="xref py py-meth docutils literal notranslate"><span class="pre">itermonthdates()</span></code></a>, but not restricted by the <a class="reference internal" href="datetime.html#datetime-1" title="datetime.date"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.date</span></code></a>
 range. Days returned will be tuples consisting of a year, a month and a day
 of the month numbers.</p>
 <div class="versionadded">
@@ -174,11 +177,11 @@ of the month numbers.</p>
 </div>
 </dd></dl>
 
-<dl class="method">
-<dt id="calendar.Calendar.itermonthdays4">
-<code class="sig-name descname">itermonthdays4</code><span class="sig-paren">(</span><em class="sig-param">year</em>, <em class="sig-param">month</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar.Calendar.itermonthdays4" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="calendar-calendar-itermonthdays4">
+<span id="calendar.Calendar.itermonthdays4"></span><code class="sig-name descname">itermonthdays4</code><span class="sig-paren">(</span><em class="sig-param">year</em>, <em class="sig-param">month</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar-calendar-itermonthdays4" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return an iterator for the month <em>month</em> in the year <em>year</em> similar to
-<a class="reference internal" href="#calendar.Calendar.itermonthdates" title="calendar.Calendar.itermonthdates"><code class="xref py py-meth docutils literal notranslate"><span class="pre">itermonthdates()</span></code></a>, but not restricted by the <a class="reference internal" href="datetime.html#datetime.date" title="datetime.date"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.date</span></code></a>
+<a class="reference internal" href="#calendar-calendar-itermonthdates" title="calendar.Calendar.itermonthdates"><code class="xref py py-meth docutils literal notranslate"><span class="pre">itermonthdates()</span></code></a>, but not restricted by the <a class="reference internal" href="datetime.html#datetime-1" title="datetime.date"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.date</span></code></a>
 range. Days returned will be tuples consisting of a year, a month, a day
 of the month, and a day of the week numbers.</p>
 <div class="versionadded">
@@ -186,130 +189,130 @@ of the month, and a day of the week numbers.</p>
 </div>
 </dd></dl>
 
-<dl class="method">
-<dt id="calendar.Calendar.monthdatescalendar">
-<code class="sig-name descname">monthdatescalendar</code><span class="sig-paren">(</span><em class="sig-param">year</em>, <em class="sig-param">month</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar.Calendar.monthdatescalendar" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="calendar-calendar-monthdatescalendar">
+<span id="calendar.Calendar.monthdatescalendar"></span><code class="sig-name descname">monthdatescalendar</code><span class="sig-paren">(</span><em class="sig-param">year</em>, <em class="sig-param">month</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar-calendar-monthdatescalendar" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a list of the weeks in the month <em>month</em> of the <em>year</em> as full
-weeks.  Weeks are lists of seven <a class="reference internal" href="datetime.html#datetime.date" title="datetime.date"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.date</span></code></a> objects.</p>
+weeks.  Weeks are lists of seven <a class="reference internal" href="datetime.html#datetime-1" title="datetime.date"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.date</span></code></a> objects.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="calendar.Calendar.monthdays2calendar">
-<code class="sig-name descname">monthdays2calendar</code><span class="sig-paren">(</span><em class="sig-param">year</em>, <em class="sig-param">month</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar.Calendar.monthdays2calendar" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="calendar-calendar-monthdays2calendar">
+<span id="calendar.Calendar.monthdays2calendar"></span><code class="sig-name descname">monthdays2calendar</code><span class="sig-paren">(</span><em class="sig-param">year</em>, <em class="sig-param">month</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar-calendar-monthdays2calendar" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a list of the weeks in the month <em>month</em> of the <em>year</em> as full
 weeks.  Weeks are lists of seven tuples of day numbers and weekday
 numbers.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="calendar.Calendar.monthdayscalendar">
-<code class="sig-name descname">monthdayscalendar</code><span class="sig-paren">(</span><em class="sig-param">year</em>, <em class="sig-param">month</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar.Calendar.monthdayscalendar" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="calendar-calendar-monthdayscalendar">
+<span id="calendar.Calendar.monthdayscalendar"></span><code class="sig-name descname">monthdayscalendar</code><span class="sig-paren">(</span><em class="sig-param">year</em>, <em class="sig-param">month</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar-calendar-monthdayscalendar" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a list of the weeks in the month <em>month</em> of the <em>year</em> as full
 weeks.  Weeks are lists of seven day numbers.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="calendar.Calendar.yeardatescalendar">
-<code class="sig-name descname">yeardatescalendar</code><span class="sig-paren">(</span><em class="sig-param">year</em>, <em class="sig-param">width=3</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar.Calendar.yeardatescalendar" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="calendar-calendar-yeardatescalendar">
+<span id="calendar.Calendar.yeardatescalendar"></span><code class="sig-name descname">yeardatescalendar</code><span class="sig-paren">(</span><em class="sig-param">year</em>, <em class="sig-param">width=3</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar-calendar-yeardatescalendar" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the data for the specified year ready for formatting. The return
 value is a list of month rows. Each month row contains up to <em>width</em>
 months (defaulting to 3). Each month contains between 4 and 6 weeks and
-each week contains 1–7 days. Days are <a class="reference internal" href="datetime.html#datetime.date" title="datetime.date"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.date</span></code></a> objects.</p>
+each week contains 1–7 days. Days are <a class="reference internal" href="datetime.html#datetime-1" title="datetime.date"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.date</span></code></a> objects.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="calendar.Calendar.yeardays2calendar">
-<code class="sig-name descname">yeardays2calendar</code><span class="sig-paren">(</span><em class="sig-param">year</em>, <em class="sig-param">width=3</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar.Calendar.yeardays2calendar" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="calendar-calendar-yeardays2calendar">
+<span id="calendar.Calendar.yeardays2calendar"></span><code class="sig-name descname">yeardays2calendar</code><span class="sig-paren">(</span><em class="sig-param">year</em>, <em class="sig-param">width=3</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar-calendar-yeardays2calendar" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the data for the specified year ready for formatting (similar to
-<a class="reference internal" href="#calendar.Calendar.yeardatescalendar" title="calendar.Calendar.yeardatescalendar"><code class="xref py py-meth docutils literal notranslate"><span class="pre">yeardatescalendar()</span></code></a>). Entries in the week lists are tuples of day
+<a class="reference internal" href="#calendar-calendar-yeardatescalendar" title="calendar.Calendar.yeardatescalendar"><code class="xref py py-meth docutils literal notranslate"><span class="pre">yeardatescalendar()</span></code></a>). Entries in the week lists are tuples of day
 numbers and weekday numbers. Day numbers outside this month are zero.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="calendar.Calendar.yeardayscalendar">
-<code class="sig-name descname">yeardayscalendar</code><span class="sig-paren">(</span><em class="sig-param">year</em>, <em class="sig-param">width=3</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar.Calendar.yeardayscalendar" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="calendar-calendar-yeardayscalendar">
+<span id="calendar.Calendar.yeardayscalendar"></span><code class="sig-name descname">yeardayscalendar</code><span class="sig-paren">(</span><em class="sig-param">year</em>, <em class="sig-param">width=3</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar-calendar-yeardayscalendar" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the data for the specified year ready for formatting (similar to
-<a class="reference internal" href="#calendar.Calendar.yeardatescalendar" title="calendar.Calendar.yeardatescalendar"><code class="xref py py-meth docutils literal notranslate"><span class="pre">yeardatescalendar()</span></code></a>). Entries in the week lists are day numbers. Day
+<a class="reference internal" href="#calendar-calendar-yeardatescalendar" title="calendar.Calendar.yeardatescalendar"><code class="xref py py-meth docutils literal notranslate"><span class="pre">yeardatescalendar()</span></code></a>). Entries in the week lists are day numbers. Day
 numbers outside this month are zero.</p>
 </dd></dl>
 
 </dd></dl>
 
-<dl class="class">
-<dt id="calendar.TextCalendar">
-<em class="property">class </em><code class="sig-prename descclassname">calendar.</code><code class="sig-name descname">TextCalendar</code><span class="sig-paren">(</span><em class="sig-param">firstweekday=0</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar.TextCalendar" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt id="calendar-textcalendar">
+<span id="calendar.TextCalendar"></span><em class="property">class </em><code class="sig-prename descclassname">calendar.</code><code class="sig-name descname">TextCalendar</code><span class="sig-paren">(</span><em class="sig-param">firstweekday=0</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar-textcalendar" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class can be used to generate plain text calendars.</p>
-<p><a class="reference internal" href="#calendar.TextCalendar" title="calendar.TextCalendar"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextCalendar</span></code></a> instances have the following methods:</p>
-<dl class="method">
-<dt id="calendar.TextCalendar.formatmonth">
-<code class="sig-name descname">formatmonth</code><span class="sig-paren">(</span><em class="sig-param">theyear</em>, <em class="sig-param">themonth</em>, <em class="sig-param">w=0</em>, <em class="sig-param">l=0</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar.TextCalendar.formatmonth" title="Permalink to this definition">¶</a></dt>
+<p><a class="reference internal" href="#calendar-textcalendar" title="calendar.TextCalendar"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextCalendar</span></code></a> instances have the following methods:</p>
+<dl class="py method">
+<dt id="calendar-textcalendar-formatmonth">
+<span id="calendar.TextCalendar.formatmonth"></span><code class="sig-name descname">formatmonth</code><span class="sig-paren">(</span><em class="sig-param">theyear</em>, <em class="sig-param">themonth</em>, <em class="sig-param">w=0</em>, <em class="sig-param">l=0</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar-textcalendar-formatmonth" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a month’s calendar in a multi-line string. If <em>w</em> is provided, it
 specifies the width of the date columns, which are centered. If <em>l</em> is
 given, it specifies the number of lines that each week will use. Depends
 on the first weekday as specified in the constructor or set by the
-<a class="reference internal" href="#calendar.setfirstweekday" title="calendar.setfirstweekday"><code class="xref py py-meth docutils literal notranslate"><span class="pre">setfirstweekday()</span></code></a> method.</p>
+<a class="reference internal" href="#calendar-setfirstweekday" title="calendar.setfirstweekday"><code class="xref py py-meth docutils literal notranslate"><span class="pre">setfirstweekday()</span></code></a> method.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="calendar.TextCalendar.prmonth">
-<code class="sig-name descname">prmonth</code><span class="sig-paren">(</span><em class="sig-param">theyear</em>, <em class="sig-param">themonth</em>, <em class="sig-param">w=0</em>, <em class="sig-param">l=0</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar.TextCalendar.prmonth" title="Permalink to this definition">¶</a></dt>
-<dd><p>Print a month’s calendar as returned by <a class="reference internal" href="#calendar.TextCalendar.formatmonth" title="calendar.TextCalendar.formatmonth"><code class="xref py py-meth docutils literal notranslate"><span class="pre">formatmonth()</span></code></a>.</p>
+<dl class="py method">
+<dt id="calendar-textcalendar-prmonth">
+<span id="calendar.TextCalendar.prmonth"></span><code class="sig-name descname">prmonth</code><span class="sig-paren">(</span><em class="sig-param">theyear</em>, <em class="sig-param">themonth</em>, <em class="sig-param">w=0</em>, <em class="sig-param">l=0</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar-textcalendar-prmonth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print a month’s calendar as returned by <a class="reference internal" href="#calendar-textcalendar-formatmonth" title="calendar.TextCalendar.formatmonth"><code class="xref py py-meth docutils literal notranslate"><span class="pre">formatmonth()</span></code></a>.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="calendar.TextCalendar.formatyear">
-<code class="sig-name descname">formatyear</code><span class="sig-paren">(</span><em class="sig-param">theyear</em>, <em class="sig-param">w=2</em>, <em class="sig-param">l=1</em>, <em class="sig-param">c=6</em>, <em class="sig-param">m=3</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar.TextCalendar.formatyear" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="calendar-textcalendar-formatyear">
+<span id="calendar.TextCalendar.formatyear"></span><code class="sig-name descname">formatyear</code><span class="sig-paren">(</span><em class="sig-param">theyear</em>, <em class="sig-param">w=2</em>, <em class="sig-param">l=1</em>, <em class="sig-param">c=6</em>, <em class="sig-param">m=3</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar-textcalendar-formatyear" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a <em>m</em>-column calendar for an entire year as a multi-line string.
 Optional parameters <em>w</em>, <em>l</em>, and <em>c</em> are for date column width, lines per
 week, and number of spaces between month columns, respectively. Depends on
 the first weekday as specified in the constructor or set by the
-<a class="reference internal" href="#calendar.setfirstweekday" title="calendar.setfirstweekday"><code class="xref py py-meth docutils literal notranslate"><span class="pre">setfirstweekday()</span></code></a> method.  The earliest year for which a calendar
+<a class="reference internal" href="#calendar-setfirstweekday" title="calendar.setfirstweekday"><code class="xref py py-meth docutils literal notranslate"><span class="pre">setfirstweekday()</span></code></a> method.  The earliest year for which a calendar
 can be generated is platform-dependent.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="calendar.TextCalendar.pryear">
-<code class="sig-name descname">pryear</code><span class="sig-paren">(</span><em class="sig-param">theyear</em>, <em class="sig-param">w=2</em>, <em class="sig-param">l=1</em>, <em class="sig-param">c=6</em>, <em class="sig-param">m=3</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar.TextCalendar.pryear" title="Permalink to this definition">¶</a></dt>
-<dd><p>Print the calendar for an entire year as returned by <a class="reference internal" href="#calendar.TextCalendar.formatyear" title="calendar.TextCalendar.formatyear"><code class="xref py py-meth docutils literal notranslate"><span class="pre">formatyear()</span></code></a>.</p>
+<dl class="py method">
+<dt id="calendar-textcalendar-pryear">
+<span id="calendar.TextCalendar.pryear"></span><code class="sig-name descname">pryear</code><span class="sig-paren">(</span><em class="sig-param">theyear</em>, <em class="sig-param">w=2</em>, <em class="sig-param">l=1</em>, <em class="sig-param">c=6</em>, <em class="sig-param">m=3</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar-textcalendar-pryear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print the calendar for an entire year as returned by <a class="reference internal" href="#calendar-textcalendar-formatyear" title="calendar.TextCalendar.formatyear"><code class="xref py py-meth docutils literal notranslate"><span class="pre">formatyear()</span></code></a>.</p>
 </dd></dl>
 
 </dd></dl>
 
-<dl class="class">
-<dt id="calendar.HTMLCalendar">
-<em class="property">class </em><code class="sig-prename descclassname">calendar.</code><code class="sig-name descname">HTMLCalendar</code><span class="sig-paren">(</span><em class="sig-param">firstweekday=0</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar.HTMLCalendar" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt id="calendar-htmlcalendar">
+<span id="calendar.HTMLCalendar"></span><em class="property">class </em><code class="sig-prename descclassname">calendar.</code><code class="sig-name descname">HTMLCalendar</code><span class="sig-paren">(</span><em class="sig-param">firstweekday=0</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar-htmlcalendar" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class can be used to generate HTML calendars.</p>
 <p><code class="xref py py-class docutils literal notranslate"><span class="pre">HTMLCalendar</span></code> instances have the following methods:</p>
-<dl class="method">
-<dt id="calendar.HTMLCalendar.formatmonth">
-<code class="sig-name descname">formatmonth</code><span class="sig-paren">(</span><em class="sig-param">theyear</em>, <em class="sig-param">themonth</em>, <em class="sig-param">withyear=True</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar.HTMLCalendar.formatmonth" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="calendar-htmlcalendar-formatmonth">
+<span id="calendar.HTMLCalendar.formatmonth"></span><code class="sig-name descname">formatmonth</code><span class="sig-paren">(</span><em class="sig-param">theyear</em>, <em class="sig-param">themonth</em>, <em class="sig-param">withyear=True</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar-htmlcalendar-formatmonth" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a month’s calendar as an HTML table. If <em>withyear</em> is true the year
 will be included in the header, otherwise just the month name will be
 used.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="calendar.HTMLCalendar.formatyear">
-<code class="sig-name descname">formatyear</code><span class="sig-paren">(</span><em class="sig-param">theyear</em>, <em class="sig-param">width=3</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar.HTMLCalendar.formatyear" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="calendar-htmlcalendar-formatyear">
+<span id="calendar.HTMLCalendar.formatyear"></span><code class="sig-name descname">formatyear</code><span class="sig-paren">(</span><em class="sig-param">theyear</em>, <em class="sig-param">width=3</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar-htmlcalendar-formatyear" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a year’s calendar as an HTML table. <em>width</em> (defaulting to 3)
 specifies the number of months per row.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="calendar.HTMLCalendar.formatyearpage">
-<code class="sig-name descname">formatyearpage</code><span class="sig-paren">(</span><em class="sig-param">theyear</em>, <em class="sig-param">width=3</em>, <em class="sig-param">css='calendar.css'</em>, <em class="sig-param">encoding=None</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar.HTMLCalendar.formatyearpage" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="calendar-htmlcalendar-formatyearpage">
+<span id="calendar.HTMLCalendar.formatyearpage"></span><code class="sig-name descname">formatyearpage</code><span class="sig-paren">(</span><em class="sig-param">theyear</em>, <em class="sig-param">width=3</em>, <em class="sig-param">css='calendar.css'</em>, <em class="sig-param">encoding=None</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar-htmlcalendar-formatyearpage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a year’s calendar as a complete HTML page. <em>width</em> (defaulting to
 3) specifies the number of months per row. <em>css</em> is the name for the
-cascading style sheet to be used. <a class="reference internal" href="constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a> can be passed if no style
+cascading style sheet to be used. <a class="reference internal" href="constants.html#none" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a> can be passed if no style
 sheet should be used. <em>encoding</em> specifies the encoding to be used for the
 output (defaulting to the system default encoding).</p>
 </dd></dl>
 
 <p><code class="xref py py-class docutils literal notranslate"><span class="pre">HTMLCalendar</span></code> has the following attributes you can override to
 customize the CSS classes used by the calendar:</p>
-<dl class="attribute">
-<dt id="calendar.HTMLCalendar.cssclasses">
-<code class="sig-name descname">cssclasses</code><a class="headerlink" href="#calendar.HTMLCalendar.cssclasses" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt id="calendar-htmlcalendar-cssclasses">
+<span id="calendar.HTMLCalendar.cssclasses"></span><code class="sig-name descname">cssclasses</code><a class="headerlink" href="#calendar-htmlcalendar-cssclasses" title="Permalink to this definition">¶</a></dt>
 <dd><p>A list of CSS classes used for each weekday. The default class list is:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">cssclasses</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;mon&quot;</span><span class="p">,</span> <span class="s2">&quot;tue&quot;</span><span class="p">,</span> <span class="s2">&quot;wed&quot;</span><span class="p">,</span> <span class="s2">&quot;thu&quot;</span><span class="p">,</span> <span class="s2">&quot;fri&quot;</span><span class="p">,</span> <span class="s2">&quot;sat&quot;</span><span class="p">,</span> <span class="s2">&quot;sun&quot;</span><span class="p">]</span>
 </pre></div>
@@ -321,28 +324,28 @@ customize the CSS classes used by the calendar:</p>
 <p>Note that the length of this list must be seven items.</p>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="calendar.HTMLCalendar.cssclass_noday">
-<code class="sig-name descname">cssclass_noday</code><a class="headerlink" href="#calendar.HTMLCalendar.cssclass_noday" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt id="calendar-htmlcalendar-cssclass-noday">
+<span id="calendar.HTMLCalendar.cssclass_noday"></span><code class="sig-name descname">cssclass_noday</code><a class="headerlink" href="#calendar-htmlcalendar-cssclass-noday" title="Permalink to this definition">¶</a></dt>
 <dd><p>The CSS class for a weekday occurring in the previous or coming month.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.7.</span></p>
 </div>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="calendar.HTMLCalendar.cssclasses_weekday_head">
-<code class="sig-name descname">cssclasses_weekday_head</code><a class="headerlink" href="#calendar.HTMLCalendar.cssclasses_weekday_head" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt id="calendar-htmlcalendar-cssclasses-weekday-head">
+<span id="calendar.HTMLCalendar.cssclasses_weekday_head"></span><code class="sig-name descname">cssclasses_weekday_head</code><a class="headerlink" href="#calendar-htmlcalendar-cssclasses-weekday-head" title="Permalink to this definition">¶</a></dt>
 <dd><p>A list of CSS classes used for weekday names in the header row.
-The default is the same as <a class="reference internal" href="#calendar.HTMLCalendar.cssclasses" title="calendar.HTMLCalendar.cssclasses"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cssclasses</span></code></a>.</p>
+The default is the same as <a class="reference internal" href="#calendar-htmlcalendar-cssclasses" title="calendar.HTMLCalendar.cssclasses"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cssclasses</span></code></a>.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.7.</span></p>
 </div>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="calendar.HTMLCalendar.cssclass_month_head">
-<code class="sig-name descname">cssclass_month_head</code><a class="headerlink" href="#calendar.HTMLCalendar.cssclass_month_head" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt id="calendar-htmlcalendar-cssclass-month-head">
+<span id="calendar.HTMLCalendar.cssclass_month_head"></span><code class="sig-name descname">cssclass_month_head</code><a class="headerlink" href="#calendar-htmlcalendar-cssclass-month-head" title="Permalink to this definition">¶</a></dt>
 <dd><p>The month’s head CSS class (used by <code class="xref py py-meth docutils literal notranslate"><span class="pre">formatmonthname()</span></code>).
 The default value is <code class="docutils literal notranslate"><span class="pre">&quot;month&quot;</span></code>.</p>
 <div class="versionadded">
@@ -350,31 +353,31 @@ The default value is <code class="docutils literal notranslate"><span class="pre
 </div>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="calendar.HTMLCalendar.cssclass_month">
-<code class="sig-name descname">cssclass_month</code><a class="headerlink" href="#calendar.HTMLCalendar.cssclass_month" title="Permalink to this definition">¶</a></dt>
-<dd><p>The CSS class for the whole month’s table (used by <a class="reference internal" href="#calendar.HTMLCalendar.formatmonth" title="calendar.HTMLCalendar.formatmonth"><code class="xref py py-meth docutils literal notranslate"><span class="pre">formatmonth()</span></code></a>).
+<dl class="py attribute">
+<dt id="calendar-htmlcalendar-cssclass-month">
+<span id="calendar.HTMLCalendar.cssclass_month"></span><code class="sig-name descname">cssclass_month</code><a class="headerlink" href="#calendar-htmlcalendar-cssclass-month" title="Permalink to this definition">¶</a></dt>
+<dd><p>The CSS class for the whole month’s table (used by <a class="reference internal" href="#calendar-htmlcalendar-formatmonth" title="calendar.HTMLCalendar.formatmonth"><code class="xref py py-meth docutils literal notranslate"><span class="pre">formatmonth()</span></code></a>).
 The default value is <code class="docutils literal notranslate"><span class="pre">&quot;month&quot;</span></code>.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.7.</span></p>
 </div>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="calendar.HTMLCalendar.cssclass_year">
-<code class="sig-name descname">cssclass_year</code><a class="headerlink" href="#calendar.HTMLCalendar.cssclass_year" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt id="calendar-htmlcalendar-cssclass-year">
+<span id="calendar.HTMLCalendar.cssclass_year"></span><code class="sig-name descname">cssclass_year</code><a class="headerlink" href="#calendar-htmlcalendar-cssclass-year" title="Permalink to this definition">¶</a></dt>
 <dd><p>The CSS class for the whole year’s table of tables (used by
-<a class="reference internal" href="#calendar.HTMLCalendar.formatyear" title="calendar.HTMLCalendar.formatyear"><code class="xref py py-meth docutils literal notranslate"><span class="pre">formatyear()</span></code></a>). The default value is <code class="docutils literal notranslate"><span class="pre">&quot;year&quot;</span></code>.</p>
+<a class="reference internal" href="#calendar-htmlcalendar-formatyear" title="calendar.HTMLCalendar.formatyear"><code class="xref py py-meth docutils literal notranslate"><span class="pre">formatyear()</span></code></a>). The default value is <code class="docutils literal notranslate"><span class="pre">&quot;year&quot;</span></code>.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.7.</span></p>
 </div>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="calendar.HTMLCalendar.cssclass_year_head">
-<code class="sig-name descname">cssclass_year_head</code><a class="headerlink" href="#calendar.HTMLCalendar.cssclass_year_head" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt id="calendar-htmlcalendar-cssclass-year-head">
+<span id="calendar.HTMLCalendar.cssclass_year_head"></span><code class="sig-name descname">cssclass_year_head</code><a class="headerlink" href="#calendar-htmlcalendar-cssclass-year-head" title="Permalink to this definition">¶</a></dt>
 <dd><p>The CSS class for the table head for the whole year (used by
-<a class="reference internal" href="#calendar.HTMLCalendar.formatyear" title="calendar.HTMLCalendar.formatyear"><code class="xref py py-meth docutils literal notranslate"><span class="pre">formatyear()</span></code></a>). The default value is <code class="docutils literal notranslate"><span class="pre">&quot;year&quot;</span></code>.</p>
+<a class="reference internal" href="#calendar-htmlcalendar-formatyear" title="calendar.HTMLCalendar.formatyear"><code class="xref py py-meth docutils literal notranslate"><span class="pre">formatyear()</span></code></a>). The default value is <code class="docutils literal notranslate"><span class="pre">&quot;year&quot;</span></code>.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.7.</span></p>
 </div>
@@ -397,19 +400,19 @@ single CSS class with a space separated list of CSS classes, for example:</p>
 </div>
 </dd></dl>
 
-<dl class="class">
-<dt id="calendar.LocaleTextCalendar">
-<em class="property">class </em><code class="sig-prename descclassname">calendar.</code><code class="sig-name descname">LocaleTextCalendar</code><span class="sig-paren">(</span><em class="sig-param">firstweekday=0</em>, <em class="sig-param">locale=None</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar.LocaleTextCalendar" title="Permalink to this definition">¶</a></dt>
-<dd><p>This subclass of <a class="reference internal" href="#calendar.TextCalendar" title="calendar.TextCalendar"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextCalendar</span></code></a> can be passed a locale name in the
+<dl class="py class">
+<dt id="calendar-localetextcalendar">
+<span id="calendar.LocaleTextCalendar"></span><em class="property">class </em><code class="sig-prename descclassname">calendar.</code><code class="sig-name descname">LocaleTextCalendar</code><span class="sig-paren">(</span><em class="sig-param">firstweekday=0</em>, <em class="sig-param">locale=None</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar-localetextcalendar" title="Permalink to this definition">¶</a></dt>
+<dd><p>This subclass of <a class="reference internal" href="#calendar-textcalendar" title="calendar.TextCalendar"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextCalendar</span></code></a> can be passed a locale name in the
 constructor and will return month and weekday names in the specified locale.
 If this locale includes an encoding all strings containing month and weekday
 names will be returned as unicode.</p>
 </dd></dl>
 
-<dl class="class">
-<dt id="calendar.LocaleHTMLCalendar">
-<em class="property">class </em><code class="sig-prename descclassname">calendar.</code><code class="sig-name descname">LocaleHTMLCalendar</code><span class="sig-paren">(</span><em class="sig-param">firstweekday=0</em>, <em class="sig-param">locale=None</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar.LocaleHTMLCalendar" title="Permalink to this definition">¶</a></dt>
-<dd><p>This subclass of <a class="reference internal" href="#calendar.HTMLCalendar" title="calendar.HTMLCalendar"><code class="xref py py-class docutils literal notranslate"><span class="pre">HTMLCalendar</span></code></a> can be passed a locale name in the
+<dl class="py class">
+<dt id="calendar-localehtmlcalendar">
+<span id="calendar.LocaleHTMLCalendar"></span><em class="property">class </em><code class="sig-prename descclassname">calendar.</code><code class="sig-name descname">LocaleHTMLCalendar</code><span class="sig-paren">(</span><em class="sig-param">firstweekday=0</em>, <em class="sig-param">locale=None</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar-localehtmlcalendar" title="Permalink to this definition">¶</a></dt>
+<dd><p>This subclass of <a class="reference internal" href="#calendar-htmlcalendar" title="calendar.HTMLCalendar"><code class="xref py py-class docutils literal notranslate"><span class="pre">HTMLCalendar</span></code></a> can be passed a locale name in the
 constructor and will return month and weekday names in the specified
 locale. If this locale includes an encoding all strings containing month and
 weekday names will be returned as unicode.</p>
@@ -422,9 +425,9 @@ classes temporarily change the current locale to the given <em>locale</em>.  Bec
 the current locale is a process-wide setting, they are not thread-safe.</p>
 </div>
 <p>For simple text calendars this module provides the following functions.</p>
-<dl class="function">
-<dt id="calendar.setfirstweekday">
-<code class="sig-prename descclassname">calendar.</code><code class="sig-name descname">setfirstweekday</code><span class="sig-paren">(</span><em class="sig-param">weekday</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar.setfirstweekday" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="calendar-setfirstweekday">
+<span id="calendar.setfirstweekday"></span><code class="sig-prename descclassname">calendar.</code><code class="sig-name descname">setfirstweekday</code><span class="sig-paren">(</span><em class="sig-param">weekday</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar-setfirstweekday" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets the weekday (<code class="docutils literal notranslate"><span class="pre">0</span></code> is Monday, <code class="docutils literal notranslate"><span class="pre">6</span></code> is Sunday) to start each week. The
 values <code class="xref py py-const docutils literal notranslate"><span class="pre">MONDAY</span></code>, <code class="xref py py-const docutils literal notranslate"><span class="pre">TUESDAY</span></code>, <code class="xref py py-const docutils literal notranslate"><span class="pre">WEDNESDAY</span></code>, <code class="xref py py-const docutils literal notranslate"><span class="pre">THURSDAY</span></code>,
 <code class="xref py py-const docutils literal notranslate"><span class="pre">FRIDAY</span></code>, <code class="xref py py-const docutils literal notranslate"><span class="pre">SATURDAY</span></code>, and <code class="xref py py-const docutils literal notranslate"><span class="pre">SUNDAY</span></code> are provided for
@@ -435,115 +438,115 @@ convenience. For example, to set the first weekday to Sunday:</p>
 </div>
 </dd></dl>
 
-<dl class="function">
-<dt id="calendar.firstweekday">
-<code class="sig-prename descclassname">calendar.</code><code class="sig-name descname">firstweekday</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#calendar.firstweekday" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="calendar-firstweekday">
+<span id="calendar.firstweekday"></span><code class="sig-prename descclassname">calendar.</code><code class="sig-name descname">firstweekday</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#calendar-firstweekday" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the current setting for the weekday to start each week.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="calendar.isleap">
-<code class="sig-prename descclassname">calendar.</code><code class="sig-name descname">isleap</code><span class="sig-paren">(</span><em class="sig-param">year</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar.isleap" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns <a class="reference internal" href="constants.html#True" title="True"><code class="xref py py-const docutils literal notranslate"><span class="pre">True</span></code></a> if <em>year</em> is a leap year, otherwise <a class="reference internal" href="constants.html#False" title="False"><code class="xref py py-const docutils literal notranslate"><span class="pre">False</span></code></a>.</p>
+<dl class="py function">
+<dt id="calendar-isleap">
+<span id="calendar.isleap"></span><code class="sig-prename descclassname">calendar.</code><code class="sig-name descname">isleap</code><span class="sig-paren">(</span><em class="sig-param">year</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar-isleap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <a class="reference internal" href="constants.html#true" title="True"><code class="xref py py-const docutils literal notranslate"><span class="pre">True</span></code></a> if <em>year</em> is a leap year, otherwise <a class="reference internal" href="constants.html#false" title="False"><code class="xref py py-const docutils literal notranslate"><span class="pre">False</span></code></a>.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="calendar.leapdays">
-<code class="sig-prename descclassname">calendar.</code><code class="sig-name descname">leapdays</code><span class="sig-paren">(</span><em class="sig-param">y1</em>, <em class="sig-param">y2</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar.leapdays" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="calendar-leapdays">
+<span id="calendar.leapdays"></span><code class="sig-prename descclassname">calendar.</code><code class="sig-name descname">leapdays</code><span class="sig-paren">(</span><em class="sig-param">y1</em>, <em class="sig-param">y2</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar-leapdays" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the number of leap years in the range from <em>y1</em> to <em>y2</em> (exclusive),
 where <em>y1</em> and <em>y2</em> are years.</p>
 <p>This function works for ranges spanning a century change.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="calendar.weekday">
-<code class="sig-prename descclassname">calendar.</code><code class="sig-name descname">weekday</code><span class="sig-paren">(</span><em class="sig-param">year</em>, <em class="sig-param">month</em>, <em class="sig-param">day</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar.weekday" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="calendar-weekday">
+<span id="calendar.weekday"></span><code class="sig-prename descclassname">calendar.</code><code class="sig-name descname">weekday</code><span class="sig-paren">(</span><em class="sig-param">year</em>, <em class="sig-param">month</em>, <em class="sig-param">day</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar-weekday" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the day of the week (<code class="docutils literal notranslate"><span class="pre">0</span></code> is Monday) for <em>year</em> (<code class="docutils literal notranslate"><span class="pre">1970</span></code>–…),
 <em>month</em> (<code class="docutils literal notranslate"><span class="pre">1</span></code>–<code class="docutils literal notranslate"><span class="pre">12</span></code>), <em>day</em> (<code class="docutils literal notranslate"><span class="pre">1</span></code>–<code class="docutils literal notranslate"><span class="pre">31</span></code>).</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="calendar.weekheader">
-<code class="sig-prename descclassname">calendar.</code><code class="sig-name descname">weekheader</code><span class="sig-paren">(</span><em class="sig-param">n</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar.weekheader" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="calendar-weekheader">
+<span id="calendar.weekheader"></span><code class="sig-prename descclassname">calendar.</code><code class="sig-name descname">weekheader</code><span class="sig-paren">(</span><em class="sig-param">n</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar-weekheader" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a header containing abbreviated weekday names. <em>n</em> specifies the width in
 characters for one weekday.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="calendar.monthrange">
-<code class="sig-prename descclassname">calendar.</code><code class="sig-name descname">monthrange</code><span class="sig-paren">(</span><em class="sig-param">year</em>, <em class="sig-param">month</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar.monthrange" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="calendar-monthrange">
+<span id="calendar.monthrange"></span><code class="sig-prename descclassname">calendar.</code><code class="sig-name descname">monthrange</code><span class="sig-paren">(</span><em class="sig-param">year</em>, <em class="sig-param">month</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar-monthrange" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns weekday of first day of the month and number of days in month,  for the
 specified <em>year</em> and <em>month</em>.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="calendar.monthcalendar">
-<code class="sig-prename descclassname">calendar.</code><code class="sig-name descname">monthcalendar</code><span class="sig-paren">(</span><em class="sig-param">year</em>, <em class="sig-param">month</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar.monthcalendar" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="calendar-monthcalendar">
+<span id="calendar.monthcalendar"></span><code class="sig-prename descclassname">calendar.</code><code class="sig-name descname">monthcalendar</code><span class="sig-paren">(</span><em class="sig-param">year</em>, <em class="sig-param">month</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar-monthcalendar" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a matrix representing a month’s calendar.  Each row represents a week;
 days outside of the month a represented by zeros. Each week begins with Monday
-unless set by <a class="reference internal" href="#calendar.setfirstweekday" title="calendar.setfirstweekday"><code class="xref py py-func docutils literal notranslate"><span class="pre">setfirstweekday()</span></code></a>.</p>
+unless set by <a class="reference internal" href="#calendar-setfirstweekday" title="calendar.setfirstweekday"><code class="xref py py-func docutils literal notranslate"><span class="pre">setfirstweekday()</span></code></a>.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="calendar.prmonth">
-<code class="sig-prename descclassname">calendar.</code><code class="sig-name descname">prmonth</code><span class="sig-paren">(</span><em class="sig-param">theyear</em>, <em class="sig-param">themonth</em>, <em class="sig-param">w=0</em>, <em class="sig-param">l=0</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar.prmonth" title="Permalink to this definition">¶</a></dt>
-<dd><p>Prints a month’s calendar as returned by <a class="reference internal" href="#calendar.month" title="calendar.month"><code class="xref py py-func docutils literal notranslate"><span class="pre">month()</span></code></a>.</p>
+<dl class="py function">
+<dt id="calendar-prmonth">
+<span id="calendar.prmonth"></span><code class="sig-prename descclassname">calendar.</code><code class="sig-name descname">prmonth</code><span class="sig-paren">(</span><em class="sig-param">theyear</em>, <em class="sig-param">themonth</em>, <em class="sig-param">w=0</em>, <em class="sig-param">l=0</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar-prmonth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints a month’s calendar as returned by <a class="reference internal" href="#calendar-month" title="calendar.month"><code class="xref py py-func docutils literal notranslate"><span class="pre">month()</span></code></a>.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="calendar.month">
-<code class="sig-prename descclassname">calendar.</code><code class="sig-name descname">month</code><span class="sig-paren">(</span><em class="sig-param">theyear</em>, <em class="sig-param">themonth</em>, <em class="sig-param">w=0</em>, <em class="sig-param">l=0</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar.month" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="calendar-month">
+<span id="calendar.month"></span><code class="sig-prename descclassname">calendar.</code><code class="sig-name descname">month</code><span class="sig-paren">(</span><em class="sig-param">theyear</em>, <em class="sig-param">themonth</em>, <em class="sig-param">w=0</em>, <em class="sig-param">l=0</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar-month" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a month’s calendar in a multi-line string using the <code class="xref py py-meth docutils literal notranslate"><span class="pre">formatmonth()</span></code>
-of the <a class="reference internal" href="#calendar.TextCalendar" title="calendar.TextCalendar"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextCalendar</span></code></a> class.</p>
+of the <a class="reference internal" href="#calendar-textcalendar" title="calendar.TextCalendar"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextCalendar</span></code></a> class.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="calendar.prcal">
-<code class="sig-prename descclassname">calendar.</code><code class="sig-name descname">prcal</code><span class="sig-paren">(</span><em class="sig-param">year</em>, <em class="sig-param">w=0</em>, <em class="sig-param">l=0</em>, <em class="sig-param">c=6</em>, <em class="sig-param">m=3</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar.prcal" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="calendar-prcal">
+<span id="calendar.prcal"></span><code class="sig-prename descclassname">calendar.</code><code class="sig-name descname">prcal</code><span class="sig-paren">(</span><em class="sig-param">year</em>, <em class="sig-param">w=0</em>, <em class="sig-param">l=0</em>, <em class="sig-param">c=6</em>, <em class="sig-param">m=3</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar-prcal" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prints the calendar for an entire year as returned by  <a class="reference internal" href="#module-calendar" title="calendar: Functions for working with calendars, including some emulation of the Unix cal program."><code class="xref py py-func docutils literal notranslate"><span class="pre">calendar()</span></code></a>.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="calendar.calendar">
-<code class="sig-prename descclassname">calendar.</code><code class="sig-name descname">calendar</code><span class="sig-paren">(</span><em class="sig-param">year</em>, <em class="sig-param">w=2</em>, <em class="sig-param">l=1</em>, <em class="sig-param">c=6</em>, <em class="sig-param">m=3</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar.calendar" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="calendar-calendar">
+<span id="calendar.calendar"></span><code class="sig-prename descclassname">calendar.</code><code class="sig-name descname">calendar</code><span class="sig-paren">(</span><em class="sig-param">year</em>, <em class="sig-param">w=2</em>, <em class="sig-param">l=1</em>, <em class="sig-param">c=6</em>, <em class="sig-param">m=3</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar-calendar" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a 3-column calendar for an entire year as a multi-line string using
-the <code class="xref py py-meth docutils literal notranslate"><span class="pre">formatyear()</span></code> of the <a class="reference internal" href="#calendar.TextCalendar" title="calendar.TextCalendar"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextCalendar</span></code></a> class.</p>
+the <code class="xref py py-meth docutils literal notranslate"><span class="pre">formatyear()</span></code> of the <a class="reference internal" href="#calendar-textcalendar" title="calendar.TextCalendar"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextCalendar</span></code></a> class.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="calendar.timegm">
-<code class="sig-prename descclassname">calendar.</code><code class="sig-name descname">timegm</code><span class="sig-paren">(</span><em class="sig-param">tuple</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar.timegm" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="calendar-timegm">
+<span id="calendar.timegm"></span><code class="sig-prename descclassname">calendar.</code><code class="sig-name descname">timegm</code><span class="sig-paren">(</span><em class="sig-param">tuple</em><span class="sig-paren">)</span><a class="headerlink" href="#calendar-timegm" title="Permalink to this definition">¶</a></dt>
 <dd><p>An unrelated but handy function that takes a time tuple such as returned by
-the <a class="reference internal" href="time.html#time.gmtime" title="time.gmtime"><code class="xref py py-func docutils literal notranslate"><span class="pre">gmtime()</span></code></a> function in the <a class="reference internal" href="time.html#module-time" title="time: Time access and conversions."><code class="xref py py-mod docutils literal notranslate"><span class="pre">time</span></code></a> module, and returns the
+the <a class="reference internal" href="time.html#time-gmtime" title="time.gmtime"><code class="xref py py-func docutils literal notranslate"><span class="pre">gmtime()</span></code></a> function in the <a class="reference internal" href="time.html#module-time" title="time: Time access and conversions."><code class="xref py py-mod docutils literal notranslate"><span class="pre">time</span></code></a> module, and returns the
 corresponding Unix timestamp value, assuming an epoch of 1970, and the POSIX
-encoding.  In fact, <a class="reference internal" href="time.html#time.gmtime" title="time.gmtime"><code class="xref py py-func docutils literal notranslate"><span class="pre">time.gmtime()</span></code></a> and <a class="reference internal" href="#calendar.timegm" title="calendar.timegm"><code class="xref py py-func docutils literal notranslate"><span class="pre">timegm()</span></code></a> are each others’
+encoding.  In fact, <a class="reference internal" href="time.html#time-gmtime" title="time.gmtime"><code class="xref py py-func docutils literal notranslate"><span class="pre">time.gmtime()</span></code></a> and <a class="reference internal" href="#calendar-timegm" title="calendar.timegm"><code class="xref py py-func docutils literal notranslate"><span class="pre">timegm()</span></code></a> are each others’
 inverse.</p>
 </dd></dl>
 
 <p>The <a class="reference internal" href="#module-calendar" title="calendar: Functions for working with calendars, including some emulation of the Unix cal program."><code class="xref py py-mod docutils literal notranslate"><span class="pre">calendar</span></code></a> module exports the following data attributes:</p>
-<dl class="data">
-<dt id="calendar.day_name">
-<code class="sig-prename descclassname">calendar.</code><code class="sig-name descname">day_name</code><a class="headerlink" href="#calendar.day_name" title="Permalink to this definition">¶</a></dt>
+<dl class="py data">
+<dt id="calendar-day-name">
+<span id="calendar.day_name"></span><code class="sig-prename descclassname">calendar.</code><code class="sig-name descname">day_name</code><a class="headerlink" href="#calendar-day-name" title="Permalink to this definition">¶</a></dt>
 <dd><p>An array that represents the days of the week in the current locale.</p>
 </dd></dl>
 
-<dl class="data">
-<dt id="calendar.day_abbr">
-<code class="sig-prename descclassname">calendar.</code><code class="sig-name descname">day_abbr</code><a class="headerlink" href="#calendar.day_abbr" title="Permalink to this definition">¶</a></dt>
+<dl class="py data">
+<dt id="calendar-day-abbr">
+<span id="calendar.day_abbr"></span><code class="sig-prename descclassname">calendar.</code><code class="sig-name descname">day_abbr</code><a class="headerlink" href="#calendar-day-abbr" title="Permalink to this definition">¶</a></dt>
 <dd><p>An array that represents the abbreviated days of the week in the current locale.</p>
 </dd></dl>
 
-<dl class="data">
-<dt id="calendar.month_name">
-<code class="sig-prename descclassname">calendar.</code><code class="sig-name descname">month_name</code><a class="headerlink" href="#calendar.month_name" title="Permalink to this definition">¶</a></dt>
+<dl class="py data">
+<dt id="calendar-month-name">
+<span id="calendar.month_name"></span><code class="sig-prename descclassname">calendar.</code><code class="sig-name descname">month_name</code><a class="headerlink" href="#calendar-month-name" title="Permalink to this definition">¶</a></dt>
 <dd><p>An array that represents the months of the year in the current locale.  This
 follows normal convention of January being month number 1, so it has a length of
 13 and  <code class="docutils literal notranslate"><span class="pre">month_name[0]</span></code> is the empty string.</p>
 </dd></dl>
 
-<dl class="data">
-<dt id="calendar.month_abbr">
-<code class="sig-prename descclassname">calendar.</code><code class="sig-name descname">month_abbr</code><a class="headerlink" href="#calendar.month_abbr" title="Permalink to this definition">¶</a></dt>
+<dl class="py data">
+<dt id="calendar-month-abbr">
+<span id="calendar.month_abbr"></span><code class="sig-prename descclassname">calendar.</code><code class="sig-name descname">month_abbr</code><a class="headerlink" href="#calendar-month-abbr" title="Permalink to this definition">¶</a></dt>
 <dd><p>An array that represents the abbreviated months of the year in the current
 locale.  This follows normal convention of January being month number 1, so it
 has a length of 13 and  <code class="docutils literal notranslate"><span class="pre">month_abbr[0]</span></code> is the empty string.</p>
@@ -610,7 +613,7 @@ has a length of 13 and  <code class="docutils literal notranslate"><span class="
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
@@ -629,6 +632,7 @@ has a length of 13 and  <code class="docutils literal notranslate"><span class="
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  
@@ -641,11 +645,11 @@ has a length of 13 and  <code class="docutils literal notranslate"><span class="
 <br />
     <br />
 
-    Last updated on Feb 13, 2020.
+    Last updated on Mar 08, 2020.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 2.4.2+/ad35b3c.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/c10e1bc.
     </div>
 
   </body>

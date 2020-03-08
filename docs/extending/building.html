@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>4. Building C and C++ Extensions &#8212; Python 3.9.0a3 documentation</title>
+    <title>4. Building C and C++ Extensions &#8212; Python 3.9.0a4 documentation</title>
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments-monokai.css" />
+    <link rel="stylesheet" href="../_static/pygments_dark.css" type="text/css" media="(prefers-color-scheme: dark)" id="pygments_dark_css" />
     
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -18,7 +18,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.9.0a3 documentation"
+          title="Search within Python 3.9.0a4 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -41,9 +41,11 @@
       }
     </style>
 
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png" />
+    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
     
     <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <script type="text/javascript" src="../_static/themetoggle.js"></script>
     
      
 
@@ -72,7 +74,7 @@
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Extending and Embedding the Python Interpreter</a> &#187;</li>
@@ -90,6 +92,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -103,11 +106,11 @@
 <span id="building"></span><h1><span class="section-number">4. </span>Building C and C++ Extensions<a class="headerlink" href="#building-c-and-c-extensions" title="Permalink to this headline">¶</a></h1>
 <p>A C extension for CPython is a shared library (e.g. a <code class="docutils literal notranslate"><span class="pre">.so</span></code> file on Linux,
 <code class="docutils literal notranslate"><span class="pre">.pyd</span></code> on Windows), which exports an <em>initialization function</em>.</p>
-<p>To be importable, the shared library must be available on <span class="target" id="index-0"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONPATH"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONPATH</span></code></a>,
+<p>To be importable, the shared library must be available on <span class="target" id="index-0"></span><a class="reference internal" href="../using/cmdline.html#envvar-pythonpath"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONPATH</span></code></a>,
 and must be named after the module name, with an appropriate extension.
 When using distutils, the correct filename is generated automatically.</p>
 <p>The initialization function has the signature:</p>
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyInit_modulename">
 <a class="reference internal" href="../c-api/structures.html#c.PyObject" title="PyObject">PyObject</a>* <code class="sig-name descname">PyInit_modulename</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#c.PyInit_modulename" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -169,7 +172,7 @@ documentation in <a class="reference internal" href="../distutils/index.html#dis
 distutils; this section explains building extension modules only.</p>
 <p>It is common to pre-compute arguments to <code class="xref py py-func docutils literal notranslate"><span class="pre">setup()</span></code>, to better structure the
 driver script. In the example above, the <code class="docutils literal notranslate"><span class="pre">ext_modules</span></code> argument to
-<a class="reference internal" href="../distutils/apiref.html#distutils.core.setup" title="distutils.core.setup"><code class="xref py py-func docutils literal notranslate"><span class="pre">setup()</span></code></a> is a list of extension modules, each of which is
+<a class="reference internal" href="../distutils/apiref.html#distutils-core-setup" title="distutils.core.setup"><code class="xref py py-func docutils literal notranslate"><span class="pre">setup()</span></code></a> is a list of extension modules, each of which is
 an instance of
 the <code class="xref py py-class docutils literal notranslate"><span class="pre">Extension</span></code>. In the example, the instance
 defines an extension named <code class="docutils literal notranslate"><span class="pre">demo</span></code> which is build by compiling a single source
@@ -199,7 +202,7 @@ example below.</p>
        <span class="n">ext_modules</span> <span class="o">=</span> <span class="p">[</span><span class="n">module1</span><span class="p">])</span>
 </pre></div>
 </div>
-<p>In this example, <a class="reference internal" href="../distutils/apiref.html#distutils.core.setup" title="distutils.core.setup"><code class="xref py py-func docutils literal notranslate"><span class="pre">setup()</span></code></a> is called with additional
+<p>In this example, <a class="reference internal" href="../distutils/apiref.html#distutils-core-setup" title="distutils.core.setup"><code class="xref py py-func docutils literal notranslate"><span class="pre">setup()</span></code></a> is called with additional
 meta-information, which
 is recommended when distribution packages have to be built. For the extension
 itself, it specifies preprocessor defines, include directories, library
@@ -296,7 +299,7 @@ commands can be used to do so.</p>
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Extending and Embedding the Python Interpreter</a> &#187;</li>
@@ -314,6 +317,7 @@ commands can be used to do so.</p>
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  
@@ -326,11 +330,11 @@ commands can be used to do so.</p>
 <br />
     <br />
 
-    Last updated on Feb 13, 2020.
+    Last updated on Mar 08, 2020.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 2.4.2+/ad35b3c.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/c10e1bc.
     </div>
 
   </body>

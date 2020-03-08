@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>3. Defining Extension Types: Assorted Topics &#8212; Python 3.9.0a3 documentation</title>
+    <title>3. Defining Extension Types: Assorted Topics &#8212; Python 3.9.0a4 documentation</title>
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments-monokai.css" />
+    <link rel="stylesheet" href="../_static/pygments_dark.css" type="text/css" media="(prefers-color-scheme: dark)" id="pygments_dark_css" />
     
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -18,7 +18,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.9.0a3 documentation"
+          title="Search within Python 3.9.0a4 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -41,9 +41,11 @@
       }
     </style>
 
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png" />
+    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
     
     <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <script type="text/javascript" src="../_static/themetoggle.js"></script>
     
      
 
@@ -72,7 +74,7 @@
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Extending and Embedding the Python Interpreter</a> &#187;</li>
@@ -90,6 +92,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -458,7 +461,7 @@ support added in Python 2.2.  It explains how the handler functions are
 called, so that if you do need to extend their functionality, you’ll understand
 what needs to be done.</p>
 <p>The <a class="reference internal" href="../c-api/typeobj.html#c.PyTypeObject.tp_getattr" title="PyTypeObject.tp_getattr"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_getattr</span></code></a> handler is called when the object requires an attribute
-look-up.  It is called in the same situations where the <a class="reference internal" href="../reference/datamodel.html#object.__getattr__" title="object.__getattr__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__getattr__()</span></code></a>
+look-up.  It is called in the same situations where the <code class="xref py py-meth docutils literal notranslate"><span class="pre">__getattr__()</span></code>
 method of a class would be called.</p>
 <p>Here is an example:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span> <span class="n">PyObject</span> <span class="o">*</span>
@@ -476,8 +479,8 @@ method of a class would be called.</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>The <a class="reference internal" href="../c-api/typeobj.html#c.PyTypeObject.tp_setattr" title="PyTypeObject.tp_setattr"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_setattr</span></code></a> handler is called when the <a class="reference internal" href="../reference/datamodel.html#object.__setattr__" title="object.__setattr__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__setattr__()</span></code></a> or
-<a class="reference internal" href="../reference/datamodel.html#object.__delattr__" title="object.__delattr__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__delattr__()</span></code></a> method of a class instance would be called.  When an
+<p>The <a class="reference internal" href="../c-api/typeobj.html#c.PyTypeObject.tp_setattr" title="PyTypeObject.tp_setattr"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_setattr</span></code></a> handler is called when the <code class="xref py py-meth docutils literal notranslate"><span class="pre">__setattr__()</span></code> or
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">__delattr__()</span></code> method of a class instance would be called.  When an
 attribute should be deleted, the third parameter will be <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.  Here is an
 example that simply raises an exception; if this were really all you wanted, the
 <a class="reference internal" href="../c-api/typeobj.html#c.PyTypeObject.tp_setattr" title="PyTypeObject.tp_setattr"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_setattr</span></code></a> handler should be set to <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.</p>
@@ -498,7 +501,7 @@ example that simply raises an exception; if this were really all you wanted, the
 </div>
 <p>The <a class="reference internal" href="../c-api/typeobj.html#c.PyTypeObject.tp_richcompare" title="PyTypeObject.tp_richcompare"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_richcompare</span></code></a> handler is called when comparisons are needed.  It is
 analogous to the <a class="reference internal" href="../reference/datamodel.html#richcmpfuncs"><span class="std std-ref">rich comparison methods</span></a>, like
-<a class="reference internal" href="../reference/datamodel.html#object.__lt__" title="object.__lt__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__lt__()</span></code></a>, and also called by <a class="reference internal" href="../c-api/object.html#c.PyObject_RichCompare" title="PyObject_RichCompare"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_RichCompare()</span></code></a> and
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">__lt__()</span></code>, and also called by <a class="reference internal" href="../c-api/object.html#c.PyObject_RichCompare" title="PyObject_RichCompare"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_RichCompare()</span></code></a> and
 <a class="reference internal" href="../c-api/object.html#c.PyObject_RichCompareBool" title="PyObject_RichCompareBool"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_RichCompareBool()</span></code></a>.</p>
 <p>This function is called with two Python objects and the operator as arguments,
 where the operator is one of <code class="docutils literal notranslate"><span class="pre">Py_EQ</span></code>, <code class="docutils literal notranslate"><span class="pre">Py_NE</span></code>, <code class="docutils literal notranslate"><span class="pre">Py_LE</span></code>, <code class="docutils literal notranslate"><span class="pre">Py_GT</span></code>,
@@ -597,7 +600,7 @@ If the call is <code class="docutils literal notranslate"><span class="pre">obj1
 non-<code class="docutils literal notranslate"><span class="pre">NULL</span></code> and you support keyword arguments, use
 <a class="reference internal" href="../c-api/arg.html#c.PyArg_ParseTupleAndKeywords" title="PyArg_ParseTupleAndKeywords"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyArg_ParseTupleAndKeywords()</span></code></a> to extract the arguments.  If you
 do not want to support keyword arguments and this is non-<code class="docutils literal notranslate"><span class="pre">NULL</span></code>, raise a
-<a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> with a message saying that keyword arguments are not supported.</p></li>
+<a class="reference internal" href="../library/exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> with a message saying that keyword arguments are not supported.</p></li>
 </ol>
 <p>Here is a toy <code class="docutils literal notranslate"><span class="pre">tp_call</span></code> implementation:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span> <span class="n">PyObject</span> <span class="o">*</span>
@@ -628,8 +631,8 @@ do not want to support keyword arguments and this is non-<code class="docutils l
 take exactly one parameter, the instance for which they are being called,
 and return a new reference.  In the case of an error, they should set an
 exception and return <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.  <a class="reference internal" href="../c-api/typeobj.html#c.PyTypeObject.tp_iter" title="PyTypeObject.tp_iter"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_iter</span></code></a> corresponds
-to the Python <a class="reference internal" href="../reference/datamodel.html#object.__iter__" title="object.__iter__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__iter__()</span></code></a> method, while <a class="reference internal" href="../c-api/typeobj.html#c.PyTypeObject.tp_iternext" title="PyTypeObject.tp_iternext"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_iternext</span></code></a>
-corresponds to the Python <a class="reference internal" href="../library/stdtypes.html#iterator.__next__" title="iterator.__next__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__next__()</span></code></a> method.</p>
+to the Python <code class="xref py py-meth docutils literal notranslate"><span class="pre">__iter__()</span></code> method, while <a class="reference internal" href="../c-api/typeobj.html#c.PyTypeObject.tp_iternext" title="PyTypeObject.tp_iternext"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_iternext</span></code></a>
+corresponds to the Python <a class="reference internal" href="../library/stdtypes.html#iterator-next" title="iterator.__next__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__next__()</span></code></a> method.</p>
 <p>Any <a class="reference internal" href="../glossary.html#term-iterable"><span class="xref std std-term">iterable</span></a> object must implement the <a class="reference internal" href="../c-api/typeobj.html#c.PyTypeObject.tp_iter" title="PyTypeObject.tp_iter"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_iter</span></code></a>
 handler, which must return an <a class="reference internal" href="../glossary.html#term-iterator"><span class="xref std std-term">iterator</span></a> object.  Here the same guidelines
 apply as for Python classes:</p>
@@ -649,7 +652,7 @@ to the iterator.  Its <a class="reference internal" href="../c-api/typeobj.html#
 return a new reference to the next object in the iteration, if there is one.
 If the iteration has reached the end, <a class="reference internal" href="../c-api/typeobj.html#c.PyTypeObject.tp_iternext" title="PyTypeObject.tp_iternext"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_iternext</span></code></a>
 may return <code class="docutils literal notranslate"><span class="pre">NULL</span></code> without setting an exception, or it may set
-<a class="reference internal" href="../library/exceptions.html#StopIteration" title="StopIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopIteration</span></code></a> <em>in addition</em> to returning <code class="docutils literal notranslate"><span class="pre">NULL</span></code>; avoiding
+<a class="reference internal" href="../library/exceptions.html#stopiteration" title="StopIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopIteration</span></code></a> <em>in addition</em> to returning <code class="docutils literal notranslate"><span class="pre">NULL</span></code>; avoiding
 the exception can yield slightly better performance.  If an actual error
 occurs, <a class="reference internal" href="../c-api/typeobj.html#c.PyTypeObject.tp_iternext" title="PyTypeObject.tp_iternext"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_iternext</span></code></a> should always set an exception
 and return <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.</p>
@@ -799,7 +802,7 @@ its use might be something like the following:</p>
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Extending and Embedding the Python Interpreter</a> &#187;</li>
@@ -817,6 +820,7 @@ its use might be something like the following:</p>
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  
@@ -829,11 +833,11 @@ its use might be something like the following:</p>
 <br />
     <br />
 
-    Last updated on Feb 13, 2020.
+    Last updated on Mar 08, 2020.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 2.4.2+/ad35b3c.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/c10e1bc.
     </div>
 
   </body>

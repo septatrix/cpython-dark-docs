@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>The Python Profilers &#8212; Python 3.9.0a3 documentation</title>
+    <title>The Python Profilers &#8212; Python 3.9.0a4 documentation</title>
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments-monokai.css" />
+    <link rel="stylesheet" href="../_static/pygments_dark.css" type="text/css" media="(prefers-color-scheme: dark)" id="pygments_dark_css" />
     
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -18,7 +18,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.9.0a3 documentation"
+          title="Search within Python 3.9.0a4 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -41,9 +41,11 @@
       }
     </style>
 
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png" />
+    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
     
     <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <script type="text/javascript" src="../_static/themetoggle.js"></script>
     
      
 
@@ -72,7 +74,7 @@
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
@@ -91,6 +93,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -106,19 +109,19 @@
 <hr class="docutils" />
 <div class="section" id="introduction-to-the-profilers">
 <span id="profiler-introduction"></span><h2>Introduction to the profilers<a class="headerlink" href="#introduction-to-the-profilers" title="Permalink to this headline">¶</a></h2>
-<p id="index-0"><a class="reference internal" href="#module-cProfile" title="cProfile"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cProfile</span></code></a> and <a class="reference internal" href="#module-profile" title="profile: Python source profiler."><code class="xref py py-mod docutils literal notranslate"><span class="pre">profile</span></code></a> provide <em class="dfn">deterministic profiling</em> of
+<p id="index-0"><a class="reference internal" href="#module-cprofile" title="cProfile"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cProfile</span></code></a> and <a class="reference internal" href="#module-profile" title="profile: Python source profiler."><code class="xref py py-mod docutils literal notranslate"><span class="pre">profile</span></code></a> provide <em class="dfn">deterministic profiling</em> of
 Python programs. A <em class="dfn">profile</em> is a set of statistics that describes how
 often and for how long various parts of the program executed. These statistics
 can be formatted into reports via the <a class="reference internal" href="#module-pstats" title="pstats: Statistics object for use with the profiler."><code class="xref py py-mod docutils literal notranslate"><span class="pre">pstats</span></code></a> module.</p>
 <p>The Python standard library provides two different implementations of the same
 profiling interface:</p>
 <ol class="arabic simple">
-<li><p><a class="reference internal" href="#module-cProfile" title="cProfile"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cProfile</span></code></a> is recommended for most users; it’s a C extension with
+<li><p><a class="reference internal" href="#module-cprofile" title="cProfile"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cProfile</span></code></a> is recommended for most users; it’s a C extension with
 reasonable overhead that makes it suitable for profiling long-running
 programs.  Based on <code class="xref py py-mod docutils literal notranslate"><span class="pre">lsprof</span></code>, contributed by Brett Rosen and Ted
 Czotter.</p></li>
 <li><p><a class="reference internal" href="#module-profile" title="profile: Python source profiler."><code class="xref py py-mod docutils literal notranslate"><span class="pre">profile</span></code></a>, a pure Python module whose interface is imitated by
-<a class="reference internal" href="#module-cProfile" title="cProfile"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cProfile</span></code></a>, but which adds significant overhead to profiled programs.
+<a class="reference internal" href="#module-cprofile" title="cProfile"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cProfile</span></code></a>, but which adds significant overhead to profiled programs.
 If you’re trying to extend the profiler in some way, the task might be easier
 with this module.  Originally designed and written by Jim Roskind.</p></li>
 </ol>
@@ -143,9 +146,9 @@ on an existing application.</p>
 <span class="n">cProfile</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;re.compile(&quot;foo|bar&quot;)&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>(Use <a class="reference internal" href="#module-profile" title="profile: Python source profiler."><code class="xref py py-mod docutils literal notranslate"><span class="pre">profile</span></code></a> instead of <a class="reference internal" href="#module-cProfile" title="cProfile"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cProfile</span></code></a> if the latter is not available on
+<p>(Use <a class="reference internal" href="#module-profile" title="profile: Python source profiler."><code class="xref py py-mod docutils literal notranslate"><span class="pre">profile</span></code></a> instead of <a class="reference internal" href="#module-cprofile" title="cProfile"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cProfile</span></code></a> if the latter is not available on
 your system.)</p>
-<p>The above action would run <a class="reference internal" href="re.html#re.compile" title="re.compile"><code class="xref py py-func docutils literal notranslate"><span class="pre">re.compile()</span></code></a> and print profile results like
+<p>The above action would run <a class="reference internal" href="re.html#re-compile" title="re.compile"><code class="xref py py-func docutils literal notranslate"><span class="pre">re.compile()</span></code></a> and print profile results like
 the following:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span>      <span class="mi">197</span> <span class="n">function</span> <span class="n">calls</span> <span class="p">(</span><span class="mi">192</span> <span class="n">primitive</span> <span class="n">calls</span><span class="p">)</span> <span class="ow">in</span> <span class="mf">0.002</span> <span class="n">seconds</span>
 
@@ -193,26 +196,26 @@ results to a file by specifying a filename to the <code class="xref py py-func d
 <span class="n">cProfile</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;re.compile(&quot;foo|bar&quot;)&#39;</span><span class="p">,</span> <span class="s1">&#39;restats&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The <a class="reference internal" href="#pstats.Stats" title="pstats.Stats"><code class="xref py py-class docutils literal notranslate"><span class="pre">pstats.Stats</span></code></a> class reads profile results from a file and formats
+<p>The <a class="reference internal" href="#pstats-stats" title="pstats.Stats"><code class="xref py py-class docutils literal notranslate"><span class="pre">pstats.Stats</span></code></a> class reads profile results from a file and formats
 them in various ways.</p>
-<p>The files <a class="reference internal" href="#module-cProfile" title="cProfile"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cProfile</span></code></a> and <a class="reference internal" href="#module-profile" title="profile: Python source profiler."><code class="xref py py-mod docutils literal notranslate"><span class="pre">profile</span></code></a> can also be invoked as a script to
+<p>The files <a class="reference internal" href="#module-cprofile" title="cProfile"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cProfile</span></code></a> and <a class="reference internal" href="#module-profile" title="profile: Python source profiler."><code class="xref py py-mod docutils literal notranslate"><span class="pre">profile</span></code></a> can also be invoked as a script to
 profile another script.  For example:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">cProfile</span> <span class="p">[</span><span class="o">-</span><span class="n">o</span> <span class="n">output_file</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">s</span> <span class="n">sort_order</span><span class="p">]</span> <span class="p">(</span><span class="o">-</span><span class="n">m</span> <span class="n">module</span> <span class="o">|</span> <span class="n">myscript</span><span class="o">.</span><span class="n">py</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">-o</span></code> writes the profile results to a file instead of to stdout</p>
-<p><code class="docutils literal notranslate"><span class="pre">-s</span></code> specifies one of the <a class="reference internal" href="#pstats.Stats.sort_stats" title="pstats.Stats.sort_stats"><code class="xref py py-func docutils literal notranslate"><span class="pre">sort_stats()</span></code></a> sort values to sort
+<p><code class="docutils literal notranslate"><span class="pre">-s</span></code> specifies one of the <a class="reference internal" href="#pstats-stats-sort-stats" title="pstats.Stats.sort_stats"><code class="xref py py-func docutils literal notranslate"><span class="pre">sort_stats()</span></code></a> sort values to sort
 the output by. This only applies when <code class="docutils literal notranslate"><span class="pre">-o</span></code> is not supplied.</p>
 <p><code class="docutils literal notranslate"><span class="pre">-m</span></code> specifies that a module is being profiled instead of a script.</p>
 <blockquote>
 <div><div class="versionadded">
-<p><span class="versionmodified added">New in version 3.7: </span>Added the <code class="docutils literal notranslate"><span class="pre">-m</span></code> option to <a class="reference internal" href="#module-cProfile" title="cProfile"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cProfile</span></code></a>.</p>
+<p><span class="versionmodified added">New in version 3.7: </span>Added the <code class="docutils literal notranslate"><span class="pre">-m</span></code> option to <a class="reference internal" href="#module-cprofile" title="cProfile"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cProfile</span></code></a>.</p>
 </div>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.8: </span>Added the <code class="docutils literal notranslate"><span class="pre">-m</span></code> option to <a class="reference internal" href="#module-profile" title="profile: Python source profiler."><code class="xref py py-mod docutils literal notranslate"><span class="pre">profile</span></code></a>.</p>
 </div>
 </div></blockquote>
-<p>The <a class="reference internal" href="#module-pstats" title="pstats: Statistics object for use with the profiler."><code class="xref py py-mod docutils literal notranslate"><span class="pre">pstats</span></code></a> module’s <a class="reference internal" href="#pstats.Stats" title="pstats.Stats"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stats</span></code></a> class has a variety of methods
+<p>The <a class="reference internal" href="#module-pstats" title="pstats: Statistics object for use with the profiler."><code class="xref py py-mod docutils literal notranslate"><span class="pre">pstats</span></code></a> module’s <a class="reference internal" href="#pstats-stats" title="pstats.Stats"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stats</span></code></a> class has a variety of methods
 for manipulating and printing the data saved into a profile results file:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pstats</span>
 <span class="kn">from</span> <span class="nn">pstats</span> <span class="kn">import</span> <span class="n">SortKey</span>
@@ -220,10 +223,10 @@ for manipulating and printing the data saved into a profile results file:</p>
 <span class="n">p</span><span class="o">.</span><span class="n">strip_dirs</span><span class="p">()</span><span class="o">.</span><span class="n">sort_stats</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">print_stats</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>The <a class="reference internal" href="#pstats.Stats.strip_dirs" title="pstats.Stats.strip_dirs"><code class="xref py py-meth docutils literal notranslate"><span class="pre">strip_dirs()</span></code></a> method removed the extraneous path from all
-the module names. The <a class="reference internal" href="#pstats.Stats.sort_stats" title="pstats.Stats.sort_stats"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sort_stats()</span></code></a> method sorted all the
+<p>The <a class="reference internal" href="#pstats-stats-strip-dirs" title="pstats.Stats.strip_dirs"><code class="xref py py-meth docutils literal notranslate"><span class="pre">strip_dirs()</span></code></a> method removed the extraneous path from all
+the module names. The <a class="reference internal" href="#pstats-stats-sort-stats" title="pstats.Stats.sort_stats"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sort_stats()</span></code></a> method sorted all the
 entries according to the standard module/line/name string that is printed. The
-<a class="reference internal" href="#pstats.Stats.print_stats" title="pstats.Stats.print_stats"><code class="xref py py-meth docutils literal notranslate"><span class="pre">print_stats()</span></code></a> method printed out all the statistics.  You
+<a class="reference internal" href="#pstats-stats-print-stats" title="pstats.Stats.print_stats"><code class="xref py py-meth docutils literal notranslate"><span class="pre">print_stats()</span></code></a> method printed out all the statistics.  You
 might try the following sort calls:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">sort_stats</span><span class="p">(</span><span class="n">SortKey</span><span class="o">.</span><span class="n">NAME</span><span class="p">)</span>
 <span class="n">p</span><span class="o">.</span><span class="n">print_stats</span><span class="p">()</span>
@@ -275,40 +278,40 @@ guess what the following functions do:</p>
 reading and examining profile dumps.  It has a simple line-oriented interface
 (implemented using <a class="reference internal" href="cmd.html#module-cmd" title="cmd: Build line-oriented command interpreters."><code class="xref py py-mod docutils literal notranslate"><span class="pre">cmd</span></code></a>) and interactive help.</p>
 </div>
-<div class="section" id="module-cProfile">
-<span id="profile-and-cprofile-module-reference"></span><h2><a class="reference internal" href="#module-profile" title="profile: Python source profiler."><code class="xref py py-mod docutils literal notranslate"><span class="pre">profile</span></code></a> and <a class="reference internal" href="#module-cProfile" title="cProfile"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cProfile</span></code></a> Module Reference<a class="headerlink" href="#module-cProfile" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="module-profile"></span><p>Both the <a class="reference internal" href="#module-profile" title="profile: Python source profiler."><code class="xref py py-mod docutils literal notranslate"><span class="pre">profile</span></code></a> and <a class="reference internal" href="#module-cProfile" title="cProfile"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cProfile</span></code></a> modules provide the following
+<div class="section" id="module-cprofile">
+<span id="module-cProfile"></span><span id="profile-and-cprofile-module-reference"></span><h2><a class="reference internal" href="#module-profile" title="profile: Python source profiler."><code class="xref py py-mod docutils literal notranslate"><span class="pre">profile</span></code></a> and <a class="reference internal" href="#module-cprofile" title="cProfile"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cProfile</span></code></a> Module Reference<a class="headerlink" href="#module-cprofile" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-profile"></span><p>Both the <a class="reference internal" href="#module-profile" title="profile: Python source profiler."><code class="xref py py-mod docutils literal notranslate"><span class="pre">profile</span></code></a> and <a class="reference internal" href="#module-cprofile" title="cProfile"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cProfile</span></code></a> modules provide the following
 functions:</p>
-<dl class="function">
-<dt id="profile.run">
-<code class="sig-prename descclassname">profile.</code><code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param">command</em>, <em class="sig-param">filename=None</em>, <em class="sig-param">sort=-1</em><span class="sig-paren">)</span><a class="headerlink" href="#profile.run" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="profile-run">
+<span id="profile.run"></span><code class="sig-prename descclassname">profile.</code><code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param">command</em>, <em class="sig-param">filename=None</em>, <em class="sig-param">sort=-1</em><span class="sig-paren">)</span><a class="headerlink" href="#profile-run" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function takes a single argument that can be passed to the <a class="reference internal" href="functions.html#exec" title="exec"><code class="xref py py-func docutils literal notranslate"><span class="pre">exec()</span></code></a>
 function, and an optional file name.  In all cases this routine executes:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">exec</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="n">__main__</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">,</span> <span class="n">__main__</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>and gathers profiling statistics from the execution. If no file name is
-present, then this function automatically creates a <a class="reference internal" href="#pstats.Stats" title="pstats.Stats"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stats</span></code></a>
+present, then this function automatically creates a <a class="reference internal" href="#pstats-stats" title="pstats.Stats"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stats</span></code></a>
 instance and prints a simple profiling report. If the sort value is specified,
-it is passed to this <a class="reference internal" href="#pstats.Stats" title="pstats.Stats"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stats</span></code></a> instance to control how the
+it is passed to this <a class="reference internal" href="#pstats-stats" title="pstats.Stats"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stats</span></code></a> instance to control how the
 results are sorted.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="profile.runctx">
-<code class="sig-prename descclassname">profile.</code><code class="sig-name descname">runctx</code><span class="sig-paren">(</span><em class="sig-param">command</em>, <em class="sig-param">globals</em>, <em class="sig-param">locals</em>, <em class="sig-param">filename=None</em>, <em class="sig-param">sort=-1</em><span class="sig-paren">)</span><a class="headerlink" href="#profile.runctx" title="Permalink to this definition">¶</a></dt>
-<dd><p>This function is similar to <a class="reference internal" href="#profile.run" title="profile.run"><code class="xref py py-func docutils literal notranslate"><span class="pre">run()</span></code></a>, with added arguments to supply the
+<dl class="py function">
+<dt id="profile-runctx">
+<span id="profile.runctx"></span><code class="sig-prename descclassname">profile.</code><code class="sig-name descname">runctx</code><span class="sig-paren">(</span><em class="sig-param">command</em>, <em class="sig-param">globals</em>, <em class="sig-param">locals</em>, <em class="sig-param">filename=None</em>, <em class="sig-param">sort=-1</em><span class="sig-paren">)</span><a class="headerlink" href="#profile-runctx" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is similar to <a class="reference internal" href="#profile-run" title="profile.run"><code class="xref py py-func docutils literal notranslate"><span class="pre">run()</span></code></a>, with added arguments to supply the
 globals and locals dictionaries for the <em>command</em> string. This routine
 executes:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">exec</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="nb">globals</span><span class="p">,</span> <span class="nb">locals</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>and gathers profiling statistics as in the <a class="reference internal" href="#profile.run" title="profile.run"><code class="xref py py-func docutils literal notranslate"><span class="pre">run()</span></code></a> function above.</p>
+<p>and gathers profiling statistics as in the <a class="reference internal" href="#profile-run" title="profile.run"><code class="xref py py-func docutils literal notranslate"><span class="pre">run()</span></code></a> function above.</p>
 </dd></dl>
 
-<dl class="class">
-<dt id="profile.Profile">
-<em class="property">class </em><code class="sig-prename descclassname">profile.</code><code class="sig-name descname">Profile</code><span class="sig-paren">(</span><em class="sig-param">timer=None</em>, <em class="sig-param">timeunit=0.0</em>, <em class="sig-param">subcalls=True</em>, <em class="sig-param">builtins=True</em><span class="sig-paren">)</span><a class="headerlink" href="#profile.Profile" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt id="profile-profile">
+<span id="profile.Profile"></span><em class="property">class </em><code class="sig-prename descclassname">profile.</code><code class="sig-name descname">Profile</code><span class="sig-paren">(</span><em class="sig-param">timer=None</em>, <em class="sig-param">timeunit=0.0</em>, <em class="sig-param">subcalls=True</em>, <em class="sig-param">builtins=True</em><span class="sig-paren">)</span><a class="headerlink" href="#profile-profile" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class is normally only used if more precise control over profiling is
 needed than what the <code class="xref py py-func docutils literal notranslate"><span class="pre">cProfile.run()</span></code> function provides.</p>
 <p>A custom timer can be supplied for measuring how long code takes to run via
@@ -317,7 +320,7 @@ representing the current time. If the number is an integer, the <em>timeunit</em
 specifies a multiplier that specifies the duration of each unit of time. For
 example, if the timer returns times measured in thousands of seconds, the
 time unit would be <code class="docutils literal notranslate"><span class="pre">.001</span></code>.</p>
-<p>Directly using the <a class="reference internal" href="#profile.Profile" title="profile.Profile"><code class="xref py py-class docutils literal notranslate"><span class="pre">Profile</span></code></a> class allows formatting profile results
+<p>Directly using the <a class="reference internal" href="#profile-profile" title="profile.Profile"><code class="xref py py-class docutils literal notranslate"><span class="pre">Profile</span></code></a> class allows formatting profile results
 without writing the profile data to a file:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cProfile</span><span class="o">,</span> <span class="nn">pstats</span><span class="o">,</span> <span class="nn">io</span>
 <span class="kn">from</span> <span class="nn">pstats</span> <span class="kn">import</span> <span class="n">SortKey</span>
@@ -332,8 +335,8 @@ without writing the profile data to a file:</p>
 <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">getvalue</span><span class="p">())</span>
 </pre></div>
 </div>
-<p>The <a class="reference internal" href="#profile.Profile" title="profile.Profile"><code class="xref py py-class docutils literal notranslate"><span class="pre">Profile</span></code></a> class can also be used as a context manager (supported
-only in <a class="reference internal" href="#module-cProfile" title="cProfile"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cProfile</span></code></a> module. see <a class="reference internal" href="stdtypes.html#typecontextmanager"><span class="std std-ref">Context Manager Types</span></a>):</p>
+<p>The <a class="reference internal" href="#profile-profile" title="profile.Profile"><code class="xref py py-class docutils literal notranslate"><span class="pre">Profile</span></code></a> class can also be used as a context manager (supported
+only in <a class="reference internal" href="#module-cprofile" title="cProfile"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cProfile</span></code></a> module. see <a class="reference internal" href="stdtypes.html#typecontextmanager"><span class="std std-ref">Context Manager Types</span></a>):</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cProfile</span>
 
 <span class="k">with</span> <span class="n">cProfile</span><span class="o">.</span><span class="n">Profile</span><span class="p">()</span> <span class="k">as</span> <span class="n">pr</span><span class="p">:</span>
@@ -345,125 +348,125 @@ only in <a class="reference internal" href="#module-cProfile" title="cProfile"><
 <div class="versionchanged">
 <p><span class="versionmodified changed">Changed in version 3.8: </span>Added context manager support.</p>
 </div>
-<dl class="method">
-<dt id="profile.Profile.enable">
-<code class="sig-name descname">enable</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#profile.Profile.enable" title="Permalink to this definition">¶</a></dt>
-<dd><p>Start collecting profiling data. Only in <a class="reference internal" href="#module-cProfile" title="cProfile"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cProfile</span></code></a>.</p>
+<dl class="py method">
+<dt id="profile-profile-enable">
+<span id="profile.Profile.enable"></span><code class="sig-name descname">enable</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#profile-profile-enable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Start collecting profiling data. Only in <a class="reference internal" href="#module-cprofile" title="cProfile"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cProfile</span></code></a>.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="profile.Profile.disable">
-<code class="sig-name descname">disable</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#profile.Profile.disable" title="Permalink to this definition">¶</a></dt>
-<dd><p>Stop collecting profiling data. Only in <a class="reference internal" href="#module-cProfile" title="cProfile"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cProfile</span></code></a>.</p>
+<dl class="py method">
+<dt id="profile-profile-disable">
+<span id="profile.Profile.disable"></span><code class="sig-name descname">disable</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#profile-profile-disable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stop collecting profiling data. Only in <a class="reference internal" href="#module-cprofile" title="cProfile"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cProfile</span></code></a>.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="profile.Profile.create_stats">
-<code class="sig-name descname">create_stats</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#profile.Profile.create_stats" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="profile-profile-create-stats">
+<span id="profile.Profile.create_stats"></span><code class="sig-name descname">create_stats</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#profile-profile-create-stats" title="Permalink to this definition">¶</a></dt>
 <dd><p>Stop collecting profiling data and record the results internally
 as the current profile.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="profile.Profile.print_stats">
-<code class="sig-name descname">print_stats</code><span class="sig-paren">(</span><em class="sig-param">sort=-1</em><span class="sig-paren">)</span><a class="headerlink" href="#profile.Profile.print_stats" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a <a class="reference internal" href="#pstats.Stats" title="pstats.Stats"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stats</span></code></a> object based on the current
+<dl class="py method">
+<dt id="profile-profile-print-stats">
+<span id="profile.Profile.print_stats"></span><code class="sig-name descname">print_stats</code><span class="sig-paren">(</span><em class="sig-param">sort=-1</em><span class="sig-paren">)</span><a class="headerlink" href="#profile-profile-print-stats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a <a class="reference internal" href="#pstats-stats" title="pstats.Stats"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stats</span></code></a> object based on the current
 profile and print the results to stdout.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="profile.Profile.dump_stats">
-<code class="sig-name descname">dump_stats</code><span class="sig-paren">(</span><em class="sig-param">filename</em><span class="sig-paren">)</span><a class="headerlink" href="#profile.Profile.dump_stats" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="profile-profile-dump-stats">
+<span id="profile.Profile.dump_stats"></span><code class="sig-name descname">dump_stats</code><span class="sig-paren">(</span><em class="sig-param">filename</em><span class="sig-paren">)</span><a class="headerlink" href="#profile-profile-dump-stats" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write the results of the current profile to <em>filename</em>.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="profile.Profile.run">
-<code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param">cmd</em><span class="sig-paren">)</span><a class="headerlink" href="#profile.Profile.run" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="profile-profile-run">
+<span id="profile.Profile.run"></span><code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param">cmd</em><span class="sig-paren">)</span><a class="headerlink" href="#profile-profile-run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Profile the cmd via <a class="reference internal" href="functions.html#exec" title="exec"><code class="xref py py-func docutils literal notranslate"><span class="pre">exec()</span></code></a>.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="profile.Profile.runctx">
-<code class="sig-name descname">runctx</code><span class="sig-paren">(</span><em class="sig-param">cmd</em>, <em class="sig-param">globals</em>, <em class="sig-param">locals</em><span class="sig-paren">)</span><a class="headerlink" href="#profile.Profile.runctx" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="profile-profile-runctx">
+<span id="profile.Profile.runctx"></span><code class="sig-name descname">runctx</code><span class="sig-paren">(</span><em class="sig-param">cmd</em>, <em class="sig-param">globals</em>, <em class="sig-param">locals</em><span class="sig-paren">)</span><a class="headerlink" href="#profile-profile-runctx" title="Permalink to this definition">¶</a></dt>
 <dd><p>Profile the cmd via <a class="reference internal" href="functions.html#exec" title="exec"><code class="xref py py-func docutils literal notranslate"><span class="pre">exec()</span></code></a> with the specified global and
 local environment.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="profile.Profile.runcall">
-<code class="sig-name descname">runcall</code><span class="sig-paren">(</span><em class="sig-param">func</em>, <em class="sig-param">/</em>, <em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#profile.Profile.runcall" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="profile-profile-runcall">
+<span id="profile.Profile.runcall"></span><code class="sig-name descname">runcall</code><span class="sig-paren">(</span><em class="sig-param">func</em>, <em class="sig-param">/</em>, <em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#profile-profile-runcall" title="Permalink to this definition">¶</a></dt>
 <dd><p>Profile <code class="docutils literal notranslate"><span class="pre">func(*args,</span> <span class="pre">**kwargs)</span></code></p>
 </dd></dl>
 
 </dd></dl>
 
 <p>Note that profiling will only work if the called command/function actually
-returns.  If the interpreter is terminated (e.g. via a <a class="reference internal" href="sys.html#sys.exit" title="sys.exit"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys.exit()</span></code></a> call
+returns.  If the interpreter is terminated (e.g. via a <a class="reference internal" href="sys.html#sys-exit" title="sys.exit"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys.exit()</span></code></a> call
 during the called command/function execution) no profiling results will be
 printed.</p>
 </div>
 <div class="section" id="the-stats-class">
 <span id="profile-stats"></span><h2>The <code class="xref py py-class docutils literal notranslate"><span class="pre">Stats</span></code> Class<a class="headerlink" href="#the-stats-class" title="Permalink to this headline">¶</a></h2>
-<p>Analysis of the profiler data is done using the <a class="reference internal" href="#pstats.Stats" title="pstats.Stats"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stats</span></code></a> class.</p>
-<span class="target" id="module-pstats"></span><dl class="class">
-<dt id="pstats.Stats">
-<em class="property">class </em><code class="sig-prename descclassname">pstats.</code><code class="sig-name descname">Stats</code><span class="sig-paren">(</span><em class="sig-param">*filenames or profile</em>, <em class="sig-param">stream=sys.stdout</em><span class="sig-paren">)</span><a class="headerlink" href="#pstats.Stats" title="Permalink to this definition">¶</a></dt>
+<p>Analysis of the profiler data is done using the <a class="reference internal" href="#pstats-stats" title="pstats.Stats"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stats</span></code></a> class.</p>
+<span class="target" id="module-pstats"></span><dl class="py class">
+<dt id="pstats-stats">
+<span id="pstats.Stats"></span><em class="property">class </em><code class="sig-prename descclassname">pstats.</code><code class="sig-name descname">Stats</code><span class="sig-paren">(</span><em class="sig-param">*filenames or profile</em>, <em class="sig-param">stream=sys.stdout</em><span class="sig-paren">)</span><a class="headerlink" href="#pstats-stats" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class constructor creates an instance of a “statistics object” from a
 <em>filename</em> (or list of filenames) or from a <code class="xref py py-class docutils literal notranslate"><span class="pre">Profile</span></code> instance. Output
 will be printed to the stream specified by <em>stream</em>.</p>
 <p>The file selected by the above constructor must have been created by the
-corresponding version of <a class="reference internal" href="#module-profile" title="profile: Python source profiler."><code class="xref py py-mod docutils literal notranslate"><span class="pre">profile</span></code></a> or <a class="reference internal" href="#module-cProfile" title="cProfile"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cProfile</span></code></a>.  To be specific,
+corresponding version of <a class="reference internal" href="#module-profile" title="profile: Python source profiler."><code class="xref py py-mod docutils literal notranslate"><span class="pre">profile</span></code></a> or <a class="reference internal" href="#module-cprofile" title="cProfile"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cProfile</span></code></a>.  To be specific,
 there is <em>no</em> file compatibility guaranteed with future versions of this
 profiler, and there is no compatibility with files produced by other
 profilers, or the same profiler run on a different operating system.  If
 several files are provided, all the statistics for identical functions will
 be coalesced, so that an overall view of several processes can be considered
 in a single report.  If additional files need to be combined with data in an
-existing <a class="reference internal" href="#pstats.Stats" title="pstats.Stats"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stats</span></code></a> object, the <a class="reference internal" href="#pstats.Stats.add" title="pstats.Stats.add"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add()</span></code></a> method
+existing <a class="reference internal" href="#pstats-stats" title="pstats.Stats"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stats</span></code></a> object, the <a class="reference internal" href="#pstats-stats-add" title="pstats.Stats.add"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add()</span></code></a> method
 can be used.</p>
 <p>Instead of reading the profile data from a file, a <code class="xref py py-class docutils literal notranslate"><span class="pre">cProfile.Profile</span></code>
-or <a class="reference internal" href="#profile.Profile" title="profile.Profile"><code class="xref py py-class docutils literal notranslate"><span class="pre">profile.Profile</span></code></a> object can be used as the profile data source.</p>
-<p><a class="reference internal" href="#pstats.Stats" title="pstats.Stats"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stats</span></code></a> objects have the following methods:</p>
-<dl class="method">
-<dt id="pstats.Stats.strip_dirs">
-<code class="sig-name descname">strip_dirs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pstats.Stats.strip_dirs" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method for the <a class="reference internal" href="#pstats.Stats" title="pstats.Stats"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stats</span></code></a> class removes all leading path
+or <a class="reference internal" href="#profile-profile" title="profile.Profile"><code class="xref py py-class docutils literal notranslate"><span class="pre">profile.Profile</span></code></a> object can be used as the profile data source.</p>
+<p><a class="reference internal" href="#pstats-stats" title="pstats.Stats"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stats</span></code></a> objects have the following methods:</p>
+<dl class="py method">
+<dt id="pstats-stats-strip-dirs">
+<span id="pstats.Stats.strip_dirs"></span><code class="sig-name descname">strip_dirs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pstats-stats-strip-dirs" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method for the <a class="reference internal" href="#pstats-stats" title="pstats.Stats"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stats</span></code></a> class removes all leading path
 information from file names.  It is very useful in reducing the size of
 the printout to fit within (close to) 80 columns.  This method modifies
 the object, and the stripped information is lost.  After performing a
 strip operation, the object is considered to have its entries in a
 “random” order, as it was just after object initialization and loading.
-If <a class="reference internal" href="#pstats.Stats.strip_dirs" title="pstats.Stats.strip_dirs"><code class="xref py py-meth docutils literal notranslate"><span class="pre">strip_dirs()</span></code></a> causes two function names to be
+If <a class="reference internal" href="#pstats-stats-strip-dirs" title="pstats.Stats.strip_dirs"><code class="xref py py-meth docutils literal notranslate"><span class="pre">strip_dirs()</span></code></a> causes two function names to be
 indistinguishable (they are on the same line of the same filename, and
 have the same function name), then the statistics for these two entries
 are accumulated into a single entry.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="pstats.Stats.add">
-<code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param">*filenames</em><span class="sig-paren">)</span><a class="headerlink" href="#pstats.Stats.add" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method of the <a class="reference internal" href="#pstats.Stats" title="pstats.Stats"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stats</span></code></a> class accumulates additional profiling
+<dl class="py method">
+<dt id="pstats-stats-add">
+<span id="pstats.Stats.add"></span><code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param">*filenames</em><span class="sig-paren">)</span><a class="headerlink" href="#pstats-stats-add" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method of the <a class="reference internal" href="#pstats-stats" title="pstats.Stats"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stats</span></code></a> class accumulates additional profiling
 information into the current profiling object.  Its arguments should refer
-to filenames created by the corresponding version of <a class="reference internal" href="#profile.run" title="profile.run"><code class="xref py py-func docutils literal notranslate"><span class="pre">profile.run()</span></code></a>
+to filenames created by the corresponding version of <a class="reference internal" href="#profile-run" title="profile.run"><code class="xref py py-func docutils literal notranslate"><span class="pre">profile.run()</span></code></a>
 or <code class="xref py py-func docutils literal notranslate"><span class="pre">cProfile.run()</span></code>. Statistics for identically named (re: file, line,
 name) functions are automatically accumulated into single function
 statistics.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="pstats.Stats.dump_stats">
-<code class="sig-name descname">dump_stats</code><span class="sig-paren">(</span><em class="sig-param">filename</em><span class="sig-paren">)</span><a class="headerlink" href="#pstats.Stats.dump_stats" title="Permalink to this definition">¶</a></dt>
-<dd><p>Save the data loaded into the <a class="reference internal" href="#pstats.Stats" title="pstats.Stats"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stats</span></code></a> object to a file named
+<dl class="py method">
+<dt id="pstats-stats-dump-stats">
+<span id="pstats.Stats.dump_stats"></span><code class="sig-name descname">dump_stats</code><span class="sig-paren">(</span><em class="sig-param">filename</em><span class="sig-paren">)</span><a class="headerlink" href="#pstats-stats-dump-stats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the data loaded into the <a class="reference internal" href="#pstats-stats" title="pstats.Stats"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stats</span></code></a> object to a file named
 <em>filename</em>.  The file is created if it does not exist, and is overwritten
 if it already exists.  This is equivalent to the method of the same name
-on the <a class="reference internal" href="#profile.Profile" title="profile.Profile"><code class="xref py py-class docutils literal notranslate"><span class="pre">profile.Profile</span></code></a> and <code class="xref py py-class docutils literal notranslate"><span class="pre">cProfile.Profile</span></code> classes.</p>
+on the <a class="reference internal" href="#profile-profile" title="profile.Profile"><code class="xref py py-class docutils literal notranslate"><span class="pre">profile.Profile</span></code></a> and <code class="xref py py-class docutils literal notranslate"><span class="pre">cProfile.Profile</span></code> classes.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="pstats.Stats.sort_stats">
-<code class="sig-name descname">sort_stats</code><span class="sig-paren">(</span><em class="sig-param">*keys</em><span class="sig-paren">)</span><a class="headerlink" href="#pstats.Stats.sort_stats" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method modifies the <a class="reference internal" href="#pstats.Stats" title="pstats.Stats"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stats</span></code></a> object by sorting it according to
+<dl class="py method">
+<dt id="pstats-stats-sort-stats">
+<span id="pstats.Stats.sort_stats"></span><code class="sig-name descname">sort_stats</code><span class="sig-paren">(</span><em class="sig-param">*keys</em><span class="sig-paren">)</span><a class="headerlink" href="#pstats-stats-sort-stats" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method modifies the <a class="reference internal" href="#pstats-stats" title="pstats.Stats"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stats</span></code></a> object by sorting it according to
 the supplied criteria.  The argument can be either a string or a SortKey
 enum identifying the basis of a sort (example: <code class="docutils literal notranslate"><span class="pre">'time'</span></code>, <code class="docutils literal notranslate"><span class="pre">'name'</span></code>,
 <code class="docutils literal notranslate"><span class="pre">SortKey.TIME</span></code> or <code class="docutils literal notranslate"><span class="pre">SortKey.NAME</span></code>). The SortKey enums argument have
@@ -568,23 +571,23 @@ be used, and additional arguments will be silently ignored.</p>
 </div>
 </dd></dl>
 
-<dl class="method">
-<dt id="pstats.Stats.reverse_order">
-<code class="sig-name descname">reverse_order</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pstats.Stats.reverse_order" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method for the <a class="reference internal" href="#pstats.Stats" title="pstats.Stats"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stats</span></code></a> class reverses the ordering of the
+<dl class="py method">
+<dt id="pstats-stats-reverse-order">
+<span id="pstats.Stats.reverse_order"></span><code class="sig-name descname">reverse_order</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pstats-stats-reverse-order" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method for the <a class="reference internal" href="#pstats-stats" title="pstats.Stats"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stats</span></code></a> class reverses the ordering of the
 basic list within the object.  Note that by default ascending vs
 descending order is properly selected based on the sort key of choice.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="pstats.Stats.print_stats">
-<code class="sig-name descname">print_stats</code><span class="sig-paren">(</span><em class="sig-param">*restrictions</em><span class="sig-paren">)</span><a class="headerlink" href="#pstats.Stats.print_stats" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method for the <a class="reference internal" href="#pstats.Stats" title="pstats.Stats"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stats</span></code></a> class prints out a report as described
-in the <a class="reference internal" href="#profile.run" title="profile.run"><code class="xref py py-func docutils literal notranslate"><span class="pre">profile.run()</span></code></a> definition.</p>
+<dl class="py method">
+<dt id="pstats-stats-print-stats">
+<span id="pstats.Stats.print_stats"></span><code class="sig-name descname">print_stats</code><span class="sig-paren">(</span><em class="sig-param">*restrictions</em><span class="sig-paren">)</span><a class="headerlink" href="#pstats-stats-print-stats" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method for the <a class="reference internal" href="#pstats-stats" title="pstats.Stats"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stats</span></code></a> class prints out a report as described
+in the <a class="reference internal" href="#profile-run" title="profile.run"><code class="xref py py-func docutils literal notranslate"><span class="pre">profile.run()</span></code></a> definition.</p>
 <p>The order of the printing is based on the last
-<a class="reference internal" href="#pstats.Stats.sort_stats" title="pstats.Stats.sort_stats"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sort_stats()</span></code></a> operation done on the object (subject to
-caveats in <a class="reference internal" href="#pstats.Stats.add" title="pstats.Stats.add"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add()</span></code></a> and
-<a class="reference internal" href="#pstats.Stats.strip_dirs" title="pstats.Stats.strip_dirs"><code class="xref py py-meth docutils literal notranslate"><span class="pre">strip_dirs()</span></code></a>).</p>
+<a class="reference internal" href="#pstats-stats-sort-stats" title="pstats.Stats.sort_stats"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sort_stats()</span></code></a> operation done on the object (subject to
+caveats in <a class="reference internal" href="#pstats-stats-add" title="pstats.Stats.add"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add()</span></code></a> and
+<a class="reference internal" href="#pstats-stats-strip-dirs" title="pstats.Stats.strip_dirs"><code class="xref py py-meth docutils literal notranslate"><span class="pre">strip_dirs()</span></code></a>).</p>
 <p>The arguments provided (if any) can be used to limit the list down to the
 significant entries.  Initially, the list is taken to be the complete set
 of profiled functions.  Each restriction is either an integer (to select a
@@ -606,12 +609,12 @@ command:</p>
 and then proceed to only print the first 10% of them.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="pstats.Stats.print_callers">
-<code class="sig-name descname">print_callers</code><span class="sig-paren">(</span><em class="sig-param">*restrictions</em><span class="sig-paren">)</span><a class="headerlink" href="#pstats.Stats.print_callers" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method for the <a class="reference internal" href="#pstats.Stats" title="pstats.Stats"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stats</span></code></a> class prints a list of all functions
+<dl class="py method">
+<dt id="pstats-stats-print-callers">
+<span id="pstats.Stats.print_callers"></span><code class="sig-name descname">print_callers</code><span class="sig-paren">(</span><em class="sig-param">*restrictions</em><span class="sig-paren">)</span><a class="headerlink" href="#pstats-stats-print-callers" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method for the <a class="reference internal" href="#pstats-stats" title="pstats.Stats"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stats</span></code></a> class prints a list of all functions
 that called each function in the profiled database.  The ordering is
-identical to that provided by <a class="reference internal" href="#pstats.Stats.print_stats" title="pstats.Stats.print_stats"><code class="xref py py-meth docutils literal notranslate"><span class="pre">print_stats()</span></code></a>, and the
+identical to that provided by <a class="reference internal" href="#pstats-stats-print-stats" title="pstats.Stats.print_stats"><code class="xref py py-meth docutils literal notranslate"><span class="pre">print_stats()</span></code></a>, and the
 definition of the restricting argument is also identical.  Each caller is
 reported on its own line.  The format differs slightly depending on the
 profiler that produced the stats:</p>
@@ -620,25 +623,25 @@ profiler that produced the stats:</p>
 to show how many times this specific call was made.  For convenience, a
 second non-parenthesized number repeats the cumulative time spent in the
 function at the right.</p></li>
-<li><p>With <a class="reference internal" href="#module-cProfile" title="cProfile"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cProfile</span></code></a>, each caller is preceded by three numbers: the
+<li><p>With <a class="reference internal" href="#module-cprofile" title="cProfile"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cProfile</span></code></a>, each caller is preceded by three numbers: the
 number of times this specific call was made, and the total and
 cumulative times spent in the current function while it was invoked by
 this specific caller.</p></li>
 </ul>
 </dd></dl>
 
-<dl class="method">
-<dt id="pstats.Stats.print_callees">
-<code class="sig-name descname">print_callees</code><span class="sig-paren">(</span><em class="sig-param">*restrictions</em><span class="sig-paren">)</span><a class="headerlink" href="#pstats.Stats.print_callees" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="pstats-stats-print-callees">
+<span id="pstats.Stats.print_callees"></span><code class="sig-name descname">print_callees</code><span class="sig-paren">(</span><em class="sig-param">*restrictions</em><span class="sig-paren">)</span><a class="headerlink" href="#pstats-stats-print-callees" title="Permalink to this definition">¶</a></dt>
 <dd><blockquote>
-<div><p>This method for the <a class="reference internal" href="#pstats.Stats" title="pstats.Stats"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stats</span></code></a> class prints a list of all function
+<div><p>This method for the <a class="reference internal" href="#pstats-stats" title="pstats.Stats"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stats</span></code></a> class prints a list of all function
 that were called by the indicated function.  Aside from this reversal of
 direction of calls (re: called vs was called by), the arguments and
-ordering are identical to the <a class="reference internal" href="#pstats.Stats.print_callers" title="pstats.Stats.print_callers"><code class="xref py py-meth docutils literal notranslate"><span class="pre">print_callers()</span></code></a> method.</p>
+ordering are identical to the <a class="reference internal" href="#pstats-stats-print-callers" title="pstats.Stats.print_callers"><code class="xref py py-meth docutils literal notranslate"><span class="pre">print_callers()</span></code></a> method.</p>
 </div></blockquote>
-<dl class="method">
-<dt id="pstats.Stats.get_stats_profile">
-<code class="sig-name descname">get_stats_profile</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pstats.Stats.get_stats_profile" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="pstats-stats-get-stats-profile">
+<span id="pstats.Stats.get_stats_profile"></span><code class="sig-name descname">get_stats_profile</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pstats-stats-get-stats-profile" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method returns an instance of StatsProfile, which contains a mapping
 of function names to instances of FunctionProfile. Each FunctionProfile
 instance holds information related to the function’s profile such as how
@@ -702,7 +705,7 @@ this error. The error that accumulates in this fashion is typically less than
 the accuracy of the clock (less than one clock tick), but it <em>can</em> accumulate
 and become very significant.</p>
 <p>The problem is more important with <a class="reference internal" href="#module-profile" title="profile: Python source profiler."><code class="xref py py-mod docutils literal notranslate"><span class="pre">profile</span></code></a> than with the lower-overhead
-<a class="reference internal" href="#module-cProfile" title="cProfile"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cProfile</span></code></a>.  For this reason, <a class="reference internal" href="#module-profile" title="profile: Python source profiler."><code class="xref py py-mod docutils literal notranslate"><span class="pre">profile</span></code></a> provides a means of
+<a class="reference internal" href="#module-cprofile" title="cProfile"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cProfile</span></code></a>.  For this reason, <a class="reference internal" href="#module-profile" title="profile: Python source profiler."><code class="xref py py-mod docutils literal notranslate"><span class="pre">profile</span></code></a> provides a means of
 calibrating itself for a given platform so that this error can be
 probabilistically (on the average) removed. After the profiler is calibrated, it
 will be more accurate (in a least square sense), but it will sometimes produce
@@ -758,18 +761,18 @@ to the <code class="xref py py-class docutils literal notranslate"><span class="
 </pre></div>
 </div>
 <p>The resulting profiler will then call <code class="docutils literal notranslate"><span class="pre">your_time_func</span></code>. Depending on whether
-you are using <a class="reference internal" href="#profile.Profile" title="profile.Profile"><code class="xref py py-class docutils literal notranslate"><span class="pre">profile.Profile</span></code></a> or <code class="xref py py-class docutils literal notranslate"><span class="pre">cProfile.Profile</span></code>,
+you are using <a class="reference internal" href="#profile-profile" title="profile.Profile"><code class="xref py py-class docutils literal notranslate"><span class="pre">profile.Profile</span></code></a> or <code class="xref py py-class docutils literal notranslate"><span class="pre">cProfile.Profile</span></code>,
 <code class="docutils literal notranslate"><span class="pre">your_time_func</span></code>’s return value will be interpreted differently:</p>
 <dl>
-<dt><a class="reference internal" href="#profile.Profile" title="profile.Profile"><code class="xref py py-class docutils literal notranslate"><span class="pre">profile.Profile</span></code></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">your_time_func</span></code> should return a single number, or a list of numbers whose
-sum is the current time (like what <a class="reference internal" href="os.html#os.times" title="os.times"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.times()</span></code></a> returns).  If the
+<dt><a class="reference internal" href="#profile-profile" title="profile.Profile"><code class="xref py py-class docutils literal notranslate"><span class="pre">profile.Profile</span></code></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">your_time_func</span></code> should return a single number, or a list of numbers whose
+sum is the current time (like what <a class="reference internal" href="os.html#os-times" title="os.times"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.times()</span></code></a> returns).  If the
 function returns a single time number, or the list of returned numbers has
 length 2, then you will get an especially fast version of the dispatch
 routine.</p>
 <p>Be warned that you should calibrate the profiler class for the timer function
 that you choose (see <a class="reference internal" href="#profile-calibration"><span class="std std-ref">Calibration</span></a>).  For most machines, a timer
 that returns a lone integer value will provide the best results in terms of
-low overhead during profiling.  (<a class="reference internal" href="os.html#os.times" title="os.times"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.times()</span></code></a> is <em>pretty</em> bad, as it
+low overhead during profiling.  (<a class="reference internal" href="os.html#os-times" title="os.times"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.times()</span></code></a> is <em>pretty</em> bad, as it
 returns a tuple of floating point values).  If you want to substitute a
 better timer in the cleanest fashion, derive a class and hardwire a
 replacement dispatch method that best handles your timer call, along with the
@@ -791,7 +794,7 @@ in the C source of the internal <code class="xref py py-mod docutils literal not
 </dl>
 <p>Python 3.3 adds several new functions in <a class="reference internal" href="time.html#module-time" title="time: Time access and conversions."><code class="xref py py-mod docutils literal notranslate"><span class="pre">time</span></code></a> that can be used to make
 precise measurements of process or wall-clock time. For example, see
-<a class="reference internal" href="time.html#time.perf_counter" title="time.perf_counter"><code class="xref py py-func docutils literal notranslate"><span class="pre">time.perf_counter()</span></code></a>.</p>
+<a class="reference internal" href="time.html#time-perf-counter" title="time.perf_counter"><code class="xref py py-func docutils literal notranslate"><span class="pre">time.perf_counter()</span></code></a>.</p>
 </div>
 </div>
 
@@ -806,7 +809,7 @@ precise measurements of process or wall-clock time. For example, see
 <li><a class="reference internal" href="#">The Python Profilers</a><ul>
 <li><a class="reference internal" href="#introduction-to-the-profilers">Introduction to the profilers</a></li>
 <li><a class="reference internal" href="#instant-user-s-manual">Instant User’s Manual</a></li>
-<li><a class="reference internal" href="#module-cProfile"><code class="xref py py-mod docutils literal notranslate"><span class="pre">profile</span></code> and <code class="xref py py-mod docutils literal notranslate"><span class="pre">cProfile</span></code> Module Reference</a></li>
+<li><a class="reference internal" href="#module-cprofile"><code class="xref py py-mod docutils literal notranslate"><span class="pre">profile</span></code> and <code class="xref py py-mod docutils literal notranslate"><span class="pre">cProfile</span></code> Module Reference</a></li>
 <li><a class="reference internal" href="#the-stats-class">The <code class="xref py py-class docutils literal notranslate"><span class="pre">Stats</span></code> Class</a></li>
 <li><a class="reference internal" href="#what-is-deterministic-profiling">What Is Deterministic Profiling?</a></li>
 <li><a class="reference internal" href="#limitations">Limitations</a></li>
@@ -859,7 +862,7 @@ precise measurements of process or wall-clock time. For example, see
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
@@ -878,6 +881,7 @@ precise measurements of process or wall-clock time. For example, see
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  
@@ -890,11 +894,11 @@ precise measurements of process or wall-clock time. For example, see
 <br />
     <br />
 
-    Last updated on Feb 13, 2020.
+    Last updated on Mar 08, 2020.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 2.4.2+/ad35b3c.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/c10e1bc.
     </div>
 
   </body>

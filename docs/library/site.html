@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>site — Site-specific configuration hook &#8212; Python 3.9.0a3 documentation</title>
+    <title>site — Site-specific configuration hook &#8212; Python 3.9.0a4 documentation</title>
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments-monokai.css" />
+    <link rel="stylesheet" href="../_static/pygments_dark.css" type="text/css" media="(prefers-color-scheme: dark)" id="pygments_dark_css" />
     
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -18,7 +18,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.9.0a3 documentation"
+          title="Search within Python 3.9.0a4 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -41,9 +41,11 @@
       }
     </style>
 
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png" />
+    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
     
     <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <script type="text/javascript" src="../_static/themetoggle.js"></script>
     
      
 
@@ -72,7 +74,7 @@
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
@@ -91,6 +93,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -105,15 +108,15 @@
 <p><strong>Source code:</strong> <a class="reference external" href="https://github.com/python/cpython/tree/master/Lib/site.py">Lib/site.py</a></p>
 <hr class="docutils" />
 <p><strong>This module is automatically imported during initialization.</strong> The automatic
-import can be suppressed using the interpreter’s <a class="reference internal" href="../using/cmdline.html#id3"><code class="xref std std-option docutils literal notranslate"><span class="pre">-S</span></code></a> option.</p>
+import can be suppressed using the interpreter’s <a class="reference internal" href="../using/cmdline.html#cmdoption-3"><code class="xref std std-option docutils literal notranslate"><span class="pre">-S</span></code></a> option.</p>
 <p id="index-0">Importing this module will append site-specific paths to the module search path
-and add a few builtins, unless <a class="reference internal" href="../using/cmdline.html#id3"><code class="xref std std-option docutils literal notranslate"><span class="pre">-S</span></code></a> was used.  In that case, this module
+and add a few builtins, unless <a class="reference internal" href="../using/cmdline.html#cmdoption-3"><code class="xref std std-option docutils literal notranslate"><span class="pre">-S</span></code></a> was used.  In that case, this module
 can be safely imported with no automatic modifications to the module search path
 or additions to the builtins.  To explicitly trigger the usual site-specific
-additions, call the <a class="reference internal" href="#site.main" title="site.main"><code class="xref py py-func docutils literal notranslate"><span class="pre">site.main()</span></code></a> function.</p>
+additions, call the <a class="reference internal" href="#site-main" title="site.main"><code class="xref py py-func docutils literal notranslate"><span class="pre">site.main()</span></code></a> function.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">Changed in version 3.3: </span>Importing the module used to trigger paths manipulation even when using
-<a class="reference internal" href="../using/cmdline.html#id3"><code class="xref std std-option docutils literal notranslate"><span class="pre">-S</span></code></a>.</p>
+<a class="reference internal" href="../using/cmdline.html#cmdoption-3"><code class="xref std std-option docutils literal notranslate"><span class="pre">-S</span></code></a>.</p>
 </div>
 <p id="index-1">It starts by constructing up to four directories from a head and a tail part.
 For the head part, it uses <code class="docutils literal notranslate"><span class="pre">sys.prefix</span></code> and <code class="docutils literal notranslate"><span class="pre">sys.exec_prefix</span></code>; empty heads
@@ -187,7 +190,7 @@ not mentioned in either path configuration file.</p>
 <p id="index-5">After these path manipulations, an attempt is made to import a module named
 <code class="xref py py-mod docutils literal notranslate"><span class="pre">sitecustomize</span></code>, which can perform arbitrary site-specific customizations.
 It is typically created by a system administrator in the site-packages
-directory.  If this import fails with an <a class="reference internal" href="exceptions.html#ImportError" title="ImportError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ImportError</span></code></a> or its subclass
+directory.  If this import fails with an <a class="reference internal" href="exceptions.html#importerror" title="ImportError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ImportError</span></code></a> or its subclass
 exception, and the exception’s <code class="xref py py-attr docutils literal notranslate"><span class="pre">name</span></code> attribute equals to <code class="docutils literal notranslate"><span class="pre">'sitecustomize'</span></code>,
 it is silently ignored.  If Python is started without output streams available, as
 with <code class="file docutils literal notranslate"><span class="pre">pythonw.exe</span></code> on Windows (which is used by default to start IDLE),
@@ -195,9 +198,9 @@ attempted output from <code class="xref py py-mod docutils literal notranslate">
 causes a silent and perhaps mysterious failure of the process.</p>
 <p id="index-6">After this, an attempt is made to import a module named <code class="xref py py-mod docutils literal notranslate"><span class="pre">usercustomize</span></code>,
 which can perform arbitrary user-specific customizations, if
-<a class="reference internal" href="#site.ENABLE_USER_SITE" title="site.ENABLE_USER_SITE"><code class="xref py py-data docutils literal notranslate"><span class="pre">ENABLE_USER_SITE</span></code></a> is true.  This file is intended to be created in the
+<a class="reference internal" href="#site-enable-user-site" title="site.ENABLE_USER_SITE"><code class="xref py py-data docutils literal notranslate"><span class="pre">ENABLE_USER_SITE</span></code></a> is true.  This file is intended to be created in the
 user site-packages directory (see below), which is part of <code class="docutils literal notranslate"><span class="pre">sys.path</span></code> unless
-disabled by <a class="reference internal" href="../using/cmdline.html#cmdoption-s"><code class="xref std std-option docutils literal notranslate"><span class="pre">-s</span></code></a>.  If this import fails with an <a class="reference internal" href="exceptions.html#ImportError" title="ImportError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ImportError</span></code></a> or
+disabled by <a class="reference internal" href="../using/cmdline.html#cmdoption-s"><code class="xref std std-option docutils literal notranslate"><span class="pre">-s</span></code></a>.  If this import fails with an <a class="reference internal" href="exceptions.html#importerror" title="ImportError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ImportError</span></code></a> or
 its subclass exception, and the exception’s <code class="xref py py-attr docutils literal notranslate"><span class="pre">name</span></code> attribute equals to
 <code class="docutils literal notranslate"><span class="pre">'usercustomize'</span></code>, it is silently ignored.</p>
 <p>Note that for some non-Unix systems, <code class="docutils literal notranslate"><span class="pre">sys.prefix</span></code> and <code class="docutils literal notranslate"><span class="pre">sys.exec_prefix</span></code> are
@@ -207,40 +210,40 @@ empty, and the path manipulations are skipped; however the import of
 <span id="rlcompleter-config"></span><h2>Readline configuration<a class="headerlink" href="#readline-configuration" title="Permalink to this headline">¶</a></h2>
 <p>On systems that support <a class="reference internal" href="readline.html#module-readline" title="readline: GNU readline support for Python. (Unix)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">readline</span></code></a>, this module will also import and
 configure the <a class="reference internal" href="rlcompleter.html#module-rlcompleter" title="rlcompleter: Python identifier completion, suitable for the GNU readline library."><code class="xref py py-mod docutils literal notranslate"><span class="pre">rlcompleter</span></code></a> module, if Python is started in
-<a class="reference internal" href="../tutorial/interpreter.html#tut-interactive"><span class="std std-ref">interactive mode</span></a> and without the <a class="reference internal" href="../using/cmdline.html#id3"><code class="xref std std-option docutils literal notranslate"><span class="pre">-S</span></code></a> option.
+<a class="reference internal" href="../tutorial/interpreter.html#tut-interactive"><span class="std std-ref">interactive mode</span></a> and without the <a class="reference internal" href="../using/cmdline.html#cmdoption-3"><code class="xref std std-option docutils literal notranslate"><span class="pre">-S</span></code></a> option.
 The default behavior is enable tab-completion and to use
 <code class="file docutils literal notranslate"><span class="pre">~/.python_history</span></code> as the history save file.  To disable it, delete (or
-override) the <a class="reference internal" href="sys.html#sys.__interactivehook__" title="sys.__interactivehook__"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.__interactivehook__</span></code></a> attribute in your
+override) the <a class="reference internal" href="sys.html#sys-interactivehook" title="sys.__interactivehook__"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.__interactivehook__</span></code></a> attribute in your
 <code class="xref py py-mod docutils literal notranslate"><span class="pre">sitecustomize</span></code> or <code class="xref py py-mod docutils literal notranslate"><span class="pre">usercustomize</span></code> module or your
-<span class="target" id="index-7"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONSTARTUP"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONSTARTUP</span></code></a> file.</p>
+<span class="target" id="index-7"></span><a class="reference internal" href="../using/cmdline.html#envvar-pythonstartup"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONSTARTUP</span></code></a> file.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">Changed in version 3.4: </span>Activation of rlcompleter and history was made automatic.</p>
 </div>
 </div>
 <div class="section" id="module-contents">
 <h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
-<dl class="data">
-<dt id="site.PREFIXES">
-<code class="sig-prename descclassname">site.</code><code class="sig-name descname">PREFIXES</code><a class="headerlink" href="#site.PREFIXES" title="Permalink to this definition">¶</a></dt>
+<dl class="py data">
+<dt id="site-prefixes">
+<span id="site.PREFIXES"></span><code class="sig-prename descclassname">site.</code><code class="sig-name descname">PREFIXES</code><a class="headerlink" href="#site-prefixes" title="Permalink to this definition">¶</a></dt>
 <dd><p>A list of prefixes for site-packages directories.</p>
 </dd></dl>
 
-<dl class="data">
-<dt id="site.ENABLE_USER_SITE">
-<code class="sig-prename descclassname">site.</code><code class="sig-name descname">ENABLE_USER_SITE</code><a class="headerlink" href="#site.ENABLE_USER_SITE" title="Permalink to this definition">¶</a></dt>
+<dl class="py data">
+<dt id="site-enable-user-site">
+<span id="site.ENABLE_USER_SITE"></span><code class="sig-prename descclassname">site.</code><code class="sig-name descname">ENABLE_USER_SITE</code><a class="headerlink" href="#site-enable-user-site" title="Permalink to this definition">¶</a></dt>
 <dd><p>Flag showing the status of the user site-packages directory.  <code class="docutils literal notranslate"><span class="pre">True</span></code> means
 that it is enabled and was added to <code class="docutils literal notranslate"><span class="pre">sys.path</span></code>.  <code class="docutils literal notranslate"><span class="pre">False</span></code> means that it
 was disabled by user request (with <a class="reference internal" href="../using/cmdline.html#cmdoption-s"><code class="xref std std-option docutils literal notranslate"><span class="pre">-s</span></code></a> or
-<span class="target" id="index-8"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONNOUSERSITE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONNOUSERSITE</span></code></a>).  <code class="docutils literal notranslate"><span class="pre">None</span></code> means it was disabled for security
+<span class="target" id="index-8"></span><a class="reference internal" href="../using/cmdline.html#envvar-pythonnousersite"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONNOUSERSITE</span></code></a>).  <code class="docutils literal notranslate"><span class="pre">None</span></code> means it was disabled for security
 reasons (mismatch between user or group id and effective id) or by an
 administrator.</p>
 </dd></dl>
 
-<dl class="data">
-<dt id="site.USER_SITE">
-<code class="sig-prename descclassname">site.</code><code class="sig-name descname">USER_SITE</code><a class="headerlink" href="#site.USER_SITE" title="Permalink to this definition">¶</a></dt>
+<dl class="py data">
+<dt id="site-user-site">
+<span id="site.USER_SITE"></span><code class="sig-prename descclassname">site.</code><code class="sig-name descname">USER_SITE</code><a class="headerlink" href="#site-user-site" title="Permalink to this definition">¶</a></dt>
 <dd><p>Path to the user site-packages for the running Python.  Can be <code class="docutils literal notranslate"><span class="pre">None</span></code> if
-<a class="reference internal" href="#site.getusersitepackages" title="site.getusersitepackages"><code class="xref py py-func docutils literal notranslate"><span class="pre">getusersitepackages()</span></code></a> hasn’t been called yet.  Default value is
+<a class="reference internal" href="#site-getusersitepackages" title="site.getusersitepackages"><code class="xref py py-func docutils literal notranslate"><span class="pre">getusersitepackages()</span></code></a> hasn’t been called yet.  Default value is
 <code class="file docutils literal notranslate"><span class="pre">~/.local/lib/python</span><em><span class="pre">X.Y</span></em><span class="pre">/site-packages</span></code> for UNIX and non-framework Mac
 OS X builds, <code class="file docutils literal notranslate"><span class="pre">~/Library/Python/</span><em><span class="pre">X.Y</span></em><span class="pre">/lib/python/site-packages</span></code> for Mac
 framework builds, and <code class="file docutils literal notranslate"><em><span class="pre">%APPDATA%</span></em><span class="pre">\Python\Python</span><em><span class="pre">XY</span></em><span class="pre">\site-packages</span></code>
@@ -248,63 +251,63 @@ on Windows.  This directory is a site directory, which means that
 <code class="file docutils literal notranslate"><span class="pre">.pth</span></code> files in it will be processed.</p>
 </dd></dl>
 
-<dl class="data">
-<dt id="site.USER_BASE">
-<code class="sig-prename descclassname">site.</code><code class="sig-name descname">USER_BASE</code><a class="headerlink" href="#site.USER_BASE" title="Permalink to this definition">¶</a></dt>
+<dl class="py data">
+<dt id="site-user-base">
+<span id="site.USER_BASE"></span><code class="sig-prename descclassname">site.</code><code class="sig-name descname">USER_BASE</code><a class="headerlink" href="#site-user-base" title="Permalink to this definition">¶</a></dt>
 <dd><p>Path to the base directory for the user site-packages.  Can be <code class="docutils literal notranslate"><span class="pre">None</span></code> if
-<a class="reference internal" href="#site.getuserbase" title="site.getuserbase"><code class="xref py py-func docutils literal notranslate"><span class="pre">getuserbase()</span></code></a> hasn’t been called yet.  Default value is
+<a class="reference internal" href="#site-getuserbase" title="site.getuserbase"><code class="xref py py-func docutils literal notranslate"><span class="pre">getuserbase()</span></code></a> hasn’t been called yet.  Default value is
 <code class="file docutils literal notranslate"><span class="pre">~/.local</span></code> for UNIX and Mac OS X non-framework builds,
 <code class="file docutils literal notranslate"><span class="pre">~/Library/Python/</span><em><span class="pre">X.Y</span></em></code> for Mac framework builds, and
 <code class="file docutils literal notranslate"><em><span class="pre">%APPDATA%</span></em><span class="pre">\Python</span></code> for Windows.  This value is used by Distutils to
 compute the installation directories for scripts, data files, Python modules,
 etc. for the <a class="reference internal" href="../install/index.html#inst-alt-install-user"><span class="std std-ref">user installation scheme</span></a>.
-See also <span class="target" id="index-9"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONUSERBASE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONUSERBASE</span></code></a>.</p>
+See also <span class="target" id="index-9"></span><a class="reference internal" href="../using/cmdline.html#envvar-pythonuserbase"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONUSERBASE</span></code></a>.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="site.main">
-<code class="sig-prename descclassname">site.</code><code class="sig-name descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#site.main" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="site-main">
+<span id="site.main"></span><code class="sig-prename descclassname">site.</code><code class="sig-name descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#site-main" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds all the standard site-specific directories to the module search
 path.  This function is called automatically when this module is imported,
-unless the Python interpreter was started with the <a class="reference internal" href="../using/cmdline.html#id3"><code class="xref std std-option docutils literal notranslate"><span class="pre">-S</span></code></a> flag.</p>
+unless the Python interpreter was started with the <a class="reference internal" href="../using/cmdline.html#cmdoption-3"><code class="xref std std-option docutils literal notranslate"><span class="pre">-S</span></code></a> flag.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">Changed in version 3.3: </span>This function used to be called unconditionally.</p>
 </div>
 </dd></dl>
 
-<dl class="function">
-<dt id="site.addsitedir">
-<code class="sig-prename descclassname">site.</code><code class="sig-name descname">addsitedir</code><span class="sig-paren">(</span><em class="sig-param">sitedir</em>, <em class="sig-param">known_paths=None</em><span class="sig-paren">)</span><a class="headerlink" href="#site.addsitedir" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="site-addsitedir">
+<span id="site.addsitedir"></span><code class="sig-prename descclassname">site.</code><code class="sig-name descname">addsitedir</code><span class="sig-paren">(</span><em class="sig-param">sitedir</em>, <em class="sig-param">known_paths=None</em><span class="sig-paren">)</span><a class="headerlink" href="#site-addsitedir" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add a directory to sys.path and process its <code class="file docutils literal notranslate"><span class="pre">.pth</span></code> files.  Typically
 used in <code class="xref py py-mod docutils literal notranslate"><span class="pre">sitecustomize</span></code> or <code class="xref py py-mod docutils literal notranslate"><span class="pre">usercustomize</span></code> (see above).</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="site.getsitepackages">
-<code class="sig-prename descclassname">site.</code><code class="sig-name descname">getsitepackages</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#site.getsitepackages" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="site-getsitepackages">
+<span id="site.getsitepackages"></span><code class="sig-prename descclassname">site.</code><code class="sig-name descname">getsitepackages</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#site-getsitepackages" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a list containing all global site-packages directories.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.2.</span></p>
 </div>
 </dd></dl>
 
-<dl class="function">
-<dt id="site.getuserbase">
-<code class="sig-prename descclassname">site.</code><code class="sig-name descname">getuserbase</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#site.getuserbase" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the path of the user base directory, <a class="reference internal" href="#site.USER_BASE" title="site.USER_BASE"><code class="xref py py-data docutils literal notranslate"><span class="pre">USER_BASE</span></code></a>.  If it is not
+<dl class="py function">
+<dt id="site-getuserbase">
+<span id="site.getuserbase"></span><code class="sig-prename descclassname">site.</code><code class="sig-name descname">getuserbase</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#site-getuserbase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the path of the user base directory, <a class="reference internal" href="#site-user-base" title="site.USER_BASE"><code class="xref py py-data docutils literal notranslate"><span class="pre">USER_BASE</span></code></a>.  If it is not
 initialized yet, this function will also set it, respecting
-<span class="target" id="index-10"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONUSERBASE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONUSERBASE</span></code></a>.</p>
+<span class="target" id="index-10"></span><a class="reference internal" href="../using/cmdline.html#envvar-pythonuserbase"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONUSERBASE</span></code></a>.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.2.</span></p>
 </div>
 </dd></dl>
 
-<dl class="function">
-<dt id="site.getusersitepackages">
-<code class="sig-prename descclassname">site.</code><code class="sig-name descname">getusersitepackages</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#site.getusersitepackages" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="site-getusersitepackages">
+<span id="site.getusersitepackages"></span><code class="sig-prename descclassname">site.</code><code class="sig-name descname">getusersitepackages</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#site-getusersitepackages" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the path of the user-specific site-packages directory,
-<a class="reference internal" href="#site.USER_SITE" title="site.USER_SITE"><code class="xref py py-data docutils literal notranslate"><span class="pre">USER_SITE</span></code></a>.  If it is not initialized yet, this function will also set
-it, respecting <span class="target" id="index-11"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONNOUSERSITE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONNOUSERSITE</span></code></a> and <a class="reference internal" href="#site.USER_BASE" title="site.USER_BASE"><code class="xref py py-data docutils literal notranslate"><span class="pre">USER_BASE</span></code></a>.</p>
+<a class="reference internal" href="#site-user-site" title="site.USER_SITE"><code class="xref py py-data docutils literal notranslate"><span class="pre">USER_SITE</span></code></a>.  If it is not initialized yet, this function will also set
+it, respecting <span class="target" id="index-11"></span><a class="reference internal" href="../using/cmdline.html#envvar-pythonnousersite"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONNOUSERSITE</span></code></a> and <a class="reference internal" href="#site-user-base" title="site.USER_BASE"><code class="xref py py-data docutils literal notranslate"><span class="pre">USER_BASE</span></code></a>.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.2.</span></p>
 </div>
@@ -320,23 +323,23 @@ command line:</p>
 </pre></div>
 </div>
 <p>If it is called without arguments, it will print the contents of
-<a class="reference internal" href="sys.html#sys.path" title="sys.path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a> on the standard output, followed by the value of
-<a class="reference internal" href="#site.USER_BASE" title="site.USER_BASE"><code class="xref py py-data docutils literal notranslate"><span class="pre">USER_BASE</span></code></a> and whether the directory exists, then the same thing for
-<a class="reference internal" href="#site.USER_SITE" title="site.USER_SITE"><code class="xref py py-data docutils literal notranslate"><span class="pre">USER_SITE</span></code></a>, and finally the value of <a class="reference internal" href="#site.ENABLE_USER_SITE" title="site.ENABLE_USER_SITE"><code class="xref py py-data docutils literal notranslate"><span class="pre">ENABLE_USER_SITE</span></code></a>.</p>
-<dl class="cmdoption">
+<a class="reference internal" href="sys.html#sys-path" title="sys.path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a> on the standard output, followed by the value of
+<a class="reference internal" href="#site-user-base" title="site.USER_BASE"><code class="xref py py-data docutils literal notranslate"><span class="pre">USER_BASE</span></code></a> and whether the directory exists, then the same thing for
+<a class="reference internal" href="#site-user-site" title="site.USER_SITE"><code class="xref py py-data docutils literal notranslate"><span class="pre">USER_SITE</span></code></a>, and finally the value of <a class="reference internal" href="#site-enable-user-site" title="site.ENABLE_USER_SITE"><code class="xref py py-data docutils literal notranslate"><span class="pre">ENABLE_USER_SITE</span></code></a>.</p>
+<dl class="std cmdoption">
 <dt id="cmdoption-site-user-base">
 <code class="sig-name descname">--user-base</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-site-user-base" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print the path to the user base directory.</p>
 </dd></dl>
 
-<dl class="cmdoption">
+<dl class="std cmdoption">
 <dt id="cmdoption-site-user-site">
 <code class="sig-name descname">--user-site</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-site-user-site" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print the path to the user site-packages directory.</p>
 </dd></dl>
 
 <p>If both options are given, user base and user site will be printed (always in
-this order), separated by <a class="reference internal" href="os.html#os.pathsep" title="os.pathsep"><code class="xref py py-data docutils literal notranslate"><span class="pre">os.pathsep</span></code></a>.</p>
+this order), separated by <a class="reference internal" href="os.html#os-pathsep" title="os.pathsep"><code class="xref py py-data docutils literal notranslate"><span class="pre">os.pathsep</span></code></a>.</p>
 <p>If any option is given, the script will exit with one of these values: <code class="docutils literal notranslate"><span class="pre">0</span></code> if
 the user site-packages directory is enabled, <code class="docutils literal notranslate"><span class="pre">1</span></code> if it was disabled by the
 user, <code class="docutils literal notranslate"><span class="pre">2</span></code> if it is disabled for security reasons or by an administrator, and a
@@ -407,7 +410,7 @@ value greater than 2 if there is an error.</p>
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
@@ -426,6 +429,7 @@ value greater than 2 if there is an error.</p>
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  
@@ -438,11 +442,11 @@ value greater than 2 if there is an error.</p>
 <br />
     <br />
 
-    Last updated on Feb 13, 2020.
+    Last updated on Mar 08, 2020.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 2.4.2+/ad35b3c.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/c10e1bc.
     </div>
 
   </body>

@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>bz2 — Support for bzip2 compression &#8212; Python 3.9.0a3 documentation</title>
+    <title>bz2 — Support for bzip2 compression &#8212; Python 3.9.0a4 documentation</title>
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments-monokai.css" />
+    <link rel="stylesheet" href="../_static/pygments_dark.css" type="text/css" media="(prefers-color-scheme: dark)" id="pygments_dark_css" />
     
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -18,7 +18,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.9.0a3 documentation"
+          title="Search within Python 3.9.0a4 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -41,9 +41,11 @@
       }
     </style>
 
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png" />
+    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
     
     <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <script type="text/javascript" src="../_static/themetoggle.js"></script>
     
      
 
@@ -72,7 +74,7 @@
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
@@ -91,6 +93,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -108,35 +111,35 @@
 decompressing data using the bzip2 compression algorithm.</p>
 <p>The <a class="reference internal" href="#module-bz2" title="bz2: Interfaces for bzip2 compression and decompression."><code class="xref py py-mod docutils literal notranslate"><span class="pre">bz2</span></code></a> module contains:</p>
 <ul class="simple">
-<li><p>The <a class="reference internal" href="#bz2.open" title="bz2.open"><code class="xref py py-func docutils literal notranslate"><span class="pre">open()</span></code></a> function and <a class="reference internal" href="#bz2.BZ2File" title="bz2.BZ2File"><code class="xref py py-class docutils literal notranslate"><span class="pre">BZ2File</span></code></a> class for reading and
+<li><p>The <a class="reference internal" href="#bz2-open" title="bz2.open"><code class="xref py py-func docutils literal notranslate"><span class="pre">open()</span></code></a> function and <a class="reference internal" href="#bz2-bz2file" title="bz2.BZ2File"><code class="xref py py-class docutils literal notranslate"><span class="pre">BZ2File</span></code></a> class for reading and
 writing compressed files.</p></li>
-<li><p>The <a class="reference internal" href="#bz2.BZ2Compressor" title="bz2.BZ2Compressor"><code class="xref py py-class docutils literal notranslate"><span class="pre">BZ2Compressor</span></code></a> and <a class="reference internal" href="#bz2.BZ2Decompressor" title="bz2.BZ2Decompressor"><code class="xref py py-class docutils literal notranslate"><span class="pre">BZ2Decompressor</span></code></a> classes for
+<li><p>The <a class="reference internal" href="#bz2-bz2compressor" title="bz2.BZ2Compressor"><code class="xref py py-class docutils literal notranslate"><span class="pre">BZ2Compressor</span></code></a> and <a class="reference internal" href="#bz2-bz2decompressor" title="bz2.BZ2Decompressor"><code class="xref py py-class docutils literal notranslate"><span class="pre">BZ2Decompressor</span></code></a> classes for
 incremental (de)compression.</p></li>
-<li><p>The <a class="reference internal" href="#bz2.compress" title="bz2.compress"><code class="xref py py-func docutils literal notranslate"><span class="pre">compress()</span></code></a> and <a class="reference internal" href="#bz2.decompress" title="bz2.decompress"><code class="xref py py-func docutils literal notranslate"><span class="pre">decompress()</span></code></a> functions for one-shot
+<li><p>The <a class="reference internal" href="#bz2-compress" title="bz2.compress"><code class="xref py py-func docutils literal notranslate"><span class="pre">compress()</span></code></a> and <a class="reference internal" href="#bz2-decompress" title="bz2.decompress"><code class="xref py py-func docutils literal notranslate"><span class="pre">decompress()</span></code></a> functions for one-shot
 (de)compression.</p></li>
 </ul>
 <p>All of the classes in this module may safely be accessed from multiple threads.</p>
 <div class="section" id="de-compression-of-files">
 <h2>(De)compression of files<a class="headerlink" href="#de-compression-of-files" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="bz2.open">
-<code class="sig-prename descclassname">bz2.</code><code class="sig-name descname">open</code><span class="sig-paren">(</span><em class="sig-param">filename</em>, <em class="sig-param">mode='rb'</em>, <em class="sig-param">compresslevel=9</em>, <em class="sig-param">encoding=None</em>, <em class="sig-param">errors=None</em>, <em class="sig-param">newline=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bz2.open" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="bz2-open">
+<span id="bz2.open"></span><code class="sig-prename descclassname">bz2.</code><code class="sig-name descname">open</code><span class="sig-paren">(</span><em class="sig-param">filename</em>, <em class="sig-param">mode='rb'</em>, <em class="sig-param">compresslevel=9</em>, <em class="sig-param">encoding=None</em>, <em class="sig-param">errors=None</em>, <em class="sig-param">newline=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bz2-open" title="Permalink to this definition">¶</a></dt>
 <dd><p>Open a bzip2-compressed file in binary or text mode, returning a <a class="reference internal" href="../glossary.html#term-file-object"><span class="xref std std-term">file
 object</span></a>.</p>
-<p>As with the constructor for <a class="reference internal" href="#bz2.BZ2File" title="bz2.BZ2File"><code class="xref py py-class docutils literal notranslate"><span class="pre">BZ2File</span></code></a>, the <em>filename</em> argument can be
+<p>As with the constructor for <a class="reference internal" href="#bz2-bz2file" title="bz2.BZ2File"><code class="xref py py-class docutils literal notranslate"><span class="pre">BZ2File</span></code></a>, the <em>filename</em> argument can be
 an actual filename (a <a class="reference internal" href="stdtypes.html#str" title="str"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> or <a class="reference internal" href="stdtypes.html#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> object), or an existing
 file object to read from or write to.</p>
 <p>The <em>mode</em> argument can be any of <code class="docutils literal notranslate"><span class="pre">'r'</span></code>, <code class="docutils literal notranslate"><span class="pre">'rb'</span></code>, <code class="docutils literal notranslate"><span class="pre">'w'</span></code>, <code class="docutils literal notranslate"><span class="pre">'wb'</span></code>,
 <code class="docutils literal notranslate"><span class="pre">'x'</span></code>, <code class="docutils literal notranslate"><span class="pre">'xb'</span></code>, <code class="docutils literal notranslate"><span class="pre">'a'</span></code> or <code class="docutils literal notranslate"><span class="pre">'ab'</span></code> for binary mode, or <code class="docutils literal notranslate"><span class="pre">'rt'</span></code>,
 <code class="docutils literal notranslate"><span class="pre">'wt'</span></code>, <code class="docutils literal notranslate"><span class="pre">'xt'</span></code>, or <code class="docutils literal notranslate"><span class="pre">'at'</span></code> for text mode. The default is <code class="docutils literal notranslate"><span class="pre">'rb'</span></code>.</p>
 <p>The <em>compresslevel</em> argument is an integer from 1 to 9, as for the
-<a class="reference internal" href="#bz2.BZ2File" title="bz2.BZ2File"><code class="xref py py-class docutils literal notranslate"><span class="pre">BZ2File</span></code></a> constructor.</p>
-<p>For binary mode, this function is equivalent to the <a class="reference internal" href="#bz2.BZ2File" title="bz2.BZ2File"><code class="xref py py-class docutils literal notranslate"><span class="pre">BZ2File</span></code></a>
+<a class="reference internal" href="#bz2-bz2file" title="bz2.BZ2File"><code class="xref py py-class docutils literal notranslate"><span class="pre">BZ2File</span></code></a> constructor.</p>
+<p>For binary mode, this function is equivalent to the <a class="reference internal" href="#bz2-bz2file" title="bz2.BZ2File"><code class="xref py py-class docutils literal notranslate"><span class="pre">BZ2File</span></code></a>
 constructor: <code class="docutils literal notranslate"><span class="pre">BZ2File(filename,</span> <span class="pre">mode,</span> <span class="pre">compresslevel=compresslevel)</span></code>. In
 this case, the <em>encoding</em>, <em>errors</em> and <em>newline</em> arguments must not be
 provided.</p>
-<p>For text mode, a <a class="reference internal" href="#bz2.BZ2File" title="bz2.BZ2File"><code class="xref py py-class docutils literal notranslate"><span class="pre">BZ2File</span></code></a> object is created, and wrapped in an
-<a class="reference internal" href="io.html#io.TextIOWrapper" title="io.TextIOWrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">io.TextIOWrapper</span></code></a> instance with the specified encoding, error
+<p>For text mode, a <a class="reference internal" href="#bz2-bz2file" title="bz2.BZ2File"><code class="xref py py-class docutils literal notranslate"><span class="pre">BZ2File</span></code></a> object is created, and wrapped in an
+<a class="reference internal" href="io.html#io-textiowrapper" title="io.TextIOWrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">io.TextIOWrapper</span></code></a> instance with the specified encoding, error
 handling behavior, and line ending(s).</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.3.</span></p>
@@ -149,9 +152,9 @@ handling behavior, and line ending(s).</p>
 </div>
 </dd></dl>
 
-<dl class="class">
-<dt id="bz2.BZ2File">
-<em class="property">class </em><code class="sig-prename descclassname">bz2.</code><code class="sig-name descname">BZ2File</code><span class="sig-paren">(</span><em class="sig-param">filename</em>, <em class="sig-param">mode='r'</em>, <em class="sig-param">*</em>, <em class="sig-param">compresslevel=9</em><span class="sig-paren">)</span><a class="headerlink" href="#bz2.BZ2File" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt id="bz2-bz2file">
+<span id="bz2.BZ2File"></span><em class="property">class </em><code class="sig-prename descclassname">bz2.</code><code class="sig-name descname">BZ2File</code><span class="sig-paren">(</span><em class="sig-param">filename</em>, <em class="sig-param">mode='r'</em>, <em class="sig-param">*</em>, <em class="sig-param">compresslevel=9</em><span class="sig-paren">)</span><a class="headerlink" href="#bz2-bz2file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Open a bzip2-compressed file in binary mode.</p>
 <p>If <em>filename</em> is a <a class="reference internal" href="stdtypes.html#str" title="str"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> or <a class="reference internal" href="stdtypes.html#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> object, open the named file
 directly. Otherwise, <em>filename</em> should be a <a class="reference internal" href="../glossary.html#term-file-object"><span class="xref std std-term">file object</span></a>, which will
@@ -167,21 +170,21 @@ respectively.</p>
 least compression, and <code class="docutils literal notranslate"><span class="pre">9</span></code> (default) produces the most compression.</p>
 <p>If <em>mode</em> is <code class="docutils literal notranslate"><span class="pre">'r'</span></code>, the input file may be the concatenation of multiple
 compressed streams.</p>
-<p><a class="reference internal" href="#bz2.BZ2File" title="bz2.BZ2File"><code class="xref py py-class docutils literal notranslate"><span class="pre">BZ2File</span></code></a> provides all of the members specified by the
-<a class="reference internal" href="io.html#io.BufferedIOBase" title="io.BufferedIOBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">io.BufferedIOBase</span></code></a>, except for <code class="xref py py-meth docutils literal notranslate"><span class="pre">detach()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">truncate()</span></code>.
+<p><a class="reference internal" href="#bz2-bz2file" title="bz2.BZ2File"><code class="xref py py-class docutils literal notranslate"><span class="pre">BZ2File</span></code></a> provides all of the members specified by the
+<a class="reference internal" href="io.html#io-bufferediobase" title="io.BufferedIOBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">io.BufferedIOBase</span></code></a>, except for <code class="xref py py-meth docutils literal notranslate"><span class="pre">detach()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">truncate()</span></code>.
 Iteration and the <a class="reference internal" href="../reference/compound_stmts.html#with"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">with</span></code></a> statement are supported.</p>
-<p><a class="reference internal" href="#bz2.BZ2File" title="bz2.BZ2File"><code class="xref py py-class docutils literal notranslate"><span class="pre">BZ2File</span></code></a> also provides the following method:</p>
-<dl class="method">
-<dt id="bz2.BZ2File.peek">
-<code class="sig-name descname">peek</code><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param">n</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#bz2.BZ2File.peek" title="Permalink to this definition">¶</a></dt>
+<p><a class="reference internal" href="#bz2-bz2file" title="bz2.BZ2File"><code class="xref py py-class docutils literal notranslate"><span class="pre">BZ2File</span></code></a> also provides the following method:</p>
+<dl class="py method">
+<dt id="bz2-bz2file-peek">
+<span id="bz2.BZ2File.peek"></span><code class="sig-name descname">peek</code><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param">n</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#bz2-bz2file-peek" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return buffered data without advancing the file position. At least one
 byte of data will be returned (unless at EOF). The exact number of bytes
 returned is unspecified.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>While calling <a class="reference internal" href="#bz2.BZ2File.peek" title="bz2.BZ2File.peek"><code class="xref py py-meth docutils literal notranslate"><span class="pre">peek()</span></code></a> does not change the file position of
-the <a class="reference internal" href="#bz2.BZ2File" title="bz2.BZ2File"><code class="xref py py-class docutils literal notranslate"><span class="pre">BZ2File</span></code></a>, it may change the position of the underlying file
-object (e.g. if the <a class="reference internal" href="#bz2.BZ2File" title="bz2.BZ2File"><code class="xref py py-class docutils literal notranslate"><span class="pre">BZ2File</span></code></a> was constructed by passing a file
+<p>While calling <a class="reference internal" href="#bz2-bz2file-peek" title="bz2.BZ2File.peek"><code class="xref py py-meth docutils literal notranslate"><span class="pre">peek()</span></code></a> does not change the file position of
+the <a class="reference internal" href="#bz2-bz2file" title="bz2.BZ2File"><code class="xref py py-class docutils literal notranslate"><span class="pre">BZ2File</span></code></a>, it may change the position of the underlying file
+object (e.g. if the <a class="reference internal" href="#bz2-bz2file" title="bz2.BZ2File"><code class="xref py py-class docutils literal notranslate"><span class="pre">BZ2File</span></code></a> was constructed by passing a file
 object for <em>filename</em>).</p>
 </div>
 <div class="versionadded">
@@ -208,7 +211,7 @@ multi-stream files.</p>
 <p><span class="versionmodified changed">Changed in version 3.4: </span>The <code class="docutils literal notranslate"><span class="pre">'x'</span></code> (exclusive creation) mode was added.</p>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 3.5: </span>The <a class="reference internal" href="io.html#io.BufferedIOBase.read" title="io.BufferedIOBase.read"><code class="xref py py-meth docutils literal notranslate"><span class="pre">read()</span></code></a> method now accepts an argument of
+<p><span class="versionmodified changed">Changed in version 3.5: </span>The <a class="reference internal" href="io.html#io-bufferediobase-read" title="io.BufferedIOBase.read"><code class="xref py py-meth docutils literal notranslate"><span class="pre">read()</span></code></a> method now accepts an argument of
 <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
 </div>
 <div class="versionchanged">
@@ -225,26 +228,26 @@ opened.</p>
 </div>
 <div class="section" id="incremental-de-compression">
 <h2>Incremental (de)compression<a class="headerlink" href="#incremental-de-compression" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="bz2.BZ2Compressor">
-<em class="property">class </em><code class="sig-prename descclassname">bz2.</code><code class="sig-name descname">BZ2Compressor</code><span class="sig-paren">(</span><em class="sig-param">compresslevel=9</em><span class="sig-paren">)</span><a class="headerlink" href="#bz2.BZ2Compressor" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt id="bz2-bz2compressor">
+<span id="bz2.BZ2Compressor"></span><em class="property">class </em><code class="sig-prename descclassname">bz2.</code><code class="sig-name descname">BZ2Compressor</code><span class="sig-paren">(</span><em class="sig-param">compresslevel=9</em><span class="sig-paren">)</span><a class="headerlink" href="#bz2-bz2compressor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new compressor object. This object may be used to compress data
-incrementally. For one-shot compression, use the <a class="reference internal" href="#bz2.compress" title="bz2.compress"><code class="xref py py-func docutils literal notranslate"><span class="pre">compress()</span></code></a> function
+incrementally. For one-shot compression, use the <a class="reference internal" href="#bz2-compress" title="bz2.compress"><code class="xref py py-func docutils literal notranslate"><span class="pre">compress()</span></code></a> function
 instead.</p>
 <p><em>compresslevel</em>, if given, must be an integer between <code class="docutils literal notranslate"><span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">9</span></code>. The
 default is <code class="docutils literal notranslate"><span class="pre">9</span></code>.</p>
-<dl class="method">
-<dt id="bz2.BZ2Compressor.compress">
-<code class="sig-name descname">compress</code><span class="sig-paren">(</span><em class="sig-param">data</em><span class="sig-paren">)</span><a class="headerlink" href="#bz2.BZ2Compressor.compress" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="bz2-bz2compressor-compress">
+<span id="bz2.BZ2Compressor.compress"></span><code class="sig-name descname">compress</code><span class="sig-paren">(</span><em class="sig-param">data</em><span class="sig-paren">)</span><a class="headerlink" href="#bz2-bz2compressor-compress" title="Permalink to this definition">¶</a></dt>
 <dd><p>Provide data to the compressor object. Returns a chunk of compressed data
 if possible, or an empty byte string otherwise.</p>
 <p>When you have finished providing data to the compressor, call the
-<a class="reference internal" href="#bz2.BZ2Compressor.flush" title="bz2.BZ2Compressor.flush"><code class="xref py py-meth docutils literal notranslate"><span class="pre">flush()</span></code></a> method to finish the compression process.</p>
+<a class="reference internal" href="#bz2-bz2compressor-flush" title="bz2.BZ2Compressor.flush"><code class="xref py py-meth docutils literal notranslate"><span class="pre">flush()</span></code></a> method to finish the compression process.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="bz2.BZ2Compressor.flush">
-<code class="sig-name descname">flush</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bz2.BZ2Compressor.flush" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="bz2-bz2compressor-flush">
+<span id="bz2.BZ2Compressor.flush"></span><code class="sig-name descname">flush</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bz2-bz2compressor-flush" title="Permalink to this definition">¶</a></dt>
 <dd><p>Finish the compression process. Returns the compressed data left in
 internal buffers.</p>
 <p>The compressor object may not be used after this method has been called.</p>
@@ -252,66 +255,66 @@ internal buffers.</p>
 
 </dd></dl>
 
-<dl class="class">
-<dt id="bz2.BZ2Decompressor">
-<em class="property">class </em><code class="sig-prename descclassname">bz2.</code><code class="sig-name descname">BZ2Decompressor</code><a class="headerlink" href="#bz2.BZ2Decompressor" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt id="bz2-bz2decompressor">
+<span id="bz2.BZ2Decompressor"></span><em class="property">class </em><code class="sig-prename descclassname">bz2.</code><code class="sig-name descname">BZ2Decompressor</code><a class="headerlink" href="#bz2-bz2decompressor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new decompressor object. This object may be used to decompress data
-incrementally. For one-shot compression, use the <a class="reference internal" href="#bz2.decompress" title="bz2.decompress"><code class="xref py py-func docutils literal notranslate"><span class="pre">decompress()</span></code></a> function
+incrementally. For one-shot compression, use the <a class="reference internal" href="#bz2-decompress" title="bz2.decompress"><code class="xref py py-func docutils literal notranslate"><span class="pre">decompress()</span></code></a> function
 instead.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This class does not transparently handle inputs containing multiple
-compressed streams, unlike <a class="reference internal" href="#bz2.decompress" title="bz2.decompress"><code class="xref py py-func docutils literal notranslate"><span class="pre">decompress()</span></code></a> and <a class="reference internal" href="#bz2.BZ2File" title="bz2.BZ2File"><code class="xref py py-class docutils literal notranslate"><span class="pre">BZ2File</span></code></a>. If
-you need to decompress a multi-stream input with <a class="reference internal" href="#bz2.BZ2Decompressor" title="bz2.BZ2Decompressor"><code class="xref py py-class docutils literal notranslate"><span class="pre">BZ2Decompressor</span></code></a>,
+compressed streams, unlike <a class="reference internal" href="#bz2-decompress" title="bz2.decompress"><code class="xref py py-func docutils literal notranslate"><span class="pre">decompress()</span></code></a> and <a class="reference internal" href="#bz2-bz2file" title="bz2.BZ2File"><code class="xref py py-class docutils literal notranslate"><span class="pre">BZ2File</span></code></a>. If
+you need to decompress a multi-stream input with <a class="reference internal" href="#bz2-bz2decompressor" title="bz2.BZ2Decompressor"><code class="xref py py-class docutils literal notranslate"><span class="pre">BZ2Decompressor</span></code></a>,
 you must use a new decompressor for each stream.</p>
 </div>
-<dl class="method">
-<dt id="bz2.BZ2Decompressor.decompress">
-<code class="sig-name descname">decompress</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">max_length=-1</em><span class="sig-paren">)</span><a class="headerlink" href="#bz2.BZ2Decompressor.decompress" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="bz2-bz2decompressor-decompress">
+<span id="bz2.BZ2Decompressor.decompress"></span><code class="sig-name descname">decompress</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">max_length=-1</em><span class="sig-paren">)</span><a class="headerlink" href="#bz2-bz2decompressor-decompress" title="Permalink to this definition">¶</a></dt>
 <dd><p>Decompress <em>data</em> (a <a class="reference internal" href="../glossary.html#term-bytes-like-object"><span class="xref std std-term">bytes-like object</span></a>), returning
 uncompressed data as bytes. Some of <em>data</em> may be buffered
-internally, for use in later calls to <a class="reference internal" href="#bz2.decompress" title="bz2.decompress"><code class="xref py py-meth docutils literal notranslate"><span class="pre">decompress()</span></code></a>. The
+internally, for use in later calls to <a class="reference internal" href="#bz2-decompress" title="bz2.decompress"><code class="xref py py-meth docutils literal notranslate"><span class="pre">decompress()</span></code></a>. The
 returned data should be concatenated with the output of any
-previous calls to <a class="reference internal" href="#bz2.decompress" title="bz2.decompress"><code class="xref py py-meth docutils literal notranslate"><span class="pre">decompress()</span></code></a>.</p>
+previous calls to <a class="reference internal" href="#bz2-decompress" title="bz2.decompress"><code class="xref py py-meth docutils literal notranslate"><span class="pre">decompress()</span></code></a>.</p>
 <p>If <em>max_length</em> is nonnegative, returns at most <em>max_length</em>
 bytes of decompressed data. If this limit is reached and further
-output can be produced, the <a class="reference internal" href="#bz2.BZ2Decompressor.needs_input" title="bz2.BZ2Decompressor.needs_input"><code class="xref py py-attr docutils literal notranslate"><span class="pre">needs_input</span></code></a> attribute will
+output can be produced, the <a class="reference internal" href="#bz2-bz2decompressor-needs-input" title="bz2.BZ2Decompressor.needs_input"><code class="xref py py-attr docutils literal notranslate"><span class="pre">needs_input</span></code></a> attribute will
 be set to <code class="docutils literal notranslate"><span class="pre">False</span></code>. In this case, the next call to
-<a class="reference internal" href="#bz2.BZ2Decompressor.decompress" title="bz2.BZ2Decompressor.decompress"><code class="xref py py-meth docutils literal notranslate"><span class="pre">decompress()</span></code></a> may provide <em>data</em> as <code class="docutils literal notranslate"><span class="pre">b''</span></code> to obtain
+<a class="reference internal" href="#bz2-bz2decompressor-decompress" title="bz2.BZ2Decompressor.decompress"><code class="xref py py-meth docutils literal notranslate"><span class="pre">decompress()</span></code></a> may provide <em>data</em> as <code class="docutils literal notranslate"><span class="pre">b''</span></code> to obtain
 more of the output.</p>
 <p>If all of the input data was decompressed and returned (either
 because this was less than <em>max_length</em> bytes, or because
-<em>max_length</em> was negative), the <a class="reference internal" href="#bz2.BZ2Decompressor.needs_input" title="bz2.BZ2Decompressor.needs_input"><code class="xref py py-attr docutils literal notranslate"><span class="pre">needs_input</span></code></a> attribute
+<em>max_length</em> was negative), the <a class="reference internal" href="#bz2-bz2decompressor-needs-input" title="bz2.BZ2Decompressor.needs_input"><code class="xref py py-attr docutils literal notranslate"><span class="pre">needs_input</span></code></a> attribute
 will be set to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
 <p>Attempting to decompress data after the end of stream is reached
 raises an <cite>EOFError</cite>.  Any data found after the end of the
-stream is ignored and saved in the <a class="reference internal" href="#bz2.BZ2Decompressor.unused_data" title="bz2.BZ2Decompressor.unused_data"><code class="xref py py-attr docutils literal notranslate"><span class="pre">unused_data</span></code></a> attribute.</p>
+stream is ignored and saved in the <a class="reference internal" href="#bz2-bz2decompressor-unused-data" title="bz2.BZ2Decompressor.unused_data"><code class="xref py py-attr docutils literal notranslate"><span class="pre">unused_data</span></code></a> attribute.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">Changed in version 3.5: </span>Added the <em>max_length</em> parameter.</p>
 </div>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="bz2.BZ2Decompressor.eof">
-<code class="sig-name descname">eof</code><a class="headerlink" href="#bz2.BZ2Decompressor.eof" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt id="bz2-bz2decompressor-eof">
+<span id="bz2.BZ2Decompressor.eof"></span><code class="sig-name descname">eof</code><a class="headerlink" href="#bz2-bz2decompressor-eof" title="Permalink to this definition">¶</a></dt>
 <dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the end-of-stream marker has been reached.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.3.</span></p>
 </div>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="bz2.BZ2Decompressor.unused_data">
-<code class="sig-name descname">unused_data</code><a class="headerlink" href="#bz2.BZ2Decompressor.unused_data" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt id="bz2-bz2decompressor-unused-data">
+<span id="bz2.BZ2Decompressor.unused_data"></span><code class="sig-name descname">unused_data</code><a class="headerlink" href="#bz2-bz2decompressor-unused-data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Data found after the end of the compressed stream.</p>
 <p>If this attribute is accessed before the end of the stream has been
 reached, its value will be <code class="docutils literal notranslate"><span class="pre">b''</span></code>.</p>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="bz2.BZ2Decompressor.needs_input">
-<code class="sig-name descname">needs_input</code><a class="headerlink" href="#bz2.BZ2Decompressor.needs_input" title="Permalink to this definition">¶</a></dt>
-<dd><p><code class="docutils literal notranslate"><span class="pre">False</span></code> if the <a class="reference internal" href="#bz2.BZ2Decompressor.decompress" title="bz2.BZ2Decompressor.decompress"><code class="xref py py-meth docutils literal notranslate"><span class="pre">decompress()</span></code></a> method can provide more
+<dl class="py attribute">
+<dt id="bz2-bz2decompressor-needs-input">
+<span id="bz2.BZ2Decompressor.needs_input"></span><code class="sig-name descname">needs_input</code><a class="headerlink" href="#bz2-bz2decompressor-needs-input" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">False</span></code> if the <a class="reference internal" href="#bz2-bz2decompressor-decompress" title="bz2.BZ2Decompressor.decompress"><code class="xref py py-meth docutils literal notranslate"><span class="pre">decompress()</span></code></a> method can provide more
 decompressed data before requiring new uncompressed input.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.5.</span></p>
@@ -323,22 +326,22 @@ decompressed data before requiring new uncompressed input.</p>
 </div>
 <div class="section" id="one-shot-de-compression">
 <h2>One-shot (de)compression<a class="headerlink" href="#one-shot-de-compression" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="bz2.compress">
-<code class="sig-prename descclassname">bz2.</code><code class="sig-name descname">compress</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">compresslevel=9</em><span class="sig-paren">)</span><a class="headerlink" href="#bz2.compress" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="bz2-compress">
+<span id="bz2.compress"></span><code class="sig-prename descclassname">bz2.</code><code class="sig-name descname">compress</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">compresslevel=9</em><span class="sig-paren">)</span><a class="headerlink" href="#bz2-compress" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compress <em>data</em>, a <a class="reference internal" href="../glossary.html#term-bytes-like-object"><span class="xref std std-term">bytes-like object</span></a>.</p>
 <p><em>compresslevel</em>, if given, must be an integer between <code class="docutils literal notranslate"><span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">9</span></code>. The
 default is <code class="docutils literal notranslate"><span class="pre">9</span></code>.</p>
-<p>For incremental compression, use a <a class="reference internal" href="#bz2.BZ2Compressor" title="bz2.BZ2Compressor"><code class="xref py py-class docutils literal notranslate"><span class="pre">BZ2Compressor</span></code></a> instead.</p>
+<p>For incremental compression, use a <a class="reference internal" href="#bz2-bz2compressor" title="bz2.BZ2Compressor"><code class="xref py py-class docutils literal notranslate"><span class="pre">BZ2Compressor</span></code></a> instead.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="bz2.decompress">
-<code class="sig-prename descclassname">bz2.</code><code class="sig-name descname">decompress</code><span class="sig-paren">(</span><em class="sig-param">data</em><span class="sig-paren">)</span><a class="headerlink" href="#bz2.decompress" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="bz2-decompress">
+<span id="bz2.decompress"></span><code class="sig-prename descclassname">bz2.</code><code class="sig-name descname">decompress</code><span class="sig-paren">(</span><em class="sig-param">data</em><span class="sig-paren">)</span><a class="headerlink" href="#bz2-decompress" title="Permalink to this definition">¶</a></dt>
 <dd><p>Decompress <em>data</em>, a <a class="reference internal" href="../glossary.html#term-bytes-like-object"><span class="xref std std-term">bytes-like object</span></a>.</p>
 <p>If <em>data</em> is the concatenation of multiple compressed streams, decompress
 all of the streams.</p>
-<p>For incremental decompression, use a <a class="reference internal" href="#bz2.BZ2Decompressor" title="bz2.BZ2Decompressor"><code class="xref py py-class docutils literal notranslate"><span class="pre">BZ2Decompressor</span></code></a> instead.</p>
+<p>For incremental decompression, use a <a class="reference internal" href="#bz2-bz2decompressor" title="bz2.BZ2Decompressor"><code class="xref py py-class docutils literal notranslate"><span class="pre">BZ2Decompressor</span></code></a> instead.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">Changed in version 3.3: </span>Support for multi-stream inputs was added.</p>
 </div>
@@ -348,7 +351,7 @@ all of the streams.</p>
 <div class="section" id="examples-of-usage">
 <span id="bz2-usage-examples"></span><h2>Examples of usage<a class="headerlink" href="#examples-of-usage" title="Permalink to this headline">¶</a></h2>
 <p>Below are some examples of typical usage of the <a class="reference internal" href="#module-bz2" title="bz2: Interfaces for bzip2 compression and decompression."><code class="xref py py-mod docutils literal notranslate"><span class="pre">bz2</span></code></a> module.</p>
-<p>Using <a class="reference internal" href="#bz2.compress" title="bz2.compress"><code class="xref py py-func docutils literal notranslate"><span class="pre">compress()</span></code></a> and <a class="reference internal" href="#bz2.decompress" title="bz2.decompress"><code class="xref py py-func docutils literal notranslate"><span class="pre">decompress()</span></code></a> to demonstrate round-trip compression:</p>
+<p>Using <a class="reference internal" href="#bz2-compress" title="bz2.compress"><code class="xref py py-func docutils literal notranslate"><span class="pre">compress()</span></code></a> and <a class="reference internal" href="#bz2-decompress" title="bz2.decompress"><code class="xref py py-func docutils literal notranslate"><span class="pre">decompress()</span></code></a> to demonstrate round-trip compression:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">bz2</span>
 </pre></div>
 </div>
@@ -372,7 +375,7 @@ all of the streams.</p>
 <span class="go">True</span>
 </pre></div>
 </div>
-<p>Using <a class="reference internal" href="#bz2.BZ2Compressor" title="bz2.BZ2Compressor"><code class="xref py py-class docutils literal notranslate"><span class="pre">BZ2Compressor</span></code></a> for incremental compression:</p>
+<p>Using <a class="reference internal" href="#bz2-bz2compressor" title="bz2.BZ2Compressor"><code class="xref py py-class docutils literal notranslate"><span class="pre">BZ2Compressor</span></code></a> for incremental compression:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">bz2</span>
 </pre></div>
 </div>
@@ -486,7 +489,7 @@ while ordered, repetitive data usually yields a high compression ratio.</p>
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
@@ -505,6 +508,7 @@ while ordered, repetitive data usually yields a high compression ratio.</p>
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  
@@ -517,11 +521,11 @@ while ordered, repetitive data usually yields a high compression ratio.</p>
 <br />
     <br />
 
-    Last updated on Feb 13, 2020.
+    Last updated on Mar 08, 2020.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 2.4.2+/ad35b3c.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/c10e1bc.
     </div>
 
   </body>

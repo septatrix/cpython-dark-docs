@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>What’s New in Python 2.1 &#8212; Python 3.9.0a3 documentation</title>
+    <title>What’s New in Python 2.1 &#8212; Python 3.9.0a4 documentation</title>
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments-monokai.css" />
+    <link rel="stylesheet" href="../_static/pygments_dark.css" type="text/css" media="(prefers-color-scheme: dark)" id="pygments_dark_css" />
     
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -18,7 +18,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.9.0a3 documentation"
+          title="Search within Python 3.9.0a4 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -41,9 +41,11 @@
       }
     </style>
 
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png" />
+    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
     
     <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <script type="text/javascript" src="../_static/themetoggle.js"></script>
     
      
 
@@ -72,7 +74,7 @@
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">What’s New in Python</a> &#187;</li>
@@ -90,6 +92,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -138,7 +141,7 @@ nested recursive function definition doesn’t work:</p>
     <span class="o">...</span>
 </pre></div>
 </div>
-<p>The function <code class="xref py py-func docutils literal notranslate"><span class="pre">g()</span></code> will always raise a <a class="reference internal" href="../library/exceptions.html#NameError" title="NameError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NameError</span></code></a> exception, because
+<p>The function <code class="xref py py-func docutils literal notranslate"><span class="pre">g()</span></code> will always raise a <a class="reference internal" href="../library/exceptions.html#nameerror" title="NameError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NameError</span></code></a> exception, because
 the binding of the name <code class="docutils literal notranslate"><span class="pre">g</span></code> isn’t in either its local namespace or in the
 module-level namespace.  This isn’t much of a problem in practice (how often do
 you recursively define interior functions like this?), but this also made using
@@ -178,7 +181,7 @@ generate different code to access variables in a containing scope.  <code class=
 figure this out, because they add names to the local namespace that are
 unknowable at compile time. Therefore, if a function contains function
 definitions or <a class="reference internal" href="../reference/expressions.html#lambda"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">lambda</span></code></a> expressions with free variables, the compiler
-will flag this by raising a <a class="reference internal" href="../library/exceptions.html#SyntaxError" title="SyntaxError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SyntaxError</span></code></a> exception.</p>
+will flag this by raising a <a class="reference internal" href="../library/exceptions.html#syntaxerror" title="SyntaxError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SyntaxError</span></code></a> exception.</p>
 <p>To make the preceding explanation a bit clearer, here’s an example:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="k">def</span> <span class="nf">f</span><span class="p">():</span>
@@ -216,7 +219,7 @@ Pythoneers take a more conservative approach.  This approach consists of
 introducing a convention for enabling optional functionality in release N that
 will become compulsory in release N+1.</p>
 <p>The syntax uses a <code class="docutils literal notranslate"><span class="pre">from...import</span></code> statement using the reserved module name
-<a class="reference internal" href="../library/__future__.html#module-__future__" title="__future__: Future statement definitions"><code class="xref py py-mod docutils literal notranslate"><span class="pre">__future__</span></code></a>.  Nested scopes can be enabled by the following statement:</p>
+<a class="reference internal" href="../library/__future__.html#module-future" title="__future__: Future statement definitions"><code class="xref py py-mod docutils literal notranslate"><span class="pre">__future__</span></code></a>.  Nested scopes can be enabled by the following statement:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">nested_scopes</span>
 </pre></div>
 </div>
@@ -229,7 +232,7 @@ precede any statement that will result in bytecodes being produced.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><span class="target" id="index-3"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0236"><strong>PEP 236</strong></a> - Back to the <a class="reference internal" href="../library/__future__.html#module-__future__" title="__future__: Future statement definitions"><code class="xref py py-mod docutils literal notranslate"><span class="pre">__future__</span></code></a></dt><dd><p>Written by Tim Peters, and primarily implemented by Jeremy Hylton.</p>
+<dt><span class="target" id="index-3"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0236"><strong>PEP 236</strong></a> - Back to the <a class="reference internal" href="../library/__future__.html#module-future" title="__future__: Future statement definitions"><code class="xref py py-mod docutils literal notranslate"><span class="pre">__future__</span></code></a></dt><dd><p>Written by Tim Peters, and primarily implemented by Jeremy Hylton.</p>
 </dd>
 </dl>
 </div>
@@ -262,22 +265,22 @@ Python classes can now individually overload each of the <code class="docutils l
 </thead>
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&lt;</span></code></p></td>
-<td><p><a class="reference internal" href="../reference/datamodel.html#object.__lt__" title="object.__lt__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__lt__()</span></code></a></p></td>
+<td><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">__lt__()</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&lt;=</span></code></p></td>
-<td><p><a class="reference internal" href="../reference/datamodel.html#object.__le__" title="object.__le__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__le__()</span></code></a></p></td>
+<td><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">__le__()</span></code></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&gt;</span></code></p></td>
-<td><p><a class="reference internal" href="../reference/datamodel.html#object.__gt__" title="object.__gt__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__gt__()</span></code></a></p></td>
+<td><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">__gt__()</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&gt;=</span></code></p></td>
-<td><p><a class="reference internal" href="../reference/datamodel.html#object.__ge__" title="object.__ge__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__ge__()</span></code></a></p></td>
+<td><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">__ge__()</span></code></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">==</span></code></p></td>
-<td><p><a class="reference internal" href="../reference/datamodel.html#object.__eq__" title="object.__eq__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__eq__()</span></code></a></p></td>
+<td><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">__eq__()</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">!=</span></code></p></td>
-<td><p><a class="reference internal" href="../reference/datamodel.html#object.__ne__" title="object.__ne__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__ne__()</span></code></a></p></td>
+<td><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">__ne__()</span></code></p></td>
 </tr>
 </tbody>
 </table>
@@ -334,7 +337,7 @@ it causes a warning to be printed:</p>
 <span class="go">&gt;&gt;&gt;</span>
 </pre></div>
 </div>
-<p>Warnings can be issued by calling the <a class="reference internal" href="../library/warnings.html#warnings.warn" title="warnings.warn"><code class="xref py py-func docutils literal notranslate"><span class="pre">warnings.warn()</span></code></a> function:</p>
+<p>Warnings can be issued by calling the <a class="reference internal" href="../library/warnings.html#warnings-warn" title="warnings.warn"><code class="xref py py-func docutils literal notranslate"><span class="pre">warnings.warn()</span></code></a> function:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;feature X no longer supported&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -353,7 +356,7 @@ now.  The warning can be suppressed by calling</p>
 </pre></div>
 </div>
 <p>This adds a filter that will apply only to warnings of the class
-<a class="reference internal" href="../library/exceptions.html#DeprecationWarning" title="DeprecationWarning"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeprecationWarning</span></code></a> triggered in the <a class="reference internal" href="../library/__main__.html#module-__main__" title="__main__: The environment where the top-level script is run."><code class="xref py py-mod docutils literal notranslate"><span class="pre">__main__</span></code></a> module, and applies
+<a class="reference internal" href="../library/exceptions.html#deprecationwarning" title="DeprecationWarning"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeprecationWarning</span></code></a> triggered in the <a class="reference internal" href="../library/__main__.html#module-main" title="__main__: The environment where the top-level script is run."><code class="xref py py-mod docutils literal notranslate"><span class="pre">__main__</span></code></a> module, and applies
 a regular expression to only match the message about the <code class="xref py py-mod docutils literal notranslate"><span class="pre">regex</span></code> module
 being deprecated, and will cause such warnings to be ignored.  Warnings can also
 be printed only once, printed every time the offending code is executed, or
@@ -504,8 +507,8 @@ Python syntax:</p>
 </pre></div>
 </div>
 <p>The dictionary containing attributes can be accessed as the function’s
-<a class="reference internal" href="../library/stdtypes.html#object.__dict__" title="object.__dict__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__dict__</span></code></a>. Unlike the <a class="reference internal" href="../library/stdtypes.html#object.__dict__" title="object.__dict__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__dict__</span></code></a> attribute of class instances, in
-functions you can actually assign a new dictionary to <a class="reference internal" href="../library/stdtypes.html#object.__dict__" title="object.__dict__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__dict__</span></code></a>, though
+<a class="reference internal" href="../library/stdtypes.html#object-dict" title="object.__dict__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__dict__</span></code></a>. Unlike the <a class="reference internal" href="../library/stdtypes.html#object-dict" title="object.__dict__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__dict__</span></code></a> attribute of class instances, in
+functions you can actually assign a new dictionary to <a class="reference internal" href="../library/stdtypes.html#object-dict" title="object.__dict__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__dict__</span></code></a>, though
 the new value is restricted to a regular Python dictionary; you <em>can’t</em> be
 tricky and set it to a <code class="xref py py-class docutils literal notranslate"><span class="pre">UserDict</span></code> instance, or any other random object
 that behaves like a mapping.</p>
@@ -525,16 +528,16 @@ distinguish the filenames <code class="docutils literal notranslate"><span class
 the file’s name  in its original case (they’re case-preserving, too).</p>
 <p>In Python 2.1, the <a class="reference internal" href="../reference/simple_stmts.html#import"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">import</span></code></a> statement will work to simulate case-sensitivity
 on case-insensitive platforms.  Python will now search for the first
-case-sensitive match by default, raising an <a class="reference internal" href="../library/exceptions.html#ImportError" title="ImportError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ImportError</span></code></a> if no such file
+case-sensitive match by default, raising an <a class="reference internal" href="../library/exceptions.html#importerror" title="ImportError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ImportError</span></code></a> if no such file
 is found, so <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">file</span></code> will not import a module named <code class="docutils literal notranslate"><span class="pre">FILE.PY</span></code>.
-Case-insensitive matching can be requested by setting the <span class="target" id="index-11"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONCASEOK"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONCASEOK</span></code></a>
+Case-insensitive matching can be requested by setting the <span class="target" id="index-11"></span><a class="reference internal" href="../using/cmdline.html#envvar-pythoncaseok"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONCASEOK</span></code></a>
 environment variable before starting the Python interpreter.</p>
 </div>
 <div class="section" id="pep-217-interactive-display-hook">
 <h2>PEP 217: Interactive Display Hook<a class="headerlink" href="#pep-217-interactive-display-hook" title="Permalink to this headline">¶</a></h2>
 <p>When using the Python interpreter interactively, the output of commands is
 displayed using the built-in <a class="reference internal" href="../library/functions.html#repr" title="repr"><code class="xref py py-func docutils literal notranslate"><span class="pre">repr()</span></code></a> function. In Python 2.1, the variable
-<a class="reference internal" href="../library/sys.html#sys.displayhook" title="sys.displayhook"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys.displayhook()</span></code></a> can be set to a callable object which will be called
+<a class="reference internal" href="../library/sys.html#sys-displayhook" title="sys.displayhook"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys.displayhook()</span></code></a> can be set to a callable object which will be called
 instead of <a class="reference internal" href="../library/functions.html#repr" title="repr"><code class="xref py py-func docutils literal notranslate"><span class="pre">repr()</span></code></a>. For example, you can set it to a special
 pretty-printing function:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Create a recursive data structure</span>
@@ -572,9 +575,9 @@ If the slot function is passed a type it can’t handle, it can indicate the
 failure by returning a reference to the <code class="docutils literal notranslate"><span class="pre">Py_NotImplemented</span></code> singleton value.
 The numeric functions of the other type will then be tried, and perhaps they can
 handle the operation; if the other type also returns <code class="docutils literal notranslate"><span class="pre">Py_NotImplemented</span></code>, then
-a <a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> will be raised.  Numeric methods written in Python can also
+a <a class="reference internal" href="../library/exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> will be raised.  Numeric methods written in Python can also
 return <code class="docutils literal notranslate"><span class="pre">Py_NotImplemented</span></code>, causing the interpreter to act as if the method
-did not exist (perhaps raising a <a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a>, perhaps trying another
+did not exist (perhaps raising a <a class="reference internal" href="../library/exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a>, perhaps trying another
 object’s numeric methods).</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
@@ -660,7 +663,7 @@ compares two sequences and computes the changes required to transform one
 sequence into the other.  For example, this module can be used to write a tool
 similar to the Unix <strong class="program">diff</strong> program, and in fact the sample program
 <code class="file docutils literal notranslate"><span class="pre">Tools/scripts/ndiff.py</span></code> demonstrates how to write such a script.</p></li>
-<li><p><a class="reference internal" href="../library/curses.panel.html#module-curses.panel" title="curses.panel: A panel stack extension that adds depth to  curses windows."><code class="xref py py-mod docutils literal notranslate"><span class="pre">curses.panel</span></code></a>, a wrapper for the panel library, part of ncurses and of
+<li><p><a class="reference internal" href="../library/curses.panel.html#module-curses-panel" title="curses.panel: A panel stack extension that adds depth to  curses windows."><code class="xref py py-mod docutils literal notranslate"><span class="pre">curses.panel</span></code></a>, a wrapper for the panel library, part of ncurses and of
 SYSV curses, was contributed by Thomas Gellekum.  The panel library provides
 windows with the additional feature of depth. Windows can be moved higher or
 lower in the depth ordering, and the panel library figures out where panels
@@ -671,9 +674,9 @@ noteworthy changes include support for Expat 1.2 and later versions, the ability
 for Expat parsers to handle files in any encoding supported by Python, and
 various bugfixes for SAX, DOM, and the <code class="xref py py-mod docutils literal notranslate"><span class="pre">minidom</span></code> module.</p></li>
 <li><p>Ping also contributed another hook for handling uncaught exceptions.
-<a class="reference internal" href="../library/sys.html#sys.excepthook" title="sys.excepthook"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys.excepthook()</span></code></a> can be set to a callable object.  When an exception isn’t
+<a class="reference internal" href="../library/sys.html#sys-excepthook" title="sys.excepthook"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys.excepthook()</span></code></a> can be set to a callable object.  When an exception isn’t
 caught by any <a class="reference internal" href="../reference/compound_stmts.html#try"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">try</span></code></a>…<a class="reference internal" href="../reference/compound_stmts.html#except"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">except</span></code></a> blocks, the exception will be
-passed to <a class="reference internal" href="../library/sys.html#sys.excepthook" title="sys.excepthook"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys.excepthook()</span></code></a>, which can then do whatever it likes.  At the
+passed to <a class="reference internal" href="../library/sys.html#sys-excepthook" title="sys.excepthook"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys.excepthook()</span></code></a>, which can then do whatever it likes.  At the
 Ninth Python Conference, Ping demonstrated an application for this hook:
 printing an extended traceback that not only lists the stack frames, but also
 lists the function arguments and the local variables for each frame.</p></li>
@@ -702,7 +705,7 @@ for displaying timing profiles for Python programs, invoked when the module is
 run as a script.  Contributed by  Eric S. Raymond.</p></li>
 <li><p>A new implementation-dependent function, <code class="docutils literal notranslate"><span class="pre">sys._getframe([depth])</span></code>, has
 been added to return a given frame object from the current call stack.
-<a class="reference internal" href="../library/sys.html#sys._getframe" title="sys._getframe"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys._getframe()</span></code></a> returns the frame at the top of the call stack;  if the
+<a class="reference internal" href="../library/sys.html#sys-getframe" title="sys._getframe"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys._getframe()</span></code></a> returns the frame at the top of the call stack;  if the
 optional integer argument <em>depth</em> is supplied, the function returns the frame
 that is <em>depth</em> calls below the top of the stack.  For example,
 <code class="docutils literal notranslate"><span class="pre">sys._getframe(1)</span></code> returns the caller’s frame object.</p>
@@ -884,7 +887,7 @@ Hudson, Marc-André Lemburg, Fredrik Lundh, Neil Schemenauer, Thomas Wouters.</p
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >What’s New in Python</a> &#187;</li>
@@ -902,6 +905,7 @@ Hudson, Marc-André Lemburg, Fredrik Lundh, Neil Schemenauer, Thomas Wouters.</p
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  
@@ -914,11 +918,11 @@ Hudson, Marc-André Lemburg, Fredrik Lundh, Neil Schemenauer, Thomas Wouters.</p
 <br />
     <br />
 
-    Last updated on Feb 13, 2020.
+    Last updated on Mar 08, 2020.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 2.4.2+/ad35b3c.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/c10e1bc.
     </div>
 
   </body>

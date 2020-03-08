@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>msvcrt — Useful routines from the MS VC++ runtime &#8212; Python 3.9.0a3 documentation</title>
+    <title>msvcrt — Useful routines from the MS VC++ runtime &#8212; Python 3.9.0a4 documentation</title>
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments-monokai.css" />
+    <link rel="stylesheet" href="../_static/pygments_dark.css" type="text/css" media="(prefers-color-scheme: dark)" id="pygments_dark_css" />
     
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -18,7 +18,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.9.0a3 documentation"
+          title="Search within Python 3.9.0a4 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -41,9 +41,11 @@
       }
     </style>
 
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png" />
+    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
     
     <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <script type="text/javascript" src="../_static/themetoggle.js"></script>
     
      
 
@@ -72,7 +74,7 @@
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
@@ -91,6 +93,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -114,83 +117,86 @@ api. The normal API deals only with ASCII characters and is of limited use
 for internationalized applications. The wide char API should be used where
 ever possible.</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 3.3: </span>Operations in this module now raise <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> where <a class="reference internal" href="exceptions.html#IOError" title="IOError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">IOError</span></code></a>
+<p><span class="versionmodified changed">Changed in version 3.3: </span>Operations in this module now raise <a class="reference internal" href="exceptions.html#oserror" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> where <a class="reference internal" href="exceptions.html#ioerror" title="IOError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">IOError</span></code></a>
 was raised.</p>
 </div>
 <div class="section" id="file-operations">
 <span id="msvcrt-files"></span><h2>File Operations<a class="headerlink" href="#file-operations" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="msvcrt.locking">
-<code class="sig-prename descclassname">msvcrt.</code><code class="sig-name descname">locking</code><span class="sig-paren">(</span><em class="sig-param">fd</em>, <em class="sig-param">mode</em>, <em class="sig-param">nbytes</em><span class="sig-paren">)</span><a class="headerlink" href="#msvcrt.locking" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="msvcrt-locking">
+<span id="msvcrt.locking"></span><code class="sig-prename descclassname">msvcrt.</code><code class="sig-name descname">locking</code><span class="sig-paren">(</span><em class="sig-param">fd</em>, <em class="sig-param">mode</em>, <em class="sig-param">nbytes</em><span class="sig-paren">)</span><a class="headerlink" href="#msvcrt-locking" title="Permalink to this definition">¶</a></dt>
 <dd><p>Lock part of a file based on file descriptor <em>fd</em> from the C runtime.  Raises
-<a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> on failure.  The locked region of the file extends from the
+<a class="reference internal" href="exceptions.html#oserror" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> on failure.  The locked region of the file extends from the
 current file position for <em>nbytes</em> bytes, and may continue beyond the end of the
 file.  <em>mode</em> must be one of the <code class="xref py py-const docutils literal notranslate"><span class="pre">LK_*</span></code> constants listed below. Multiple
 regions in a file may be locked at the same time, but may not overlap.  Adjacent
 regions are not merged; they must be unlocked individually.</p>
+<p class="audit-hook">Raises an <a class="reference internal" href="sys.html#auditing"><span class="std std-ref">auditing event</span></a> <code class="docutils literal notranslate"><span class="pre">msvcrt.locking</span></code> with arguments <code class="docutils literal notranslate"><span class="pre">fd</span></code>, <code class="docutils literal notranslate"><span class="pre">mode</span></code>, <code class="docutils literal notranslate"><span class="pre">nbytes</span></code>.</p>
 </dd></dl>
 
-<dl class="data">
-<dt id="msvcrt.LK_LOCK">
-<code class="sig-prename descclassname">msvcrt.</code><code class="sig-name descname">LK_LOCK</code><a class="headerlink" href="#msvcrt.LK_LOCK" title="Permalink to this definition">¶</a></dt>
-<dt id="msvcrt.LK_RLCK">
-<code class="sig-prename descclassname">msvcrt.</code><code class="sig-name descname">LK_RLCK</code><a class="headerlink" href="#msvcrt.LK_RLCK" title="Permalink to this definition">¶</a></dt>
+<dl class="py data">
+<dt id="msvcrt-lk-lock">
+<span id="msvcrt.LK_LOCK"></span><code class="sig-prename descclassname">msvcrt.</code><code class="sig-name descname">LK_LOCK</code><a class="headerlink" href="#msvcrt-lk-lock" title="Permalink to this definition">¶</a></dt>
+<dt id="msvcrt-lk-rlck">
+<span id="msvcrt.LK_RLCK"></span><code class="sig-prename descclassname">msvcrt.</code><code class="sig-name descname">LK_RLCK</code><a class="headerlink" href="#msvcrt-lk-rlck" title="Permalink to this definition">¶</a></dt>
 <dd><p>Locks the specified bytes. If the bytes cannot be locked, the program
 immediately tries again after 1 second.  If, after 10 attempts, the bytes cannot
-be locked, <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> is raised.</p>
+be locked, <a class="reference internal" href="exceptions.html#oserror" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> is raised.</p>
 </dd></dl>
 
-<dl class="data">
-<dt id="msvcrt.LK_NBLCK">
-<code class="sig-prename descclassname">msvcrt.</code><code class="sig-name descname">LK_NBLCK</code><a class="headerlink" href="#msvcrt.LK_NBLCK" title="Permalink to this definition">¶</a></dt>
-<dt id="msvcrt.LK_NBRLCK">
-<code class="sig-prename descclassname">msvcrt.</code><code class="sig-name descname">LK_NBRLCK</code><a class="headerlink" href="#msvcrt.LK_NBRLCK" title="Permalink to this definition">¶</a></dt>
-<dd><p>Locks the specified bytes. If the bytes cannot be locked, <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> is
+<dl class="py data">
+<dt id="msvcrt-lk-nblck">
+<span id="msvcrt.LK_NBLCK"></span><code class="sig-prename descclassname">msvcrt.</code><code class="sig-name descname">LK_NBLCK</code><a class="headerlink" href="#msvcrt-lk-nblck" title="Permalink to this definition">¶</a></dt>
+<dt id="msvcrt-lk-nbrlck">
+<span id="msvcrt.LK_NBRLCK"></span><code class="sig-prename descclassname">msvcrt.</code><code class="sig-name descname">LK_NBRLCK</code><a class="headerlink" href="#msvcrt-lk-nbrlck" title="Permalink to this definition">¶</a></dt>
+<dd><p>Locks the specified bytes. If the bytes cannot be locked, <a class="reference internal" href="exceptions.html#oserror" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> is
 raised.</p>
 </dd></dl>
 
-<dl class="data">
-<dt id="msvcrt.LK_UNLCK">
-<code class="sig-prename descclassname">msvcrt.</code><code class="sig-name descname">LK_UNLCK</code><a class="headerlink" href="#msvcrt.LK_UNLCK" title="Permalink to this definition">¶</a></dt>
+<dl class="py data">
+<dt id="msvcrt-lk-unlck">
+<span id="msvcrt.LK_UNLCK"></span><code class="sig-prename descclassname">msvcrt.</code><code class="sig-name descname">LK_UNLCK</code><a class="headerlink" href="#msvcrt-lk-unlck" title="Permalink to this definition">¶</a></dt>
 <dd><p>Unlocks the specified bytes, which must have been previously locked.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="msvcrt.setmode">
-<code class="sig-prename descclassname">msvcrt.</code><code class="sig-name descname">setmode</code><span class="sig-paren">(</span><em class="sig-param">fd</em>, <em class="sig-param">flags</em><span class="sig-paren">)</span><a class="headerlink" href="#msvcrt.setmode" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="msvcrt-setmode">
+<span id="msvcrt.setmode"></span><code class="sig-prename descclassname">msvcrt.</code><code class="sig-name descname">setmode</code><span class="sig-paren">(</span><em class="sig-param">fd</em>, <em class="sig-param">flags</em><span class="sig-paren">)</span><a class="headerlink" href="#msvcrt-setmode" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the line-end translation mode for the file descriptor <em>fd</em>. To set it to
-text mode, <em>flags</em> should be <a class="reference internal" href="os.html#os.O_TEXT" title="os.O_TEXT"><code class="xref py py-const docutils literal notranslate"><span class="pre">os.O_TEXT</span></code></a>; for binary, it should be
-<a class="reference internal" href="os.html#os.O_BINARY" title="os.O_BINARY"><code class="xref py py-const docutils literal notranslate"><span class="pre">os.O_BINARY</span></code></a>.</p>
+text mode, <em>flags</em> should be <a class="reference internal" href="os.html#os-o-text" title="os.O_TEXT"><code class="xref py py-const docutils literal notranslate"><span class="pre">os.O_TEXT</span></code></a>; for binary, it should be
+<a class="reference internal" href="os.html#os-o-binary" title="os.O_BINARY"><code class="xref py py-const docutils literal notranslate"><span class="pre">os.O_BINARY</span></code></a>.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="msvcrt.open_osfhandle">
-<code class="sig-prename descclassname">msvcrt.</code><code class="sig-name descname">open_osfhandle</code><span class="sig-paren">(</span><em class="sig-param">handle</em>, <em class="sig-param">flags</em><span class="sig-paren">)</span><a class="headerlink" href="#msvcrt.open_osfhandle" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="msvcrt-open-osfhandle">
+<span id="msvcrt.open_osfhandle"></span><code class="sig-prename descclassname">msvcrt.</code><code class="sig-name descname">open_osfhandle</code><span class="sig-paren">(</span><em class="sig-param">handle</em>, <em class="sig-param">flags</em><span class="sig-paren">)</span><a class="headerlink" href="#msvcrt-open-osfhandle" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a C runtime file descriptor from the file handle <em>handle</em>.  The <em>flags</em>
-parameter should be a bitwise OR of <a class="reference internal" href="os.html#os.O_APPEND" title="os.O_APPEND"><code class="xref py py-const docutils literal notranslate"><span class="pre">os.O_APPEND</span></code></a>, <a class="reference internal" href="os.html#os.O_RDONLY" title="os.O_RDONLY"><code class="xref py py-const docutils literal notranslate"><span class="pre">os.O_RDONLY</span></code></a>,
-and <a class="reference internal" href="os.html#os.O_TEXT" title="os.O_TEXT"><code class="xref py py-const docutils literal notranslate"><span class="pre">os.O_TEXT</span></code></a>.  The returned file descriptor may be used as a parameter
-to <a class="reference internal" href="os.html#os.fdopen" title="os.fdopen"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.fdopen()</span></code></a> to create a file object.</p>
+parameter should be a bitwise OR of <a class="reference internal" href="os.html#os-o-append" title="os.O_APPEND"><code class="xref py py-const docutils literal notranslate"><span class="pre">os.O_APPEND</span></code></a>, <a class="reference internal" href="os.html#os-o-rdonly" title="os.O_RDONLY"><code class="xref py py-const docutils literal notranslate"><span class="pre">os.O_RDONLY</span></code></a>,
+and <a class="reference internal" href="os.html#os-o-text" title="os.O_TEXT"><code class="xref py py-const docutils literal notranslate"><span class="pre">os.O_TEXT</span></code></a>.  The returned file descriptor may be used as a parameter
+to <a class="reference internal" href="os.html#os-fdopen" title="os.fdopen"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.fdopen()</span></code></a> to create a file object.</p>
+<p class="audit-hook">Raises an <a class="reference internal" href="sys.html#auditing"><span class="std std-ref">auditing event</span></a> <code class="docutils literal notranslate"><span class="pre">msvcrt.open_osfhandle</span></code> with arguments <code class="docutils literal notranslate"><span class="pre">handle</span></code>, <code class="docutils literal notranslate"><span class="pre">flags</span></code>.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="msvcrt.get_osfhandle">
-<code class="sig-prename descclassname">msvcrt.</code><code class="sig-name descname">get_osfhandle</code><span class="sig-paren">(</span><em class="sig-param">fd</em><span class="sig-paren">)</span><a class="headerlink" href="#msvcrt.get_osfhandle" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the file handle for the file descriptor <em>fd</em>.  Raises <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> if
+<dl class="py function">
+<dt id="msvcrt-get-osfhandle">
+<span id="msvcrt.get_osfhandle"></span><code class="sig-prename descclassname">msvcrt.</code><code class="sig-name descname">get_osfhandle</code><span class="sig-paren">(</span><em class="sig-param">fd</em><span class="sig-paren">)</span><a class="headerlink" href="#msvcrt-get-osfhandle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the file handle for the file descriptor <em>fd</em>.  Raises <a class="reference internal" href="exceptions.html#oserror" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> if
 <em>fd</em> is not recognized.</p>
+<p class="audit-hook">Raises an <a class="reference internal" href="sys.html#auditing"><span class="std std-ref">auditing event</span></a> <code class="docutils literal notranslate"><span class="pre">msvcrt.get_osfhandle</span></code> with argument <code class="docutils literal notranslate"><span class="pre">fd</span></code>.</p>
 </dd></dl>
 
 </div>
 <div class="section" id="console-i-o">
 <span id="msvcrt-console"></span><h2>Console I/O<a class="headerlink" href="#console-i-o" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="msvcrt.kbhit">
-<code class="sig-prename descclassname">msvcrt.</code><code class="sig-name descname">kbhit</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#msvcrt.kbhit" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="msvcrt-kbhit">
+<span id="msvcrt.kbhit"></span><code class="sig-prename descclassname">msvcrt.</code><code class="sig-name descname">kbhit</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#msvcrt-kbhit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return <code class="docutils literal notranslate"><span class="pre">True</span></code> if a keypress is waiting to be read.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="msvcrt.getch">
-<code class="sig-prename descclassname">msvcrt.</code><code class="sig-name descname">getch</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#msvcrt.getch" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="msvcrt-getch">
+<span id="msvcrt.getch"></span><code class="sig-prename descclassname">msvcrt.</code><code class="sig-name descname">getch</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#msvcrt-getch" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read a keypress and return the resulting character as a byte string.
 Nothing is echoed to the console.  This call will block if a keypress
 is not already available, but will not wait for <kbd class="kbd docutils literal notranslate">Enter</kbd> to be
@@ -199,58 +205,58 @@ return <code class="docutils literal notranslate"><span class="pre">'\000'</span
 The <kbd class="kbd docutils literal notranslate">Control-C</kbd> keypress cannot be read with this function.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="msvcrt.getwch">
-<code class="sig-prename descclassname">msvcrt.</code><code class="sig-name descname">getwch</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#msvcrt.getwch" title="Permalink to this definition">¶</a></dt>
-<dd><p>Wide char variant of <a class="reference internal" href="#msvcrt.getch" title="msvcrt.getch"><code class="xref py py-func docutils literal notranslate"><span class="pre">getch()</span></code></a>, returning a Unicode value.</p>
+<dl class="py function">
+<dt id="msvcrt-getwch">
+<span id="msvcrt.getwch"></span><code class="sig-prename descclassname">msvcrt.</code><code class="sig-name descname">getwch</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#msvcrt-getwch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wide char variant of <a class="reference internal" href="#msvcrt-getch" title="msvcrt.getch"><code class="xref py py-func docutils literal notranslate"><span class="pre">getch()</span></code></a>, returning a Unicode value.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="msvcrt.getche">
-<code class="sig-prename descclassname">msvcrt.</code><code class="sig-name descname">getche</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#msvcrt.getche" title="Permalink to this definition">¶</a></dt>
-<dd><p>Similar to <a class="reference internal" href="#msvcrt.getch" title="msvcrt.getch"><code class="xref py py-func docutils literal notranslate"><span class="pre">getch()</span></code></a>, but the keypress will be echoed if it  represents a
+<dl class="py function">
+<dt id="msvcrt-getche">
+<span id="msvcrt.getche"></span><code class="sig-prename descclassname">msvcrt.</code><code class="sig-name descname">getche</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#msvcrt-getche" title="Permalink to this definition">¶</a></dt>
+<dd><p>Similar to <a class="reference internal" href="#msvcrt-getch" title="msvcrt.getch"><code class="xref py py-func docutils literal notranslate"><span class="pre">getch()</span></code></a>, but the keypress will be echoed if it  represents a
 printable character.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="msvcrt.getwche">
-<code class="sig-prename descclassname">msvcrt.</code><code class="sig-name descname">getwche</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#msvcrt.getwche" title="Permalink to this definition">¶</a></dt>
-<dd><p>Wide char variant of <a class="reference internal" href="#msvcrt.getche" title="msvcrt.getche"><code class="xref py py-func docutils literal notranslate"><span class="pre">getche()</span></code></a>, returning a Unicode value.</p>
+<dl class="py function">
+<dt id="msvcrt-getwche">
+<span id="msvcrt.getwche"></span><code class="sig-prename descclassname">msvcrt.</code><code class="sig-name descname">getwche</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#msvcrt-getwche" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wide char variant of <a class="reference internal" href="#msvcrt-getche" title="msvcrt.getche"><code class="xref py py-func docutils literal notranslate"><span class="pre">getche()</span></code></a>, returning a Unicode value.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="msvcrt.putch">
-<code class="sig-prename descclassname">msvcrt.</code><code class="sig-name descname">putch</code><span class="sig-paren">(</span><em class="sig-param">char</em><span class="sig-paren">)</span><a class="headerlink" href="#msvcrt.putch" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="msvcrt-putch">
+<span id="msvcrt.putch"></span><code class="sig-prename descclassname">msvcrt.</code><code class="sig-name descname">putch</code><span class="sig-paren">(</span><em class="sig-param">char</em><span class="sig-paren">)</span><a class="headerlink" href="#msvcrt-putch" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print the byte string <em>char</em> to the console without buffering.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="msvcrt.putwch">
-<code class="sig-prename descclassname">msvcrt.</code><code class="sig-name descname">putwch</code><span class="sig-paren">(</span><em class="sig-param">unicode_char</em><span class="sig-paren">)</span><a class="headerlink" href="#msvcrt.putwch" title="Permalink to this definition">¶</a></dt>
-<dd><p>Wide char variant of <a class="reference internal" href="#msvcrt.putch" title="msvcrt.putch"><code class="xref py py-func docutils literal notranslate"><span class="pre">putch()</span></code></a>, accepting a Unicode value.</p>
+<dl class="py function">
+<dt id="msvcrt-putwch">
+<span id="msvcrt.putwch"></span><code class="sig-prename descclassname">msvcrt.</code><code class="sig-name descname">putwch</code><span class="sig-paren">(</span><em class="sig-param">unicode_char</em><span class="sig-paren">)</span><a class="headerlink" href="#msvcrt-putwch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wide char variant of <a class="reference internal" href="#msvcrt-putch" title="msvcrt.putch"><code class="xref py py-func docutils literal notranslate"><span class="pre">putch()</span></code></a>, accepting a Unicode value.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="msvcrt.ungetch">
-<code class="sig-prename descclassname">msvcrt.</code><code class="sig-name descname">ungetch</code><span class="sig-paren">(</span><em class="sig-param">char</em><span class="sig-paren">)</span><a class="headerlink" href="#msvcrt.ungetch" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="msvcrt-ungetch">
+<span id="msvcrt.ungetch"></span><code class="sig-prename descclassname">msvcrt.</code><code class="sig-name descname">ungetch</code><span class="sig-paren">(</span><em class="sig-param">char</em><span class="sig-paren">)</span><a class="headerlink" href="#msvcrt-ungetch" title="Permalink to this definition">¶</a></dt>
 <dd><p>Cause the byte string <em>char</em> to be “pushed back” into the console buffer;
-it will be the next character read by <a class="reference internal" href="#msvcrt.getch" title="msvcrt.getch"><code class="xref py py-func docutils literal notranslate"><span class="pre">getch()</span></code></a> or <a class="reference internal" href="#msvcrt.getche" title="msvcrt.getche"><code class="xref py py-func docutils literal notranslate"><span class="pre">getche()</span></code></a>.</p>
+it will be the next character read by <a class="reference internal" href="#msvcrt-getch" title="msvcrt.getch"><code class="xref py py-func docutils literal notranslate"><span class="pre">getch()</span></code></a> or <a class="reference internal" href="#msvcrt-getche" title="msvcrt.getche"><code class="xref py py-func docutils literal notranslate"><span class="pre">getche()</span></code></a>.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="msvcrt.ungetwch">
-<code class="sig-prename descclassname">msvcrt.</code><code class="sig-name descname">ungetwch</code><span class="sig-paren">(</span><em class="sig-param">unicode_char</em><span class="sig-paren">)</span><a class="headerlink" href="#msvcrt.ungetwch" title="Permalink to this definition">¶</a></dt>
-<dd><p>Wide char variant of <a class="reference internal" href="#msvcrt.ungetch" title="msvcrt.ungetch"><code class="xref py py-func docutils literal notranslate"><span class="pre">ungetch()</span></code></a>, accepting a Unicode value.</p>
+<dl class="py function">
+<dt id="msvcrt-ungetwch">
+<span id="msvcrt.ungetwch"></span><code class="sig-prename descclassname">msvcrt.</code><code class="sig-name descname">ungetwch</code><span class="sig-paren">(</span><em class="sig-param">unicode_char</em><span class="sig-paren">)</span><a class="headerlink" href="#msvcrt-ungetwch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wide char variant of <a class="reference internal" href="#msvcrt-ungetch" title="msvcrt.ungetch"><code class="xref py py-func docutils literal notranslate"><span class="pre">ungetch()</span></code></a>, accepting a Unicode value.</p>
 </dd></dl>
 
 </div>
 <div class="section" id="other-functions">
 <span id="msvcrt-other"></span><h2>Other Functions<a class="headerlink" href="#other-functions" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="msvcrt.heapmin">
-<code class="sig-prename descclassname">msvcrt.</code><code class="sig-name descname">heapmin</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#msvcrt.heapmin" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="msvcrt-heapmin">
+<span id="msvcrt.heapmin"></span><code class="sig-prename descclassname">msvcrt.</code><code class="sig-name descname">heapmin</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#msvcrt-heapmin" title="Permalink to this definition">¶</a></dt>
 <dd><p>Force the <code class="xref c c-func docutils literal notranslate"><span class="pre">malloc()</span></code> heap to clean itself up and return unused blocks to
-the operating system.  On failure, this raises <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a>.</p>
+the operating system.  On failure, this raises <a class="reference internal" href="exceptions.html#oserror" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a>.</p>
 </dd></dl>
 
 </div>
@@ -315,7 +321,7 @@ the operating system.  On failure, this raises <a class="reference internal" hre
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
@@ -334,6 +340,7 @@ the operating system.  On failure, this raises <a class="reference internal" hre
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  
@@ -346,11 +353,11 @@ the operating system.  On failure, this raises <a class="reference internal" hre
 <br />
     <br />
 
-    Last updated on Feb 13, 2020.
+    Last updated on Mar 08, 2020.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 2.4.2+/ad35b3c.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/c10e1bc.
     </div>
 
   </body>

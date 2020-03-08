@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Mapping Protocol &#8212; Python 3.9.0a3 documentation</title>
+    <title>Mapping Protocol &#8212; Python 3.9.0a4 documentation</title>
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments-monokai.css" />
+    <link rel="stylesheet" href="../_static/pygments_dark.css" type="text/css" media="(prefers-color-scheme: dark)" id="pygments_dark_css" />
     
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -18,7 +18,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.9.0a3 documentation"
+          title="Search within Python 3.9.0a4 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -41,9 +41,11 @@
       }
     </style>
 
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png" />
+    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
     
     <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <script type="text/javascript" src="../_static/themetoggle.js"></script>
     
      
 
@@ -72,7 +74,7 @@
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API Reference Manual</a> &#187;</li>
@@ -91,6 +93,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -104,16 +107,16 @@
 <span id="mapping"></span><h1>Mapping Protocol<a class="headerlink" href="#mapping-protocol" title="Permalink to this headline">¶</a></h1>
 <p>See also <a class="reference internal" href="object.html#c.PyObject_GetItem" title="PyObject_GetItem"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_GetItem()</span></code></a>, <a class="reference internal" href="object.html#c.PyObject_SetItem" title="PyObject_SetItem"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_SetItem()</span></code></a> and
 <a class="reference internal" href="object.html#c.PyObject_DelItem" title="PyObject_DelItem"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_DelItem()</span></code></a>.</p>
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyMapping_Check">
 int <code class="sig-name descname">PyMapping_Check</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *o</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyMapping_Check" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return <code class="docutils literal notranslate"><span class="pre">1</span></code> if the object provides mapping protocol or supports slicing,
 and <code class="docutils literal notranslate"><span class="pre">0</span></code> otherwise.  Note that it returns <code class="docutils literal notranslate"><span class="pre">1</span></code> for Python classes with
-a <a class="reference internal" href="../reference/datamodel.html#object.__getitem__" title="object.__getitem__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__getitem__()</span></code></a> method since in general case it is impossible to
+a <code class="xref py py-meth docutils literal notranslate"><span class="pre">__getitem__()</span></code> method since in general case it is impossible to
 determine what type of keys it supports. This function always succeeds.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyMapping_Size">
 Py_ssize_t <code class="sig-name descname">PyMapping_Size</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *o</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyMapping_Size" title="Permalink to this definition">¶</a></dt>
 <dt id="c.PyMapping_Length">
@@ -122,7 +125,7 @@ Py_ssize_t <code class="sig-name descname">PyMapping_Length</code><span class="s
 This is equivalent to the Python expression <code class="docutils literal notranslate"><span class="pre">len(o)</span></code>.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyMapping_GetItemString">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a>* <code class="sig-name descname">PyMapping_GetItemString</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *o</em>, const char<em> *key</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyMapping_GetItemString" title="Permalink to this definition">¶</a></dt>
 <dd><em class="refcount">Return value: New reference.</em><p>Return element of <em>o</em> corresponding to the string <em>key</em> or <code class="docutils literal notranslate"><span class="pre">NULL</span></code> on failure.
@@ -130,7 +133,7 @@ This is the equivalent of the Python expression <code class="docutils literal no
 See also <a class="reference internal" href="object.html#c.PyObject_GetItem" title="PyObject_GetItem"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_GetItem()</span></code></a>.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyMapping_SetItemString">
 int <code class="sig-name descname">PyMapping_SetItemString</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *o</em>, const char<em> *key</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *v</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyMapping_SetItemString" title="Permalink to this definition">¶</a></dt>
 <dd><p>Map the string <em>key</em> to the value <em>v</em> in object <em>o</em>.  Returns <code class="docutils literal notranslate"><span class="pre">-1</span></code> on
@@ -139,7 +142,7 @@ See also <a class="reference internal" href="object.html#c.PyObject_SetItem" tit
 reference to <em>v</em>.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyMapping_DelItem">
 int <code class="sig-name descname">PyMapping_DelItem</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *o</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *key</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyMapping_DelItem" title="Permalink to this definition">¶</a></dt>
 <dd><p>Remove the mapping for the object <em>key</em> from the object <em>o</em>.  Return <code class="docutils literal notranslate"><span class="pre">-1</span></code>
@@ -147,36 +150,36 @@ on failure.  This is equivalent to the Python statement <code class="docutils li
 This is an alias of <a class="reference internal" href="object.html#c.PyObject_DelItem" title="PyObject_DelItem"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_DelItem()</span></code></a>.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyMapping_DelItemString">
 int <code class="sig-name descname">PyMapping_DelItemString</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *o</em>, const char<em> *key</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyMapping_DelItemString" title="Permalink to this definition">¶</a></dt>
 <dd><p>Remove the mapping for the string <em>key</em> from the object <em>o</em>.  Return <code class="docutils literal notranslate"><span class="pre">-1</span></code>
 on failure.  This is equivalent to the Python statement <code class="docutils literal notranslate"><span class="pre">del</span> <span class="pre">o[key]</span></code>.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyMapping_HasKey">
 int <code class="sig-name descname">PyMapping_HasKey</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *o</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *key</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyMapping_HasKey" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return <code class="docutils literal notranslate"><span class="pre">1</span></code> if the mapping object has the key <em>key</em> and <code class="docutils literal notranslate"><span class="pre">0</span></code> otherwise.
 This is equivalent to the Python expression <code class="docutils literal notranslate"><span class="pre">key</span> <span class="pre">in</span> <span class="pre">o</span></code>.
 This function always succeeds.</p>
-<p>Note that exceptions which occur while calling the <a class="reference internal" href="../reference/datamodel.html#object.__getitem__" title="object.__getitem__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__getitem__()</span></code></a>
+<p>Note that exceptions which occur while calling the <code class="xref py py-meth docutils literal notranslate"><span class="pre">__getitem__()</span></code>
 method will get suppressed.
 To get error reporting use <a class="reference internal" href="object.html#c.PyObject_GetItem" title="PyObject_GetItem"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_GetItem()</span></code></a> instead.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyMapping_HasKeyString">
 int <code class="sig-name descname">PyMapping_HasKeyString</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *o</em>, const char<em> *key</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyMapping_HasKeyString" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return <code class="docutils literal notranslate"><span class="pre">1</span></code> if the mapping object has the key <em>key</em> and <code class="docutils literal notranslate"><span class="pre">0</span></code> otherwise.
 This is equivalent to the Python expression <code class="docutils literal notranslate"><span class="pre">key</span> <span class="pre">in</span> <span class="pre">o</span></code>.
 This function always succeeds.</p>
-<p>Note that exceptions which occur while calling the <a class="reference internal" href="../reference/datamodel.html#object.__getitem__" title="object.__getitem__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__getitem__()</span></code></a>
+<p>Note that exceptions which occur while calling the <code class="xref py py-meth docutils literal notranslate"><span class="pre">__getitem__()</span></code>
 method and creating a temporary string object will get suppressed.
 To get error reporting use <a class="reference internal" href="#c.PyMapping_GetItemString" title="PyMapping_GetItemString"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyMapping_GetItemString()</span></code></a> instead.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyMapping_Keys">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a>* <code class="sig-name descname">PyMapping_Keys</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *o</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyMapping_Keys" title="Permalink to this definition">¶</a></dt>
 <dd><em class="refcount">Return value: New reference.</em><p>On success, return a list of the keys in object <em>o</em>.  On failure, return
@@ -186,7 +189,7 @@ To get error reporting use <a class="reference internal" href="#c.PyMapping_GetI
 </div>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyMapping_Values">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a>* <code class="sig-name descname">PyMapping_Values</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *o</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyMapping_Values" title="Permalink to this definition">¶</a></dt>
 <dd><em class="refcount">Return value: New reference.</em><p>On success, return a list of the values in object <em>o</em>.  On failure, return
@@ -196,7 +199,7 @@ To get error reporting use <a class="reference internal" href="#c.PyMapping_GetI
 </div>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyMapping_Items">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a>* <code class="sig-name descname">PyMapping_Items</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *o</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyMapping_Items" title="Permalink to this definition">¶</a></dt>
 <dd><em class="refcount">Return value: New reference.</em><p>On success, return a list of the items in object <em>o</em>, where each item is a
@@ -257,7 +260,7 @@ tuple containing a key-value pair.  On failure, return <code class="docutils lit
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API Reference Manual</a> &#187;</li>
@@ -276,6 +279,7 @@ tuple containing a key-value pair.  On failure, return <code class="docutils lit
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  
@@ -288,11 +292,11 @@ tuple containing a key-value pair.  On failure, return <code class="docutils lit
 <br />
     <br />
 
-    Last updated on Feb 13, 2020.
+    Last updated on Mar 08, 2020.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 2.4.2+/ad35b3c.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/c10e1bc.
     </div>
 
   </body>

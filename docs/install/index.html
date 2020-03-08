@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Installing Python Modules (Legacy version) &#8212; Python 3.9.0a3 documentation</title>
+    <title>Installing Python Modules (Legacy version) &#8212; Python 3.9.0a4 documentation</title>
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments-monokai.css" />
+    <link rel="stylesheet" href="../_static/pygments_dark.css" type="text/css" media="(prefers-color-scheme: dark)" id="pygments_dark_css" />
     
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -18,7 +18,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.9.0a3 documentation"
+          title="Search within Python 3.9.0a4 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -40,9 +40,11 @@
       }
     </style>
 
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png" />
+    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
     
     <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <script type="text/javascript" src="../_static/themetoggle.js"></script>
     
      
 
@@ -68,7 +70,7 @@
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
     <li class="right">
@@ -85,6 +87,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -327,7 +330,7 @@ statements shown below, and get the output as shown, to find out my
 </div>
 <p>A few other placeholders are used in this document: <code class="file docutils literal notranslate"><em><span class="pre">X.Y</span></em></code> stands for the
 version of Python, for example <code class="docutils literal notranslate"><span class="pre">3.2</span></code>; <code class="file docutils literal notranslate"><em><span class="pre">abiflags</span></em></code> will be replaced by
-the value of <a class="reference internal" href="../library/sys.html#sys.abiflags" title="sys.abiflags"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.abiflags</span></code></a> or the empty string for platforms which don’t
+the value of <a class="reference internal" href="../library/sys.html#sys-abiflags" title="sys.abiflags"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.abiflags</span></code></a> or the empty string for platforms which don’t
 define ABI flags; <code class="file docutils literal notranslate"><em><span class="pre">distname</span></em></code> will be replaced by the name of the module
 distribution being installed.  Dots and capitalization are important in the
 paths; for example, a value that uses <code class="docutils literal notranslate"><span class="pre">python3.2</span></code> on UNIX will typically use
@@ -367,9 +370,9 @@ install into it.  It is enabled with a simple option:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>python setup.py install --user
 </pre></div>
 </div>
-<p>Files will be installed into subdirectories of <a class="reference internal" href="../library/site.html#site.USER_BASE" title="site.USER_BASE"><code class="xref py py-data docutils literal notranslate"><span class="pre">site.USER_BASE</span></code></a> (written
+<p>Files will be installed into subdirectories of <a class="reference internal" href="../library/site.html#site-user-base" title="site.USER_BASE"><code class="xref py py-data docutils literal notranslate"><span class="pre">site.USER_BASE</span></code></a> (written
 as <code class="file docutils literal notranslate"><em><span class="pre">userbase</span></em></code> hereafter).  This scheme installs pure Python modules and
-extension modules in the same location (also known as <a class="reference internal" href="../library/site.html#site.USER_SITE" title="site.USER_SITE"><code class="xref py py-data docutils literal notranslate"><span class="pre">site.USER_SITE</span></code></a>).
+extension modules in the same location (also known as <a class="reference internal" href="../library/site.html#site-user-site" title="site.USER_SITE"><code class="xref py py-data docutils literal notranslate"><span class="pre">site.USER_SITE</span></code></a>).
 Here are the values for UNIX, including Mac OS X:</p>
 <table class="docutils align-default">
 <colgroup>
@@ -424,7 +427,7 @@ Here are the values for UNIX, including Mac OS X:</p>
 </table>
 <p>The advantage of using this scheme compared to the other ones described below is
 that the user site-packages directory is under normal conditions always included
-in <a class="reference internal" href="../library/sys.html#sys.path" title="sys.path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a> (see <a class="reference internal" href="../library/site.html#module-site" title="site: Module responsible for site-specific configuration."><code class="xref py py-mod docutils literal notranslate"><span class="pre">site</span></code></a> for more information), which means that
+in <a class="reference internal" href="../library/sys.html#sys-path" title="sys.path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a> (see <a class="reference internal" href="../library/site.html#module-site" title="site: Module responsible for site-specific configuration."><code class="xref py py-mod docutils literal notranslate"><span class="pre">site</span></code></a> for more information), which means that
 there is no additional step to perform after running the <code class="file docutils literal notranslate"><span class="pre">setup.py</span></code> script
 to finalize the installation.</p>
 <p>The <strong class="command">build_ext</strong> command also has a <code class="docutils literal notranslate"><span class="pre">--user</span></code> option to add
@@ -452,8 +455,8 @@ will expand this to your home directory:</p>
 </div>
 <p>To make Python find the distributions installed with this scheme, you may have
 to <a class="reference internal" href="#inst-search-path"><span class="std std-ref">modify Python’s search path</span></a> or edit
-<code class="xref py py-mod docutils literal notranslate"><span class="pre">sitecustomize</span></code> (see <a class="reference internal" href="../library/site.html#module-site" title="site: Module responsible for site-specific configuration."><code class="xref py py-mod docutils literal notranslate"><span class="pre">site</span></code></a>) to call <a class="reference internal" href="../library/site.html#site.addsitedir" title="site.addsitedir"><code class="xref py py-func docutils literal notranslate"><span class="pre">site.addsitedir()</span></code></a> or edit
-<a class="reference internal" href="../library/sys.html#sys.path" title="sys.path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a>.</p>
+<code class="xref py py-mod docutils literal notranslate"><span class="pre">sitecustomize</span></code> (see <a class="reference internal" href="../library/site.html#module-site" title="site: Module responsible for site-specific configuration."><code class="xref py py-mod docutils literal notranslate"><span class="pre">site</span></code></a>) to call <a class="reference internal" href="../library/site.html#site-addsitedir" title="site.addsitedir"><code class="xref py py-func docutils literal notranslate"><span class="pre">site.addsitedir()</span></code></a> or edit
+<a class="reference internal" href="../library/sys.html#sys-path" title="sys.path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a>.</p>
 <p>The <code class="xref std std-option docutils literal notranslate"><span class="pre">--home</span></code> option defines the installation base directory.  Files are
 installed to the following directories under the installation base as follows:</p>
 <table class="docutils align-default">
@@ -794,7 +797,7 @@ directory containing the <code class="file docutils literal notranslate"><span c
 the <a class="reference internal" href="../library/site.html#module-site" title="site: Module responsible for site-specific configuration."><code class="xref py py-mod docutils literal notranslate"><span class="pre">site</span></code></a> module for more information.</p>
 <p>A slightly less convenient way is to edit the <code class="file docutils literal notranslate"><span class="pre">site.py</span></code> file in Python’s
 standard library, and modify <code class="docutils literal notranslate"><span class="pre">sys.path</span></code>.  <code class="file docutils literal notranslate"><span class="pre">site.py</span></code> is automatically
-imported when the Python interpreter is executed, unless the <a class="reference internal" href="../using/cmdline.html#id3"><code class="xref std std-option docutils literal notranslate"><span class="pre">-S</span></code></a> switch
+imported when the Python interpreter is executed, unless the <a class="reference internal" href="../using/cmdline.html#cmdoption-3"><code class="xref std std-option docutils literal notranslate"><span class="pre">-S</span></code></a> switch
 is supplied to suppress this behaviour.  So you could simply edit
 <code class="file docutils literal notranslate"><span class="pre">site.py</span></code> and add two lines to it:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
@@ -806,12 +809,12 @@ upgrading from 2.2 to 2.2.2, for example) <code class="file docutils literal not
 the stock version.  You’d have to remember that it was modified and save a copy
 before doing the installation.</p>
 <p>There are two environment variables that can modify <code class="docutils literal notranslate"><span class="pre">sys.path</span></code>.
-<span class="target" id="index-0"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONHOME"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONHOME</span></code></a> sets an alternate value for the prefix of the Python
-installation.  For example, if <span class="target" id="index-1"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONHOME"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONHOME</span></code></a> is set to <code class="docutils literal notranslate"><span class="pre">/www/python</span></code>,
+<span class="target" id="index-0"></span><a class="reference internal" href="../using/cmdline.html#envvar-pythonhome"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONHOME</span></code></a> sets an alternate value for the prefix of the Python
+installation.  For example, if <span class="target" id="index-1"></span><a class="reference internal" href="../using/cmdline.html#envvar-pythonhome"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONHOME</span></code></a> is set to <code class="docutils literal notranslate"><span class="pre">/www/python</span></code>,
 the search path will be set to <code class="docutils literal notranslate"><span class="pre">['',</span> <span class="pre">'/www/python/lib/pythonX.Y/',</span>
 <span class="pre">'/www/python/lib/pythonX.Y/plat-linux2',</span> <span class="pre">...]</span></code>.</p>
-<p>The <span class="target" id="index-2"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONPATH"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONPATH</span></code></a> variable can be set to a list of paths that will be
-added to the beginning of <code class="docutils literal notranslate"><span class="pre">sys.path</span></code>.  For example, if <span class="target" id="index-3"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONPATH"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONPATH</span></code></a> is
+<p>The <span class="target" id="index-2"></span><a class="reference internal" href="../using/cmdline.html#envvar-pythonpath"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONPATH</span></code></a> variable can be set to a list of paths that will be
+added to the beginning of <code class="docutils literal notranslate"><span class="pre">sys.path</span></code>.  For example, if <span class="target" id="index-3"></span><a class="reference internal" href="../using/cmdline.html#envvar-pythonpath"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONPATH</span></code></a> is
 set to <code class="docutils literal notranslate"><span class="pre">/www/python:/opt/py</span></code>, the search path will begin with
 <code class="docutils literal notranslate"><span class="pre">['/www/python',</span> <span class="pre">'/opt/py']</span></code>.  (Note that directories must exist in order to
 be added to <code class="docutils literal notranslate"><span class="pre">sys.path</span></code>; the <a class="reference internal" href="../library/site.html#module-site" title="site: Module responsible for site-specific configuration."><code class="xref py py-mod docutils literal notranslate"><span class="pre">site</span></code></a> module removes paths that don’t
@@ -901,7 +904,7 @@ as shown. For Python 1.5.2, the Distutils will normally be installed to
 configuration file should be put there under Python 1.5.2.</p></li>
 <li><p>On Unix, if the <span class="target" id="index-4"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">HOME</span></code> environment variable is not defined, the user’s
 home directory will be determined with the <code class="xref py py-func docutils literal notranslate"><span class="pre">getpwuid()</span></code> function from the
-standard <a class="reference internal" href="../library/pwd.html#module-pwd" title="pwd: The password database (getpwnam() and friends). (Unix)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pwd</span></code></a> module. This is done by the <a class="reference internal" href="../library/os.path.html#os.path.expanduser" title="os.path.expanduser"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.path.expanduser()</span></code></a>
+standard <a class="reference internal" href="../library/pwd.html#module-pwd" title="pwd: The password database (getpwnam() and friends). (Unix)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pwd</span></code></a> module. This is done by the <a class="reference internal" href="../library/os.path.html#os-path-expanduser" title="os.path.expanduser"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.path.expanduser()</span></code></a>
 function used by Distutils.</p></li>
 <li><p>I.e., in the current directory (usually the location of the setup script).</p></li>
 <li><p>(See also note (1).)  Under Python 1.6 and later, Python’s default “installation
@@ -913,7 +916,7 @@ part of the standard library—so the system configuration file would be
 1.5.2 installation under Windows.</p></li>
 <li><p>On Windows, if the <span class="target" id="index-5"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">HOME</span></code> environment variable is not defined,
 <span class="target" id="index-6"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">USERPROFILE</span></code> then <span class="target" id="index-7"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">HOMEDRIVE</span></code> and <span class="target" id="index-8"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">HOMEPATH</span></code> will
-be tried. This is done by the <a class="reference internal" href="../library/os.path.html#os.path.expanduser" title="os.path.expanduser"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.path.expanduser()</span></code></a> function used
+be tried. This is done by the <a class="reference internal" href="../library/os.path.html#os-path-expanduser" title="os.path.expanduser"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.path.expanduser()</span></code></a> function used
 by Distutils.</p></li>
 </ol>
 </div>
@@ -1240,7 +1243,7 @@ information</p>
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
     <li class="right">
@@ -1257,6 +1260,7 @@ information</p>
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  
@@ -1269,11 +1273,11 @@ information</p>
 <br />
     <br />
 
-    Last updated on Feb 13, 2020.
+    Last updated on Mar 08, 2020.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 2.4.2+/ad35b3c.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/c10e1bc.
     </div>
 
   </body>

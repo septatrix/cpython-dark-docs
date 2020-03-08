@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>glob — Unix style pathname pattern expansion &#8212; Python 3.9.0a3 documentation</title>
+    <title>glob — Unix style pathname pattern expansion &#8212; Python 3.9.0a4 documentation</title>
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments-monokai.css" />
+    <link rel="stylesheet" href="../_static/pygments_dark.css" type="text/css" media="(prefers-color-scheme: dark)" id="pygments_dark_css" />
     
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -18,7 +18,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.9.0a3 documentation"
+          title="Search within Python 3.9.0a4 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -41,9 +41,11 @@
       }
     </style>
 
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png" />
+    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
     
     <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <script type="text/javascript" src="../_static/themetoggle.js"></script>
     
      
 
@@ -72,7 +74,7 @@
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
@@ -91,6 +93,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -108,20 +111,20 @@
 according to the rules used by the Unix shell, although results are returned in
 arbitrary order.  No tilde expansion is done, but <code class="docutils literal notranslate"><span class="pre">*</span></code>, <code class="docutils literal notranslate"><span class="pre">?</span></code>, and character
 ranges expressed with <code class="docutils literal notranslate"><span class="pre">[]</span></code> will be correctly matched.  This is done by using
-the <a class="reference internal" href="os.html#os.scandir" title="os.scandir"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.scandir()</span></code></a> and <a class="reference internal" href="fnmatch.html#fnmatch.fnmatch" title="fnmatch.fnmatch"><code class="xref py py-func docutils literal notranslate"><span class="pre">fnmatch.fnmatch()</span></code></a> functions in concert, and
-not by actually invoking a subshell.  Note that unlike <a class="reference internal" href="fnmatch.html#fnmatch.fnmatch" title="fnmatch.fnmatch"><code class="xref py py-func docutils literal notranslate"><span class="pre">fnmatch.fnmatch()</span></code></a>,
+the <a class="reference internal" href="os.html#os-scandir" title="os.scandir"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.scandir()</span></code></a> and <a class="reference internal" href="fnmatch.html#fnmatch-fnmatch" title="fnmatch.fnmatch"><code class="xref py py-func docutils literal notranslate"><span class="pre">fnmatch.fnmatch()</span></code></a> functions in concert, and
+not by actually invoking a subshell.  Note that unlike <a class="reference internal" href="fnmatch.html#fnmatch-fnmatch" title="fnmatch.fnmatch"><code class="xref py py-func docutils literal notranslate"><span class="pre">fnmatch.fnmatch()</span></code></a>,
 <a class="reference internal" href="#module-glob" title="glob: Unix shell style pathname pattern expansion."><code class="xref py py-mod docutils literal notranslate"><span class="pre">glob</span></code></a> treats filenames beginning with a dot (<code class="docutils literal notranslate"><span class="pre">.</span></code>) as special cases.
-(For tilde and shell variable expansion, use <a class="reference internal" href="os.path.html#os.path.expanduser" title="os.path.expanduser"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.path.expanduser()</span></code></a> and
-<a class="reference internal" href="os.path.html#os.path.expandvars" title="os.path.expandvars"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.path.expandvars()</span></code></a>.)</p>
+(For tilde and shell variable expansion, use <a class="reference internal" href="os.path.html#os-path-expanduser" title="os.path.expanduser"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.path.expanduser()</span></code></a> and
+<a class="reference internal" href="os.path.html#os-path-expandvars" title="os.path.expandvars"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.path.expandvars()</span></code></a>.)</p>
 <p>For a literal match, wrap the meta-characters in brackets.
 For example, <code class="docutils literal notranslate"><span class="pre">'[?]'</span></code> matches the character <code class="docutils literal notranslate"><span class="pre">'?'</span></code>.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p>The <a class="reference internal" href="pathlib.html#module-pathlib" title="pathlib: Object-oriented filesystem paths"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pathlib</span></code></a> module offers high-level path objects.</p>
 </div>
-<dl class="function">
-<dt id="glob.glob">
-<code class="sig-prename descclassname">glob.</code><code class="sig-name descname">glob</code><span class="sig-paren">(</span><em class="sig-param">pathname</em>, <em class="sig-param">*</em>, <em class="sig-param">recursive=False</em><span class="sig-paren">)</span><a class="headerlink" href="#glob.glob" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="glob-glob">
+<span id="glob.glob"></span><code class="sig-prename descclassname">glob.</code><code class="sig-name descname">glob</code><span class="sig-paren">(</span><em class="sig-param">pathname</em>, <em class="sig-param">*</em>, <em class="sig-param">recursive=False</em><span class="sig-paren">)</span><a class="headerlink" href="#glob-glob" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a possibly-empty list of path names that match <em>pathname</em>, which must be
 a string containing a path specification. <em>pathname</em> can be either absolute
 (like <code class="file docutils literal notranslate"><span class="pre">/usr/src/Python-1.5/Makefile</span></code>) or relative (like
@@ -130,7 +133,7 @@ symlinks are included in the results (as in the shell). Whether or not the
 results are sorted depends on the file system.</p>
 <p id="index-2">If <em>recursive</em> is true, the pattern “<code class="docutils literal notranslate"><span class="pre">**</span></code>” will match any files and zero or
 more directories, subdirectories and symbolic links to directories. If the
-pattern is followed by an <a class="reference internal" href="os.html#os.sep" title="os.sep"><code class="xref py py-data docutils literal notranslate"><span class="pre">os.sep</span></code></a> or <a class="reference internal" href="os.html#os.altsep" title="os.altsep"><code class="xref py py-data docutils literal notranslate"><span class="pre">os.altsep</span></code></a> then files will not
+pattern is followed by an <a class="reference internal" href="os.html#os-sep" title="os.sep"><code class="xref py py-data docutils literal notranslate"><span class="pre">os.sep</span></code></a> or <a class="reference internal" href="os.html#os-altsep" title="os.altsep"><code class="xref py py-data docutils literal notranslate"><span class="pre">os.altsep</span></code></a> then files will not
 match.</p>
 <p class="audit-hook">Raises an <a class="reference internal" href="sys.html#auditing"><span class="std std-ref">auditing event</span></a> <code class="docutils literal notranslate"><span class="pre">glob.glob</span></code> with arguments <code class="docutils literal notranslate"><span class="pre">pathname</span></code>, <code class="docutils literal notranslate"><span class="pre">recursive</span></code>.</p>
 <div class="admonition note">
@@ -143,17 +146,17 @@ an inordinate amount of time.</p>
 </div>
 </dd></dl>
 
-<dl class="function">
-<dt id="glob.iglob">
-<code class="sig-prename descclassname">glob.</code><code class="sig-name descname">iglob</code><span class="sig-paren">(</span><em class="sig-param">pathname</em>, <em class="sig-param">*</em>, <em class="sig-param">recursive=False</em><span class="sig-paren">)</span><a class="headerlink" href="#glob.iglob" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="glob-iglob">
+<span id="glob.iglob"></span><code class="sig-prename descclassname">glob.</code><code class="sig-name descname">iglob</code><span class="sig-paren">(</span><em class="sig-param">pathname</em>, <em class="sig-param">*</em>, <em class="sig-param">recursive=False</em><span class="sig-paren">)</span><a class="headerlink" href="#glob-iglob" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return an <a class="reference internal" href="../glossary.html#term-iterator"><span class="xref std std-term">iterator</span></a> which yields the same values as <a class="reference internal" href="#module-glob" title="glob: Unix shell style pathname pattern expansion."><code class="xref py py-func docutils literal notranslate"><span class="pre">glob()</span></code></a>
 without actually storing them all simultaneously.</p>
 <p class="audit-hook">Raises an <a class="reference internal" href="sys.html#auditing"><span class="std std-ref">auditing event</span></a> <code class="docutils literal notranslate"><span class="pre">glob.glob</span></code> with arguments <code class="docutils literal notranslate"><span class="pre">pathname</span></code>, <code class="docutils literal notranslate"><span class="pre">recursive</span></code>.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="glob.escape">
-<code class="sig-prename descclassname">glob.</code><code class="sig-name descname">escape</code><span class="sig-paren">(</span><em class="sig-param">pathname</em><span class="sig-paren">)</span><a class="headerlink" href="#glob.escape" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="glob-escape">
+<span id="glob.escape"></span><code class="sig-prename descclassname">glob.</code><code class="sig-name descname">escape</code><span class="sig-paren">(</span><em class="sig-param">pathname</em><span class="sig-paren">)</span><a class="headerlink" href="#glob-escape" title="Permalink to this definition">¶</a></dt>
 <dd><p>Escape all special characters (<code class="docutils literal notranslate"><span class="pre">'?'</span></code>, <code class="docutils literal notranslate"><span class="pre">'*'</span></code> and <code class="docutils literal notranslate"><span class="pre">'['</span></code>).
 This is useful if you want to match an arbitrary literal string that may
 have special characters in it.  Special characters in drive/UNC
@@ -250,7 +253,7 @@ default. For example, consider a directory containing <code class="file docutils
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
@@ -269,6 +272,7 @@ default. For example, consider a directory containing <code class="file docutils
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  
@@ -281,11 +285,11 @@ default. For example, consider a directory containing <code class="file docutils
 <br />
     <br />
 
-    Last updated on Feb 13, 2020.
+    Last updated on Mar 08, 2020.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 2.4.2+/ad35b3c.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/c10e1bc.
     </div>
 
   </body>

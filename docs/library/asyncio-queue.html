@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Queues &#8212; Python 3.9.0a3 documentation</title>
+    <title>Queues &#8212; Python 3.9.0a4 documentation</title>
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments-monokai.css" />
+    <link rel="stylesheet" href="../_static/pygments_dark.css" type="text/css" media="(prefers-color-scheme: dark)" id="pygments_dark_css" />
     
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -18,7 +18,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.9.0a3 documentation"
+          title="Search within Python 3.9.0a4 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -41,9 +41,11 @@
       }
     </style>
 
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png" />
+    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
     
     <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <script type="text/javascript" src="../_static/themetoggle.js"></script>
     
      
 
@@ -72,7 +74,7 @@
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
@@ -92,6 +94,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -109,103 +112,103 @@
 <a class="reference internal" href="queue.html#module-queue" title="queue: A synchronized queue class."><code class="xref py py-mod docutils literal notranslate"><span class="pre">queue</span></code></a> module.  Although asyncio queues are not thread-safe,
 they are designed to be used specifically in async/await code.</p>
 <p>Note that methods of asyncio queues don’t have a <em>timeout</em> parameter;
-use <a class="reference internal" href="asyncio-task.html#asyncio.wait_for" title="asyncio.wait_for"><code class="xref py py-func docutils literal notranslate"><span class="pre">asyncio.wait_for()</span></code></a> function to do queue operations with a
+use <a class="reference internal" href="asyncio-task.html#asyncio-wait-for" title="asyncio.wait_for"><code class="xref py py-func docutils literal notranslate"><span class="pre">asyncio.wait_for()</span></code></a> function to do queue operations with a
 timeout.</p>
 <p>See also the <a class="reference internal" href="#examples">Examples</a> section below.</p>
 <div class="section" id="queue">
 <h2>Queue<a class="headerlink" href="#queue" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="asyncio.Queue">
-<em class="property">class </em><code class="sig-prename descclassname">asyncio.</code><code class="sig-name descname">Queue</code><span class="sig-paren">(</span><em class="sig-param">maxsize=0</em>, <em class="sig-param">*</em>, <em class="sig-param">loop=None</em><span class="sig-paren">)</span><a class="headerlink" href="#asyncio.Queue" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt id="asyncio-queue">
+<span id="asyncio.Queue"></span><em class="property">class </em><code class="sig-prename descclassname">asyncio.</code><code class="sig-name descname">Queue</code><span class="sig-paren">(</span><em class="sig-param">maxsize=0</em>, <em class="sig-param">*</em>, <em class="sig-param">loop=None</em><span class="sig-paren">)</span><a class="headerlink" href="#asyncio-queue" title="Permalink to this definition">¶</a></dt>
 <dd><p>A first in, first out (FIFO) queue.</p>
 <p>If <em>maxsize</em> is less than or equal to zero, the queue size is
 infinite.  If it is an integer greater than <code class="docutils literal notranslate"><span class="pre">0</span></code>, then
 <code class="docutils literal notranslate"><span class="pre">await</span> <span class="pre">put()</span></code> blocks when the queue reaches <em>maxsize</em>
-until an item is removed by <a class="reference internal" href="#asyncio.Queue.get" title="asyncio.Queue.get"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get()</span></code></a>.</p>
+until an item is removed by <a class="reference internal" href="#asyncio-queue-get" title="asyncio.Queue.get"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get()</span></code></a>.</p>
 <p>Unlike the standard library threading <a class="reference internal" href="queue.html#module-queue" title="queue: A synchronized queue class."><code class="xref py py-mod docutils literal notranslate"><span class="pre">queue</span></code></a>, the size of
 the queue is always known and can be returned by calling the
-<a class="reference internal" href="#asyncio.Queue.qsize" title="asyncio.Queue.qsize"><code class="xref py py-meth docutils literal notranslate"><span class="pre">qsize()</span></code></a> method.</p>
+<a class="reference internal" href="#asyncio-queue-qsize" title="asyncio.Queue.qsize"><code class="xref py py-meth docutils literal notranslate"><span class="pre">qsize()</span></code></a> method.</p>
 <div class="deprecated-removed">
 <p><span class="versionmodified">Deprecated since version 3.8, will be removed in version 3.10: </span>The <em>loop</em> parameter.</p>
 </div>
 <p>This class is <a class="reference internal" href="asyncio-dev.html#asyncio-multithreading"><span class="std std-ref">not thread safe</span></a>.</p>
-<dl class="attribute">
-<dt id="asyncio.Queue.maxsize">
-<code class="sig-name descname">maxsize</code><a class="headerlink" href="#asyncio.Queue.maxsize" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt id="asyncio-queue-maxsize">
+<span id="asyncio.Queue.maxsize"></span><code class="sig-name descname">maxsize</code><a class="headerlink" href="#asyncio-queue-maxsize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Number of items allowed in the queue.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="asyncio.Queue.empty">
-<code class="sig-name descname">empty</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asyncio.Queue.empty" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="asyncio-queue-empty">
+<span id="asyncio.Queue.empty"></span><code class="sig-name descname">empty</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asyncio-queue-empty" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return <code class="docutils literal notranslate"><span class="pre">True</span></code> if the queue is empty, <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="asyncio.Queue.full">
-<code class="sig-name descname">full</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asyncio.Queue.full" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return <code class="docutils literal notranslate"><span class="pre">True</span></code> if there are <a class="reference internal" href="#asyncio.Queue.maxsize" title="asyncio.Queue.maxsize"><code class="xref py py-attr docutils literal notranslate"><span class="pre">maxsize</span></code></a> items in the queue.</p>
+<dl class="py method">
+<dt id="asyncio-queue-full">
+<span id="asyncio.Queue.full"></span><code class="sig-name descname">full</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asyncio-queue-full" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return <code class="docutils literal notranslate"><span class="pre">True</span></code> if there are <a class="reference internal" href="#asyncio-queue-maxsize" title="asyncio.Queue.maxsize"><code class="xref py py-attr docutils literal notranslate"><span class="pre">maxsize</span></code></a> items in the queue.</p>
 <p>If the queue was initialized with <code class="docutils literal notranslate"><span class="pre">maxsize=0</span></code> (the default),
-then <a class="reference internal" href="#asyncio.Queue.full" title="asyncio.Queue.full"><code class="xref py py-meth docutils literal notranslate"><span class="pre">full()</span></code></a> never returns <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+then <a class="reference internal" href="#asyncio-queue-full" title="asyncio.Queue.full"><code class="xref py py-meth docutils literal notranslate"><span class="pre">full()</span></code></a> never returns <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="asyncio.Queue.get">
-<em class="property">coroutine </em><code class="sig-name descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asyncio.Queue.get" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="asyncio-queue-get">
+<span id="asyncio.Queue.get"></span><em class="property">coroutine </em><code class="sig-name descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asyncio-queue-get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Remove and return an item from the queue. If queue is empty,
 wait until an item is available.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="asyncio.Queue.get_nowait">
-<code class="sig-name descname">get_nowait</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asyncio.Queue.get_nowait" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="asyncio-queue-get-nowait">
+<span id="asyncio.Queue.get_nowait"></span><code class="sig-name descname">get_nowait</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asyncio-queue-get-nowait" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return an item if one is immediately available, else raise
-<a class="reference internal" href="#asyncio.QueueEmpty" title="asyncio.QueueEmpty"><code class="xref py py-exc docutils literal notranslate"><span class="pre">QueueEmpty</span></code></a>.</p>
+<a class="reference internal" href="#asyncio-queueempty" title="asyncio.QueueEmpty"><code class="xref py py-exc docutils literal notranslate"><span class="pre">QueueEmpty</span></code></a>.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="asyncio.Queue.join">
-<em class="property">coroutine </em><code class="sig-name descname">join</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asyncio.Queue.join" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="asyncio-queue-join">
+<span id="asyncio.Queue.join"></span><em class="property">coroutine </em><code class="sig-name descname">join</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asyncio-queue-join" title="Permalink to this definition">¶</a></dt>
 <dd><p>Block until all items in the queue have been received and processed.</p>
 <p>The count of unfinished tasks goes up whenever an item is added
 to the queue. The count goes down whenever a consumer coroutine calls
-<a class="reference internal" href="#asyncio.Queue.task_done" title="asyncio.Queue.task_done"><code class="xref py py-meth docutils literal notranslate"><span class="pre">task_done()</span></code></a> to indicate that the item was retrieved and all
+<a class="reference internal" href="#asyncio-queue-task-done" title="asyncio.Queue.task_done"><code class="xref py py-meth docutils literal notranslate"><span class="pre">task_done()</span></code></a> to indicate that the item was retrieved and all
 work on it is complete.  When the count of unfinished tasks drops
-to zero, <a class="reference internal" href="#asyncio.Queue.join" title="asyncio.Queue.join"><code class="xref py py-meth docutils literal notranslate"><span class="pre">join()</span></code></a> unblocks.</p>
+to zero, <a class="reference internal" href="#asyncio-queue-join" title="asyncio.Queue.join"><code class="xref py py-meth docutils literal notranslate"><span class="pre">join()</span></code></a> unblocks.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="asyncio.Queue.put">
-<em class="property">coroutine </em><code class="sig-name descname">put</code><span class="sig-paren">(</span><em class="sig-param">item</em><span class="sig-paren">)</span><a class="headerlink" href="#asyncio.Queue.put" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="asyncio-queue-put">
+<span id="asyncio.Queue.put"></span><em class="property">coroutine </em><code class="sig-name descname">put</code><span class="sig-paren">(</span><em class="sig-param">item</em><span class="sig-paren">)</span><a class="headerlink" href="#asyncio-queue-put" title="Permalink to this definition">¶</a></dt>
 <dd><p>Put an item into the queue. If the queue is full, wait until a
 free slot is available before adding the item.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="asyncio.Queue.put_nowait">
-<code class="sig-name descname">put_nowait</code><span class="sig-paren">(</span><em class="sig-param">item</em><span class="sig-paren">)</span><a class="headerlink" href="#asyncio.Queue.put_nowait" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="asyncio-queue-put-nowait">
+<span id="asyncio.Queue.put_nowait"></span><code class="sig-name descname">put_nowait</code><span class="sig-paren">(</span><em class="sig-param">item</em><span class="sig-paren">)</span><a class="headerlink" href="#asyncio-queue-put-nowait" title="Permalink to this definition">¶</a></dt>
 <dd><p>Put an item into the queue without blocking.</p>
-<p>If no free slot is immediately available, raise <a class="reference internal" href="#asyncio.QueueFull" title="asyncio.QueueFull"><code class="xref py py-exc docutils literal notranslate"><span class="pre">QueueFull</span></code></a>.</p>
+<p>If no free slot is immediately available, raise <a class="reference internal" href="#asyncio-queuefull" title="asyncio.QueueFull"><code class="xref py py-exc docutils literal notranslate"><span class="pre">QueueFull</span></code></a>.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="asyncio.Queue.qsize">
-<code class="sig-name descname">qsize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asyncio.Queue.qsize" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="asyncio-queue-qsize">
+<span id="asyncio.Queue.qsize"></span><code class="sig-name descname">qsize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asyncio-queue-qsize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the number of items in the queue.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="asyncio.Queue.task_done">
-<code class="sig-name descname">task_done</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asyncio.Queue.task_done" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="asyncio-queue-task-done">
+<span id="asyncio.Queue.task_done"></span><code class="sig-name descname">task_done</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asyncio-queue-task-done" title="Permalink to this definition">¶</a></dt>
 <dd><p>Indicate that a formerly enqueued task is complete.</p>
-<p>Used by queue consumers. For each <a class="reference internal" href="#asyncio.Queue.get" title="asyncio.Queue.get"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get()</span></code></a> used to
-fetch a task, a subsequent call to <a class="reference internal" href="#asyncio.Queue.task_done" title="asyncio.Queue.task_done"><code class="xref py py-meth docutils literal notranslate"><span class="pre">task_done()</span></code></a> tells the
+<p>Used by queue consumers. For each <a class="reference internal" href="#asyncio-queue-get" title="asyncio.Queue.get"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get()</span></code></a> used to
+fetch a task, a subsequent call to <a class="reference internal" href="#asyncio-queue-task-done" title="asyncio.Queue.task_done"><code class="xref py py-meth docutils literal notranslate"><span class="pre">task_done()</span></code></a> tells the
 queue that the processing on the task is complete.</p>
-<p>If a <a class="reference internal" href="#asyncio.Queue.join" title="asyncio.Queue.join"><code class="xref py py-meth docutils literal notranslate"><span class="pre">join()</span></code></a> is currently blocking, it will resume when all
-items have been processed (meaning that a <a class="reference internal" href="#asyncio.Queue.task_done" title="asyncio.Queue.task_done"><code class="xref py py-meth docutils literal notranslate"><span class="pre">task_done()</span></code></a>
-call was received for every item that had been <a class="reference internal" href="#asyncio.Queue.put" title="asyncio.Queue.put"><code class="xref py py-meth docutils literal notranslate"><span class="pre">put()</span></code></a>
+<p>If a <a class="reference internal" href="#asyncio-queue-join" title="asyncio.Queue.join"><code class="xref py py-meth docutils literal notranslate"><span class="pre">join()</span></code></a> is currently blocking, it will resume when all
+items have been processed (meaning that a <a class="reference internal" href="#asyncio-queue-task-done" title="asyncio.Queue.task_done"><code class="xref py py-meth docutils literal notranslate"><span class="pre">task_done()</span></code></a>
+call was received for every item that had been <a class="reference internal" href="#asyncio-queue-put" title="asyncio.Queue.put"><code class="xref py py-meth docutils literal notranslate"><span class="pre">put()</span></code></a>
 into the queue).</p>
-<p>Raises <a class="reference internal" href="exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> if called more times than there were
+<p>Raises <a class="reference internal" href="exceptions.html#valueerror" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> if called more times than there were
 items placed in the queue.</p>
 </dd></dl>
 
@@ -214,10 +217,10 @@ items placed in the queue.</p>
 </div>
 <div class="section" id="priority-queue">
 <h2>Priority Queue<a class="headerlink" href="#priority-queue" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="asyncio.PriorityQueue">
-<em class="property">class </em><code class="sig-prename descclassname">asyncio.</code><code class="sig-name descname">PriorityQueue</code><a class="headerlink" href="#asyncio.PriorityQueue" title="Permalink to this definition">¶</a></dt>
-<dd><p>A variant of <a class="reference internal" href="#asyncio.Queue" title="asyncio.Queue"><code class="xref py py-class docutils literal notranslate"><span class="pre">Queue</span></code></a>; retrieves entries in priority order
+<dl class="py class">
+<dt id="asyncio-priorityqueue">
+<span id="asyncio.PriorityQueue"></span><em class="property">class </em><code class="sig-prename descclassname">asyncio.</code><code class="sig-name descname">PriorityQueue</code><a class="headerlink" href="#asyncio-priorityqueue" title="Permalink to this definition">¶</a></dt>
+<dd><p>A variant of <a class="reference internal" href="#asyncio-queue" title="asyncio.Queue"><code class="xref py py-class docutils literal notranslate"><span class="pre">Queue</span></code></a>; retrieves entries in priority order
 (lowest first).</p>
 <p>Entries are typically tuples of the form
 <code class="docutils literal notranslate"><span class="pre">(priority_number,</span> <span class="pre">data)</span></code>.</p>
@@ -226,27 +229,27 @@ items placed in the queue.</p>
 </div>
 <div class="section" id="lifo-queue">
 <h2>LIFO Queue<a class="headerlink" href="#lifo-queue" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="asyncio.LifoQueue">
-<em class="property">class </em><code class="sig-prename descclassname">asyncio.</code><code class="sig-name descname">LifoQueue</code><a class="headerlink" href="#asyncio.LifoQueue" title="Permalink to this definition">¶</a></dt>
-<dd><p>A variant of <a class="reference internal" href="#asyncio.Queue" title="asyncio.Queue"><code class="xref py py-class docutils literal notranslate"><span class="pre">Queue</span></code></a> that retrieves most recently added
+<dl class="py class">
+<dt id="asyncio-lifoqueue">
+<span id="asyncio.LifoQueue"></span><em class="property">class </em><code class="sig-prename descclassname">asyncio.</code><code class="sig-name descname">LifoQueue</code><a class="headerlink" href="#asyncio-lifoqueue" title="Permalink to this definition">¶</a></dt>
+<dd><p>A variant of <a class="reference internal" href="#asyncio-queue" title="asyncio.Queue"><code class="xref py py-class docutils literal notranslate"><span class="pre">Queue</span></code></a> that retrieves most recently added
 entries first (last in, first out).</p>
 </dd></dl>
 
 </div>
 <div class="section" id="exceptions">
 <h2>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this headline">¶</a></h2>
-<dl class="exception">
-<dt id="asyncio.QueueEmpty">
-<em class="property">exception </em><code class="sig-prename descclassname">asyncio.</code><code class="sig-name descname">QueueEmpty</code><a class="headerlink" href="#asyncio.QueueEmpty" title="Permalink to this definition">¶</a></dt>
-<dd><p>This exception is raised when the <a class="reference internal" href="#asyncio.Queue.get_nowait" title="asyncio.Queue.get_nowait"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_nowait()</span></code></a> method
+<dl class="py exception">
+<dt id="asyncio-queueempty">
+<span id="asyncio.QueueEmpty"></span><em class="property">exception </em><code class="sig-prename descclassname">asyncio.</code><code class="sig-name descname">QueueEmpty</code><a class="headerlink" href="#asyncio-queueempty" title="Permalink to this definition">¶</a></dt>
+<dd><p>This exception is raised when the <a class="reference internal" href="#asyncio-queue-get-nowait" title="asyncio.Queue.get_nowait"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_nowait()</span></code></a> method
 is called on an empty queue.</p>
 </dd></dl>
 
-<dl class="exception">
-<dt id="asyncio.QueueFull">
-<em class="property">exception </em><code class="sig-prename descclassname">asyncio.</code><code class="sig-name descname">QueueFull</code><a class="headerlink" href="#asyncio.QueueFull" title="Permalink to this definition">¶</a></dt>
-<dd><p>Exception raised when the <a class="reference internal" href="#asyncio.Queue.put_nowait" title="asyncio.Queue.put_nowait"><code class="xref py py-meth docutils literal notranslate"><span class="pre">put_nowait()</span></code></a> method is called
+<dl class="py exception">
+<dt id="asyncio-queuefull">
+<span id="asyncio.QueueFull"></span><em class="property">exception </em><code class="sig-prename descclassname">asyncio.</code><code class="sig-name descname">QueueFull</code><a class="headerlink" href="#asyncio-queuefull" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception raised when the <a class="reference internal" href="#asyncio-queue-put-nowait" title="asyncio.Queue.put_nowait"><code class="xref py py-meth docutils literal notranslate"><span class="pre">put_nowait()</span></code></a> method is called
 on a queue that has reached its <em>maxsize</em>.</p>
 </dd></dl>
 
@@ -271,7 +274,7 @@ concurrent tasks:</p>
         <span class="c1"># Notify the queue that the &quot;work item&quot; has been processed.</span>
         <span class="n">queue</span><span class="o">.</span><span class="n">task_done</span><span class="p">()</span>
 
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{name}</span><span class="s1"> has slept for </span><span class="si">{sleep_for:.2f}</span><span class="s1"> seconds&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1"> has slept for </span><span class="si">{</span><span class="n">sleep_for</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> seconds&#39;</span><span class="p">)</span>
 
 
 <span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
@@ -288,7 +291,7 @@ concurrent tasks:</p>
     <span class="c1"># Create three worker tasks to process the queue concurrently.</span>
     <span class="n">tasks</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-        <span class="n">task</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="n">worker</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;worker-</span><span class="si">{i}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">queue</span><span class="p">))</span>
+        <span class="n">task</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="n">worker</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;worker-</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">queue</span><span class="p">))</span>
         <span class="n">tasks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
 
     <span class="c1"># Wait until the queue is fully processed.</span>
@@ -303,8 +306,8 @@ concurrent tasks:</p>
     <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="o">*</span><span class="n">tasks</span><span class="p">,</span> <span class="n">return_exceptions</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;====&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;3 workers slept in parallel for </span><span class="si">{total_slept_for:.2f}</span><span class="s1"> seconds&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;total expected sleep time: </span><span class="si">{total_sleep_time:.2f}</span><span class="s1"> seconds&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;3 workers slept in parallel for </span><span class="si">{</span><span class="n">total_slept_for</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> seconds&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;total expected sleep time: </span><span class="si">{</span><span class="n">total_sleep_time</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> seconds&#39;</span><span class="p">)</span>
 
 
 <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
@@ -374,7 +377,7 @@ concurrent tasks:</p>
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
@@ -394,6 +397,7 @@ concurrent tasks:</p>
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  
@@ -406,11 +410,11 @@ concurrent tasks:</p>
 <br />
     <br />
 
-    Last updated on Feb 13, 2020.
+    Last updated on Mar 08, 2020.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 2.4.2+/ad35b3c.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/c10e1bc.
     </div>
 
   </body>

@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>plistlib — Generate and parse Apple .plist files &#8212; Python 3.9.0a3 documentation</title>
+    <title>plistlib — Generate and parse Apple .plist files &#8212; Python 3.9.0a4 documentation</title>
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments-monokai.css" />
+    <link rel="stylesheet" href="../_static/pygments_dark.css" type="text/css" media="(prefers-color-scheme: dark)" id="pygments_dark_css" />
     
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -18,7 +18,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.9.0a3 documentation"
+          title="Search within Python 3.9.0a4 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -41,9 +41,11 @@
       }
     </style>
 
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png" />
+    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
     
     <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <script type="text/javascript" src="../_static/themetoggle.js"></script>
     
      
 
@@ -72,7 +74,7 @@
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
@@ -91,6 +93,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -110,18 +113,18 @@ and XML plist files.</p>
 <p>The property list (<code class="docutils literal notranslate"><span class="pre">.plist</span></code>) file format is a simple serialization supporting
 basic object types, like dictionaries, lists, numbers and strings.  Usually the
 top level object is a dictionary.</p>
-<p>To write out and to parse a plist file, use the <a class="reference internal" href="#plistlib.dump" title="plistlib.dump"><code class="xref py py-func docutils literal notranslate"><span class="pre">dump()</span></code></a> and
-<a class="reference internal" href="#plistlib.load" title="plistlib.load"><code class="xref py py-func docutils literal notranslate"><span class="pre">load()</span></code></a> functions.</p>
-<p>To work with plist data in bytes objects, use <a class="reference internal" href="#plistlib.dumps" title="plistlib.dumps"><code class="xref py py-func docutils literal notranslate"><span class="pre">dumps()</span></code></a>
-and <a class="reference internal" href="#plistlib.loads" title="plistlib.loads"><code class="xref py py-func docutils literal notranslate"><span class="pre">loads()</span></code></a>.</p>
+<p>To write out and to parse a plist file, use the <a class="reference internal" href="#plistlib-dump" title="plistlib.dump"><code class="xref py py-func docutils literal notranslate"><span class="pre">dump()</span></code></a> and
+<a class="reference internal" href="#plistlib-load" title="plistlib.load"><code class="xref py py-func docutils literal notranslate"><span class="pre">load()</span></code></a> functions.</p>
+<p>To work with plist data in bytes objects, use <a class="reference internal" href="#plistlib-dumps" title="plistlib.dumps"><code class="xref py py-func docutils literal notranslate"><span class="pre">dumps()</span></code></a>
+and <a class="reference internal" href="#plistlib-loads" title="plistlib.loads"><code class="xref py py-func docutils literal notranslate"><span class="pre">loads()</span></code></a>.</p>
 <p>Values can be strings, integers, floats, booleans, tuples, lists, dictionaries
 (but only with string keys), <a class="reference internal" href="stdtypes.html#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a>, <a class="reference internal" href="stdtypes.html#bytearray" title="bytearray"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytearray</span></code></a>
-or <a class="reference internal" href="datetime.html#datetime.datetime" title="datetime.datetime"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code></a> objects.</p>
+or <a class="reference internal" href="datetime.html#datetime-2" title="datetime.datetime"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code></a> objects.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">Changed in version 3.4: </span>New API, old API deprecated.  Support for binary format plists added.</p>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 3.8: </span>Support added for reading and writing <a class="reference internal" href="#plistlib.UID" title="plistlib.UID"><code class="xref py py-class docutils literal notranslate"><span class="pre">UID</span></code></a> tokens in binary plists as used
+<p><span class="versionmodified changed">Changed in version 3.8: </span>Support added for reading and writing <a class="reference internal" href="#plistlib-uid" title="plistlib.UID"><code class="xref py py-class docutils literal notranslate"><span class="pre">UID</span></code></a> tokens in binary plists as used
 by NSKeyedArchiver and NSKeyedUnarchiver.</p>
 </div>
 <div class="versionchanged">
@@ -135,22 +138,22 @@ by NSKeyedArchiver and NSKeyedUnarchiver.</p>
 </dl>
 </div>
 <p>This module defines the following functions:</p>
-<dl class="function">
-<dt id="plistlib.load">
-<code class="sig-prename descclassname">plistlib.</code><code class="sig-name descname">load</code><span class="sig-paren">(</span><em class="sig-param">fp</em>, <em class="sig-param">*</em>, <em class="sig-param">fmt=None</em>, <em class="sig-param">dict_type=dict</em><span class="sig-paren">)</span><a class="headerlink" href="#plistlib.load" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="plistlib-load">
+<span id="plistlib.load"></span><code class="sig-prename descclassname">plistlib.</code><code class="sig-name descname">load</code><span class="sig-paren">(</span><em class="sig-param">fp</em>, <em class="sig-param">*</em>, <em class="sig-param">fmt=None</em>, <em class="sig-param">dict_type=dict</em><span class="sig-paren">)</span><a class="headerlink" href="#plistlib-load" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read a plist file. <em>fp</em> should be a readable and binary file object.
 Return the unpacked root object (which usually is a
 dictionary).</p>
 <p>The <em>fmt</em> is the format of the file and the following values are valid:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="constants.html#None" title="None"><code class="xref py py-data docutils literal notranslate"><span class="pre">None</span></code></a>: Autodetect the file format</p></li>
-<li><p><a class="reference internal" href="#plistlib.FMT_XML" title="plistlib.FMT_XML"><code class="xref py py-data docutils literal notranslate"><span class="pre">FMT_XML</span></code></a>: XML file format</p></li>
-<li><p><a class="reference internal" href="#plistlib.FMT_BINARY" title="plistlib.FMT_BINARY"><code class="xref py py-data docutils literal notranslate"><span class="pre">FMT_BINARY</span></code></a>: Binary plist format</p></li>
+<li><p><a class="reference internal" href="constants.html#none" title="None"><code class="xref py py-data docutils literal notranslate"><span class="pre">None</span></code></a>: Autodetect the file format</p></li>
+<li><p><a class="reference internal" href="#plistlib-fmt-xml" title="plistlib.FMT_XML"><code class="xref py py-data docutils literal notranslate"><span class="pre">FMT_XML</span></code></a>: XML file format</p></li>
+<li><p><a class="reference internal" href="#plistlib-fmt-binary" title="plistlib.FMT_BINARY"><code class="xref py py-data docutils literal notranslate"><span class="pre">FMT_BINARY</span></code></a>: Binary plist format</p></li>
 </ul>
 <p>The <em>dict_type</em> is the type used for dictionaries that are read from the
 plist file.</p>
-<p>XML data for the <a class="reference internal" href="#plistlib.FMT_XML" title="plistlib.FMT_XML"><code class="xref py py-data docutils literal notranslate"><span class="pre">FMT_XML</span></code></a> format is parsed using the Expat parser
-from <a class="reference internal" href="pyexpat.html#module-xml.parsers.expat" title="xml.parsers.expat: An interface to the Expat non-validating XML parser."><code class="xref py py-mod docutils literal notranslate"><span class="pre">xml.parsers.expat</span></code></a> – see its documentation for possible
+<p>XML data for the <a class="reference internal" href="#plistlib-fmt-xml" title="plistlib.FMT_XML"><code class="xref py py-data docutils literal notranslate"><span class="pre">FMT_XML</span></code></a> format is parsed using the Expat parser
+from <a class="reference internal" href="pyexpat.html#module-xml-parsers-expat" title="xml.parsers.expat: An interface to the Expat non-validating XML parser."><code class="xref py py-mod docutils literal notranslate"><span class="pre">xml.parsers.expat</span></code></a> – see its documentation for possible
 exceptions on ill-formed XML.  Unknown elements will simply be ignored
 by the plist parser.</p>
 <p>The parser for the binary format raises <code class="xref py py-exc docutils literal notranslate"><span class="pre">InvalidFileException</span></code>
@@ -160,46 +163,46 @@ when the file cannot be parsed.</p>
 </div>
 </dd></dl>
 
-<dl class="function">
-<dt id="plistlib.loads">
-<code class="sig-prename descclassname">plistlib.</code><code class="sig-name descname">loads</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">*</em>, <em class="sig-param">fmt=None</em>, <em class="sig-param">dict_type=dict</em><span class="sig-paren">)</span><a class="headerlink" href="#plistlib.loads" title="Permalink to this definition">¶</a></dt>
-<dd><p>Load a plist from a bytes object. See <a class="reference internal" href="#plistlib.load" title="plistlib.load"><code class="xref py py-func docutils literal notranslate"><span class="pre">load()</span></code></a> for an explanation of
+<dl class="py function">
+<dt id="plistlib-loads">
+<span id="plistlib.loads"></span><code class="sig-prename descclassname">plistlib.</code><code class="sig-name descname">loads</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">*</em>, <em class="sig-param">fmt=None</em>, <em class="sig-param">dict_type=dict</em><span class="sig-paren">)</span><a class="headerlink" href="#plistlib-loads" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load a plist from a bytes object. See <a class="reference internal" href="#plistlib-load" title="plistlib.load"><code class="xref py py-func docutils literal notranslate"><span class="pre">load()</span></code></a> for an explanation of
 the keyword arguments.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.4.</span></p>
 </div>
 </dd></dl>
 
-<dl class="function">
-<dt id="plistlib.dump">
-<code class="sig-prename descclassname">plistlib.</code><code class="sig-name descname">dump</code><span class="sig-paren">(</span><em class="sig-param">value</em>, <em class="sig-param">fp</em>, <em class="sig-param">*</em>, <em class="sig-param">fmt=FMT_XML</em>, <em class="sig-param">sort_keys=True</em>, <em class="sig-param">skipkeys=False</em><span class="sig-paren">)</span><a class="headerlink" href="#plistlib.dump" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="plistlib-dump">
+<span id="plistlib.dump"></span><code class="sig-prename descclassname">plistlib.</code><code class="sig-name descname">dump</code><span class="sig-paren">(</span><em class="sig-param">value</em>, <em class="sig-param">fp</em>, <em class="sig-param">*</em>, <em class="sig-param">fmt=FMT_XML</em>, <em class="sig-param">sort_keys=True</em>, <em class="sig-param">skipkeys=False</em><span class="sig-paren">)</span><a class="headerlink" href="#plistlib-dump" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write <em>value</em> to a plist file. <em>Fp</em> should be a writable, binary
 file object.</p>
 <p>The <em>fmt</em> argument specifies the format of the plist file and can be
 one of the following values:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#plistlib.FMT_XML" title="plistlib.FMT_XML"><code class="xref py py-data docutils literal notranslate"><span class="pre">FMT_XML</span></code></a>: XML formatted plist file</p></li>
-<li><p><a class="reference internal" href="#plistlib.FMT_BINARY" title="plistlib.FMT_BINARY"><code class="xref py py-data docutils literal notranslate"><span class="pre">FMT_BINARY</span></code></a>: Binary formatted plist file</p></li>
+<li><p><a class="reference internal" href="#plistlib-fmt-xml" title="plistlib.FMT_XML"><code class="xref py py-data docutils literal notranslate"><span class="pre">FMT_XML</span></code></a>: XML formatted plist file</p></li>
+<li><p><a class="reference internal" href="#plistlib-fmt-binary" title="plistlib.FMT_BINARY"><code class="xref py py-data docutils literal notranslate"><span class="pre">FMT_BINARY</span></code></a>: Binary formatted plist file</p></li>
 </ul>
 <p>When <em>sort_keys</em> is true (the default) the keys for dictionaries will be
 written to the plist in sorted order, otherwise they will be written in
 the iteration order of the dictionary.</p>
-<p>When <em>skipkeys</em> is false (the default) the function raises <a class="reference internal" href="exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a>
+<p>When <em>skipkeys</em> is false (the default) the function raises <a class="reference internal" href="exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a>
 when a key of a dictionary is not a string, otherwise such keys are skipped.</p>
-<p>A <a class="reference internal" href="exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> will be raised if the object is of an unsupported type or
+<p>A <a class="reference internal" href="exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> will be raised if the object is of an unsupported type or
 a container that contains objects of unsupported types.</p>
-<p>An <a class="reference internal" href="exceptions.html#OverflowError" title="OverflowError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OverflowError</span></code></a> will be raised for integer values that cannot
+<p>An <a class="reference internal" href="exceptions.html#overflowerror" title="OverflowError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OverflowError</span></code></a> will be raised for integer values that cannot
 be represented in (binary) plist files.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.4.</span></p>
 </div>
 </dd></dl>
 
-<dl class="function">
-<dt id="plistlib.dumps">
-<code class="sig-prename descclassname">plistlib.</code><code class="sig-name descname">dumps</code><span class="sig-paren">(</span><em class="sig-param">value</em>, <em class="sig-param">*</em>, <em class="sig-param">fmt=FMT_XML</em>, <em class="sig-param">sort_keys=True</em>, <em class="sig-param">skipkeys=False</em><span class="sig-paren">)</span><a class="headerlink" href="#plistlib.dumps" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="plistlib-dumps">
+<span id="plistlib.dumps"></span><code class="sig-prename descclassname">plistlib.</code><code class="sig-name descname">dumps</code><span class="sig-paren">(</span><em class="sig-param">value</em>, <em class="sig-param">*</em>, <em class="sig-param">fmt=FMT_XML</em>, <em class="sig-param">sort_keys=True</em>, <em class="sig-param">skipkeys=False</em><span class="sig-paren">)</span><a class="headerlink" href="#plistlib-dumps" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return <em>value</em> as a plist-formatted bytes object. See
-the documentation for <a class="reference internal" href="#plistlib.dump" title="plistlib.dump"><code class="xref py py-func docutils literal notranslate"><span class="pre">dump()</span></code></a> for an explanation of the keyword
+the documentation for <a class="reference internal" href="#plistlib-dump" title="plistlib.dump"><code class="xref py py-func docutils literal notranslate"><span class="pre">dump()</span></code></a> for an explanation of the keyword
 arguments of this function.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.4.</span></p>
@@ -207,9 +210,9 @@ arguments of this function.</p>
 </dd></dl>
 
 <p>The following classes are available:</p>
-<dl class="class">
-<dt id="plistlib.UID">
-<em class="property">class </em><code class="sig-prename descclassname">plistlib.</code><code class="sig-name descname">UID</code><span class="sig-paren">(</span><em class="sig-param">data</em><span class="sig-paren">)</span><a class="headerlink" href="#plistlib.UID" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt id="plistlib-uid">
+<span id="plistlib.UID"></span><em class="property">class </em><code class="sig-prename descclassname">plistlib.</code><code class="sig-name descname">UID</code><span class="sig-paren">(</span><em class="sig-param">data</em><span class="sig-paren">)</span><a class="headerlink" href="#plistlib-uid" title="Permalink to this definition">¶</a></dt>
 <dd><p>Wraps an <a class="reference internal" href="functions.html#int" title="int"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>.  This is used when reading or writing NSKeyedArchiver
 encoded data, which contains UID (see PList manual).</p>
 <p>It has one attribute, <code class="xref py py-attr docutils literal notranslate"><span class="pre">data</span></code>, which can be used to retrieve the int value
@@ -220,18 +223,18 @@ of the UID.  <code class="xref py py-attr docutils literal notranslate"><span cl
 </dd></dl>
 
 <p>The following constants are available:</p>
-<dl class="data">
-<dt id="plistlib.FMT_XML">
-<code class="sig-prename descclassname">plistlib.</code><code class="sig-name descname">FMT_XML</code><a class="headerlink" href="#plistlib.FMT_XML" title="Permalink to this definition">¶</a></dt>
+<dl class="py data">
+<dt id="plistlib-fmt-xml">
+<span id="plistlib.FMT_XML"></span><code class="sig-prename descclassname">plistlib.</code><code class="sig-name descname">FMT_XML</code><a class="headerlink" href="#plistlib-fmt-xml" title="Permalink to this definition">¶</a></dt>
 <dd><p>The XML format for plist files.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.4.</span></p>
 </div>
 </dd></dl>
 
-<dl class="data">
-<dt id="plistlib.FMT_BINARY">
-<code class="sig-prename descclassname">plistlib.</code><code class="sig-name descname">FMT_BINARY</code><a class="headerlink" href="#plistlib.FMT_BINARY" title="Permalink to this definition">¶</a></dt>
+<dl class="py data">
+<dt id="plistlib-fmt-binary">
+<span id="plistlib.FMT_BINARY"></span><code class="sig-prename descclassname">plistlib.</code><code class="sig-name descname">FMT_BINARY</code><a class="headerlink" href="#plistlib-fmt-binary" title="Permalink to this definition">¶</a></dt>
 <dd><p>The binary format for plist files</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.4.</span></p>
@@ -326,7 +329,7 @@ of the UID.  <code class="xref py py-attr docutils literal notranslate"><span cl
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
@@ -345,6 +348,7 @@ of the UID.  <code class="xref py py-attr docutils literal notranslate"><span cl
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  
@@ -357,11 +361,11 @@ of the UID.  <code class="xref py py-attr docutils literal notranslate"><span cl
 <br />
     <br />
 
-    Last updated on Feb 13, 2020.
+    Last updated on Mar 08, 2020.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 2.4.2+/ad35b3c.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/c10e1bc.
     </div>
 
   </body>

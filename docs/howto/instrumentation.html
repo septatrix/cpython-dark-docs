@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Instrumenting CPython with DTrace and SystemTap &#8212; Python 3.9.0a3 documentation</title>
+    <title>Instrumenting CPython with DTrace and SystemTap &#8212; Python 3.9.0a4 documentation</title>
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments-monokai.css" />
+    <link rel="stylesheet" href="../_static/pygments_dark.css" type="text/css" media="(prefers-color-scheme: dark)" id="pygments_dark_css" />
     
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -18,7 +18,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.9.0a3 documentation"
+          title="Search within Python 3.9.0a4 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -41,9 +41,11 @@
       }
     </style>
 
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png" />
+    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
     
     <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <script type="text/javascript" src="../_static/themetoggle.js"></script>
     
      
 
@@ -72,7 +74,7 @@
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python HOWTOs</a> &#187;</li>
@@ -90,6 +92,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -345,7 +348,7 @@ example, this line from the above example:</p>
 </div>
 <div class="section" id="available-static-markers">
 <h2>Available static markers<a class="headerlink" href="#available-static-markers" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
+<dl class="c function">
 <dt id="c.function__entry">
 <code class="sig-name descname">function__entry</code><span class="sig-paren">(</span>str<em> filename</em>, str<em> funcname</em>, int<em> lineno</em><span class="sig-paren">)</span><a class="headerlink" href="#c.function__entry" title="Permalink to this definition">¶</a></dt>
 <dd><p>This marker indicates that execution of a Python function has begun.
@@ -363,7 +366,7 @@ tracing script as positional arguments, which must be accessed using
 </div></blockquote>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.function__return">
 <code class="sig-name descname">function__return</code><span class="sig-paren">(</span>str<em> filename</em>, str<em> funcname</em>, int<em> lineno</em><span class="sig-paren">)</span><a class="headerlink" href="#c.function__return" title="Permalink to this definition">¶</a></dt>
 <dd><p>This marker is the converse of <a class="reference internal" href="#c.function__entry" title="function__entry"><code class="xref c c-func docutils literal notranslate"><span class="pre">function__entry()</span></code></a>, and indicates that
@@ -372,7 +375,7 @@ exception).  It is only triggered for pure-Python (bytecode) functions.</p>
 <p>The arguments are the same as for <a class="reference internal" href="#c.function__entry" title="function__entry"><code class="xref c c-func docutils literal notranslate"><span class="pre">function__entry()</span></code></a></p>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.line">
 <code class="sig-name descname">line</code><span class="sig-paren">(</span>str<em> filename</em>, str<em> funcname</em>, int<em> lineno</em><span class="sig-paren">)</span><a class="headerlink" href="#c.line" title="Permalink to this definition">¶</a></dt>
 <dd><p>This marker indicates a Python line is about to be executed.  It is
@@ -381,21 +384,21 @@ not triggered within C functions.</p>
 <p>The arguments are the same as for <a class="reference internal" href="#c.function__entry" title="function__entry"><code class="xref c c-func docutils literal notranslate"><span class="pre">function__entry()</span></code></a>.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.gc__start">
 <code class="sig-name descname">gc__start</code><span class="sig-paren">(</span>int<em> generation</em><span class="sig-paren">)</span><a class="headerlink" href="#c.gc__start" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fires when the Python interpreter starts a garbage collection cycle.
-<code class="docutils literal notranslate"><span class="pre">arg0</span></code> is the generation to scan, like <a class="reference internal" href="../library/gc.html#gc.collect" title="gc.collect"><code class="xref py py-func docutils literal notranslate"><span class="pre">gc.collect()</span></code></a>.</p>
+<code class="docutils literal notranslate"><span class="pre">arg0</span></code> is the generation to scan, like <a class="reference internal" href="../library/gc.html#gc-collect" title="gc.collect"><code class="xref py py-func docutils literal notranslate"><span class="pre">gc.collect()</span></code></a>.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.gc__done">
 <code class="sig-name descname">gc__done</code><span class="sig-paren">(</span>long<em> collected</em><span class="sig-paren">)</span><a class="headerlink" href="#c.gc__done" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fires when the Python interpreter finishes a garbage collection
 cycle. <code class="docutils literal notranslate"><span class="pre">arg0</span></code> is the number of collected objects.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.import__find__load__start">
 <code class="sig-name descname">import__find__load__start</code><span class="sig-paren">(</span>str<em> modulename</em><span class="sig-paren">)</span><a class="headerlink" href="#c.import__find__load__start" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fires before <a class="reference internal" href="../library/importlib.html#module-importlib" title="importlib: The implementation of the import machinery."><code class="xref py py-mod docutils literal notranslate"><span class="pre">importlib</span></code></a> attempts to find and load the module.
@@ -405,7 +408,7 @@ cycle. <code class="docutils literal notranslate"><span class="pre">arg0</span><
 </div>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.import__find__load__done">
 <code class="sig-name descname">import__find__load__done</code><span class="sig-paren">(</span>str<em> modulename</em>, int<em> found</em><span class="sig-paren">)</span><a class="headerlink" href="#c.import__find__load__done" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fires after <a class="reference internal" href="../library/importlib.html#module-importlib" title="importlib: The implementation of the import machinery."><code class="xref py py-mod docutils literal notranslate"><span class="pre">importlib</span></code></a>’s find_and_load function is called.
@@ -416,10 +419,10 @@ successfully loaded.</p>
 </div>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.audit">
 <code class="sig-name descname">audit</code><span class="sig-paren">(</span>str<em> event</em>, void<em> *tuple</em><span class="sig-paren">)</span><a class="headerlink" href="#c.audit" title="Permalink to this definition">¶</a></dt>
-<dd><p>Fires when <a class="reference internal" href="../library/sys.html#sys.audit" title="sys.audit"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys.audit()</span></code></a> or <a class="reference internal" href="../c-api/sys.html#c.PySys_Audit" title="PySys_Audit"><code class="xref c c-func docutils literal notranslate"><span class="pre">PySys_Audit()</span></code></a> is called.
+<dd><p>Fires when <a class="reference internal" href="../library/sys.html#sys-audit" title="sys.audit"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys.audit()</span></code></a> or <a class="reference internal" href="../c-api/sys.html#c.PySys_Audit" title="PySys_Audit"><code class="xref c c-func docutils literal notranslate"><span class="pre">PySys_Audit()</span></code></a> is called.
 <code class="docutils literal notranslate"><span class="pre">arg0</span></code> is the event name as C string, <code class="docutils literal notranslate"><span class="pre">arg1</span></code> is a <a class="reference internal" href="../c-api/structures.html#c.PyObject" title="PyObject"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyObject</span></code></a>
 pointer to a tuple object.</p>
 <div class="versionadded">
@@ -457,14 +460,14 @@ probe python.function.return = process(&quot;python&quot;).mark(&quot;function__
 <p>If this file is installed in SystemTap’s tapset directory (e.g.
 <code class="docutils literal notranslate"><span class="pre">/usr/share/systemtap/tapset</span></code>), then these additional probepoints become
 available:</p>
-<dl class="function">
+<dl class="c function">
 <dt id="c.python.function.entry">
 <code class="sig-name descname">python.function.entry</code><span class="sig-paren">(</span>str<em> filename</em>, str<em> funcname</em>, int<em> lineno</em>, frameptr<span class="sig-paren">)</span><a class="headerlink" href="#c.python.function.entry" title="Permalink to this definition">¶</a></dt>
 <dd><p>This probe point indicates that execution of a Python function has begun.
 It is only triggered for pure-Python (bytecode) functions.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.python.function.return">
 <code class="sig-name descname">python.function.return</code><span class="sig-paren">(</span>str<em> filename</em>, str<em> funcname</em>, int<em> lineno</em>, frameptr<span class="sig-paren">)</span><a class="headerlink" href="#c.python.function.return" title="Permalink to this definition">¶</a></dt>
 <dd><p>This probe point is the converse of <a class="reference internal" href="#c.python.function.return" title="python.function.return"><code class="xref c c-func docutils literal notranslate"><span class="pre">python.function.return()</span></code></a>, and
@@ -580,7 +583,7 @@ probe timer.ms(1000) {
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python HOWTOs</a> &#187;</li>
@@ -598,6 +601,7 @@ probe timer.ms(1000) {
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  
@@ -610,11 +614,11 @@ probe timer.ms(1000) {
 <br />
     <br />
 
-    Last updated on Feb 13, 2020.
+    Last updated on Mar 08, 2020.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 2.4.2+/ad35b3c.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/c10e1bc.
     </div>
 
   </body>

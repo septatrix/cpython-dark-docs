@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Memory Management &#8212; Python 3.9.0a3 documentation</title>
+    <title>Memory Management &#8212; Python 3.9.0a4 documentation</title>
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments-monokai.css" />
+    <link rel="stylesheet" href="../_static/pygments_dark.css" type="text/css" media="(prefers-color-scheme: dark)" id="pygments_dark_css" />
     
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -18,7 +18,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.9.0a3 documentation"
+          title="Search within Python 3.9.0a4 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -41,9 +41,11 @@
       }
     </style>
 
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png" />
+    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
     
     <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <script type="text/javascript" src="../_static/themetoggle.js"></script>
     
      
 
@@ -72,7 +74,7 @@
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python/C API Reference Manual</a> &#187;</li>
@@ -90,6 +92,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -161,9 +164,9 @@ the C library allocator as shown in the previous example, the allocated memory
 for the I/O buffer escapes completely the Python memory manager.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p>The <span class="target" id="index-1"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONMALLOC"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONMALLOC</span></code></a> environment variable can be used to configure
+<p>The <span class="target" id="index-1"></span><a class="reference internal" href="../using/cmdline.html#envvar-pythonmalloc"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONMALLOC</span></code></a> environment variable can be used to configure
 the memory allocators used by Python.</p>
-<p>The <span class="target" id="index-2"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONMALLOCSTATS"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONMALLOCSTATS</span></code></a> environment variable can be used to print
+<p>The <span class="target" id="index-2"></span><a class="reference internal" href="../using/cmdline.html#envvar-pythonmallocstats"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONMALLOCSTATS</span></code></a> environment variable can be used to print
 statistics of the <a class="reference internal" href="#pymalloc"><span class="std std-ref">pymalloc memory allocator</span></a> every time a
 new pymalloc object arena is created, and on shutdown.</p>
 </div>
@@ -180,7 +183,7 @@ zero bytes.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.4.</span></p>
 </div>
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyMem_RawMalloc">
 void* <code class="sig-name descname">PyMem_RawMalloc</code><span class="sig-paren">(</span>size_t<em> n</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyMem_RawMalloc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Allocates <em>n</em> bytes and returns a pointer of type <code class="xref c c-type docutils literal notranslate"><span class="pre">void*</span></code> to the
@@ -190,7 +193,7 @@ if <code class="docutils literal notranslate"><span class="pre">PyMem_RawMalloc(
 been initialized in any way.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyMem_RawCalloc">
 void* <code class="sig-name descname">PyMem_RawCalloc</code><span class="sig-paren">(</span>size_t<em> nelem</em>, size_t<em> elsize</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyMem_RawCalloc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Allocates <em>nelem</em> elements each whose size in bytes is <em>elsize</em> and returns
@@ -204,7 +207,7 @@ called instead.</p>
 </div>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyMem_RawRealloc">
 void* <code class="sig-name descname">PyMem_RawRealloc</code><span class="sig-paren">(</span>void<em> *p</em>, size_t<em> n</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyMem_RawRealloc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Resizes the memory block pointed to by <em>p</em> to <em>n</em> bytes. The contents will
@@ -219,7 +222,7 @@ returned pointer is non-<code class="docutils literal notranslate"><span class="
 remains a valid pointer to the previous memory area.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyMem_RawFree">
 void <code class="sig-name descname">PyMem_RawFree</code><span class="sig-paren">(</span>void<em> *p</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyMem_RawFree" title="Permalink to this definition">¶</a></dt>
 <dd><p>Frees the memory block pointed to by <em>p</em>, which must have been returned by a
@@ -245,7 +248,7 @@ functions.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">Changed in version 3.6: </span>The default allocator is now pymalloc instead of system <code class="xref c c-func docutils literal notranslate"><span class="pre">malloc()</span></code>.</p>
 </div>
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyMem_Malloc">
 void* <code class="sig-name descname">PyMem_Malloc</code><span class="sig-paren">(</span>size_t<em> n</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyMem_Malloc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Allocates <em>n</em> bytes and returns a pointer of type <code class="xref c c-type docutils literal notranslate"><span class="pre">void*</span></code> to the
@@ -255,7 +258,7 @@ if <code class="docutils literal notranslate"><span class="pre">PyMem_Malloc(1)<
 been initialized in any way.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyMem_Calloc">
 void* <code class="sig-name descname">PyMem_Calloc</code><span class="sig-paren">(</span>size_t<em> nelem</em>, size_t<em> elsize</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyMem_Calloc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Allocates <em>nelem</em> elements each whose size in bytes is <em>elsize</em> and returns
@@ -269,7 +272,7 @@ instead.</p>
 </div>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyMem_Realloc">
 void* <code class="sig-name descname">PyMem_Realloc</code><span class="sig-paren">(</span>void<em> *p</em>, size_t<em> n</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyMem_Realloc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Resizes the memory block pointed to by <em>p</em> to <em>n</em> bytes. The contents will be
@@ -283,7 +286,7 @@ returned pointer is non-<code class="docutils literal notranslate"><span class="
 a valid pointer to the previous memory area.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyMem_Free">
 void <code class="sig-name descname">PyMem_Free</code><span class="sig-paren">(</span>void<em> *p</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyMem_Free" title="Permalink to this definition">¶</a></dt>
 <dd><p>Frees the memory block pointed to by <em>p</em>, which must have been returned by a
@@ -295,7 +298,7 @@ before, undefined behavior occurs.</p>
 
 <p>The following type-oriented macros are provided for convenience.  Note  that
 <em>TYPE</em> refers to any C type.</p>
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyMem_New">
 TYPE* <code class="sig-name descname">PyMem_New</code><span class="sig-paren">(</span>TYPE, size_t<em> n</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyMem_New" title="Permalink to this definition">¶</a></dt>
 <dd><p>Same as <a class="reference internal" href="#c.PyMem_Malloc" title="PyMem_Malloc"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyMem_Malloc()</span></code></a>, but allocates <code class="docutils literal notranslate"><span class="pre">(n</span> <span class="pre">*</span> <span class="pre">sizeof(TYPE))</span></code> bytes of
@@ -303,7 +306,7 @@ memory.  Returns a pointer cast to <code class="xref c c-type docutils literal n
 been initialized in any way.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyMem_Resize">
 TYPE* <code class="sig-name descname">PyMem_Resize</code><span class="sig-paren">(</span>void<em> *p</em>, TYPE, size_t<em> n</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyMem_Resize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Same as <a class="reference internal" href="#c.PyMem_Realloc" title="PyMem_Realloc"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyMem_Realloc()</span></code></a>, but the memory block is resized to <code class="docutils literal notranslate"><span class="pre">(n</span> <span class="pre">*</span>
@@ -314,7 +317,7 @@ failure.</p>
 value of <em>p</em> to avoid losing memory when handling errors.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyMem_Del">
 void <code class="sig-name descname">PyMem_Del</code><span class="sig-paren">(</span>void<em> *p</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyMem_Del" title="Permalink to this definition">¶</a></dt>
 <dd><p>Same as <a class="reference internal" href="#c.PyMem_Free" title="PyMem_Free"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyMem_Free()</span></code></a>.</p>
@@ -345,7 +348,7 @@ memory from the Python heap.</p>
 <p>The <a class="reference internal" href="../glossary.html#term-global-interpreter-lock"><span class="xref std std-term">GIL</span></a> must be held when using these
 functions.</p>
 </div>
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyObject_Malloc">
 void* <code class="sig-name descname">PyObject_Malloc</code><span class="sig-paren">(</span>size_t<em> n</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_Malloc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Allocates <em>n</em> bytes and returns a pointer of type <code class="xref c c-type docutils literal notranslate"><span class="pre">void*</span></code> to the
@@ -355,7 +358,7 @@ if <code class="docutils literal notranslate"><span class="pre">PyObject_Malloc(
 been initialized in any way.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyObject_Calloc">
 void* <code class="sig-name descname">PyObject_Calloc</code><span class="sig-paren">(</span>size_t<em> nelem</em>, size_t<em> elsize</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_Calloc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Allocates <em>nelem</em> elements each whose size in bytes is <em>elsize</em> and returns
@@ -369,7 +372,7 @@ instead.</p>
 </div>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyObject_Realloc">
 void* <code class="sig-name descname">PyObject_Realloc</code><span class="sig-paren">(</span>void<em> *p</em>, size_t<em> n</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_Realloc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Resizes the memory block pointed to by <em>p</em> to <em>n</em> bytes. The contents will be
@@ -383,7 +386,7 @@ returned pointer is non-<code class="docutils literal notranslate"><span class="
 a valid pointer to the previous memory area.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyObject_Free">
 void <code class="sig-name descname">PyObject_Free</code><span class="sig-paren">(</span>void<em> *p</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_Free" title="Permalink to this definition">¶</a></dt>
 <dd><p>Frees the memory block pointed to by <em>p</em>, which must have been returned by a
@@ -442,7 +445,7 @@ before, undefined behavior occurs.</p>
 </table>
 <p>Legend:</p>
 <ul class="simple">
-<li><p>Name: value for <span class="target" id="index-3"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONMALLOC"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONMALLOC</span></code></a> environment variable</p></li>
+<li><p>Name: value for <span class="target" id="index-3"></span><a class="reference internal" href="../using/cmdline.html#envvar-pythonmalloc"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONMALLOC</span></code></a> environment variable</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">malloc</span></code>: system allocators from the standard C library, C functions:
 <code class="xref c c-func docutils literal notranslate"><span class="pre">malloc()</span></code>, <code class="xref c c-func docutils literal notranslate"><span class="pre">calloc()</span></code>, <code class="xref c c-func docutils literal notranslate"><span class="pre">realloc()</span></code> and <code class="xref c c-func docutils literal notranslate"><span class="pre">free()</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">pymalloc</span></code>: <a class="reference internal" href="#pymalloc"><span class="std std-ref">pymalloc memory allocator</span></a></p></li>
@@ -454,7 +457,7 @@ before, undefined behavior occurs.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.4.</span></p>
 </div>
-<dl class="type">
+<dl class="c type">
 <dt id="c.PyMemAllocatorEx">
 <code class="sig-name descname">PyMemAllocatorEx</code><a class="headerlink" href="#c.PyMemAllocatorEx" title="Permalink to this definition">¶</a></dt>
 <dd><p>Structure used to describe a memory block allocator. The structure has
@@ -494,11 +497,11 @@ with zeros</p></td>
 </div>
 </dd></dl>
 
-<dl class="type">
+<dl class="c type">
 <dt id="c.PyMemAllocatorDomain">
 <code class="sig-name descname">PyMemAllocatorDomain</code><a class="headerlink" href="#c.PyMemAllocatorDomain" title="Permalink to this definition">¶</a></dt>
 <dd><p>Enum used to identify an allocator domain. Domains:</p>
-<dl class="var">
+<dl class="c var">
 <dt id="c.PYMEM_DOMAIN_RAW">
 <code class="sig-name descname">PYMEM_DOMAIN_RAW</code><a class="headerlink" href="#c.PYMEM_DOMAIN_RAW" title="Permalink to this definition">¶</a></dt>
 <dd><p>Functions:</p>
@@ -510,7 +513,7 @@ with zeros</p></td>
 </ul>
 </dd></dl>
 
-<dl class="var">
+<dl class="c var">
 <dt id="c.PYMEM_DOMAIN_MEM">
 <code class="sig-name descname">PYMEM_DOMAIN_MEM</code><a class="headerlink" href="#c.PYMEM_DOMAIN_MEM" title="Permalink to this definition">¶</a></dt>
 <dd><p>Functions:</p>
@@ -522,7 +525,7 @@ with zeros</p></td>
 </ul>
 </dd></dl>
 
-<dl class="var">
+<dl class="c var">
 <dt id="c.PYMEM_DOMAIN_OBJ">
 <code class="sig-name descname">PYMEM_DOMAIN_OBJ</code><a class="headerlink" href="#c.PYMEM_DOMAIN_OBJ" title="Permalink to this definition">¶</a></dt>
 <dd><p>Functions:</p>
@@ -536,13 +539,13 @@ with zeros</p></td>
 
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyMem_GetAllocator">
 void <code class="sig-name descname">PyMem_GetAllocator</code><span class="sig-paren">(</span><a class="reference internal" href="#c.PyMemAllocatorDomain" title="PyMemAllocatorDomain">PyMemAllocatorDomain</a><em> domain</em>, <a class="reference internal" href="#c.PyMemAllocatorEx" title="PyMemAllocatorEx">PyMemAllocatorEx</a><em> *allocator</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyMem_GetAllocator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the memory block allocator of the specified domain.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyMem_SetAllocator">
 void <code class="sig-name descname">PyMem_SetAllocator</code><span class="sig-paren">(</span><a class="reference internal" href="#c.PyMemAllocatorDomain" title="PyMemAllocatorDomain">PyMemAllocatorDomain</a><em> domain</em>, <a class="reference internal" href="#c.PyMemAllocatorEx" title="PyMemAllocatorEx">PyMemAllocatorEx</a><em> *allocator</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyMem_SetAllocator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the memory block allocator of the specified domain.</p>
@@ -556,7 +559,7 @@ the <a class="reference internal" href="#c.PyMem_SetupDebugHooks" title="PyMem_S
 debug hooks on top on the new allocator.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyMem_SetupDebugHooks">
 void <code class="sig-name descname">PyMem_SetupDebugHooks</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#c.PyMem_SetupDebugHooks" title="Permalink to this definition">¶</a></dt>
 <dd><p>Setup hooks to detect bugs in the Python memory allocator functions.</p>
@@ -580,7 +583,7 @@ displayed if <a class="reference internal" href="../library/tracemalloc.html#mod
 memory block was traced.</p>
 <p>These hooks are <a class="reference internal" href="#default-memory-allocators"><span class="std std-ref">installed by default</span></a> if
 Python is compiled in debug
-mode. The <span class="target" id="index-4"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONMALLOC"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONMALLOC</span></code></a> environment variable can be used to install
+mode. The <span class="target" id="index-4"></span><a class="reference internal" href="../using/cmdline.html#envvar-pythonmalloc"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONMALLOC</span></code></a> environment variable can be used to install
 debug hooks on a Python compiled in release mode.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">Changed in version 3.6: </span>This function now also works on Python compiled in release mode.
@@ -618,7 +621,7 @@ with a fixed size of 256 KiB. It falls back to <a class="reference internal" hre
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.4.</span></p>
 </div>
-<dl class="type">
+<dl class="c type">
 <dt id="c.PyObjectArenaAllocator">
 <code class="sig-name descname">PyObjectArenaAllocator</code><a class="headerlink" href="#c.PyObjectArenaAllocator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Structure used to describe an arena allocator. The structure has
@@ -647,13 +650,13 @@ three fields:</p>
 </table>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyObject_GetArenaAllocator">
 <code class="sig-name descname">PyObject_GetArenaAllocator</code><span class="sig-paren">(</span><a class="reference internal" href="#c.PyObjectArenaAllocator" title="PyObjectArenaAllocator">PyObjectArenaAllocator</a><em> *allocator</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_GetArenaAllocator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the arena allocator.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyObject_SetArenaAllocator">
 <code class="sig-name descname">PyObject_SetArenaAllocator</code><span class="sig-paren">(</span><a class="reference internal" href="#c.PyObjectArenaAllocator" title="PyObjectArenaAllocator">PyObjectArenaAllocator</a><em> *allocator</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_SetArenaAllocator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the arena allocator.</p>
@@ -666,6 +669,23 @@ three fields:</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.7.</span></p>
 </div>
+<dl class="c function">
+<dt id="c.PyTraceMalloc_Track">
+int <code class="sig-name descname">PyTraceMalloc_Track</code><span class="sig-paren">(</span>unsigned int<em> domain</em>, uintptr_t<em> ptr</em>, size_t<em> size</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyTraceMalloc_Track" title="Permalink to this definition">¶</a></dt>
+<dd><p>Track an allocated memory block in the <a class="reference internal" href="../library/tracemalloc.html#module-tracemalloc" title="tracemalloc: Trace memory allocations."><code class="xref py py-mod docutils literal notranslate"><span class="pre">tracemalloc</span></code></a> module.</p>
+<p>Return <code class="docutils literal notranslate"><span class="pre">0</span></code> on success, return <code class="docutils literal notranslate"><span class="pre">-1</span></code> on error (failed to allocate memory to
+store the trace). Return <code class="docutils literal notranslate"><span class="pre">-2</span></code> if tracemalloc is disabled.</p>
+<p>If memory block is already tracked, update the existing trace.</p>
+</dd></dl>
+
+<dl class="c function">
+<dt id="c.PyTraceMalloc_Untrack">
+int <code class="sig-name descname">PyTraceMalloc_Untrack</code><span class="sig-paren">(</span>unsigned int<em> domain</em>, uintptr_t<em> ptr</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyTraceMalloc_Untrack" title="Permalink to this definition">¶</a></dt>
+<dd><p>Untrack an allocated memory block in the <a class="reference internal" href="../library/tracemalloc.html#module-tracemalloc" title="tracemalloc: Trace memory allocations."><code class="xref py py-mod docutils literal notranslate"><span class="pre">tracemalloc</span></code></a> module.
+Do nothing if the block was not tracked.</p>
+<p>Return <code class="docutils literal notranslate"><span class="pre">-2</span></code> if tracemalloc is disabled, otherwise return <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+</dd></dl>
+
 </div>
 <div class="section" id="examples">
 <span id="memoryexamples"></span><h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
@@ -785,7 +805,7 @@ object types in C.</p>
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API Reference Manual</a> &#187;</li>
@@ -803,6 +823,7 @@ object types in C.</p>
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  
@@ -815,11 +836,11 @@ object types in C.</p>
 <br />
     <br />
 
-    Last updated on Feb 13, 2020.
+    Last updated on Mar 08, 2020.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 2.4.2+/ad35b3c.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/c10e1bc.
     </div>
 
   </body>

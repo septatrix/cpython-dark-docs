@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>2. Defining Extension Types: Tutorial &#8212; Python 3.9.0a3 documentation</title>
+    <title>2. Defining Extension Types: Tutorial &#8212; Python 3.9.0a4 documentation</title>
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments-monokai.css" />
+    <link rel="stylesheet" href="../_static/pygments_dark.css" type="text/css" media="(prefers-color-scheme: dark)" id="pygments_dark_css" />
     
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -18,7 +18,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.9.0a3 documentation"
+          title="Search within Python 3.9.0a4 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -41,9 +41,11 @@
       }
     </style>
 
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png" />
+    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
     
     <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <script type="text/javascript" src="../_static/themetoggle.js"></script>
     
      
 
@@ -72,7 +74,7 @@
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Extending and Embedding the Python Interpreter</a> &#187;</li>
@@ -90,6 +92,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -268,14 +271,14 @@ only used for variable-sized objects and should otherwise be zero.</p>
 <p>If you want your type to be subclassable from Python, and your type has the same
 <a class="reference internal" href="../c-api/typeobj.html#c.PyTypeObject.tp_basicsize" title="PyTypeObject.tp_basicsize"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_basicsize</span></code></a> as its base type, you may have problems with multiple
 inheritance.  A Python subclass of your type will have to list your type first
-in its <a class="reference internal" href="../library/stdtypes.html#class.__bases__" title="class.__bases__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__bases__</span></code></a>, or else it will not be able to call your type’s
-<a class="reference internal" href="../reference/datamodel.html#object.__new__" title="object.__new__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__new__()</span></code></a> method without getting an error.  You can avoid this problem by
+in its <a class="reference internal" href="../library/stdtypes.html#class-bases" title="class.__bases__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__bases__</span></code></a>, or else it will not be able to call your type’s
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">__new__()</span></code> method without getting an error.  You can avoid this problem by
 ensuring that your type has a larger value for <a class="reference internal" href="../c-api/typeobj.html#c.PyTypeObject.tp_basicsize" title="PyTypeObject.tp_basicsize"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_basicsize</span></code></a> than its
 base type does.  Most of the time, this will be true anyway, because either your
 base type will be <a class="reference internal" href="../library/functions.html#object" title="object"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a>, or else you will be adding data members to
 your base type, and therefore increasing its size.</p>
 </div>
-<p>We set the class flags to <a class="reference internal" href="../c-api/typeobj.html#Py_TPFLAGS_DEFAULT" title="Py_TPFLAGS_DEFAULT"><code class="xref py py-const docutils literal notranslate"><span class="pre">Py_TPFLAGS_DEFAULT</span></code></a>.</p>
+<p>We set the class flags to <a class="reference internal" href="../c-api/typeobj.html#py-tpflags-default" title="Py_TPFLAGS_DEFAULT"><code class="xref py py-const docutils literal notranslate"><span class="pre">Py_TPFLAGS_DEFAULT</span></code></a>.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="p">.</span><span class="n">tp_flags</span> <span class="o">=</span> <span class="n">Py_TPFLAGS_DEFAULT</span><span class="p">,</span>
 </pre></div>
 </div>
@@ -287,7 +290,7 @@ you will need to OR the corresponding flags.</p>
 </pre></div>
 </div>
 <p>To enable object creation, we have to provide a <a class="reference internal" href="../c-api/typeobj.html#c.PyTypeObject.tp_new" title="PyTypeObject.tp_new"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_new</span></code></a>
-handler.  This is the equivalent of the Python method <a class="reference internal" href="../reference/datamodel.html#object.__new__" title="object.__new__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__new__()</span></code></a>, but
+handler.  This is the equivalent of the Python method <code class="xref py py-meth docutils literal notranslate"><span class="pre">__new__()</span></code>, but
 has to be specified explicitly.  In this case, we can just use the default
 implementation provided by the API function <a class="reference internal" href="../c-api/type.html#c.PyType_GenericNew" title="PyType_GenericNew"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyType_GenericNew()</span></code></a>.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="p">.</span><span class="n">tp_new</span> <span class="o">=</span> <span class="n">PyType_GenericNew</span><span class="p">,</span>
@@ -565,7 +568,7 @@ strings, so we provide a <code class="docutils literal notranslate"><span class=
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">tp_new</span></code> handler is responsible for creating (as opposed to initializing)
-objects of the type.  It is exposed in Python as the <a class="reference internal" href="../reference/datamodel.html#object.__new__" title="object.__new__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__new__()</span></code></a> method.
+objects of the type.  It is exposed in Python as the <code class="xref py py-meth docutils literal notranslate"><span class="pre">__new__()</span></code> method.
 It is not required to define a <code class="docutils literal notranslate"><span class="pre">tp_new</span></code> member, and indeed many extension
 types will simply reuse <a class="reference internal" href="../c-api/type.html#c.PyType_GenericNew" title="PyType_GenericNew"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyType_GenericNew()</span></code></a> as done in the first
 version of the <code class="docutils literal notranslate"><span class="pre">Custom</span></code> type above.  In this case, we use the <code class="docutils literal notranslate"><span class="pre">tp_new</span></code>
@@ -599,14 +602,14 @@ strategy.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If you are creating a co-operative <a class="reference internal" href="../c-api/typeobj.html#c.PyTypeObject.tp_new" title="PyTypeObject.tp_new"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_new</span></code></a> (one
-that calls a base type’s <a class="reference internal" href="../c-api/typeobj.html#c.PyTypeObject.tp_new" title="PyTypeObject.tp_new"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_new</span></code></a> or <a class="reference internal" href="../reference/datamodel.html#object.__new__" title="object.__new__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__new__()</span></code></a>),
+that calls a base type’s <a class="reference internal" href="../c-api/typeobj.html#c.PyTypeObject.tp_new" title="PyTypeObject.tp_new"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_new</span></code></a> or <code class="xref py py-meth docutils literal notranslate"><span class="pre">__new__()</span></code>),
 you must <em>not</em> try to determine what method to call using method resolution
 order at runtime.  Always statically determine what type you are going to
 call, and call its <a class="reference internal" href="../c-api/typeobj.html#c.PyTypeObject.tp_new" title="PyTypeObject.tp_new"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_new</span></code></a> directly, or via
 <code class="docutils literal notranslate"><span class="pre">type-&gt;tp_base-&gt;tp_new</span></code>.  If you do not do this, Python subclasses of your
 type that also inherit from other Python-defined classes may not work correctly.
 (Specifically, you may not be able to create instances of such subclasses
-without getting a <a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a>.)</p>
+without getting a <a class="reference internal" href="../library/exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a>.)</p>
 </div>
 <p>We also define an initialization function which accepts arguments to provide
 initial values for our instance:</p>
@@ -642,13 +645,13 @@ initial values for our instance:</p>
 </pre></div>
 </div>
 <p>The <a class="reference internal" href="../c-api/typeobj.html#c.PyTypeObject.tp_init" title="PyTypeObject.tp_init"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_init</span></code></a> slot is exposed in Python as the
-<a class="reference internal" href="../reference/datamodel.html#object.__init__" title="object.__init__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code></a> method.  It is used to initialize an object after it’s
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code> method.  It is used to initialize an object after it’s
 created.  Initializers always accept positional and keyword arguments,
 and they should return either <code class="docutils literal notranslate"><span class="pre">0</span></code> on success or <code class="docutils literal notranslate"><span class="pre">-1</span></code> on error.</p>
 <p>Unlike the <code class="docutils literal notranslate"><span class="pre">tp_new</span></code> handler, there is no guarantee that <code class="docutils literal notranslate"><span class="pre">tp_init</span></code>
 is called at all (for example, the <a class="reference internal" href="../library/pickle.html#module-pickle" title="pickle: Convert Python objects to streams of bytes and back."><code class="xref py py-mod docutils literal notranslate"><span class="pre">pickle</span></code></a> module by default
-doesn’t call <a class="reference internal" href="../reference/datamodel.html#object.__init__" title="object.__init__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code></a> on unpickled instances).  It can also be
-called multiple times.  Anyone can call the <a class="reference internal" href="../reference/datamodel.html#object.__init__" title="object.__init__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code></a> method on
+doesn’t call <code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code> on unpickled instances).  It can also be
+called multiple times.  Anyone can call the <code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code> method on
 our objects.  For this reason, we have to be extra careful when assigning
 the new attribute values.  We might be tempted, for example to assign the
 <code class="docutils literal notranslate"><span class="pre">first</span></code> member like this:</p>
@@ -743,7 +746,7 @@ definitions:</p>
 <span class="p">};</span>
 </pre></div>
 </div>
-<p>(note that we used the <a class="reference internal" href="../c-api/structures.html#METH_NOARGS" title="METH_NOARGS"><code class="xref py py-const docutils literal notranslate"><span class="pre">METH_NOARGS</span></code></a> flag to indicate that the method
+<p>(note that we used the <a class="reference internal" href="../c-api/structures.html#meth-noargs" title="METH_NOARGS"><code class="xref py py-const docutils literal notranslate"><span class="pre">METH_NOARGS</span></code></a> flag to indicate that the method
 is expecting no arguments other than <em>self</em>)</p>
 <p>and assign it to the <a class="reference internal" href="../c-api/typeobj.html#c.PyTypeObject.tp_methods" title="PyTypeObject.tp_methods"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_methods</span></code></a> slot:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="p">.</span><span class="n">tp_methods</span> <span class="o">=</span> <span class="n">Custom_methods</span><span class="p">,</span>
@@ -752,7 +755,7 @@ is expecting no arguments other than <em>self</em>)</p>
 <p>Finally, we’ll make our type usable as a base class for subclassing.  We’ve
 written our methods carefully so far so that they don’t make any assumptions
 about the type of the object being created or used, so all we need to do is
-to add the <a class="reference internal" href="../c-api/typeobj.html#Py_TPFLAGS_BASETYPE" title="Py_TPFLAGS_BASETYPE"><code class="xref py py-const docutils literal notranslate"><span class="pre">Py_TPFLAGS_BASETYPE</span></code></a> to our class flag definition:</p>
+to add the <a class="reference internal" href="../c-api/typeobj.html#py-tpflags-basetype" title="Py_TPFLAGS_BASETYPE"><code class="xref py py-const docutils literal notranslate"><span class="pre">Py_TPFLAGS_BASETYPE</span></code></a> to our class flag definition:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="p">.</span><span class="n">tp_flags</span> <span class="o">=</span> <span class="n">Py_TPFLAGS_DEFAULT</span> <span class="o">|</span> <span class="n">Py_TPFLAGS_BASETYPE</span><span class="p">,</span>
 </pre></div>
 </div>
@@ -1391,7 +1394,7 @@ and <code class="docutils literal notranslate"><span class="pre">Custom_clear</s
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>Finally, we add the <a class="reference internal" href="../c-api/typeobj.html#Py_TPFLAGS_HAVE_GC" title="Py_TPFLAGS_HAVE_GC"><code class="xref py py-const docutils literal notranslate"><span class="pre">Py_TPFLAGS_HAVE_GC</span></code></a> flag to the class flags:</p>
+<p>Finally, we add the <a class="reference internal" href="../c-api/typeobj.html#py-tpflags-have-gc" title="Py_TPFLAGS_HAVE_GC"><code class="xref py py-const docutils literal notranslate"><span class="pre">Py_TPFLAGS_HAVE_GC</span></code></a> flag to the class flags:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="p">.</span><span class="n">tp_flags</span> <span class="o">=</span> <span class="n">Py_TPFLAGS_DEFAULT</span> <span class="o">|</span> <span class="n">Py_TPFLAGS_BASETYPE</span> <span class="o">|</span> <span class="n">Py_TPFLAGS_HAVE_GC</span><span class="p">,</span>
 </pre></div>
 </div>
@@ -1514,7 +1517,7 @@ can be safely cast to both <code class="docutils literal notranslate"><span clas
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>We see above how to call through to the <a class="reference internal" href="../reference/datamodel.html#object.__init__" title="object.__init__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__init__</span></code></a> method of the base
+<p>We see above how to call through to the <code class="xref py py-attr docutils literal notranslate"><span class="pre">__init__</span></code> method of the base
 type.</p>
 <p>This pattern is important when writing a type with custom
 <a class="reference internal" href="../c-api/typeobj.html#c.PyTypeObject.tp_new" title="PyTypeObject.tp_new"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_new</span></code></a> and <a class="reference internal" href="../c-api/typeobj.html#c.PyTypeObject.tp_dealloc" title="PyTypeObject.tp_dealloc"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_dealloc</span></code></a>
@@ -1643,7 +1646,7 @@ reference cycles.</p>
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Extending and Embedding the Python Interpreter</a> &#187;</li>
@@ -1661,6 +1664,7 @@ reference cycles.</p>
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  
@@ -1673,11 +1677,11 @@ reference cycles.</p>
 <br />
     <br />
 
-    Last updated on Feb 13, 2020.
+    Last updated on Mar 08, 2020.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 2.4.2+/ad35b3c.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/c10e1bc.
     </div>
 
   </body>

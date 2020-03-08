@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>2. Lexical analysis &#8212; Python 3.9.0a3 documentation</title>
+    <title>2. Lexical analysis &#8212; Python 3.9.0a4 documentation</title>
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments-monokai.css" />
+    <link rel="stylesheet" href="../_static/pygments_dark.css" type="text/css" media="(prefers-color-scheme: dark)" id="pygments_dark_css" />
     
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -18,7 +18,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.9.0a3 documentation"
+          title="Search within Python 3.9.0a4 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -41,9 +41,11 @@
       }
     </style>
 
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png" />
+    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
     
     <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <script type="text/javascript" src="../_static/themetoggle.js"></script>
     
      
 
@@ -72,7 +74,7 @@
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">The Python Language Reference</a> &#187;</li>
@@ -90,6 +92,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -106,7 +109,7 @@
 lexical analyzer breaks a file into tokens.</p>
 <p>Python reads program text as Unicode code points; the encoding of a source file
 can be given by an encoding declaration and defaults to UTF-8, see <span class="target" id="index-1"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-3120"><strong>PEP 3120</strong></a>
-for details.  If the source file cannot be decoded, a <a class="reference internal" href="../library/exceptions.html#SyntaxError" title="SyntaxError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SyntaxError</span></code></a> is
+for details.  If the source file cannot be decoded, a <a class="reference internal" href="../library/exceptions.html#syntaxerror" title="SyntaxError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SyntaxError</span></code></a> is
 raised.</p>
 <div class="section" id="line-structure">
 <span id="id1"></span><h2><span class="section-number">2.1. </span>Line structure<a class="headerlink" href="#line-structure" title="Permalink to this headline">¶</a></h2>
@@ -221,7 +224,7 @@ backslashes; the whitespace up to the first backslash determines the
 indentation.</p>
 <p>Indentation is rejected as inconsistent if a source file mixes tabs and spaces
 in a way that makes the meaning dependent on the worth of a tab in spaces; a
-<a class="reference internal" href="../library/exceptions.html#TabError" title="TabError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TabError</span></code></a> is raised in that case.</p>
+<a class="reference internal" href="../library/exceptions.html#taberror" title="TabError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TabError</span></code></a> is raised in that case.</p>
 <p><strong>Cross-platform compatibility note:</strong> because of the nature of text editors on
 non-UNIX platforms, it is unwise to use a mixture of spaces and tabs for the
 indentation in a single source file.  It should also be noted that different
@@ -569,9 +572,9 @@ escape sequences only recognized in string literals fall into the category of
 unrecognized escapes for bytes literals.</p>
 <blockquote>
 <div><div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 3.6: </span>Unrecognized escape sequences produce a <a class="reference internal" href="../library/exceptions.html#DeprecationWarning" title="DeprecationWarning"><code class="xref py py-exc docutils literal notranslate"><span class="pre">DeprecationWarning</span></code></a>.  In
-a future Python version they will be a <a class="reference internal" href="../library/exceptions.html#SyntaxWarning" title="SyntaxWarning"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SyntaxWarning</span></code></a> and
-eventually a <a class="reference internal" href="../library/exceptions.html#SyntaxError" title="SyntaxError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SyntaxError</span></code></a>.</p>
+<p><span class="versionmodified changed">Changed in version 3.6: </span>Unrecognized escape sequences produce a <a class="reference internal" href="../library/exceptions.html#deprecationwarning" title="DeprecationWarning"><code class="xref py py-exc docutils literal notranslate"><span class="pre">DeprecationWarning</span></code></a>.  In
+a future Python version they will be a <a class="reference internal" href="../library/exceptions.html#syntaxwarning" title="SyntaxWarning"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SyntaxWarning</span></code></a> and
+eventually a <a class="reference internal" href="../library/exceptions.html#syntaxerror" title="SyntaxError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SyntaxError</span></code></a>.</p>
 </div>
 </div></blockquote>
 <p>Even in a raw literal, quotes can be escaped with a backslash, but the
@@ -641,11 +644,16 @@ Replacement expressions can contain line breaks (e.g. in triple-quoted
 strings), but they cannot contain comments.  Each expression is evaluated
 in the context where the formatted string literal appears, in order from
 left to right.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 3.7: </span>Prior to Python 3.7, an <a class="reference internal" href="expressions.html#await"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">await</span></code></a> expression and comprehensions
+containing an <a class="reference internal" href="compound_stmts.html#async-for"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">async</span> <span class="pre">for</span></code></a> clause were illegal in the expressions
+in formatted string literals due to a problem with the implementation.</p>
+</div>
 <p>If a conversion is specified, the result of evaluating the expression
 is converted before formatting.  Conversion <code class="docutils literal notranslate"><span class="pre">'!s'</span></code> calls <a class="reference internal" href="../library/stdtypes.html#str" title="str"><code class="xref py py-func docutils literal notranslate"><span class="pre">str()</span></code></a> on
 the result, <code class="docutils literal notranslate"><span class="pre">'!r'</span></code> calls <a class="reference internal" href="../library/functions.html#repr" title="repr"><code class="xref py py-func docutils literal notranslate"><span class="pre">repr()</span></code></a>, and <code class="docutils literal notranslate"><span class="pre">'!a'</span></code> calls <a class="reference internal" href="../library/functions.html#ascii" title="ascii"><code class="xref py py-func docutils literal notranslate"><span class="pre">ascii()</span></code></a>.</p>
 <p>The result is then formatted using the <a class="reference internal" href="../library/functions.html#format" title="format"><code class="xref py py-func docutils literal notranslate"><span class="pre">format()</span></code></a> protocol.  The
-format specifier is passed to the <a class="reference internal" href="datamodel.html#object.__format__" title="object.__format__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__format__()</span></code></a> method of the
+format specifier is passed to the <code class="xref py py-meth docutils literal notranslate"><span class="pre">__format__()</span></code> method of the
 expression or conversion result.  An empty string is passed when the
 format specifier is omitted.  The formatted result is then included in
 the final value of the whole string.</p>
@@ -657,39 +665,39 @@ the string .format() method.</p>
 cannot be split across literals.</p>
 <p>Some examples of formatted string literals:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Fred&quot;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="sa">f</span><span class="s2">&quot;He said his name is </span><span class="si">{name!r}</span><span class="s2">.&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="sa">f</span><span class="s2">&quot;He said his name is </span><span class="si">{</span><span class="n">name</span><span class="si">!r}</span><span class="s2">.&quot;</span>
 <span class="go">&quot;He said his name is &#39;Fred&#39;.&quot;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="sa">f</span><span class="s2">&quot;He said his name is {repr(name)}.&quot;</span>  <span class="c1"># repr() is equivalent to !r</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="sa">f</span><span class="s2">&quot;He said his name is </span><span class="si">{</span><span class="nb">repr</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span>  <span class="c1"># repr() is equivalent to !r</span>
 <span class="go">&quot;He said his name is &#39;Fred&#39;.&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">width</span> <span class="o">=</span> <span class="mi">10</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">precision</span> <span class="o">=</span> <span class="mi">4</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">value</span> <span class="o">=</span> <span class="n">decimal</span><span class="o">.</span><span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;12.34567&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="sa">f</span><span class="s2">&quot;result: {value:</span><span class="si">{width}</span><span class="s2">.</span><span class="si">{precision}</span><span class="s2">}&quot;</span>  <span class="c1"># nested fields</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="sa">f</span><span class="s2">&quot;result: </span><span class="si">{</span><span class="n">value</span><span class="si">:{</span><span class="n">width</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">precision</span><span class="si">}}</span><span class="s2">&quot;</span>  <span class="c1"># nested fields</span>
 <span class="go">&#39;result:      12.35&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">today</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="mi">2017</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="mi">27</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="sa">f</span><span class="s2">&quot;{today:%B </span><span class="si">%d</span><span class="s2">, %Y}&quot;</span>  <span class="c1"># using date format specifier</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">today</span><span class="si">:</span><span class="s2">%B %d, %Y</span><span class="si">}</span><span class="s2">&quot;</span>  <span class="c1"># using date format specifier</span>
 <span class="go">&#39;January 27, 2017&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">number</span> <span class="o">=</span> <span class="mi">1024</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{number:#0x}</span><span class="s2">&quot;</span>  <span class="c1"># using integer format specifier</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">number</span><span class="si">:</span><span class="s2">#0x</span><span class="si">}</span><span class="s2">&quot;</span>  <span class="c1"># using integer format specifier</span>
 <span class="go">&#39;0x400&#39;</span>
 </pre></div>
 </div>
 <p>A consequence of sharing the same syntax as regular string literals is
 that characters in the replacement fields must not conflict with the
 quoting used in the outer formatted string literal:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="sa">f</span><span class="s2">&quot;abc </span><span class="si">{a[&quot;x&quot;]}</span><span class="s2"> def&quot;</span>    <span class="c1"># error: outer string literal ended prematurely</span>
-<span class="sa">f</span><span class="s2">&quot;abc </span><span class="si">{a[&#39;x&#39;]}</span><span class="s2"> def&quot;</span>    <span class="c1"># workaround: use different quoting</span>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="sa">f</span><span class="s2">&quot;abc </span><span class="si">{</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]</span><span class="si">}</span><span class="s2"> def&quot;</span>    <span class="c1"># error: outer string literal ended prematurely</span>
+<span class="sa">f</span><span class="s2">&quot;abc </span><span class="si">{</span><span class="n">a</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> def&quot;</span>    <span class="c1"># workaround: use different quoting</span>
 </pre></div>
 </div>
 <p>Backslashes are not allowed in format expressions and will raise
 an error:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="sa">f</span><span class="s2">&quot;newline: {ord(&#39;</span><span class="se">\n</span><span class="s2">&#39;)}&quot;</span>  <span class="c1"># raises SyntaxError</span>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="sa">f</span><span class="s2">&quot;newline: </span><span class="si">{</span><span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>  <span class="c1"># raises SyntaxError</span>
 </pre></div>
 </div>
 <p>To include a value in which a backslash escape is required, create
 a temporary variable.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">newline</span> <span class="o">=</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="sa">f</span><span class="s2">&quot;newline: </span><span class="si">{newline}</span><span class="s2">&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="sa">f</span><span class="s2">&quot;newline: </span><span class="si">{</span><span class="n">newline</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="go">&#39;newline: 10&#39;</span>
 </pre></div>
 </div>
@@ -703,7 +711,7 @@ include expressions.</p>
 </pre></div>
 </div>
 <p>See also <span class="target" id="index-25"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0498"><strong>PEP 498</strong></a> for the proposal that added formatted string literals,
-and <a class="reference internal" href="../library/stdtypes.html#str.format" title="str.format"><code class="xref py py-meth docutils literal notranslate"><span class="pre">str.format()</span></code></a>, which uses a related format string mechanism.</p>
+and <a class="reference internal" href="../library/stdtypes.html#str-format" title="str.format"><code class="xref py py-meth docutils literal notranslate"><span class="pre">str.format()</span></code></a>, which uses a related format string mechanism.</p>
 </div>
 <div class="section" id="numeric-literals">
 <span id="numbers"></span><h3><span class="section-number">2.4.4. </span>Numeric literals<a class="headerlink" href="#numeric-literals" title="Permalink to this headline">¶</a></h3>
@@ -913,7 +921,7 @@ occurrence outside string literals and comments is an unconditional error:</p>
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Language Reference</a> &#187;</li>
@@ -931,6 +939,7 @@ occurrence outside string literals and comments is an unconditional error:</p>
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  
@@ -943,11 +952,11 @@ occurrence outside string literals and comments is an unconditional error:</p>
 <br />
     <br />
 
-    Last updated on Feb 13, 2020.
+    Last updated on Mar 08, 2020.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 2.4.2+/ad35b3c.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/c10e1bc.
     </div>
 
   </body>

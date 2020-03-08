@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>MemoryView objects &#8212; Python 3.9.0a3 documentation</title>
+    <title>MemoryView objects &#8212; Python 3.9.0a4 documentation</title>
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments-monokai.css" />
+    <link rel="stylesheet" href="../_static/pygments_dark.css" type="text/css" media="(prefers-color-scheme: dark)" id="pygments_dark_css" />
     
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -18,7 +18,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.9.0a3 documentation"
+          title="Search within Python 3.9.0a4 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -41,9 +41,11 @@
       }
     </style>
 
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png" />
+    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
     
     <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <script type="text/javascript" src="../_static/themetoggle.js"></script>
     
      
 
@@ -72,7 +74,7 @@
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API Reference Manual</a> &#187;</li>
@@ -91,6 +93,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -104,7 +107,7 @@
 <span id="id1"></span><h1>MemoryView objects<a class="headerlink" href="#index-0" title="Permalink to this headline">¶</a></h1>
 <p>A <a class="reference internal" href="../library/stdtypes.html#memoryview" title="memoryview"><code class="xref py py-class docutils literal notranslate"><span class="pre">memoryview</span></code></a> object exposes the C level <a class="reference internal" href="buffer.html#bufferobjects"><span class="std std-ref">buffer interface</span></a> as a Python object which can then be passed around like
 any other object.</p>
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyMemoryView_FromObject">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<code class="sig-name descname">PyMemoryView_FromObject</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *obj</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyMemoryView_FromObject" title="Permalink to this definition">¶</a></dt>
 <dd><em class="refcount">Return value: New reference.</em><p>Create a memoryview object from an object that provides the buffer interface.
@@ -113,7 +116,7 @@ read/write, otherwise it may be either read-only or read/write at the
 discretion of the exporter.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyMemoryView_FromMemory">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<code class="sig-name descname">PyMemoryView_FromMemory</code><span class="sig-paren">(</span>char<em> *mem</em>, Py_ssize_t<em> size</em>, int<em> flags</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyMemoryView_FromMemory" title="Permalink to this definition">¶</a></dt>
 <dd><em class="refcount">Return value: New reference.</em><p>Create a memoryview object using <em>mem</em> as the underlying buffer.
@@ -123,7 +126,7 @@ discretion of the exporter.</p>
 </div>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyMemoryView_FromBuffer">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<code class="sig-name descname">PyMemoryView_FromBuffer</code><span class="sig-paren">(</span><a class="reference internal" href="buffer.html#c.Py_buffer" title="Py_buffer">Py_buffer</a><em> *view</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyMemoryView_FromBuffer" title="Permalink to this definition">¶</a></dt>
 <dd><em class="refcount">Return value: New reference.</em><p>Create a memoryview object wrapping the given buffer structure <em>view</em>.
@@ -131,7 +134,7 @@ For simple byte buffers, <a class="reference internal" href="#c.PyMemoryView_Fro
 function.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyMemoryView_GetContiguous">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<code class="sig-name descname">PyMemoryView_GetContiguous</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *obj</em>, int<em> buffertype</em>, char<em> order</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyMemoryView_GetContiguous" title="Permalink to this definition">¶</a></dt>
 <dd><em class="refcount">Return value: New reference.</em><p>Create a memoryview object to a <a class="reference internal" href="../glossary.html#term-contiguous"><span class="xref std std-term">contiguous</span></a> chunk of memory (in either
@@ -141,14 +144,14 @@ original memory. Otherwise, a copy is made and the memoryview points to a
 new bytes object.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyMemoryView_Check">
 int <code class="sig-name descname">PyMemoryView_Check</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *obj</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyMemoryView_Check" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return true if the object <em>obj</em> is a memoryview object.  It is not
 currently allowed to create subclasses of <a class="reference internal" href="../library/stdtypes.html#memoryview" title="memoryview"><code class="xref py py-class docutils literal notranslate"><span class="pre">memoryview</span></code></a>.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyMemoryView_GET_BUFFER">
 <a class="reference internal" href="buffer.html#c.Py_buffer" title="Py_buffer">Py_buffer</a> *<code class="sig-name descname">PyMemoryView_GET_BUFFER</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *mview</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyMemoryView_GET_BUFFER" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a pointer to the memoryview’s private copy of the exporter’s buffer.
@@ -156,7 +159,7 @@ currently allowed to create subclasses of <a class="reference internal" href="..
 you must do it yourself or you will risk crashes.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyMemoryView_GET_BASE">
 <a class="reference internal" href="buffer.html#c.Py_buffer" title="Py_buffer">Py_buffer</a> *<code class="sig-name descname">PyMemoryView_GET_BASE</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *mview</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyMemoryView_GET_BASE" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return either a pointer to the exporting object that the memoryview is based
@@ -216,7 +219,7 @@ on or <code class="docutils literal notranslate"><span class="pre">NULL</span></
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API Reference Manual</a> &#187;</li>
@@ -235,6 +238,7 @@ on or <code class="docutils literal notranslate"><span class="pre">NULL</span></
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  
@@ -247,11 +251,11 @@ on or <code class="docutils literal notranslate"><span class="pre">NULL</span></
 <br />
     <br />
 
-    Last updated on Feb 13, 2020.
+    Last updated on Mar 08, 2020.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 2.4.2+/ad35b3c.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/c10e1bc.
     </div>
 
   </body>

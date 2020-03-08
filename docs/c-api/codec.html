@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Codec registry and support functions &#8212; Python 3.9.0a3 documentation</title>
+    <title>Codec registry and support functions &#8212; Python 3.9.0a4 documentation</title>
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments-monokai.css" />
+    <link rel="stylesheet" href="../_static/pygments_dark.css" type="text/css" media="(prefers-color-scheme: dark)" id="pygments_dark_css" />
     
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -18,7 +18,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.9.0a3 documentation"
+          title="Search within Python 3.9.0a4 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -41,9 +41,11 @@
       }
     </style>
 
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png" />
+    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
     
     <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <script type="text/javascript" src="../_static/themetoggle.js"></script>
     
      
 
@@ -72,7 +74,7 @@
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API Reference Manual</a> &#187;</li>
@@ -91,6 +93,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -102,7 +105,7 @@
             
   <div class="section" id="codec-registry-and-support-functions">
 <span id="codec-registry"></span><h1>Codec registry and support functions<a class="headerlink" href="#codec-registry-and-support-functions" title="Permalink to this headline">¶</a></h1>
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyCodec_Register">
 int <code class="sig-name descname">PyCodec_Register</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *search_function</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyCodec_Register" title="Permalink to this definition">¶</a></dt>
 <dd><p>Register a new codec search function.</p>
@@ -110,79 +113,79 @@ int <code class="sig-name descname">PyCodec_Register</code><span class="sig-pare
 done, to make sure that it is always first in the list of search functions.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyCodec_KnownEncoding">
 int <code class="sig-name descname">PyCodec_KnownEncoding</code><span class="sig-paren">(</span>const char<em> *encoding</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyCodec_KnownEncoding" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return <code class="docutils literal notranslate"><span class="pre">1</span></code> or <code class="docutils literal notranslate"><span class="pre">0</span></code> depending on whether there is a registered codec for
 the given <em>encoding</em>.  This function always succeeds.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyCodec_Encode">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a>* <code class="sig-name descname">PyCodec_Encode</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *object</em>, const char<em> *encoding</em>, const char<em> *errors</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyCodec_Encode" title="Permalink to this definition">¶</a></dt>
 <dd><em class="refcount">Return value: New reference.</em><p>Generic codec based encoding API.</p>
 <p><em>object</em> is passed through the encoder function found for the given
 <em>encoding</em> using the error handling method defined by <em>errors</em>.  <em>errors</em> may
 be <code class="docutils literal notranslate"><span class="pre">NULL</span></code> to use the default method defined for the codec.  Raises a
-<a class="reference internal" href="../library/exceptions.html#LookupError" title="LookupError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">LookupError</span></code></a> if no encoder can be found.</p>
+<a class="reference internal" href="../library/exceptions.html#lookuperror" title="LookupError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">LookupError</span></code></a> if no encoder can be found.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyCodec_Decode">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a>* <code class="sig-name descname">PyCodec_Decode</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *object</em>, const char<em> *encoding</em>, const char<em> *errors</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyCodec_Decode" title="Permalink to this definition">¶</a></dt>
 <dd><em class="refcount">Return value: New reference.</em><p>Generic codec based decoding API.</p>
 <p><em>object</em> is passed through the decoder function found for the given
 <em>encoding</em> using the error handling method defined by <em>errors</em>.  <em>errors</em> may
 be <code class="docutils literal notranslate"><span class="pre">NULL</span></code> to use the default method defined for the codec.  Raises a
-<a class="reference internal" href="../library/exceptions.html#LookupError" title="LookupError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">LookupError</span></code></a> if no encoder can be found.</p>
+<a class="reference internal" href="../library/exceptions.html#lookuperror" title="LookupError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">LookupError</span></code></a> if no encoder can be found.</p>
 </dd></dl>
 
 <div class="section" id="codec-lookup-api">
 <h2>Codec lookup API<a class="headerlink" href="#codec-lookup-api" title="Permalink to this headline">¶</a></h2>
 <p>In the following functions, the <em>encoding</em> string is looked up converted to all
 lower-case characters, which makes encodings looked up through this mechanism
-effectively case-insensitive.  If no codec is found, a <a class="reference internal" href="../library/exceptions.html#KeyError" title="KeyError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">KeyError</span></code></a> is set
+effectively case-insensitive.  If no codec is found, a <a class="reference internal" href="../library/exceptions.html#keyerror" title="KeyError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">KeyError</span></code></a> is set
 and <code class="docutils literal notranslate"><span class="pre">NULL</span></code> returned.</p>
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyCodec_Encoder">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a>* <code class="sig-name descname">PyCodec_Encoder</code><span class="sig-paren">(</span>const char<em> *encoding</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyCodec_Encoder" title="Permalink to this definition">¶</a></dt>
 <dd><em class="refcount">Return value: New reference.</em><p>Get an encoder function for the given <em>encoding</em>.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyCodec_Decoder">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a>* <code class="sig-name descname">PyCodec_Decoder</code><span class="sig-paren">(</span>const char<em> *encoding</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyCodec_Decoder" title="Permalink to this definition">¶</a></dt>
 <dd><em class="refcount">Return value: New reference.</em><p>Get a decoder function for the given <em>encoding</em>.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyCodec_IncrementalEncoder">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a>* <code class="sig-name descname">PyCodec_IncrementalEncoder</code><span class="sig-paren">(</span>const char<em> *encoding</em>, const char<em> *errors</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyCodec_IncrementalEncoder" title="Permalink to this definition">¶</a></dt>
-<dd><em class="refcount">Return value: New reference.</em><p>Get an <a class="reference internal" href="../library/codecs.html#codecs.IncrementalEncoder" title="codecs.IncrementalEncoder"><code class="xref py py-class docutils literal notranslate"><span class="pre">IncrementalEncoder</span></code></a> object for the given <em>encoding</em>.</p>
+<dd><em class="refcount">Return value: New reference.</em><p>Get an <a class="reference internal" href="../library/codecs.html#codecs-incrementalencoder" title="codecs.IncrementalEncoder"><code class="xref py py-class docutils literal notranslate"><span class="pre">IncrementalEncoder</span></code></a> object for the given <em>encoding</em>.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyCodec_IncrementalDecoder">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a>* <code class="sig-name descname">PyCodec_IncrementalDecoder</code><span class="sig-paren">(</span>const char<em> *encoding</em>, const char<em> *errors</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyCodec_IncrementalDecoder" title="Permalink to this definition">¶</a></dt>
-<dd><em class="refcount">Return value: New reference.</em><p>Get an <a class="reference internal" href="../library/codecs.html#codecs.IncrementalDecoder" title="codecs.IncrementalDecoder"><code class="xref py py-class docutils literal notranslate"><span class="pre">IncrementalDecoder</span></code></a> object for the given <em>encoding</em>.</p>
+<dd><em class="refcount">Return value: New reference.</em><p>Get an <a class="reference internal" href="../library/codecs.html#codecs-incrementaldecoder" title="codecs.IncrementalDecoder"><code class="xref py py-class docutils literal notranslate"><span class="pre">IncrementalDecoder</span></code></a> object for the given <em>encoding</em>.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyCodec_StreamReader">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a>* <code class="sig-name descname">PyCodec_StreamReader</code><span class="sig-paren">(</span>const char<em> *encoding</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *stream</em>, const char<em> *errors</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyCodec_StreamReader" title="Permalink to this definition">¶</a></dt>
-<dd><em class="refcount">Return value: New reference.</em><p>Get a <a class="reference internal" href="../library/codecs.html#codecs.StreamReader" title="codecs.StreamReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">StreamReader</span></code></a> factory function for the given <em>encoding</em>.</p>
+<dd><em class="refcount">Return value: New reference.</em><p>Get a <a class="reference internal" href="../library/codecs.html#codecs-streamreader" title="codecs.StreamReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">StreamReader</span></code></a> factory function for the given <em>encoding</em>.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyCodec_StreamWriter">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a>* <code class="sig-name descname">PyCodec_StreamWriter</code><span class="sig-paren">(</span>const char<em> *encoding</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *stream</em>, const char<em> *errors</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyCodec_StreamWriter" title="Permalink to this definition">¶</a></dt>
-<dd><em class="refcount">Return value: New reference.</em><p>Get a <a class="reference internal" href="../library/codecs.html#codecs.StreamWriter" title="codecs.StreamWriter"><code class="xref py py-class docutils literal notranslate"><span class="pre">StreamWriter</span></code></a> factory function for the given <em>encoding</em>.</p>
+<dd><em class="refcount">Return value: New reference.</em><p>Get a <a class="reference internal" href="../library/codecs.html#codecs-streamwriter" title="codecs.StreamWriter"><code class="xref py py-class docutils literal notranslate"><span class="pre">StreamWriter</span></code></a> factory function for the given <em>encoding</em>.</p>
 </dd></dl>
 
 </div>
 <div class="section" id="registry-api-for-unicode-encoding-error-handlers">
 <h2>Registry API for Unicode encoding error handlers<a class="headerlink" href="#registry-api-for-unicode-encoding-error-handlers" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyCodec_RegisterError">
 int <code class="sig-name descname">PyCodec_RegisterError</code><span class="sig-paren">(</span>const char<em> *name</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *error</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyCodec_RegisterError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Register the error handling callback function <em>error</em> under the given <em>name</em>.
@@ -190,8 +193,8 @@ This callback function will be called by a codec when it encounters
 unencodable characters/undecodable bytes and <em>name</em> is specified as the error
 parameter in the call to the encode/decode function.</p>
 <p>The callback gets a single argument, an instance of
-<a class="reference internal" href="../library/exceptions.html#UnicodeEncodeError" title="UnicodeEncodeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">UnicodeEncodeError</span></code></a>, <a class="reference internal" href="../library/exceptions.html#UnicodeDecodeError" title="UnicodeDecodeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">UnicodeDecodeError</span></code></a> or
-<a class="reference internal" href="../library/exceptions.html#UnicodeTranslateError" title="UnicodeTranslateError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">UnicodeTranslateError</span></code></a> that holds information about the problematic
+<a class="reference internal" href="../library/exceptions.html#unicodeencodeerror" title="UnicodeEncodeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">UnicodeEncodeError</span></code></a>, <a class="reference internal" href="../library/exceptions.html#unicodedecodeerror" title="UnicodeDecodeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">UnicodeDecodeError</span></code></a> or
+<a class="reference internal" href="../library/exceptions.html#unicodetranslateerror" title="UnicodeTranslateError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">UnicodeTranslateError</span></code></a> that holds information about the problematic
 sequence of characters or bytes and their offset in the original string (see
 <a class="reference internal" href="exceptions.html#unicodeexceptions"><span class="std std-ref">Unicode Exception Objects</span></a> for functions to extract this information).  The
 callback must either raise the given exception, or return a two-item tuple
@@ -201,7 +204,7 @@ resumed.</p>
 <p>Return <code class="docutils literal notranslate"><span class="pre">0</span></code> on success, <code class="docutils literal notranslate"><span class="pre">-1</span></code> on error.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyCodec_LookupError">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a>* <code class="sig-name descname">PyCodec_LookupError</code><span class="sig-paren">(</span>const char<em> *name</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyCodec_LookupError" title="Permalink to this definition">¶</a></dt>
 <dd><em class="refcount">Return value: New reference.</em><p>Lookup the error handling callback function registered under <em>name</em>.  As a
@@ -209,38 +212,38 @@ special case <code class="docutils literal notranslate"><span class="pre">NULL</
 for “strict” will be returned.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyCodec_StrictErrors">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a>* <code class="sig-name descname">PyCodec_StrictErrors</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *exc</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyCodec_StrictErrors" title="Permalink to this definition">¶</a></dt>
 <dd><em class="refcount">Return value: Always NULL.</em><p>Raise <em>exc</em> as an exception.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyCodec_IgnoreErrors">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a>* <code class="sig-name descname">PyCodec_IgnoreErrors</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *exc</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyCodec_IgnoreErrors" title="Permalink to this definition">¶</a></dt>
 <dd><em class="refcount">Return value: New reference.</em><p>Ignore the unicode error, skipping the faulty input.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyCodec_ReplaceErrors">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a>* <code class="sig-name descname">PyCodec_ReplaceErrors</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *exc</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyCodec_ReplaceErrors" title="Permalink to this definition">¶</a></dt>
 <dd><em class="refcount">Return value: New reference.</em><p>Replace the unicode encode error with <code class="docutils literal notranslate"><span class="pre">?</span></code> or <code class="docutils literal notranslate"><span class="pre">U+FFFD</span></code>.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyCodec_XMLCharRefReplaceErrors">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a>* <code class="sig-name descname">PyCodec_XMLCharRefReplaceErrors</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *exc</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyCodec_XMLCharRefReplaceErrors" title="Permalink to this definition">¶</a></dt>
 <dd><em class="refcount">Return value: New reference.</em><p>Replace the unicode encode error with XML character references.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyCodec_BackslashReplaceErrors">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a>* <code class="sig-name descname">PyCodec_BackslashReplaceErrors</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *exc</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyCodec_BackslashReplaceErrors" title="Permalink to this definition">¶</a></dt>
 <dd><em class="refcount">Return value: New reference.</em><p>Replace the unicode encode error with backslash escapes (<code class="docutils literal notranslate"><span class="pre">\x</span></code>, <code class="docutils literal notranslate"><span class="pre">\u</span></code> and
 <code class="docutils literal notranslate"><span class="pre">\U</span></code>).</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="c function">
 <dt id="c.PyCodec_NameReplaceErrors">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a>* <code class="sig-name descname">PyCodec_NameReplaceErrors</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *exc</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyCodec_NameReplaceErrors" title="Permalink to this definition">¶</a></dt>
 <dd><em class="refcount">Return value: New reference.</em><p>Replace the unicode encode error with <code class="docutils literal notranslate"><span class="pre">\N{...}</span></code> escapes.</p>
@@ -310,7 +313,7 @@ for “strict” will be returned.</p>
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API Reference Manual</a> &#187;</li>
@@ -329,6 +332,7 @@ for “strict” will be returned.</p>
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  
@@ -341,11 +345,11 @@ for “strict” will be returned.</p>
 <br />
     <br />
 
-    Last updated on Feb 13, 2020.
+    Last updated on Mar 08, 2020.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 2.4.2+/ad35b3c.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/c10e1bc.
     </div>
 
   </body>

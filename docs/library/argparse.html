@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>argparse — Parser for command-line options, arguments and sub-commands &#8212; Python 3.9.0a3 documentation</title>
+    <title>argparse — Parser for command-line options, arguments and sub-commands &#8212; Python 3.9.0a4 documentation</title>
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments-monokai.css" />
+    <link rel="stylesheet" href="../_static/pygments_dark.css" type="text/css" media="(prefers-color-scheme: dark)" id="pygments_dark_css" />
     
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -18,7 +18,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.9.0a3 documentation"
+          title="Search within Python 3.9.0a4 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -41,9 +41,11 @@
       }
     </style>
 
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png" />
+    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
     
     <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <script type="text/javascript" src="../_static/themetoggle.js"></script>
     
      
 
@@ -72,7 +74,7 @@
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
@@ -91,6 +93,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -115,7 +118,7 @@ introduction to Python command-line parsing, have a look at the
 </div>
 <p>The <a class="reference internal" href="#module-argparse" title="argparse: Command-line option and argument parsing library."><code class="xref py py-mod docutils literal notranslate"><span class="pre">argparse</span></code></a> module makes it easy to write user-friendly command-line
 interfaces. The program defines what arguments it requires, and <a class="reference internal" href="#module-argparse" title="argparse: Command-line option and argument parsing library."><code class="xref py py-mod docutils literal notranslate"><span class="pre">argparse</span></code></a>
-will figure out how to parse those out of <a class="reference internal" href="sys.html#sys.argv" title="sys.argv"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.argv</span></code></a>.  The <a class="reference internal" href="#module-argparse" title="argparse: Command-line option and argument parsing library."><code class="xref py py-mod docutils literal notranslate"><span class="pre">argparse</span></code></a>
+will figure out how to parse those out of <a class="reference internal" href="sys.html#sys-argv" title="sys.argv"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.argv</span></code></a>.  The <a class="reference internal" href="#module-argparse" title="argparse: Command-line option and argument parsing library."><code class="xref py py-mod docutils literal notranslate"><span class="pre">argparse</span></code></a>
 module also automatically generates help and usage messages and issues errors
 when users give the program invalid arguments.</p>
 <div class="section" id="example">
@@ -169,20 +172,20 @@ the command-line integers:</p>
 <div class="section" id="creating-a-parser">
 <h3>Creating a parser<a class="headerlink" href="#creating-a-parser" title="Permalink to this headline">¶</a></h3>
 <p>The first step in using the <a class="reference internal" href="#module-argparse" title="argparse: Command-line option and argument parsing library."><code class="xref py py-mod docutils literal notranslate"><span class="pre">argparse</span></code></a> is creating an
-<a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> object:</p>
+<a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> object:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Process some integers.&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> object will hold all the information necessary to
+<p>The <a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> object will hold all the information necessary to
 parse the command line into Python data types.</p>
 </div>
 <div class="section" id="adding-arguments">
 <h3>Adding arguments<a class="headerlink" href="#adding-arguments" title="Permalink to this headline">¶</a></h3>
-<p>Filling an <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> with information about program arguments is
-done by making calls to the <a class="reference internal" href="#argparse.ArgumentParser.add_argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code></a> method.
-Generally, these calls tell the <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> how to take the strings
+<p>Filling an <a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> with information about program arguments is
+done by making calls to the <a class="reference internal" href="#argparse-argumentparser-add-argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code></a> method.
+Generally, these calls tell the <a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> how to take the strings
 on the command line and turn them into objects.  This information is stored and
-used when <a class="reference internal" href="#argparse.ArgumentParser.parse_args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> is called. For example:</p>
+used when <a class="reference internal" href="#argparse-argumentparser-parse-args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> is called. For example:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;integers&#39;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;N&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">,</span>
 <span class="gp">... </span>                    <span class="n">help</span><span class="o">=</span><span class="s1">&#39;an integer for the accumulator&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--sum&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;accumulate&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_const&#39;</span><span class="p">,</span>
@@ -190,7 +193,7 @@ used when <a class="reference internal" href="#argparse.ArgumentParser.parse_arg
 <span class="gp">... </span>                    <span class="n">help</span><span class="o">=</span><span class="s1">&#39;sum the integers (default: find the max)&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Later, calling <a class="reference internal" href="#argparse.ArgumentParser.parse_args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> will return an object with
+<p>Later, calling <a class="reference internal" href="#argparse-argumentparser-parse-args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> will return an object with
 two attributes, <code class="docutils literal notranslate"><span class="pre">integers</span></code> and <code class="docutils literal notranslate"><span class="pre">accumulate</span></code>.  The <code class="docutils literal notranslate"><span class="pre">integers</span></code> attribute
 will be a list of one or more ints, and the <code class="docutils literal notranslate"><span class="pre">accumulate</span></code> attribute will be
 either the <a class="reference internal" href="functions.html#sum" title="sum"><code class="xref py py-func docutils literal notranslate"><span class="pre">sum()</span></code></a> function, if <code class="docutils literal notranslate"><span class="pre">--sum</span></code> was specified at the command line,
@@ -198,26 +201,26 @@ or the <a class="reference internal" href="functions.html#max" title="max"><code
 </div>
 <div class="section" id="parsing-arguments">
 <h3>Parsing arguments<a class="headerlink" href="#parsing-arguments" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> parses arguments through the
-<a class="reference internal" href="#argparse.ArgumentParser.parse_args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> method.  This will inspect the command line,
+<p><a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> parses arguments through the
+<a class="reference internal" href="#argparse-argumentparser-parse-args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> method.  This will inspect the command line,
 convert each argument to the appropriate type and then invoke the appropriate action.
-In most cases, this means a simple <a class="reference internal" href="#argparse.Namespace" title="argparse.Namespace"><code class="xref py py-class docutils literal notranslate"><span class="pre">Namespace</span></code></a> object will be built up from
+In most cases, this means a simple <a class="reference internal" href="#argparse-namespace" title="argparse.Namespace"><code class="xref py py-class docutils literal notranslate"><span class="pre">Namespace</span></code></a> object will be built up from
 attributes parsed out of the command line:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">([</span><span class="s1">&#39;--sum&#39;</span><span class="p">,</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;-1&#39;</span><span class="p">,</span> <span class="s1">&#39;42&#39;</span><span class="p">])</span>
 <span class="go">Namespace(accumulate=&lt;built-in function sum&gt;, integers=[7, -1, 42])</span>
 </pre></div>
 </div>
-<p>In a script, <a class="reference internal" href="#argparse.ArgumentParser.parse_args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> will typically be called with no
-arguments, and the <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> will automatically determine the
-command-line arguments from <a class="reference internal" href="sys.html#sys.argv" title="sys.argv"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.argv</span></code></a>.</p>
+<p>In a script, <a class="reference internal" href="#argparse-argumentparser-parse-args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> will typically be called with no
+arguments, and the <a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> will automatically determine the
+command-line arguments from <a class="reference internal" href="sys.html#sys-argv" title="sys.argv"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.argv</span></code></a>.</p>
 </div>
 </div>
 <div class="section" id="argumentparser-objects">
 <h2>ArgumentParser objects<a class="headerlink" href="#argumentparser-objects" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="argparse.ArgumentParser">
-<em class="property">class </em><code class="sig-prename descclassname">argparse.</code><code class="sig-name descname">ArgumentParser</code><span class="sig-paren">(</span><em class="sig-param">prog=None</em>, <em class="sig-param">usage=None</em>, <em class="sig-param">description=None</em>, <em class="sig-param">epilog=None</em>, <em class="sig-param">parents=[]</em>, <em class="sig-param">formatter_class=argparse.HelpFormatter</em>, <em class="sig-param">prefix_chars='-'</em>, <em class="sig-param">fromfile_prefix_chars=None</em>, <em class="sig-param">argument_default=None</em>, <em class="sig-param">conflict_handler='error'</em>, <em class="sig-param">add_help=True</em>, <em class="sig-param">allow_abbrev=True</em>, <em class="sig-param">exit_on_error=True</em><span class="sig-paren">)</span><a class="headerlink" href="#argparse.ArgumentParser" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a new <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> object. All parameters should be passed
+<dl class="py class">
+<dt id="argparse-argumentparser">
+<span id="argparse.ArgumentParser"></span><em class="property">class </em><code class="sig-prename descclassname">argparse.</code><code class="sig-name descname">ArgumentParser</code><span class="sig-paren">(</span><em class="sig-param">prog=None</em>, <em class="sig-param">usage=None</em>, <em class="sig-param">description=None</em>, <em class="sig-param">epilog=None</em>, <em class="sig-param">parents=[]</em>, <em class="sig-param">formatter_class=argparse.HelpFormatter</em>, <em class="sig-param">prefix_chars='-'</em>, <em class="sig-param">fromfile_prefix_chars=None</em>, <em class="sig-param">argument_default=None</em>, <em class="sig-param">conflict_handler='error'</em>, <em class="sig-param">add_help=True</em>, <em class="sig-param">allow_abbrev=True</em>, <em class="sig-param">exit_on_error=True</em><span class="sig-paren">)</span><a class="headerlink" href="#argparse-argumentparser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new <a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> object. All parameters should be passed
 as keyword arguments. Each parameter has its own more detailed description
 below, but in short they are:</p>
 <ul class="simple">
@@ -226,7 +229,7 @@ below, but in short they are:</p>
 arguments added to parser)</p></li>
 <li><p><a class="reference internal" href="#description">description</a> - Text to display before the argument help (default: none)</p></li>
 <li><p><a class="reference internal" href="#epilog">epilog</a> - Text to display after the argument help (default: none)</p></li>
-<li><p><a class="reference internal" href="#parents">parents</a> - A list of <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> objects whose arguments should
+<li><p><a class="reference internal" href="#parents">parents</a> - A list of <a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> objects whose arguments should
 also be included</p></li>
 <li><p><a class="reference internal" href="#formatter-class">formatter_class</a> - A class for customizing the help output</p></li>
 <li><p><a class="reference internal" href="#prefix-chars">prefix_chars</a> - The set of characters that prefix optional arguments
@@ -258,7 +261,7 @@ flags such as <code class="docutils literal notranslate"><span class="pre">-vv</
 <p>The following sections describe how each of these are used.</p>
 <div class="section" id="prog">
 <h3>prog<a class="headerlink" href="#prog" title="Permalink to this headline">¶</a></h3>
-<p>By default, <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> objects use <code class="docutils literal notranslate"><span class="pre">sys.argv[0]</span></code> to determine
+<p>By default, <a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> objects use <code class="docutils literal notranslate"><span class="pre">sys.argv[0]</span></code> to determine
 how to display the name of the program in help messages.  This default is almost
 always desirable because it will make the help messages match how the program was
 invoked on the command line.  For example, consider a file named
@@ -287,7 +290,7 @@ invoked on the command line.  For example, consider a file named
 </pre></div>
 </div>
 <p>To change this default behavior, another value can be supplied using the
-<code class="docutils literal notranslate"><span class="pre">prog=</span></code> argument to <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a>:</p>
+<code class="docutils literal notranslate"><span class="pre">prog=</span></code> argument to <a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a>:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">prog</span><span class="o">=</span><span class="s1">&#39;myprogram&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span><span class="o">.</span><span class="n">print_help</span><span class="p">()</span>
 <span class="go">usage: myprogram [-h]</span>
@@ -312,7 +315,7 @@ specifier.</p>
 </div>
 <div class="section" id="usage">
 <h3>usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h3>
-<p>By default, <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> calculates the usage message from the
+<p>By default, <a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> calculates the usage message from the
 arguments it contains:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">prog</span><span class="o">=</span><span class="s1">&#39;PROG&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--foo&#39;</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;?&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;foo help&#39;</span><span class="p">)</span>
@@ -348,7 +351,7 @@ your usage messages.</p>
 </div>
 <div class="section" id="description">
 <h3>description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h3>
-<p>Most calls to the <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> constructor will use the
+<p>Most calls to the <a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> constructor will use the
 <code class="docutils literal notranslate"><span class="pre">description=</span></code> keyword argument.  This argument gives a brief description of
 what the program does and how it works.  In help messages, the description is
 displayed between the command-line usage string and the help messages for the
@@ -370,7 +373,7 @@ given space.  To change this behavior, see the <a class="reference internal" hre
 <h3>epilog<a class="headerlink" href="#epilog" title="Permalink to this headline">¶</a></h3>
 <p>Some programs like to display additional description of the program after the
 description of the arguments.  Such text can be specified using the <code class="docutils literal notranslate"><span class="pre">epilog=</span></code>
-argument to <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a>:</p>
+argument to <a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a>:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;A foo that bars&#39;</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">epilog</span><span class="o">=</span><span class="s2">&quot;And that&#39;s how you&#39;d foo a bar&quot;</span><span class="p">)</span>
@@ -387,16 +390,16 @@ argument to <a class="reference internal" href="#argparse.ArgumentParser" title=
 </div>
 <p>As with the <a class="reference internal" href="#description">description</a> argument, the <code class="docutils literal notranslate"><span class="pre">epilog=</span></code> text is by default
 line-wrapped, but this behavior can be adjusted with the <a class="reference internal" href="#formatter-class">formatter_class</a>
-argument to <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a>.</p>
+argument to <a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a>.</p>
 </div>
 <div class="section" id="parents">
 <h3>parents<a class="headerlink" href="#parents" title="Permalink to this headline">¶</a></h3>
 <p>Sometimes, several parsers share a common set of arguments. Rather than
 repeating the definitions of these arguments, a single parser with all the
-shared arguments and passed to <code class="docutils literal notranslate"><span class="pre">parents=</span></code> argument to <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a>
-can be used.  The <code class="docutils literal notranslate"><span class="pre">parents=</span></code> argument takes a list of <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a>
+shared arguments and passed to <code class="docutils literal notranslate"><span class="pre">parents=</span></code> argument to <a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a>
+can be used.  The <code class="docutils literal notranslate"><span class="pre">parents=</span></code> argument takes a list of <a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a>
 objects, collects all the positional and optional actions from them, and adds
-these actions to the <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> object being constructed:</p>
+these actions to the <a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> object being constructed:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parent_parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">add_help</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">parent_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--parent&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
 
@@ -412,7 +415,7 @@ these actions to the <a class="reference internal" href="#argparse.ArgumentParse
 </pre></div>
 </div>
 <p>Note that most parent parsers will specify <code class="docutils literal notranslate"><span class="pre">add_help=False</span></code>.  Otherwise, the
-<a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> will see two <code class="docutils literal notranslate"><span class="pre">-h/--help</span></code> options (one in the parent
+<a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> will see two <code class="docutils literal notranslate"><span class="pre">-h/--help</span></code> options (one in the parent
 and one in the child) and raise an error.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -423,23 +426,23 @@ not be reflected in the child.</p>
 </div>
 <div class="section" id="formatter-class">
 <h3>formatter_class<a class="headerlink" href="#formatter-class" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> objects allow the help formatting to be customized by
+<p><a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> objects allow the help formatting to be customized by
 specifying an alternate formatting class.  Currently, there are four such
 classes:</p>
-<dl class="class">
-<dt id="argparse.RawDescriptionHelpFormatter">
-<em class="property">class </em><code class="sig-prename descclassname">argparse.</code><code class="sig-name descname">RawDescriptionHelpFormatter</code><a class="headerlink" href="#argparse.RawDescriptionHelpFormatter" title="Permalink to this definition">¶</a></dt>
-<dt id="argparse.RawTextHelpFormatter">
-<em class="property">class </em><code class="sig-prename descclassname">argparse.</code><code class="sig-name descname">RawTextHelpFormatter</code><a class="headerlink" href="#argparse.RawTextHelpFormatter" title="Permalink to this definition">¶</a></dt>
-<dt id="argparse.ArgumentDefaultsHelpFormatter">
-<em class="property">class </em><code class="sig-prename descclassname">argparse.</code><code class="sig-name descname">ArgumentDefaultsHelpFormatter</code><a class="headerlink" href="#argparse.ArgumentDefaultsHelpFormatter" title="Permalink to this definition">¶</a></dt>
-<dt id="argparse.MetavarTypeHelpFormatter">
-<em class="property">class </em><code class="sig-prename descclassname">argparse.</code><code class="sig-name descname">MetavarTypeHelpFormatter</code><a class="headerlink" href="#argparse.MetavarTypeHelpFormatter" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt id="argparse-rawdescriptionhelpformatter">
+<span id="argparse.RawDescriptionHelpFormatter"></span><em class="property">class </em><code class="sig-prename descclassname">argparse.</code><code class="sig-name descname">RawDescriptionHelpFormatter</code><a class="headerlink" href="#argparse-rawdescriptionhelpformatter" title="Permalink to this definition">¶</a></dt>
+<dt id="argparse-rawtexthelpformatter">
+<span id="argparse.RawTextHelpFormatter"></span><em class="property">class </em><code class="sig-prename descclassname">argparse.</code><code class="sig-name descname">RawTextHelpFormatter</code><a class="headerlink" href="#argparse-rawtexthelpformatter" title="Permalink to this definition">¶</a></dt>
+<dt id="argparse-argumentdefaultshelpformatter">
+<span id="argparse.ArgumentDefaultsHelpFormatter"></span><em class="property">class </em><code class="sig-prename descclassname">argparse.</code><code class="sig-name descname">ArgumentDefaultsHelpFormatter</code><a class="headerlink" href="#argparse-argumentdefaultshelpformatter" title="Permalink to this definition">¶</a></dt>
+<dt id="argparse-metavartypehelpformatter">
+<span id="argparse.MetavarTypeHelpFormatter"></span><em class="property">class </em><code class="sig-prename descclassname">argparse.</code><code class="sig-name descname">MetavarTypeHelpFormatter</code><a class="headerlink" href="#argparse-metavartypehelpformatter" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<p><a class="reference internal" href="#argparse.RawDescriptionHelpFormatter" title="argparse.RawDescriptionHelpFormatter"><code class="xref py py-class docutils literal notranslate"><span class="pre">RawDescriptionHelpFormatter</span></code></a> and <a class="reference internal" href="#argparse.RawTextHelpFormatter" title="argparse.RawTextHelpFormatter"><code class="xref py py-class docutils literal notranslate"><span class="pre">RawTextHelpFormatter</span></code></a> give
+<p><a class="reference internal" href="#argparse-rawdescriptionhelpformatter" title="argparse.RawDescriptionHelpFormatter"><code class="xref py py-class docutils literal notranslate"><span class="pre">RawDescriptionHelpFormatter</span></code></a> and <a class="reference internal" href="#argparse-rawtexthelpformatter" title="argparse.RawTextHelpFormatter"><code class="xref py py-class docutils literal notranslate"><span class="pre">RawTextHelpFormatter</span></code></a> give
 more control over how textual descriptions are displayed.
-By default, <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> objects line-wrap the <a class="reference internal" href="#description">description</a> and
+By default, <a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> objects line-wrap the <a class="reference internal" href="#description">description</a> and
 <a class="reference internal" href="#epilog">epilog</a> texts in command-line help messages:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="n">prog</span><span class="o">=</span><span class="s1">&#39;PROG&#39;</span><span class="p">,</span>
@@ -462,7 +465,7 @@ By default, <a class="reference internal" href="#argparse.ArgumentParser" title=
 <span class="go">will be wrapped across a couple lines</span>
 </pre></div>
 </div>
-<p>Passing <a class="reference internal" href="#argparse.RawDescriptionHelpFormatter" title="argparse.RawDescriptionHelpFormatter"><code class="xref py py-class docutils literal notranslate"><span class="pre">RawDescriptionHelpFormatter</span></code></a> as <code class="docutils literal notranslate"><span class="pre">formatter_class=</span></code>
+<p>Passing <a class="reference internal" href="#argparse-rawdescriptionhelpformatter" title="argparse.RawDescriptionHelpFormatter"><code class="xref py py-class docutils literal notranslate"><span class="pre">RawDescriptionHelpFormatter</span></code></a> as <code class="docutils literal notranslate"><span class="pre">formatter_class=</span></code>
 indicates that <a class="reference internal" href="#description">description</a> and <a class="reference internal" href="#epilog">epilog</a> are already correctly formatted and
 should not be line-wrapped:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span>
@@ -488,11 +491,11 @@ should not be line-wrapped:</p>
 <span class="go"> -h, --help  show this help message and exit</span>
 </pre></div>
 </div>
-<p><a class="reference internal" href="#argparse.RawTextHelpFormatter" title="argparse.RawTextHelpFormatter"><code class="xref py py-class docutils literal notranslate"><span class="pre">RawTextHelpFormatter</span></code></a> maintains whitespace for all sorts of help text,
+<p><a class="reference internal" href="#argparse-rawtexthelpformatter" title="argparse.RawTextHelpFormatter"><code class="xref py py-class docutils literal notranslate"><span class="pre">RawTextHelpFormatter</span></code></a> maintains whitespace for all sorts of help text,
 including argument descriptions. However, multiple new lines are replaced with
 one. If you wish to preserve multiple blank lines, add spaces between the
 newlines.</p>
-<p><a class="reference internal" href="#argparse.ArgumentDefaultsHelpFormatter" title="argparse.ArgumentDefaultsHelpFormatter"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentDefaultsHelpFormatter</span></code></a> automatically adds information about
+<p><a class="reference internal" href="#argparse-argumentdefaultshelpformatter" title="argparse.ArgumentDefaultsHelpFormatter"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentDefaultsHelpFormatter</span></code></a> automatically adds information about
 default values to each of the argument help messages:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="n">prog</span><span class="o">=</span><span class="s1">&#39;PROG&#39;</span><span class="p">,</span>
@@ -510,7 +513,7 @@ default values to each of the argument help messages:</p>
 <span class="go"> --foo FOO   FOO! (default: 42)</span>
 </pre></div>
 </div>
-<p><a class="reference internal" href="#argparse.MetavarTypeHelpFormatter" title="argparse.MetavarTypeHelpFormatter"><code class="xref py py-class docutils literal notranslate"><span class="pre">MetavarTypeHelpFormatter</span></code></a> uses the name of the <a class="reference internal" href="#type">type</a> argument for each
+<p><a class="reference internal" href="#argparse-metavartypehelpformatter" title="argparse.MetavarTypeHelpFormatter"><code class="xref py py-class docutils literal notranslate"><span class="pre">MetavarTypeHelpFormatter</span></code></a> uses the name of the <a class="reference internal" href="#type">type</a> argument for each
 argument as the display name for its values (rather than using the <a class="reference internal" href="#dest">dest</a>
 as the regular formatter does):</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span>
@@ -553,7 +556,7 @@ disallowed.</p>
 <p>Sometimes, for example when dealing with a particularly long argument lists, it
 may make sense to keep the list of arguments in a file rather than typing it out
 at the command line.  If the <code class="docutils literal notranslate"><span class="pre">fromfile_prefix_chars=</span></code> argument is given to the
-<a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> constructor, then arguments that start with any of the
+<a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> constructor, then arguments that start with any of the
 specified characters will be treated as files, and will be replaced by the
 arguments they contain.  For example:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;args.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
@@ -565,7 +568,7 @@ arguments they contain.  For example:</p>
 </pre></div>
 </div>
 <p>Arguments read from a file must by default be one per line (but see also
-<a class="reference internal" href="#argparse.ArgumentParser.convert_arg_line_to_args" title="argparse.ArgumentParser.convert_arg_line_to_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">convert_arg_line_to_args()</span></code></a>) and are treated as if they
+<a class="reference internal" href="#argparse-argumentparser-convert-arg-line-to-args" title="argparse.ArgumentParser.convert_arg_line_to_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">convert_arg_line_to_args()</span></code></a>) and are treated as if they
 were in the same place as the original file referencing argument on the command
 line.  So in the example above, the expression <code class="docutils literal notranslate"><span class="pre">['-f',</span> <span class="pre">'foo',</span> <span class="pre">'&#64;args.txt']</span></code>
 is considered equivalent to the expression <code class="docutils literal notranslate"><span class="pre">['-f',</span> <span class="pre">'foo',</span> <span class="pre">'-f',</span> <span class="pre">'bar']</span></code>.</p>
@@ -575,12 +578,12 @@ arguments will never be treated as file references.</p>
 <div class="section" id="argument-default">
 <h3>argument_default<a class="headerlink" href="#argument-default" title="Permalink to this headline">¶</a></h3>
 <p>Generally, argument defaults are specified either by passing a default to
-<a class="reference internal" href="#argparse.ArgumentParser.add_argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code></a> or by calling the
-<a class="reference internal" href="#argparse.ArgumentParser.set_defaults" title="argparse.ArgumentParser.set_defaults"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_defaults()</span></code></a> methods with a specific set of name-value
+<a class="reference internal" href="#argparse-argumentparser-add-argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code></a> or by calling the
+<a class="reference internal" href="#argparse-argumentparser-set-defaults" title="argparse.ArgumentParser.set_defaults"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_defaults()</span></code></a> methods with a specific set of name-value
 pairs.  Sometimes however, it may be useful to specify a single parser-wide
 default for arguments.  This can be accomplished by passing the
-<code class="docutils literal notranslate"><span class="pre">argument_default=</span></code> keyword argument to <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a>.  For example,
-to globally suppress attribute creation on <a class="reference internal" href="#argparse.ArgumentParser.parse_args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a>
+<code class="docutils literal notranslate"><span class="pre">argument_default=</span></code> keyword argument to <a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a>.  For example,
+to globally suppress attribute creation on <a class="reference internal" href="#argparse-argumentparser-parse-args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a>
 calls, we supply <code class="docutils literal notranslate"><span class="pre">argument_default=SUPPRESS</span></code>:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">argument_default</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">SUPPRESS</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--foo&#39;</span><span class="p">)</span>
@@ -595,7 +598,7 @@ calls, we supply <code class="docutils literal notranslate"><span class="pre">ar
 <div class="section" id="allow-abbrev">
 <span id="id1"></span><h3>allow_abbrev<a class="headerlink" href="#allow-abbrev" title="Permalink to this headline">¶</a></h3>
 <p>Normally, when you pass an argument list to the
-<a class="reference internal" href="#argparse.ArgumentParser.parse_args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> method of an <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a>,
+<a class="reference internal" href="#argparse-argumentparser-parse-args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> method of an <a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a>,
 it <a class="reference internal" href="#prefix-matching"><span class="std std-ref">recognizes abbreviations</span></a> of long options.</p>
 <p>This feature can be disabled by setting <code class="docutils literal notranslate"><span class="pre">allow_abbrev</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code>:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">prog</span><span class="o">=</span><span class="s1">&#39;PROG&#39;</span><span class="p">,</span> <span class="n">allow_abbrev</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -612,8 +615,8 @@ it <a class="reference internal" href="#prefix-matching"><span class="std std-re
 </div>
 <div class="section" id="conflict-handler">
 <h3>conflict_handler<a class="headerlink" href="#conflict-handler" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> objects do not allow two actions with the same option
-string.  By default, <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> objects raise an exception if an
+<p><a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> objects do not allow two actions with the same option
+string.  By default, <a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> objects raise an exception if an
 attempt is made to create an argument with an option string that is already in
 use:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">prog</span><span class="o">=</span><span class="s1">&#39;PROG&#39;</span><span class="p">)</span>
@@ -627,7 +630,7 @@ use:</p>
 <p>Sometimes (e.g. when using <a class="reference internal" href="#parents">parents</a>) it may be useful to simply override any
 older arguments with the same option string.  To get this behavior, the value
 <code class="docutils literal notranslate"><span class="pre">'resolve'</span></code> can be supplied to the <code class="docutils literal notranslate"><span class="pre">conflict_handler=</span></code> argument of
-<a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a>:</p>
+<a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a>:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">prog</span><span class="o">=</span><span class="s1">&#39;PROG&#39;</span><span class="p">,</span> <span class="n">conflict_handler</span><span class="o">=</span><span class="s1">&#39;resolve&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-f&#39;</span><span class="p">,</span> <span class="s1">&#39;--foo&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;old foo help&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--foo&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;new foo help&#39;</span><span class="p">)</span>
@@ -640,7 +643,7 @@ older arguments with the same option string.  To get this behavior, the value
 <span class="go"> --foo FOO   new foo help</span>
 </pre></div>
 </div>
-<p>Note that <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> objects only remove an action if all of its
+<p>Note that <a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> objects only remove an action if all of its
 option strings are overridden.  So, in the example above, the old <code class="docutils literal notranslate"><span class="pre">-f/--foo</span></code>
 action is retained as the <code class="docutils literal notranslate"><span class="pre">-f</span></code> action, because only the <code class="docutils literal notranslate"><span class="pre">--foo</span></code> option
 string was overridden.</p>
@@ -668,7 +671,7 @@ help will be printed:</p>
 </div>
 <p>Occasionally, it may be useful to disable the addition of this help option.
 This can be achieved by passing <code class="docutils literal notranslate"><span class="pre">False</span></code> as the <code class="docutils literal notranslate"><span class="pre">add_help=</span></code> argument to
-<a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a>:</p>
+<a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a>:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">prog</span><span class="o">=</span><span class="s1">&#39;PROG&#39;</span><span class="p">,</span> <span class="n">add_help</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--foo&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;foo help&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span><span class="o">.</span><span class="n">print_help</span><span class="p">()</span>
@@ -694,8 +697,8 @@ the help options:</p>
 </div>
 <div class="section" id="exit-on-error">
 <h3>exit_on_error<a class="headerlink" href="#exit-on-error" title="Permalink to this headline">¶</a></h3>
-<p>Normally, when you pass an invalid argument list to the <a class="reference internal" href="#argparse.ArgumentParser.parse_args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a>
-method of an <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a>, it will exit with error info.</p>
+<p>Normally, when you pass an invalid argument list to the <a class="reference internal" href="#argparse-argumentparser-parse-args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a>
+method of an <a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a>, it will exit with error info.</p>
 <p>If the user would like catch errors manually, the feature can be enable by setting
 <code class="docutils literal notranslate"><span class="pre">exit_on_error</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code>:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">exit_on_error</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -716,9 +719,9 @@ method of an <a class="reference internal" href="#argparse.ArgumentParser" title
 </div>
 <div class="section" id="the-add-argument-method">
 <h2>The add_argument() method<a class="headerlink" href="#the-add-argument-method" title="Permalink to this headline">¶</a></h2>
-<dl class="method">
-<dt id="argparse.ArgumentParser.add_argument">
-<code class="sig-prename descclassname">ArgumentParser.</code><code class="sig-name descname">add_argument</code><span class="sig-paren">(</span><em class="sig-param">name or flags...</em><span class="optional">[</span>, <em class="sig-param">action</em><span class="optional">]</span><span class="optional">[</span>, <em class="sig-param">nargs</em><span class="optional">]</span><span class="optional">[</span>, <em class="sig-param">const</em><span class="optional">]</span><span class="optional">[</span>, <em class="sig-param">default</em><span class="optional">]</span><span class="optional">[</span>, <em class="sig-param">type</em><span class="optional">]</span><span class="optional">[</span>, <em class="sig-param">choices</em><span class="optional">]</span><span class="optional">[</span>, <em class="sig-param">required</em><span class="optional">]</span><span class="optional">[</span>, <em class="sig-param">help</em><span class="optional">]</span><span class="optional">[</span>, <em class="sig-param">metavar</em><span class="optional">]</span><span class="optional">[</span>, <em class="sig-param">dest</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#argparse.ArgumentParser.add_argument" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="argparse-argumentparser-add-argument">
+<span id="argparse.ArgumentParser.add_argument"></span><code class="sig-prename descclassname">ArgumentParser.</code><code class="sig-name descname">add_argument</code><span class="sig-paren">(</span><em class="sig-param">name or flags...</em><span class="optional">[</span>, <em class="sig-param">action</em><span class="optional">]</span><span class="optional">[</span>, <em class="sig-param">nargs</em><span class="optional">]</span><span class="optional">[</span>, <em class="sig-param">const</em><span class="optional">]</span><span class="optional">[</span>, <em class="sig-param">default</em><span class="optional">]</span><span class="optional">[</span>, <em class="sig-param">type</em><span class="optional">]</span><span class="optional">[</span>, <em class="sig-param">choices</em><span class="optional">]</span><span class="optional">[</span>, <em class="sig-param">required</em><span class="optional">]</span><span class="optional">[</span>, <em class="sig-param">help</em><span class="optional">]</span><span class="optional">[</span>, <em class="sig-param">metavar</em><span class="optional">]</span><span class="optional">[</span>, <em class="sig-param">dest</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#argparse-argumentparser-add-argument" title="Permalink to this definition">¶</a></dt>
 <dd><p>Define how a single command-line argument should be parsed.  Each parameter
 has its own more detailed description below, but in short they are:</p>
 <ul class="simple">
@@ -737,17 +740,17 @@ command line.</p></li>
 <li><p><a class="reference internal" href="#help">help</a> - A brief description of what the argument does.</p></li>
 <li><p><a class="reference internal" href="#metavar">metavar</a> - A name for the argument in usage messages.</p></li>
 <li><p><a class="reference internal" href="#dest">dest</a> - The name of the attribute to be added to the object returned by
-<a class="reference internal" href="#argparse.ArgumentParser.parse_args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a>.</p></li>
+<a class="reference internal" href="#argparse-argumentparser-parse-args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a>.</p></li>
 </ul>
 </dd></dl>
 
 <p>The following sections describe how each of these are used.</p>
 <div class="section" id="name-or-flags">
 <h3>name or flags<a class="headerlink" href="#name-or-flags" title="Permalink to this headline">¶</a></h3>
-<p>The <a class="reference internal" href="#argparse.ArgumentParser.add_argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code></a> method must know whether an optional
+<p>The <a class="reference internal" href="#argparse-argumentparser-add-argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code></a> method must know whether an optional
 argument, like <code class="docutils literal notranslate"><span class="pre">-f</span></code> or <code class="docutils literal notranslate"><span class="pre">--foo</span></code>, or a positional argument, like a list of
 filenames, is expected.  The first arguments passed to
-<a class="reference internal" href="#argparse.ArgumentParser.add_argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code></a> must therefore be either a series of
+<a class="reference internal" href="#argparse-argumentparser-add-argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code></a> must therefore be either a series of
 flags, or a simple argument name.  For example, an optional argument could
 be created like:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-f&#39;</span><span class="p">,</span> <span class="s1">&#39;--foo&#39;</span><span class="p">)</span>
@@ -757,7 +760,7 @@ be created like:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>When <a class="reference internal" href="#argparse.ArgumentParser.parse_args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> is called, optional arguments will be
+<p>When <a class="reference internal" href="#argparse-argumentparser-parse-args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> is called, optional arguments will be
 identified by the <code class="docutils literal notranslate"><span class="pre">-</span></code> prefix, and the remaining arguments will be assumed to
 be positional:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">prog</span><span class="o">=</span><span class="s1">&#39;PROG&#39;</span><span class="p">)</span>
@@ -775,10 +778,10 @@ be positional:</p>
 </div>
 <div class="section" id="action">
 <h3>action<a class="headerlink" href="#action" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> objects associate command-line arguments with actions.  These
+<p><a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> objects associate command-line arguments with actions.  These
 actions can do just about anything with the command-line arguments associated with
 them, though most actions simply add an attribute to the object returned by
-<a class="reference internal" href="#argparse.ArgumentParser.parse_args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a>.  The <code class="docutils literal notranslate"><span class="pre">action</span></code> keyword argument specifies
+<a class="reference internal" href="#argparse-argumentparser-parse-args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a>.  The <code class="docutils literal notranslate"><span class="pre">action</span></code> keyword argument specifies
 how the command-line arguments should be handled. The supplied actions are:</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">'store'</span></code> - This just stores the argument’s value.  This is the default
@@ -848,10 +851,10 @@ example, this is useful for increasing verbosity levels:</p>
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">'help'</span></code> - This prints a complete help message for all the options in the
 current parser and then exits. By default a help action is automatically
-added to the parser. See <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> for details of how the
+added to the parser. See <a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> for details of how the
 output is created.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">'version'</span></code> - This expects a <code class="docutils literal notranslate"><span class="pre">version=</span></code> keyword argument in the
-<a class="reference internal" href="#argparse.ArgumentParser.add_argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code></a> call, and prints version information
+<a class="reference internal" href="#argparse-argumentparser-add-argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code></a> call, and prints version information
 and exits when invoked:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">argparse</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">prog</span><span class="o">=</span><span class="s1">&#39;PROG&#39;</span><span class="p">)</span>
@@ -886,7 +889,7 @@ is available in <code class="docutils literal notranslate"><span class="pre">arg
 <span class="go">Namespace(foo=False)</span>
 </pre></div>
 </div>
-<p>The recommended way to create a custom action is to extend <a class="reference internal" href="#argparse.Action" title="argparse.Action"><code class="xref py py-class docutils literal notranslate"><span class="pre">Action</span></code></a>,
+<p>The recommended way to create a custom action is to extend <a class="reference internal" href="#argparse-action" title="argparse.Action"><code class="xref py py-class docutils literal notranslate"><span class="pre">Action</span></code></a>,
 overriding the <code class="docutils literal notranslate"><span class="pre">__call__</span></code> method and optionally the <code class="docutils literal notranslate"><span class="pre">__init__</span></code> and
 <code class="docutils literal notranslate"><span class="pre">format_usage</span></code> methods.</p>
 <p>An example of a custom action:</p>
@@ -909,7 +912,7 @@ overriding the <code class="docutils literal notranslate"><span class="pre">__ca
 <span class="go">Namespace(bar=&#39;1&#39;, foo=&#39;2&#39;)</span>
 </pre></div>
 </div>
-<p>For more details, see <a class="reference internal" href="#argparse.Action" title="argparse.Action"><code class="xref py py-class docutils literal notranslate"><span class="pre">Action</span></code></a>.</p>
+<p>For more details, see <a class="reference internal" href="#argparse-action" title="argparse.Action"><code class="xref py py-class docutils literal notranslate"><span class="pre">Action</span></code></a>.</p>
 </div>
 <div class="section" id="nargs">
 <h3>nargs<a class="headerlink" href="#nargs" title="Permalink to this headline">¶</a></h3>
@@ -1016,15 +1019,15 @@ will be consumed and a single item (not a list) will be produced.</p>
 </div>
 <div class="section" id="const">
 <h3>const<a class="headerlink" href="#const" title="Permalink to this headline">¶</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">const</span></code> argument of <a class="reference internal" href="#argparse.ArgumentParser.add_argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code></a> is used to hold
+<p>The <code class="docutils literal notranslate"><span class="pre">const</span></code> argument of <a class="reference internal" href="#argparse-argumentparser-add-argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code></a> is used to hold
 constant values that are not read from the command line but are required for
-the various <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> actions.  The two most common uses of it are:</p>
+the various <a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> actions.  The two most common uses of it are:</p>
 <ul class="simple">
-<li><p>When <a class="reference internal" href="#argparse.ArgumentParser.add_argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code></a> is called with
+<li><p>When <a class="reference internal" href="#argparse-argumentparser-add-argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code></a> is called with
 <code class="docutils literal notranslate"><span class="pre">action='store_const'</span></code> or <code class="docutils literal notranslate"><span class="pre">action='append_const'</span></code>.  These actions add the
 <code class="docutils literal notranslate"><span class="pre">const</span></code> value to one of the attributes of the object returned by
-<a class="reference internal" href="#argparse.ArgumentParser.parse_args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a>. See the <a class="reference internal" href="#action">action</a> description for examples.</p></li>
-<li><p>When <a class="reference internal" href="#argparse.ArgumentParser.add_argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code></a> is called with option strings
+<a class="reference internal" href="#argparse-argumentparser-parse-args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a>. See the <a class="reference internal" href="#action">action</a> description for examples.</p></li>
+<li><p>When <a class="reference internal" href="#argparse-argumentparser-add-argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code></a> is called with option strings
 (like <code class="docutils literal notranslate"><span class="pre">-f</span></code> or <code class="docutils literal notranslate"><span class="pre">--foo</span></code>) and <code class="docutils literal notranslate"><span class="pre">nargs='?'</span></code>.  This creates an optional
 argument that can be followed by zero or one command-line arguments.
 When parsing the command line, if the option string is encountered with no
@@ -1038,7 +1041,7 @@ keyword argument must be given.  For other actions, it defaults to <code class="
 <h3>default<a class="headerlink" href="#default" title="Permalink to this headline">¶</a></h3>
 <p>All optional arguments and some positional arguments may be omitted at the
 command line.  The <code class="docutils literal notranslate"><span class="pre">default</span></code> keyword argument of
-<a class="reference internal" href="#argparse.ArgumentParser.add_argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code></a>, whose value defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>,
+<a class="reference internal" href="#argparse-argumentparser-add-argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code></a>, whose value defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>,
 specifies what value should be used if the command-line argument is not present.
 For optional arguments, the <code class="docutils literal notranslate"><span class="pre">default</span></code> value is used when the option string
 was not present at the command line:</p>
@@ -1053,7 +1056,7 @@ was not present at the command line:</p>
 <p>If the <code class="docutils literal notranslate"><span class="pre">default</span></code> value is a string, the parser parses the value as if it
 were a command-line argument.  In particular, the parser applies any <a class="reference internal" href="#type">type</a>
 conversion argument, if provided, before setting the attribute on the
-<a class="reference internal" href="#argparse.Namespace" title="argparse.Namespace"><code class="xref py py-class docutils literal notranslate"><span class="pre">Namespace</span></code></a> return value.  Otherwise, the parser uses the value as is:</p>
+<a class="reference internal" href="#argparse-namespace" title="argparse.Namespace"><code class="xref py py-class docutils literal notranslate"><span class="pre">Namespace</span></code></a> return value.  Otherwise, the parser uses the value as is:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--length&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;10&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--width&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mf">10.5</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
@@ -1084,10 +1087,10 @@ command-line argument was not present:</p>
 </div>
 <div class="section" id="type">
 <h3>type<a class="headerlink" href="#type" title="Permalink to this headline">¶</a></h3>
-<p>By default, <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> objects read command-line arguments in as simple
+<p>By default, <a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> objects read command-line arguments in as simple
 strings. However, quite often the command-line string should instead be
 interpreted as another type, like a <a class="reference internal" href="functions.html#float" title="float"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> or <a class="reference internal" href="functions.html#int" title="int"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>.  The
-<code class="docutils literal notranslate"><span class="pre">type</span></code> keyword argument of <a class="reference internal" href="#argparse.ArgumentParser.add_argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code></a> allows any
+<code class="docutils literal notranslate"><span class="pre">type</span></code> keyword argument of <a class="reference internal" href="#argparse-argumentparser-add-argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code></a> allows any
 necessary type-checking and type conversions to be performed.  Common built-in
 types and functions can be used directly as the value of the <code class="docutils literal notranslate"><span class="pre">type</span></code> argument:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
@@ -1145,7 +1148,7 @@ simply check against a range of values:</p>
 <h3>choices<a class="headerlink" href="#choices" title="Permalink to this headline">¶</a></h3>
 <p>Some command-line arguments should be selected from a restricted set of values.
 These can be handled by passing a container object as the <em>choices</em> keyword
-argument to <a class="reference internal" href="#argparse.ArgumentParser.add_argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code></a>.  When the command line is
+argument to <a class="reference internal" href="#argparse-argumentparser-add-argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code></a>.  When the command line is
 parsed, argument values will be checked, and an error message will be displayed
 if the argument was not one of the acceptable values:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">prog</span><span class="o">=</span><span class="s1">&#39;game.py&#39;</span><span class="p">)</span>
@@ -1178,7 +1181,7 @@ container should match the <a class="reference internal" href="#type">type</a> s
 <p>In general, the <a class="reference internal" href="#module-argparse" title="argparse: Command-line option and argument parsing library."><code class="xref py py-mod docutils literal notranslate"><span class="pre">argparse</span></code></a> module assumes that flags like <code class="docutils literal notranslate"><span class="pre">-f</span></code> and <code class="docutils literal notranslate"><span class="pre">--bar</span></code>
 indicate <em>optional</em> arguments, which can always be omitted at the command line.
 To make an option <em>required</em>, <code class="docutils literal notranslate"><span class="pre">True</span></code> can be specified for the <code class="docutils literal notranslate"><span class="pre">required=</span></code>
-keyword argument to <a class="reference internal" href="#argparse.ArgumentParser.add_argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code></a>:</p>
+keyword argument to <a class="reference internal" href="#argparse-argumentparser-add-argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code></a>:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--foo&#39;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">([</span><span class="s1">&#39;--foo&#39;</span><span class="p">,</span> <span class="s1">&#39;BAR&#39;</span><span class="p">])</span>
@@ -1189,7 +1192,7 @@ keyword argument to <a class="reference internal" href="#argparse.ArgumentParser
 </pre></div>
 </div>
 <p>As the example shows, if an option is marked as <code class="docutils literal notranslate"><span class="pre">required</span></code>,
-<a class="reference internal" href="#argparse.ArgumentParser.parse_args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> will report an error if that option is not
+<a class="reference internal" href="#argparse-argumentparser-parse-args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> will report an error if that option is not
 present at the command line.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1222,7 +1225,7 @@ argument:</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">help</span></code> strings can include various format specifiers to avoid repetition
 of things like the program name or the argument <a class="reference internal" href="#default">default</a>.  The available
 specifiers include the program name, <code class="docutils literal notranslate"><span class="pre">%(prog)s</span></code> and most keyword arguments to
-<a class="reference internal" href="#argparse.ArgumentParser.add_argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code></a>, e.g. <code class="docutils literal notranslate"><span class="pre">%(default)s</span></code>, <code class="docutils literal notranslate"><span class="pre">%(type)s</span></code>, etc.:</p>
+<a class="reference internal" href="#argparse-argumentparser-add-argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code></a>, e.g. <code class="docutils literal notranslate"><span class="pre">%(default)s</span></code>, <code class="docutils literal notranslate"><span class="pre">%(type)s</span></code>, etc.:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">prog</span><span class="o">=</span><span class="s1">&#39;frobble&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;?&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
 <span class="gp">... </span>                    <span class="n">help</span><span class="o">=</span><span class="s1">&#39;the bar to </span><span class="si">%(prog)s</span><span class="s1"> (default: </span><span class="si">%(default)s</span><span class="s1">)&#39;</span><span class="p">)</span>
@@ -1252,7 +1255,7 @@ setting the <code class="docutils literal notranslate"><span class="pre">help</s
 </div>
 <div class="section" id="metavar">
 <h3>metavar<a class="headerlink" href="#metavar" title="Permalink to this headline">¶</a></h3>
-<p>When <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> generates help messages, it needs some way to refer
+<p>When <a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> generates help messages, it needs some way to refer
 to each expected argument.  By default, ArgumentParser objects use the <a class="reference internal" href="#dest">dest</a>
 value as the “name” of each object.  By default, for positional argument
 actions, the <a class="reference internal" href="#dest">dest</a> value is used directly, and for optional argument actions,
@@ -1294,7 +1297,7 @@ will be referred to as <code class="docutils literal notranslate"><span class="p
 </pre></div>
 </div>
 <p>Note that <code class="docutils literal notranslate"><span class="pre">metavar</span></code> only changes the <em>displayed</em> name - the name of the
-attribute on the <a class="reference internal" href="#argparse.ArgumentParser.parse_args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> object is still determined
+attribute on the <a class="reference internal" href="#argparse-argumentparser-parse-args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> object is still determined
 by the <a class="reference internal" href="#dest">dest</a> value.</p>
 <p>Different values of <code class="docutils literal notranslate"><span class="pre">nargs</span></code> may cause the metavar to be used multiple times.
 Providing a tuple to <code class="docutils literal notranslate"><span class="pre">metavar</span></code> specifies a different display for each of the
@@ -1314,12 +1317,12 @@ arguments:</p>
 </div>
 <div class="section" id="dest">
 <h3>dest<a class="headerlink" href="#dest" title="Permalink to this headline">¶</a></h3>
-<p>Most <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> actions add some value as an attribute of the
-object returned by <a class="reference internal" href="#argparse.ArgumentParser.parse_args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a>.  The name of this
+<p>Most <a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> actions add some value as an attribute of the
+object returned by <a class="reference internal" href="#argparse-argumentparser-parse-args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a>.  The name of this
 attribute is determined by the <code class="docutils literal notranslate"><span class="pre">dest</span></code> keyword argument of
-<a class="reference internal" href="#argparse.ArgumentParser.add_argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code></a>.  For positional argument actions,
+<a class="reference internal" href="#argparse-argumentparser-add-argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code></a>.  For positional argument actions,
 <code class="docutils literal notranslate"><span class="pre">dest</span></code> is normally supplied as the first argument to
-<a class="reference internal" href="#argparse.ArgumentParser.add_argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code></a>:</p>
+<a class="reference internal" href="#argparse-argumentparser-add-argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code></a>:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">([</span><span class="s1">&#39;XXX&#39;</span><span class="p">])</span>
@@ -1327,7 +1330,7 @@ attribute is determined by the <code class="docutils literal notranslate"><span 
 </pre></div>
 </div>
 <p>For optional argument actions, the value of <code class="docutils literal notranslate"><span class="pre">dest</span></code> is normally inferred from
-the option strings.  <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> generates the value of <code class="docutils literal notranslate"><span class="pre">dest</span></code> by
+the option strings.  <a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> generates the value of <code class="docutils literal notranslate"><span class="pre">dest</span></code> by
 taking the first long option string and stripping away the initial <code class="docutils literal notranslate"><span class="pre">--</span></code>
 string.  If no long option strings were supplied, <code class="docutils literal notranslate"><span class="pre">dest</span></code> will be derived from
 the first short option string by stripping the initial <code class="docutils literal notranslate"><span class="pre">-</span></code> character.  Any
@@ -1357,15 +1360,15 @@ behavior:</p>
 which processes arguments from the command-line. Any object which follows
 this API may be passed as the <code class="docutils literal notranslate"><span class="pre">action</span></code> parameter to
 <code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code>.</p>
-<dl class="class">
-<dt id="argparse.Action">
-<em class="property">class </em><code class="sig-prename descclassname">argparse.</code><code class="sig-name descname">Action</code><span class="sig-paren">(</span><em class="sig-param">option_strings</em>, <em class="sig-param">dest</em>, <em class="sig-param">nargs=None</em>, <em class="sig-param">const=None</em>, <em class="sig-param">default=None</em>, <em class="sig-param">type=None</em>, <em class="sig-param">choices=None</em>, <em class="sig-param">required=False</em>, <em class="sig-param">help=None</em>, <em class="sig-param">metavar=None</em><span class="sig-paren">)</span><a class="headerlink" href="#argparse.Action" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt id="argparse-action">
+<span id="argparse.Action"></span><em class="property">class </em><code class="sig-prename descclassname">argparse.</code><code class="sig-name descname">Action</code><span class="sig-paren">(</span><em class="sig-param">option_strings</em>, <em class="sig-param">dest</em>, <em class="sig-param">nargs=None</em>, <em class="sig-param">const=None</em>, <em class="sig-param">default=None</em>, <em class="sig-param">type=None</em>, <em class="sig-param">choices=None</em>, <em class="sig-param">required=False</em>, <em class="sig-param">help=None</em>, <em class="sig-param">metavar=None</em><span class="sig-paren">)</span><a class="headerlink" href="#argparse-action" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>Action objects are used by an ArgumentParser to represent the information
 needed to parse a single argument from one or more strings from the
 command line. The Action class must accept the two positional arguments
-plus any keyword arguments passed to <a class="reference internal" href="#argparse.ArgumentParser.add_argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ArgumentParser.add_argument()</span></code></a>
+plus any keyword arguments passed to <a class="reference internal" href="#argparse-argumentparser-add-argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ArgumentParser.add_argument()</span></code></a>
 except for the <code class="docutils literal notranslate"><span class="pre">action</span></code> itself.</p>
 <p>Instances of Action (or return value of any callable to the <code class="docutils literal notranslate"><span class="pre">action</span></code>
 parameter) should have attributes “dest”, “option_strings”, “default”, “type”,
@@ -1375,12 +1378,12 @@ are defined is to call <code class="docutils literal notranslate"><span class="p
 <code class="docutils literal notranslate"><span class="pre">__call__</span></code> method, which should accept four parameters:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">parser</span></code> - The ArgumentParser object which contains this action.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">namespace</span></code> - The <a class="reference internal" href="#argparse.Namespace" title="argparse.Namespace"><code class="xref py py-class docutils literal notranslate"><span class="pre">Namespace</span></code></a> object that will be returned by
-<a class="reference internal" href="#argparse.ArgumentParser.parse_args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a>.  Most actions add an attribute to this
+<li><p><code class="docutils literal notranslate"><span class="pre">namespace</span></code> - The <a class="reference internal" href="#argparse-namespace" title="argparse.Namespace"><code class="xref py py-class docutils literal notranslate"><span class="pre">Namespace</span></code></a> object that will be returned by
+<a class="reference internal" href="#argparse-argumentparser-parse-args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a>.  Most actions add an attribute to this
 object using <a class="reference internal" href="functions.html#setattr" title="setattr"><code class="xref py py-func docutils literal notranslate"><span class="pre">setattr()</span></code></a>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">values</span></code> - The associated command-line arguments, with any type conversions
 applied.  Type conversions are specified with the <a class="reference internal" href="#type">type</a> keyword argument to
-<a class="reference internal" href="#argparse.ArgumentParser.add_argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code></a>.</p></li>
+<a class="reference internal" href="#argparse-argumentparser-add-argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code></a>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">option_string</span></code> - The option string that was used to invoke this action.
 The <code class="docutils literal notranslate"><span class="pre">option_string</span></code> argument is optional, and will be absent if the action
 is associated with a positional argument.</p></li>
@@ -1394,25 +1397,25 @@ If such method is not provided, a sensible default will be used.</p>
 </div>
 <div class="section" id="the-parse-args-method">
 <h2>The parse_args() method<a class="headerlink" href="#the-parse-args-method" title="Permalink to this headline">¶</a></h2>
-<dl class="method">
-<dt id="argparse.ArgumentParser.parse_args">
-<code class="sig-prename descclassname">ArgumentParser.</code><code class="sig-name descname">parse_args</code><span class="sig-paren">(</span><em class="sig-param">args=None</em>, <em class="sig-param">namespace=None</em><span class="sig-paren">)</span><a class="headerlink" href="#argparse.ArgumentParser.parse_args" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="argparse-argumentparser-parse-args">
+<span id="argparse.ArgumentParser.parse_args"></span><code class="sig-prename descclassname">ArgumentParser.</code><code class="sig-name descname">parse_args</code><span class="sig-paren">(</span><em class="sig-param">args=None</em>, <em class="sig-param">namespace=None</em><span class="sig-paren">)</span><a class="headerlink" href="#argparse-argumentparser-parse-args" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert argument strings to objects and assign them as attributes of the
 namespace.  Return the populated namespace.</p>
-<p>Previous calls to <a class="reference internal" href="#argparse.ArgumentParser.add_argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code></a> determine exactly what objects are
+<p>Previous calls to <a class="reference internal" href="#argparse-argumentparser-add-argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code></a> determine exactly what objects are
 created and how they are assigned. See the documentation for
-<a class="reference internal" href="#argparse.ArgumentParser.add_argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code></a> for details.</p>
+<a class="reference internal" href="#argparse-argumentparser-add-argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code></a> for details.</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#args">args</a> - List of strings to parse.  The default is taken from
-<a class="reference internal" href="sys.html#sys.argv" title="sys.argv"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.argv</span></code></a>.</p></li>
+<a class="reference internal" href="sys.html#sys-argv" title="sys.argv"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.argv</span></code></a>.</p></li>
 <li><p><a class="reference internal" href="#namespace">namespace</a> - An object to take the attributes.  The default is a new empty
-<a class="reference internal" href="#argparse.Namespace" title="argparse.Namespace"><code class="xref py py-class docutils literal notranslate"><span class="pre">Namespace</span></code></a> object.</p></li>
+<a class="reference internal" href="#argparse-namespace" title="argparse.Namespace"><code class="xref py py-class docutils literal notranslate"><span class="pre">Namespace</span></code></a> object.</p></li>
 </ul>
 </dd></dl>
 
 <div class="section" id="option-value-syntax">
 <h3>Option value syntax<a class="headerlink" href="#option-value-syntax" title="Permalink to this headline">¶</a></h3>
-<p>The <a class="reference internal" href="#argparse.ArgumentParser.parse_args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> method supports several ways of
+<p>The <a class="reference internal" href="#argparse-argumentparser-parse-args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> method supports several ways of
 specifying the value of an option (if it takes one).  In the simplest case, the
 option and its value are passed as two separate arguments:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">prog</span><span class="o">=</span><span class="s1">&#39;PROG&#39;</span><span class="p">)</span>
@@ -1450,7 +1453,7 @@ as long as only the last option (or none of them) requires a value:</p>
 </div>
 <div class="section" id="invalid-arguments">
 <h3>Invalid arguments<a class="headerlink" href="#invalid-arguments" title="Permalink to this headline">¶</a></h3>
-<p>While parsing the command line, <a class="reference internal" href="#argparse.ArgumentParser.parse_args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> checks for a
+<p>While parsing the command line, <a class="reference internal" href="#argparse-argumentparser-parse-args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> checks for a
 variety of errors, including ambiguous options, invalid types, invalid options,
 wrong number of positional arguments, etc.  When it encounters such an error,
 it exits and prints the error along with a usage message:</p>
@@ -1477,11 +1480,11 @@ it exits and prints the error along with a usage message:</p>
 </div>
 <div class="section" id="arguments-containing">
 <h3>Arguments containing <code class="docutils literal notranslate"><span class="pre">-</span></code><a class="headerlink" href="#arguments-containing" title="Permalink to this headline">¶</a></h3>
-<p>The <a class="reference internal" href="#argparse.ArgumentParser.parse_args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> method attempts to give errors whenever
+<p>The <a class="reference internal" href="#argparse-argumentparser-parse-args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> method attempts to give errors whenever
 the user has clearly made a mistake, but some situations are inherently
 ambiguous.  For example, the command-line argument <code class="docutils literal notranslate"><span class="pre">-1</span></code> could either be an
 attempt to specify an option or an attempt to provide a positional argument.
-The <a class="reference internal" href="#argparse.ArgumentParser.parse_args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> method is cautious here: positional
+The <a class="reference internal" href="#argparse-argumentparser-parse-args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> method is cautious here: positional
 arguments may only begin with <code class="docutils literal notranslate"><span class="pre">-</span></code> if they look like negative numbers and
 there are no options in the parser that look like negative numbers:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">prog</span><span class="o">=</span><span class="s1">&#39;PROG&#39;</span><span class="p">)</span>
@@ -1517,7 +1520,7 @@ there are no options in the parser that look like negative numbers:</p>
 </div>
 <p>If you have positional arguments that must begin with <code class="docutils literal notranslate"><span class="pre">-</span></code> and don’t look
 like negative numbers, you can insert the pseudo-argument <code class="docutils literal notranslate"><span class="pre">'--'</span></code> which tells
-<a class="reference internal" href="#argparse.ArgumentParser.parse_args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> that everything after that is a positional
+<a class="reference internal" href="#argparse-argumentparser-parse-args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> that everything after that is a positional
 argument:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">([</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="s1">&#39;-f&#39;</span><span class="p">])</span>
 <span class="go">Namespace(foo=&#39;-f&#39;, one=None)</span>
@@ -1526,7 +1529,7 @@ argument:</p>
 </div>
 <div class="section" id="argument-abbreviations-prefix-matching">
 <span id="prefix-matching"></span><h3>Argument abbreviations (prefix matching)<a class="headerlink" href="#argument-abbreviations-prefix-matching" title="Permalink to this headline">¶</a></h3>
-<p>The <a class="reference internal" href="#argparse.ArgumentParser.parse_args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> method <a class="reference internal" href="#allow-abbrev"><span class="std std-ref">by default</span></a>
+<p>The <a class="reference internal" href="#argparse-argumentparser-parse-args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> method <a class="reference internal" href="#allow-abbrev"><span class="std std-ref">by default</span></a>
 allows long options to be abbreviated to a prefix, if the abbreviation is
 unambiguous (the prefix matches a unique option):</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">prog</span><span class="o">=</span><span class="s1">&#39;PROG&#39;</span><span class="p">)</span>
@@ -1547,8 +1550,8 @@ This feature can be disabled by setting <a class="reference internal" href="#all
 <div class="section" id="beyond-sys-argv">
 <span id="args"></span><h3>Beyond <code class="docutils literal notranslate"><span class="pre">sys.argv</span></code><a class="headerlink" href="#beyond-sys-argv" title="Permalink to this headline">¶</a></h3>
 <p>Sometimes it may be useful to have an ArgumentParser parse arguments other than those
-of <a class="reference internal" href="sys.html#sys.argv" title="sys.argv"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.argv</span></code></a>.  This can be accomplished by passing a list of strings to
-<a class="reference internal" href="#argparse.ArgumentParser.parse_args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a>.  This is useful for testing at the
+of <a class="reference internal" href="sys.html#sys-argv" title="sys.argv"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.argv</span></code></a>.  This can be accomplished by passing a list of strings to
+<a class="reference internal" href="#argparse-argumentparser-parse-args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a>.  This is useful for testing at the
 interactive prompt:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
@@ -1566,10 +1569,10 @@ interactive prompt:</p>
 </div>
 <div class="section" id="the-namespace-object">
 <span id="namespace"></span><h3>The Namespace object<a class="headerlink" href="#the-namespace-object" title="Permalink to this headline">¶</a></h3>
-<dl class="class">
-<dt id="argparse.Namespace">
-<em class="property">class </em><code class="sig-prename descclassname">argparse.</code><code class="sig-name descname">Namespace</code><a class="headerlink" href="#argparse.Namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>Simple class used by default by <a class="reference internal" href="#argparse.ArgumentParser.parse_args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> to create
+<dl class="py class">
+<dt id="argparse-namespace">
+<span id="argparse.Namespace"></span><em class="property">class </em><code class="sig-prename descclassname">argparse.</code><code class="sig-name descname">Namespace</code><a class="headerlink" href="#argparse-namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simple class used by default by <a class="reference internal" href="#argparse-argumentparser-parse-args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> to create
 an object holding attributes and return it.</p>
 </dd></dl>
 
@@ -1583,8 +1586,8 @@ attributes, you can use the standard Python idiom, <a class="reference internal"
 <span class="go">{&#39;foo&#39;: &#39;BAR&#39;}</span>
 </pre></div>
 </div>
-<p>It may also be useful to have an <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> assign attributes to an
-already existing object, rather than a new <a class="reference internal" href="#argparse.Namespace" title="argparse.Namespace"><code class="xref py py-class docutils literal notranslate"><span class="pre">Namespace</span></code></a> object.  This can
+<p>It may also be useful to have an <a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> assign attributes to an
+already existing object, rather than a new <a class="reference internal" href="#argparse-namespace" title="argparse.Namespace"><code class="xref py py-class docutils literal notranslate"><span class="pre">Namespace</span></code></a> object.  This can
 be achieved by specifying the <code class="docutils literal notranslate"><span class="pre">namespace=</span></code> keyword argument:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">C</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="k">pass</span>
@@ -1603,20 +1606,20 @@ be achieved by specifying the <code class="docutils literal notranslate"><span c
 <h2>Other utilities<a class="headerlink" href="#other-utilities" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="sub-commands">
 <h3>Sub-commands<a class="headerlink" href="#sub-commands" title="Permalink to this headline">¶</a></h3>
-<dl class="method">
-<dt id="argparse.ArgumentParser.add_subparsers">
-<code class="sig-prename descclassname">ArgumentParser.</code><code class="sig-name descname">add_subparsers</code><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param">title</em><span class="optional">]</span><span class="optional">[</span>, <em class="sig-param">description</em><span class="optional">]</span><span class="optional">[</span>, <em class="sig-param">prog</em><span class="optional">]</span><span class="optional">[</span>, <em class="sig-param">parser_class</em><span class="optional">]</span><span class="optional">[</span>, <em class="sig-param">action</em><span class="optional">]</span><span class="optional">[</span>, <em class="sig-param">option_string</em><span class="optional">]</span><span class="optional">[</span>, <em class="sig-param">dest</em><span class="optional">]</span><span class="optional">[</span>, <em class="sig-param">required</em><span class="optional">]</span><span class="optional">[</span>, <em class="sig-param">help</em><span class="optional">]</span><span class="optional">[</span>, <em class="sig-param">metavar</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#argparse.ArgumentParser.add_subparsers" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="argparse-argumentparser-add-subparsers">
+<span id="argparse.ArgumentParser.add_subparsers"></span><code class="sig-prename descclassname">ArgumentParser.</code><code class="sig-name descname">add_subparsers</code><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param">title</em><span class="optional">]</span><span class="optional">[</span>, <em class="sig-param">description</em><span class="optional">]</span><span class="optional">[</span>, <em class="sig-param">prog</em><span class="optional">]</span><span class="optional">[</span>, <em class="sig-param">parser_class</em><span class="optional">]</span><span class="optional">[</span>, <em class="sig-param">action</em><span class="optional">]</span><span class="optional">[</span>, <em class="sig-param">option_string</em><span class="optional">]</span><span class="optional">[</span>, <em class="sig-param">dest</em><span class="optional">]</span><span class="optional">[</span>, <em class="sig-param">required</em><span class="optional">]</span><span class="optional">[</span>, <em class="sig-param">help</em><span class="optional">]</span><span class="optional">[</span>, <em class="sig-param">metavar</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#argparse-argumentparser-add-subparsers" title="Permalink to this definition">¶</a></dt>
 <dd><p>Many programs split up their functionality into a number of sub-commands,
 for example, the <code class="docutils literal notranslate"><span class="pre">svn</span></code> program can invoke sub-commands like <code class="docutils literal notranslate"><span class="pre">svn</span>
 <span class="pre">checkout</span></code>, <code class="docutils literal notranslate"><span class="pre">svn</span> <span class="pre">update</span></code>, and <code class="docutils literal notranslate"><span class="pre">svn</span> <span class="pre">commit</span></code>.  Splitting up functionality
 this way can be a particularly good idea when a program performs several
 different functions which require different kinds of command-line arguments.
-<a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> supports the creation of such sub-commands with the
-<a class="reference internal" href="#argparse.ArgumentParser.add_subparsers" title="argparse.ArgumentParser.add_subparsers"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_subparsers()</span></code></a> method.  The <a class="reference internal" href="#argparse.ArgumentParser.add_subparsers" title="argparse.ArgumentParser.add_subparsers"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_subparsers()</span></code></a> method is normally
+<a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> supports the creation of such sub-commands with the
+<a class="reference internal" href="#argparse-argumentparser-add-subparsers" title="argparse.ArgumentParser.add_subparsers"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_subparsers()</span></code></a> method.  The <a class="reference internal" href="#argparse-argumentparser-add-subparsers" title="argparse.ArgumentParser.add_subparsers"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_subparsers()</span></code></a> method is normally
 called with no arguments and returns a special action object.  This object
 has a single method, <code class="xref py py-meth docutils literal notranslate"><span class="pre">add_parser()</span></code>, which takes a
-command name and any <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> constructor arguments, and
-returns an <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> object that can be modified as usual.</p>
+command name and any <a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> constructor arguments, and
+returns an <a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> object that can be modified as usual.</p>
 <p>Description of parameters:</p>
 <ul class="simple">
 <li><p>title - title for the sub-parser group in help output; by default
@@ -1660,7 +1663,7 @@ is <code class="docutils literal notranslate"><span class="pre">None</span></cod
 <span class="go">Namespace(baz=&#39;Z&#39;, foo=True)</span>
 </pre></div>
 </div>
-<p>Note that the object returned by <a class="reference internal" href="#argparse.ArgumentParser.parse_args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> will only contain
+<p>Note that the object returned by <a class="reference internal" href="#argparse-argumentparser-parse-args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> will only contain
 attributes for the main parser and the subparser that was selected by the
 command line (and not any other subparsers).  So in the example above, when
 the <code class="docutils literal notranslate"><span class="pre">a</span></code> command is specified, only the <code class="docutils literal notranslate"><span class="pre">foo</span></code> and <code class="docutils literal notranslate"><span class="pre">bar</span></code> attributes are
@@ -1700,7 +1703,7 @@ to <code class="xref py py-meth docutils literal notranslate"><span class="pre">
 <span class="go">  --baz {X,Y,Z}  baz help</span>
 </pre></div>
 </div>
-<p>The <a class="reference internal" href="#argparse.ArgumentParser.add_subparsers" title="argparse.ArgumentParser.add_subparsers"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_subparsers()</span></code></a> method also supports <code class="docutils literal notranslate"><span class="pre">title</span></code> and <code class="docutils literal notranslate"><span class="pre">description</span></code>
+<p>The <a class="reference internal" href="#argparse-argumentparser-add-subparsers" title="argparse.ArgumentParser.add_subparsers"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_subparsers()</span></code></a> method also supports <code class="docutils literal notranslate"><span class="pre">title</span></code> and <code class="docutils literal notranslate"><span class="pre">description</span></code>
 keyword arguments.  When either is present, the subparser’s commands will
 appear in their own group in the help output.  For example:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
@@ -1733,7 +1736,7 @@ like <code class="docutils literal notranslate"><span class="pre">svn</span></co
 </pre></div>
 </div>
 <p>One particularly effective way of handling sub-commands is to combine the use
-of the <a class="reference internal" href="#argparse.ArgumentParser.add_subparsers" title="argparse.ArgumentParser.add_subparsers"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_subparsers()</span></code></a> method with calls to <a class="reference internal" href="#argparse.ArgumentParser.set_defaults" title="argparse.ArgumentParser.set_defaults"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_defaults()</span></code></a> so
+of the <a class="reference internal" href="#argparse-argumentparser-add-subparsers" title="argparse.ArgumentParser.add_subparsers"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_subparsers()</span></code></a> method with calls to <a class="reference internal" href="#argparse-argumentparser-set-defaults" title="argparse.ArgumentParser.set_defaults"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_defaults()</span></code></a> so
 that each subparser knows which Python function it should execute.  For
 example:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># sub-command functions</span>
@@ -1769,12 +1772,12 @@ example:</p>
 <span class="go">((XYZYX))</span>
 </pre></div>
 </div>
-<p>This way, you can let <a class="reference internal" href="#argparse.ArgumentParser.parse_args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> do the job of calling the
+<p>This way, you can let <a class="reference internal" href="#argparse-argumentparser-parse-args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> do the job of calling the
 appropriate function after argument parsing is complete.  Associating
 functions with actions like this is typically the easiest way to handle the
 different actions for each of your subparsers.  However, if it is necessary
 to check the name of the subparser that was invoked, the <code class="docutils literal notranslate"><span class="pre">dest</span></code> keyword
-argument to the <a class="reference internal" href="#argparse.ArgumentParser.add_subparsers" title="argparse.ArgumentParser.add_subparsers"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_subparsers()</span></code></a> call will work:</p>
+argument to the <a class="reference internal" href="#argparse-argumentparser-add-subparsers" title="argparse.ArgumentParser.add_subparsers"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_subparsers()</span></code></a> call will work:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">subparsers</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_subparsers</span><span class="p">(</span><span class="n">dest</span><span class="o">=</span><span class="s1">&#39;subparser_name&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">subparser1</span> <span class="o">=</span> <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">)</span>
@@ -1793,12 +1796,12 @@ argument to the <a class="reference internal" href="#argparse.ArgumentParser.add
 </div>
 <div class="section" id="filetype-objects">
 <h3>FileType objects<a class="headerlink" href="#filetype-objects" title="Permalink to this headline">¶</a></h3>
-<dl class="class">
-<dt id="argparse.FileType">
-<em class="property">class </em><code class="sig-prename descclassname">argparse.</code><code class="sig-name descname">FileType</code><span class="sig-paren">(</span><em class="sig-param">mode='r'</em>, <em class="sig-param">bufsize=-1</em>, <em class="sig-param">encoding=None</em>, <em class="sig-param">errors=None</em><span class="sig-paren">)</span><a class="headerlink" href="#argparse.FileType" title="Permalink to this definition">¶</a></dt>
-<dd><p>The <a class="reference internal" href="#argparse.FileType" title="argparse.FileType"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileType</span></code></a> factory creates objects that can be passed to the type
-argument of <a class="reference internal" href="#argparse.ArgumentParser.add_argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ArgumentParser.add_argument()</span></code></a>.  Arguments that have
-<a class="reference internal" href="#argparse.FileType" title="argparse.FileType"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileType</span></code></a> objects as their type will open command-line arguments as
+<dl class="py class">
+<dt id="argparse-filetype">
+<span id="argparse.FileType"></span><em class="property">class </em><code class="sig-prename descclassname">argparse.</code><code class="sig-name descname">FileType</code><span class="sig-paren">(</span><em class="sig-param">mode='r'</em>, <em class="sig-param">bufsize=-1</em>, <em class="sig-param">encoding=None</em>, <em class="sig-param">errors=None</em><span class="sig-paren">)</span><a class="headerlink" href="#argparse-filetype" title="Permalink to this definition">¶</a></dt>
+<dd><p>The <a class="reference internal" href="#argparse-filetype" title="argparse.FileType"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileType</span></code></a> factory creates objects that can be passed to the type
+argument of <a class="reference internal" href="#argparse-argumentparser-add-argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ArgumentParser.add_argument()</span></code></a>.  Arguments that have
+<a class="reference internal" href="#argparse-filetype" title="argparse.FileType"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileType</span></code></a> objects as their type will open command-line arguments as
 files with the requested modes, buffer sizes, encodings and error handling
 (see the <a class="reference internal" href="functions.html#open" title="open"><code class="xref py py-func docutils literal notranslate"><span class="pre">open()</span></code></a> function for more details):</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
@@ -1809,8 +1812,8 @@ files with the requested modes, buffer sizes, encodings and error handling
 </pre></div>
 </div>
 <p>FileType objects understand the pseudo-argument <code class="docutils literal notranslate"><span class="pre">'-'</span></code> and automatically
-convert this into <code class="docutils literal notranslate"><span class="pre">sys.stdin</span></code> for readable <a class="reference internal" href="#argparse.FileType" title="argparse.FileType"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileType</span></code></a> objects and
-<code class="docutils literal notranslate"><span class="pre">sys.stdout</span></code> for writable <a class="reference internal" href="#argparse.FileType" title="argparse.FileType"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileType</span></code></a> objects:</p>
+convert this into <code class="docutils literal notranslate"><span class="pre">sys.stdin</span></code> for readable <a class="reference internal" href="#argparse-filetype" title="argparse.FileType"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileType</span></code></a> objects and
+<code class="docutils literal notranslate"><span class="pre">sys.stdout</span></code> for writable <a class="reference internal" href="#argparse-filetype" title="argparse.FileType"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileType</span></code></a> objects:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;infile&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">FileType</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">([</span><span class="s1">&#39;-&#39;</span><span class="p">])</span>
@@ -1825,14 +1828,14 @@ convert this into <code class="docutils literal notranslate"><span class="pre">s
 </div>
 <div class="section" id="argument-groups">
 <h3>Argument groups<a class="headerlink" href="#argument-groups" title="Permalink to this headline">¶</a></h3>
-<dl class="method">
-<dt id="argparse.ArgumentParser.add_argument_group">
-<code class="sig-prename descclassname">ArgumentParser.</code><code class="sig-name descname">add_argument_group</code><span class="sig-paren">(</span><em class="sig-param">title=None</em>, <em class="sig-param">description=None</em><span class="sig-paren">)</span><a class="headerlink" href="#argparse.ArgumentParser.add_argument_group" title="Permalink to this definition">¶</a></dt>
-<dd><p>By default, <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> groups command-line arguments into
+<dl class="py method">
+<dt id="argparse-argumentparser-add-argument-group">
+<span id="argparse.ArgumentParser.add_argument_group"></span><code class="sig-prename descclassname">ArgumentParser.</code><code class="sig-name descname">add_argument_group</code><span class="sig-paren">(</span><em class="sig-param">title=None</em>, <em class="sig-param">description=None</em><span class="sig-paren">)</span><a class="headerlink" href="#argparse-argumentparser-add-argument-group" title="Permalink to this definition">¶</a></dt>
+<dd><p>By default, <a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> groups command-line arguments into
 “positional arguments” and “optional arguments” when displaying help
 messages. When there is a better conceptual grouping of arguments than this
 default one, appropriate groups can be created using the
-<a class="reference internal" href="#argparse.ArgumentParser.add_argument_group" title="argparse.ArgumentParser.add_argument_group"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument_group()</span></code></a> method:</p>
+<a class="reference internal" href="#argparse-argumentparser-add-argument-group" title="argparse.ArgumentParser.add_argument_group"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument_group()</span></code></a> method:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">prog</span><span class="o">=</span><span class="s1">&#39;PROG&#39;</span><span class="p">,</span> <span class="n">add_help</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">group</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_argument_group</span><span class="p">(</span><span class="s1">&#39;group&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--foo&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;foo help&#39;</span><span class="p">)</span>
@@ -1845,11 +1848,11 @@ default one, appropriate groups can be created using the
 <span class="go">  --foo FOO  foo help</span>
 </pre></div>
 </div>
-<p>The <a class="reference internal" href="#argparse.ArgumentParser.add_argument_group" title="argparse.ArgumentParser.add_argument_group"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument_group()</span></code></a> method returns an argument group object which
-has an <a class="reference internal" href="#argparse.ArgumentParser.add_argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code></a> method just like a regular
-<a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a>.  When an argument is added to the group, the parser
+<p>The <a class="reference internal" href="#argparse-argumentparser-add-argument-group" title="argparse.ArgumentParser.add_argument_group"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument_group()</span></code></a> method returns an argument group object which
+has an <a class="reference internal" href="#argparse-argumentparser-add-argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code></a> method just like a regular
+<a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a>.  When an argument is added to the group, the parser
 treats it just like a normal argument, but displays the argument in a
-separate group for help messages.  The <a class="reference internal" href="#argparse.ArgumentParser.add_argument_group" title="argparse.ArgumentParser.add_argument_group"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument_group()</span></code></a> method
+separate group for help messages.  The <a class="reference internal" href="#argparse-argumentparser-add-argument-group" title="argparse.ArgumentParser.add_argument_group"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument_group()</span></code></a> method
 accepts <em>title</em> and <em>description</em> arguments which can be used to
 customize this display:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">prog</span><span class="o">=</span><span class="s1">&#39;PROG&#39;</span><span class="p">,</span> <span class="n">add_help</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -1878,9 +1881,9 @@ in the usual “positional arguments” and “optional arguments” sections.</
 </div>
 <div class="section" id="mutual-exclusion">
 <h3>Mutual exclusion<a class="headerlink" href="#mutual-exclusion" title="Permalink to this headline">¶</a></h3>
-<dl class="method">
-<dt id="argparse.ArgumentParser.add_mutually_exclusive_group">
-<code class="sig-prename descclassname">ArgumentParser.</code><code class="sig-name descname">add_mutually_exclusive_group</code><span class="sig-paren">(</span><em class="sig-param">required=False</em><span class="sig-paren">)</span><a class="headerlink" href="#argparse.ArgumentParser.add_mutually_exclusive_group" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="argparse-argumentparser-add-mutually-exclusive-group">
+<span id="argparse.ArgumentParser.add_mutually_exclusive_group"></span><code class="sig-prename descclassname">ArgumentParser.</code><code class="sig-name descname">add_mutually_exclusive_group</code><span class="sig-paren">(</span><em class="sig-param">required=False</em><span class="sig-paren">)</span><a class="headerlink" href="#argparse-argumentparser-add-mutually-exclusive-group" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a mutually exclusive group. <a class="reference internal" href="#module-argparse" title="argparse: Command-line option and argument parsing library."><code class="xref py py-mod docutils literal notranslate"><span class="pre">argparse</span></code></a> will make sure that only
 one of the arguments in the mutually exclusive group was present on the
 command line:</p>
@@ -1897,7 +1900,7 @@ command line:</p>
 <span class="go">PROG: error: argument --bar: not allowed with argument --foo</span>
 </pre></div>
 </div>
-<p>The <a class="reference internal" href="#argparse.ArgumentParser.add_mutually_exclusive_group" title="argparse.ArgumentParser.add_mutually_exclusive_group"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_mutually_exclusive_group()</span></code></a> method also accepts a <em>required</em>
+<p>The <a class="reference internal" href="#argparse-argumentparser-add-mutually-exclusive-group" title="argparse.ArgumentParser.add_mutually_exclusive_group"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_mutually_exclusive_group()</span></code></a> method also accepts a <em>required</em>
 argument, to indicate that at least one of the mutually exclusive arguments
 is required:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">prog</span><span class="o">=</span><span class="s1">&#39;PROG&#39;</span><span class="p">)</span>
@@ -1911,18 +1914,18 @@ is required:</p>
 </div>
 <p>Note that currently mutually exclusive argument groups do not support the
 <em>title</em> and <em>description</em> arguments of
-<a class="reference internal" href="#argparse.ArgumentParser.add_argument_group" title="argparse.ArgumentParser.add_argument_group"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument_group()</span></code></a>.</p>
+<a class="reference internal" href="#argparse-argumentparser-add-argument-group" title="argparse.ArgumentParser.add_argument_group"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument_group()</span></code></a>.</p>
 </dd></dl>
 
 </div>
 <div class="section" id="parser-defaults">
 <h3>Parser defaults<a class="headerlink" href="#parser-defaults" title="Permalink to this headline">¶</a></h3>
-<dl class="method">
-<dt id="argparse.ArgumentParser.set_defaults">
-<code class="sig-prename descclassname">ArgumentParser.</code><code class="sig-name descname">set_defaults</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#argparse.ArgumentParser.set_defaults" title="Permalink to this definition">¶</a></dt>
-<dd><p>Most of the time, the attributes of the object returned by <a class="reference internal" href="#argparse.ArgumentParser.parse_args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a>
+<dl class="py method">
+<dt id="argparse-argumentparser-set-defaults">
+<span id="argparse.ArgumentParser.set_defaults"></span><code class="sig-prename descclassname">ArgumentParser.</code><code class="sig-name descname">set_defaults</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#argparse-argumentparser-set-defaults" title="Permalink to this definition">¶</a></dt>
+<dd><p>Most of the time, the attributes of the object returned by <a class="reference internal" href="#argparse-argumentparser-parse-args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a>
 will be fully determined by inspecting the command-line arguments and the argument
-actions.  <a class="reference internal" href="#argparse.ArgumentParser.set_defaults" title="argparse.ArgumentParser.set_defaults"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_defaults()</span></code></a> allows some additional
+actions.  <a class="reference internal" href="#argparse-argumentparser-set-defaults" title="argparse.ArgumentParser.set_defaults"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_defaults()</span></code></a> allows some additional
 attributes that are determined without any inspection of the command line to
 be added:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
@@ -1941,16 +1944,16 @@ be added:</p>
 </pre></div>
 </div>
 <p>Parser-level defaults can be particularly useful when working with multiple
-parsers.  See the <a class="reference internal" href="#argparse.ArgumentParser.add_subparsers" title="argparse.ArgumentParser.add_subparsers"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_subparsers()</span></code></a> method for an
+parsers.  See the <a class="reference internal" href="#argparse-argumentparser-add-subparsers" title="argparse.ArgumentParser.add_subparsers"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_subparsers()</span></code></a> method for an
 example of this type.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="argparse.ArgumentParser.get_default">
-<code class="sig-prename descclassname">ArgumentParser.</code><code class="sig-name descname">get_default</code><span class="sig-paren">(</span><em class="sig-param">dest</em><span class="sig-paren">)</span><a class="headerlink" href="#argparse.ArgumentParser.get_default" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="argparse-argumentparser-get-default">
+<span id="argparse.ArgumentParser.get_default"></span><code class="sig-prename descclassname">ArgumentParser.</code><code class="sig-name descname">get_default</code><span class="sig-paren">(</span><em class="sig-param">dest</em><span class="sig-paren">)</span><a class="headerlink" href="#argparse-argumentparser-get-default" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the default value for a namespace attribute, as set by either
-<a class="reference internal" href="#argparse.ArgumentParser.add_argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code></a> or by
-<a class="reference internal" href="#argparse.ArgumentParser.set_defaults" title="argparse.ArgumentParser.set_defaults"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_defaults()</span></code></a>:</p>
+<a class="reference internal" href="#argparse-argumentparser-add-argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code></a> or by
+<a class="reference internal" href="#argparse-argumentparser-set-defaults" title="argparse.ArgumentParser.set_defaults"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_defaults()</span></code></a>:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--foo&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;badger&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span><span class="o">.</span><span class="n">get_default</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">)</span>
@@ -1962,53 +1965,53 @@ example of this type.</p>
 </div>
 <div class="section" id="printing-help">
 <h3>Printing help<a class="headerlink" href="#printing-help" title="Permalink to this headline">¶</a></h3>
-<p>In most typical applications, <a class="reference internal" href="#argparse.ArgumentParser.parse_args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> will take
+<p>In most typical applications, <a class="reference internal" href="#argparse-argumentparser-parse-args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> will take
 care of formatting and printing any usage or error messages.  However, several
 formatting methods are available:</p>
-<dl class="method">
-<dt id="argparse.ArgumentParser.print_usage">
-<code class="sig-prename descclassname">ArgumentParser.</code><code class="sig-name descname">print_usage</code><span class="sig-paren">(</span><em class="sig-param">file=None</em><span class="sig-paren">)</span><a class="headerlink" href="#argparse.ArgumentParser.print_usage" title="Permalink to this definition">¶</a></dt>
-<dd><p>Print a brief description of how the <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> should be
-invoked on the command line.  If <em>file</em> is <code class="docutils literal notranslate"><span class="pre">None</span></code>, <a class="reference internal" href="sys.html#sys.stdout" title="sys.stdout"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.stdout</span></code></a> is
+<dl class="py method">
+<dt id="argparse-argumentparser-print-usage">
+<span id="argparse.ArgumentParser.print_usage"></span><code class="sig-prename descclassname">ArgumentParser.</code><code class="sig-name descname">print_usage</code><span class="sig-paren">(</span><em class="sig-param">file=None</em><span class="sig-paren">)</span><a class="headerlink" href="#argparse-argumentparser-print-usage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print a brief description of how the <a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> should be
+invoked on the command line.  If <em>file</em> is <code class="docutils literal notranslate"><span class="pre">None</span></code>, <a class="reference internal" href="sys.html#sys-stdout" title="sys.stdout"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.stdout</span></code></a> is
 assumed.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="argparse.ArgumentParser.print_help">
-<code class="sig-prename descclassname">ArgumentParser.</code><code class="sig-name descname">print_help</code><span class="sig-paren">(</span><em class="sig-param">file=None</em><span class="sig-paren">)</span><a class="headerlink" href="#argparse.ArgumentParser.print_help" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="argparse-argumentparser-print-help">
+<span id="argparse.ArgumentParser.print_help"></span><code class="sig-prename descclassname">ArgumentParser.</code><code class="sig-name descname">print_help</code><span class="sig-paren">(</span><em class="sig-param">file=None</em><span class="sig-paren">)</span><a class="headerlink" href="#argparse-argumentparser-print-help" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print a help message, including the program usage and information about the
-arguments registered with the <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a>.  If <em>file</em> is
-<code class="docutils literal notranslate"><span class="pre">None</span></code>, <a class="reference internal" href="sys.html#sys.stdout" title="sys.stdout"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.stdout</span></code></a> is assumed.</p>
+arguments registered with the <a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a>.  If <em>file</em> is
+<code class="docutils literal notranslate"><span class="pre">None</span></code>, <a class="reference internal" href="sys.html#sys-stdout" title="sys.stdout"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.stdout</span></code></a> is assumed.</p>
 </dd></dl>
 
 <p>There are also variants of these methods that simply return a string instead of
 printing it:</p>
-<dl class="method">
-<dt id="argparse.ArgumentParser.format_usage">
-<code class="sig-prename descclassname">ArgumentParser.</code><code class="sig-name descname">format_usage</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#argparse.ArgumentParser.format_usage" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="argparse-argumentparser-format-usage">
+<span id="argparse.ArgumentParser.format_usage"></span><code class="sig-prename descclassname">ArgumentParser.</code><code class="sig-name descname">format_usage</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#argparse-argumentparser-format-usage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a string containing a brief description of how the
-<a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> should be invoked on the command line.</p>
+<a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> should be invoked on the command line.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="argparse.ArgumentParser.format_help">
-<code class="sig-prename descclassname">ArgumentParser.</code><code class="sig-name descname">format_help</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#argparse.ArgumentParser.format_help" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="argparse-argumentparser-format-help">
+<span id="argparse.ArgumentParser.format_help"></span><code class="sig-prename descclassname">ArgumentParser.</code><code class="sig-name descname">format_help</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#argparse-argumentparser-format-help" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a string containing a help message, including the program usage and
-information about the arguments registered with the <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a>.</p>
+information about the arguments registered with the <a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a>.</p>
 </dd></dl>
 
 </div>
 <div class="section" id="partial-parsing">
 <h3>Partial parsing<a class="headerlink" href="#partial-parsing" title="Permalink to this headline">¶</a></h3>
-<dl class="method">
-<dt id="argparse.ArgumentParser.parse_known_args">
-<code class="sig-prename descclassname">ArgumentParser.</code><code class="sig-name descname">parse_known_args</code><span class="sig-paren">(</span><em class="sig-param">args=None</em>, <em class="sig-param">namespace=None</em><span class="sig-paren">)</span><a class="headerlink" href="#argparse.ArgumentParser.parse_known_args" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="argparse-argumentparser-parse-known-args">
+<span id="argparse.ArgumentParser.parse_known_args"></span><code class="sig-prename descclassname">ArgumentParser.</code><code class="sig-name descname">parse_known_args</code><span class="sig-paren">(</span><em class="sig-param">args=None</em>, <em class="sig-param">namespace=None</em><span class="sig-paren">)</span><a class="headerlink" href="#argparse-argumentparser-parse-known-args" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>Sometimes a script may only parse a few of the command-line arguments, passing
 the remaining arguments on to another script or program. In these cases, the
-<a class="reference internal" href="#argparse.ArgumentParser.parse_known_args" title="argparse.ArgumentParser.parse_known_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_known_args()</span></code></a> method can be useful.  It works much like
-<a class="reference internal" href="#argparse.ArgumentParser.parse_args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> except that it does not produce an error when
+<a class="reference internal" href="#argparse-argumentparser-parse-known-args" title="argparse.ArgumentParser.parse_known_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_known_args()</span></code></a> method can be useful.  It works much like
+<a class="reference internal" href="#argparse-argumentparser-parse-args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> except that it does not produce an error when
 extra arguments are present.  Instead, it returns a two item tuple containing
 the populated namespace and the list of remaining argument strings.</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
@@ -2028,12 +2031,12 @@ arguments list.</p>
 </div>
 <div class="section" id="customizing-file-parsing">
 <h3>Customizing file parsing<a class="headerlink" href="#customizing-file-parsing" title="Permalink to this headline">¶</a></h3>
-<dl class="method">
-<dt id="argparse.ArgumentParser.convert_arg_line_to_args">
-<code class="sig-prename descclassname">ArgumentParser.</code><code class="sig-name descname">convert_arg_line_to_args</code><span class="sig-paren">(</span><em class="sig-param">arg_line</em><span class="sig-paren">)</span><a class="headerlink" href="#argparse.ArgumentParser.convert_arg_line_to_args" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="argparse-argumentparser-convert-arg-line-to-args">
+<span id="argparse.ArgumentParser.convert_arg_line_to_args"></span><code class="sig-prename descclassname">ArgumentParser.</code><code class="sig-name descname">convert_arg_line_to_args</code><span class="sig-paren">(</span><em class="sig-param">arg_line</em><span class="sig-paren">)</span><a class="headerlink" href="#argparse-argumentparser-convert-arg-line-to-args" title="Permalink to this definition">¶</a></dt>
 <dd><p>Arguments that are read from a file (see the <em>fromfile_prefix_chars</em>
-keyword argument to the <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> constructor) are read one
-argument per line. <a class="reference internal" href="#argparse.ArgumentParser.convert_arg_line_to_args" title="argparse.ArgumentParser.convert_arg_line_to_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">convert_arg_line_to_args()</span></code></a> can be overridden for
+keyword argument to the <a class="reference internal" href="#argparse-argumentparser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> constructor) are read one
+argument per line. <a class="reference internal" href="#argparse-argumentparser-convert-arg-line-to-args" title="argparse.ArgumentParser.convert_arg_line_to_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">convert_arg_line_to_args()</span></code></a> can be overridden for
 fancier reading.</p>
 <p>This method takes a single argument <em>arg_line</em> which is a string read from
 the argument file.  It returns a list of arguments parsed from this string.
@@ -2050,24 +2053,24 @@ as an argument.  The following example demonstrates how to do this:</p>
 </div>
 <div class="section" id="exiting-methods">
 <h3>Exiting methods<a class="headerlink" href="#exiting-methods" title="Permalink to this headline">¶</a></h3>
-<dl class="method">
-<dt id="argparse.ArgumentParser.exit">
-<code class="sig-prename descclassname">ArgumentParser.</code><code class="sig-name descname">exit</code><span class="sig-paren">(</span><em class="sig-param">status=0</em>, <em class="sig-param">message=None</em><span class="sig-paren">)</span><a class="headerlink" href="#argparse.ArgumentParser.exit" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="argparse-argumentparser-exit">
+<span id="argparse.ArgumentParser.exit"></span><code class="sig-prename descclassname">ArgumentParser.</code><code class="sig-name descname">exit</code><span class="sig-paren">(</span><em class="sig-param">status=0</em>, <em class="sig-param">message=None</em><span class="sig-paren">)</span><a class="headerlink" href="#argparse-argumentparser-exit" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method terminates the program, exiting with the specified <em>status</em>
 and, if given, it prints a <em>message</em> before that. The user can override
 this method to handle these steps differently:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ErrorCatchingArgumentParser</span><span class="p">(</span><span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">exit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">status</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Exiting because of an error: </span><span class="si">{message}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Exiting because of an error: </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">exit</span><span class="p">(</span><span class="n">status</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
 
-<dl class="method">
-<dt id="argparse.ArgumentParser.error">
-<code class="sig-prename descclassname">ArgumentParser.</code><code class="sig-name descname">error</code><span class="sig-paren">(</span><em class="sig-param">message</em><span class="sig-paren">)</span><a class="headerlink" href="#argparse.ArgumentParser.error" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="argparse-argumentparser-error">
+<span id="argparse.ArgumentParser.error"></span><code class="sig-prename descclassname">ArgumentParser.</code><code class="sig-name descname">error</code><span class="sig-paren">(</span><em class="sig-param">message</em><span class="sig-paren">)</span><a class="headerlink" href="#argparse-argumentparser-error" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method prints a usage message including the <em>message</em> to the
 standard error and terminates the program with a status code of 2.</p>
 </dd></dl>
@@ -2075,27 +2078,27 @@ standard error and terminates the program with a status code of 2.</p>
 </div>
 <div class="section" id="intermixed-parsing">
 <h3>Intermixed parsing<a class="headerlink" href="#intermixed-parsing" title="Permalink to this headline">¶</a></h3>
-<dl class="method">
-<dt id="argparse.ArgumentParser.parse_intermixed_args">
-<code class="sig-prename descclassname">ArgumentParser.</code><code class="sig-name descname">parse_intermixed_args</code><span class="sig-paren">(</span><em class="sig-param">args=None</em>, <em class="sig-param">namespace=None</em><span class="sig-paren">)</span><a class="headerlink" href="#argparse.ArgumentParser.parse_intermixed_args" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="argparse-argumentparser-parse-intermixed-args">
+<span id="argparse.ArgumentParser.parse_intermixed_args"></span><code class="sig-prename descclassname">ArgumentParser.</code><code class="sig-name descname">parse_intermixed_args</code><span class="sig-paren">(</span><em class="sig-param">args=None</em>, <em class="sig-param">namespace=None</em><span class="sig-paren">)</span><a class="headerlink" href="#argparse-argumentparser-parse-intermixed-args" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="argparse.ArgumentParser.parse_known_intermixed_args">
-<code class="sig-prename descclassname">ArgumentParser.</code><code class="sig-name descname">parse_known_intermixed_args</code><span class="sig-paren">(</span><em class="sig-param">args=None</em>, <em class="sig-param">namespace=None</em><span class="sig-paren">)</span><a class="headerlink" href="#argparse.ArgumentParser.parse_known_intermixed_args" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="argparse-argumentparser-parse-known-intermixed-args">
+<span id="argparse.ArgumentParser.parse_known_intermixed_args"></span><code class="sig-prename descclassname">ArgumentParser.</code><code class="sig-name descname">parse_known_intermixed_args</code><span class="sig-paren">(</span><em class="sig-param">args=None</em>, <em class="sig-param">namespace=None</em><span class="sig-paren">)</span><a class="headerlink" href="#argparse-argumentparser-parse-known-intermixed-args" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>A number of Unix commands allow the user to intermix optional arguments with
-positional arguments.  The <a class="reference internal" href="#argparse.ArgumentParser.parse_intermixed_args" title="argparse.ArgumentParser.parse_intermixed_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_intermixed_args()</span></code></a>
-and <a class="reference internal" href="#argparse.ArgumentParser.parse_known_intermixed_args" title="argparse.ArgumentParser.parse_known_intermixed_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_known_intermixed_args()</span></code></a> methods
+positional arguments.  The <a class="reference internal" href="#argparse-argumentparser-parse-intermixed-args" title="argparse.ArgumentParser.parse_intermixed_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_intermixed_args()</span></code></a>
+and <a class="reference internal" href="#argparse-argumentparser-parse-known-intermixed-args" title="argparse.ArgumentParser.parse_known_intermixed_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_known_intermixed_args()</span></code></a> methods
 support this parsing style.</p>
 <p>These parsers do not support all the argparse features, and will raise
 exceptions if unsupported features are used.  In particular, subparsers,
 <code class="docutils literal notranslate"><span class="pre">argparse.REMAINDER</span></code>, and mutually exclusive groups that include both
 optionals and positionals are not supported.</p>
 <p>The following example shows the difference between
-<a class="reference internal" href="#argparse.ArgumentParser.parse_known_args" title="argparse.ArgumentParser.parse_known_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_known_args()</span></code></a> and
-<a class="reference internal" href="#argparse.ArgumentParser.parse_intermixed_args" title="argparse.ArgumentParser.parse_intermixed_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_intermixed_args()</span></code></a>: the former returns <code class="docutils literal notranslate"><span class="pre">['2',</span>
+<a class="reference internal" href="#argparse-argumentparser-parse-known-args" title="argparse.ArgumentParser.parse_known_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_known_args()</span></code></a> and
+<a class="reference internal" href="#argparse-argumentparser-parse-intermixed-args" title="argparse.ArgumentParser.parse_intermixed_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_intermixed_args()</span></code></a>: the former returns <code class="docutils literal notranslate"><span class="pre">['2',</span>
 <span class="pre">'3']</span></code> as unparsed arguments, while the latter collects all the positionals
 into <code class="docutils literal notranslate"><span class="pre">rest</span></code>.</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
@@ -2108,9 +2111,9 @@ into <code class="docutils literal notranslate"><span class="pre">rest</span></c
 <span class="go">Namespace(cmd=&#39;doit&#39;, foo=&#39;bar&#39;, rest=[1, 2, 3])</span>
 </pre></div>
 </div>
-<p><a class="reference internal" href="#argparse.ArgumentParser.parse_known_intermixed_args" title="argparse.ArgumentParser.parse_known_intermixed_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_known_intermixed_args()</span></code></a> returns a two item tuple
+<p><a class="reference internal" href="#argparse-argumentparser-parse-known-intermixed-args" title="argparse.ArgumentParser.parse_known_intermixed_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_known_intermixed_args()</span></code></a> returns a two item tuple
 containing the populated namespace and the list of remaining argument strings.
-<a class="reference internal" href="#argparse.ArgumentParser.parse_intermixed_args" title="argparse.ArgumentParser.parse_intermixed_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_intermixed_args()</span></code></a> raises an error if there are any
+<a class="reference internal" href="#argparse-argumentparser-parse-intermixed-args" title="argparse.ArgumentParser.parse_intermixed_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_intermixed_args()</span></code></a> raises an error if there are any
 remaining unparsed argument strings.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.7.</span></p>
@@ -2137,20 +2140,20 @@ module in a number of ways including:</p>
 </ul>
 <p>A partial upgrade path from <a class="reference internal" href="optparse.html#module-optparse" title="optparse: Command-line option parsing library. (deprecated)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">optparse</span></code></a> to <a class="reference internal" href="#module-argparse" title="argparse: Command-line option and argument parsing library."><code class="xref py py-mod docutils literal notranslate"><span class="pre">argparse</span></code></a>:</p>
 <ul class="simple">
-<li><p>Replace all <a class="reference internal" href="optparse.html#optparse.OptionParser.add_option" title="optparse.OptionParser.add_option"><code class="xref py py-meth docutils literal notranslate"><span class="pre">optparse.OptionParser.add_option()</span></code></a> calls with
-<a class="reference internal" href="#argparse.ArgumentParser.add_argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ArgumentParser.add_argument()</span></code></a> calls.</p></li>
+<li><p>Replace all <a class="reference internal" href="optparse.html#optparse-optionparser-add-option" title="optparse.OptionParser.add_option"><code class="xref py py-meth docutils literal notranslate"><span class="pre">optparse.OptionParser.add_option()</span></code></a> calls with
+<a class="reference internal" href="#argparse-argumentparser-add-argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ArgumentParser.add_argument()</span></code></a> calls.</p></li>
 <li><p>Replace <code class="docutils literal notranslate"><span class="pre">(options,</span> <span class="pre">args)</span> <span class="pre">=</span> <span class="pre">parser.parse_args()</span></code> with <code class="docutils literal notranslate"><span class="pre">args</span> <span class="pre">=</span>
-<span class="pre">parser.parse_args()</span></code> and add additional <a class="reference internal" href="#argparse.ArgumentParser.add_argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ArgumentParser.add_argument()</span></code></a>
+<span class="pre">parser.parse_args()</span></code> and add additional <a class="reference internal" href="#argparse-argumentparser-add-argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ArgumentParser.add_argument()</span></code></a>
 calls for the positional arguments. Keep in mind that what was previously
 called <code class="docutils literal notranslate"><span class="pre">options</span></code>, now in the <a class="reference internal" href="#module-argparse" title="argparse: Command-line option and argument parsing library."><code class="xref py py-mod docutils literal notranslate"><span class="pre">argparse</span></code></a> context is called <code class="docutils literal notranslate"><span class="pre">args</span></code>.</p></li>
-<li><p>Replace <a class="reference internal" href="optparse.html#optparse.OptionParser.disable_interspersed_args" title="optparse.OptionParser.disable_interspersed_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">optparse.OptionParser.disable_interspersed_args()</span></code></a>
-by using <a class="reference internal" href="#argparse.ArgumentParser.parse_intermixed_args" title="argparse.ArgumentParser.parse_intermixed_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_intermixed_args()</span></code></a> instead of
-<a class="reference internal" href="#argparse.ArgumentParser.parse_args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a>.</p></li>
+<li><p>Replace <a class="reference internal" href="optparse.html#optparse-optionparser-disable-interspersed-args" title="optparse.OptionParser.disable_interspersed_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">optparse.OptionParser.disable_interspersed_args()</span></code></a>
+by using <a class="reference internal" href="#argparse-argumentparser-parse-intermixed-args" title="argparse.ArgumentParser.parse_intermixed_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_intermixed_args()</span></code></a> instead of
+<a class="reference internal" href="#argparse-argumentparser-parse-args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a>.</p></li>
 <li><p>Replace callback actions and the <code class="docutils literal notranslate"><span class="pre">callback_*</span></code> keyword arguments with
 <code class="docutils literal notranslate"><span class="pre">type</span></code> or <code class="docutils literal notranslate"><span class="pre">action</span></code> arguments.</p></li>
 <li><p>Replace string names for <code class="docutils literal notranslate"><span class="pre">type</span></code> keyword arguments with the corresponding
 type objects (e.g. int, float, complex, etc).</p></li>
-<li><p>Replace <code class="xref py py-class docutils literal notranslate"><span class="pre">optparse.Values</span></code> with <a class="reference internal" href="#argparse.Namespace" title="argparse.Namespace"><code class="xref py py-class docutils literal notranslate"><span class="pre">Namespace</span></code></a> and
+<li><p>Replace <code class="xref py py-class docutils literal notranslate"><span class="pre">optparse.Values</span></code> with <a class="reference internal" href="#argparse-namespace" title="argparse.Namespace"><code class="xref py py-class docutils literal notranslate"><span class="pre">Namespace</span></code></a> and
 <code class="xref py py-exc docutils literal notranslate"><span class="pre">optparse.OptionError</span></code> and <code class="xref py py-exc docutils literal notranslate"><span class="pre">optparse.OptionValueError</span></code> with
 <code class="xref py py-exc docutils literal notranslate"><span class="pre">ArgumentError</span></code>.</p></li>
 <li><p>Replace strings with implicit arguments such as <code class="docutils literal notranslate"><span class="pre">%default</span></code> or <code class="docutils literal notranslate"><span class="pre">%prog</span></code> with
@@ -2278,7 +2281,7 @@ the standard Python syntax to use dictionaries to format strings, that is,
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
@@ -2297,6 +2300,7 @@ the standard Python syntax to use dictionaries to format strings, that is,
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  
@@ -2309,11 +2313,11 @@ the standard Python syntax to use dictionaries to format strings, that is,
 <br />
     <br />
 
-    Last updated on Feb 13, 2020.
+    Last updated on Mar 08, 2020.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 2.4.2+/ad35b3c.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/c10e1bc.
     </div>
 
   </body>

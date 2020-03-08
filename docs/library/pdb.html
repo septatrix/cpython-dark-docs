@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>pdb — The Python Debugger &#8212; Python 3.9.0a3 documentation</title>
+    <title>pdb — The Python Debugger &#8212; Python 3.9.0a4 documentation</title>
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments-monokai.css" />
+    <link rel="stylesheet" href="../_static/pygments_dark.css" type="text/css" media="(prefers-color-scheme: dark)" id="pygments_dark_css" />
     
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -18,7 +18,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.9.0a3 documentation"
+          title="Search within Python 3.9.0a4 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -41,9 +41,11 @@
       }
     </style>
 
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png" />
+    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
     
     <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <script type="text/javascript" src="../_static/themetoggle.js"></script>
     
      
 
@@ -72,7 +74,7 @@
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
@@ -91,6 +93,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -109,7 +112,7 @@ programs.  It supports setting (conditional) breakpoints and single stepping at
 the source line level, inspection of stack frames, source code listing, and
 evaluation of arbitrary Python code in the context of any stack frame.  It also
 supports post-mortem debugging and can be called under program control.</p>
-<p id="index-1">The debugger is extensible – it is actually defined as the class <a class="reference internal" href="#pdb.Pdb" title="pdb.Pdb"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pdb</span></code></a>.
+<p id="index-1">The debugger is extensible – it is actually defined as the class <a class="reference internal" href="#pdb-pdb" title="pdb.Pdb"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pdb</span></code></a>.
 This is currently undocumented but easily understood by reading the source.  The
 extension interface uses the modules <a class="reference internal" href="bdb.html#module-bdb" title="bdb: Debugger framework."><code class="xref py py-mod docutils literal notranslate"><span class="pre">bdb</span></code></a> and <a class="reference internal" href="cmd.html#module-cmd" title="cmd: Build line-oriented command interpreters."><code class="xref py py-mod docutils literal notranslate"><span class="pre">cmd</span></code></a>.</p>
 <p>The debugger’s prompt is <code class="docutils literal notranslate"><span class="pre">(Pdb)</span></code>. Typical usage to run a program under control
@@ -181,39 +184,39 @@ instead of <code class="docutils literal notranslate"><span class="pre">import</
 </div>
 <p>The module defines the following functions; each enters the debugger in a
 slightly different way:</p>
-<dl class="function">
-<dt id="pdb.run">
-<code class="sig-prename descclassname">pdb.</code><code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param">statement</em>, <em class="sig-param">globals=None</em>, <em class="sig-param">locals=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pdb.run" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="pdb-run">
+<span id="pdb.run"></span><code class="sig-prename descclassname">pdb.</code><code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param">statement</em>, <em class="sig-param">globals=None</em>, <em class="sig-param">locals=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pdb-run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute the <em>statement</em> (given as a string or a code object) under debugger
 control.  The debugger prompt appears before any code is executed; you can
 set breakpoints and type <a class="reference internal" href="#pdbcommand-continue"><code class="xref std std-pdbcmd docutils literal notranslate"><span class="pre">continue</span></code></a>, or you can step through the
 statement using <a class="reference internal" href="#pdbcommand-step"><code class="xref std std-pdbcmd docutils literal notranslate"><span class="pre">step</span></code></a> or <a class="reference internal" href="#pdbcommand-next"><code class="xref std std-pdbcmd docutils literal notranslate"><span class="pre">next</span></code></a> (all these commands are
 explained below).  The optional <em>globals</em> and <em>locals</em> arguments specify the
 environment in which the code is executed; by default the dictionary of the
-module <a class="reference internal" href="__main__.html#module-__main__" title="__main__: The environment where the top-level script is run."><code class="xref py py-mod docutils literal notranslate"><span class="pre">__main__</span></code></a> is used.  (See the explanation of the built-in
+module <a class="reference internal" href="__main__.html#module-main" title="__main__: The environment where the top-level script is run."><code class="xref py py-mod docutils literal notranslate"><span class="pre">__main__</span></code></a> is used.  (See the explanation of the built-in
 <a class="reference internal" href="functions.html#exec" title="exec"><code class="xref py py-func docutils literal notranslate"><span class="pre">exec()</span></code></a> or <a class="reference internal" href="functions.html#eval" title="eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">eval()</span></code></a> functions.)</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="pdb.runeval">
-<code class="sig-prename descclassname">pdb.</code><code class="sig-name descname">runeval</code><span class="sig-paren">(</span><em class="sig-param">expression</em>, <em class="sig-param">globals=None</em>, <em class="sig-param">locals=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pdb.runeval" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="pdb-runeval">
+<span id="pdb.runeval"></span><code class="sig-prename descclassname">pdb.</code><code class="sig-name descname">runeval</code><span class="sig-paren">(</span><em class="sig-param">expression</em>, <em class="sig-param">globals=None</em>, <em class="sig-param">locals=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pdb-runeval" title="Permalink to this definition">¶</a></dt>
 <dd><p>Evaluate the <em>expression</em> (given as a string or a code object) under debugger
-control.  When <a class="reference internal" href="#pdb.runeval" title="pdb.runeval"><code class="xref py py-func docutils literal notranslate"><span class="pre">runeval()</span></code></a> returns, it returns the value of the
-expression.  Otherwise this function is similar to <a class="reference internal" href="#pdb.run" title="pdb.run"><code class="xref py py-func docutils literal notranslate"><span class="pre">run()</span></code></a>.</p>
+control.  When <a class="reference internal" href="#pdb-runeval" title="pdb.runeval"><code class="xref py py-func docutils literal notranslate"><span class="pre">runeval()</span></code></a> returns, it returns the value of the
+expression.  Otherwise this function is similar to <a class="reference internal" href="#pdb-run" title="pdb.run"><code class="xref py py-func docutils literal notranslate"><span class="pre">run()</span></code></a>.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="pdb.runcall">
-<code class="sig-prename descclassname">pdb.</code><code class="sig-name descname">runcall</code><span class="sig-paren">(</span><em class="sig-param">function</em>, <em class="sig-param">*args</em>, <em class="sig-param">**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#pdb.runcall" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="pdb-runcall">
+<span id="pdb.runcall"></span><code class="sig-prename descclassname">pdb.</code><code class="sig-name descname">runcall</code><span class="sig-paren">(</span><em class="sig-param">function</em>, <em class="sig-param">*args</em>, <em class="sig-param">**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#pdb-runcall" title="Permalink to this definition">¶</a></dt>
 <dd><p>Call the <em>function</em> (a function or method object, not a string) with the
-given arguments.  When <a class="reference internal" href="#pdb.runcall" title="pdb.runcall"><code class="xref py py-func docutils literal notranslate"><span class="pre">runcall()</span></code></a> returns, it returns whatever the
+given arguments.  When <a class="reference internal" href="#pdb-runcall" title="pdb.runcall"><code class="xref py py-func docutils literal notranslate"><span class="pre">runcall()</span></code></a> returns, it returns whatever the
 function call returned.  The debugger prompt appears as soon as the function
 is entered.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="pdb.set_trace">
-<code class="sig-prename descclassname">pdb.</code><code class="sig-name descname">set_trace</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">header=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pdb.set_trace" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="pdb-set-trace">
+<span id="pdb.set_trace"></span><code class="sig-prename descclassname">pdb.</code><code class="sig-name descname">set_trace</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">header=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pdb-set-trace" title="Permalink to this definition">¶</a></dt>
 <dd><p>Enter the debugger at the calling stack frame.  This is useful to hard-code
 a breakpoint at a given point in a program, even if the code is not
 otherwise being debugged (e.g. when an assertion fails).  If given,
@@ -223,31 +226,31 @@ otherwise being debugged (e.g. when an assertion fails).  If given,
 </div>
 </dd></dl>
 
-<dl class="function">
-<dt id="pdb.post_mortem">
-<code class="sig-prename descclassname">pdb.</code><code class="sig-name descname">post_mortem</code><span class="sig-paren">(</span><em class="sig-param">traceback=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pdb.post_mortem" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="pdb-post-mortem">
+<span id="pdb.post_mortem"></span><code class="sig-prename descclassname">pdb.</code><code class="sig-name descname">post_mortem</code><span class="sig-paren">(</span><em class="sig-param">traceback=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pdb-post-mortem" title="Permalink to this definition">¶</a></dt>
 <dd><p>Enter post-mortem debugging of the given <em>traceback</em> object.  If no
 <em>traceback</em> is given, it uses the one of the exception that is currently
 being handled (an exception must be being handled if the default is to be
 used).</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="pdb.pm">
-<code class="sig-prename descclassname">pdb.</code><code class="sig-name descname">pm</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pdb.pm" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="pdb-pm">
+<span id="pdb.pm"></span><code class="sig-prename descclassname">pdb.</code><code class="sig-name descname">pm</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pdb-pm" title="Permalink to this definition">¶</a></dt>
 <dd><p>Enter post-mortem debugging of the traceback found in
-<a class="reference internal" href="sys.html#sys.last_traceback" title="sys.last_traceback"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.last_traceback</span></code></a>.</p>
+<a class="reference internal" href="sys.html#sys-last-traceback" title="sys.last_traceback"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.last_traceback</span></code></a>.</p>
 </dd></dl>
 
-<p>The <code class="docutils literal notranslate"><span class="pre">run*</span></code> functions and <a class="reference internal" href="#pdb.set_trace" title="pdb.set_trace"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_trace()</span></code></a> are aliases for instantiating the
-<a class="reference internal" href="#pdb.Pdb" title="pdb.Pdb"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pdb</span></code></a> class and calling the method of the same name.  If you want to
+<p>The <code class="docutils literal notranslate"><span class="pre">run*</span></code> functions and <a class="reference internal" href="#pdb-set-trace" title="pdb.set_trace"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_trace()</span></code></a> are aliases for instantiating the
+<a class="reference internal" href="#pdb-pdb" title="pdb.Pdb"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pdb</span></code></a> class and calling the method of the same name.  If you want to
 access further features, you have to do this yourself:</p>
-<dl class="class">
-<dt id="pdb.Pdb">
-<em class="property">class </em><code class="sig-prename descclassname">pdb.</code><code class="sig-name descname">Pdb</code><span class="sig-paren">(</span><em class="sig-param">completekey='tab'</em>, <em class="sig-param">stdin=None</em>, <em class="sig-param">stdout=None</em>, <em class="sig-param">skip=None</em>, <em class="sig-param">nosigint=False</em>, <em class="sig-param">readrc=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pdb.Pdb" title="Permalink to this definition">¶</a></dt>
-<dd><p><a class="reference internal" href="#pdb.Pdb" title="pdb.Pdb"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pdb</span></code></a> is the debugger class.</p>
+<dl class="py class">
+<dt id="pdb-pdb">
+<span id="pdb.Pdb"></span><em class="property">class </em><code class="sig-prename descclassname">pdb.</code><code class="sig-name descname">Pdb</code><span class="sig-paren">(</span><em class="sig-param">completekey='tab'</em>, <em class="sig-param">stdin=None</em>, <em class="sig-param">stdout=None</em>, <em class="sig-param">skip=None</em>, <em class="sig-param">nosigint=False</em>, <em class="sig-param">readrc=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pdb-pdb" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="#pdb-pdb" title="pdb.Pdb"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pdb</span></code></a> is the debugger class.</p>
 <p>The <em>completekey</em>, <em>stdin</em> and <em>stdout</em> arguments are passed to the
-underlying <a class="reference internal" href="cmd.html#cmd.Cmd" title="cmd.Cmd"><code class="xref py py-class docutils literal notranslate"><span class="pre">cmd.Cmd</span></code></a> class; see the description there.</p>
+underlying <a class="reference internal" href="cmd.html#cmd-cmd" title="cmd.Cmd"><code class="xref py py-class docutils literal notranslate"><span class="pre">cmd.Cmd</span></code></a> class; see the description there.</p>
 <p>The <em>skip</em> argument, if given, must be an iterable of glob-style module name
 patterns.  The debugger will not step into frames that originate in a module
 that matches one of these patterns. <a class="footnote-reference brackets" href="#id3" id="id1">1</a></p>
@@ -272,15 +275,15 @@ Pdb.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">Changed in version 3.6: </span>The <em>readrc</em> argument.</p>
 </div>
-<dl class="method">
-<dt id="pdb.Pdb.run">
-<code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param">statement</em>, <em class="sig-param">globals=None</em>, <em class="sig-param">locals=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pdb.Pdb.run" title="Permalink to this definition">¶</a></dt>
-<dt id="pdb.Pdb.runeval">
-<code class="sig-name descname">runeval</code><span class="sig-paren">(</span><em class="sig-param">expression</em>, <em class="sig-param">globals=None</em>, <em class="sig-param">locals=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pdb.Pdb.runeval" title="Permalink to this definition">¶</a></dt>
-<dt id="pdb.Pdb.runcall">
-<code class="sig-name descname">runcall</code><span class="sig-paren">(</span><em class="sig-param">function</em>, <em class="sig-param">*args</em>, <em class="sig-param">**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#pdb.Pdb.runcall" title="Permalink to this definition">¶</a></dt>
-<dt id="pdb.Pdb.set_trace">
-<code class="sig-name descname">set_trace</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pdb.Pdb.set_trace" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="pdb-pdb-run">
+<span id="pdb.Pdb.run"></span><code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param">statement</em>, <em class="sig-param">globals=None</em>, <em class="sig-param">locals=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pdb-pdb-run" title="Permalink to this definition">¶</a></dt>
+<dt id="pdb-pdb-runeval">
+<span id="pdb.Pdb.runeval"></span><code class="sig-name descname">runeval</code><span class="sig-paren">(</span><em class="sig-param">expression</em>, <em class="sig-param">globals=None</em>, <em class="sig-param">locals=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pdb-pdb-runeval" title="Permalink to this definition">¶</a></dt>
+<dt id="pdb-pdb-runcall">
+<span id="pdb.Pdb.runcall"></span><code class="sig-name descname">runcall</code><span class="sig-paren">(</span><em class="sig-param">function</em>, <em class="sig-param">*args</em>, <em class="sig-param">**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#pdb-pdb-runcall" title="Permalink to this definition">¶</a></dt>
+<dt id="pdb-pdb-set-trace">
+<span id="pdb.Pdb.set_trace"></span><code class="sig-name descname">set_trace</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pdb-pdb-set-trace" title="Permalink to this definition">¶</a></dt>
 <dd><p>See the documentation for the functions explained above.</p>
 </dd></dl>
 
@@ -323,7 +326,7 @@ by the local file.</p>
 <a class="reference internal" href="#pdbcommand-continue"><code class="xref std std-pdbcmd docutils literal notranslate"><span class="pre">continue</span></code></a> or <a class="reference internal" href="#pdbcommand-next"><code class="xref std std-pdbcmd docutils literal notranslate"><span class="pre">next</span></code></a>.  Previously, these commands had no
 effect.</p>
 </div>
-<dl class="pdbcommand">
+<dl class="std pdbcommand">
 <dt id="pdbcommand-help">
 <code class="sig-name descname">h(elp)</code><code class="sig-prename descclassname"> [command]</code><a class="headerlink" href="#pdbcommand-help" title="Permalink to this definition">¶</a></dt>
 <dd><p>Without argument, print the list of available commands.  With a <em>command</em> as
@@ -333,35 +336,35 @@ argument must be an identifier, <code class="docutils literal notranslate"><span
 the <code class="docutils literal notranslate"><span class="pre">!</span></code> command.</p>
 </dd></dl>
 
-<dl class="pdbcommand">
+<dl class="std pdbcommand">
 <dt id="pdbcommand-where">
 <code class="sig-name descname">w(here)</code><a class="headerlink" href="#pdbcommand-where" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print a stack trace, with the most recent frame at the bottom.  An arrow
 indicates the current frame, which determines the context of most commands.</p>
 </dd></dl>
 
-<dl class="pdbcommand">
+<dl class="std pdbcommand">
 <dt id="pdbcommand-down">
 <code class="sig-name descname">d(own)</code><code class="sig-prename descclassname"> [count]</code><a class="headerlink" href="#pdbcommand-down" title="Permalink to this definition">¶</a></dt>
 <dd><p>Move the current frame <em>count</em> (default one) levels down in the stack trace
 (to a newer frame).</p>
 </dd></dl>
 
-<dl class="pdbcommand">
+<dl class="std pdbcommand">
 <dt id="pdbcommand-up">
 <code class="sig-name descname">u(p)</code><code class="sig-prename descclassname"> [count]</code><a class="headerlink" href="#pdbcommand-up" title="Permalink to this definition">¶</a></dt>
 <dd><p>Move the current frame <em>count</em> (default one) levels up in the stack trace (to
 an older frame).</p>
 </dd></dl>
 
-<dl class="pdbcommand">
+<dl class="std pdbcommand">
 <dt id="pdbcommand-break">
 <code class="sig-name descname">b(reak)</code><code class="sig-prename descclassname"> [([filename:]lineno | function) [, condition]]</code><a class="headerlink" href="#pdbcommand-break" title="Permalink to this definition">¶</a></dt>
 <dd><p>With a <em>lineno</em> argument, set a break there in the current file.  With a
 <em>function</em> argument, set a break at the first executable statement within
 that function.  The line number may be prefixed with a filename and a colon,
 to specify a breakpoint in another file (probably one that hasn’t been loaded
-yet).  The file is searched on <a class="reference internal" href="sys.html#sys.path" title="sys.path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a>.  Note that each breakpoint
+yet).  The file is searched on <a class="reference internal" href="sys.html#sys-path" title="sys.path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a>.  Note that each breakpoint
 is assigned a number to which all the other breakpoint commands refer.</p>
 <p>If a second argument is present, it is an expression which must evaluate to
 true before the breakpoint is honored.</p>
@@ -370,14 +373,14 @@ of times that breakpoint has been hit, the current ignore count, and the
 associated condition if any.</p>
 </dd></dl>
 
-<dl class="pdbcommand">
+<dl class="std pdbcommand">
 <dt id="pdbcommand-tbreak">
 <code class="sig-name descname">tbreak</code><code class="sig-prename descclassname"> [([filename:]lineno | function) [, condition]]</code><a class="headerlink" href="#pdbcommand-tbreak" title="Permalink to this definition">¶</a></dt>
 <dd><p>Temporary breakpoint, which is removed automatically when it is first hit.
 The arguments are the same as for <a class="reference internal" href="#pdbcommand-break"><code class="xref std std-pdbcmd docutils literal notranslate"><span class="pre">break</span></code></a>.</p>
 </dd></dl>
 
-<dl class="pdbcommand">
+<dl class="std pdbcommand">
 <dt id="pdbcommand-clear">
 <code class="sig-name descname">cl(ear)</code><code class="sig-prename descclassname"> [filename:lineno | bpnumber ...]</code><a class="headerlink" href="#pdbcommand-clear" title="Permalink to this definition">¶</a></dt>
 <dd><p>With a <em>filename:lineno</em> argument, clear all the breakpoints at this line.
@@ -385,7 +388,7 @@ With a space separated list of breakpoint numbers, clear those breakpoints.
 Without argument, clear all breaks (but first ask confirmation).</p>
 </dd></dl>
 
-<dl class="pdbcommand">
+<dl class="std pdbcommand">
 <dt id="pdbcommand-disable">
 <code class="sig-name descname">disable</code><code class="sig-prename descclassname"> [bpnumber ...]</code><a class="headerlink" href="#pdbcommand-disable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Disable the breakpoints given as a space separated list of breakpoint
@@ -394,13 +397,13 @@ execution, but unlike clearing a breakpoint, it remains in the list of
 breakpoints and can be (re-)enabled.</p>
 </dd></dl>
 
-<dl class="pdbcommand">
+<dl class="std pdbcommand">
 <dt id="pdbcommand-enable">
 <code class="sig-name descname">enable</code><code class="sig-prename descclassname"> [bpnumber ...]</code><a class="headerlink" href="#pdbcommand-enable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Enable the breakpoints specified.</p>
 </dd></dl>
 
-<dl class="pdbcommand">
+<dl class="std pdbcommand">
 <dt id="pdbcommand-ignore">
 <code class="sig-name descname">ignore</code><code class="sig-prename descclassname"> bpnumber [count]</code><a class="headerlink" href="#pdbcommand-ignore" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the ignore count for the given breakpoint number.  If count is omitted,
@@ -410,7 +413,7 @@ breakpoint is reached and the breakpoint is not disabled and any associated
 condition evaluates to true.</p>
 </dd></dl>
 
-<dl class="pdbcommand">
+<dl class="std pdbcommand">
 <dt id="pdbcommand-condition">
 <code class="sig-name descname">condition</code><code class="sig-prename descclassname"> bpnumber [condition]</code><a class="headerlink" href="#pdbcommand-condition" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set a new <em>condition</em> for the breakpoint, an expression which must evaluate
@@ -418,7 +421,7 @@ to true before the breakpoint is honored.  If <em>condition</em> is absent, any
 existing condition is removed; i.e., the breakpoint is made unconditional.</p>
 </dd></dl>
 
-<dl class="pdbcommand">
+<dl class="std pdbcommand">
 <dt id="pdbcommand-commands">
 <code class="sig-name descname">commands</code><code class="sig-prename descclassname"> [bpnumber]</code><a class="headerlink" href="#pdbcommand-commands" title="Permalink to this definition">¶</a></dt>
 <dd><p>Specify a list of commands for breakpoint number <em>bpnumber</em>.  The commands
@@ -450,14 +453,14 @@ that are to print a specific message and then continue.  If none of the other
 commands print anything, you see no sign that the breakpoint was reached.</p>
 </dd></dl>
 
-<dl class="pdbcommand">
+<dl class="std pdbcommand">
 <dt id="pdbcommand-step">
 <code class="sig-name descname">s(tep)</code><a class="headerlink" href="#pdbcommand-step" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute the current line, stop at the first possible occasion (either in a
 function that is called or on the next line in the current function).</p>
 </dd></dl>
 
-<dl class="pdbcommand">
+<dl class="std pdbcommand">
 <dt id="pdbcommand-next">
 <code class="sig-name descname">n(ext)</code><a class="headerlink" href="#pdbcommand-next" title="Permalink to this definition">¶</a></dt>
 <dd><p>Continue execution until the next line in the current function is reached or
@@ -467,7 +470,7 @@ executes called functions at (nearly) full speed, only stopping at the next
 line in the current function.)</p>
 </dd></dl>
 
-<dl class="pdbcommand">
+<dl class="std pdbcommand">
 <dt id="pdbcommand-until">
 <code class="sig-name descname">unt(il)</code><code class="sig-prename descclassname"> [lineno]</code><a class="headerlink" href="#pdbcommand-until" title="Permalink to this definition">¶</a></dt>
 <dd><p>Without argument, continue execution until the line with a number greater
@@ -480,19 +483,19 @@ returns.</p>
 </div>
 </dd></dl>
 
-<dl class="pdbcommand">
+<dl class="std pdbcommand">
 <dt id="pdbcommand-return">
 <code class="sig-name descname">r(eturn)</code><a class="headerlink" href="#pdbcommand-return" title="Permalink to this definition">¶</a></dt>
 <dd><p>Continue execution until the current function returns.</p>
 </dd></dl>
 
-<dl class="pdbcommand">
+<dl class="std pdbcommand">
 <dt id="pdbcommand-continue">
 <code class="sig-name descname">c(ont(inue))</code><a class="headerlink" href="#pdbcommand-continue" title="Permalink to this definition">¶</a></dt>
 <dd><p>Continue execution, only stop when a breakpoint is encountered.</p>
 </dd></dl>
 
-<dl class="pdbcommand">
+<dl class="std pdbcommand">
 <dt id="pdbcommand-jump">
 <code class="sig-name descname">j(ump)</code><code class="sig-prename descclassname"> lineno</code><a class="headerlink" href="#pdbcommand-jump" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the next line that will be executed.  Only available in the bottom-most
@@ -503,7 +506,7 @@ possible to jump into the middle of a <a class="reference internal" href="../ref
 <a class="reference internal" href="../reference/compound_stmts.html#finally"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">finally</span></code></a> clause.</p>
 </dd></dl>
 
-<dl class="pdbcommand">
+<dl class="std pdbcommand">
 <dt id="pdbcommand-list">
 <code class="sig-name descname">l(ist)</code><code class="sig-prename descclassname"> [first[, last]]</code><a class="headerlink" href="#pdbcommand-list" title="Permalink to this definition">¶</a></dt>
 <dd><p>List source code for the current file.  Without arguments, list 11 lines
@@ -520,7 +523,7 @@ line.</p>
 </div>
 </dd></dl>
 
-<dl class="pdbcommand">
+<dl class="std pdbcommand">
 <dt id="pdbcommand-ll">
 <code class="sig-name descname">ll</code><code class="sig-prename descclassname"> | longlist</code><a class="headerlink" href="#pdbcommand-ll" title="Permalink to this definition">¶</a></dt>
 <dd><p>List all source code for the current function or frame.  Interesting lines
@@ -530,13 +533,13 @@ are marked as for <a class="reference internal" href="#pdbcommand-list"><code cl
 </div>
 </dd></dl>
 
-<dl class="pdbcommand">
+<dl class="std pdbcommand">
 <dt id="pdbcommand-args">
 <code class="sig-name descname">a(rgs)</code><a class="headerlink" href="#pdbcommand-args" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print the argument list of the current function.</p>
 </dd></dl>
 
-<dl class="pdbcommand">
+<dl class="std pdbcommand">
 <dt id="pdbcommand-p">
 <code class="sig-name descname">p</code><code class="sig-prename descclassname"> expression</code><a class="headerlink" href="#pdbcommand-p" title="Permalink to this definition">¶</a></dt>
 <dd><p>Evaluate the <em>expression</em> in the current context and print its value.</p>
@@ -547,20 +550,20 @@ Python <a class="reference internal" href="functions.html#print" title="print"><
 </div>
 </dd></dl>
 
-<dl class="pdbcommand">
+<dl class="std pdbcommand">
 <dt id="pdbcommand-pp">
 <code class="sig-name descname">pp</code><code class="sig-prename descclassname"> expression</code><a class="headerlink" href="#pdbcommand-pp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Like the <a class="reference internal" href="#pdbcommand-p"><code class="xref std std-pdbcmd docutils literal notranslate"><span class="pre">p</span></code></a> command, except the value of the expression is
 pretty-printed using the <a class="reference internal" href="pprint.html#module-pprint" title="pprint: Data pretty printer."><code class="xref py py-mod docutils literal notranslate"><span class="pre">pprint</span></code></a> module.</p>
 </dd></dl>
 
-<dl class="pdbcommand">
+<dl class="std pdbcommand">
 <dt id="pdbcommand-whatis">
 <code class="sig-name descname">whatis</code><code class="sig-prename descclassname"> expression</code><a class="headerlink" href="#pdbcommand-whatis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print the type of the <em>expression</em>.</p>
 </dd></dl>
 
-<dl class="pdbcommand">
+<dl class="std pdbcommand">
 <dt id="pdbcommand-source">
 <code class="sig-name descname">source</code><code class="sig-prename descclassname"> expression</code><a class="headerlink" href="#pdbcommand-source" title="Permalink to this definition">¶</a></dt>
 <dd><p>Try to get source code for the given object and display it.</p>
@@ -569,7 +572,7 @@ pretty-printed using the <a class="reference internal" href="pprint.html#module-
 </div>
 </dd></dl>
 
-<dl class="pdbcommand">
+<dl class="std pdbcommand">
 <dt id="pdbcommand-display">
 <code class="sig-name descname">display</code><code class="sig-prename descclassname"> [expression]</code><a class="headerlink" href="#pdbcommand-display" title="Permalink to this definition">¶</a></dt>
 <dd><p>Display the value of the expression if it changed, each time execution stops
@@ -580,7 +583,7 @@ in the current frame.</p>
 </div>
 </dd></dl>
 
-<dl class="pdbcommand">
+<dl class="std pdbcommand">
 <dt id="pdbcommand-undisplay">
 <code class="sig-name descname">undisplay</code><code class="sig-prename descclassname"> [expression]</code><a class="headerlink" href="#pdbcommand-undisplay" title="Permalink to this definition">¶</a></dt>
 <dd><p>Do not display the expression any more in the current frame.  Without
@@ -590,7 +593,7 @@ expression, clear all display expressions for the current frame.</p>
 </div>
 </dd></dl>
 
-<dl class="pdbcommand">
+<dl class="std pdbcommand">
 <dt id="pdbcommand-interact">
 <code class="sig-name descname">interact</code><a class="headerlink" href="#pdbcommand-interact" title="Permalink to this definition">¶</a></dt>
 <dd><p>Start an interactive interpreter (using the <a class="reference internal" href="code.html#module-code" title="code: Facilities to implement read-eval-print loops."><code class="xref py py-mod docutils literal notranslate"><span class="pre">code</span></code></a> module) whose global
@@ -601,7 +604,7 @@ scope.</p>
 </div>
 </dd></dl>
 
-<span class="target" id="debugger-aliases"></span><dl class="pdbcommand">
+<span class="target" id="debugger-aliases"></span><dl class="std pdbcommand">
 <dt id="pdbcommand-alias">
 <code class="sig-name descname">alias</code><code class="sig-prename descclassname"> [name [command]]</code><a class="headerlink" href="#pdbcommand-alias" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create an alias called <em>name</em> that executes <em>command</em>.  The command must
@@ -624,15 +627,15 @@ in the line are left alone.</p>
 </div>
 </dd></dl>
 
-<dl class="pdbcommand">
+<dl class="std pdbcommand">
 <dt id="pdbcommand-unalias">
 <code class="sig-name descname">unalias</code><code class="sig-prename descclassname"> name</code><a class="headerlink" href="#pdbcommand-unalias" title="Permalink to this definition">¶</a></dt>
 <dd><p>Delete the specified alias.</p>
 </dd></dl>
 
-<dl class="pdbcommand">
-<dt id="pdbcommand-!">
-<code class="sig-name descname">!</code><code class="sig-prename descclassname"> statement</code><a class="headerlink" href="#pdbcommand-!" title="Permalink to this definition">¶</a></dt>
+<dl class="std pdbcommand">
+<dt id="pdbcommand-0">
+<span id="pdbcommand-!"></span><code class="sig-name descname">!</code><code class="sig-prename descclassname"> statement</code><a class="headerlink" href="#pdbcommand-0" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute the (one-line) <em>statement</em> in the context of the current stack frame.
 The exclamation point can be omitted unless the first word of the statement
 resembles a debugger command.  To set a global variable, you can prefix the
@@ -644,24 +647,24 @@ e.g.:</p>
 </div>
 </dd></dl>
 
-<dl class="pdbcommand">
+<dl class="std pdbcommand">
 <dt id="pdbcommand-run">
 <code class="sig-name descname">run</code><code class="sig-prename descclassname"> [args ...]</code><a class="headerlink" href="#pdbcommand-run" title="Permalink to this definition">¶</a></dt>
 <dt id="pdbcommand-restart">
 <code class="sig-name descname">restart</code><code class="sig-prename descclassname"> [args ...]</code><a class="headerlink" href="#pdbcommand-restart" title="Permalink to this definition">¶</a></dt>
 <dd><p>Restart the debugged Python program.  If an argument is supplied, it is split
-with <a class="reference internal" href="shlex.html#module-shlex" title="shlex: Simple lexical analysis for Unix shell-like languages."><code class="xref py py-mod docutils literal notranslate"><span class="pre">shlex</span></code></a> and the result is used as the new <a class="reference internal" href="sys.html#sys.argv" title="sys.argv"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.argv</span></code></a>.
+with <a class="reference internal" href="shlex.html#module-shlex" title="shlex: Simple lexical analysis for Unix shell-like languages."><code class="xref py py-mod docutils literal notranslate"><span class="pre">shlex</span></code></a> and the result is used as the new <a class="reference internal" href="sys.html#sys-argv" title="sys.argv"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.argv</span></code></a>.
 History, breakpoints, actions and debugger options are preserved.
 <a class="reference internal" href="#pdbcommand-restart"><code class="xref std std-pdbcmd docutils literal notranslate"><span class="pre">restart</span></code></a> is an alias for <a class="reference internal" href="#pdbcommand-run"><code class="xref std std-pdbcmd docutils literal notranslate"><span class="pre">run</span></code></a>.</p>
 </dd></dl>
 
-<dl class="pdbcommand">
+<dl class="std pdbcommand">
 <dt id="pdbcommand-quit">
 <code class="sig-name descname">q(uit)</code><a class="headerlink" href="#pdbcommand-quit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Quit from the debugger.  The program being executed is aborted.</p>
 </dd></dl>
 
-<dl class="pdbcommand">
+<dl class="std pdbcommand">
 <dt id="pdbcommand-debug">
 <code class="sig-name descname">debug</code><code class="sig-prename descclassname"> code</code><a class="headerlink" href="#pdbcommand-debug" title="Permalink to this definition">¶</a></dt>
 <dd><p>Enter a recursive debugger that steps through the code
@@ -669,7 +672,7 @@ argument (which is an arbitrary expression or statement to be
 executed in the current environment).</p>
 </dd></dl>
 
-<dl class="pdbcommand">
+<dl class="std pdbcommand">
 <dt id="pdbcommand-retval">
 <code class="sig-name descname">retval</code><a class="headerlink" href="#pdbcommand-retval" title="Permalink to this definition">¶</a></dt>
 <dt>
@@ -743,7 +746,7 @@ is determined by the <code class="docutils literal notranslate"><span class="pre
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
@@ -762,6 +765,7 @@ is determined by the <code class="docutils literal notranslate"><span class="pre
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  
@@ -774,11 +778,11 @@ is determined by the <code class="docutils literal notranslate"><span class="pre
 <br />
     <br />
 
-    Last updated on Feb 13, 2020.
+    Last updated on Mar 08, 2020.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 2.4.2+/ad35b3c.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/c10e1bc.
     </div>
 
   </body>

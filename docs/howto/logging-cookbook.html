@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Logging Cookbook &#8212; Python 3.9.0a3 documentation</title>
+    <title>Logging Cookbook &#8212; Python 3.9.0a4 documentation</title>
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments-monokai.css" />
+    <link rel="stylesheet" href="../_static/pygments_dark.css" type="text/css" media="(prefers-color-scheme: dark)" id="pygments_dark_css" />
     
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -18,7 +18,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.9.0a3 documentation"
+          title="Search within Python 3.9.0a4 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -41,9 +41,11 @@
       }
     </style>
 
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png" />
+    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
     
     <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <script type="text/javascript" src="../_static/themetoggle.js"></script>
     
      
 
@@ -72,7 +74,7 @@
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python HOWTOs</a> &#187;</li>
@@ -90,6 +92,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -248,7 +251,7 @@ works for more threads than shown here, of course.</p>
 </div>
 <div class="section" id="multiple-handlers-and-formatters">
 <h2>Multiple handlers and formatters<a class="headerlink" href="#multiple-handlers-and-formatters" title="Permalink to this headline">¶</a></h2>
-<p>Loggers are plain Python objects.  The <a class="reference internal" href="../library/logging.html#logging.Logger.addHandler" title="logging.Logger.addHandler"><code class="xref py py-meth docutils literal notranslate"><span class="pre">addHandler()</span></code></a> method has no
+<p>Loggers are plain Python objects.  The <a class="reference internal" href="../library/logging.html#logging-logger-addhandler" title="logging.Logger.addHandler"><code class="xref py py-meth docutils literal notranslate"><span class="pre">addHandler()</span></code></a> method has no
 minimum or maximum quota for the number of handlers you may add.  Sometimes it
 will be beneficial for an application to log all messages of all severities to a
 text file while simultaneously logging errors or above to the console.  To set
@@ -412,30 +415,30 @@ configuration:</p>
 blocking the thread you’re logging from. This is common in Web applications,
 though of course it also occurs in other scenarios.</p>
 <p>A common culprit which demonstrates sluggish behaviour is the
-<a class="reference internal" href="../library/logging.handlers.html#logging.handlers.SMTPHandler" title="logging.handlers.SMTPHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">SMTPHandler</span></code></a>: sending emails can take a long time, for a
+<a class="reference internal" href="../library/logging.handlers.html#logging-handlers-smtphandler" title="logging.handlers.SMTPHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">SMTPHandler</span></code></a>: sending emails can take a long time, for a
 number of reasons outside the developer’s control (for example, a poorly
 performing mail or network infrastructure). But almost any network-based
-handler can block: Even a <a class="reference internal" href="../library/logging.handlers.html#logging.handlers.SocketHandler" title="logging.handlers.SocketHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">SocketHandler</span></code></a> operation may do a
+handler can block: Even a <a class="reference internal" href="../library/logging.handlers.html#logging-handlers-sockethandler" title="logging.handlers.SocketHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">SocketHandler</span></code></a> operation may do a
 DNS query under the hood which is too slow (and this query can be deep in the
 socket library code, below the Python layer, and outside your control).</p>
 <p>One solution is to use a two-part approach. For the first part, attach only a
-<a class="reference internal" href="../library/logging.handlers.html#logging.handlers.QueueHandler" title="logging.handlers.QueueHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueueHandler</span></code></a> to those loggers which are accessed from
+<a class="reference internal" href="../library/logging.handlers.html#logging-handlers-queuehandler" title="logging.handlers.QueueHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueueHandler</span></code></a> to those loggers which are accessed from
 performance-critical threads. They simply write to their queue, which can be
 sized to a large enough capacity or initialized with no upper bound to their
 size. The write to the queue will typically be accepted quickly, though you
-will probably need to catch the <a class="reference internal" href="../library/queue.html#queue.Full" title="queue.Full"><code class="xref py py-exc docutils literal notranslate"><span class="pre">queue.Full</span></code></a> exception as a precaution
+will probably need to catch the <a class="reference internal" href="../library/queue.html#queue-full" title="queue.Full"><code class="xref py py-exc docutils literal notranslate"><span class="pre">queue.Full</span></code></a> exception as a precaution
 in your code. If you are a library developer who has performance-critical
 threads in their code, be sure to document this (together with a suggestion to
 attach only <code class="docutils literal notranslate"><span class="pre">QueueHandlers</span></code> to your loggers) for the benefit of other
 developers who will use your code.</p>
-<p>The second part of the solution is <a class="reference internal" href="../library/logging.handlers.html#logging.handlers.QueueListener" title="logging.handlers.QueueListener"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueueListener</span></code></a>, which has been
-designed as the counterpart to <a class="reference internal" href="../library/logging.handlers.html#logging.handlers.QueueHandler" title="logging.handlers.QueueHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueueHandler</span></code></a>.  A
-<a class="reference internal" href="../library/logging.handlers.html#logging.handlers.QueueListener" title="logging.handlers.QueueListener"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueueListener</span></code></a> is very simple: it’s passed a queue and some handlers,
+<p>The second part of the solution is <a class="reference internal" href="../library/logging.handlers.html#logging-handlers-queuelistener" title="logging.handlers.QueueListener"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueueListener</span></code></a>, which has been
+designed as the counterpart to <a class="reference internal" href="../library/logging.handlers.html#logging-handlers-queuehandler" title="logging.handlers.QueueHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueueHandler</span></code></a>.  A
+<a class="reference internal" href="../library/logging.handlers.html#logging-handlers-queuelistener" title="logging.handlers.QueueListener"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueueListener</span></code></a> is very simple: it’s passed a queue and some handlers,
 and it fires up an internal thread which listens to its queue for LogRecords
 sent from <code class="docutils literal notranslate"><span class="pre">QueueHandlers</span></code> (or any other source of <code class="docutils literal notranslate"><span class="pre">LogRecords</span></code>, for that
 matter). The <code class="docutils literal notranslate"><span class="pre">LogRecords</span></code> are removed from the queue and passed to the
 handlers for processing.</p>
-<p>The advantage of having a separate <a class="reference internal" href="../library/logging.handlers.html#logging.handlers.QueueListener" title="logging.handlers.QueueListener"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueueListener</span></code></a> class is that you
+<p>The advantage of having a separate <a class="reference internal" href="../library/logging.handlers.html#logging-handlers-queuelistener" title="logging.handlers.QueueListener"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueueListener</span></code></a> class is that you
 can use the same instance to service multiple <code class="docutils literal notranslate"><span class="pre">QueueHandlers</span></code>. This is more
 resource-friendly than, say, having threaded versions of the existing handler
 classes, which would eat up one thread per handler for no particular benefit.</p>
@@ -462,7 +465,7 @@ classes, which would eat up one thread per handler for no particular benefit.</p
 </pre></div>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 3.5: </span>Prior to Python 3.5, the <a class="reference internal" href="../library/logging.handlers.html#logging.handlers.QueueListener" title="logging.handlers.QueueListener"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueueListener</span></code></a> always passed every message
+<p><span class="versionmodified changed">Changed in version 3.5: </span>Prior to Python 3.5, the <a class="reference internal" href="../library/logging.handlers.html#logging-handlers-queuelistener" title="logging.handlers.QueueListener"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueueListener</span></code></a> always passed every message
 received from the queue to every handler it was initialized with. (This was
 because it was assumed that level filtering was all done on the other side,
 where the queue is filled.) From 3.5 onwards, this behaviour can be changed
@@ -476,7 +479,7 @@ handler if it’s appropriate to do so.</p>
 <span id="network-logging"></span><h2>Sending and receiving logging events across a network<a class="headerlink" href="#sending-and-receiving-logging-events-across-a-network" title="Permalink to this headline">¶</a></h2>
 <p>Let’s say you want to send logging events across a network, and handle them at
 the receiving end. A simple way of doing this is attaching a
-<a class="reference internal" href="../library/logging.handlers.html#logging.handlers.SocketHandler" title="logging.handlers.SocketHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">SocketHandler</span></code></a> instance to the root logger at the sending end:</p>
+<a class="reference internal" href="../library/logging.handlers.html#logging-handlers-sockethandler" title="logging.handlers.SocketHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">SocketHandler</span></code></a> instance to the root logger at the sending end:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span><span class="o">,</span> <span class="nn">logging.handlers</span>
 
 <span class="n">rootLogger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
@@ -692,7 +695,7 @@ passed to them, including adding additional attributes which can then be output
 using a suitable format string, or if needed a custom <code class="xref py py-class docutils literal notranslate"><span class="pre">Formatter</span></code>.</p>
 <p>For example in a web application, the request being processed (or at least,
 the interesting parts of it) can be stored in a threadlocal
-(<a class="reference internal" href="../library/threading.html#threading.local" title="threading.local"><code class="xref py py-class docutils literal notranslate"><span class="pre">threading.local</span></code></a>) variable, and then accessed from a <code class="docutils literal notranslate"><span class="pre">Filter</span></code> to
+(<a class="reference internal" href="../library/threading.html#threading-local" title="threading.local"><code class="xref py py-class docutils literal notranslate"><span class="pre">threading.local</span></code></a>) variable, and then accessed from a <code class="docutils literal notranslate"><span class="pre">Filter</span></code> to
 add, say, information from the request - say, the remote IP address and remote
 user’s username - to the <code class="docutils literal notranslate"><span class="pre">LogRecord</span></code>, using the attribute names ‘ip’ and
 ‘user’ as in the <code class="docutils literal notranslate"><span class="pre">LoggerAdapter</span></code> example above. In that case, the same format
@@ -767,14 +770,14 @@ existing processes to perform this function.)
 <a class="reference internal" href="#network-logging"><span class="std std-ref">This section</span></a> documents this approach in more detail and
 includes a working socket receiver which can be used as a starting point for you
 to adapt in your own applications.</p>
-<p>You could also write your own handler which uses the <a class="reference internal" href="../library/multiprocessing.html#multiprocessing.Lock" title="multiprocessing.Lock"><code class="xref py py-class docutils literal notranslate"><span class="pre">Lock</span></code></a>
+<p>You could also write your own handler which uses the <a class="reference internal" href="../library/multiprocessing.html#multiprocessing-lock" title="multiprocessing.Lock"><code class="xref py py-class docutils literal notranslate"><span class="pre">Lock</span></code></a>
 class from the <a class="reference internal" href="../library/multiprocessing.html#module-multiprocessing" title="multiprocessing: Process-based parallelism."><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> module to serialize access to the
 file from your processes. The existing <code class="xref py py-class docutils literal notranslate"><span class="pre">FileHandler</span></code> and subclasses do
 not make use of <a class="reference internal" href="../library/multiprocessing.html#module-multiprocessing" title="multiprocessing: Process-based parallelism."><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> at present, though they may do so in the
 future. Note that at present, the <a class="reference internal" href="../library/multiprocessing.html#module-multiprocessing" title="multiprocessing: Process-based parallelism."><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> module does not provide
 working lock functionality on all platforms (see
 <a class="reference external" href="https://bugs.python.org/issue3770">https://bugs.python.org/issue3770</a>).</p>
-<p>Alternatively, you can use a <code class="docutils literal notranslate"><span class="pre">Queue</span></code> and a <a class="reference internal" href="../library/logging.handlers.html#logging.handlers.QueueHandler" title="logging.handlers.QueueHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueueHandler</span></code></a> to send
+<p>Alternatively, you can use a <code class="docutils literal notranslate"><span class="pre">Queue</span></code> and a <a class="reference internal" href="../library/logging.handlers.html#logging-handlers-queuehandler" title="logging.handlers.QueueHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueueHandler</span></code></a> to send
 all logging events to one of the processes in your multi-process application.
 The following example script demonstrates how you can do this; in the example
 a separate listener process listens for events sent by other processes and logs
@@ -992,7 +995,7 @@ machinery in the main process (even though the logging events are generated in
 the worker processes) to direct the messages to the appropriate destinations.</p>
 <div class="section" id="using-concurrent-futures-processpoolexecutor">
 <h3>Using concurrent.futures.ProcessPoolExecutor<a class="headerlink" href="#using-concurrent-futures-processpoolexecutor" title="Permalink to this headline">¶</a></h3>
-<p>If you want to use <a class="reference internal" href="../library/concurrent.futures.html#concurrent.futures.ProcessPoolExecutor" title="concurrent.futures.ProcessPoolExecutor"><code class="xref py py-class docutils literal notranslate"><span class="pre">concurrent.futures.ProcessPoolExecutor</span></code></a> to start
+<p>If you want to use <a class="reference internal" href="../library/concurrent.futures.html#concurrent-futures-processpoolexecutor" title="concurrent.futures.ProcessPoolExecutor"><code class="xref py py-class docutils literal notranslate"><span class="pre">concurrent.futures.ProcessPoolExecutor</span></code></a> to start
 your worker processes, you need to create the queue slightly differently.
 Instead of</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">queue</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Queue</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
@@ -1013,7 +1016,7 @@ Instead of</p>
     <span class="n">w</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>to this (remembering to first import <a class="reference internal" href="../library/concurrent.futures.html#module-concurrent.futures" title="concurrent.futures: Execute computations concurrently using threads or processes."><code class="xref py py-mod docutils literal notranslate"><span class="pre">concurrent.futures</span></code></a>):</p>
+<p>to this (remembering to first import <a class="reference internal" href="../library/concurrent.futures.html#module-concurrent-futures" title="concurrent.futures: Execute computations concurrently using threads or processes."><code class="xref py py-mod docutils literal notranslate"><span class="pre">concurrent.futures</span></code></a>):</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">concurrent</span><span class="o">.</span><span class="n">futures</span><span class="o">.</span><span class="n">ProcessPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
         <span class="n">executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">worker_process</span><span class="p">,</span> <span class="n">queue</span><span class="p">,</span> <span class="n">worker_configurer</span><span class="p">)</span>
@@ -1077,7 +1080,7 @@ example.  You would want to set <em>maxBytes</em> to an appropriate value.</p>
 <p>When logging was added to the Python standard library, the only way of
 formatting messages with variable content was to use the %-formatting
 method. Since then, Python has gained two new formatting approaches:
-<a class="reference internal" href="../library/string.html#string.Template" title="string.Template"><code class="xref py py-class docutils literal notranslate"><span class="pre">string.Template</span></code></a> (added in Python 2.4) and <a class="reference internal" href="../library/stdtypes.html#str.format" title="str.format"><code class="xref py py-meth docutils literal notranslate"><span class="pre">str.format()</span></code></a>
+<a class="reference internal" href="../library/string.html#string-template" title="string.Template"><code class="xref py py-class docutils literal notranslate"><span class="pre">string.Template</span></code></a> (added in Python 2.4) and <a class="reference internal" href="../library/stdtypes.html#str-format" title="str.format"><code class="xref py py-meth docutils literal notranslate"><span class="pre">str.format()</span></code></a>
 (added in Python 2.6).</p>
 <p>Logging (as of 3.2) provides improved support for these two additional
 formatting styles. The <code class="xref py py-class docutils literal notranslate"><span class="pre">Formatter</span></code> class been enhanced to take an
@@ -1086,7 +1089,7 @@ additional, optional keyword parameter named <code class="docutils literal notra
 to the other two formatting styles. Backwards compatibility is maintained by
 default (as you would expect), but by explicitly specifying a style parameter,
 you get the ability to specify format strings which work with
-<a class="reference internal" href="../library/stdtypes.html#str.format" title="str.format"><code class="xref py py-meth docutils literal notranslate"><span class="pre">str.format()</span></code></a> or <a class="reference internal" href="../library/string.html#string.Template" title="string.Template"><code class="xref py py-class docutils literal notranslate"><span class="pre">string.Template</span></code></a>. Here’s an example console
+<a class="reference internal" href="../library/stdtypes.html#str-format" title="str.format"><code class="xref py py-meth docutils literal notranslate"><span class="pre">str.format()</span></code></a> or <a class="reference internal" href="../library/string.html#string-template" title="string.Template"><code class="xref py py-class docutils literal notranslate"><span class="pre">string.Template</span></code></a>. Here’s an example console
 session to show the possibilities:</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">logging</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span>
@@ -1125,8 +1128,8 @@ parameters used only for determining options for how to handle the actual
 logging call (e.g. the <code class="docutils literal notranslate"><span class="pre">exc_info</span></code> keyword parameter to indicate that
 traceback information should be logged, or the <code class="docutils literal notranslate"><span class="pre">extra</span></code> keyword parameter
 to indicate additional contextual information to be added to the log). So
-you cannot directly make logging calls using <a class="reference internal" href="../library/stdtypes.html#str.format" title="str.format"><code class="xref py py-meth docutils literal notranslate"><span class="pre">str.format()</span></code></a> or
-<a class="reference internal" href="../library/string.html#string.Template" title="string.Template"><code class="xref py py-class docutils literal notranslate"><span class="pre">string.Template</span></code></a> syntax, because internally the logging package
+you cannot directly make logging calls using <a class="reference internal" href="../library/stdtypes.html#str-format" title="str.format"><code class="xref py py-meth docutils literal notranslate"><span class="pre">str.format()</span></code></a> or
+<a class="reference internal" href="../library/string.html#string-template" title="string.Template"><code class="xref py py-class docutils literal notranslate"><span class="pre">string.Template</span></code></a> syntax, because internally the logging package
 uses %-formatting to merge the format string and the variable arguments.
 There would be no changing this while preserving backward compatibility, since
 all logging calls which are out there in existing code will be using %-format
@@ -1161,7 +1164,7 @@ formatted log output in place of “%(message)s” or “{message}” or “$mes
 It’s a little unwieldy to use the class names whenever you want to log
 something, but it’s quite palatable if you use an alias such as __ (double
 underscore — not to be confused with _, the single underscore used as a
-synonym/alias for <a class="reference internal" href="../library/gettext.html#gettext.gettext" title="gettext.gettext"><code class="xref py py-func docutils literal notranslate"><span class="pre">gettext.gettext()</span></code></a> or its brethren).</p>
+synonym/alias for <a class="reference internal" href="../library/gettext.html#gettext-gettext" title="gettext.gettext"><code class="xref py py-func docutils literal notranslate"><span class="pre">gettext.gettext()</span></code></a> or its brethren).</p>
 <p>The above classes are not included in Python, though they’re easy enough to
 copy and paste into your own code. They can be used as follows (assuming that
 they’re declared in a module called <code class="docutils literal notranslate"><span class="pre">wherever</span></code>):</p>
@@ -1228,38 +1231,38 @@ Python 3.2 or later.</p>
 </div>
 <div class="section" id="customizing-logrecord">
 <span id="custom-logrecord"></span><h2>Customizing <code class="docutils literal notranslate"><span class="pre">LogRecord</span></code><a class="headerlink" href="#customizing-logrecord" title="Permalink to this headline">¶</a></h2>
-<p>Every logging event is represented by a <a class="reference internal" href="../library/logging.html#logging.LogRecord" title="logging.LogRecord"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogRecord</span></code></a> instance.
+<p>Every logging event is represented by a <a class="reference internal" href="../library/logging.html#logging-logrecord" title="logging.LogRecord"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogRecord</span></code></a> instance.
 When an event is logged and not filtered out by a logger’s level, a
-<a class="reference internal" href="../library/logging.html#logging.LogRecord" title="logging.LogRecord"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogRecord</span></code></a> is created, populated with information about the event and
+<a class="reference internal" href="../library/logging.html#logging-logrecord" title="logging.LogRecord"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogRecord</span></code></a> is created, populated with information about the event and
 then passed to the handlers for that logger (and its ancestors, up to and
 including the logger where further propagation up the hierarchy is disabled).
 Before Python 3.2, there were only two places where this creation was done:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../library/logging.html#logging.Logger.makeRecord" title="logging.Logger.makeRecord"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Logger.makeRecord()</span></code></a>, which is called in the normal process of
-logging an event. This invoked <a class="reference internal" href="../library/logging.html#logging.LogRecord" title="logging.LogRecord"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogRecord</span></code></a> directly to create an
+<li><p><a class="reference internal" href="../library/logging.html#logging-logger-makerecord" title="logging.Logger.makeRecord"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Logger.makeRecord()</span></code></a>, which is called in the normal process of
+logging an event. This invoked <a class="reference internal" href="../library/logging.html#logging-logrecord" title="logging.LogRecord"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogRecord</span></code></a> directly to create an
 instance.</p></li>
-<li><p><a class="reference internal" href="../library/logging.html#logging.makeLogRecord" title="logging.makeLogRecord"><code class="xref py py-func docutils literal notranslate"><span class="pre">makeLogRecord()</span></code></a>, which is called with a dictionary containing
+<li><p><a class="reference internal" href="../library/logging.html#logging-makelogrecord" title="logging.makeLogRecord"><code class="xref py py-func docutils literal notranslate"><span class="pre">makeLogRecord()</span></code></a>, which is called with a dictionary containing
 attributes to be added to the LogRecord. This is typically invoked when a
 suitable dictionary has been received over the network (e.g. in pickle form
-via a <a class="reference internal" href="../library/logging.handlers.html#logging.handlers.SocketHandler" title="logging.handlers.SocketHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">SocketHandler</span></code></a>, or in JSON form via an
-<a class="reference internal" href="../library/logging.handlers.html#logging.handlers.HTTPHandler" title="logging.handlers.HTTPHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">HTTPHandler</span></code></a>).</p></li>
+via a <a class="reference internal" href="../library/logging.handlers.html#logging-handlers-sockethandler" title="logging.handlers.SocketHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">SocketHandler</span></code></a>, or in JSON form via an
+<a class="reference internal" href="../library/logging.handlers.html#logging-handlers-httphandler" title="logging.handlers.HTTPHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">HTTPHandler</span></code></a>).</p></li>
 </ul>
 <p>This has usually meant that if you need to do anything special with a
-<a class="reference internal" href="../library/logging.html#logging.LogRecord" title="logging.LogRecord"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogRecord</span></code></a>, you’ve had to do one of the following.</p>
+<a class="reference internal" href="../library/logging.html#logging-logrecord" title="logging.LogRecord"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogRecord</span></code></a>, you’ve had to do one of the following.</p>
 <ul class="simple">
-<li><p>Create your own <a class="reference internal" href="../library/logging.html#logging.Logger" title="logging.Logger"><code class="xref py py-class docutils literal notranslate"><span class="pre">Logger</span></code></a> subclass, which overrides
-<a class="reference internal" href="../library/logging.html#logging.Logger.makeRecord" title="logging.Logger.makeRecord"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Logger.makeRecord()</span></code></a>, and set it using <a class="reference internal" href="../library/logging.html#logging.setLoggerClass" title="logging.setLoggerClass"><code class="xref py py-func docutils literal notranslate"><span class="pre">setLoggerClass()</span></code></a>
+<li><p>Create your own <a class="reference internal" href="../library/logging.html#logging-logger" title="logging.Logger"><code class="xref py py-class docutils literal notranslate"><span class="pre">Logger</span></code></a> subclass, which overrides
+<a class="reference internal" href="../library/logging.html#logging-logger-makerecord" title="logging.Logger.makeRecord"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Logger.makeRecord()</span></code></a>, and set it using <a class="reference internal" href="../library/logging.html#logging-setloggerclass" title="logging.setLoggerClass"><code class="xref py py-func docutils literal notranslate"><span class="pre">setLoggerClass()</span></code></a>
 before any loggers that you care about are instantiated.</p></li>
-<li><p>Add a <a class="reference internal" href="../library/logging.html#logging.Filter" title="logging.Filter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Filter</span></code></a> to a logger or handler, which does the
+<li><p>Add a <a class="reference internal" href="../library/logging.html#logging-filter" title="logging.Filter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Filter</span></code></a> to a logger or handler, which does the
 necessary special manipulation you need when its
-<a class="reference internal" href="../library/logging.html#logging.Filter.filter" title="logging.Filter.filter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">filter()</span></code></a> method is called.</p></li>
+<a class="reference internal" href="../library/logging.html#logging-filter-filter" title="logging.Filter.filter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">filter()</span></code></a> method is called.</p></li>
 </ul>
 <p>The first approach would be a little unwieldy in the scenario where (say)
 several different libraries wanted to do different things. Each would attempt
-to set its own <a class="reference internal" href="../library/logging.html#logging.Logger" title="logging.Logger"><code class="xref py py-class docutils literal notranslate"><span class="pre">Logger</span></code></a> subclass, and the one which did this last would
+to set its own <a class="reference internal" href="../library/logging.html#logging-logger" title="logging.Logger"><code class="xref py py-class docutils literal notranslate"><span class="pre">Logger</span></code></a> subclass, and the one which did this last would
 win.</p>
 <p>The second approach works reasonably well for many cases, but does not allow
-you to e.g. use a specialized subclass of <a class="reference internal" href="../library/logging.html#logging.LogRecord" title="logging.LogRecord"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogRecord</span></code></a>. Library
+you to e.g. use a specialized subclass of <a class="reference internal" href="../library/logging.html#logging-logrecord" title="logging.LogRecord"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogRecord</span></code></a>. Library
 developers can set a suitable filter on their loggers, but they would have to
 remember to do this every time they introduced a new logger (which they would
 do simply by adding new packages or modules and doing</p>
@@ -1267,15 +1270,15 @@ do simply by adding new packages or modules and doing</p>
 </pre></div>
 </div>
 <p>at module level). It’s probably one too many things to think about. Developers
-could also add the filter to a <a class="reference internal" href="../library/logging.handlers.html#logging.NullHandler" title="logging.NullHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">NullHandler</span></code></a> attached to their
+could also add the filter to a <a class="reference internal" href="../library/logging.handlers.html#logging-nullhandler" title="logging.NullHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">NullHandler</span></code></a> attached to their
 top-level logger, but this would not be invoked if an application developer
 attached a handler to a lower-level library logger — so output from that
 handler would not reflect the intentions of the library developer.</p>
-<p>In Python 3.2 and later, <a class="reference internal" href="../library/logging.html#logging.LogRecord" title="logging.LogRecord"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogRecord</span></code></a> creation is done through a
+<p>In Python 3.2 and later, <a class="reference internal" href="../library/logging.html#logging-logrecord" title="logging.LogRecord"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogRecord</span></code></a> creation is done through a
 factory, which you can specify. The factory is just a callable you can set with
-<a class="reference internal" href="../library/logging.html#logging.setLogRecordFactory" title="logging.setLogRecordFactory"><code class="xref py py-func docutils literal notranslate"><span class="pre">setLogRecordFactory()</span></code></a>, and interrogate with
-<a class="reference internal" href="../library/logging.html#logging.getLogRecordFactory" title="logging.getLogRecordFactory"><code class="xref py py-func docutils literal notranslate"><span class="pre">getLogRecordFactory()</span></code></a>. The factory is invoked with the same
-signature as the <a class="reference internal" href="../library/logging.html#logging.LogRecord" title="logging.LogRecord"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogRecord</span></code></a> constructor, as <a class="reference internal" href="../library/logging.html#logging.LogRecord" title="logging.LogRecord"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogRecord</span></code></a>
+<a class="reference internal" href="../library/logging.html#logging-setlogrecordfactory" title="logging.setLogRecordFactory"><code class="xref py py-func docutils literal notranslate"><span class="pre">setLogRecordFactory()</span></code></a>, and interrogate with
+<a class="reference internal" href="../library/logging.html#logging-getlogrecordfactory" title="logging.getLogRecordFactory"><code class="xref py py-func docutils literal notranslate"><span class="pre">getLogRecordFactory()</span></code></a>. The factory is invoked with the same
+signature as the <a class="reference internal" href="../library/logging.html#logging-logrecord" title="logging.LogRecord"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogRecord</span></code></a> constructor, as <a class="reference internal" href="../library/logging.html#logging-logrecord" title="logging.LogRecord"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogRecord</span></code></a>
 is the default setting for the factory.</p>
 <p>This approach allows a custom factory to control all aspects of LogRecord
 creation. For example, you could return a subclass, or just add some additional
@@ -1295,7 +1298,7 @@ long as they don’t overwrite each other’s attributes or unintentionally
 overwrite the attributes provided as standard, there should be no surprises.
 However, it should be borne in mind that each link in the chain adds run-time
 overhead to all logging operations, and the technique should only be used when
-the use of a <a class="reference internal" href="../library/logging.html#logging.Filter" title="logging.Filter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Filter</span></code></a> does not provide the desired result.</p>
+the use of a <a class="reference internal" href="../library/logging.html#logging-filter" title="logging.Filter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Filter</span></code></a> does not provide the desired result.</p>
 </div>
 <div class="section" id="subclassing-queuehandler-a-zeromq-example">
 <span id="zeromq-handlers"></span><h2>Subclassing QueueHandler - a ZeroMQ example<a class="headerlink" href="#subclassing-queuehandler-a-zeromq-example" title="Permalink to this headline">¶</a></h2>
@@ -1356,9 +1359,9 @@ of queues, for example a ZeroMQ ‘subscribe’ socket. Here’s an example:</p>
 <dl class="simple">
 <dt>Module <a class="reference internal" href="../library/logging.html#module-logging" title="logging: Flexible event logging system for applications."><code class="xref py py-mod docutils literal notranslate"><span class="pre">logging</span></code></a></dt><dd><p>API reference for the logging module.</p>
 </dd>
-<dt>Module <a class="reference internal" href="../library/logging.config.html#module-logging.config" title="logging.config: Configuration of the logging module."><code class="xref py py-mod docutils literal notranslate"><span class="pre">logging.config</span></code></a></dt><dd><p>Configuration API for the logging module.</p>
+<dt>Module <a class="reference internal" href="../library/logging.config.html#module-logging-config" title="logging.config: Configuration of the logging module."><code class="xref py py-mod docutils literal notranslate"><span class="pre">logging.config</span></code></a></dt><dd><p>Configuration API for the logging module.</p>
 </dd>
-<dt>Module <a class="reference internal" href="../library/logging.handlers.html#module-logging.handlers" title="logging.handlers: Handlers for the logging module."><code class="xref py py-mod docutils literal notranslate"><span class="pre">logging.handlers</span></code></a></dt><dd><p>Useful handlers included with the logging module.</p>
+<dt>Module <a class="reference internal" href="../library/logging.handlers.html#module-logging-handlers" title="logging.handlers: Handlers for the logging module."><code class="xref py py-mod docutils literal notranslate"><span class="pre">logging.handlers</span></code></a></dt><dd><p>Useful handlers included with the logging module.</p>
 </dd>
 </dl>
 <p><a class="reference internal" href="logging.html#logging-basic-tutorial"><span class="std std-ref">A basic logging tutorial</span></a></p>
@@ -1369,7 +1372,7 @@ of queues, for example a ZeroMQ ‘subscribe’ socket. Here’s an example:</p>
 <h2>An example dictionary-based configuration<a class="headerlink" href="#an-example-dictionary-based-configuration" title="Permalink to this headline">¶</a></h2>
 <p>Below is an example of a logging configuration dictionary - it’s taken from
 the <a class="reference external" href="https://docs.djangoproject.com/en/1.9/topics/logging/#configuring-logging">documentation on the Django project</a>.
-This dictionary is passed to <a class="reference internal" href="../library/logging.config.html#logging.config.dictConfig" title="logging.config.dictConfig"><code class="xref py py-func docutils literal notranslate"><span class="pre">dictConfig()</span></code></a> to put the configuration into effect:</p>
+This dictionary is passed to <a class="reference internal" href="../library/logging.config.html#logging-config-dictconfig" title="logging.config.dictConfig"><code class="xref py py-func docutils literal notranslate"><span class="pre">dictConfig()</span></code></a> to put the configuration into effect:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">LOGGING</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
     <span class="s1">&#39;disable_existing_loggers&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
@@ -1685,7 +1688,7 @@ following structure: an optional pure-ASCII component, followed by a UTF-8 Byte
 Order Mark (BOM), followed by Unicode encoded using UTF-8. (See the
 <span class="target" id="index-1"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc5424.html#section-6"><strong>relevant section of the specification</strong></a>.)</p>
 <p>In Python 3.1, code was added to
-<a class="reference internal" href="../library/logging.handlers.html#logging.handlers.SysLogHandler" title="logging.handlers.SysLogHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">SysLogHandler</span></code></a> to insert a BOM into the message, but
+<a class="reference internal" href="../library/logging.handlers.html#logging-handlers-sysloghandler" title="logging.handlers.SysLogHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">SysLogHandler</span></code></a> to insert a BOM into the message, but
 unfortunately, it was implemented incorrectly, with the BOM appearing at the
 beginning of the message and hence not allowing any pure-ASCII component to
 appear before it.</p>
@@ -1695,8 +1698,8 @@ want to produce <span class="target" id="index-2"></span><a class="rfc reference
 pure-ASCII sequence before it and arbitrary Unicode after it, encoded using
 UTF-8, then you need to do the following:</p>
 <ol class="arabic">
-<li><p>Attach a <a class="reference internal" href="../library/logging.html#logging.Formatter" title="logging.Formatter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Formatter</span></code></a> instance to your
-<a class="reference internal" href="../library/logging.handlers.html#logging.handlers.SysLogHandler" title="logging.handlers.SysLogHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">SysLogHandler</span></code></a> instance, with a format string
+<li><p>Attach a <a class="reference internal" href="../library/logging.html#logging-formatter" title="logging.Formatter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Formatter</span></code></a> instance to your
+<a class="reference internal" href="../library/logging.handlers.html#logging-handlers-sysloghandler" title="logging.handlers.SysLogHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">SysLogHandler</span></code></a> instance, with a format string
 such as:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;ASCII section</span><span class="se">\ufeff</span><span class="s1">Unicode section&#39;</span>
 </pre></div>
@@ -1796,11 +1799,11 @@ as in the following complete example:</p>
 Python used.</p>
 </div>
 <div class="section" id="customizing-handlers-with-dictconfig">
-<span id="custom-handlers"></span><h2>Customizing handlers with <a class="reference internal" href="../library/logging.config.html#logging.config.dictConfig" title="logging.config.dictConfig"><code class="xref py py-func docutils literal notranslate"><span class="pre">dictConfig()</span></code></a><a class="headerlink" href="#customizing-handlers-with-dictconfig" title="Permalink to this headline">¶</a></h2>
+<span id="custom-handlers"></span><h2>Customizing handlers with <a class="reference internal" href="../library/logging.config.html#logging-config-dictconfig" title="logging.config.dictConfig"><code class="xref py py-func docutils literal notranslate"><span class="pre">dictConfig()</span></code></a><a class="headerlink" href="#customizing-handlers-with-dictconfig" title="Permalink to this headline">¶</a></h2>
 <p>There are times when you want to customize logging handlers in particular ways,
-and if you use <a class="reference internal" href="../library/logging.config.html#logging.config.dictConfig" title="logging.config.dictConfig"><code class="xref py py-func docutils literal notranslate"><span class="pre">dictConfig()</span></code></a> you may be able to do this without
+and if you use <a class="reference internal" href="../library/logging.config.html#logging-config-dictconfig" title="logging.config.dictConfig"><code class="xref py py-func docutils literal notranslate"><span class="pre">dictConfig()</span></code></a> you may be able to do this without
 subclassing. As an example, consider that you may want to set the ownership of a
-log file. On POSIX, this is easily done using <a class="reference internal" href="../library/shutil.html#shutil.chown" title="shutil.chown"><code class="xref py py-func docutils literal notranslate"><span class="pre">shutil.chown()</span></code></a>, but the file
+log file. On POSIX, this is easily done using <a class="reference internal" href="../library/shutil.html#shutil-chown" title="shutil.chown"><code class="xref py py-func docutils literal notranslate"><span class="pre">shutil.chown()</span></code></a>, but the file
 handlers in the stdlib don’t offer built-in support. You can customize handler
 creation using a plain function such as:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">owned_file_handler</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">owner</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -1811,7 +1814,7 @@ creation using a plain function such as:</p>
     <span class="k">return</span> <span class="n">logging</span><span class="o">.</span><span class="n">FileHandler</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">encoding</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>You can then specify, in a logging configuration passed to <a class="reference internal" href="../library/logging.config.html#logging.config.dictConfig" title="logging.config.dictConfig"><code class="xref py py-func docutils literal notranslate"><span class="pre">dictConfig()</span></code></a>,
+<p>You can then specify, in a logging configuration passed to <a class="reference internal" href="../library/logging.config.html#logging-config-dictconfig" title="logging.config.dictConfig"><code class="xref py py-func docutils literal notranslate"><span class="pre">dictConfig()</span></code></a>,
 that a logging handler be created by calling this function:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">LOGGING</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
@@ -1899,11 +1902,11 @@ script, <code class="docutils literal notranslate"><span class="pre">chowntest.p
 <span class="go">-rw-r--r-- 1 pulse pulse 55 2013-11-05 09:34 chowntest.log</span>
 </pre></div>
 </div>
-<p>Note that this example uses Python 3.3 because that’s where <a class="reference internal" href="../library/shutil.html#shutil.chown" title="shutil.chown"><code class="xref py py-func docutils literal notranslate"><span class="pre">shutil.chown()</span></code></a>
+<p>Note that this example uses Python 3.3 because that’s where <a class="reference internal" href="../library/shutil.html#shutil-chown" title="shutil.chown"><code class="xref py py-func docutils literal notranslate"><span class="pre">shutil.chown()</span></code></a>
 makes an appearance. This approach should work with any Python version that
-supports <a class="reference internal" href="../library/logging.config.html#logging.config.dictConfig" title="logging.config.dictConfig"><code class="xref py py-func docutils literal notranslate"><span class="pre">dictConfig()</span></code></a> - namely, Python 2.7, 3.2 or later. With pre-3.3
+supports <a class="reference internal" href="../library/logging.config.html#logging-config-dictconfig" title="logging.config.dictConfig"><code class="xref py py-func docutils literal notranslate"><span class="pre">dictConfig()</span></code></a> - namely, Python 2.7, 3.2 or later. With pre-3.3
 versions, you would need to implement the actual ownership change using e.g.
-<a class="reference internal" href="../library/os.html#os.chown" title="os.chown"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.chown()</span></code></a>.</p>
+<a class="reference internal" href="../library/os.html#os-chown" title="os.chown"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.chown()</span></code></a>.</p>
 <p>In practice, the handler-creating function may be in a utility module somewhere
 in your project. Instead of the line in the configuration:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;()&#39;</span><span class="p">:</span> <span class="n">owned_file_handler</span><span class="p">,</span>
@@ -1916,29 +1919,29 @@ in your project. Instead of the line in the configuration:</p>
 <p>where <code class="docutils literal notranslate"><span class="pre">project.util</span></code> can be replaced with the actual name of the package
 where the function resides. In the above working script, using
 <code class="docutils literal notranslate"><span class="pre">'ext://__main__.owned_file_handler'</span></code> should work. Here, the actual callable
-is resolved by <a class="reference internal" href="../library/logging.config.html#logging.config.dictConfig" title="logging.config.dictConfig"><code class="xref py py-func docutils literal notranslate"><span class="pre">dictConfig()</span></code></a> from the <code class="docutils literal notranslate"><span class="pre">ext://</span></code> specification.</p>
+is resolved by <a class="reference internal" href="../library/logging.config.html#logging-config-dictconfig" title="logging.config.dictConfig"><code class="xref py py-func docutils literal notranslate"><span class="pre">dictConfig()</span></code></a> from the <code class="docutils literal notranslate"><span class="pre">ext://</span></code> specification.</p>
 <p>This example hopefully also points the way to how you could implement other
 types of file change - e.g. setting specific POSIX permission bits - in the
-same way, using <a class="reference internal" href="../library/os.html#os.chmod" title="os.chmod"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.chmod()</span></code></a>.</p>
+same way, using <a class="reference internal" href="../library/os.html#os-chmod" title="os.chmod"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.chmod()</span></code></a>.</p>
 <p>Of course, the approach could also be extended to types of handler other than a
-<a class="reference internal" href="../library/logging.handlers.html#logging.FileHandler" title="logging.FileHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileHandler</span></code></a> - for example, one of the rotating file handlers,
+<a class="reference internal" href="../library/logging.handlers.html#logging-filehandler" title="logging.FileHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileHandler</span></code></a> - for example, one of the rotating file handlers,
 or a different type of handler altogether.</p>
 </div>
 <div class="section" id="using-particular-formatting-styles-throughout-your-application">
 <span id="formatting-styles"></span><h2>Using particular formatting styles throughout your application<a class="headerlink" href="#using-particular-formatting-styles-throughout-your-application" title="Permalink to this headline">¶</a></h2>
-<p>In Python 3.2, the <a class="reference internal" href="../library/logging.html#logging.Formatter" title="logging.Formatter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Formatter</span></code></a> gained a <code class="docutils literal notranslate"><span class="pre">style</span></code> keyword
+<p>In Python 3.2, the <a class="reference internal" href="../library/logging.html#logging-formatter" title="logging.Formatter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Formatter</span></code></a> gained a <code class="docutils literal notranslate"><span class="pre">style</span></code> keyword
 parameter which, while defaulting to <code class="docutils literal notranslate"><span class="pre">%</span></code> for backward compatibility, allowed
 the specification of <code class="docutils literal notranslate"><span class="pre">{</span></code> or <code class="docutils literal notranslate"><span class="pre">$</span></code> to support the formatting approaches
-supported by <a class="reference internal" href="../library/stdtypes.html#str.format" title="str.format"><code class="xref py py-meth docutils literal notranslate"><span class="pre">str.format()</span></code></a> and <a class="reference internal" href="../library/string.html#string.Template" title="string.Template"><code class="xref py py-class docutils literal notranslate"><span class="pre">string.Template</span></code></a>. Note that this
+supported by <a class="reference internal" href="../library/stdtypes.html#str-format" title="str.format"><code class="xref py py-meth docutils literal notranslate"><span class="pre">str.format()</span></code></a> and <a class="reference internal" href="../library/string.html#string-template" title="string.Template"><code class="xref py py-class docutils literal notranslate"><span class="pre">string.Template</span></code></a>. Note that this
 governs the formatting of logging messages for final output to logs, and is
 completely orthogonal to how an individual logging message is constructed.</p>
-<p>Logging calls (<a class="reference internal" href="../library/logging.html#logging.Logger.debug" title="logging.Logger.debug"><code class="xref py py-meth docutils literal notranslate"><span class="pre">debug()</span></code></a>, <a class="reference internal" href="../library/logging.html#logging.Logger.info" title="logging.Logger.info"><code class="xref py py-meth docutils literal notranslate"><span class="pre">info()</span></code></a> etc.) only take
+<p>Logging calls (<a class="reference internal" href="../library/logging.html#logging-logger-debug" title="logging.Logger.debug"><code class="xref py py-meth docutils literal notranslate"><span class="pre">debug()</span></code></a>, <a class="reference internal" href="../library/logging.html#logging-logger-info" title="logging.Logger.info"><code class="xref py py-meth docutils literal notranslate"><span class="pre">info()</span></code></a> etc.) only take
 positional parameters for the actual logging message itself, with keyword
 parameters used only for determining options for how to handle the logging call
 (e.g. the <code class="docutils literal notranslate"><span class="pre">exc_info</span></code> keyword parameter to indicate that traceback information
 should be logged, or the <code class="docutils literal notranslate"><span class="pre">extra</span></code> keyword parameter to indicate additional
 contextual information to be added to the log). So you cannot directly make
-logging calls using <a class="reference internal" href="../library/stdtypes.html#str.format" title="str.format"><code class="xref py py-meth docutils literal notranslate"><span class="pre">str.format()</span></code></a> or <a class="reference internal" href="../library/string.html#string.Template" title="string.Template"><code class="xref py py-class docutils literal notranslate"><span class="pre">string.Template</span></code></a> syntax,
+logging calls using <a class="reference internal" href="../library/stdtypes.html#str-format" title="str.format"><code class="xref py py-meth docutils literal notranslate"><span class="pre">str.format()</span></code></a> or <a class="reference internal" href="../library/string.html#string-template" title="string.Template"><code class="xref py py-class docutils literal notranslate"><span class="pre">string.Template</span></code></a> syntax,
 because internally the logging package uses %-formatting to merge the format
 string and the variable arguments. There would no changing this while preserving
 backward compatibility, since all logging calls which are out there in existing
@@ -1952,18 +1955,18 @@ individual logging call. This opens up a couple of ways in which alternative
 formatting styles can be accommodated.</p>
 <div class="section" id="using-logrecord-factories">
 <h3>Using LogRecord factories<a class="headerlink" href="#using-logrecord-factories" title="Permalink to this headline">¶</a></h3>
-<p>In Python 3.2, along with the <a class="reference internal" href="../library/logging.html#logging.Formatter" title="logging.Formatter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Formatter</span></code></a> changes mentioned
+<p>In Python 3.2, along with the <a class="reference internal" href="../library/logging.html#logging-formatter" title="logging.Formatter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Formatter</span></code></a> changes mentioned
 above, the logging package gained the ability to allow users to set their own
-<a class="reference internal" href="../library/logging.html#logging.LogRecord" title="logging.LogRecord"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogRecord</span></code></a> subclasses, using the <a class="reference internal" href="../library/logging.html#logging.setLogRecordFactory" title="logging.setLogRecordFactory"><code class="xref py py-func docutils literal notranslate"><span class="pre">setLogRecordFactory()</span></code></a> function.
-You can use this to set your own subclass of <a class="reference internal" href="../library/logging.html#logging.LogRecord" title="logging.LogRecord"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogRecord</span></code></a>, which does the
-Right Thing by overriding the <a class="reference internal" href="../library/logging.html#logging.LogRecord.getMessage" title="logging.LogRecord.getMessage"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getMessage()</span></code></a> method. The base
+<a class="reference internal" href="../library/logging.html#logging-logrecord" title="logging.LogRecord"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogRecord</span></code></a> subclasses, using the <a class="reference internal" href="../library/logging.html#logging-setlogrecordfactory" title="logging.setLogRecordFactory"><code class="xref py py-func docutils literal notranslate"><span class="pre">setLogRecordFactory()</span></code></a> function.
+You can use this to set your own subclass of <a class="reference internal" href="../library/logging.html#logging-logrecord" title="logging.LogRecord"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogRecord</span></code></a>, which does the
+Right Thing by overriding the <a class="reference internal" href="../library/logging.html#logging-logrecord-getmessage" title="logging.LogRecord.getMessage"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getMessage()</span></code></a> method. The base
 class implementation of this method is where the <code class="docutils literal notranslate"><span class="pre">msg</span> <span class="pre">%</span> <span class="pre">args</span></code> formatting
 happens, and where you can substitute your alternate formatting; however, you
 should be careful to support all formatting styles and allow %-formatting as
 the default, to ensure interoperability with other code. Care should also be
 taken to call <code class="docutils literal notranslate"><span class="pre">str(self.msg)</span></code>, just as the base implementation does.</p>
-<p>Refer to the reference documentation on <a class="reference internal" href="../library/logging.html#logging.setLogRecordFactory" title="logging.setLogRecordFactory"><code class="xref py py-func docutils literal notranslate"><span class="pre">setLogRecordFactory()</span></code></a> and
-<a class="reference internal" href="../library/logging.html#logging.LogRecord" title="logging.LogRecord"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogRecord</span></code></a> for more information.</p>
+<p>Refer to the reference documentation on <a class="reference internal" href="../library/logging.html#logging-setlogrecordfactory" title="logging.setLogRecordFactory"><code class="xref py py-func docutils literal notranslate"><span class="pre">setLogRecordFactory()</span></code></a> and
+<a class="reference internal" href="../library/logging.html#logging-logrecord" title="logging.LogRecord"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogRecord</span></code></a> for more information.</p>
 </div>
 <div class="section" id="using-custom-message-objects">
 <h3>Using custom message objects<a class="headerlink" href="#using-custom-message-objects" title="Permalink to this headline">¶</a></h3>
@@ -2000,7 +2003,7 @@ something, you can make it more palatable if you use an alias such as <code clas
 <code class="docutils literal notranslate"><span class="pre">_</span></code> for the message (or perhaps <code class="docutils literal notranslate"><span class="pre">__</span></code>, if you are using <code class="docutils literal notranslate"><span class="pre">_</span></code> for
 localization).</p>
 <p>Examples of this approach are given below. Firstly, formatting with
-<a class="reference internal" href="../library/stdtypes.html#str.format" title="str.format"><code class="xref py py-meth docutils literal notranslate"><span class="pre">str.format()</span></code></a>:</p>
+<a class="reference internal" href="../library/stdtypes.html#str-format" title="str.format"><code class="xref py py-meth docutils literal notranslate"><span class="pre">str.format()</span></code></a>:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">__</span> <span class="o">=</span> <span class="n">BraceMessage</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">__</span><span class="p">(</span><span class="s1">&#39;Message with </span><span class="si">{0}</span><span class="s1"> </span><span class="si">{1}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;placeholders&#39;</span><span class="p">))</span>
 <span class="go">Message with 2 placeholders</span>
@@ -2013,7 +2016,7 @@ localization).</p>
 <span class="go">Message with coordinates: (0.50, 0.50)</span>
 </pre></div>
 </div>
-<p>Secondly, formatting with <a class="reference internal" href="../library/string.html#string.Template" title="string.Template"><code class="xref py py-class docutils literal notranslate"><span class="pre">string.Template</span></code></a>:</p>
+<p>Secondly, formatting with <a class="reference internal" href="../library/string.html#string-template" title="string.Template"><code class="xref py py-class docutils literal notranslate"><span class="pre">string.Template</span></code></a>:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">__</span> <span class="o">=</span> <span class="n">DollarMessage</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">__</span><span class="p">(</span><span class="s1">&#39;Message with $num $what&#39;</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">what</span><span class="o">=</span><span class="s1">&#39;placeholders&#39;</span><span class="p">))</span>
 <span class="go">Message with 2 placeholders</span>
@@ -2030,17 +2033,17 @@ call to one of the <code class="docutils literal notranslate"><span class="pre">
 </div>
 </div>
 <div class="section" id="configuring-filters-with-dictconfig">
-<span id="filters-dictconfig"></span><h2>Configuring filters with <a class="reference internal" href="../library/logging.config.html#logging.config.dictConfig" title="logging.config.dictConfig"><code class="xref py py-func docutils literal notranslate"><span class="pre">dictConfig()</span></code></a><a class="headerlink" href="#configuring-filters-with-dictconfig" title="Permalink to this headline">¶</a></h2>
-<p>You <em>can</em> configure filters using <a class="reference internal" href="../library/logging.config.html#logging.config.dictConfig" title="logging.config.dictConfig"><code class="xref py py-func docutils literal notranslate"><span class="pre">dictConfig()</span></code></a>, though it
+<span id="filters-dictconfig"></span><h2>Configuring filters with <a class="reference internal" href="../library/logging.config.html#logging-config-dictconfig" title="logging.config.dictConfig"><code class="xref py py-func docutils literal notranslate"><span class="pre">dictConfig()</span></code></a><a class="headerlink" href="#configuring-filters-with-dictconfig" title="Permalink to this headline">¶</a></h2>
+<p>You <em>can</em> configure filters using <a class="reference internal" href="../library/logging.config.html#logging-config-dictconfig" title="logging.config.dictConfig"><code class="xref py py-func docutils literal notranslate"><span class="pre">dictConfig()</span></code></a>, though it
 might not be obvious at first glance how to do it (hence this recipe). Since
-<a class="reference internal" href="../library/logging.html#logging.Filter" title="logging.Filter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Filter</span></code></a> is the only filter class included in the standard
+<a class="reference internal" href="../library/logging.html#logging-filter" title="logging.Filter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Filter</span></code></a> is the only filter class included in the standard
 library, and it is unlikely to cater to many requirements (it’s only there as a
-base class), you will typically need to define your own <a class="reference internal" href="../library/logging.html#logging.Filter" title="logging.Filter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Filter</span></code></a>
-subclass with an overridden <a class="reference internal" href="../library/logging.html#logging.Filter.filter" title="logging.Filter.filter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">filter()</span></code></a> method. To do this,
+base class), you will typically need to define your own <a class="reference internal" href="../library/logging.html#logging-filter" title="logging.Filter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Filter</span></code></a>
+subclass with an overridden <a class="reference internal" href="../library/logging.html#logging-filter-filter" title="logging.Filter.filter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">filter()</span></code></a> method. To do this,
 specify the <code class="docutils literal notranslate"><span class="pre">()</span></code> key in the configuration dictionary for the filter,
 specifying a callable which will be used to create the filter (a class is the
 most obvious, but you can provide any callable which returns a
-<a class="reference internal" href="../library/logging.html#logging.Filter" title="logging.Filter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Filter</span></code></a> instance). Here is a complete example:</p>
+<a class="reference internal" href="../library/logging.html#logging-filter" title="logging.Filter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Filter</span></code></a> instance). Here is a complete example:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">logging.config</span>
 <span class="kn">import</span> <span class="nn">sys</span>
@@ -2216,7 +2219,7 @@ but if there is an error, you want all the debug information to be output as wel
 as the error.</p>
 <p>Here is an example which shows how you could do this using a decorator for your
 functions where you want logging to behave this way. It makes use of the
-<a class="reference internal" href="../library/logging.handlers.html#logging.handlers.MemoryHandler" title="logging.handlers.MemoryHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">logging.handlers.MemoryHandler</span></code></a>, which allows buffering of logged events
+<a class="reference internal" href="../library/logging.handlers.html#logging-handlers-memoryhandler" title="logging.handlers.MemoryHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">logging.handlers.MemoryHandler</span></code></a>, which allows buffering of logged events
 until some condition occurs, at which point the buffered events are <code class="docutils literal notranslate"><span class="pre">flushed</span></code>
 - passed to another handler (the <code class="docutils literal notranslate"><span class="pre">target</span></code> handler) for processing. By default,
 the <code class="docutils literal notranslate"><span class="pre">MemoryHandler</span></code> flushed when its buffer gets filled up or an event whose
@@ -2233,7 +2236,7 @@ conditional logging that’s required. The decorator takes a logger as a paramet
 and attaches a memory handler for the duration of the call to the decorated
 function. The decorator can be additionally parameterised using a target handler,
 a level at which flushing should occur, and a capacity for the buffer (number of
-records buffered). These default to a <a class="reference internal" href="../library/logging.handlers.html#logging.StreamHandler" title="logging.StreamHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">StreamHandler</span></code></a> which
+records buffered). These default to a <a class="reference internal" href="../library/logging.handlers.html#logging-streamhandler" title="logging.StreamHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">StreamHandler</span></code></a> which
 writes to <code class="docutils literal notranslate"><span class="pre">sys.stderr</span></code>, <code class="docutils literal notranslate"><span class="pre">logging.ERROR</span></code> and <code class="docutils literal notranslate"><span class="pre">100</span></code> respectively.</p>
 <p>Here’s the script:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
@@ -2348,8 +2351,8 @@ such as <cite>UTCFormatter</cite>, shown below:</p>
 </pre></div>
 </div>
 <p>and you can then use the <code class="docutils literal notranslate"><span class="pre">UTCFormatter</span></code> in your code instead of
-<a class="reference internal" href="../library/logging.html#logging.Formatter" title="logging.Formatter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Formatter</span></code></a>. If you want to do that via configuration, you can
-use the <a class="reference internal" href="../library/logging.config.html#logging.config.dictConfig" title="logging.config.dictConfig"><code class="xref py py-func docutils literal notranslate"><span class="pre">dictConfig()</span></code></a> API with an approach illustrated by
+<a class="reference internal" href="../library/logging.html#logging-formatter" title="logging.Formatter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Formatter</span></code></a>. If you want to do that via configuration, you can
+use the <a class="reference internal" href="../library/logging.config.html#logging-config-dictconfig" title="logging.config.dictConfig"><code class="xref py py-func docutils literal notranslate"><span class="pre">dictConfig()</span></code></a> API with an approach illustrated by
 the following complete example:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">logging.config</span>
@@ -2970,7 +2973,7 @@ refer to the comments in the code snippet for more detailed information.</p>
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python HOWTOs</a> &#187;</li>
@@ -2988,6 +2991,7 @@ refer to the comments in the code snippet for more detailed information.</p>
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  
@@ -3000,11 +3004,11 @@ refer to the comments in the code snippet for more detailed information.</p>
 <br />
     <br />
 
-    Last updated on Feb 13, 2020.
+    Last updated on Mar 08, 2020.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 2.4.2+/ad35b3c.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/c10e1bc.
     </div>
 
   </body>

@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Developing with asyncio &#8212; Python 3.9.0a3 documentation</title>
+    <title>Developing with asyncio &#8212; Python 3.9.0a4 documentation</title>
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments-monokai.css" />
+    <link rel="stylesheet" href="../_static/pygments_dark.css" type="text/css" media="(prefers-color-scheme: dark)" id="pygments_dark_css" />
     
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -18,7 +18,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.9.0a3 documentation"
+          title="Search within Python 3.9.0a4 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -41,9 +41,11 @@
       }
     </style>
 
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png" />
+    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
     
     <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <script type="text/javascript" src="../_static/themetoggle.js"></script>
     
      
 
@@ -72,7 +74,7 @@
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
@@ -92,6 +94,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -113,10 +116,10 @@ to avoid them.</p>
 the development asyncio has a <em>debug mode</em>.</p>
 <p>There are several ways to enable asyncio debug mode:</p>
 <ul class="simple">
-<li><p>Setting the <span class="target" id="index-0"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONASYNCIODEBUG"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONASYNCIODEBUG</span></code></a> environment variable to <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p></li>
+<li><p>Setting the <span class="target" id="index-0"></span><a class="reference internal" href="../using/cmdline.html#envvar-pythonasynciodebug"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONASYNCIODEBUG</span></code></a> environment variable to <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p></li>
 <li><p>Using the <a class="reference internal" href="devmode.html#devmode"><span class="std std-ref">Python Development Mode</span></a>.</p></li>
-<li><p>Passing <code class="docutils literal notranslate"><span class="pre">debug=True</span></code> to <a class="reference internal" href="asyncio-task.html#asyncio.run" title="asyncio.run"><code class="xref py py-func docutils literal notranslate"><span class="pre">asyncio.run()</span></code></a>.</p></li>
-<li><p>Calling <a class="reference internal" href="asyncio-eventloop.html#asyncio.loop.set_debug" title="asyncio.loop.set_debug"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.set_debug()</span></code></a>.</p></li>
+<li><p>Passing <code class="docutils literal notranslate"><span class="pre">debug=True</span></code> to <a class="reference internal" href="asyncio-task.html#asyncio-run" title="asyncio.run"><code class="xref py py-func docutils literal notranslate"><span class="pre">asyncio.run()</span></code></a>.</p></li>
+<li><p>Calling <a class="reference internal" href="asyncio-eventloop.html#asyncio-loop-set-debug" title="asyncio.loop.set_debug"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.set_debug()</span></code></a>.</p></li>
 </ul>
 <p>In addition to enabling the debug mode, consider also:</p>
 <ul>
@@ -128,15 +131,15 @@ can be run at startup of the application:</p>
 </div>
 </li>
 <li><p>configuring the <a class="reference internal" href="warnings.html#module-warnings" title="warnings: Issue warning messages and control their disposition."><code class="xref py py-mod docutils literal notranslate"><span class="pre">warnings</span></code></a> module to display
-<a class="reference internal" href="exceptions.html#ResourceWarning" title="ResourceWarning"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ResourceWarning</span></code></a> warnings.  One way of doing that is by
+<a class="reference internal" href="exceptions.html#resourcewarning" title="ResourceWarning"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ResourceWarning</span></code></a> warnings.  One way of doing that is by
 using the <a class="reference internal" href="../using/cmdline.html#cmdoption-w"><code class="xref std std-option docutils literal notranslate"><span class="pre">-W</span></code></a> <code class="docutils literal notranslate"><span class="pre">default</span></code> command line option.</p></li>
 </ul>
 <p>When the debug mode is enabled:</p>
 <ul class="simple">
 <li><p>asyncio checks for <a class="reference internal" href="#asyncio-coroutine-not-scheduled"><span class="std std-ref">coroutines that were not awaited</span></a> and logs them; this mitigates
 the “forgotten await” pitfall.</p></li>
-<li><p>Many non-threadsafe asyncio APIs (such as <a class="reference internal" href="asyncio-eventloop.html#asyncio.loop.call_soon" title="asyncio.loop.call_soon"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.call_soon()</span></code></a> and
-<a class="reference internal" href="asyncio-eventloop.html#asyncio.loop.call_at" title="asyncio.loop.call_at"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.call_at()</span></code></a> methods) raise an exception if they are called
+<li><p>Many non-threadsafe asyncio APIs (such as <a class="reference internal" href="asyncio-eventloop.html#asyncio-loop-call-soon" title="asyncio.loop.call_soon"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.call_soon()</span></code></a> and
+<a class="reference internal" href="asyncio-eventloop.html#asyncio-loop-call-at" title="asyncio.loop.call_at"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.call_at()</span></code></a> methods) raise an exception if they are called
 from a wrong thread.</p></li>
 <li><p>The execution time of the I/O selector is logged if it takes too long to
 perform an I/O operation.</p></li>
@@ -153,21 +156,21 @@ event loop, no other Tasks can run in the same thread.  When a Task
 executes an <code class="docutils literal notranslate"><span class="pre">await</span></code> expression, the running Task gets suspended, and
 the event loop executes the next Task.</p>
 <p>To schedule a callback from a different OS thread, the
-<a class="reference internal" href="asyncio-eventloop.html#asyncio.loop.call_soon_threadsafe" title="asyncio.loop.call_soon_threadsafe"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.call_soon_threadsafe()</span></code></a> method should be used. Example:</p>
+<a class="reference internal" href="asyncio-eventloop.html#asyncio-loop-call-soon-threadsafe" title="asyncio.loop.call_soon_threadsafe"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.call_soon_threadsafe()</span></code></a> method should be used. Example:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">loop</span><span class="o">.</span><span class="n">call_soon_threadsafe</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Almost all asyncio objects are not thread safe, which is typically
 not a problem unless there is code that works with them from outside
 of a Task or a callback.  If there’s a need for such code to call a
-low-level asyncio API, the <a class="reference internal" href="asyncio-eventloop.html#asyncio.loop.call_soon_threadsafe" title="asyncio.loop.call_soon_threadsafe"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.call_soon_threadsafe()</span></code></a> method
+low-level asyncio API, the <a class="reference internal" href="asyncio-eventloop.html#asyncio-loop-call-soon-threadsafe" title="asyncio.loop.call_soon_threadsafe"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.call_soon_threadsafe()</span></code></a> method
 should be used, e.g.:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">loop</span><span class="o">.</span><span class="n">call_soon_threadsafe</span><span class="p">(</span><span class="n">fut</span><span class="o">.</span><span class="n">cancel</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>To schedule a coroutine object from a different OS thread, the
-<a class="reference internal" href="asyncio-task.html#asyncio.run_coroutine_threadsafe" title="asyncio.run_coroutine_threadsafe"><code class="xref py py-func docutils literal notranslate"><span class="pre">run_coroutine_threadsafe()</span></code></a> function should be used. It returns a
-<a class="reference internal" href="concurrent.futures.html#concurrent.futures.Future" title="concurrent.futures.Future"><code class="xref py py-class docutils literal notranslate"><span class="pre">concurrent.futures.Future</span></code></a> to access the result:</p>
+<a class="reference internal" href="asyncio-task.html#asyncio-run-coroutine-threadsafe" title="asyncio.run_coroutine_threadsafe"><code class="xref py py-func docutils literal notranslate"><span class="pre">run_coroutine_threadsafe()</span></code></a> function should be used. It returns a
+<a class="reference internal" href="concurrent.futures.html#concurrent-futures-future" title="concurrent.futures.Future"><code class="xref py py-class docutils literal notranslate"><span class="pre">concurrent.futures.Future</span></code></a> to access the result:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">coro_func</span><span class="p">():</span>
      <span class="k">return</span> <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">42</span><span class="p">)</span>
 
@@ -180,8 +183,8 @@ should be used, e.g.:</p>
 </div>
 <p>To handle signals and to execute subprocesses, the event loop must be
 run in the main thread.</p>
-<p>The <a class="reference internal" href="asyncio-eventloop.html#asyncio.loop.run_in_executor" title="asyncio.loop.run_in_executor"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.run_in_executor()</span></code></a> method can be used with a
-<a class="reference internal" href="concurrent.futures.html#concurrent.futures.ThreadPoolExecutor" title="concurrent.futures.ThreadPoolExecutor"><code class="xref py py-class docutils literal notranslate"><span class="pre">concurrent.futures.ThreadPoolExecutor</span></code></a> to execute
+<p>The <a class="reference internal" href="asyncio-eventloop.html#asyncio-loop-run-in-executor" title="asyncio.loop.run_in_executor"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.run_in_executor()</span></code></a> method can be used with a
+<a class="reference internal" href="concurrent.futures.html#concurrent-futures-threadpoolexecutor" title="concurrent.futures.ThreadPoolExecutor"><code class="xref py py-class docutils literal notranslate"><span class="pre">concurrent.futures.ThreadPoolExecutor</span></code></a> to execute
 blocking code in a different OS thread without blocking the OS thread
 that the event loop runs in.</p>
 </div>
@@ -193,7 +196,7 @@ all concurrent asyncio Tasks and IO operations would be delayed
 by 1 second.</p>
 <p>An executor can be used to run a task in a different thread or even in
 a different process to avoid blocking the OS thread with the
-event loop.  See the <a class="reference internal" href="asyncio-eventloop.html#asyncio.loop.run_in_executor" title="asyncio.loop.run_in_executor"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.run_in_executor()</span></code></a> method for more
+event loop.  See the <a class="reference internal" href="asyncio-eventloop.html#asyncio-loop-run-in-executor" title="asyncio.loop.run_in_executor"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.run_in_executor()</span></code></a> method for more
 details.</p>
 </div>
 <div class="section" id="logging">
@@ -210,8 +213,8 @@ adjusted:</p>
 <span id="asyncio-coroutine-not-scheduled"></span><h2>Detect never-awaited coroutines<a class="headerlink" href="#detect-never-awaited-coroutines" title="Permalink to this headline">¶</a></h2>
 <p>When a coroutine function is called, but not awaited
 (e.g. <code class="docutils literal notranslate"><span class="pre">coro()</span></code> instead of <code class="docutils literal notranslate"><span class="pre">await</span> <span class="pre">coro()</span></code>)
-or the coroutine is not scheduled with <a class="reference internal" href="asyncio-task.html#asyncio.create_task" title="asyncio.create_task"><code class="xref py py-meth docutils literal notranslate"><span class="pre">asyncio.create_task()</span></code></a>, asyncio
-will emit a <a class="reference internal" href="exceptions.html#RuntimeWarning" title="RuntimeWarning"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RuntimeWarning</span></code></a>:</p>
+or the coroutine is not scheduled with <a class="reference internal" href="asyncio-task.html#asyncio-create-task" title="asyncio.create_task"><code class="xref py py-meth docutils literal notranslate"><span class="pre">asyncio.create_task()</span></code></a>, asyncio
+will emit a <a class="reference internal" href="exceptions.html#runtimewarning" title="RuntimeWarning"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RuntimeWarning</span></code></a>:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">asyncio</span>
 
 <span class="k">async</span> <span class="k">def</span> <span class="nf">test</span><span class="p">():</span>
@@ -242,7 +245,7 @@ will emit a <a class="reference internal" href="exceptions.html#RuntimeWarning" 
 </pre></div>
 </div>
 <p>The usual fix is to either await the coroutine or call the
-<a class="reference internal" href="asyncio-task.html#asyncio.create_task" title="asyncio.create_task"><code class="xref py py-meth docutils literal notranslate"><span class="pre">asyncio.create_task()</span></code></a> function:</p>
+<a class="reference internal" href="asyncio-task.html#asyncio-create-task" title="asyncio.create_task"><code class="xref py py-meth docutils literal notranslate"><span class="pre">asyncio.create_task()</span></code></a> function:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
     <span class="k">await</span> <span class="n">test</span><span class="p">()</span>
 </pre></div>
@@ -250,7 +253,7 @@ will emit a <a class="reference internal" href="exceptions.html#RuntimeWarning" 
 </div>
 <div class="section" id="detect-never-retrieved-exceptions">
 <h2>Detect never-retrieved exceptions<a class="headerlink" href="#detect-never-retrieved-exceptions" title="Permalink to this headline">¶</a></h2>
-<p>If a <a class="reference internal" href="asyncio-future.html#asyncio.Future.set_exception" title="asyncio.Future.set_exception"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Future.set_exception()</span></code></a> is called but the Future object is
+<p>If a <a class="reference internal" href="asyncio-future.html#asyncio-future-set-exception" title="asyncio.Future.set_exception"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Future.set_exception()</span></code></a> is called but the Future object is
 never awaited on, the exception would never be propagated to the
 user code.  In this case, asyncio would emit a log message when the
 Future object is garbage collected.</p>
@@ -364,7 +367,7 @@ traceback where the task was created:</p>
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
@@ -384,6 +387,7 @@ traceback where the task was created:</p>
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  
@@ -396,11 +400,11 @@ traceback where the task was created:</p>
 <br />
     <br />
 
-    Last updated on Feb 13, 2020.
+    Last updated on Mar 08, 2020.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 2.4.2+/ad35b3c.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/c10e1bc.
     </div>
 
   </body>

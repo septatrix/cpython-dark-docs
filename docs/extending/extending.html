@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>1. Extending Python with C or C++ &#8212; Python 3.9.0a3 documentation</title>
+    <title>1. Extending Python with C or C++ &#8212; Python 3.9.0a4 documentation</title>
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments-monokai.css" />
+    <link rel="stylesheet" href="../_static/pygments_dark.css" type="text/css" media="(prefers-color-scheme: dark)" id="pygments_dark_css" />
     
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -18,7 +18,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.9.0a3 documentation"
+          title="Search within Python 3.9.0a4 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -41,9 +41,11 @@
       }
     </style>
 
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png" />
+    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
     
     <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <script type="text/javascript" src="../_static/themetoggle.js"></script>
     
      
 
@@ -72,7 +74,7 @@
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Extending and Embedding the Python Interpreter</a> &#187;</li>
@@ -90,6 +92,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -205,7 +208,7 @@ inside the interpreter; if this variable is <code class="docutils literal notran
 second global variable stores the “associated value” of the exception (the
 second argument to <a class="reference internal" href="../reference/simple_stmts.html#raise"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">raise</span></code></a>).  A third variable contains the stack
 traceback in case the error originated in Python code.  These three variables
-are the C equivalents of the result in Python of <a class="reference internal" href="../library/sys.html#sys.exc_info" title="sys.exc_info"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sys.exc_info()</span></code></a> (see the
+are the C equivalents of the result in Python of <a class="reference internal" href="../library/sys.html#sys-exc-info" title="sys.exc_info"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sys.exc_info()</span></code></a> (see the
 section on module <a class="reference internal" href="../library/sys.html#module-sys" title="sys: Access system-specific parameters and functions."><code class="xref py py-mod docutils literal notranslate"><span class="pre">sys</span></code></a> in the Python Library Reference).  It is important
 to know about them to understand how errors are passed around.</p>
 <p>The Python API defines a number of functions to set various types of exceptions.</p>
@@ -295,7 +298,7 @@ with an exception object:</p>
 </div>
 <p>Note that the Python name for the exception object is <code class="xref py py-exc docutils literal notranslate"><span class="pre">spam.error</span></code>.  The
 <a class="reference internal" href="../c-api/exceptions.html#c.PyErr_NewException" title="PyErr_NewException"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyErr_NewException()</span></code></a> function may create a class with the base class
-being <a class="reference internal" href="../library/exceptions.html#Exception" title="Exception"><code class="xref py py-exc docutils literal notranslate"><span class="pre">Exception</span></code></a> (unless another class is passed in instead of <code class="docutils literal notranslate"><span class="pre">NULL</span></code>),
+being <a class="reference internal" href="../library/exceptions.html#exception" title="Exception"><code class="xref py py-exc docutils literal notranslate"><span class="pre">Exception</span></code></a> (unless another class is passed in instead of <code class="docutils literal notranslate"><span class="pre">NULL</span></code>),
 described in <a class="reference internal" href="../library/exceptions.html#bltin-exceptions"><span class="std std-ref">Built-in Exceptions</span></a>.</p>
 <p>Note also that the <code class="xref c c-data docutils literal notranslate"><span class="pre">SpamError</span></code> variable retains a reference to the newly
 created exception class; this is intentional!  Since the exception could be
@@ -550,7 +553,7 @@ be part of a module definition:</p>
 </pre></div>
 </div>
 <p>This function must be registered with the interpreter using the
-<a class="reference internal" href="../c-api/structures.html#METH_VARARGS" title="METH_VARARGS"><code class="xref py py-const docutils literal notranslate"><span class="pre">METH_VARARGS</span></code></a> flag; this is described in section <a class="reference internal" href="#methodtable"><span class="std std-ref">The Module’s Method Table and Initialization Function</span></a>.  The
+<a class="reference internal" href="../c-api/structures.html#meth-varargs" title="METH_VARARGS"><code class="xref py py-const docutils literal notranslate"><span class="pre">METH_VARARGS</span></code></a> flag; this is described in section <a class="reference internal" href="#methodtable"><span class="std std-ref">The Module’s Method Table and Initialization Function</span></a>.  The
 <a class="reference internal" href="../c-api/arg.html#c.PyArg_ParseTuple" title="PyArg_ParseTuple"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyArg_ParseTuple()</span></code></a> function and its arguments are documented in section
 <a class="reference internal" href="#parsetuple"><span class="std std-ref">Extracting Parameters in Extension Functions</span></a>.</p>
 <p>The macros <a class="reference internal" href="../c-api/refcounting.html#c.Py_XINCREF" title="Py_XINCREF"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_XINCREF()</span></code></a> and <a class="reference internal" href="../c-api/refcounting.html#c.Py_XDECREF" title="Py_XDECREF"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_XDECREF()</span></code></a> increment/decrement the
@@ -732,7 +735,7 @@ it returns false and raises an appropriate exception.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Nested tuples cannot be parsed when using keyword arguments!  Keyword parameters
-passed in which are not present in the <em>kwlist</em> will cause <a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> to
+passed in which are not present in the <em>kwlist</em> will cause <a class="reference internal" href="../library/exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> to
 be raised.</p>
 </div>
 <p id="index-4">Here is an example module which uses keywords, based on an example by Geoff
@@ -885,7 +888,7 @@ from the objects in the cycle, even though there are no further references to
 the cycle itself.</p>
 <p>The cycle detector is able to detect garbage cycles and can reclaim them.
 The <a class="reference internal" href="../library/gc.html#module-gc" title="gc: Interface to the cycle-detecting garbage collector."><code class="xref py py-mod docutils literal notranslate"><span class="pre">gc</span></code></a> module exposes a way to run the detector (the
-<a class="reference internal" href="../library/gc.html#gc.collect" title="gc.collect"><code class="xref py py-func docutils literal notranslate"><span class="pre">collect()</span></code></a> function), as well as configuration
+<a class="reference internal" href="../library/gc.html#gc-collect" title="gc.collect"><code class="xref py py-func docutils literal notranslate"><span class="pre">collect()</span></code></a> function), as well as configuration
 interfaces and the ability to disable the detector at runtime.  The cycle
 detector is considered an optional component; though it is included by default,
 it can be disabled at build time using the <code class="xref std std-option docutils literal notranslate"><span class="pre">--without-cycle-gc</span></code> option
@@ -987,12 +990,12 @@ Looks harmless, right?  But it’s not!</p>
 references to all its items, so when item 1 is replaced, it has to dispose of
 the original item 1.  Now let’s suppose the original item 1 was an instance of a
 user-defined class, and let’s further suppose that the class defined a
-<a class="reference internal" href="../reference/datamodel.html#object.__del__" title="object.__del__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__del__()</span></code></a> method.  If this class instance has a reference count of 1,
-disposing of it will call its <a class="reference internal" href="../reference/datamodel.html#object.__del__" title="object.__del__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__del__()</span></code></a> method.</p>
-<p>Since it is written in Python, the <a class="reference internal" href="../reference/datamodel.html#object.__del__" title="object.__del__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__del__()</span></code></a> method can execute arbitrary
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">__del__()</span></code> method.  If this class instance has a reference count of 1,
+disposing of it will call its <code class="xref py py-meth docutils literal notranslate"><span class="pre">__del__()</span></code> method.</p>
+<p>Since it is written in Python, the <code class="xref py py-meth docutils literal notranslate"><span class="pre">__del__()</span></code> method can execute arbitrary
 Python code.  Could it perhaps do something to invalidate the reference to
 <code class="docutils literal notranslate"><span class="pre">item</span></code> in <code class="xref c c-func docutils literal notranslate"><span class="pre">bug()</span></code>?  You bet!  Assuming that the list passed into
-<code class="xref c c-func docutils literal notranslate"><span class="pre">bug()</span></code> is accessible to the <a class="reference internal" href="../reference/datamodel.html#object.__del__" title="object.__del__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__del__()</span></code></a> method, it could execute a
+<code class="xref c c-func docutils literal notranslate"><span class="pre">bug()</span></code> is accessible to the <code class="xref py py-meth docutils literal notranslate"><span class="pre">__del__()</span></code> method, it could execute a
 statement to the effect of <code class="docutils literal notranslate"><span class="pre">del</span> <span class="pre">list[0]</span></code>, and assuming this was the last
 reference to that object, it would free the memory associated with it, thereby
 invalidating <code class="docutils literal notranslate"><span class="pre">item</span></code>.</p>
@@ -1012,7 +1015,7 @@ increment the reference count.  The correct version of the function reads:</p>
 </div>
 <p>This is a true story.  An older version of Python contained variants of this bug
 and someone spent a considerable amount of time in a C debugger to figure out
-why his <a class="reference internal" href="../reference/datamodel.html#object.__del__" title="object.__del__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__del__()</span></code></a> methods would fail…</p>
+why his <code class="xref py py-meth docutils literal notranslate"><span class="pre">__del__()</span></code> methods would fail…</p>
 <p>The second case of problems with a borrowed reference is a variant involving
 threads.  Normally, multiple threads in the Python interpreter can’t get in each
 other’s way, because there is a global lock protecting Python’s entire object
@@ -1376,7 +1379,7 @@ this is still found in much existing code.</p>
     
 
     <li>
-      <a href="../index.html">3.9.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.9.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Extending and Embedding the Python Interpreter</a> &#187;</li>
@@ -1394,6 +1397,7 @@ this is still found in much existing code.</p>
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
+    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  
@@ -1406,11 +1410,11 @@ this is still found in much existing code.</p>
 <br />
     <br />
 
-    Last updated on Feb 13, 2020.
+    Last updated on Mar 08, 2020.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 2.4.2+/ad35b3c.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/c10e1bc.
     </div>
 
   </body>
