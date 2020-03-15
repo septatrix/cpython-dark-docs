@@ -109,7 +109,7 @@
 <dd class="field-odd"><p>3.9.0a4</p>
 </dd>
 <dt class="field-even">Date</dt>
-<dd class="field-even"><p>March 08, 2020</p>
+<dd class="field-even"><p>March 15, 2020</p>
 </dd>
 </dl>
 <p>This article explains the new features in Python 3.9, compared to 3.8.</p>
@@ -261,6 +261,11 @@ unreachable. (Contributed by Pablo Galindo and Tim Peters in <a class="reference
 finalized by the garbage collector. (Contributed by Pablo Galindo in
 <a class="reference external" href="https://bugs.python.org/issue39322">bpo-39322</a>.)</p>
 </div>
+<div class="section" id="http">
+<h3>http<a class="headerlink" href="#http" title="Permalink to this headline">¶</a></h3>
+<p>HTTP status codes <code class="docutils literal notranslate"><span class="pre">103</span> <span class="pre">EARLY_HINTS</span></code>, <code class="docutils literal notranslate"><span class="pre">418</span> <span class="pre">IM_A_TEAPOT</span></code> and <code class="docutils literal notranslate"><span class="pre">425</span> <span class="pre">TOO_EARLY</span></code> are added to
+<a class="reference internal" href="../library/http.html#http-httpstatus" title="http.HTTPStatus"><code class="xref py py-class docutils literal notranslate"><span class="pre">http.HTTPStatus</span></code></a>. (Contributed by Dong-hee Na in <a class="reference external" href="https://bugs.python.org/issue39509">bpo-39509</a> and Ross Rhodes in <a class="reference external" href="https://bugs.python.org/issue39507">bpo-39507</a>.)</p>
+</div>
 <div class="section" id="imaplib">
 <h3>imaplib<a class="headerlink" href="#imaplib" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="../library/imaplib.html#imaplib-imap4" title="imaplib.IMAP4"><code class="xref py py-class docutils literal notranslate"><span class="pre">IMAP4</span></code></a> and <a class="reference internal" href="../library/imaplib.html#imaplib-imap4-ssl" title="imaplib.IMAP4_SSL"><code class="xref py py-class docutils literal notranslate"><span class="pre">IMAP4_SSL</span></code></a> now have
@@ -361,12 +366,25 @@ finalization crashed with a Python fatal error if a daemon thread was still
 running.
 (Contributed by Victor Stinner in <a class="reference external" href="https://bugs.python.org/issue37266">bpo-37266</a>.)</p>
 </div>
+<div class="section" id="sys">
+<h3>sys<a class="headerlink" href="#sys" title="Permalink to this headline">¶</a></h3>
+<p>Add a new <a class="reference internal" href="../library/sys.html#sys-platlibdir" title="sys.platlibdir"><code class="xref py py-attr docutils literal notranslate"><span class="pre">sys.platlibdir</span></code></a> attribute: name of the platform-specific
+library directory. It is used to build the path of platform-specific dynamic
+libraries and the path of the standard library. It is equal to <code class="docutils literal notranslate"><span class="pre">&quot;lib&quot;</span></code> on
+most platforms.  On Fedora and SuSE, it is equal to <code class="docutils literal notranslate"><span class="pre">&quot;lib64&quot;</span></code> on 64-bit
+platforms.
+(Contributed by Jan Matějek, Matěj Cepl, Charalampos Stratakis and Victor Stinner in <a class="reference external" href="https://bugs.python.org/issue1294959">bpo-1294959</a>.)</p>
+</div>
 <div class="section" id="typing">
 <h3>typing<a class="headerlink" href="#typing" title="Permalink to this headline">¶</a></h3>
 <p><span class="target" id="index-2"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0593"><strong>PEP 593</strong></a> introduced an <a class="reference internal" href="../library/typing.html#typing-annotated" title="typing.Annotated"><code class="xref py py-data docutils literal notranslate"><span class="pre">typing.Annotated</span></code></a> type to decorate existing
 types with context-specific metadata and new <code class="docutils literal notranslate"><span class="pre">include_extras</span></code> parameter to
 <a class="reference internal" href="../library/typing.html#typing-get-type-hints" title="typing.get_type_hints"><code class="xref py py-func docutils literal notranslate"><span class="pre">typing.get_type_hints()</span></code></a> to access the metadata at runtime. (Contributed
 by Till Varoquaux and Konstantin Kashin.)</p>
+</div>
+<div class="section" id="unicodedata">
+<h3>unicodedata<a class="headerlink" href="#unicodedata" title="Permalink to this headline">¶</a></h3>
+<p>The Unicode database has been updated to version 13.0.0. (<a class="reference external" href="https://bugs.python.org/issue39926">bpo-39926</a>).</p>
 </div>
 <div class="section" id="venv">
 <h3>venv<a class="headerlink" href="#venv" title="Permalink to this headline">¶</a></h3>
@@ -396,6 +414,12 @@ outer scope.</p>
 <div class="section" id="build-and-c-api-changes">
 <h2>Build and C API Changes<a class="headerlink" href="#build-and-c-api-changes" title="Permalink to this headline">¶</a></h2>
 <ul>
+<li><p>New <a class="reference internal" href="../c-api/init.html#c.PyThreadState_GetInterpreter" title="PyThreadState_GetInterpreter"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyThreadState_GetInterpreter()</span></code></a> and
+<a class="reference internal" href="../c-api/init.html#c.PyInterpreterState_Get" title="PyInterpreterState_Get"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyInterpreterState_Get()</span></code></a> functions to get the interpreter.</p></li>
+<li><p>Add <code class="docutils literal notranslate"><span class="pre">--with-platlibdir</span></code> option to the <code class="docutils literal notranslate"><span class="pre">configure</span></code> script: name of the
+platform-specific library directory, stored in the new <a class="reference internal" href="../library/sys.html#sys-platlibdir" title="sys.platlibdir"><code class="xref py py-attr docutils literal notranslate"><span class="pre">sys.platlibdir</span></code></a>
+attribute. See <a class="reference internal" href="../library/sys.html#sys-platlibdir" title="sys.platlibdir"><code class="xref py py-attr docutils literal notranslate"><span class="pre">sys.platlibdir</span></code></a> attribute for more information.
+(Contributed by Jan Matějek, Matěj Cepl, Charalampos Stratakis and Victor Stinner in <a class="reference external" href="https://bugs.python.org/issue1294959">bpo-1294959</a>.)</p></li>
 <li><p>Add a new public <a class="reference internal" href="../c-api/call.html#c.PyObject_CallNoArgs" title="PyObject_CallNoArgs"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_CallNoArgs()</span></code></a> function to the C API, which
 calls a callable Python object without any arguments. It is the most efficient
 way to call a callable Python object without any argument.
@@ -467,6 +491,9 @@ C API.</p></li>
 </ul>
 <p>(Contributed by Victor Stinner in <a class="reference external" href="https://bugs.python.org/issue38644">bpo-38644</a> and <a class="reference external" href="https://bugs.python.org/issue39542">bpo-39542</a>.)</p>
 </li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PyInterpreterState.eval_frame</span></code> (<span class="target" id="index-3"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0523"><strong>PEP 523</strong></a>) now requires a new mandatory
+<em>tstate</em> parameter (<code class="docutils literal notranslate"><span class="pre">PyThreadState*</span></code>).
+(Contributed by Victor Stinner in <a class="reference external" href="https://bugs.python.org/issue38500">bpo-38500</a>.)</p></li>
 </ul>
 </div>
 <div class="section" id="deprecated">
@@ -513,6 +540,16 @@ and the following <a class="reference internal" href="../library/binascii.html#m
 </ul>
 <p>(Contributed by Victor Stinner in <a class="reference external" href="https://bugs.python.org/issue39353">bpo-39353</a>.)</p>
 </li>
+<li><p><a class="reference internal" href="../library/ast.html#module-ast" title="ast: Abstract Syntax Tree classes and manipulation."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ast</span></code></a> classes <code class="docutils literal notranslate"><span class="pre">Index</span></code> and <code class="docutils literal notranslate"><span class="pre">ExtSlice</span></code> are considered deprecated
+and will be removed in future Python versions.  <code class="docutils literal notranslate"><span class="pre">value</span></code> itself should be
+used instead of <code class="docutils literal notranslate"><span class="pre">Index(value)</span></code>.  <code class="docutils literal notranslate"><span class="pre">Tuple(slices,</span> <span class="pre">Load())</span></code> should be
+used instead of <code class="docutils literal notranslate"><span class="pre">ExtSlice(slices)</span></code>.
+(Contributed by Serhiy Storchaka in <a class="reference external" href="https://bugs.python.org/issue32892">bpo-32892</a>.)</p></li>
+<li><p>The <a class="reference internal" href="../c-api/init.html#c.PyEval_InitThreads" title="PyEval_InitThreads"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyEval_InitThreads()</span></code></a> and <a class="reference internal" href="../c-api/init.html#c.PyEval_ThreadsInitialized" title="PyEval_ThreadsInitialized"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyEval_ThreadsInitialized()</span></code></a>
+functions are now deprecated and will be removed in Python 3.11. Calling
+<a class="reference internal" href="../c-api/init.html#c.PyEval_InitThreads" title="PyEval_InitThreads"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyEval_InitThreads()</span></code></a> now does nothing. The <a class="reference internal" href="../glossary.html#term-gil"><span class="xref std std-term">GIL</span></a> is initialized
+by <a class="reference internal" href="../c-api/init.html#c.Py_Initialize" title="Py_Initialize"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_Initialize()</span></code></a> since Python 3.7.
+(Contributed by Victor Stinner in <a class="reference external" href="https://bugs.python.org/issue39877">bpo-39877</a>.)</p></li>
 </ul>
 </div>
 <div class="section" id="removed">
@@ -551,10 +588,13 @@ removed. They were deprecated since Python 3.7.
 has been removed. It was deprecated since Python 3.8.
 Use <a class="reference internal" href="../library/threading.html#threading-thread-is-alive" title="threading.Thread.is_alive"><code class="xref py py-meth docutils literal notranslate"><span class="pre">is_alive()</span></code></a> instead.
 (Contributed by Dong-hee Na in <a class="reference external" href="https://bugs.python.org/issue37804">bpo-37804</a>.)</p></li>
-<li><p>Methods <code class="docutils literal notranslate"><span class="pre">getchildren()</span></code> and <code class="docutils literal notranslate"><span class="pre">getiterator()</span></code> in the
-<a class="reference internal" href="../library/xml.etree.elementtree.html#module-xml-etree-elementtree" title="xml.etree.ElementTree: Implementation of the ElementTree API."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ElementTree</span></code></a> module have been removed.  They were
-deprecated in Python 3.2.  Use functions <a class="reference internal" href="../library/stdtypes.html#list" title="list"><code class="xref py py-func docutils literal notranslate"><span class="pre">list()</span></code></a> and <a class="reference internal" href="../library/functions.html#iter" title="iter"><code class="xref py py-func docutils literal notranslate"><span class="pre">iter()</span></code></a>
-instead.  The <code class="docutils literal notranslate"><span class="pre">xml.etree.cElementTree</span></code> module has been removed.
+<li><p>Methods <code class="docutils literal notranslate"><span class="pre">getchildren()</span></code> and <code class="docutils literal notranslate"><span class="pre">getiterator()</span></code> of classes
+<a class="reference internal" href="../library/xml.etree.elementtree.html#xml-etree-elementtree-elementtree" title="xml.etree.ElementTree.ElementTree"><code class="xref py py-class docutils literal notranslate"><span class="pre">ElementTree</span></code></a> and
+<a class="reference internal" href="../library/xml.etree.elementtree.html#xml-etree-elementtree-element" title="xml.etree.ElementTree.Element"><code class="xref py py-class docutils literal notranslate"><span class="pre">Element</span></code></a> in the <a class="reference internal" href="../library/xml.etree.elementtree.html#module-xml-etree-elementtree" title="xml.etree.ElementTree: Implementation of the ElementTree API."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ElementTree</span></code></a>
+module have been removed.  They were deprecated in Python 3.2.
+Use <code class="docutils literal notranslate"><span class="pre">iter(x)</span></code> or <code class="docutils literal notranslate"><span class="pre">list(x)</span></code> instead of <code class="docutils literal notranslate"><span class="pre">x.getchildren()</span></code> and
+<code class="docutils literal notranslate"><span class="pre">x.iter()</span></code> or <code class="docutils literal notranslate"><span class="pre">list(x.iter())</span></code> instead of <code class="docutils literal notranslate"><span class="pre">x.getiterator()</span></code>.
+The <code class="docutils literal notranslate"><span class="pre">xml.etree.cElementTree</span></code> module has been removed.
 (Contributed by Serhiy Storchaka in <a class="reference external" href="https://bugs.python.org/issue36543">bpo-36543</a>.)</p></li>
 <li><p>The old <a class="reference internal" href="../library/plistlib.html#module-plistlib" title="plistlib: Generate and parse Apple plist files."><code class="xref py py-mod docutils literal notranslate"><span class="pre">plistlib</span></code></a> API has been removed, it was deprecated since Python
 3.4. Use the <a class="reference internal" href="../library/plistlib.html#plistlib-load" title="plistlib.load"><code class="xref py py-func docutils literal notranslate"><span class="pre">load()</span></code></a>, <a class="reference internal" href="../library/plistlib.html#plistlib-loads" title="plistlib.loads"><code class="xref py py-func docutils literal notranslate"><span class="pre">loads()</span></code></a>, <a class="reference internal" href="../library/plistlib.html#plistlib-dump" title="plistlib.dump"><code class="xref py py-func docutils literal notranslate"><span class="pre">dump()</span></code></a>, and
@@ -565,7 +605,7 @@ removed, standard <a class="reference internal" href="../library/stdtypes.html#b
 (Contributed by Joannah Nanjekye in <a class="reference external" href="https://bugs.python.org/issue37878">bpo-37878</a>.)</p></li>
 <li><p>The C function <code class="docutils literal notranslate"><span class="pre">PyGen_NeedsFinalizing</span></code> has been removed. It was not
 documented, tested, or used anywhere within CPython after the implementation
-of <span class="target" id="index-3"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0442"><strong>PEP 442</strong></a>. Patch by Joannah Nanjekye.
+of <span class="target" id="index-4"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0442"><strong>PEP 442</strong></a>. Patch by Joannah Nanjekye.
 (Contributed by Joannah Nanjekye in <a class="reference external" href="https://bugs.python.org/issue15088">bpo-15088</a>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">base64.encodestring()</span></code> and <code class="docutils literal notranslate"><span class="pre">base64.decodestring()</span></code>, aliases deprecated
 since Python 3.1, have been removed: use <a class="reference internal" href="../library/base64.html#base64-encodebytes" title="base64.encodebytes"><code class="xref py py-func docutils literal notranslate"><span class="pre">base64.encodebytes()</span></code></a> and
@@ -591,8 +631,9 @@ option and the <code class="docutils literal notranslate"><span class="pre">show
 <a class="reference internal" href="../c-api/init_config.html#c.PyConfig" title="PyConfig"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyConfig</span></code></a> have been removed. They required a special Python build by
 defining <code class="docutils literal notranslate"><span class="pre">COUNT_ALLOCS</span></code> macro.
 (Contributed by Victor Stinner in <a class="reference external" href="https://bugs.python.org/issue39489">bpo-39489</a>.)</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">ast.Suite</span></code> node class has been removed due to no longer being needed.
-(Contributed by Batuhan Taskaya in <a class="reference external" href="https://bugs.python.org/issue39639">bpo-39639</a>.)</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">ast.Suite</span></code> and <code class="docutils literal notranslate"><span class="pre">ast.Param</span></code> node classes has been removed due to no
+longer being needed.
+(Contributed by Batuhan Taskaya in <a class="reference external" href="https://bugs.python.org/issue39639">bpo-39639</a> and <a class="reference external" href="https://bugs.python.org/issue39969">bpo-39969</a>.)</p></li>
 </ul>
 </div>
 <div class="section" id="porting-to-python-3-9">
@@ -614,6 +655,14 @@ earlier versions will need to catch both using <code class="docutils literal not
 <li><p>The <em>compresslevel</em> parameter of <a class="reference internal" href="../library/bz2.html#bz2-bz2file" title="bz2.BZ2File"><code class="xref py py-class docutils literal notranslate"><span class="pre">bz2.BZ2File</span></code></a> became keyword-only,
 since the <em>buffering</em> parameter has been removed.
 (Contributed by Victor Stinner in <a class="reference external" href="https://bugs.python.org/issue39357">bpo-39357</a>.)</p></li>
+<li><p>Simplified AST for subscription. Simple indices will be represented by
+their value, extended slices will be represented as tuples.
+<code class="docutils literal notranslate"><span class="pre">Index(value)</span></code> will return a <code class="docutils literal notranslate"><span class="pre">value</span></code> itself, <code class="docutils literal notranslate"><span class="pre">ExtSlice(slices)</span></code>
+will return <code class="docutils literal notranslate"><span class="pre">Tuple(slices,</span> <span class="pre">Load())</span></code>.
+(Contributed by Serhiy Storchaka in <a class="reference external" href="https://bugs.python.org/issue34822">bpo-34822</a>.)</p></li>
+<li><p>The <a class="reference internal" href="../library/importlib.html#module-importlib" title="importlib: The implementation of the import machinery."><code class="xref py py-mod docutils literal notranslate"><span class="pre">importlib</span></code></a> module now ignores the <span class="target" id="index-5"></span><a class="reference internal" href="../using/cmdline.html#envvar-pythoncaseok"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONCASEOK</span></code></a>
+environment variable when the <a class="reference internal" href="../using/cmdline.html#cmdoption-e"><code class="xref std std-option docutils literal notranslate"><span class="pre">-E</span></code></a> or <a class="reference internal" href="../using/cmdline.html#cmdoption-2"><code class="xref std std-option docutils literal notranslate"><span class="pre">-I</span></code></a> command line
+options are being used.</p></li>
 </ul>
 </div>
 <div class="section" id="cpython-bytecode-changes">
@@ -654,6 +703,7 @@ correctly if the <a class="reference internal" href="../library/exceptions.html#
 <li><a class="reference internal" href="#ftplib">ftplib</a></li>
 <li><a class="reference internal" href="#functools">functools</a></li>
 <li><a class="reference internal" href="#gc">gc</a></li>
+<li><a class="reference internal" href="#http">http</a></li>
 <li><a class="reference internal" href="#imaplib">imaplib</a></li>
 <li><a class="reference internal" href="#importlib">importlib</a></li>
 <li><a class="reference internal" href="#inspect">inspect</a></li>
@@ -667,7 +717,9 @@ correctly if the <a class="reference internal" href="../library/exceptions.html#
 <li><a class="reference internal" href="#signal">signal</a></li>
 <li><a class="reference internal" href="#smtplib">smtplib</a></li>
 <li><a class="reference internal" href="#threading">threading</a></li>
+<li><a class="reference internal" href="#sys">sys</a></li>
 <li><a class="reference internal" href="#typing">typing</a></li>
+<li><a class="reference internal" href="#unicodedata">unicodedata</a></li>
 <li><a class="reference internal" href="#venv">venv</a></li>
 </ul>
 </li>
@@ -758,11 +810,11 @@ correctly if the <a class="reference internal" href="../library/exceptions.html#
 <br />
     <br />
 
-    Last updated on Mar 08, 2020.
+    Last updated on Mar 15, 2020.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/c10e1bc.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/6f5bac9.
     </div>
 
   </body>

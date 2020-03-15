@@ -188,10 +188,20 @@ complete listing.</p>
 <dl class="c macro">
 <dt id="c.Py_UNREACHABLE">
 <code class="sig-name descname">Py_UNREACHABLE</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#c.Py_UNREACHABLE" title="Permalink to this definition">¶</a></dt>
-<dd><p>Use this when you have a code path that you do not expect to be reached.
+<dd><p>Use this when you have a code path that cannot be reached by design.
 For example, in the <code class="docutils literal notranslate"><span class="pre">default:</span></code> clause in a <code class="docutils literal notranslate"><span class="pre">switch</span></code> statement for which
 all possible values are covered in <code class="docutils literal notranslate"><span class="pre">case</span></code> statements.  Use this in places
 where you might be tempted to put an <code class="docutils literal notranslate"><span class="pre">assert(0)</span></code> or <code class="docutils literal notranslate"><span class="pre">abort()</span></code> call.</p>
+<p>In release mode, the macro helps the compiler to optimize the code, and
+avoids a warning about unreachable code.  For example, the macro is
+implemented with <code class="docutils literal notranslate"><span class="pre">__builtin_unreachable()</span></code> on GCC in release mode.</p>
+<p>A use for <code class="docutils literal notranslate"><span class="pre">Py_UNREACHABLE()</span></code> is following a call a function that
+never returns but that is not declared <code class="xref c c-macro docutils literal notranslate"><span class="pre">_Py_NO_RETURN</span></code>.</p>
+<p>If a code path is very unlikely code but can be reached under exceptional
+case, this macro must not be used.  For example, under low memory condition
+or if a system call returns a value out of the expected range.  In this
+case, it’s better to report the error to the caller.  If the error cannot
+be reported to caller, <a class="reference internal" href="sys.html#c.Py_FatalError" title="Py_FatalError"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_FatalError()</span></code></a> can be used.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.7.</span></p>
 </div>
@@ -825,11 +835,11 @@ for more detailed information.</p>
 <br />
     <br />
 
-    Last updated on Mar 08, 2020.
+    Last updated on Mar 15, 2020.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/c10e1bc.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/6f5bac9.
     </div>
 
   </body>

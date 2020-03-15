@@ -716,13 +716,16 @@ notation.</p>
 hosts are all the IP addresses that belong to the network, except the
 network address itself and the network broadcast address.  For networks
 with a mask length of 31, the network address and network broadcast
-address are also included in the result.</p>
+address are also included in the result. Networks with a mask of 32
+will return a list containing the single host address.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">ip_network</span><span class="p">(</span><span class="s1">&#39;192.0.2.0/29&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">hosts</span><span class="p">())</span>  
 <span class="go">[IPv4Address(&#39;192.0.2.1&#39;), IPv4Address(&#39;192.0.2.2&#39;),</span>
 <span class="go"> IPv4Address(&#39;192.0.2.3&#39;), IPv4Address(&#39;192.0.2.4&#39;),</span>
 <span class="go"> IPv4Address(&#39;192.0.2.5&#39;), IPv4Address(&#39;192.0.2.6&#39;)]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">ip_network</span><span class="p">(</span><span class="s1">&#39;192.0.2.0/31&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">hosts</span><span class="p">())</span>
 <span class="go">[IPv4Address(&#39;192.0.2.0&#39;), IPv4Address(&#39;192.0.2.1&#39;)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">ip_network</span><span class="p">(</span><span class="s1">&#39;192.0.2.1/32&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">hosts</span><span class="p">())</span>
+<span class="go">[IPv4Address(&#39;192.0.2.1&#39;)]</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -981,7 +984,9 @@ to determine the appropriate network address.</p>
 <dd><p>Returns an iterator over the usable hosts in the network.  The usable
 hosts are all the IP addresses that belong to the network, except the
 Subnet-Router anycast address.  For networks with a mask length of 127,
-the Subnet-Router anycast address is also included in the result.</p>
+the Subnet-Router anycast address is also included in the result.
+Networks with a mask of 128 will return a list containing the
+single host address.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -1426,11 +1431,11 @@ module defines the following exceptions:</p>
 <br />
     <br />
 
-    Last updated on Mar 08, 2020.
+    Last updated on Mar 15, 2020.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/c10e1bc.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/6f5bac9.
     </div>
 
   </body>

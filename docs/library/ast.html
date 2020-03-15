@@ -199,20 +199,19 @@ module Python
 
          -- the following expression can appear in assignment context
          | Attribute(expr value, identifier attr, expr_context ctx)
-         | Subscript(expr value, slice slice, expr_context ctx)
+         | Subscript(expr value, expr slice, expr_context ctx)
          | Starred(expr value, expr_context ctx)
          | Name(identifier id, expr_context ctx)
          | List(expr* elts, expr_context ctx)
          | Tuple(expr* elts, expr_context ctx)
 
+         -- can appear only in Subscript
+         | Slice(expr? lower, expr? upper, expr? step)
+
           -- col_offset is the byte offset in the utf8 string the parser uses
           attributes (int lineno, int col_offset, int? end_lineno, int? end_col_offset)
 
-    expr_context = Load | Store | Del | AugLoad | AugStore | Param
-
-    slice = Slice(expr? lower, expr? upper, expr? step)
-          | ExtSlice(slice* dims)
-          | Index(expr value)
+    expr_context = Load | Store | Del | AugLoad | AugStore
 
     boolop = And | Or
 
@@ -329,11 +328,21 @@ use</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">Changed in version 3.8: </span>Class <a class="reference internal" href="#ast-constant" title="ast.Constant"><code class="xref py py-class docutils literal notranslate"><span class="pre">ast.Constant</span></code></a> is now used for all constants.</p>
 </div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 3.9: </span>Simple indices are represented by their value, extended slices are
+represented as tuples.</p>
+</div>
 <div class="deprecated">
 <p><span class="versionmodified deprecated">Deprecated since version 3.8: </span>Old classes <code class="xref py py-class docutils literal notranslate"><span class="pre">ast.Num</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ast.Str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ast.Bytes</span></code>,
 <code class="xref py py-class docutils literal notranslate"><span class="pre">ast.NameConstant</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">ast.Ellipsis</span></code> are still available,
-but they will be removed in future Python releases.  In the meanwhile,
+but they will be removed in future Python releases.  In the meantime,
 instantiating them will return an instance of a different class.</p>
+</div>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 3.9: </span>Old classes <code class="xref py py-class docutils literal notranslate"><span class="pre">ast.Index</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">ast.ExtSlice</span></code> are still
+available, but they will be removed in future Python releases.
+In the meantime, instantiating them will return an instance of
+a different class.</p>
 </div>
 <div class="section" id="literals">
 <h3>Literals<a class="headerlink" href="#literals" title="Permalink to this headline">¶</a></h3>
@@ -346,7 +355,7 @@ such as a number, string or <code class="docutils literal notranslate"><span cla
 (tuples and frozensets) if all of their elements are constant.</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;123&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;eval&#39;</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
 <span class="go">Expression(</span>
-<span class="go">    body=Constant(value=123, kind=None))</span>
+<span class="go">    body=Constant(value=123))</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -383,12 +392,11 @@ nodes.</p>
 <span class="go">Expression(</span>
 <span class="go">    body=JoinedStr(</span>
 <span class="go">        values=[</span>
-<span class="go">            Constant(value=&#39;sin(&#39;, kind=None),</span>
+<span class="go">            Constant(value=&#39;sin(&#39;),</span>
 <span class="go">            FormattedValue(</span>
 <span class="go">                value=Name(id=&#39;a&#39;, ctx=Load()),</span>
-<span class="go">                conversion=-1,</span>
-<span class="go">                format_spec=None),</span>
-<span class="go">            Constant(value=&#39;) is &#39;, kind=None),</span>
+<span class="go">                conversion=-1),</span>
+<span class="go">            Constant(value=&#39;) is &#39;),</span>
 <span class="go">            FormattedValue(</span>
 <span class="go">                value=Call(</span>
 <span class="go">                    func=Name(id=&#39;sin&#39;, ctx=Load()),</span>
@@ -398,7 +406,7 @@ nodes.</p>
 <span class="go">                conversion=-1,</span>
 <span class="go">                format_spec=JoinedStr(</span>
 <span class="go">                    values=[</span>
-<span class="go">                        Constant(value=&#39;.3&#39;, kind=None)]))]))</span>
+<span class="go">                        Constant(value=&#39;.3&#39;)]))]))</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -415,17 +423,17 @@ nodes.</p>
 <span class="go">Expression(</span>
 <span class="go">    body=List(</span>
 <span class="go">        elts=[</span>
-<span class="go">            Constant(value=1, kind=None),</span>
-<span class="go">            Constant(value=2, kind=None),</span>
-<span class="go">            Constant(value=3, kind=None)],</span>
+<span class="go">            Constant(value=1),</span>
+<span class="go">            Constant(value=2),</span>
+<span class="go">            Constant(value=3)],</span>
 <span class="go">        ctx=Load()))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;(1, 2, 3)&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;eval&#39;</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
 <span class="go">Expression(</span>
 <span class="go">    body=Tuple(</span>
 <span class="go">        elts=[</span>
-<span class="go">            Constant(value=1, kind=None),</span>
-<span class="go">            Constant(value=2, kind=None),</span>
-<span class="go">            Constant(value=3, kind=None)],</span>
+<span class="go">            Constant(value=1),</span>
+<span class="go">            Constant(value=2),</span>
+<span class="go">            Constant(value=3)],</span>
 <span class="go">        ctx=Load()))</span>
 </pre></div>
 </div>
@@ -439,9 +447,9 @@ nodes.</p>
 <span class="go">Expression(</span>
 <span class="go">    body=Set(</span>
 <span class="go">        elts=[</span>
-<span class="go">            Constant(value=1, kind=None),</span>
-<span class="go">            Constant(value=2, kind=None),</span>
-<span class="go">            Constant(value=3, kind=None)]))</span>
+<span class="go">            Constant(value=1),</span>
+<span class="go">            Constant(value=2),</span>
+<span class="go">            Constant(value=3)]))</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -459,10 +467,10 @@ position in <code class="docutils literal notranslate"><span class="pre">keys</s
 <span class="go">Expression(</span>
 <span class="go">    body=Dict(</span>
 <span class="go">        keys=[</span>
-<span class="go">            Constant(value=&#39;a&#39;, kind=None),</span>
+<span class="go">            Constant(value=&#39;a&#39;),</span>
 <span class="go">            None],</span>
 <span class="go">        values=[</span>
-<span class="go">            Constant(value=1, kind=None),</span>
+<span class="go">            Constant(value=1),</span>
 <span class="go">            Name(id=&#39;d&#39;, ctx=Load())]))</span>
 </pre></div>
 </div>
@@ -501,8 +509,7 @@ to distinguish these cases.</p>
 <span class="go">        Assign(</span>
 <span class="go">            targets=[</span>
 <span class="go">                Name(id=&#39;a&#39;, ctx=Store())],</span>
-<span class="go">            value=Constant(value=1, kind=None),</span>
-<span class="go">            type_comment=None)],</span>
+<span class="go">            value=Constant(value=1))],</span>
 <span class="go">    type_ignores=[])</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;del a&#39;</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
@@ -534,8 +541,7 @@ node with <code class="docutils literal notranslate"><span class="pre">*args</sp
 <span class="go">                            value=Name(id=&#39;b&#39;, ctx=Store()),</span>
 <span class="go">                            ctx=Store())],</span>
 <span class="go">                    ctx=Store())],</span>
-<span class="go">            value=Name(id=&#39;it&#39;, ctx=Load()),</span>
-<span class="go">            type_comment=None)],</span>
+<span class="go">            value=Name(id=&#39;it&#39;, ctx=Load()))],</span>
 <span class="go">    type_ignores=[])</span>
 </pre></div>
 </div>
@@ -671,13 +677,13 @@ of values after the first element in the comparison.</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;1 &lt;= a &lt; 10&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;eval&#39;</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
 <span class="go">Expression(</span>
 <span class="go">    body=Compare(</span>
-<span class="go">        left=Constant(value=1, kind=None),</span>
+<span class="go">        left=Constant(value=1),</span>
 <span class="go">        ops=[</span>
 <span class="go">            LtE(),</span>
 <span class="go">            Lt()],</span>
 <span class="go">        comparators=[</span>
 <span class="go">            Name(id=&#39;a&#39;, ctx=Load()),</span>
-<span class="go">            Constant(value=10, kind=None)]))</span>
+<span class="go">            Constant(value=10)]))</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -732,7 +738,6 @@ they can be empty lists. <code class="docutils literal notranslate"><span class=
 <span class="go">                arg=&#39;b&#39;,</span>
 <span class="go">                value=Name(id=&#39;c&#39;, ctx=Load())),</span>
 <span class="go">            keyword(</span>
-<span class="go">                arg=None,</span>
 <span class="go">                value=Name(id=&#39;e&#39;, ctx=Load()))]))</span>
 </pre></div>
 </div>
@@ -790,7 +795,7 @@ node in which the first argument can be multiple nodes, in this case both
 <span class="go">Expression(</span>
 <span class="go">    body=NamedExpr(</span>
 <span class="go">        target=Name(id=&#39;x&#39;, ctx=Store()),</span>
-<span class="go">        value=Constant(value=4, kind=None)))</span>
+<span class="go">        value=Constant(value=4)))</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -800,22 +805,22 @@ node in which the first argument can be multiple nodes, in this case both
 <dl class="py class">
 <dt id="ast-subscript">
 <span id="ast.Subscript"></span><em class="property">class </em><code class="sig-prename descclassname">ast.</code><code class="sig-name descname">Subscript</code><span class="sig-paren">(</span><em class="sig-param">value</em>, <em class="sig-param">slice</em>, <em class="sig-param">ctx</em><span class="sig-paren">)</span><a class="headerlink" href="#ast-subscript" title="Permalink to this definition">¶</a></dt>
-<dd><p>A subscript, such as <code class="docutils literal notranslate"><span class="pre">l[1]</span></code>. <code class="docutils literal notranslate"><span class="pre">value</span></code> is the object, often a
-<a class="reference internal" href="#ast-name" title="ast.Name"><code class="xref py py-class docutils literal notranslate"><span class="pre">Name</span></code></a>. <code class="docutils literal notranslate"><span class="pre">slice</span></code> is one of <a class="reference internal" href="#ast-index" title="ast.Index"><code class="xref py py-class docutils literal notranslate"><span class="pre">Index</span></code></a>, <a class="reference internal" href="#ast-slice" title="ast.Slice"><code class="xref py py-class docutils literal notranslate"><span class="pre">Slice</span></code></a> or
-<a class="reference internal" href="#ast-extslice" title="ast.ExtSlice"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExtSlice</span></code></a>. <code class="docutils literal notranslate"><span class="pre">ctx</span></code> is <a class="reference internal" href="#ast-load" title="ast.Load"><code class="xref py py-class docutils literal notranslate"><span class="pre">Load</span></code></a>, <a class="reference internal" href="#ast-store" title="ast.Store"><code class="xref py py-class docutils literal notranslate"><span class="pre">Store</span></code></a> or <a class="reference internal" href="#ast-del" title="ast.Del"><code class="xref py py-class docutils literal notranslate"><span class="pre">Del</span></code></a>
+<dd><p>A subscript, such as <code class="docutils literal notranslate"><span class="pre">l[1]</span></code>. <code class="docutils literal notranslate"><span class="pre">value</span></code> is the subscripted object
+(usually sequence or mapping). <code class="docutils literal notranslate"><span class="pre">slice</span></code> is an index, slice or key.
+It can be a <a class="reference internal" href="#ast-tuple" title="ast.Tuple"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tuple</span></code></a> and contain a <a class="reference internal" href="#ast-slice" title="ast.Slice"><code class="xref py py-class docutils literal notranslate"><span class="pre">Slice</span></code></a>.
+<code class="docutils literal notranslate"><span class="pre">ctx</span></code> is <a class="reference internal" href="#ast-load" title="ast.Load"><code class="xref py py-class docutils literal notranslate"><span class="pre">Load</span></code></a>, <a class="reference internal" href="#ast-store" title="ast.Store"><code class="xref py py-class docutils literal notranslate"><span class="pre">Store</span></code></a> or <a class="reference internal" href="#ast-del" title="ast.Del"><code class="xref py py-class docutils literal notranslate"><span class="pre">Del</span></code></a>
 according to the action performed with the subscript.</p>
-</dd></dl>
-
-<dl class="py class">
-<dt id="ast-index">
-<span id="ast.Index"></span><em class="property">class </em><code class="sig-prename descclassname">ast.</code><code class="sig-name descname">Index</code><span class="sig-paren">(</span><em class="sig-param">value</em><span class="sig-paren">)</span><a class="headerlink" href="#ast-index" title="Permalink to this definition">¶</a></dt>
-<dd><p>Simple subscripting with a single value</p>
-<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;l[1]&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;eval&#39;</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;l[1:2, 3]&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;eval&#39;</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
 <span class="go">Expression(</span>
 <span class="go">    body=Subscript(</span>
 <span class="go">        value=Name(id=&#39;l&#39;, ctx=Load()),</span>
-<span class="go">        slice=Index(</span>
-<span class="go">            value=Constant(value=1, kind=None)),</span>
+<span class="go">        slice=Tuple(</span>
+<span class="go">            elts=[</span>
+<span class="go">                Slice(</span>
+<span class="go">                    lower=Constant(value=1),</span>
+<span class="go">                    upper=Constant(value=2)),</span>
+<span class="go">                Constant(value=3)],</span>
+<span class="go">            ctx=Load()),</span>
 <span class="go">        ctx=Load()))</span>
 </pre></div>
 </div>
@@ -824,37 +829,16 @@ according to the action performed with the subscript.</p>
 <dl class="py class">
 <dt id="ast-slice">
 <span id="ast.Slice"></span><em class="property">class </em><code class="sig-prename descclassname">ast.</code><code class="sig-name descname">Slice</code><span class="sig-paren">(</span><em class="sig-param">lower</em>, <em class="sig-param">upper</em>, <em class="sig-param">step</em><span class="sig-paren">)</span><a class="headerlink" href="#ast-slice" title="Permalink to this definition">¶</a></dt>
-<dd><p>Regular slicing (on the form x:y).</p>
+<dd><p>Regular slicing (on the form <code class="docutils literal notranslate"><span class="pre">lower:upper</span></code> or <code class="docutils literal notranslate"><span class="pre">lower:upper:step</span></code>).
+Can occur only inside the <em>slice</em> field of <a class="reference internal" href="#ast-subscript" title="ast.Subscript"><code class="xref py py-class docutils literal notranslate"><span class="pre">Subscript</span></code></a>, either
+directly or as an element of <a class="reference internal" href="#ast-tuple" title="ast.Tuple"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tuple</span></code></a>.</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;l[1:2]&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;eval&#39;</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
 <span class="go">Expression(</span>
 <span class="go">    body=Subscript(</span>
 <span class="go">        value=Name(id=&#39;l&#39;, ctx=Load()),</span>
 <span class="go">        slice=Slice(</span>
-<span class="go">            lower=Constant(value=1, kind=None),</span>
-<span class="go">            upper=Constant(value=2, kind=None),</span>
-<span class="go">            step=None),</span>
-<span class="go">        ctx=Load()))</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py class">
-<dt id="ast-extslice">
-<span id="ast.ExtSlice"></span><em class="property">class </em><code class="sig-prename descclassname">ast.</code><code class="sig-name descname">ExtSlice</code><span class="sig-paren">(</span><em class="sig-param">dims</em><span class="sig-paren">)</span><a class="headerlink" href="#ast-extslice" title="Permalink to this definition">¶</a></dt>
-<dd><p>Advanced slicing. <code class="docutils literal notranslate"><span class="pre">dims</span></code> holds a list of <a class="reference internal" href="#ast-slice" title="ast.Slice"><code class="xref py py-class docutils literal notranslate"><span class="pre">Slice</span></code></a> and
-<a class="reference internal" href="#ast-index" title="ast.Index"><code class="xref py py-class docutils literal notranslate"><span class="pre">Index</span></code></a> nodes</p>
-<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;l[1:2, 3]&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;eval&#39;</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
-<span class="go">Expression(</span>
-<span class="go">    body=Subscript(</span>
-<span class="go">        value=Name(id=&#39;l&#39;, ctx=Load()),</span>
-<span class="go">        slice=ExtSlice(</span>
-<span class="go">            dims=[</span>
-<span class="go">                Slice(</span>
-<span class="go">                    lower=Constant(value=1, kind=None),</span>
-<span class="go">                    upper=Constant(value=2, kind=None),</span>
-<span class="go">                    step=None),</span>
-<span class="go">                Index(</span>
-<span class="go">                    value=Constant(value=3, kind=None))]),</span>
+<span class="go">            lower=Constant(value=1),</span>
+<span class="go">            upper=Constant(value=2)),</span>
 <span class="go">        ctx=Load()))</span>
 </pre></div>
 </div>
@@ -893,7 +877,7 @@ representing the part that will be evaluated for each item.</p>
 <span class="go">        value=BinOp(</span>
 <span class="go">            left=Name(id=&#39;x&#39;, ctx=Load()),</span>
 <span class="go">            op=Pow(),</span>
-<span class="go">            right=Constant(value=2, kind=None)),</span>
+<span class="go">            right=Constant(value=2)),</span>
 <span class="go">        generators=[</span>
 <span class="go">            comprehension(</span>
 <span class="go">                target=Name(id=&#39;x&#39;, ctx=Store()),</span>
@@ -951,7 +935,7 @@ is the object to iterate over. <code class="docutils literal notranslate"><span 
 <span class="go">        elt=BinOp(</span>
 <span class="go">            left=Name(id=&#39;n&#39;, ctx=Load()),</span>
 <span class="go">            op=Pow(),</span>
-<span class="go">            right=Constant(value=2, kind=None)),</span>
+<span class="go">            right=Constant(value=2)),</span>
 <span class="go">        generators=[</span>
 <span class="go">            comprehension(</span>
 <span class="go">                target=Name(id=&#39;n&#39;, ctx=Store()),</span>
@@ -962,13 +946,13 @@ is the object to iterate over. <code class="docutils literal notranslate"><span 
 <span class="go">                        ops=[</span>
 <span class="go">                            Gt()],</span>
 <span class="go">                        comparators=[</span>
-<span class="go">                            Constant(value=5, kind=None)]),</span>
+<span class="go">                            Constant(value=5)]),</span>
 <span class="go">                    Compare(</span>
 <span class="go">                        left=Name(id=&#39;n&#39;, ctx=Load()),</span>
 <span class="go">                        ops=[</span>
 <span class="go">                            Lt()],</span>
 <span class="go">                        comparators=[</span>
-<span class="go">                            Constant(value=10, kind=None)])],</span>
+<span class="go">                            Constant(value=10)])],</span>
 <span class="go">                is_async=0)]))</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;[i async for i in soc]&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;eval&#39;</span><span class="p">),</span>
@@ -1010,8 +994,7 @@ within <code class="docutils literal notranslate"><span class="pre">targets</spa
 <span class="go">            targets=[</span>
 <span class="go">                Name(id=&#39;a&#39;, ctx=Store()),</span>
 <span class="go">                Name(id=&#39;b&#39;, ctx=Store())],</span>
-<span class="go">            value=Constant(value=1, kind=None),</span>
-<span class="go">            type_comment=None)],</span>
+<span class="go">            value=Constant(value=1))],</span>
 <span class="go">    type_ignores=[])</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;a,b = c&#39;</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span> <span class="c1"># Unpacking</span>
@@ -1024,8 +1007,7 @@ within <code class="docutils literal notranslate"><span class="pre">targets</spa
 <span class="go">                        Name(id=&#39;a&#39;, ctx=Store()),</span>
 <span class="go">                        Name(id=&#39;b&#39;, ctx=Store())],</span>
 <span class="go">                    ctx=Store())],</span>
-<span class="go">            value=Name(id=&#39;c&#39;, ctx=Load()),</span>
-<span class="go">            type_comment=None)],</span>
+<span class="go">            value=Name(id=&#39;c&#39;, ctx=Load()))],</span>
 <span class="go">    type_ignores=[])</span>
 </pre></div>
 </div>
@@ -1046,7 +1028,6 @@ between parenthesis and are hence pure names and not expressions.</p>
 <span class="go">        AnnAssign(</span>
 <span class="go">            target=Name(id=&#39;c&#39;, ctx=Store()),</span>
 <span class="go">            annotation=Name(id=&#39;int&#39;, ctx=Load()),</span>
-<span class="go">            value=None,</span>
 <span class="go">            simple=1)],</span>
 <span class="go">    type_ignores=[])</span>
 
@@ -1056,7 +1037,7 @@ between parenthesis and are hence pure names and not expressions.</p>
 <span class="go">        AnnAssign(</span>
 <span class="go">            target=Name(id=&#39;a&#39;, ctx=Store()),</span>
 <span class="go">            annotation=Name(id=&#39;int&#39;, ctx=Load()),</span>
-<span class="go">            value=Constant(value=1, kind=None),</span>
+<span class="go">            value=Constant(value=1),</span>
 <span class="go">            simple=0)],</span>
 <span class="go">    type_ignores=[])</span>
 
@@ -1069,7 +1050,6 @@ between parenthesis and are hence pure names and not expressions.</p>
 <span class="go">                attr=&#39;b&#39;,</span>
 <span class="go">                ctx=Store()),</span>
 <span class="go">            annotation=Name(id=&#39;int&#39;, ctx=Load()),</span>
-<span class="go">            value=None,</span>
 <span class="go">            simple=0)],</span>
 <span class="go">    type_ignores=[])</span>
 
@@ -1079,11 +1059,9 @@ between parenthesis and are hence pure names and not expressions.</p>
 <span class="go">        AnnAssign(</span>
 <span class="go">            target=Subscript(</span>
 <span class="go">                value=Name(id=&#39;a&#39;, ctx=Load()),</span>
-<span class="go">                slice=Index(</span>
-<span class="go">                    value=Constant(value=1, kind=None)),</span>
+<span class="go">                slice=Constant(value=1),</span>
 <span class="go">                ctx=Store()),</span>
 <span class="go">            annotation=Name(id=&#39;int&#39;, ctx=Load()),</span>
-<span class="go">            value=None,</span>
 <span class="go">            simple=0)],</span>
 <span class="go">    type_ignores=[])</span>
 </pre></div>
@@ -1105,7 +1083,7 @@ unlike the targets of <a class="reference internal" href="#ast-assign" title="as
 <span class="go">        AugAssign(</span>
 <span class="go">            target=Name(id=&#39;x&#39;, ctx=Store()),</span>
 <span class="go">            op=Add(),</span>
-<span class="go">            value=Constant(value=2, kind=None))],</span>
+<span class="go">            value=Constant(value=2))],</span>
 <span class="go">    type_ignores=[])</span>
 </pre></div>
 </div>
@@ -1188,9 +1166,9 @@ described in other sections.</p>
 <span class="go">    body=[</span>
 <span class="go">        Import(</span>
 <span class="go">            names=[</span>
-<span class="go">                alias(name=&#39;x&#39;, asname=None),</span>
-<span class="go">                alias(name=&#39;y&#39;, asname=None),</span>
-<span class="go">                alias(name=&#39;z&#39;, asname=None)])],</span>
+<span class="go">                alias(name=&#39;x&#39;),</span>
+<span class="go">                alias(name=&#39;y&#39;),</span>
+<span class="go">                alias(name=&#39;z&#39;)])],</span>
 <span class="go">    type_ignores=[])</span>
 </pre></div>
 </div>
@@ -1209,9 +1187,9 @@ absolute import).</p>
 <span class="go">        ImportFrom(</span>
 <span class="go">            module=&#39;y&#39;,</span>
 <span class="go">            names=[</span>
-<span class="go">                alias(name=&#39;x&#39;, asname=None),</span>
-<span class="go">                alias(name=&#39;y&#39;, asname=None),</span>
-<span class="go">                alias(name=&#39;z&#39;, asname=None)],</span>
+<span class="go">                alias(name=&#39;x&#39;),</span>
+<span class="go">                alias(name=&#39;y&#39;),</span>
+<span class="go">                alias(name=&#39;z&#39;)],</span>
 <span class="go">            level=0)],</span>
 <span class="go">    type_ignores=[])</span>
 </pre></div>
@@ -1230,7 +1208,7 @@ the regular name is to be used.</p>
 <span class="go">            module=&#39;foo.bar&#39;,</span>
 <span class="go">            names=[</span>
 <span class="go">                alias(name=&#39;a&#39;, asname=&#39;b&#39;),</span>
-<span class="go">                alias(name=&#39;c&#39;, asname=None)],</span>
+<span class="go">                alias(name=&#39;c&#39;)],</span>
 <span class="go">            level=2)],</span>
 <span class="go">    type_ignores=[])</span>
 </pre></div>
@@ -1268,16 +1246,16 @@ previous one.</p>
 <span class="go">            test=Name(id=&#39;x&#39;, ctx=Load()),</span>
 <span class="go">            body=[</span>
 <span class="go">                Expr(</span>
-<span class="go">                    value=Constant(value=Ellipsis, kind=None))],</span>
+<span class="go">                    value=Constant(value=Ellipsis))],</span>
 <span class="go">            orelse=[</span>
 <span class="go">                If(</span>
 <span class="go">                    test=Name(id=&#39;y&#39;, ctx=Load()),</span>
 <span class="go">                    body=[</span>
 <span class="go">                        Expr(</span>
-<span class="go">                            value=Constant(value=Ellipsis, kind=None))],</span>
+<span class="go">                            value=Constant(value=Ellipsis))],</span>
 <span class="go">                    orelse=[</span>
 <span class="go">                        Expr(</span>
-<span class="go">                            value=Constant(value=Ellipsis, kind=None))])])],</span>
+<span class="go">                            value=Constant(value=Ellipsis))])])],</span>
 <span class="go">    type_ignores=[])</span>
 </pre></div>
 </div>
@@ -1310,11 +1288,10 @@ loop finishes normally, rather than via a <code class="docutils literal notransl
 <span class="go">            iter=Name(id=&#39;y&#39;, ctx=Load()),</span>
 <span class="go">            body=[</span>
 <span class="go">                Expr(</span>
-<span class="go">                    value=Constant(value=Ellipsis, kind=None))],</span>
+<span class="go">                    value=Constant(value=Ellipsis))],</span>
 <span class="go">            orelse=[</span>
 <span class="go">                Expr(</span>
-<span class="go">                    value=Constant(value=Ellipsis, kind=None))],</span>
-<span class="go">            type_comment=None)],</span>
+<span class="go">                    value=Constant(value=Ellipsis))])],</span>
 <span class="go">    type_ignores=[])</span>
 </pre></div>
 </div>
@@ -1337,10 +1314,10 @@ node.</p>
 <span class="go">            test=Name(id=&#39;x&#39;, ctx=Load()),</span>
 <span class="go">            body=[</span>
 <span class="go">                Expr(</span>
-<span class="go">                    value=Constant(value=Ellipsis, kind=None))],</span>
+<span class="go">                    value=Constant(value=Ellipsis))],</span>
 <span class="go">            orelse=[</span>
 <span class="go">                Expr(</span>
-<span class="go">                    value=Constant(value=Ellipsis, kind=None))])],</span>
+<span class="go">                    value=Constant(value=Ellipsis))])],</span>
 <span class="go">    type_ignores=[])</span>
 </pre></div>
 </div>
@@ -1372,13 +1349,12 @@ node.</p>
 <span class="go">                        ops=[</span>
 <span class="go">                            Gt()],</span>
 <span class="go">                        comparators=[</span>
-<span class="go">                            Constant(value=5, kind=None)]),</span>
+<span class="go">                            Constant(value=5)]),</span>
 <span class="go">                    body=[</span>
 <span class="go">                        Break()],</span>
 <span class="go">                    orelse=[</span>
 <span class="go">                        Continue()])],</span>
-<span class="go">            orelse=[],</span>
-<span class="go">            type_comment=None)],</span>
+<span class="go">            orelse=[])],</span>
 <span class="go">    type_ignores=[])</span>
 </pre></div>
 </div>
@@ -1406,26 +1382,25 @@ node.</p>
 <span class="go">        Try(</span>
 <span class="go">            body=[</span>
 <span class="go">                Expr(</span>
-<span class="go">                    value=Constant(value=Ellipsis, kind=None))],</span>
+<span class="go">                    value=Constant(value=Ellipsis))],</span>
 <span class="go">            handlers=[</span>
 <span class="go">                ExceptHandler(</span>
 <span class="go">                    type=Name(id=&#39;Exception&#39;, ctx=Load()),</span>
-<span class="go">                    name=None,</span>
 <span class="go">                    body=[</span>
 <span class="go">                        Expr(</span>
-<span class="go">                            value=Constant(value=Ellipsis, kind=None))]),</span>
+<span class="go">                            value=Constant(value=Ellipsis))]),</span>
 <span class="go">                ExceptHandler(</span>
 <span class="go">                    type=Name(id=&#39;OtherException&#39;, ctx=Load()),</span>
 <span class="go">                    name=&#39;e&#39;,</span>
 <span class="go">                    body=[</span>
 <span class="go">                        Expr(</span>
-<span class="go">                            value=Constant(value=Ellipsis, kind=None))])],</span>
+<span class="go">                            value=Constant(value=Ellipsis))])],</span>
 <span class="go">            orelse=[</span>
 <span class="go">                Expr(</span>
-<span class="go">                    value=Constant(value=Ellipsis, kind=None))],</span>
+<span class="go">                    value=Constant(value=Ellipsis))],</span>
 <span class="go">            finalbody=[</span>
 <span class="go">                Expr(</span>
-<span class="go">                    value=Constant(value=Ellipsis, kind=None))])],</span>
+<span class="go">                    value=Constant(value=Ellipsis))])],</span>
 <span class="go">    type_ignores=[])</span>
 </pre></div>
 </div>
@@ -1452,11 +1427,10 @@ the clause doesn’t have <code class="docutils literal notranslate"><span class
 <span class="go">                    value=BinOp(</span>
 <span class="go">                        left=Name(id=&#39;a&#39;, ctx=Load()),</span>
 <span class="go">                        op=Add(),</span>
-<span class="go">                        right=Constant(value=1, kind=None)))],</span>
+<span class="go">                        right=Constant(value=1)))],</span>
 <span class="go">            handlers=[</span>
 <span class="go">                ExceptHandler(</span>
 <span class="go">                    type=Name(id=&#39;TypeError&#39;, ctx=Load()),</span>
-<span class="go">                    name=None,</span>
 <span class="go">                    body=[</span>
 <span class="go">                        Pass()])],</span>
 <span class="go">            orelse=[],</span>
@@ -1507,8 +1481,7 @@ isn’t used.</p>
 <span class="go">                        args=[</span>
 <span class="go">                            Name(id=&#39;b&#39;, ctx=Load()),</span>
 <span class="go">                            Name(id=&#39;d&#39;, ctx=Load())],</span>
-<span class="go">                        keywords=[]))],</span>
-<span class="go">            type_comment=None)],</span>
+<span class="go">                        keywords=[]))])],</span>
 <span class="go">    type_ignores=[])</span>
 </pre></div>
 </div>
@@ -1550,14 +1523,12 @@ expression. Unlike <a class="reference internal" href="#ast-functiondef" title="
 <span class="go">                args=arguments(</span>
 <span class="go">                    posonlyargs=[],</span>
 <span class="go">                    args=[</span>
-<span class="go">                        arg(arg=&#39;x&#39;, annotation=None, type_comment=None),</span>
-<span class="go">                        arg(arg=&#39;y&#39;, annotation=None, type_comment=None)],</span>
-<span class="go">                    vararg=None,</span>
+<span class="go">                        arg(arg=&#39;x&#39;),</span>
+<span class="go">                        arg(arg=&#39;y&#39;)],</span>
 <span class="go">                    kwonlyargs=[],</span>
 <span class="go">                    kw_defaults=[],</span>
-<span class="go">                    kwarg=None,</span>
 <span class="go">                    defaults=[]),</span>
-<span class="go">                body=Constant(value=Ellipsis, kind=None)))],</span>
+<span class="go">                body=Constant(value=Ellipsis)))],</span>
 <span class="go">    type_ignores=[])</span>
 </pre></div>
 </div>
@@ -1606,28 +1577,26 @@ name, <code class="docutils literal notranslate"><span class="pre">annotation</s
 <span class="go">                args=[</span>
 <span class="go">                    arg(</span>
 <span class="go">                        arg=&#39;a&#39;,</span>
-<span class="go">                        annotation=Constant(value=&#39;annotation&#39;, kind=None),</span>
-<span class="go">                        type_comment=None),</span>
-<span class="go">                    arg(arg=&#39;b&#39;, annotation=None, type_comment=None),</span>
-<span class="go">                    arg(arg=&#39;c&#39;, annotation=None, type_comment=None)],</span>
-<span class="go">                vararg=arg(arg=&#39;d&#39;, annotation=None, type_comment=None),</span>
+<span class="go">                        annotation=Constant(value=&#39;annotation&#39;)),</span>
+<span class="go">                    arg(arg=&#39;b&#39;),</span>
+<span class="go">                    arg(arg=&#39;c&#39;)],</span>
+<span class="go">                vararg=arg(arg=&#39;d&#39;),</span>
 <span class="go">                kwonlyargs=[</span>
-<span class="go">                    arg(arg=&#39;e&#39;, annotation=None, type_comment=None),</span>
-<span class="go">                    arg(arg=&#39;f&#39;, annotation=None, type_comment=None)],</span>
+<span class="go">                    arg(arg=&#39;e&#39;),</span>
+<span class="go">                    arg(arg=&#39;f&#39;)],</span>
 <span class="go">                kw_defaults=[</span>
 <span class="go">                    None,</span>
-<span class="go">                    Constant(value=3, kind=None)],</span>
-<span class="go">                kwarg=arg(arg=&#39;g&#39;, annotation=None, type_comment=None),</span>
+<span class="go">                    Constant(value=3)],</span>
+<span class="go">                kwarg=arg(arg=&#39;g&#39;),</span>
 <span class="go">                defaults=[</span>
-<span class="go">                    Constant(value=1, kind=None),</span>
-<span class="go">                    Constant(value=2, kind=None)]),</span>
+<span class="go">                    Constant(value=1),</span>
+<span class="go">                    Constant(value=2)]),</span>
 <span class="go">            body=[</span>
 <span class="go">                Pass()],</span>
 <span class="go">            decorator_list=[</span>
 <span class="go">                Name(id=&#39;decorator1&#39;, ctx=Load()),</span>
 <span class="go">                Name(id=&#39;decorator2&#39;, ctx=Load())],</span>
-<span class="go">            returns=Constant(value=&#39;return annotation&#39;, kind=None),</span>
-<span class="go">            type_comment=None)],</span>
+<span class="go">            returns=Constant(value=&#39;return annotation&#39;))],</span>
 <span class="go">    type_ignores=[])</span>
 </pre></div>
 </div>
@@ -1641,7 +1610,7 @@ name, <code class="docutils literal notranslate"><span class="pre">annotation</s
 <span class="go">Module(</span>
 <span class="go">    body=[</span>
 <span class="go">        Return(</span>
-<span class="go">            value=Constant(value=4, kind=None))],</span>
+<span class="go">            value=Constant(value=4))],</span>
 <span class="go">    type_ignores=[])</span>
 </pre></div>
 </div>
@@ -1773,10 +1742,8 @@ Only valid in the body of an <a class="reference internal" href="#ast-asyncfunct
 <span class="go">            args=arguments(</span>
 <span class="go">                posonlyargs=[],</span>
 <span class="go">                args=[],</span>
-<span class="go">                vararg=None,</span>
 <span class="go">                kwonlyargs=[],</span>
 <span class="go">                kw_defaults=[],</span>
-<span class="go">                kwarg=None,</span>
 <span class="go">                defaults=[]),</span>
 <span class="go">            body=[</span>
 <span class="go">                Expr(</span>
@@ -1785,9 +1752,7 @@ Only valid in the body of an <a class="reference internal" href="#ast-asyncfunct
 <span class="go">                            func=Name(id=&#39;other_func&#39;, ctx=Load()),</span>
 <span class="go">                            args=[],</span>
 <span class="go">                            keywords=[])))],</span>
-<span class="go">            decorator_list=[],</span>
-<span class="go">            returns=None,</span>
-<span class="go">            type_comment=None)],</span>
+<span class="go">            decorator_list=[])],</span>
 <span class="go">    type_ignores=[])</span>
 </pre></div>
 </div>
@@ -2009,9 +1974,9 @@ may be the original node in which case no replacement takes place.</p>
     <span class="k">def</span> <span class="nf">visit_Name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">Subscript</span><span class="p">(</span>
             <span class="n">value</span><span class="o">=</span><span class="n">Name</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">ctx</span><span class="o">=</span><span class="n">Load</span><span class="p">()),</span>
-            <span class="nb">slice</span><span class="o">=</span><span class="n">Index</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">Constant</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">node</span><span class="o">.</span><span class="n">id</span><span class="p">)),</span>
+            <span class="nb">slice</span><span class="o">=</span><span class="n">Constant</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">node</span><span class="o">.</span><span class="n">id</span><span class="p">),</span>
             <span class="n">ctx</span><span class="o">=</span><span class="n">node</span><span class="o">.</span><span class="n">ctx</span>
-        <span class="p">),</span> <span class="n">node</span><span class="p">)</span>
+        <span class="p">)</span>
 </pre></div>
 </div>
 <p>Keep in mind that if the node you’re operating on has child nodes you must
@@ -2220,11 +2185,11 @@ details on working with Python ASTs.</p>
 <br />
     <br />
 
-    Last updated on Mar 08, 2020.
+    Last updated on Mar 15, 2020.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/c10e1bc.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/6f5bac9.
     </div>
 
   </body>
