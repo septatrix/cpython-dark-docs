@@ -7,7 +7,7 @@
     <title>Buffer Protocol &#8212; Python 3.9.0a4 documentation</title>
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments_dark.css" type="text/css" media="(prefers-color-scheme: dark)" id="pygments_dark_css" />
+    <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
     
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -163,10 +163,10 @@ can be created.</p>
 a buffer, see <a class="reference internal" href="#c.PyObject_GetBuffer" title="PyObject_GetBuffer"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_GetBuffer()</span></code></a>.</p>
 <dl class="c type">
 <dt id="c.Py_buffer">
-<code class="sig-name descname">Py_buffer</code><a class="headerlink" href="#c.Py_buffer" title="Permalink to this definition">¶</a></dt>
+<em class="property">type </em><code class="sig-name descname">Py_buffer</code><a class="headerlink" href="#c.Py_buffer" title="Permalink to this definition">¶</a><br /></dt>
 <dd><dl class="c member">
 <dt id="c.Py_buffer.buf">
-void *<code class="sig-name descname">buf</code><a class="headerlink" href="#c.Py_buffer.buf" title="Permalink to this definition">¶</a></dt>
+void *<code class="sig-name descname">buf</code><a class="headerlink" href="#c.Py_buffer.buf" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>A pointer to the start of the logical structure described by the buffer
 fields. This can be any location within the underlying physical memory
 block of the exporter. For example, with negative <a class="reference internal" href="#c.Py_buffer.strides" title="Py_buffer.strides"><code class="xref c c-member docutils literal notranslate"><span class="pre">strides</span></code></a>
@@ -177,7 +177,7 @@ the memory block.</p>
 
 <dl class="c member">
 <dt id="c.Py_buffer.obj">
-void *<code class="sig-name descname">obj</code><a class="headerlink" href="#c.Py_buffer.obj" title="Permalink to this definition">¶</a></dt>
+void *<code class="sig-name descname">obj</code><a class="headerlink" href="#c.Py_buffer.obj" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>A new reference to the exporting object. The reference is owned by
 the consumer and automatically decremented and set to <code class="docutils literal notranslate"><span class="pre">NULL</span></code> by
 <a class="reference internal" href="#c.PyBuffer_Release" title="PyBuffer_Release"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyBuffer_Release()</span></code></a>. The field is the equivalent of the return
@@ -190,7 +190,7 @@ use this scheme.</p>
 
 <dl class="c member">
 <dt id="c.Py_buffer.len">
-Py_ssize_t <code class="sig-name descname">len</code><a class="headerlink" href="#c.Py_buffer.len" title="Permalink to this definition">¶</a></dt>
+Py_ssize_t <code class="sig-name descname">len</code><a class="headerlink" href="#c.Py_buffer.len" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p><code class="docutils literal notranslate"><span class="pre">product(shape)</span> <span class="pre">*</span> <span class="pre">itemsize</span></code>. For contiguous arrays, this is the length
 of the underlying memory block. For non-contiguous arrays, it is the length
 that the logical structure would have if it were copied to a contiguous
@@ -202,14 +202,14 @@ most cases such a request will be <a class="reference internal" href="#c.PyBUF_S
 
 <dl class="c member">
 <dt id="c.Py_buffer.readonly">
-int <code class="sig-name descname">readonly</code><a class="headerlink" href="#c.Py_buffer.readonly" title="Permalink to this definition">¶</a></dt>
+int <code class="sig-name descname">readonly</code><a class="headerlink" href="#c.Py_buffer.readonly" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>An indicator of whether the buffer is read-only. This field is controlled
 by the <a class="reference internal" href="#c.PyBUF_WRITABLE" title="PyBUF_WRITABLE"><code class="xref c c-macro docutils literal notranslate"><span class="pre">PyBUF_WRITABLE</span></code></a> flag.</p>
 </dd></dl>
 
 <dl class="c member">
 <dt id="c.Py_buffer.itemsize">
-Py_ssize_t <code class="sig-name descname">itemsize</code><a class="headerlink" href="#c.Py_buffer.itemsize" title="Permalink to this definition">¶</a></dt>
+Py_ssize_t <code class="sig-name descname">itemsize</code><a class="headerlink" href="#c.Py_buffer.itemsize" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Item size in bytes of a single element. Same as the value of <a class="reference internal" href="../library/struct.html#struct-calcsize" title="struct.calcsize"><code class="xref py py-func docutils literal notranslate"><span class="pre">struct.calcsize()</span></code></a>
 called on non-<code class="docutils literal notranslate"><span class="pre">NULL</span></code> <a class="reference internal" href="#c.Py_buffer.format" title="Py_buffer.format"><code class="xref c c-member docutils literal notranslate"><span class="pre">format</span></code></a> values.</p>
 <p>Important exception: If a consumer requests a buffer without the
@@ -226,7 +226,7 @@ or a <a class="reference internal" href="#c.PyBUF_WRITABLE" title="PyBUF_WRITABL
 
 <dl class="c member">
 <dt id="c.Py_buffer.format">
-const char *<code class="sig-name descname">format</code><a class="headerlink" href="#c.Py_buffer.format" title="Permalink to this definition">¶</a></dt>
+<em class="property">const</em> char *<code class="sig-name descname">format</code><a class="headerlink" href="#c.Py_buffer.format" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>A <em>NUL</em> terminated string in <a class="reference internal" href="../library/struct.html#module-struct" title="struct: Interpret bytes as packed binary data."><code class="xref py py-mod docutils literal notranslate"><span class="pre">struct</span></code></a> module style syntax describing
 the contents of a single item. If this is <code class="docutils literal notranslate"><span class="pre">NULL</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;B&quot;</span></code> (unsigned bytes)
 is assumed.</p>
@@ -235,7 +235,7 @@ is assumed.</p>
 
 <dl class="c member">
 <dt id="c.Py_buffer.ndim">
-int <code class="sig-name descname">ndim</code><a class="headerlink" href="#c.Py_buffer.ndim" title="Permalink to this definition">¶</a></dt>
+int <code class="sig-name descname">ndim</code><a class="headerlink" href="#c.Py_buffer.ndim" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>The number of dimensions the memory represents as an n-dimensional array.
 If it is <code class="docutils literal notranslate"><span class="pre">0</span></code>, <a class="reference internal" href="#c.Py_buffer.buf" title="Py_buffer.buf"><code class="xref c c-member docutils literal notranslate"><span class="pre">buf</span></code></a> points to a single item representing
 a scalar. In this case, <a class="reference internal" href="#c.Py_buffer.shape" title="Py_buffer.shape"><code class="xref c c-member docutils literal notranslate"><span class="pre">shape</span></code></a>, <a class="reference internal" href="#c.Py_buffer.strides" title="Py_buffer.strides"><code class="xref c c-member docutils literal notranslate"><span class="pre">strides</span></code></a>
@@ -247,7 +247,7 @@ buffers SHOULD be able to handle up to <code class="xref c c-macro docutils lite
 
 <dl class="c member">
 <dt id="c.Py_buffer.shape">
-Py_ssize_t *<code class="sig-name descname">shape</code><a class="headerlink" href="#c.Py_buffer.shape" title="Permalink to this definition">¶</a></dt>
+Py_ssize_t *<code class="sig-name descname">shape</code><a class="headerlink" href="#c.Py_buffer.shape" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>An array of <code class="xref c c-type docutils literal notranslate"><span class="pre">Py_ssize_t</span></code> of length <a class="reference internal" href="#c.Py_buffer.ndim" title="Py_buffer.ndim"><code class="xref c c-member docutils literal notranslate"><span class="pre">ndim</span></code></a>
 indicating the shape of the memory as an n-dimensional array. Note that
 <code class="docutils literal notranslate"><span class="pre">shape[0]</span> <span class="pre">*</span> <span class="pre">...</span> <span class="pre">*</span> <span class="pre">shape[ndim-1]</span> <span class="pre">*</span> <span class="pre">itemsize</span></code> MUST be equal to
@@ -260,7 +260,7 @@ for further information.</p>
 
 <dl class="c member">
 <dt id="c.Py_buffer.strides">
-Py_ssize_t *<code class="sig-name descname">strides</code><a class="headerlink" href="#c.Py_buffer.strides" title="Permalink to this definition">¶</a></dt>
+Py_ssize_t *<code class="sig-name descname">strides</code><a class="headerlink" href="#c.Py_buffer.strides" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>An array of <code class="xref c c-type docutils literal notranslate"><span class="pre">Py_ssize_t</span></code> of length <a class="reference internal" href="#c.Py_buffer.ndim" title="Py_buffer.ndim"><code class="xref c c-member docutils literal notranslate"><span class="pre">ndim</span></code></a>
 giving the number of bytes to skip to get to a new element in each
 dimension.</p>
@@ -272,7 +272,7 @@ usually positive, but a consumer MUST be able to handle the case
 
 <dl class="c member">
 <dt id="c.Py_buffer.suboffsets">
-Py_ssize_t *<code class="sig-name descname">suboffsets</code><a class="headerlink" href="#c.Py_buffer.suboffsets" title="Permalink to this definition">¶</a></dt>
+Py_ssize_t *<code class="sig-name descname">suboffsets</code><a class="headerlink" href="#c.Py_buffer.suboffsets" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>An array of <code class="xref c c-type docutils literal notranslate"><span class="pre">Py_ssize_t</span></code> of length <a class="reference internal" href="#c.Py_buffer.ndim" title="Py_buffer.ndim"><code class="xref c c-member docutils literal notranslate"><span class="pre">ndim</span></code></a>.
 If <code class="docutils literal notranslate"><span class="pre">suboffsets[n]</span> <span class="pre">&gt;=</span> <span class="pre">0</span></code>, the values stored along the nth dimension are
 pointers and the suboffset value dictates how many bytes to add to each
@@ -289,7 +289,7 @@ of such an array.</p>
 
 <dl class="c member">
 <dt id="c.Py_buffer.internal">
-void *<code class="sig-name descname">internal</code><a class="headerlink" href="#c.Py_buffer.internal" title="Permalink to this definition">¶</a></dt>
+void *<code class="sig-name descname">internal</code><a class="headerlink" href="#c.Py_buffer.internal" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>This is for use internally by the exporting object. For example, this
 might be re-cast as an integer by the exporter and used to store flags
 about whether or not the shape, strides, and suboffsets arrays must be
@@ -319,7 +319,7 @@ with the correct values: <a class="reference internal" href="#c.Py_buffer.obj" t
 <blockquote>
 <div><dl class="c macro">
 <dt id="c.PyBUF_WRITABLE">
-<code class="sig-name descname">PyBUF_WRITABLE</code><a class="headerlink" href="#c.PyBUF_WRITABLE" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">PyBUF_WRITABLE</code><a class="headerlink" href="#c.PyBUF_WRITABLE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Controls the <a class="reference internal" href="#c.Py_buffer.readonly" title="Py_buffer.readonly"><code class="xref c c-member docutils literal notranslate"><span class="pre">readonly</span></code></a> field. If set, the exporter
 MUST provide a writable buffer or else report failure. Otherwise, the
 exporter MAY provide either a read-only or writable buffer, but the choice
@@ -328,7 +328,7 @@ MUST be consistent for all consumers.</p>
 
 <dl class="c macro">
 <dt id="c.PyBUF_FORMAT">
-<code class="sig-name descname">PyBUF_FORMAT</code><a class="headerlink" href="#c.PyBUF_FORMAT" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">PyBUF_FORMAT</code><a class="headerlink" href="#c.PyBUF_FORMAT" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Controls the <a class="reference internal" href="#c.Py_buffer.format" title="Py_buffer.format"><code class="xref c c-member docutils literal notranslate"><span class="pre">format</span></code></a> field. If set, this field MUST
 be filled in correctly. Otherwise, this field MUST be <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.</p>
 </dd></dl>
@@ -362,7 +362,7 @@ of the flags below it.</p>
 <tbody>
 <tr class="row-even"><td><dl class="c macro">
 <dt id="c.PyBUF_INDIRECT">
-<code class="sig-name descname">PyBUF_INDIRECT</code><a class="headerlink" href="#c.PyBUF_INDIRECT" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">PyBUF_INDIRECT</code><a class="headerlink" href="#c.PyBUF_INDIRECT" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </td>
@@ -372,7 +372,7 @@ of the flags below it.</p>
 </tr>
 <tr class="row-odd"><td><dl class="c macro">
 <dt id="c.PyBUF_STRIDES">
-<code class="sig-name descname">PyBUF_STRIDES</code><a class="headerlink" href="#c.PyBUF_STRIDES" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">PyBUF_STRIDES</code><a class="headerlink" href="#c.PyBUF_STRIDES" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </td>
@@ -382,7 +382,7 @@ of the flags below it.</p>
 </tr>
 <tr class="row-even"><td><dl class="c macro">
 <dt id="c.PyBUF_ND">
-<code class="sig-name descname">PyBUF_ND</code><a class="headerlink" href="#c.PyBUF_ND" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">PyBUF_ND</code><a class="headerlink" href="#c.PyBUF_ND" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </td>
@@ -392,7 +392,7 @@ of the flags below it.</p>
 </tr>
 <tr class="row-odd"><td><dl class="c macro">
 <dt id="c.PyBUF_SIMPLE">
-<code class="sig-name descname">PyBUF_SIMPLE</code><a class="headerlink" href="#c.PyBUF_SIMPLE" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">PyBUF_SIMPLE</code><a class="headerlink" href="#c.PyBUF_SIMPLE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </td>
@@ -427,7 +427,7 @@ must be C-contiguous.</p>
 <tbody>
 <tr class="row-even"><td><dl class="c macro">
 <dt id="c.PyBUF_C_CONTIGUOUS">
-<code class="sig-name descname">PyBUF_C_CONTIGUOUS</code><a class="headerlink" href="#c.PyBUF_C_CONTIGUOUS" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">PyBUF_C_CONTIGUOUS</code><a class="headerlink" href="#c.PyBUF_C_CONTIGUOUS" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </td>
@@ -438,7 +438,7 @@ must be C-contiguous.</p>
 </tr>
 <tr class="row-odd"><td><dl class="c macro">
 <dt id="c.PyBUF_F_CONTIGUOUS">
-<code class="sig-name descname">PyBUF_F_CONTIGUOUS</code><a class="headerlink" href="#c.PyBUF_F_CONTIGUOUS" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">PyBUF_F_CONTIGUOUS</code><a class="headerlink" href="#c.PyBUF_F_CONTIGUOUS" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </td>
@@ -449,7 +449,7 @@ must be C-contiguous.</p>
 </tr>
 <tr class="row-even"><td><dl class="c macro">
 <dt id="c.PyBUF_ANY_CONTIGUOUS">
-<code class="sig-name descname">PyBUF_ANY_CONTIGUOUS</code><a class="headerlink" href="#c.PyBUF_ANY_CONTIGUOUS" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">PyBUF_ANY_CONTIGUOUS</code><a class="headerlink" href="#c.PyBUF_ANY_CONTIGUOUS" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </td>
@@ -460,7 +460,7 @@ must be C-contiguous.</p>
 </tr>
 <tr class="row-odd"><td><dl class="c macro">
 <dt>
-<code class="sig-name descname">PyBUF_ND</code></dt>
+<code class="sig-name descname">PyBUF_ND</code><br /></dt>
 <dd></dd></dl>
 
 </td>
@@ -502,7 +502,7 @@ have to call <a class="reference internal" href="#c.PyBuffer_IsContiguous" title
 <tbody>
 <tr class="row-even"><td><dl class="c macro">
 <dt id="c.PyBUF_FULL">
-<code class="sig-name descname">PyBUF_FULL</code><a class="headerlink" href="#c.PyBUF_FULL" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">PyBUF_FULL</code><a class="headerlink" href="#c.PyBUF_FULL" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </td>
@@ -515,7 +515,7 @@ have to call <a class="reference internal" href="#c.PyBuffer_IsContiguous" title
 </tr>
 <tr class="row-odd"><td><dl class="c macro">
 <dt id="c.PyBUF_FULL_RO">
-<code class="sig-name descname">PyBUF_FULL_RO</code><a class="headerlink" href="#c.PyBUF_FULL_RO" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">PyBUF_FULL_RO</code><a class="headerlink" href="#c.PyBUF_FULL_RO" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </td>
@@ -528,7 +528,7 @@ have to call <a class="reference internal" href="#c.PyBuffer_IsContiguous" title
 </tr>
 <tr class="row-even"><td><dl class="c macro">
 <dt id="c.PyBUF_RECORDS">
-<code class="sig-name descname">PyBUF_RECORDS</code><a class="headerlink" href="#c.PyBUF_RECORDS" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">PyBUF_RECORDS</code><a class="headerlink" href="#c.PyBUF_RECORDS" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </td>
@@ -541,7 +541,7 @@ have to call <a class="reference internal" href="#c.PyBuffer_IsContiguous" title
 </tr>
 <tr class="row-odd"><td><dl class="c macro">
 <dt id="c.PyBUF_RECORDS_RO">
-<code class="sig-name descname">PyBUF_RECORDS_RO</code><a class="headerlink" href="#c.PyBUF_RECORDS_RO" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">PyBUF_RECORDS_RO</code><a class="headerlink" href="#c.PyBUF_RECORDS_RO" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </td>
@@ -554,7 +554,7 @@ have to call <a class="reference internal" href="#c.PyBuffer_IsContiguous" title
 </tr>
 <tr class="row-even"><td><dl class="c macro">
 <dt id="c.PyBUF_STRIDED">
-<code class="sig-name descname">PyBUF_STRIDED</code><a class="headerlink" href="#c.PyBUF_STRIDED" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">PyBUF_STRIDED</code><a class="headerlink" href="#c.PyBUF_STRIDED" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </td>
@@ -567,7 +567,7 @@ have to call <a class="reference internal" href="#c.PyBuffer_IsContiguous" title
 </tr>
 <tr class="row-odd"><td><dl class="c macro">
 <dt id="c.PyBUF_STRIDED_RO">
-<code class="sig-name descname">PyBUF_STRIDED_RO</code><a class="headerlink" href="#c.PyBUF_STRIDED_RO" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">PyBUF_STRIDED_RO</code><a class="headerlink" href="#c.PyBUF_STRIDED_RO" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </td>
@@ -580,7 +580,7 @@ have to call <a class="reference internal" href="#c.PyBuffer_IsContiguous" title
 </tr>
 <tr class="row-even"><td><dl class="c macro">
 <dt id="c.PyBUF_CONTIG">
-<code class="sig-name descname">PyBUF_CONTIG</code><a class="headerlink" href="#c.PyBUF_CONTIG" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">PyBUF_CONTIG</code><a class="headerlink" href="#c.PyBUF_CONTIG" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </td>
@@ -593,7 +593,7 @@ have to call <a class="reference internal" href="#c.PyBuffer_IsContiguous" title
 </tr>
 <tr class="row-odd"><td><dl class="c macro">
 <dt id="c.PyBUF_CONTIG_RO">
-<code class="sig-name descname">PyBUF_CONTIG_RO</code><a class="headerlink" href="#c.PyBUF_CONTIG_RO" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">PyBUF_CONTIG_RO</code><a class="headerlink" href="#c.PyBUF_CONTIG_RO" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </td>
@@ -687,7 +687,7 @@ and suboffsets:</p>
 <h2>Buffer-related functions<a class="headerlink" href="#buffer-related-functions" title="Permalink to this headline">¶</a></h2>
 <dl class="c function">
 <dt id="c.PyObject_CheckBuffer">
-int <code class="sig-name descname">PyObject_CheckBuffer</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *obj</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_CheckBuffer" title="Permalink to this definition">¶</a></dt>
+int <code class="sig-name descname">PyObject_CheckBuffer</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_CheckBuffer" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Return <code class="docutils literal notranslate"><span class="pre">1</span></code> if <em>obj</em> supports the buffer interface otherwise <code class="docutils literal notranslate"><span class="pre">0</span></code>.  When <code class="docutils literal notranslate"><span class="pre">1</span></code> is
 returned, it doesn’t guarantee that <a class="reference internal" href="#c.PyObject_GetBuffer" title="PyObject_GetBuffer"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_GetBuffer()</span></code></a> will
 succeed.  This function always succeeds.</p>
@@ -695,7 +695,7 @@ succeed.  This function always succeeds.</p>
 
 <dl class="c function">
 <dt id="c.PyObject_GetBuffer">
-int <code class="sig-name descname">PyObject_GetBuffer</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *exporter</em>, <a class="reference internal" href="#c.Py_buffer" title="Py_buffer">Py_buffer</a><em> *view</em>, int<em> flags</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_GetBuffer" title="Permalink to this definition">¶</a></dt>
+int <code class="sig-name descname">PyObject_GetBuffer</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>exporter</em>, <a class="reference internal" href="#c.Py_buffer" title="Py_buffer">Py_buffer</a> *<em>view</em>, int <em>flags</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_GetBuffer" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Send a request to <em>exporter</em> to fill in <em>view</em> as specified by  <em>flags</em>.
 If the exporter cannot provide a buffer of the exact type, it MUST raise
 <code class="xref c c-data docutils literal notranslate"><span class="pre">PyExc_BufferError</span></code>, set <code class="xref c c-member docutils literal notranslate"><span class="pre">view-&gt;obj</span></code> to <code class="docutils literal notranslate"><span class="pre">NULL</span></code> and
@@ -712,7 +712,7 @@ must be called exactly once.</p>
 
 <dl class="c function">
 <dt id="c.PyBuffer_Release">
-void <code class="sig-name descname">PyBuffer_Release</code><span class="sig-paren">(</span><a class="reference internal" href="#c.Py_buffer" title="Py_buffer">Py_buffer</a><em> *view</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyBuffer_Release" title="Permalink to this definition">¶</a></dt>
+void <code class="sig-name descname">PyBuffer_Release</code><span class="sig-paren">(</span><a class="reference internal" href="#c.Py_buffer" title="Py_buffer">Py_buffer</a> *<em>view</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyBuffer_Release" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Release the buffer <em>view</em> and decrement the reference count for
 <code class="xref c c-member docutils literal notranslate"><span class="pre">view-&gt;obj</span></code>. This function MUST be called when the buffer
 is no longer being used, otherwise reference leaks may occur.</p>
@@ -722,7 +722,7 @@ is no longer being used, otherwise reference leaks may occur.</p>
 
 <dl class="c function">
 <dt id="c.PyBuffer_SizeFromFormat">
-Py_ssize_t <code class="sig-name descname">PyBuffer_SizeFromFormat</code><span class="sig-paren">(</span>const char<em> *format</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyBuffer_SizeFromFormat" title="Permalink to this definition">¶</a></dt>
+Py_ssize_t <code class="sig-name descname">PyBuffer_SizeFromFormat</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>format</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyBuffer_SizeFromFormat" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Return the implied <a class="reference internal" href="#c.Py_buffer.itemsize" title="Py_buffer.itemsize"><code class="xref c c-data docutils literal notranslate"><span class="pre">itemsize</span></code></a> from <a class="reference internal" href="#c.Py_buffer.format" title="Py_buffer.format"><code class="xref c c-data docutils literal notranslate"><span class="pre">format</span></code></a>.
 On error, raise an exception and return -1.</p>
 <div class="versionadded">
@@ -732,7 +732,7 @@ On error, raise an exception and return -1.</p>
 
 <dl class="c function">
 <dt id="c.PyBuffer_IsContiguous">
-int <code class="sig-name descname">PyBuffer_IsContiguous</code><span class="sig-paren">(</span><a class="reference internal" href="#c.Py_buffer" title="Py_buffer">Py_buffer</a><em> *view</em>, char<em> order</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyBuffer_IsContiguous" title="Permalink to this definition">¶</a></dt>
+int <code class="sig-name descname">PyBuffer_IsContiguous</code><span class="sig-paren">(</span><a class="reference internal" href="#c.Py_buffer" title="Py_buffer">Py_buffer</a> *<em>view</em>, char <em>order</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyBuffer_IsContiguous" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Return <code class="docutils literal notranslate"><span class="pre">1</span></code> if the memory defined by the <em>view</em> is C-style (<em>order</em> is
 <code class="docutils literal notranslate"><span class="pre">'C'</span></code>) or Fortran-style (<em>order</em> is <code class="docutils literal notranslate"><span class="pre">'F'</span></code>) <a class="reference internal" href="../glossary.html#term-contiguous"><span class="xref std std-term">contiguous</span></a> or either one
 (<em>order</em> is <code class="docutils literal notranslate"><span class="pre">'A'</span></code>).  Return <code class="docutils literal notranslate"><span class="pre">0</span></code> otherwise.  This function always succeeds.</p>
@@ -740,14 +740,14 @@ int <code class="sig-name descname">PyBuffer_IsContiguous</code><span class="sig
 
 <dl class="c function">
 <dt id="c.PyBuffer_GetPointer">
-void* <code class="sig-name descname">PyBuffer_GetPointer</code><span class="sig-paren">(</span><a class="reference internal" href="#c.Py_buffer" title="Py_buffer">Py_buffer</a><em> *view</em>, Py_ssize_t<em> *indices</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyBuffer_GetPointer" title="Permalink to this definition">¶</a></dt>
+void *<code class="sig-name descname">PyBuffer_GetPointer</code><span class="sig-paren">(</span><a class="reference internal" href="#c.Py_buffer" title="Py_buffer">Py_buffer</a> *<em>view</em>, Py_ssize_t *<em>indices</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyBuffer_GetPointer" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Get the memory area pointed to by the <em>indices</em> inside the given <em>view</em>.
 <em>indices</em> must point to an array of <code class="docutils literal notranslate"><span class="pre">view-&gt;ndim</span></code> indices.</p>
 </dd></dl>
 
 <dl class="c function">
 <dt id="c.PyBuffer_FromContiguous">
-int <code class="sig-name descname">PyBuffer_FromContiguous</code><span class="sig-paren">(</span><a class="reference internal" href="#c.Py_buffer" title="Py_buffer">Py_buffer</a><em> *view</em>, void<em> *buf</em>, Py_ssize_t<em> len</em>, char<em> fort</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyBuffer_FromContiguous" title="Permalink to this definition">¶</a></dt>
+int <code class="sig-name descname">PyBuffer_FromContiguous</code><span class="sig-paren">(</span><a class="reference internal" href="#c.Py_buffer" title="Py_buffer">Py_buffer</a> *<em>view</em>, void *<em>buf</em>, Py_ssize_t <em>len</em>, char <em>fort</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyBuffer_FromContiguous" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Copy contiguous <em>len</em> bytes from <em>buf</em> to <em>view</em>.
 <em>fort</em> can be <code class="docutils literal notranslate"><span class="pre">'C'</span></code> or <code class="docutils literal notranslate"><span class="pre">'F'</span></code> (for C-style or Fortran-style ordering).
 <code class="docutils literal notranslate"><span class="pre">0</span></code> is returned on success, <code class="docutils literal notranslate"><span class="pre">-1</span></code> on error.</p>
@@ -755,7 +755,7 @@ int <code class="sig-name descname">PyBuffer_FromContiguous</code><span class="s
 
 <dl class="c function">
 <dt id="c.PyBuffer_ToContiguous">
-int <code class="sig-name descname">PyBuffer_ToContiguous</code><span class="sig-paren">(</span>void<em> *buf</em>, <a class="reference internal" href="#c.Py_buffer" title="Py_buffer">Py_buffer</a><em> *src</em>, Py_ssize_t<em> len</em>, char<em> order</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyBuffer_ToContiguous" title="Permalink to this definition">¶</a></dt>
+int <code class="sig-name descname">PyBuffer_ToContiguous</code><span class="sig-paren">(</span>void *<em>buf</em>, <a class="reference internal" href="#c.Py_buffer" title="Py_buffer">Py_buffer</a> *<em>src</em>, Py_ssize_t <em>len</em>, char <em>order</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyBuffer_ToContiguous" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Copy <em>len</em> bytes from <em>src</em> to its contiguous representation in <em>buf</em>.
 <em>order</em> can be <code class="docutils literal notranslate"><span class="pre">'C'</span></code> or <code class="docutils literal notranslate"><span class="pre">'F'</span></code> or <code class="docutils literal notranslate"><span class="pre">'A'</span></code> (for C-style or Fortran-style
 ordering or either one). <code class="docutils literal notranslate"><span class="pre">0</span></code> is returned on success, <code class="docutils literal notranslate"><span class="pre">-1</span></code> on error.</p>
@@ -764,7 +764,7 @@ ordering or either one). <code class="docutils literal notranslate"><span class=
 
 <dl class="c function">
 <dt id="c.PyBuffer_FillContiguousStrides">
-void <code class="sig-name descname">PyBuffer_FillContiguousStrides</code><span class="sig-paren">(</span>int<em> ndims</em>, Py_ssize_t<em> *shape</em>, Py_ssize_t<em> *strides</em>, int<em> itemsize</em>, char<em> order</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyBuffer_FillContiguousStrides" title="Permalink to this definition">¶</a></dt>
+void <code class="sig-name descname">PyBuffer_FillContiguousStrides</code><span class="sig-paren">(</span>int <em>ndims</em>, Py_ssize_t *<em>shape</em>, Py_ssize_t *<em>strides</em>, int <em>itemsize</em>, char <em>order</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyBuffer_FillContiguousStrides" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Fill the <em>strides</em> array with byte-strides of a <a class="reference internal" href="../glossary.html#term-contiguous"><span class="xref std std-term">contiguous</span></a> (C-style if
 <em>order</em> is <code class="docutils literal notranslate"><span class="pre">'C'</span></code> or Fortran-style if <em>order</em> is <code class="docutils literal notranslate"><span class="pre">'F'</span></code>) array of the
 given shape with the given number of bytes per element.</p>
@@ -772,7 +772,7 @@ given shape with the given number of bytes per element.</p>
 
 <dl class="c function">
 <dt id="c.PyBuffer_FillInfo">
-int <code class="sig-name descname">PyBuffer_FillInfo</code><span class="sig-paren">(</span><a class="reference internal" href="#c.Py_buffer" title="Py_buffer">Py_buffer</a><em> *view</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *exporter</em>, void<em> *buf</em>, Py_ssize_t<em> len</em>, int<em> readonly</em>, int<em> flags</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyBuffer_FillInfo" title="Permalink to this definition">¶</a></dt>
+int <code class="sig-name descname">PyBuffer_FillInfo</code><span class="sig-paren">(</span><a class="reference internal" href="#c.Py_buffer" title="Py_buffer">Py_buffer</a> *<em>view</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>exporter</em>, void *<em>buf</em>, Py_ssize_t <em>len</em>, int <em>readonly</em>, int <em>flags</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyBuffer_FillInfo" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Handle buffer requests for an exporter that wants to expose <em>buf</em> of size <em>len</em>
 with writability set according to <em>readonly</em>. <em>buf</em> is interpreted as a sequence
 of unsigned bytes.</p>
@@ -893,11 +893,11 @@ unmodified. Otherwise, <em>exporter</em> MUST be <code class="docutils literal n
 <br />
     <br />
 
-    Last updated on Mar 15, 2020.
+    Last updated on Mar 19, 2020.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/6f5bac9.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/b652476.
     </div>
 
   </body>

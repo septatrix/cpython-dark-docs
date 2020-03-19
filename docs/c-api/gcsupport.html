@@ -7,7 +7,7 @@
     <title>Supporting Cyclic Garbage Collection &#8212; Python 3.9.0a4 documentation</title>
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments_dark.css" type="text/css" media="(prefers-color-scheme: dark)" id="pygments_dark_css" />
+    <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
     
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -132,28 +132,28 @@ initialized, it must call <a class="reference internal" href="#c.PyObject_GC_Tra
 </ol>
 <dl class="c function">
 <dt id="c.PyObject_GC_New">
-TYPE* <code class="sig-name descname">PyObject_GC_New</code><span class="sig-paren">(</span>TYPE, <a class="reference internal" href="type.html#c.PyTypeObject" title="PyTypeObject">PyTypeObject</a><em> *type</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_GC_New" title="Permalink to this definition">¶</a></dt>
+TYPE *<code class="sig-name descname">PyObject_GC_New</code><span class="sig-paren">(</span>TYPE, <a class="reference internal" href="type.html#c.PyTypeObject" title="PyTypeObject">PyTypeObject</a> *<em>type</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_GC_New" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Analogous to <a class="reference internal" href="allocation.html#c.PyObject_New" title="PyObject_New"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_New()</span></code></a> but for container objects with the
 <a class="reference internal" href="typeobj.html#py-tpflags-have-gc" title="Py_TPFLAGS_HAVE_GC"><code class="xref py py-const docutils literal notranslate"><span class="pre">Py_TPFLAGS_HAVE_GC</span></code></a> flag set.</p>
 </dd></dl>
 
 <dl class="c function">
 <dt id="c.PyObject_GC_NewVar">
-TYPE* <code class="sig-name descname">PyObject_GC_NewVar</code><span class="sig-paren">(</span>TYPE, <a class="reference internal" href="type.html#c.PyTypeObject" title="PyTypeObject">PyTypeObject</a><em> *type</em>, Py_ssize_t<em> size</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_GC_NewVar" title="Permalink to this definition">¶</a></dt>
+TYPE *<code class="sig-name descname">PyObject_GC_NewVar</code><span class="sig-paren">(</span>TYPE, <a class="reference internal" href="type.html#c.PyTypeObject" title="PyTypeObject">PyTypeObject</a> *<em>type</em>, Py_ssize_t <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_GC_NewVar" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Analogous to <a class="reference internal" href="allocation.html#c.PyObject_NewVar" title="PyObject_NewVar"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_NewVar()</span></code></a> but for container objects with the
 <a class="reference internal" href="typeobj.html#py-tpflags-have-gc" title="Py_TPFLAGS_HAVE_GC"><code class="xref py py-const docutils literal notranslate"><span class="pre">Py_TPFLAGS_HAVE_GC</span></code></a> flag set.</p>
 </dd></dl>
 
 <dl class="c function">
 <dt id="c.PyObject_GC_Resize">
-TYPE* <code class="sig-name descname">PyObject_GC_Resize</code><span class="sig-paren">(</span>TYPE, <a class="reference internal" href="structures.html#c.PyVarObject" title="PyVarObject">PyVarObject</a><em> *op</em>, Py_ssize_t<em> newsize</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_GC_Resize" title="Permalink to this definition">¶</a></dt>
+TYPE *<code class="sig-name descname">PyObject_GC_Resize</code><span class="sig-paren">(</span>TYPE, <a class="reference internal" href="structures.html#c.PyVarObject" title="PyVarObject">PyVarObject</a> *<em>op</em>, Py_ssize_t <em>newsize</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_GC_Resize" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Resize an object allocated by <a class="reference internal" href="allocation.html#c.PyObject_NewVar" title="PyObject_NewVar"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_NewVar()</span></code></a>.  Returns the
 resized object or <code class="docutils literal notranslate"><span class="pre">NULL</span></code> on failure.  <em>op</em> must not be tracked by the collector yet.</p>
 </dd></dl>
 
 <dl class="c function">
 <dt id="c.PyObject_GC_Track">
-void <code class="sig-name descname">PyObject_GC_Track</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *op</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_GC_Track" title="Permalink to this definition">¶</a></dt>
+void <code class="sig-name descname">PyObject_GC_Track</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>op</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_GC_Track" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Adds the object <em>op</em> to the set of container objects tracked by the
 collector.  The collector can run at unexpected times so objects must be
 valid while being tracked.  This should be called once all the fields
@@ -170,14 +170,14 @@ rules:</p>
 </ol>
 <dl class="c function">
 <dt id="c.PyObject_GC_Del">
-void <code class="sig-name descname">PyObject_GC_Del</code><span class="sig-paren">(</span>void<em> *op</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_GC_Del" title="Permalink to this definition">¶</a></dt>
+void <code class="sig-name descname">PyObject_GC_Del</code><span class="sig-paren">(</span>void *<em>op</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_GC_Del" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Releases memory allocated to an object using <a class="reference internal" href="#c.PyObject_GC_New" title="PyObject_GC_New"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_GC_New()</span></code></a> or
 <a class="reference internal" href="#c.PyObject_GC_NewVar" title="PyObject_GC_NewVar"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_GC_NewVar()</span></code></a>.</p>
 </dd></dl>
 
 <dl class="c function">
 <dt id="c.PyObject_GC_UnTrack">
-void <code class="sig-name descname">PyObject_GC_UnTrack</code><span class="sig-paren">(</span>void<em> *op</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_GC_UnTrack" title="Permalink to this definition">¶</a></dt>
+void <code class="sig-name descname">PyObject_GC_UnTrack</code><span class="sig-paren">(</span>void *<em>op</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_GC_UnTrack" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Remove the object <em>op</em> from the set of container objects tracked by the
 collector.  Note that <a class="reference internal" href="#c.PyObject_GC_Track" title="PyObject_GC_Track"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_GC_Track()</span></code></a> can be called again on
 this object to add it back to the set of tracked objects.  The deallocator
@@ -192,7 +192,7 @@ have been removed from the public C API.</p>
 <p>The <a class="reference internal" href="typeobj.html#c.PyTypeObject.tp_traverse" title="PyTypeObject.tp_traverse"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_traverse</span></code></a> handler accepts a function parameter of this type:</p>
 <dl class="c type">
 <dt id="c.visitproc">
-int <code class="sig-name descname">(*visitproc)</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *object</em>, void<em> *arg</em><span class="sig-paren">)</span><a class="headerlink" href="#c.visitproc" title="Permalink to this definition">¶</a></dt>
+<em class="property">typedef </em>int (*<code class="sig-name descname">visitproc</code>)<span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *object, void *arg<span class="sig-paren">)</span><a class="headerlink" href="#c.visitproc" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Type of the visitor function passed to the <a class="reference internal" href="typeobj.html#c.PyTypeObject.tp_traverse" title="PyTypeObject.tp_traverse"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_traverse</span></code></a> handler.
 The function should be called with an object to traverse as <em>object</em> and
 the third parameter to the <a class="reference internal" href="typeobj.html#c.PyTypeObject.tp_traverse" title="PyTypeObject.tp_traverse"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_traverse</span></code></a> handler as <em>arg</em>.  The
@@ -204,7 +204,7 @@ visitor functions.</p>
 <p>The <a class="reference internal" href="typeobj.html#c.PyTypeObject.tp_traverse" title="PyTypeObject.tp_traverse"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_traverse</span></code></a> handler must have the following type:</p>
 <dl class="c type">
 <dt id="c.traverseproc">
-int <code class="sig-name descname">(*traverseproc)</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *self</em>, <a class="reference internal" href="#c.visitproc" title="visitproc">visitproc</a><em> visit</em>, void<em> *arg</em><span class="sig-paren">)</span><a class="headerlink" href="#c.traverseproc" title="Permalink to this definition">¶</a></dt>
+<em class="property">typedef </em>int (*<code class="sig-name descname">traverseproc</code>)<span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *self, <a class="reference internal" href="#c.visitproc" title="visitproc">visitproc</a> visit, void *arg<span class="sig-paren">)</span><a class="headerlink" href="#c.traverseproc" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Traversal function for a container object.  Implementations must call the
 <em>visit</em> function for each object directly contained by <em>self</em>, with the
 parameters to <em>visit</em> being the contained object and the <em>arg</em> value passed
@@ -218,7 +218,7 @@ provided.  In order to use this macro, the <a class="reference internal" href="t
 must name its arguments exactly <em>visit</em> and <em>arg</em>:</p>
 <dl class="c function">
 <dt id="c.Py_VISIT">
-void <code class="sig-name descname">Py_VISIT</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *o</em><span class="sig-paren">)</span><a class="headerlink" href="#c.Py_VISIT" title="Permalink to this definition">¶</a></dt>
+void <code class="sig-name descname">Py_VISIT</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>o</em><span class="sig-paren">)</span><a class="headerlink" href="#c.Py_VISIT" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>If <em>o</em> is not <code class="docutils literal notranslate"><span class="pre">NULL</span></code>, call the <em>visit</em> callback, with arguments <em>o</em>
 and <em>arg</em>.  If <em>visit</em> returns a non-zero value, then return it.
 Using this macro, <a class="reference internal" href="typeobj.html#c.PyTypeObject.tp_traverse" title="PyTypeObject.tp_traverse"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_traverse</span></code></a> handlers
@@ -238,7 +238,7 @@ look like:</p>
 if the object is immutable.</p>
 <dl class="c type">
 <dt id="c.inquiry">
-int <code class="sig-name descname">(*inquiry)</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *self</em><span class="sig-paren">)</span><a class="headerlink" href="#c.inquiry" title="Permalink to this definition">¶</a></dt>
+<em class="property">typedef </em>int (*<code class="sig-name descname">inquiry</code>)<span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *self<span class="sig-paren">)</span><a class="headerlink" href="#c.inquiry" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Drop references that may have created reference cycles.  Immutable objects
 do not have to define this method since they can never directly create
 reference cycles.  Note that the object must still be valid after calling
@@ -330,11 +330,11 @@ in a reference cycle.</p>
 <br />
     <br />
 
-    Last updated on Mar 15, 2020.
+    Last updated on Mar 19, 2020.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/6f5bac9.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/b652476.
     </div>
 
   </body>

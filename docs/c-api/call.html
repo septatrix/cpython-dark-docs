@@ -7,7 +7,7 @@
     <title>Call Protocol &#8212; Python 3.9.0a4 documentation</title>
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments_dark.css" type="text/css" media="(prefers-color-scheme: dark)" id="pygments_dark_css" />
+    <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
     
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -159,7 +159,7 @@ object structure where a <em>vectorcallfunc</em> appears.
 This is a pointer to a function with the following signature:</p>
 <dl class="c type">
 <dt id="c.vectorcallfunc">
-<a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<code class="sig-name descname">(*vectorcallfunc)</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *callable</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *const<em> *args</em>, size_t<em> nargsf</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *kwnames</em><span class="sig-paren">)</span><a class="headerlink" href="#c.vectorcallfunc" title="Permalink to this definition">¶</a></dt>
+<em class="property">typedef </em><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *(*<code class="sig-name descname">vectorcallfunc</code>)<span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *callable, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em class="property">const</em> *args, size_t nargsf, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *kwnames<span class="sig-paren">)</span><a class="headerlink" href="#c.vectorcallfunc" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <ul class="simple">
@@ -187,8 +187,8 @@ If there are no keyword arguments, then <em>kwnames</em> can instead be <em>NULL
 </li>
 </ul>
 <dl class="c var">
-<dt id="c.PY_VECTORCALL_ARGUMENTS_OFFSET">
-<code class="sig-name descname">PY_VECTORCALL_ARGUMENTS_OFFSET</code><a class="headerlink" href="#c.PY_VECTORCALL_ARGUMENTS_OFFSET" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="sig-name descname">PY_VECTORCALL_ARGUMENTS_OFFSET</code></dt>
 <dd><p>If this flag is set in a vectorcall <em>nargsf</em> argument, the callee is allowed
 to temporarily change <code class="docutils literal notranslate"><span class="pre">args[-1]</span></code>. In other words, <em>args</em> points to
 argument 1 (not 0) in the allocated vector.
@@ -230,7 +230,7 @@ if needed.</p>
 <h3>Vectorcall Support API<a class="headerlink" href="#vectorcall-support-api" title="Permalink to this headline">¶</a></h3>
 <dl class="c function">
 <dt id="c.PyVectorcall_NARGS">
-Py_ssize_t <code class="sig-name descname">PyVectorcall_NARGS</code><span class="sig-paren">(</span>size_t<em> nargsf</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyVectorcall_NARGS" title="Permalink to this definition">¶</a></dt>
+Py_ssize_t <code class="sig-name descname">PyVectorcall_NARGS</code><span class="sig-paren">(</span>size_t <em>nargsf</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyVectorcall_NARGS" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Given a vectorcall <em>nargsf</em> argument, return the actual number of
 arguments.
 Currently equivalent to:</p>
@@ -247,7 +247,7 @@ for future extensions.</p>
 
 <dl class="c function">
 <dt id="c.PyVectorcall_Function">
-<a class="reference internal" href="#c.vectorcallfunc" title="vectorcallfunc">vectorcallfunc</a> <code class="sig-name descname">PyVectorcall_Function</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *op</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyVectorcall_Function" title="Permalink to this definition">¶</a></dt>
+<a class="reference internal" href="#c.vectorcallfunc" title="vectorcallfunc">vectorcallfunc</a> <code class="sig-name descname">PyVectorcall_Function</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>op</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyVectorcall_Function" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>If <em>op</em> does not support the vectorcall protocol (either because the type
 does not or because the specific instance does not), return <em>NULL</em>.
 Otherwise, return the vectorcall function pointer stored in <em>op</em>.
@@ -262,7 +262,7 @@ which can be done by checking <code class="docutils literal notranslate"><span c
 
 <dl class="c function">
 <dt id="c.PyVectorcall_Call">
-<a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a>* <code class="sig-name descname">PyVectorcall_Call</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *callable</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *tuple</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *dict</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyVectorcall_Call" title="Permalink to this definition">¶</a></dt>
+<a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<code class="sig-name descname">PyVectorcall_Call</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>callable</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>tuple</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>dict</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyVectorcall_Call" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Call <em>callable</em>’s <a class="reference internal" href="#c.vectorcallfunc" title="vectorcallfunc"><code class="xref c c-type docutils literal notranslate"><span class="pre">vectorcallfunc</span></code></a> with positional and keyword
 arguments given in a tuple and dict, respectively.</p>
 <p>This is a specialized function, intended to be put in the
@@ -331,12 +331,12 @@ please see individual documentation for details.</p>
 <td><p>format</p></td>
 <td><p>—</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#c.PyObject_CallFunctionObjArgs" title="PyObject_CallFunctionObjArgs"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_CallFunctionObjArgs()</span></code></a></p></td>
+<tr class="row-even"><td><p><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_CallFunctionObjArgs()</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">PyObject</span> <span class="pre">*</span></code></p></td>
 <td><p>variadic</p></td>
 <td><p>—</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#c.PyObject_CallMethodObjArgs" title="PyObject_CallMethodObjArgs"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_CallMethodObjArgs()</span></code></a></p></td>
+<tr class="row-odd"><td><p><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_CallMethodObjArgs()</span></code></p></td>
 <td><p>obj + name</p></td>
 <td><p>variadic</p></td>
 <td><p>—</p></td>
@@ -370,8 +370,8 @@ please see individual documentation for details.</p>
 </table>
 <dl class="c function">
 <dt id="c.PyObject_Call">
-<a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a>* <code class="sig-name descname">PyObject_Call</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *callable</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *args</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_Call" title="Permalink to this definition">¶</a></dt>
-<dd><em class="refcount">Return value: New reference.</em><p>Call a callable Python object <em>callable</em>, with arguments given by the
+<a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<code class="sig-name descname">PyObject_Call</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>callable</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>args</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_Call" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Call a callable Python object <em>callable</em>, with arguments given by the
 tuple <em>args</em>, and named arguments given by the dictionary <em>kwargs</em>.</p>
 <p><em>args</em> must not be <em>NULL</em>; use an empty tuple if no arguments are needed.
 If no named arguments are needed, <em>kwargs</em> can be <em>NULL</em>.</p>
@@ -383,7 +383,7 @@ If no named arguments are needed, <em>kwargs</em> can be <em>NULL</em>.</p>
 
 <dl class="c function">
 <dt id="c.PyObject_CallNoArgs">
-<a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a>* <code class="sig-name descname">PyObject_CallNoArgs</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *callable</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_CallNoArgs" title="Permalink to this definition">¶</a></dt>
+<a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<code class="sig-name descname">PyObject_CallNoArgs</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>callable</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_CallNoArgs" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Call a callable Python object <em>callable</em> without any arguments. It is the
 most efficient way to call a callable Python object without any argument.</p>
 <p>Return the result of the call on success, or raise an exception and return
@@ -395,7 +395,7 @@ most efficient way to call a callable Python object without any argument.</p>
 
 <dl class="c function">
 <dt id="c.PyObject_CallOneArg">
-<a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a>* <code class="sig-name descname">PyObject_CallOneArg</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *callable</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *arg</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_CallOneArg" title="Permalink to this definition">¶</a></dt>
+<a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<code class="sig-name descname">PyObject_CallOneArg</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>callable</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>arg</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_CallOneArg" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Call a callable Python object <em>callable</em> with exactly 1 positional argument
 <em>arg</em> and no keyword arguments.</p>
 <p>Return the result of the call on success, or raise an exception and return
@@ -408,8 +408,8 @@ most efficient way to call a callable Python object without any argument.</p>
 
 <dl class="c function">
 <dt id="c.PyObject_CallObject">
-<a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a>* <code class="sig-name descname">PyObject_CallObject</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *callable</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *args</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_CallObject" title="Permalink to this definition">¶</a></dt>
-<dd><em class="refcount">Return value: New reference.</em><p>Call a callable Python object <em>callable</em>, with arguments given by the
+<a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<code class="sig-name descname">PyObject_CallObject</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>callable</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>args</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_CallObject" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Call a callable Python object <em>callable</em>, with arguments given by the
 tuple <em>args</em>.  If no arguments are needed, then <em>args</em> can be <em>NULL</em>.</p>
 <p>Return the result of the call on success, or raise an exception and return
 <em>NULL</em> on failure.</p>
@@ -418,15 +418,15 @@ tuple <em>args</em>.  If no arguments are needed, then <em>args</em> can be <em>
 
 <dl class="c function">
 <dt id="c.PyObject_CallFunction">
-<a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a>* <code class="sig-name descname">PyObject_CallFunction</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *callable</em>, const char<em> *format</em>, ...<span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_CallFunction" title="Permalink to this definition">¶</a></dt>
-<dd><em class="refcount">Return value: New reference.</em><p>Call a callable Python object <em>callable</em>, with a variable number of C arguments.
+<a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<code class="sig-name descname">PyObject_CallFunction</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>callable</em>, <em class="property">const</em> char *<em>format</em>, ...<span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_CallFunction" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Call a callable Python object <em>callable</em>, with a variable number of C arguments.
 The C arguments are described using a <a class="reference internal" href="arg.html#c.Py_BuildValue" title="Py_BuildValue"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_BuildValue()</span></code></a> style format
 string.  The format can be <em>NULL</em>, indicating that no arguments are provided.</p>
 <p>Return the result of the call on success, or raise an exception and return
 <em>NULL</em> on failure.</p>
 <p>This is the equivalent of the Python expression: <code class="docutils literal notranslate"><span class="pre">callable(*args)</span></code>.</p>
-<p>Note that if you only pass <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyObject</span> <span class="pre">*</span></code></a> args,
-<a class="reference internal" href="#c.PyObject_CallFunctionObjArgs" title="PyObject_CallFunctionObjArgs"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_CallFunctionObjArgs()</span></code></a> is a faster alternative.</p>
+<p>Note that if you only pass <code class="xref c c-type docutils literal notranslate"><span class="pre">PyObject</span> <span class="pre">*</span></code> args,
+<code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_CallFunctionObjArgs()</span></code> is a faster alternative.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">Changed in version 3.4: </span>The type of <em>format</em> was changed from <code class="docutils literal notranslate"><span class="pre">char</span> <span class="pre">*</span></code>.</p>
 </div>
@@ -434,8 +434,8 @@ string.  The format can be <em>NULL</em>, indicating that no arguments are provi
 
 <dl class="c function">
 <dt id="c.PyObject_CallMethod">
-<a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a>* <code class="sig-name descname">PyObject_CallMethod</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *obj</em>, const char<em> *name</em>, const char<em> *format</em>, ...<span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_CallMethod" title="Permalink to this definition">¶</a></dt>
-<dd><em class="refcount">Return value: New reference.</em><p>Call the method named <em>name</em> of object <em>obj</em> with a variable number of C
+<a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<code class="sig-name descname">PyObject_CallMethod</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>obj</em>, <em class="property">const</em> char *<em>name</em>, <em class="property">const</em> char *<em>format</em>, ...<span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_CallMethod" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Call the method named <em>name</em> of object <em>obj</em> with a variable number of C
 arguments.  The C arguments are described by a <a class="reference internal" href="arg.html#c.Py_BuildValue" title="Py_BuildValue"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_BuildValue()</span></code></a> format
 string that should produce a tuple.</p>
 <p>The format can be <em>NULL</em>, indicating that no arguments are provided.</p>
@@ -443,18 +443,18 @@ string that should produce a tuple.</p>
 <em>NULL</em> on failure.</p>
 <p>This is the equivalent of the Python expression:
 <code class="docutils literal notranslate"><span class="pre">obj.name(arg1,</span> <span class="pre">arg2,</span> <span class="pre">...)</span></code>.</p>
-<p>Note that if you only pass <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyObject</span> <span class="pre">*</span></code></a> args,
-<a class="reference internal" href="#c.PyObject_CallMethodObjArgs" title="PyObject_CallMethodObjArgs"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_CallMethodObjArgs()</span></code></a> is a faster alternative.</p>
+<p>Note that if you only pass <code class="xref c c-type docutils literal notranslate"><span class="pre">PyObject</span> <span class="pre">*</span></code> args,
+<code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_CallMethodObjArgs()</span></code> is a faster alternative.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">Changed in version 3.4: </span>The types of <em>name</em> and <em>format</em> were changed from <code class="docutils literal notranslate"><span class="pre">char</span> <span class="pre">*</span></code>.</p>
 </div>
 </dd></dl>
 
 <dl class="c function">
-<dt id="c.PyObject_CallFunctionObjArgs">
-<a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a>* <code class="sig-name descname">PyObject_CallFunctionObjArgs</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *callable</em>, ..., NULL<span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_CallFunctionObjArgs" title="Permalink to this definition">¶</a></dt>
-<dd><em class="refcount">Return value: New reference.</em><p>Call a callable Python object <em>callable</em>, with a variable number of
-<a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyObject</span> <span class="pre">*</span></code></a> arguments.  The arguments are provided as a variable number
+<dt>
+<code class="sig-name descname">PyObject* PyObject_CallFunctionObjArgs(PyObject *callable, ..., NULL)</code></dt>
+<dd><p>Call a callable Python object <em>callable</em>, with a variable number of
+<code class="xref c c-type docutils literal notranslate"><span class="pre">PyObject</span> <span class="pre">*</span></code> arguments.  The arguments are provided as a variable number
 of parameters followed by <em>NULL</em>.</p>
 <p>Return the result of the call on success, or raise an exception and return
 <em>NULL</em> on failure.</p>
@@ -463,11 +463,11 @@ of parameters followed by <em>NULL</em>.</p>
 </dd></dl>
 
 <dl class="c function">
-<dt id="c.PyObject_CallMethodObjArgs">
-<a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a>* <code class="sig-name descname">PyObject_CallMethodObjArgs</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *obj</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *name</em>, ..., NULL<span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_CallMethodObjArgs" title="Permalink to this definition">¶</a></dt>
-<dd><em class="refcount">Return value: New reference.</em><p>Call a method of the Python object <em>obj</em>, where the name of the method is given as a
+<dt>
+<code class="sig-name descname">PyObject* PyObject_CallMethodObjArgs(PyObject *obj, PyObject *name, ..., NULL)</code></dt>
+<dd><p>Call a method of the Python object <em>obj</em>, where the name of the method is given as a
 Python string object in <em>name</em>.  It is called with a variable number of
-<a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyObject</span> <span class="pre">*</span></code></a> arguments.  The arguments are provided as a variable number
+<code class="xref c c-type docutils literal notranslate"><span class="pre">PyObject</span> <span class="pre">*</span></code> arguments.  The arguments are provided as a variable number
 of parameters followed by <em>NULL</em>.</p>
 <p>Return the result of the call on success, or raise an exception and return
 <em>NULL</em> on failure.</p>
@@ -475,7 +475,7 @@ of parameters followed by <em>NULL</em>.</p>
 
 <dl class="c function">
 <dt id="c.PyObject_CallMethodNoArgs">
-<a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a>* <code class="sig-name descname">PyObject_CallMethodNoArgs</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *obj</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *name</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_CallMethodNoArgs" title="Permalink to this definition">¶</a></dt>
+<a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<code class="sig-name descname">PyObject_CallMethodNoArgs</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>obj</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_CallMethodNoArgs" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Call a method of the Python object <em>obj</em> without arguments,
 where the name of the method is given as a Python string object in <em>name</em>.</p>
 <p>Return the result of the call on success, or raise an exception and return
@@ -488,7 +488,7 @@ where the name of the method is given as a Python string object in <em>name</em>
 
 <dl class="c function">
 <dt id="c.PyObject_CallMethodOneArg">
-<a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a>* <code class="sig-name descname">PyObject_CallMethodOneArg</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *obj</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *name</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *arg</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_CallMethodOneArg" title="Permalink to this definition">¶</a></dt>
+<a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<code class="sig-name descname">PyObject_CallMethodOneArg</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>obj</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>name</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>arg</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_CallMethodOneArg" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Call a method of the Python object <em>obj</em> with a single positional argument
 <em>arg</em>, where the name of the method is given as a Python string object in
 <em>name</em>.</p>
@@ -502,7 +502,7 @@ where the name of the method is given as a Python string object in <em>name</em>
 
 <dl class="c function">
 <dt id="c.PyObject_Vectorcall">
-<a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a>* <code class="sig-name descname">PyObject_Vectorcall</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *callable</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *const<em> *args</em>, size_t<em> nargsf</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *kwnames</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_Vectorcall" title="Permalink to this definition">¶</a></dt>
+<a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<code class="sig-name descname">PyObject_Vectorcall</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>callable</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em class="property">const</em> *<em>args</em>, size_t <em>nargsf</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>kwnames</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_Vectorcall" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Call a callable Python object <em>callable</em>.
 The arguments are the same as for <a class="reference internal" href="#c.vectorcallfunc" title="vectorcallfunc"><code class="xref c c-type docutils literal notranslate"><span class="pre">vectorcallfunc</span></code></a>.
 If <em>callable</em> supports <a class="reference internal" href="#vectorcall">vectorcall</a>, this directly calls
@@ -517,7 +517,7 @@ the vectorcall function stored in <em>callable</em>.</p>
 
 <dl class="c function">
 <dt id="c.PyObject_VectorcallDict">
-<a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a>* <code class="sig-name descname">PyObject_VectorcallDict</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *callable</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *const<em> *args</em>, size_t<em> nargsf</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *kwdict</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_VectorcallDict" title="Permalink to this definition">¶</a></dt>
+<a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<code class="sig-name descname">PyObject_VectorcallDict</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>callable</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em class="property">const</em> *<em>args</em>, size_t <em>nargsf</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>kwdict</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_VectorcallDict" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Call <em>callable</em> with positional arguments passed exactly as in the <a class="reference internal" href="#vectorcall">vectorcall</a> protocol,
 but with keyword arguments passed as a dictionary <em>kwdict</em>.
 The <em>args</em> array contains only the positional arguments.</p>
@@ -534,7 +534,7 @@ but not a tuple for the positional arguments.</p>
 
 <dl class="c function">
 <dt id="c.PyObject_VectorcallMethod">
-<a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a>* <code class="sig-name descname">PyObject_VectorcallMethod</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *name</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *const<em> *args</em>, size_t<em> nargsf</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *kwnames</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_VectorcallMethod" title="Permalink to this definition">¶</a></dt>
+<a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<code class="sig-name descname">PyObject_VectorcallMethod</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>name</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em class="property">const</em> *<em>args</em>, size_t <em>nargsf</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>kwnames</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_VectorcallMethod" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Call a method using the vectorcall calling convention. The name of the method
 is given as a Python string <em>name</em>. The object whose method is called is
 <em>args[0]</em>, and the <em>args</em> array starting at <em>args[1]</em> represents the arguments
@@ -559,7 +559,7 @@ this will call the unbound method object with the full
 <h2>Call Support API<a class="headerlink" href="#call-support-api" title="Permalink to this headline">¶</a></h2>
 <dl class="c function">
 <dt id="c.PyCallable_Check">
-int <code class="sig-name descname">PyCallable_Check</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *o</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyCallable_Check" title="Permalink to this definition">¶</a></dt>
+int <code class="sig-name descname">PyCallable_Check</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>o</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyCallable_Check" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Determine if the object <em>o</em> is callable.  Return <code class="docutils literal notranslate"><span class="pre">1</span></code> if the object is callable
 and <code class="docutils literal notranslate"><span class="pre">0</span></code> otherwise.  This function always succeeds.</p>
 </dd></dl>
@@ -663,11 +663,11 @@ and <code class="docutils literal notranslate"><span class="pre">0</span></code>
 <br />
     <br />
 
-    Last updated on Mar 15, 2020.
+    Last updated on Mar 19, 2020.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/6f5bac9.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/b652476.
     </div>
 
   </body>
