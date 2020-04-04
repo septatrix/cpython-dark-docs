@@ -165,7 +165,7 @@ output must only depend on its input.</p>
 statements such as <code class="docutils literal notranslate"><span class="pre">a=3</span></code> or <code class="docutils literal notranslate"><span class="pre">c</span> <span class="pre">=</span> <span class="pre">a</span> <span class="pre">+</span> <span class="pre">b</span></code>, but it’s difficult to avoid all
 side effects.  Printing to the screen or writing to a disk file are side
 effects, for example.  For example, in Python a call to the <a class="reference internal" href="../library/functions.html#print" title="print"><code class="xref py py-func docutils literal notranslate"><span class="pre">print()</span></code></a> or
-<a class="reference internal" href="../library/time.html#time-sleep" title="time.sleep"><code class="xref py py-func docutils literal notranslate"><span class="pre">time.sleep()</span></code></a> function both return no useful value; they’re only called for
+<a class="reference internal" href="../library/time.html#time.sleep" title="time.sleep"><code class="xref py py-func docutils literal notranslate"><span class="pre">time.sleep()</span></code></a> function both return no useful value; they’re only called for
 their side effects of sending some text to the screen or pausing execution for a
 second.</p>
 <p>Python programs written in functional style usually won’t go to the extreme of
@@ -259,9 +259,9 @@ a few functions specialized for the current task.</p>
 foundation for writing functional-style programs: iterators.</p>
 <p>An iterator is an object representing a stream of data; this object returns the
 data one element at a time.  A Python iterator must support a method called
-<a class="reference internal" href="../library/stdtypes.html#iterator-next" title="iterator.__next__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__next__()</span></code></a> that takes no arguments and always returns the next
+<a class="reference internal" href="../library/stdtypes.html#iterator.__next__" title="iterator.__next__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__next__()</span></code></a> that takes no arguments and always returns the next
 element of the stream.  If there are no more elements in the stream,
-<a class="reference internal" href="../library/stdtypes.html#iterator-next" title="iterator.__next__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__next__()</span></code></a> must raise the <a class="reference internal" href="../library/exceptions.html#stopiteration" title="StopIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopIteration</span></code></a> exception.
+<a class="reference internal" href="../library/stdtypes.html#iterator.__next__" title="iterator.__next__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__next__()</span></code></a> must raise the <a class="reference internal" href="../library/exceptions.html#stopiteration" title="StopIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopIteration</span></code></a> exception.
 Iterators don’t have to be finite, though; it’s perfectly reasonable to write
 an iterator that produces an infinite stream of data.</p>
 <p>The built-in <a class="reference internal" href="../library/functions.html#iter" title="iter"><code class="xref py py-func docutils literal notranslate"><span class="pre">iter()</span></code></a> function takes an arbitrary object and tries to return
@@ -327,7 +327,7 @@ will never return, and if the element X never appears in the stream, the
 <p>Note that you can only go forward in an iterator; there’s no way to get the
 previous element, reset the iterator, or make a copy of it.  Iterator objects
 can optionally provide these additional capabilities, but the iterator protocol
-only specifies the <a class="reference internal" href="../library/stdtypes.html#iterator-next" title="iterator.__next__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__next__()</span></code></a> method.  Functions may therefore
+only specifies the <a class="reference internal" href="../library/stdtypes.html#iterator.__next__" title="iterator.__next__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__next__()</span></code></a> method.  Functions may therefore
 consume all of the iterator’s output, and if you need to do something different
 with the same stream, you’ll have to create a new iterator.</p>
 <div class="section" id="data-types-that-support-iterators">
@@ -361,7 +361,7 @@ unspecified and could vary between implementations.</p>
 <p>Applying <a class="reference internal" href="../library/functions.html#iter" title="iter"><code class="xref py py-func docutils literal notranslate"><span class="pre">iter()</span></code></a> to a dictionary always loops over the keys, but
 dictionaries have methods that return other iterators.  If you want to iterate
 over values or key/value pairs, you can explicitly call the
-<a class="reference internal" href="../library/stdtypes.html#dict-values" title="dict.values"><code class="xref py py-meth docutils literal notranslate"><span class="pre">values()</span></code></a> or <a class="reference internal" href="../library/stdtypes.html#dict-items" title="dict.items"><code class="xref py py-meth docutils literal notranslate"><span class="pre">items()</span></code></a> methods to get an appropriate
+<a class="reference internal" href="../library/stdtypes.html#dict.values" title="dict.values"><code class="xref py py-meth docutils literal notranslate"><span class="pre">values()</span></code></a> or <a class="reference internal" href="../library/stdtypes.html#dict.items" title="dict.items"><code class="xref py py-meth docutils literal notranslate"><span class="pre">items()</span></code></a> methods to get an appropriate
 iterator.</p>
 <p>The <a class="reference internal" href="../library/stdtypes.html#dict" title="dict"><code class="xref py py-func docutils literal notranslate"><span class="pre">dict()</span></code></a> constructor can accept an iterator that returns a finite stream
 of <code class="docutils literal notranslate"><span class="pre">(key,</span> <span class="pre">value)</span></code> tuples:</p>
@@ -370,7 +370,7 @@ of <code class="docutils literal notranslate"><span class="pre">(key,</span> <sp
 <span class="go">{&#39;Italy&#39;: &#39;Rome&#39;, &#39;France&#39;: &#39;Paris&#39;, &#39;US&#39;: &#39;Washington DC&#39;}</span>
 </pre></div>
 </div>
-<p>Files also support iteration by calling the <a class="reference internal" href="../library/io.html#io-textiobase-readline" title="io.TextIOBase.readline"><code class="xref py py-meth docutils literal notranslate"><span class="pre">readline()</span></code></a>
+<p>Files also support iteration by calling the <a class="reference internal" href="../library/io.html#io.textiobase.readline" title="io.TextIOBase.readline"><code class="xref py py-meth docutils literal notranslate"><span class="pre">readline()</span></code></a>
 method until there are no more lines in the file.  This means you can read each
 line of a file like this:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">file</span><span class="p">:</span>
@@ -514,7 +514,7 @@ the <code class="docutils literal notranslate"><span class="pre">yield</span></c
 <code class="docutils literal notranslate"><span class="pre">return</span></code> statement.  The big difference between <code class="docutils literal notranslate"><span class="pre">yield</span></code> and a <code class="docutils literal notranslate"><span class="pre">return</span></code>
 statement is that on reaching a <code class="docutils literal notranslate"><span class="pre">yield</span></code> the generator’s state of execution is
 suspended and local variables are preserved.  On the next call to the
-generator’s <a class="reference internal" href="../reference/expressions.html#generator-next" title="generator.__next__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__next__()</span></code></a> method, the function will resume
+generator’s <a class="reference internal" href="../reference/expressions.html#generator.__next__" title="generator.__next__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__next__()</span></code></a> method, the function will resume
 executing.</p>
 <p>Here’s a sample usage of the <code class="docutils literal notranslate"><span class="pre">generate_ints()</span></code> generator:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gen</span> <span class="o">=</span> <span class="n">generate_ints</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
@@ -536,13 +536,13 @@ executing.</p>
 <p>You could equally write <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">i</span> <span class="pre">in</span> <span class="pre">generate_ints(5)</span></code>, or <code class="docutils literal notranslate"><span class="pre">a,</span> <span class="pre">b,</span> <span class="pre">c</span> <span class="pre">=</span>
 <span class="pre">generate_ints(3)</span></code>.</p>
 <p>Inside a generator function, <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">value</span></code> causes <code class="docutils literal notranslate"><span class="pre">StopIteration(value)</span></code>
-to be raised from the <a class="reference internal" href="../reference/expressions.html#generator-next" title="generator.__next__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__next__()</span></code></a> method.  Once this happens, or
+to be raised from the <a class="reference internal" href="../reference/expressions.html#generator.__next__" title="generator.__next__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__next__()</span></code></a> method.  Once this happens, or
 the bottom of the function is reached, the procession of values ends and the
 generator cannot yield any further values.</p>
 <p>You could achieve the effect of generators manually by writing your own class
 and storing all the local variables of the generator as instance variables.  For
 example, returning a list of integers could be done by setting <code class="docutils literal notranslate"><span class="pre">self.count</span></code> to
-0, and having the <a class="reference internal" href="../library/stdtypes.html#iterator-next" title="iterator.__next__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__next__()</span></code></a> method increment <code class="docutils literal notranslate"><span class="pre">self.count</span></code> and
+0, and having the <a class="reference internal" href="../library/stdtypes.html#iterator.__next__" title="iterator.__next__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__next__()</span></code></a> method increment <code class="docutils literal notranslate"><span class="pre">self.count</span></code> and
 return it.
 However, for a moderately complicated generator, writing a corresponding class
 can be much messier.</p>
@@ -589,9 +589,9 @@ always be parenthesized except when it occurs at the top-level expression on the
 right-hand side of an assignment.  This means you can write <code class="docutils literal notranslate"><span class="pre">val</span> <span class="pre">=</span> <span class="pre">yield</span> <span class="pre">i</span></code>
 but have to use parentheses when there’s an operation, as in <code class="docutils literal notranslate"><span class="pre">val</span> <span class="pre">=</span> <span class="pre">(yield</span> <span class="pre">i)</span>
 <span class="pre">+</span> <span class="pre">12</span></code>.)</p>
-<p>Values are sent into a generator by calling its <a class="reference internal" href="../reference/expressions.html#generator-send" title="generator.send"><code class="xref py py-meth docutils literal notranslate"><span class="pre">send(value)</span></code></a> method.  This method resumes the generator’s code and the
+<p>Values are sent into a generator by calling its <a class="reference internal" href="../reference/expressions.html#generator.send" title="generator.send"><code class="xref py py-meth docutils literal notranslate"><span class="pre">send(value)</span></code></a> method.  This method resumes the generator’s code and the
 <code class="docutils literal notranslate"><span class="pre">yield</span></code> expression returns the specified value.  If the regular
-<a class="reference internal" href="../reference/expressions.html#generator-next" title="generator.__next__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__next__()</span></code></a> method is called, the <code class="docutils literal notranslate"><span class="pre">yield</span></code> returns <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<a class="reference internal" href="../reference/expressions.html#generator.__next__" title="generator.__next__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__next__()</span></code></a> method is called, the <code class="docutils literal notranslate"><span class="pre">yield</span></code> returns <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
 <p>Here’s a simple counter that increments by 1 and allows changing the value of
 the internal counter.</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">counter</span><span class="p">(</span><span class="n">maximum</span><span class="p">):</span>
@@ -624,19 +624,19 @@ the internal counter.</p>
 </div>
 <p>Because <code class="docutils literal notranslate"><span class="pre">yield</span></code> will often be returning <code class="docutils literal notranslate"><span class="pre">None</span></code>, you should always check for
 this case.  Don’t just use its value in expressions unless you’re sure that the
-<a class="reference internal" href="../reference/expressions.html#generator-send" title="generator.send"><code class="xref py py-meth docutils literal notranslate"><span class="pre">send()</span></code></a> method will be the only method used to resume your
+<a class="reference internal" href="../reference/expressions.html#generator.send" title="generator.send"><code class="xref py py-meth docutils literal notranslate"><span class="pre">send()</span></code></a> method will be the only method used to resume your
 generator function.</p>
-<p>In addition to <a class="reference internal" href="../reference/expressions.html#generator-send" title="generator.send"><code class="xref py py-meth docutils literal notranslate"><span class="pre">send()</span></code></a>, there are two other methods on
+<p>In addition to <a class="reference internal" href="../reference/expressions.html#generator.send" title="generator.send"><code class="xref py py-meth docutils literal notranslate"><span class="pre">send()</span></code></a>, there are two other methods on
 generators:</p>
 <ul>
-<li><p><a class="reference internal" href="../reference/expressions.html#generator-throw" title="generator.throw"><code class="xref py py-meth docutils literal notranslate"><span class="pre">throw(type,</span> <span class="pre">value=None,</span> <span class="pre">traceback=None)</span></code></a> is used to
+<li><p><a class="reference internal" href="../reference/expressions.html#generator.throw" title="generator.throw"><code class="xref py py-meth docutils literal notranslate"><span class="pre">throw(type,</span> <span class="pre">value=None,</span> <span class="pre">traceback=None)</span></code></a> is used to
 raise an exception inside the generator; the exception is raised by the
 <code class="docutils literal notranslate"><span class="pre">yield</span></code> expression where the generator’s execution is paused.</p></li>
-<li><p><a class="reference internal" href="../reference/expressions.html#generator-close" title="generator.close"><code class="xref py py-meth docutils literal notranslate"><span class="pre">close()</span></code></a> raises a <a class="reference internal" href="../library/exceptions.html#generatorexit" title="GeneratorExit"><code class="xref py py-exc docutils literal notranslate"><span class="pre">GeneratorExit</span></code></a> exception inside the
+<li><p><a class="reference internal" href="../reference/expressions.html#generator.close" title="generator.close"><code class="xref py py-meth docutils literal notranslate"><span class="pre">close()</span></code></a> raises a <a class="reference internal" href="../library/exceptions.html#generatorexit" title="GeneratorExit"><code class="xref py py-exc docutils literal notranslate"><span class="pre">GeneratorExit</span></code></a> exception inside the
 generator to terminate the iteration.  On receiving this exception, the
 generator’s code must either raise <a class="reference internal" href="../library/exceptions.html#generatorexit" title="GeneratorExit"><code class="xref py py-exc docutils literal notranslate"><span class="pre">GeneratorExit</span></code></a> or
 <a class="reference internal" href="../library/exceptions.html#stopiteration" title="StopIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopIteration</span></code></a>; catching the exception and doing anything else is
-illegal and will trigger a <a class="reference internal" href="../library/exceptions.html#runtimeerror" title="RuntimeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RuntimeError</span></code></a>.  <a class="reference internal" href="../reference/expressions.html#generator-close" title="generator.close"><code class="xref py py-meth docutils literal notranslate"><span class="pre">close()</span></code></a>
+illegal and will trigger a <a class="reference internal" href="../library/exceptions.html#runtimeerror" title="RuntimeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RuntimeError</span></code></a>.  <a class="reference internal" href="../reference/expressions.html#generator.close" title="generator.close"><code class="xref py py-meth docutils literal notranslate"><span class="pre">close()</span></code></a>
 will also be called by Python’s garbage collector when the generator is
 garbage-collected.</p>
 <p>If you need to run cleanup code when a <a class="reference internal" href="../library/exceptions.html#generatorexit" title="GeneratorExit"><code class="xref py py-exc docutils literal notranslate"><span class="pre">GeneratorExit</span></code></a> occurs, I suggest
@@ -710,7 +710,7 @@ indexes at which certain conditions are met:</p>
 <p><a class="reference internal" href="../library/functions.html#sorted" title="sorted"><code class="xref py py-func docutils literal notranslate"><span class="pre">sorted(iterable,</span> <span class="pre">key=None,</span> <span class="pre">reverse=False)</span></code></a> collects all the
 elements of the iterable into a list, sorts the list, and returns the sorted
 result.  The <em>key</em> and <em>reverse</em> arguments are passed through to the
-constructed list’s <a class="reference internal" href="../library/stdtypes.html#list-sort" title="list.sort"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sort()</span></code></a> method.</p>
+constructed list’s <a class="reference internal" href="../library/stdtypes.html#list.sort" title="list.sort"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sort()</span></code></a> method.</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">random</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Generate 8 random numbers between [0, 10000)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rand_list</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">),</span> <span class="mi">8</span><span class="p">)</span>
@@ -775,7 +775,7 @@ module’s contents by showing small examples.</p>
 </ul>
 <div class="section" id="creating-new-iterators">
 <h3>Creating new iterators<a class="headerlink" href="#creating-new-iterators" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference internal" href="../library/itertools.html#itertools-count" title="itertools.count"><code class="xref py py-func docutils literal notranslate"><span class="pre">itertools.count(start,</span> <span class="pre">step)</span></code></a> returns an infinite
+<p><a class="reference internal" href="../library/itertools.html#itertools.count" title="itertools.count"><code class="xref py py-func docutils literal notranslate"><span class="pre">itertools.count(start,</span> <span class="pre">step)</span></code></a> returns an infinite
 stream of evenly spaced values.  You can optionally supply the starting number,
 which defaults to 0, and the interval between numbers, which defaults to 1:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">itertools</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="o">=&gt;</span>
@@ -786,14 +786,14 @@ which defaults to 0, and the interval between numbers, which defaults to 1:</p>
   <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="o">...</span>
 </pre></div>
 </div>
-<p><a class="reference internal" href="../library/itertools.html#itertools-cycle" title="itertools.cycle"><code class="xref py py-func docutils literal notranslate"><span class="pre">itertools.cycle(iter)</span></code></a> saves a copy of the contents of
+<p><a class="reference internal" href="../library/itertools.html#itertools.cycle" title="itertools.cycle"><code class="xref py py-func docutils literal notranslate"><span class="pre">itertools.cycle(iter)</span></code></a> saves a copy of the contents of
 a provided iterable and returns a new iterator that returns its elements from
 first to last.  The new iterator will repeat these elements infinitely.</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">itertools</span><span class="o">.</span><span class="n">cycle</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span> <span class="o">=&gt;</span>
   <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">...</span>
 </pre></div>
 </div>
-<p><a class="reference internal" href="../library/itertools.html#itertools-repeat" title="itertools.repeat"><code class="xref py py-func docutils literal notranslate"><span class="pre">itertools.repeat(elem,</span> <span class="pre">[n])</span></code></a> returns the provided
+<p><a class="reference internal" href="../library/itertools.html#itertools.repeat" title="itertools.repeat"><code class="xref py py-func docutils literal notranslate"><span class="pre">itertools.repeat(elem,</span> <span class="pre">[n])</span></code></a> returns the provided
 element <em>n</em> times, or returns the element endlessly if <em>n</em> is not provided.</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">itertools</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="s1">&#39;abc&#39;</span><span class="p">)</span> <span class="o">=&gt;</span>
   <span class="n">abc</span><span class="p">,</span> <span class="n">abc</span><span class="p">,</span> <span class="n">abc</span><span class="p">,</span> <span class="n">abc</span><span class="p">,</span> <span class="n">abc</span><span class="p">,</span> <span class="n">abc</span><span class="p">,</span> <span class="n">abc</span><span class="p">,</span> <span class="n">abc</span><span class="p">,</span> <span class="n">abc</span><span class="p">,</span> <span class="n">abc</span><span class="p">,</span> <span class="o">...</span>
@@ -801,7 +801,7 @@ element <em>n</em> times, or returns the element endlessly if <em>n</em> is not 
   <span class="n">abc</span><span class="p">,</span> <span class="n">abc</span><span class="p">,</span> <span class="n">abc</span><span class="p">,</span> <span class="n">abc</span><span class="p">,</span> <span class="n">abc</span>
 </pre></div>
 </div>
-<p><a class="reference internal" href="../library/itertools.html#itertools-chain" title="itertools.chain"><code class="xref py py-func docutils literal notranslate"><span class="pre">itertools.chain(iterA,</span> <span class="pre">iterB,</span> <span class="pre">...)</span></code></a> takes an arbitrary
+<p><a class="reference internal" href="../library/itertools.html#itertools.chain" title="itertools.chain"><code class="xref py py-func docutils literal notranslate"><span class="pre">itertools.chain(iterA,</span> <span class="pre">iterB,</span> <span class="pre">...)</span></code></a> takes an arbitrary
 number of iterables as input, and returns all the elements of the first
 iterator, then all the elements of the second, and so on, until all of the
 iterables have been exhausted.</p>
@@ -809,7 +809,7 @@ iterables have been exhausted.</p>
   <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span>
 </pre></div>
 </div>
-<p><a class="reference internal" href="../library/itertools.html#itertools-islice" title="itertools.islice"><code class="xref py py-func docutils literal notranslate"><span class="pre">itertools.islice(iter,</span> <span class="pre">[start],</span> <span class="pre">stop,</span> <span class="pre">[step])</span></code></a> returns
+<p><a class="reference internal" href="../library/itertools.html#itertools.islice" title="itertools.islice"><code class="xref py py-func docutils literal notranslate"><span class="pre">itertools.islice(iter,</span> <span class="pre">[start],</span> <span class="pre">stop,</span> <span class="pre">[step])</span></code></a> returns
 a stream that’s a slice of the iterator.  With a single <em>stop</em> argument, it
 will return the first <em>stop</em> elements.  If you supply a starting index, you’ll
 get <em>stop-start</em> elements, and if you supply a value for <em>step</em>, elements
@@ -823,7 +823,7 @@ use negative values for <em>start</em>, <em>stop</em>, or <em>step</em>.</p>
   <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span>
 </pre></div>
 </div>
-<p><a class="reference internal" href="../library/itertools.html#itertools-tee" title="itertools.tee"><code class="xref py py-func docutils literal notranslate"><span class="pre">itertools.tee(iter,</span> <span class="pre">[n])</span></code></a> replicates an iterator; it
+<p><a class="reference internal" href="../library/itertools.html#itertools.tee" title="itertools.tee"><code class="xref py py-func docutils literal notranslate"><span class="pre">itertools.tee(iter,</span> <span class="pre">[n])</span></code></a> replicates an iterator; it
 returns <em>n</em> independent iterators that will all return the contents of the
 source iterator.
 If you don’t supply a value for <em>n</em>, the default is 2.  Replicating iterators
@@ -844,11 +844,11 @@ consumed more than the others.</p>
 <div class="section" id="calling-functions-on-elements">
 <h3>Calling functions on elements<a class="headerlink" href="#calling-functions-on-elements" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="../library/operator.html#module-operator" title="operator: Functions corresponding to the standard operators."><code class="xref py py-mod docutils literal notranslate"><span class="pre">operator</span></code></a> module contains a set of functions corresponding to Python’s
-operators.  Some examples are <a class="reference internal" href="../library/operator.html#operator-add" title="operator.add"><code class="xref py py-func docutils literal notranslate"><span class="pre">operator.add(a,</span> <span class="pre">b)</span></code></a> (adds
-two values), <a class="reference internal" href="../library/operator.html#operator-ne" title="operator.ne"><code class="xref py py-func docutils literal notranslate"><span class="pre">operator.ne(a,</span> <span class="pre">b)</span></code></a> (same as <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">!=</span> <span class="pre">b</span></code>), and
-<a class="reference internal" href="../library/operator.html#operator-attrgetter" title="operator.attrgetter"><code class="xref py py-func docutils literal notranslate"><span class="pre">operator.attrgetter('id')</span></code></a>
+operators.  Some examples are <a class="reference internal" href="../library/operator.html#operator.add" title="operator.add"><code class="xref py py-func docutils literal notranslate"><span class="pre">operator.add(a,</span> <span class="pre">b)</span></code></a> (adds
+two values), <a class="reference internal" href="../library/operator.html#operator.ne" title="operator.ne"><code class="xref py py-func docutils literal notranslate"><span class="pre">operator.ne(a,</span> <span class="pre">b)</span></code></a> (same as <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">!=</span> <span class="pre">b</span></code>), and
+<a class="reference internal" href="../library/operator.html#operator.attrgetter" title="operator.attrgetter"><code class="xref py py-func docutils literal notranslate"><span class="pre">operator.attrgetter('id')</span></code></a>
 (returns a callable that fetches the <code class="docutils literal notranslate"><span class="pre">.id</span></code> attribute).</p>
-<p><a class="reference internal" href="../library/itertools.html#itertools-starmap" title="itertools.starmap"><code class="xref py py-func docutils literal notranslate"><span class="pre">itertools.starmap(func,</span> <span class="pre">iter)</span></code></a> assumes that the
+<p><a class="reference internal" href="../library/itertools.html#itertools.starmap" title="itertools.starmap"><code class="xref py py-func docutils literal notranslate"><span class="pre">itertools.starmap(func,</span> <span class="pre">iter)</span></code></a> assumes that the
 iterable will return a stream of tuples, and calls <em>func</em> using these tuples as
 the arguments:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">itertools</span><span class="o">.</span><span class="n">starmap</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">,</span>
@@ -863,14 +863,14 @@ the arguments:</p>
 <h3>Selecting elements<a class="headerlink" href="#selecting-elements" title="Permalink to this headline">¶</a></h3>
 <p>Another group of functions chooses a subset of an iterator’s elements based on a
 predicate.</p>
-<p><a class="reference internal" href="../library/itertools.html#itertools-filterfalse" title="itertools.filterfalse"><code class="xref py py-func docutils literal notranslate"><span class="pre">itertools.filterfalse(predicate,</span> <span class="pre">iter)</span></code></a> is the
+<p><a class="reference internal" href="../library/itertools.html#itertools.filterfalse" title="itertools.filterfalse"><code class="xref py py-func docutils literal notranslate"><span class="pre">itertools.filterfalse(predicate,</span> <span class="pre">iter)</span></code></a> is the
 opposite of <a class="reference internal" href="../library/functions.html#filter" title="filter"><code class="xref py py-func docutils literal notranslate"><span class="pre">filter()</span></code></a>, returning all elements for which the predicate
 returns false:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">itertools</span><span class="o">.</span><span class="n">filterfalse</span><span class="p">(</span><span class="n">is_even</span><span class="p">,</span> <span class="n">itertools</span><span class="o">.</span><span class="n">count</span><span class="p">())</span> <span class="o">=&gt;</span>
   <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="o">...</span>
 </pre></div>
 </div>
-<p><a class="reference internal" href="../library/itertools.html#itertools-takewhile" title="itertools.takewhile"><code class="xref py py-func docutils literal notranslate"><span class="pre">itertools.takewhile(predicate,</span> <span class="pre">iter)</span></code></a> returns
+<p><a class="reference internal" href="../library/itertools.html#itertools.takewhile" title="itertools.takewhile"><code class="xref py py-func docutils literal notranslate"><span class="pre">itertools.takewhile(predicate,</span> <span class="pre">iter)</span></code></a> returns
 elements for as long as the predicate returns true.  Once the predicate returns
 false, the iterator will signal the end of its results.</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">less_than_10</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
@@ -883,7 +883,7 @@ false, the iterator will signal the end of its results.</p>
   <span class="mi">0</span>
 </pre></div>
 </div>
-<p><a class="reference internal" href="../library/itertools.html#itertools-dropwhile" title="itertools.dropwhile"><code class="xref py py-func docutils literal notranslate"><span class="pre">itertools.dropwhile(predicate,</span> <span class="pre">iter)</span></code></a> discards
+<p><a class="reference internal" href="../library/itertools.html#itertools.dropwhile" title="itertools.dropwhile"><code class="xref py py-func docutils literal notranslate"><span class="pre">itertools.dropwhile(predicate,</span> <span class="pre">iter)</span></code></a> discards
 elements while the predicate returns true, and then returns the rest of the
 iterable’s results.</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">itertools</span><span class="o">.</span><span class="n">dropwhile</span><span class="p">(</span><span class="n">less_than_10</span><span class="p">,</span> <span class="n">itertools</span><span class="o">.</span><span class="n">count</span><span class="p">())</span> <span class="o">=&gt;</span>
@@ -893,7 +893,7 @@ iterable’s results.</p>
   <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="o">...</span>
 </pre></div>
 </div>
-<p><a class="reference internal" href="../library/itertools.html#itertools-compress" title="itertools.compress"><code class="xref py py-func docutils literal notranslate"><span class="pre">itertools.compress(data,</span> <span class="pre">selectors)</span></code></a> takes two
+<p><a class="reference internal" href="../library/itertools.html#itertools.compress" title="itertools.compress"><code class="xref py py-func docutils literal notranslate"><span class="pre">itertools.compress(data,</span> <span class="pre">selectors)</span></code></a> takes two
 iterators and returns only those elements of <em>data</em> for which the corresponding
 element of <em>selectors</em> is true, stopping whenever either one is exhausted:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">itertools</span><span class="o">.</span><span class="n">compress</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">])</span> <span class="o">=&gt;</span>
@@ -903,7 +903,7 @@ element of <em>selectors</em> is true, stopping whenever either one is exhausted
 </div>
 <div class="section" id="combinatoric-functions">
 <h3>Combinatoric functions<a class="headerlink" href="#combinatoric-functions" title="Permalink to this headline">¶</a></h3>
-<p>The <a class="reference internal" href="../library/itertools.html#itertools-combinations" title="itertools.combinations"><code class="xref py py-func docutils literal notranslate"><span class="pre">itertools.combinations(iterable,</span> <span class="pre">r)</span></code></a>
+<p>The <a class="reference internal" href="../library/itertools.html#itertools.combinations" title="itertools.combinations"><code class="xref py py-func docutils literal notranslate"><span class="pre">itertools.combinations(iterable,</span> <span class="pre">r)</span></code></a>
 returns an iterator giving all possible <em>r</em>-tuple combinations of the
 elements contained in <em>iterable</em>.</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">itertools</span><span class="o">.</span><span class="n">combinations</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span> <span class="o">=&gt;</span>
@@ -921,7 +921,7 @@ elements contained in <em>iterable</em>.</p>
 <p>The elements within each tuple remain in the same order as
 <em>iterable</em> returned them.  For example, the number 1 is always before
 2, 3, 4, or 5 in the examples above.  A similar function,
-<a class="reference internal" href="../library/itertools.html#itertools-permutations" title="itertools.permutations"><code class="xref py py-func docutils literal notranslate"><span class="pre">itertools.permutations(iterable,</span> <span class="pre">r=None)</span></code></a>,
+<a class="reference internal" href="../library/itertools.html#itertools.permutations" title="itertools.permutations"><code class="xref py py-func docutils literal notranslate"><span class="pre">itertools.permutations(iterable,</span> <span class="pre">r=None)</span></code></a>,
 removes this constraint on the order, returning all possible
 arrangements of length <em>r</em>:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">itertools</span><span class="o">.</span><span class="n">permutations</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span> <span class="o">=&gt;</span>
@@ -948,7 +948,7 @@ position and don’t require that the contents of <em>iterable</em> are unique:<
 </div>
 <p>The identical tuple <code class="docutils literal notranslate"><span class="pre">('a',</span> <span class="pre">'a',</span> <span class="pre">'b')</span></code> occurs twice, but the two ‘a’
 strings came from different positions.</p>
-<p>The <a class="reference internal" href="../library/itertools.html#itertools-combinations-with-replacement" title="itertools.combinations_with_replacement"><code class="xref py py-func docutils literal notranslate"><span class="pre">itertools.combinations_with_replacement(iterable,</span> <span class="pre">r)</span></code></a>
+<p>The <a class="reference internal" href="../library/itertools.html#itertools.combinations_with_replacement" title="itertools.combinations_with_replacement"><code class="xref py py-func docutils literal notranslate"><span class="pre">itertools.combinations_with_replacement(iterable,</span> <span class="pre">r)</span></code></a>
 function relaxes a different constraint: elements can be repeated
 within a single tuple.  Conceptually an element is selected for the
 first position of each tuple and then is replaced before the second
@@ -964,10 +964,10 @@ element is selected.</p>
 </div>
 <div class="section" id="grouping-elements">
 <h3>Grouping elements<a class="headerlink" href="#grouping-elements" title="Permalink to this headline">¶</a></h3>
-<p>The last function I’ll discuss, <a class="reference internal" href="../library/itertools.html#itertools-groupby" title="itertools.groupby"><code class="xref py py-func docutils literal notranslate"><span class="pre">itertools.groupby(iter,</span> <span class="pre">key_func=None)</span></code></a>, is the most complicated.  <code class="docutils literal notranslate"><span class="pre">key_func(elem)</span></code> is a function
+<p>The last function I’ll discuss, <a class="reference internal" href="../library/itertools.html#itertools.groupby" title="itertools.groupby"><code class="xref py py-func docutils literal notranslate"><span class="pre">itertools.groupby(iter,</span> <span class="pre">key_func=None)</span></code></a>, is the most complicated.  <code class="docutils literal notranslate"><span class="pre">key_func(elem)</span></code> is a function
 that can compute a key value for each element returned by the iterable.  If you
 don’t supply a key function, the key is simply each element itself.</p>
-<p><a class="reference internal" href="../library/itertools.html#itertools-groupby" title="itertools.groupby"><code class="xref py py-func docutils literal notranslate"><span class="pre">groupby()</span></code></a> collects all the consecutive elements from the
+<p><a class="reference internal" href="../library/itertools.html#itertools.groupby" title="itertools.groupby"><code class="xref py py-func docutils literal notranslate"><span class="pre">groupby()</span></code></a> collects all the consecutive elements from the
 underlying iterable that have the same key value, and returns a stream of
 2-tuples containing a key value and an iterator for the elements with that key.</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">city_list</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;Decatur&#39;</span><span class="p">,</span> <span class="s1">&#39;AL&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Huntsville&#39;</span><span class="p">,</span> <span class="s1">&#39;AL&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Selma&#39;</span><span class="p">,</span> <span class="s1">&#39;AL&#39;</span><span class="p">),</span>
@@ -993,7 +993,7 @@ underlying iterable that have the same key value, and returns a stream of
   <span class="p">(</span><span class="s1">&#39;Flagstaff&#39;</span><span class="p">,</span> <span class="s1">&#39;AZ&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Phoenix&#39;</span><span class="p">,</span> <span class="s1">&#39;AZ&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Tucson&#39;</span><span class="p">,</span> <span class="s1">&#39;AZ&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><a class="reference internal" href="../library/itertools.html#itertools-groupby" title="itertools.groupby"><code class="xref py py-func docutils literal notranslate"><span class="pre">groupby()</span></code></a> assumes that the underlying iterable’s contents will
+<p><a class="reference internal" href="../library/itertools.html#itertools.groupby" title="itertools.groupby"><code class="xref py py-func docutils literal notranslate"><span class="pre">groupby()</span></code></a> assumes that the underlying iterable’s contents will
 already be sorted based on the key.  Note that the returned iterators also use
 the underlying iterable, so you have to consume the results of iterator-1 before
 requesting iterator-2 and its corresponding key.</p>
@@ -1004,13 +1004,13 @@ requesting iterator-2 and its corresponding key.</p>
 <p>The <a class="reference internal" href="../library/functools.html#module-functools" title="functools: Higher-order functions and operations on callable objects."><code class="xref py py-mod docutils literal notranslate"><span class="pre">functools</span></code></a> module in Python 2.5 contains some higher-order functions.
 A <strong>higher-order function</strong> takes one or more functions as input and returns a
 new function.  The most useful tool in this module is the
-<a class="reference internal" href="../library/functools.html#functools-partial" title="functools.partial"><code class="xref py py-func docutils literal notranslate"><span class="pre">functools.partial()</span></code></a> function.</p>
+<a class="reference internal" href="../library/functools.html#functools.partial" title="functools.partial"><code class="xref py py-func docutils literal notranslate"><span class="pre">functools.partial()</span></code></a> function.</p>
 <p>For programs written in a functional style, you’ll sometimes want to construct
 variants of existing functions that have some of the parameters filled in.
 Consider a Python function <code class="docutils literal notranslate"><span class="pre">f(a,</span> <span class="pre">b,</span> <span class="pre">c)</span></code>; you may wish to create a new function
 <code class="docutils literal notranslate"><span class="pre">g(b,</span> <span class="pre">c)</span></code> that’s equivalent to <code class="docutils literal notranslate"><span class="pre">f(1,</span> <span class="pre">b,</span> <span class="pre">c)</span></code>; you’re filling in a value for
 one of <code class="docutils literal notranslate"><span class="pre">f()</span></code>’s parameters.  This is called “partial function application”.</p>
-<p>The constructor for <a class="reference internal" href="../library/functools.html#functools-partial" title="functools.partial"><code class="xref py py-func docutils literal notranslate"><span class="pre">partial()</span></code></a> takes the arguments
+<p>The constructor for <a class="reference internal" href="../library/functools.html#functools.partial" title="functools.partial"><code class="xref py py-func docutils literal notranslate"><span class="pre">partial()</span></code></a> takes the arguments
 <code class="docutils literal notranslate"><span class="pre">(function,</span> <span class="pre">arg1,</span> <span class="pre">arg2,</span> <span class="pre">...,</span> <span class="pre">kwarg1=value1,</span> <span class="pre">kwarg2=value2)</span></code>.  The resulting
 object is callable, so you can just call it to invoke <code class="docutils literal notranslate"><span class="pre">function</span></code> with the
 filled-in arguments.</p>
@@ -1026,10 +1026,10 @@ filled-in arguments.</p>
 <span class="n">server_log</span><span class="p">(</span><span class="s1">&#39;Unable to open socket&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><a class="reference internal" href="../library/functools.html#functools-reduce" title="functools.reduce"><code class="xref py py-func docutils literal notranslate"><span class="pre">functools.reduce(func,</span> <span class="pre">iter,</span> <span class="pre">[initial_value])</span></code></a>
+<p><a class="reference internal" href="../library/functools.html#functools.reduce" title="functools.reduce"><code class="xref py py-func docutils literal notranslate"><span class="pre">functools.reduce(func,</span> <span class="pre">iter,</span> <span class="pre">[initial_value])</span></code></a>
 cumulatively performs an operation on all the iterable’s elements and,
 therefore, can’t be applied to infinite iterables. <em>func</em> must be a function
-that takes two elements and returns a single value.  <a class="reference internal" href="../library/functools.html#functools-reduce" title="functools.reduce"><code class="xref py py-func docutils literal notranslate"><span class="pre">functools.reduce()</span></code></a>
+that takes two elements and returns a single value.  <a class="reference internal" href="../library/functools.html#functools.reduce" title="functools.reduce"><code class="xref py py-func docutils literal notranslate"><span class="pre">functools.reduce()</span></code></a>
 takes the first two elements A and B returned by the iterator and calculates
 <code class="docutils literal notranslate"><span class="pre">func(A,</span> <span class="pre">B)</span></code>.  It then requests the third element, C, calculates
 <code class="docutils literal notranslate"><span class="pre">func(func(A,</span> <span class="pre">B),</span> <span class="pre">C)</span></code>, combines this result with the fourth element returned,
@@ -1050,7 +1050,7 @@ first calculation.</p>
 <span class="go">1</span>
 </pre></div>
 </div>
-<p>If you use <a class="reference internal" href="../library/operator.html#operator-add" title="operator.add"><code class="xref py py-func docutils literal notranslate"><span class="pre">operator.add()</span></code></a> with <a class="reference internal" href="../library/functools.html#functools-reduce" title="functools.reduce"><code class="xref py py-func docutils literal notranslate"><span class="pre">functools.reduce()</span></code></a>, you’ll add up all the
+<p>If you use <a class="reference internal" href="../library/operator.html#operator.add" title="operator.add"><code class="xref py py-func docutils literal notranslate"><span class="pre">operator.add()</span></code></a> with <a class="reference internal" href="../library/functools.html#functools.reduce" title="functools.reduce"><code class="xref py py-func docutils literal notranslate"><span class="pre">functools.reduce()</span></code></a>, you’ll add up all the
 elements of the iterable.  This case is so common that there’s a special
 built-in called <a class="reference internal" href="../library/functions.html#sum" title="sum"><code class="xref py py-func docutils literal notranslate"><span class="pre">sum()</span></code></a> to compute it:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">functools</span><span class="o">,</span> <span class="nn">operator</span>
@@ -1062,7 +1062,7 @@ built-in called <a class="reference internal" href="../library/functions.html#su
 <span class="go">0</span>
 </pre></div>
 </div>
-<p>For many uses of <a class="reference internal" href="../library/functools.html#functools-reduce" title="functools.reduce"><code class="xref py py-func docutils literal notranslate"><span class="pre">functools.reduce()</span></code></a>, though, it can be clearer to just
+<p>For many uses of <a class="reference internal" href="../library/functools.html#functools.reduce" title="functools.reduce"><code class="xref py py-func docutils literal notranslate"><span class="pre">functools.reduce()</span></code></a>, though, it can be clearer to just
 write the obvious <a class="reference internal" href="../reference/compound_stmts.html#for"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">for</span></code></a> loop:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">functools</span>
 <span class="c1"># Instead of:</span>
@@ -1074,7 +1074,7 @@ write the obvious <a class="reference internal" href="../reference/compound_stmt
     <span class="n">product</span> <span class="o">*=</span> <span class="n">i</span>
 </pre></div>
 </div>
-<p>A related function is <a class="reference internal" href="../library/itertools.html#itertools-accumulate" title="itertools.accumulate"><code class="xref py py-func docutils literal notranslate"><span class="pre">itertools.accumulate(iterable,</span> <span class="pre">func=operator.add)</span></code></a>.  It performs the same calculation, but instead of
+<p>A related function is <a class="reference internal" href="../library/itertools.html#itertools.accumulate" title="itertools.accumulate"><code class="xref py py-func docutils literal notranslate"><span class="pre">itertools.accumulate(iterable,</span> <span class="pre">func=operator.add)</span></code></a>.  It performs the same calculation, but instead of
 returning only the final result, <code class="xref py py-func docutils literal notranslate"><span class="pre">accumulate()</span></code> returns an iterator that
 also yields each partial result:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">itertools</span><span class="o">.</span><span class="n">accumulate</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span> <span class="o">=&gt;</span>
@@ -1161,7 +1161,7 @@ little bit better:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">b</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">items</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Many uses of <a class="reference internal" href="../library/functools.html#functools-reduce" title="functools.reduce"><code class="xref py py-func docutils literal notranslate"><span class="pre">functools.reduce()</span></code></a> are clearer when written as <code class="docutils literal notranslate"><span class="pre">for</span></code> loops.</p>
+<p>Many uses of <a class="reference internal" href="../library/functools.html#functools.reduce" title="functools.reduce"><code class="xref py py-func docutils literal notranslate"><span class="pre">functools.reduce()</span></code></a> are clearer when written as <code class="docutils literal notranslate"><span class="pre">for</span></code> loops.</p>
 <p>Fredrik Lundh once suggested the following set of rules for refactoring uses of
 <code class="docutils literal notranslate"><span class="pre">lambda</span></code>:</p>
 <ol class="arabic simple">
@@ -1359,7 +1359,7 @@ features in Python 2.5.</p>
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/b652476.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.0+/b652476.
     </div>
 
   </body>

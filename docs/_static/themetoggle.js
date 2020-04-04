@@ -1,19 +1,35 @@
-let currentTheme = 'dark'
+let currentTheme = localStorage.getItem('currentTheme') || 'auto'
 
-const cookies = new Map(document.cookie.split('; ').map(cookie => cookie.split('=')))
-if (cookies.has('currentTheme')) {
-    currentTheme = cookies.get('currentTheme')
+const pygmentsDark = document.getElementById('pygments_dark_css')
+const pydocthemeDark = document.getElementById('pydoctheme_dark_css')
+
+const themeOrder = {
+  light: 'dark',
+  dark: 'auto',
+  auto: 'light',
 }
 
-const pygments_dark = document.getElementById('pygments_dark_css')
-const pydoctheme_dark = document.getElementById('pydoctheme_dark_css')
-
-pydoctheme_dark.disabled = currentTheme == 'light'
-pygments_dark.disabled = currentTheme == 'light'
+updateTheme()
 
 function toggleTheme() {
-    currentTheme = currentTheme == 'light' ? 'dark' : 'light'
-    document.cookie = 'currentTheme=' + currentTheme + ';path=/;max-age=' + (60*60*24*365)
-    pygments_dark.disabled = currentTheme == 'light'
-    pydoctheme_dark.disabled = currentTheme == 'light'
+  currentTheme = themeOrder[currentTheme]
+  localStorage.setItem('currentTheme', currentTheme)
+  updateTheme()
+}
+
+function updateTheme() {
+  switch (currentTheme) {
+    case 'light':
+      pydocthemeDark.media = 'not all'
+      pygmentsDark.media = 'not all'
+      break
+    case 'dark':
+      pydocthemeDark.media = 'all'
+      pygmentsDark.media = 'all'
+      break
+    default:
+      // auto
+      pydocthemeDark.media = '(prefers-color-scheme: dark)'
+      pygmentsDark.media = '(prefers-color-scheme: dark)'
+  }
 }

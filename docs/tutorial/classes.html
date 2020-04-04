@@ -182,7 +182,7 @@ starts up, and is never deleted.  The global namespace for a module is created
 when the module definition is read in; normally, module namespaces also last
 until the interpreter quits.  The statements executed by the top-level
 invocation of the interpreter, either read from a script file or interactively,
-are considered part of a module called <a class="reference internal" href="../library/__main__.html#module-main" title="__main__: The environment where the top-level script is run."><code class="xref py py-mod docutils literal notranslate"><span class="pre">__main__</span></code></a>, so they have their own
+are considered part of a module called <a class="reference internal" href="../library/__main__.html#module-__main__" title="__main__: The environment where the top-level script is run."><code class="xref py py-mod docutils literal notranslate"><span class="pre">__main__</span></code></a>, so they have their own
 global namespace.  (The built-in names actually also live in a module; this is
 called <a class="reference internal" href="../library/builtins.html#module-builtins" title="builtins: The module that provides the built-in namespace."><code class="xref py py-mod docutils literal notranslate"><span class="pre">builtins</span></code></a>.)</p>
 <p>The local namespace for a function is created when the function is called, and
@@ -771,10 +771,10 @@ using a <a class="reference internal" href="../reference/compound_stmts.html#for
 <p>This style of access is clear, concise, and convenient.  The use of iterators
 pervades and unifies Python.  Behind the scenes, the <a class="reference internal" href="../reference/compound_stmts.html#for"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">for</span></code></a> statement
 calls <a class="reference internal" href="../library/functions.html#iter" title="iter"><code class="xref py py-func docutils literal notranslate"><span class="pre">iter()</span></code></a> on the container object.  The function returns an iterator
-object that defines the method <a class="reference internal" href="../library/stdtypes.html#iterator-next" title="iterator.__next__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__next__()</span></code></a> which accesses
+object that defines the method <a class="reference internal" href="../library/stdtypes.html#iterator.__next__" title="iterator.__next__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__next__()</span></code></a> which accesses
 elements in the container one at a time.  When there are no more elements,
-<a class="reference internal" href="../library/stdtypes.html#iterator-next" title="iterator.__next__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__next__()</span></code></a> raises a <a class="reference internal" href="../library/exceptions.html#stopiteration" title="StopIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopIteration</span></code></a> exception which tells the
-<code class="xref std std-keyword docutils literal notranslate"><span class="pre">for</span></code> loop to terminate.  You can call the <a class="reference internal" href="../library/stdtypes.html#iterator-next" title="iterator.__next__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__next__()</span></code></a> method
+<a class="reference internal" href="../library/stdtypes.html#iterator.__next__" title="iterator.__next__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__next__()</span></code></a> raises a <a class="reference internal" href="../library/exceptions.html#stopiteration" title="StopIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopIteration</span></code></a> exception which tells the
+<code class="xref std std-keyword docutils literal notranslate"><span class="pre">for</span></code> loop to terminate.  You can call the <a class="reference internal" href="../library/stdtypes.html#iterator.__next__" title="iterator.__next__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__next__()</span></code></a> method
 using the <a class="reference internal" href="../library/functions.html#next" title="next"><code class="xref py py-func docutils literal notranslate"><span class="pre">next()</span></code></a> built-in function; this example shows how it all works:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;abc&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">it</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
@@ -795,7 +795,7 @@ using the <a class="reference internal" href="../library/functions.html#next" ti
 </div>
 <p>Having seen the mechanics behind the iterator protocol, it is easy to add
 iterator behavior to your classes.  Define an <code class="xref py py-meth docutils literal notranslate"><span class="pre">__iter__()</span></code> method which
-returns an object with a <a class="reference internal" href="../library/stdtypes.html#iterator-next" title="iterator.__next__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__next__()</span></code></a> method.  If the class
+returns an object with a <a class="reference internal" href="../library/stdtypes.html#iterator.__next__" title="iterator.__next__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__next__()</span></code></a> method.  If the class
 defines <code class="xref py py-meth docutils literal notranslate"><span class="pre">__next__()</span></code>, then <code class="xref py py-meth docutils literal notranslate"><span class="pre">__iter__()</span></code> can just return <code class="docutils literal notranslate"><span class="pre">self</span></code>:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Reverse</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Iterator for looping over a sequence backwards.&quot;&quot;&quot;</span>
@@ -850,7 +850,7 @@ easy to create:</p>
 </div>
 <p>Anything that can be done with generators can also be done with class-based
 iterators as described in the previous section.  What makes generators so
-compact is that the <code class="xref py py-meth docutils literal notranslate"><span class="pre">__iter__()</span></code> and <a class="reference internal" href="../reference/expressions.html#generator-next" title="generator.__next__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__next__()</span></code></a> methods
+compact is that the <code class="xref py py-meth docutils literal notranslate"><span class="pre">__iter__()</span></code> and <a class="reference internal" href="../reference/expressions.html#generator.__next__" title="generator.__next__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__next__()</span></code></a> methods
 are created automatically.</p>
 <p>Another key feature is that the local variables and execution state are
 automatically saved between calls.  This made the function easier to write and
@@ -891,8 +891,8 @@ than equivalent list comprehensions.</p>
 <dl class="footnote brackets">
 <dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
 <dd><p>Except for one thing.  Module objects have a secret read-only attribute called
-<a class="reference internal" href="../library/stdtypes.html#object-dict" title="object.__dict__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__dict__</span></code></a> which returns the dictionary used to implement the module’s
-namespace; the name <a class="reference internal" href="../library/stdtypes.html#object-dict" title="object.__dict__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__dict__</span></code></a> is an attribute but not a global name.
+<a class="reference internal" href="../library/stdtypes.html#object.__dict__" title="object.__dict__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__dict__</span></code></a> which returns the dictionary used to implement the module’s
+namespace; the name <a class="reference internal" href="../library/stdtypes.html#object.__dict__" title="object.__dict__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__dict__</span></code></a> is an attribute but not a global name.
 Obviously, using this violates the abstraction of namespace implementation, and
 should be restricted to things like post-mortem debuggers.</p>
 </dd>
@@ -1014,7 +1014,7 @@ should be restricted to things like post-mortem debuggers.</p>
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/b652476.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.0+/b652476.
     </div>
 
   </body>

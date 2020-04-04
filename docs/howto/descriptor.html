@@ -191,7 +191,7 @@ upon attribute access.  For example, <code class="docutils literal notranslate">
 of <code class="docutils literal notranslate"><span class="pre">obj</span></code>.  If <code class="docutils literal notranslate"><span class="pre">d</span></code> defines the method <code class="xref py py-meth docutils literal notranslate"><span class="pre">__get__()</span></code>, then <code class="docutils literal notranslate"><span class="pre">d.__get__(obj)</span></code>
 is invoked according to the precedence rules listed below.</p>
 <p>The details of invocation depend on whether <code class="docutils literal notranslate"><span class="pre">obj</span></code> is an object or a class.</p>
-<p>For objects, the machinery is in <a class="reference internal" href="../reference/datamodel.html#object-getattribute" title="object.__getattribute__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">object.__getattribute__()</span></code></a> which
+<p>For objects, the machinery is in <a class="reference internal" href="../reference/datamodel.html#object.__getattribute__" title="object.__getattribute__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">object.__getattribute__()</span></code></a> which
 transforms <code class="docutils literal notranslate"><span class="pre">b.x</span></code> into <code class="docutils literal notranslate"><span class="pre">type(b).__dict__['x'].__get__(b,</span> <span class="pre">type(b))</span></code>.  The
 implementation works through a precedence chain that gives data descriptors
 priority over instance variables, instance variables priority over non-data
@@ -213,7 +213,7 @@ like:</p>
 <ul class="simple">
 <li><p>descriptors are invoked by the <code class="xref py py-meth docutils literal notranslate"><span class="pre">__getattribute__()</span></code> method</p></li>
 <li><p>overriding <code class="xref py py-meth docutils literal notranslate"><span class="pre">__getattribute__()</span></code> prevents automatic descriptor calls</p></li>
-<li><p><a class="reference internal" href="../reference/datamodel.html#object-getattribute" title="object.__getattribute__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">object.__getattribute__()</span></code></a> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">type.__getattribute__()</span></code> make
+<li><p><a class="reference internal" href="../reference/datamodel.html#object.__getattribute__" title="object.__getattribute__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">object.__getattribute__()</span></code></a> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">type.__getattribute__()</span></code> make
 different calls to <code class="xref py py-meth docutils literal notranslate"><span class="pre">__get__()</span></code>.</p></li>
 <li><p>data descriptors always override instance dictionaries.</p></li>
 <li><p>non-data descriptors may be overridden by instance dictionaries.</p></li>
@@ -223,7 +223,7 @@ method for invoking descriptors.  The attribute lookup <code class="docutils lit
 <code class="docutils literal notranslate"><span class="pre">obj.__class__.__mro__</span></code> for the base class <code class="docutils literal notranslate"><span class="pre">A</span></code> immediately following <code class="docutils literal notranslate"><span class="pre">B</span></code>
 and then returns <code class="docutils literal notranslate"><span class="pre">A.__dict__['m'].__get__(obj,</span> <span class="pre">B)</span></code>.  If not a descriptor,
 <code class="docutils literal notranslate"><span class="pre">m</span></code> is returned unchanged.  If not in the dictionary, <code class="docutils literal notranslate"><span class="pre">m</span></code> reverts to a
-search using <a class="reference internal" href="../reference/datamodel.html#object-getattribute" title="object.__getattribute__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">object.__getattribute__()</span></code></a>.</p>
+search using <a class="reference internal" href="../reference/datamodel.html#object.__getattribute__" title="object.__getattribute__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">object.__getattribute__()</span></code></a>.</p>
 <p>The implementation details are in <code class="xref c c-func docutils literal notranslate"><span class="pre">super_getattro()</span></code> in
 <a class="reference external" href="https://github.com/python/cpython/tree/master/Objects/typeobject.c">Objects/typeobject.c</a>.  and a pure Python equivalent can be found in
 <a class="reference external" href="https://www.python.org/download/releases/2.2.3/descrintro/#cooperation">Guido’s Tutorial</a>.</p>
@@ -509,7 +509,7 @@ for whether the caller is an object or a class:</p>
 <p>This behavior is useful whenever the function only needs to have a class
 reference and does not care about any underlying data.  One use for classmethods
 is to create alternate class constructors.  In Python 2.3, the classmethod
-<a class="reference internal" href="../library/stdtypes.html#dict-fromkeys" title="dict.fromkeys"><code class="xref py py-func docutils literal notranslate"><span class="pre">dict.fromkeys()</span></code></a> creates a new dictionary from a list of keys.  The pure
+<a class="reference internal" href="../library/stdtypes.html#dict.fromkeys" title="dict.fromkeys"><code class="xref py py-func docutils literal notranslate"><span class="pre">dict.fromkeys()</span></code></a> creates a new dictionary from a list of keys.  The pure
 Python equivalent is:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Dict</span><span class="p">:</span>
     <span class="o">.</span> <span class="o">.</span> <span class="o">.</span>
@@ -645,7 +645,7 @@ Python equivalent is:</p>
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/b652476.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.0+/b652476.
     </div>
 
   </body>

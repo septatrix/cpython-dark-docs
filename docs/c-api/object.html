@@ -174,7 +174,7 @@ expression <code class="docutils literal notranslate"><span class="pre">o.attr_n
 <dd><p>Generic attribute getter function that is meant to be put into a type
 object’s <code class="docutils literal notranslate"><span class="pre">tp_getattro</span></code> slot.  It looks for a descriptor in the dictionary
 of classes in the object’s MRO as well as an attribute in the object’s
-<a class="reference internal" href="../library/stdtypes.html#object-dict" title="object.__dict__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__dict__</span></code></a> (if present).  As outlined in <a class="reference internal" href="../reference/datamodel.html#descriptors"><span class="std std-ref">Implementing Descriptors</span></a>,
+<a class="reference internal" href="../library/stdtypes.html#object.__dict__" title="object.__dict__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__dict__</span></code></a> (if present).  As outlined in <a class="reference internal" href="../reference/datamodel.html#descriptors"><span class="std std-ref">Implementing Descriptors</span></a>,
 data descriptors take preference over instance attributes, while non-data
 descriptors don’t.  Otherwise, an <a class="reference internal" href="../library/exceptions.html#attributeerror" title="AttributeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">AttributeError</span></code></a> is raised.</p>
 </dd></dl>
@@ -209,7 +209,7 @@ to be put into a type object’s <a class="reference internal" href="typeobj.htm
 slot.  It looks for a data descriptor in the
 dictionary of classes in the object’s MRO, and if found it takes preference
 over setting or deleting the attribute in the instance dictionary. Otherwise, the
-attribute is set or deleted in the object’s <a class="reference internal" href="../library/stdtypes.html#object-dict" title="object.__dict__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__dict__</span></code></a> (if present).
+attribute is set or deleted in the object’s <a class="reference internal" href="../library/stdtypes.html#object.__dict__" title="object.__dict__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__dict__</span></code></a> (if present).
 On success, <code class="docutils literal notranslate"><span class="pre">0</span></code> is returned, otherwise an <a class="reference internal" href="../library/exceptions.html#attributeerror" title="AttributeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">AttributeError</span></code></a>
 is raised and <code class="docutils literal notranslate"><span class="pre">-1</span></code> is returned.</p>
 </dd></dl>
@@ -329,7 +329,7 @@ int <code class="sig-name descname">PyObject_IsSubclass</code><span class="sig-p
 <p>If <em>cls</em> is a tuple, the check will be done against every entry in <em>cls</em>.
 The result will be <code class="docutils literal notranslate"><span class="pre">1</span></code> when at least one of the checks returns <code class="docutils literal notranslate"><span class="pre">1</span></code>,
 otherwise it will be <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
-<p>If <em>cls</em> has a <a class="reference internal" href="../reference/datamodel.html#class-subclasscheck" title="class.__subclasscheck__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__subclasscheck__()</span></code></a> method, it will be called to
+<p>If <em>cls</em> has a <a class="reference internal" href="../reference/datamodel.html#class.__subclasscheck__" title="class.__subclasscheck__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__subclasscheck__()</span></code></a> method, it will be called to
 determine the subclass status as described in <span class="target" id="index-4"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-3119"><strong>PEP 3119</strong></a>.  Otherwise,
 <em>derived</em> is a subclass of <em>cls</em> if it is a direct or indirect subclass,
 i.e. contained in <code class="docutils literal notranslate"><span class="pre">cls.__mro__</span></code>.</p>
@@ -346,7 +346,7 @@ int <code class="sig-name descname">PyObject_IsInstance</code><span class="sig-p
 <p>If <em>cls</em> is a tuple, the check will be done against every entry in <em>cls</em>.
 The result will be <code class="docutils literal notranslate"><span class="pre">1</span></code> when at least one of the checks returns <code class="docutils literal notranslate"><span class="pre">1</span></code>,
 otherwise it will be <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
-<p>If <em>cls</em> has a <a class="reference internal" href="../reference/datamodel.html#class-instancecheck" title="class.__instancecheck__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__instancecheck__()</span></code></a> method, it will be called to
+<p>If <em>cls</em> has a <a class="reference internal" href="../reference/datamodel.html#class.__instancecheck__" title="class.__instancecheck__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__instancecheck__()</span></code></a> method, it will be called to
 determine the subclass status as described in <span class="target" id="index-5"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-3119"><strong>PEP 3119</strong></a>.  Otherwise, <em>inst</em>
 is an instance of <em>cls</em> if its class is a subclass of <em>cls</em>.</p>
 <p>An instance <em>inst</em> can override what is considered its class by having a
@@ -425,7 +425,7 @@ returned.  This is the equivalent to the Python expression <code class="docutils
 <dt id="c.PyObject_LengthHint">
 Py_ssize_t <code class="sig-name descname">PyObject_LengthHint</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>o</em>, Py_ssize_t <em>default</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_LengthHint" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Return an estimated length for the object <em>o</em>. First try to return its
-actual length, then an estimate using <a class="reference internal" href="../reference/datamodel.html#object-length-hint" title="object.__length_hint__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__length_hint__()</span></code></a>, and
+actual length, then an estimate using <a class="reference internal" href="../reference/datamodel.html#object.__length_hint__" title="object.__length_hint__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__length_hint__()</span></code></a>, and
 finally return the default value. On error return <code class="docutils literal notranslate"><span class="pre">-1</span></code>. This is the
 equivalent to the Python expression <code class="docutils literal notranslate"><span class="pre">operator.length_hint(o,</span> <span class="pre">default)</span></code>.</p>
 <div class="versionadded">
@@ -562,7 +562,7 @@ iterated.</p>
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/b652476.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.0+/b652476.
     </div>
 
   </body>

@@ -164,7 +164,7 @@ curses; if you’re already familiar with curses programming in C, it’s really
 easy to transfer that knowledge to Python.  The biggest difference is that the
 Python interface makes things simpler by merging different C functions such as
 <code class="xref c c-func docutils literal notranslate"><span class="pre">addstr()</span></code>, <code class="xref c c-func docutils literal notranslate"><span class="pre">mvaddstr()</span></code>, and <code class="xref c c-func docutils literal notranslate"><span class="pre">mvwaddstr()</span></code> into a single
-<a class="reference internal" href="../library/curses.html#curses-window-addstr" title="curses.window.addstr"><code class="xref py py-meth docutils literal notranslate"><span class="pre">addstr()</span></code></a> method.  You’ll see this covered in more
+<a class="reference internal" href="../library/curses.html#curses.window.addstr" title="curses.window.addstr"><code class="xref py py-meth docutils literal notranslate"><span class="pre">addstr()</span></code></a> method.  You’ll see this covered in more
 detail later.</p>
 <p>This HOWTO is an introduction to writing text-mode programs with curses
 and Python. It doesn’t attempt to be a complete guide to the curses API; for
@@ -175,7 +175,7 @@ for ncurses.  It will, however, give you the basic ideas.</p>
 <div class="section" id="starting-and-ending-a-curses-application">
 <h2>Starting and ending a curses application<a class="headerlink" href="#starting-and-ending-a-curses-application" title="Permalink to this headline">¶</a></h2>
 <p>Before doing anything, curses must be initialized.  This is done by
-calling the <a class="reference internal" href="../library/curses.html#curses-initscr" title="curses.initscr"><code class="xref py py-func docutils literal notranslate"><span class="pre">initscr()</span></code></a> function, which will determine the
+calling the <a class="reference internal" href="../library/curses.html#curses.initscr" title="curses.initscr"><code class="xref py py-func docutils literal notranslate"><span class="pre">initscr()</span></code></a> function, which will determine the
 terminal type, send any required setup codes to the terminal, and
 create various internal data structures.  If successful,
 <code class="xref py py-func docutils literal notranslate"><span class="pre">initscr()</span></code> returns a window object representing the entire
@@ -188,7 +188,7 @@ corresponding C variable.</p>
 <p>Usually curses applications turn off automatic echoing of keys to the
 screen, in order to be able to read keys and only display them under
 certain circumstances.  This requires calling the
-<a class="reference internal" href="../library/curses.html#curses-noecho" title="curses.noecho"><code class="xref py py-func docutils literal notranslate"><span class="pre">noecho()</span></code></a> function.</p>
+<a class="reference internal" href="../library/curses.html#curses.noecho" title="curses.noecho"><code class="xref py py-func docutils literal notranslate"><span class="pre">noecho()</span></code></a> function.</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">curses</span><span class="o">.</span><span class="n">noecho</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -215,7 +215,7 @@ to call:</p>
 </pre></div>
 </div>
 <p>to reverse the curses-friendly terminal settings. Then call the
-<a class="reference internal" href="../library/curses.html#curses-endwin" title="curses.endwin"><code class="xref py py-func docutils literal notranslate"><span class="pre">endwin()</span></code></a> function to restore the terminal to its original
+<a class="reference internal" href="../library/curses.html#curses.endwin" title="curses.endwin"><code class="xref py py-func docutils literal notranslate"><span class="pre">endwin()</span></code></a> function to restore the terminal to its original
 operating mode.</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">curses</span><span class="o">.</span><span class="n">endwin</span><span class="p">()</span>
 </pre></div>
@@ -226,7 +226,7 @@ previous state.  In Python this commonly happens when your code is buggy and
 raises an uncaught exception.  Keys are no longer echoed to the screen when
 you type them, for example, which makes using the shell difficult.</p>
 <p>In Python you can avoid these complications and make debugging much easier by
-importing the <a class="reference internal" href="../library/curses.html#curses-wrapper" title="curses.wrapper"><code class="xref py py-func docutils literal notranslate"><span class="pre">curses.wrapper()</span></code></a> function and using it like this:</p>
+importing the <a class="reference internal" href="../library/curses.html#curses.wrapper" title="curses.wrapper"><code class="xref py py-func docutils literal notranslate"><span class="pre">curses.wrapper()</span></code></a> function and using it like this:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">curses</span> <span class="kn">import</span> <span class="n">wrapper</span>
 
 <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">stdscr</span><span class="p">):</span>
@@ -244,7 +244,7 @@ importing the <a class="reference internal" href="../library/curses.html#curses-
 <span class="n">wrapper</span><span class="p">(</span><span class="n">main</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The <a class="reference internal" href="../library/curses.html#curses-wrapper" title="curses.wrapper"><code class="xref py py-func docutils literal notranslate"><span class="pre">wrapper()</span></code></a> function takes a callable object and does the
+<p>The <a class="reference internal" href="../library/curses.html#curses.wrapper" title="curses.wrapper"><code class="xref py py-func docutils literal notranslate"><span class="pre">wrapper()</span></code></a> function takes a callable object and does the
 initializations described above, also initializing colors if color
 support is present.  <code class="xref py py-func docutils literal notranslate"><span class="pre">wrapper()</span></code> then runs your provided callable.
 Once the callable returns, <code class="xref py py-func docutils literal notranslate"><span class="pre">wrapper()</span></code> will restore the original
@@ -259,11 +259,11 @@ able to read the exception’s message and traceback.</p>
 <p>Windows are the basic abstraction in curses.  A window object represents a
 rectangular area of the screen, and supports methods to display text,
 erase it, allow the user to input strings, and so forth.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">stdscr</span></code> object returned by the <a class="reference internal" href="../library/curses.html#curses-initscr" title="curses.initscr"><code class="xref py py-func docutils literal notranslate"><span class="pre">initscr()</span></code></a> function is a
+<p>The <code class="docutils literal notranslate"><span class="pre">stdscr</span></code> object returned by the <a class="reference internal" href="../library/curses.html#curses.initscr" title="curses.initscr"><code class="xref py py-func docutils literal notranslate"><span class="pre">initscr()</span></code></a> function is a
 window object that covers the entire screen.  Many programs may need
 only this single window, but you might wish to divide the screen into
 smaller windows, in order to redraw or clear them separately. The
-<a class="reference internal" href="../library/curses.html#curses-newwin" title="curses.newwin"><code class="xref py py-func docutils literal notranslate"><span class="pre">newwin()</span></code></a> function creates a new window of a given size,
+<a class="reference internal" href="../library/curses.html#curses.newwin" title="curses.newwin"><code class="xref py py-func docutils literal notranslate"><span class="pre">newwin()</span></code></a> function creates a new window of a given size,
 returning the new window object.</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">begin_x</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span> <span class="n">begin_y</span> <span class="o">=</span> <span class="mi">7</span>
 <span class="n">height</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span> <span class="n">width</span> <span class="o">=</span> <span class="mi">40</span>
@@ -283,7 +283,7 @@ and it’s too late to change things now.</p>
 <code class="docutils literal notranslate"><span class="pre">(curses.LINES</span> <span class="pre">-</span> <span class="pre">1,</span> <span class="pre">curses.COLS</span> <span class="pre">-</span> <span class="pre">1)</span></code>.</p>
 <p>When you call a method to display or erase text, the effect doesn’t
 immediately show up on the display.  Instead you must call the
-<a class="reference internal" href="../library/curses.html#curses-window-refresh" title="curses.window.refresh"><code class="xref py py-meth docutils literal notranslate"><span class="pre">refresh()</span></code></a> method of window objects to update the
+<a class="reference internal" href="../library/curses.html#curses.window.refresh" title="curses.window.refresh"><code class="xref py py-meth docutils literal notranslate"><span class="pre">refresh()</span></code></a> method of window objects to update the
 screen.</p>
 <p>This is because curses was originally written with slow 300-baud
 terminal connections in mind; with these terminals, minimizing the
@@ -331,10 +331,10 @@ efficient way to update the screen and prevent annoying screen flicker
 as each part of the screen gets updated.  <code class="xref py py-meth docutils literal notranslate"><span class="pre">refresh()</span></code> actually
 does two things:</p>
 <ol class="arabic simple">
-<li><p>Calls the <a class="reference internal" href="../library/curses.html#curses-window-noutrefresh" title="curses.window.noutrefresh"><code class="xref py py-meth docutils literal notranslate"><span class="pre">noutrefresh()</span></code></a> method of each window
+<li><p>Calls the <a class="reference internal" href="../library/curses.html#curses.window.noutrefresh" title="curses.window.noutrefresh"><code class="xref py py-meth docutils literal notranslate"><span class="pre">noutrefresh()</span></code></a> method of each window
 to update an underlying data structure representing the desired
 state of the screen.</p></li>
-<li><p>Calls the function <a class="reference internal" href="../library/curses.html#curses-doupdate" title="curses.doupdate"><code class="xref py py-func docutils literal notranslate"><span class="pre">doupdate()</span></code></a> function to change the
+<li><p>Calls the function <a class="reference internal" href="../library/curses.html#curses.doupdate" title="curses.doupdate"><code class="xref py py-func docutils literal notranslate"><span class="pre">doupdate()</span></code></a> function to change the
 physical screen to match the desired state recorded in the data structure.</p></li>
 </ol>
 <p>Instead you can call <code class="xref py py-meth docutils literal notranslate"><span class="pre">noutrefresh()</span></code> on a number of windows to
@@ -353,7 +353,7 @@ using <code class="docutils literal notranslate"><span class="pre">stdscr</span>
 a window and a coordinate.</p>
 <p>Fortunately the Python interface hides all these details.  <code class="docutils literal notranslate"><span class="pre">stdscr</span></code>
 is a window object like any other, and methods such as
-<a class="reference internal" href="../library/curses.html#curses-window-addstr" title="curses.window.addstr"><code class="xref py py-meth docutils literal notranslate"><span class="pre">addstr()</span></code></a> accept multiple argument forms.  Usually there
+<a class="reference internal" href="../library/curses.html#curses.window.addstr" title="curses.window.addstr"><code class="xref py py-meth docutils literal notranslate"><span class="pre">addstr()</span></code></a> accept multiple argument forms.  Usually there
 are four different forms.</p>
 <table class="docutils align-default">
 <colgroup>
@@ -388,13 +388,13 @@ display <em>str</em> or <em>ch</em>, using attribute <em>attr</em></p></td>
 <p>Attributes allow displaying text in highlighted forms such as boldface,
 underline, reverse code, or in color.  They’ll be explained in more detail in
 the next subsection.</p>
-<p>The <a class="reference internal" href="../library/curses.html#curses-window-addstr" title="curses.window.addstr"><code class="xref py py-meth docutils literal notranslate"><span class="pre">addstr()</span></code></a> method takes a Python string or
+<p>The <a class="reference internal" href="../library/curses.html#curses.window.addstr" title="curses.window.addstr"><code class="xref py py-meth docutils literal notranslate"><span class="pre">addstr()</span></code></a> method takes a Python string or
 bytestring as the value to be displayed.  The contents of bytestrings
 are sent to the terminal as-is.  Strings are encoded to bytes using
 the value of the window’s <code class="xref py py-attr docutils literal notranslate"><span class="pre">encoding</span></code> attribute; this defaults to
 the default system encoding as returned by
-<a class="reference internal" href="../library/locale.html#locale-getpreferredencoding" title="locale.getpreferredencoding"><code class="xref py py-func docutils literal notranslate"><span class="pre">locale.getpreferredencoding()</span></code></a>.</p>
-<p>The <a class="reference internal" href="../library/curses.html#curses-window-addch" title="curses.window.addch"><code class="xref py py-meth docutils literal notranslate"><span class="pre">addch()</span></code></a> methods take a character, which can be
+<a class="reference internal" href="../library/locale.html#locale.getpreferredencoding" title="locale.getpreferredencoding"><code class="xref py py-func docutils literal notranslate"><span class="pre">locale.getpreferredencoding()</span></code></a>.</p>
+<p>The <a class="reference internal" href="../library/curses.html#curses.window.addch" title="curses.window.addch"><code class="xref py py-meth docutils literal notranslate"><span class="pre">addch()</span></code></a> methods take a character, which can be
 either a string of length 1, a bytestring of length 1, or an integer.</p>
 <p>Constants are provided for extension characters; these constants are
 integers greater than 255.  For example, <code class="xref py py-const docutils literal notranslate"><span class="pre">ACS_PLMINUS</span></code> is a +/-
@@ -411,7 +411,7 @@ apparently random location.</p>
 <p>If your application doesn’t need a blinking cursor at all, you can
 call <code class="docutils literal notranslate"><span class="pre">curs_set(False)</span></code> to make it invisible.  For compatibility
 with older curses versions, there’s a <code class="docutils literal notranslate"><span class="pre">leaveok(bool)</span></code> function
-that’s a synonym for <a class="reference internal" href="../library/curses.html#curses-curs-set" title="curses.curs_set"><code class="xref py py-func docutils literal notranslate"><span class="pre">curs_set()</span></code></a>.  When <em>bool</em> is true, the
+that’s a synonym for <a class="reference internal" href="../library/curses.html#curses.curs_set" title="curses.curs_set"><code class="xref py py-func docutils literal notranslate"><span class="pre">curs_set()</span></code></a>.  When <em>bool</em> is true, the
 curses library will attempt to suppress the flashing cursor, and you
 won’t need to worry about leaving it in odd locations.</p>
 <div class="section" id="attributes-and-color">
@@ -467,10 +467,10 @@ could code:</p>
 <p>The curses library also supports color on those terminals that provide it. The
 most common such terminal is probably the Linux console, followed by color
 xterms.</p>
-<p>To use color, you must call the <a class="reference internal" href="../library/curses.html#curses-start-color" title="curses.start_color"><code class="xref py py-func docutils literal notranslate"><span class="pre">start_color()</span></code></a> function soon
-after calling <a class="reference internal" href="../library/curses.html#curses-initscr" title="curses.initscr"><code class="xref py py-func docutils literal notranslate"><span class="pre">initscr()</span></code></a>, to initialize the default color set
-(the <a class="reference internal" href="../library/curses.html#curses-wrapper" title="curses.wrapper"><code class="xref py py-func docutils literal notranslate"><span class="pre">curses.wrapper()</span></code></a> function does this automatically).  Once that’s
-done, the <a class="reference internal" href="../library/curses.html#curses-has-colors" title="curses.has_colors"><code class="xref py py-func docutils literal notranslate"><span class="pre">has_colors()</span></code></a> function returns TRUE if the terminal
+<p>To use color, you must call the <a class="reference internal" href="../library/curses.html#curses.start_color" title="curses.start_color"><code class="xref py py-func docutils literal notranslate"><span class="pre">start_color()</span></code></a> function soon
+after calling <a class="reference internal" href="../library/curses.html#curses.initscr" title="curses.initscr"><code class="xref py py-func docutils literal notranslate"><span class="pre">initscr()</span></code></a>, to initialize the default color set
+(the <a class="reference internal" href="../library/curses.html#curses.wrapper" title="curses.wrapper"><code class="xref py py-func docutils literal notranslate"><span class="pre">curses.wrapper()</span></code></a> function does this automatically).  Once that’s
+done, the <a class="reference internal" href="../library/curses.html#curses.has_colors" title="curses.has_colors"><code class="xref py py-func docutils literal notranslate"><span class="pre">has_colors()</span></code></a> function returns TRUE if the terminal
 in use can
 actually display color.  (Note: curses uses the American spelling ‘color’,
 instead of the Canadian/British spelling ‘colour’.  If you’re used to the
@@ -478,7 +478,7 @@ British spelling, you’ll have to resign yourself to misspelling it for the sak
 of these functions.)</p>
 <p>The curses library maintains a finite number of color pairs, containing a
 foreground (or text) color and a background color.  You can get the attribute
-value corresponding to a color pair with the <a class="reference internal" href="../library/curses.html#curses-color-pair" title="curses.color_pair"><code class="xref py py-func docutils literal notranslate"><span class="pre">color_pair()</span></code></a>
+value corresponding to a color pair with the <a class="reference internal" href="../library/curses.html#curses.color_pair" title="curses.color_pair"><code class="xref py py-func docutils literal notranslate"><span class="pre">color_pair()</span></code></a>
 function; this can be bitwise-OR’ed with other attributes such as
 <code class="xref py py-const docutils literal notranslate"><span class="pre">A_REVERSE</span></code>, but again, such combinations are not guaranteed to work
 on all terminals.</p>
@@ -512,7 +512,7 @@ RGB value.  This lets you change color 1, which is usually red, to purple or
 blue or any other color you like.  Unfortunately, the Linux console doesn’t
 support this, so I’m unable to try it out, and can’t provide any examples.  You
 can check if your terminal can do this by calling
-<a class="reference internal" href="../library/curses.html#curses-can-change-color" title="curses.can_change_color"><code class="xref py py-func docutils literal notranslate"><span class="pre">can_change_color()</span></code></a>, which returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if the capability is
+<a class="reference internal" href="../library/curses.html#curses.can_change_color" title="curses.can_change_color"><code class="xref py py-func docutils literal notranslate"><span class="pre">can_change_color()</span></code></a>, which returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if the capability is
 there.  If you’re lucky enough to have such a talented terminal, consult your
 system’s man pages for more information.</p>
 </div>
@@ -525,21 +525,21 @@ such as <a class="reference external" href="https://pypi.org/project/urwid/">Urw
 collections of widgets.)</p>
 <p>There are two methods for getting input from a window:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../library/curses.html#curses-window-getch" title="curses.window.getch"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getch()</span></code></a> refreshes the screen and then waits for
-the user to hit a key, displaying the key if <a class="reference internal" href="../library/curses.html#curses-echo" title="curses.echo"><code class="xref py py-func docutils literal notranslate"><span class="pre">echo()</span></code></a> has been
+<li><p><a class="reference internal" href="../library/curses.html#curses.window.getch" title="curses.window.getch"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getch()</span></code></a> refreshes the screen and then waits for
+the user to hit a key, displaying the key if <a class="reference internal" href="../library/curses.html#curses.echo" title="curses.echo"><code class="xref py py-func docutils literal notranslate"><span class="pre">echo()</span></code></a> has been
 called earlier.  You can optionally specify a coordinate to which
 the cursor should be moved before pausing.</p></li>
-<li><p><a class="reference internal" href="../library/curses.html#curses-window-getkey" title="curses.window.getkey"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getkey()</span></code></a> does the same thing but converts the
+<li><p><a class="reference internal" href="../library/curses.html#curses.window.getkey" title="curses.window.getkey"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getkey()</span></code></a> does the same thing but converts the
 integer to a string.  Individual characters are returned as
 1-character strings, and special keys such as function keys return
 longer strings containing a key name such as <code class="docutils literal notranslate"><span class="pre">KEY_UP</span></code> or <code class="docutils literal notranslate"><span class="pre">^G</span></code>.</p></li>
 </ul>
 <p>It’s possible to not wait for the user using the
-<a class="reference internal" href="../library/curses.html#curses-window-nodelay" title="curses.window.nodelay"><code class="xref py py-meth docutils literal notranslate"><span class="pre">nodelay()</span></code></a> window method. After <code class="docutils literal notranslate"><span class="pre">nodelay(True)</span></code>,
+<a class="reference internal" href="../library/curses.html#curses.window.nodelay" title="curses.window.nodelay"><code class="xref py py-meth docutils literal notranslate"><span class="pre">nodelay()</span></code></a> window method. After <code class="docutils literal notranslate"><span class="pre">nodelay(True)</span></code>,
 <code class="xref py py-meth docutils literal notranslate"><span class="pre">getch()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">getkey()</span></code> for the window become
 non-blocking. To signal that no input is ready, <code class="xref py py-meth docutils literal notranslate"><span class="pre">getch()</span></code> returns
 <code class="docutils literal notranslate"><span class="pre">curses.ERR</span></code> (a value of -1) and <code class="xref py py-meth docutils literal notranslate"><span class="pre">getkey()</span></code> raises an exception.
-There’s also a <a class="reference internal" href="../library/curses.html#curses-halfdelay" title="curses.halfdelay"><code class="xref py py-func docutils literal notranslate"><span class="pre">halfdelay()</span></code></a> function, which can be used to (in
+There’s also a <a class="reference internal" href="../library/curses.html#curses.halfdelay" title="curses.halfdelay"><code class="xref py py-func docutils literal notranslate"><span class="pre">halfdelay()</span></code></a> function, which can be used to (in
 effect) set a timer on each <code class="xref py py-meth docutils literal notranslate"><span class="pre">getch()</span></code>; if no input becomes
 available within a specified delay (measured in tenths of a second),
 curses raises an exception.</p>
@@ -559,14 +559,14 @@ your program may look something like this:</p>
         <span class="n">x</span> <span class="o">=</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span>
 </pre></div>
 </div>
-<p>The <a class="reference internal" href="../library/curses.ascii.html#module-curses-ascii" title="curses.ascii: Constants and set-membership functions for ASCII characters."><code class="xref py py-mod docutils literal notranslate"><span class="pre">curses.ascii</span></code></a> module supplies ASCII class membership functions that
+<p>The <a class="reference internal" href="../library/curses.ascii.html#module-curses.ascii" title="curses.ascii: Constants and set-membership functions for ASCII characters."><code class="xref py py-mod docutils literal notranslate"><span class="pre">curses.ascii</span></code></a> module supplies ASCII class membership functions that
 take either integer or 1-character string arguments; these may be useful in
 writing more readable tests for such loops.  It also supplies
 conversion functions  that take either integer or 1-character-string arguments
-and return the same type.  For example, <a class="reference internal" href="../library/curses.ascii.html#curses-ascii-ctrl" title="curses.ascii.ctrl"><code class="xref py py-func docutils literal notranslate"><span class="pre">curses.ascii.ctrl()</span></code></a> returns the
+and return the same type.  For example, <a class="reference internal" href="../library/curses.ascii.html#curses.ascii.ctrl" title="curses.ascii.ctrl"><code class="xref py py-func docutils literal notranslate"><span class="pre">curses.ascii.ctrl()</span></code></a> returns the
 control character corresponding to its argument.</p>
 <p>There’s also a method to retrieve an entire string,
-<a class="reference internal" href="../library/curses.html#curses-window-getstr" title="curses.window.getstr"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getstr()</span></code></a>.  It isn’t used very often, because its
+<a class="reference internal" href="../library/curses.html#curses.window.getstr" title="curses.window.getstr"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getstr()</span></code></a>.  It isn’t used very often, because its
 functionality is quite limited; the only editing keys available are
 the backspace key and the Enter key, which terminates the string.  It
 can optionally be limited to a fixed number of characters.</p>
@@ -576,9 +576,9 @@ can optionally be limited to a fixed number of characters.</p>
 <span class="n">s</span> <span class="o">=</span> <span class="n">stdscr</span><span class="o">.</span><span class="n">getstr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The <a class="reference internal" href="../library/curses.html#module-curses-textpad" title="curses.textpad: Emacs-like input editing in a curses window."><code class="xref py py-mod docutils literal notranslate"><span class="pre">curses.textpad</span></code></a> module supplies a text box that supports an
+<p>The <a class="reference internal" href="../library/curses.html#module-curses.textpad" title="curses.textpad: Emacs-like input editing in a curses window."><code class="xref py py-mod docutils literal notranslate"><span class="pre">curses.textpad</span></code></a> module supplies a text box that supports an
 Emacs-like set of keybindings.  Various methods of the
-<a class="reference internal" href="../library/curses.html#curses-textpad-textbox" title="curses.textpad.Textbox"><code class="xref py py-class docutils literal notranslate"><span class="pre">Textbox</span></code></a> class support editing with input
+<a class="reference internal" href="../library/curses.html#curses.textpad.textbox" title="curses.textpad.Textbox"><code class="xref py py-class docutils literal notranslate"><span class="pre">Textbox</span></code></a> class support editing with input
 validation and gathering the edit results either with or without
 trailing spaces.  Here’s an example:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">curses</span>
@@ -600,7 +600,7 @@ trailing spaces.  Here’s an example:</p>
     <span class="n">message</span> <span class="o">=</span> <span class="n">box</span><span class="o">.</span><span class="n">gather</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>See the library documentation on <a class="reference internal" href="../library/curses.html#module-curses-textpad" title="curses.textpad: Emacs-like input editing in a curses window."><code class="xref py py-mod docutils literal notranslate"><span class="pre">curses.textpad</span></code></a> for more details.</p>
+<p>See the library documentation on <a class="reference internal" href="../library/curses.html#module-curses.textpad" title="curses.textpad: Emacs-like input editing in a curses window."><code class="xref py py-mod docutils literal notranslate"><span class="pre">curses.textpad</span></code></a> for more details.</p>
 </div>
 <div class="section" id="for-more-information">
 <h2>For More Information<a class="headerlink" href="#for-more-information" title="Permalink to this headline">¶</a></h2>
@@ -738,7 +738,7 @@ Urwid.</p></li>
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/b652476.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.0+/b652476.
     </div>
 
   </body>

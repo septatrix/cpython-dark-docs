@@ -107,7 +107,7 @@
 <span id="bufferobjects"></span><span id="index-0"></span><h1>Buffer Protocol<a class="headerlink" href="#buffer-protocol" title="Permalink to this headline">¶</a></h1>
 <p>Certain objects available in Python wrap access to an underlying memory
 array or <em>buffer</em>.  Such objects include the built-in <a class="reference internal" href="../library/stdtypes.html#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> and
-<a class="reference internal" href="../library/stdtypes.html#bytearray" title="bytearray"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytearray</span></code></a>, and some extension types like <a class="reference internal" href="../library/array.html#array-array" title="array.array"><code class="xref py py-class docutils literal notranslate"><span class="pre">array.array</span></code></a>.
+<a class="reference internal" href="../library/stdtypes.html#bytearray" title="bytearray"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytearray</span></code></a>, and some extension types like <a class="reference internal" href="../library/array.html#array.array" title="array.array"><code class="xref py py-class docutils literal notranslate"><span class="pre">array.array</span></code></a>.
 Third-party libraries may define their own types for special purposes, such
 as image processing or numeric analysis.</p>
 <p>While each of these types have their own semantics, they share the common
@@ -125,12 +125,12 @@ the raw underlying data of an object (for example a method parameter).</p></li>
 </ul>
 <p>Simple objects such as <a class="reference internal" href="../library/stdtypes.html#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> and <a class="reference internal" href="../library/stdtypes.html#bytearray" title="bytearray"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytearray</span></code></a> expose their
 underlying buffer in byte-oriented form.  Other forms are possible; for example,
-the elements exposed by an <a class="reference internal" href="../library/array.html#array-array" title="array.array"><code class="xref py py-class docutils literal notranslate"><span class="pre">array.array</span></code></a> can be multi-byte values.</p>
-<p>An example consumer of the buffer interface is the <a class="reference internal" href="../library/io.html#io-bufferediobase-write" title="io.BufferedIOBase.write"><code class="xref py py-meth docutils literal notranslate"><span class="pre">write()</span></code></a>
+the elements exposed by an <a class="reference internal" href="../library/array.html#array.array" title="array.array"><code class="xref py py-class docutils literal notranslate"><span class="pre">array.array</span></code></a> can be multi-byte values.</p>
+<p>An example consumer of the buffer interface is the <a class="reference internal" href="../library/io.html#io.bufferediobase.write" title="io.BufferedIOBase.write"><code class="xref py py-meth docutils literal notranslate"><span class="pre">write()</span></code></a>
 method of file objects: any object that can export a series of bytes through
 the buffer interface can be written to a file.  While <code class="xref py py-meth docutils literal notranslate"><span class="pre">write()</span></code> only
 needs read-only access to the internal contents of the object passed to it,
-other methods such as <a class="reference internal" href="../library/io.html#io-bufferediobase-readinto" title="io.BufferedIOBase.readinto"><code class="xref py py-meth docutils literal notranslate"><span class="pre">readinto()</span></code></a> need write access
+other methods such as <a class="reference internal" href="../library/io.html#io.bufferediobase.readinto" title="io.BufferedIOBase.readinto"><code class="xref py py-meth docutils literal notranslate"><span class="pre">readinto()</span></code></a> need write access
 to the contents of their argument.  The buffer interface allows objects to
 selectively allow or reject exporting of read-write and read-only buffers.</p>
 <p>There are two ways for a consumer of the buffer interface to acquire a buffer
@@ -165,19 +165,19 @@ a buffer, see <a class="reference internal" href="#c.PyObject_GetBuffer" title="
 <dt id="c.Py_buffer">
 <em class="property">type </em><code class="sig-name descname">Py_buffer</code><a class="headerlink" href="#c.Py_buffer" title="Permalink to this definition">¶</a><br /></dt>
 <dd><dl class="c member">
-<dt id="c.Py_buffer.buf">
-void *<code class="sig-name descname">buf</code><a class="headerlink" href="#c.Py_buffer.buf" title="Permalink to this definition">¶</a><br /></dt>
+<dt>
+<code class="sig-name descname">void \*buf</code></dt>
 <dd><p>A pointer to the start of the logical structure described by the buffer
 fields. This can be any location within the underlying physical memory
-block of the exporter. For example, with negative <a class="reference internal" href="#c.Py_buffer.strides" title="Py_buffer.strides"><code class="xref c c-member docutils literal notranslate"><span class="pre">strides</span></code></a>
+block of the exporter. For example, with negative <code class="xref c c-member docutils literal notranslate"><span class="pre">strides</span></code>
 the value may point to the end of the memory block.</p>
 <p>For <a class="reference internal" href="../glossary.html#term-contiguous"><span class="xref std std-term">contiguous</span></a> arrays, the value points to the beginning of
 the memory block.</p>
 </dd></dl>
 
 <dl class="c member">
-<dt id="c.Py_buffer.obj">
-void *<code class="sig-name descname">obj</code><a class="headerlink" href="#c.Py_buffer.obj" title="Permalink to this definition">¶</a><br /></dt>
+<dt>
+<code class="sig-name descname">void \*obj</code></dt>
 <dd><p>A new reference to the exporting object. The reference is owned by
 the consumer and automatically decremented and set to <code class="docutils literal notranslate"><span class="pre">NULL</span></code> by
 <a class="reference internal" href="#c.PyBuffer_Release" title="PyBuffer_Release"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyBuffer_Release()</span></code></a>. The field is the equivalent of the return
@@ -210,23 +210,23 @@ by the <a class="reference internal" href="#c.PyBUF_WRITABLE" title="PyBUF_WRITA
 <dl class="c member">
 <dt id="c.Py_buffer.itemsize">
 Py_ssize_t <code class="sig-name descname">itemsize</code><a class="headerlink" href="#c.Py_buffer.itemsize" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Item size in bytes of a single element. Same as the value of <a class="reference internal" href="../library/struct.html#struct-calcsize" title="struct.calcsize"><code class="xref py py-func docutils literal notranslate"><span class="pre">struct.calcsize()</span></code></a>
-called on non-<code class="docutils literal notranslate"><span class="pre">NULL</span></code> <a class="reference internal" href="#c.Py_buffer.format" title="Py_buffer.format"><code class="xref c c-member docutils literal notranslate"><span class="pre">format</span></code></a> values.</p>
+<dd><p>Item size in bytes of a single element. Same as the value of <a class="reference internal" href="../library/struct.html#struct.calcsize" title="struct.calcsize"><code class="xref py py-func docutils literal notranslate"><span class="pre">struct.calcsize()</span></code></a>
+called on non-<code class="docutils literal notranslate"><span class="pre">NULL</span></code> <code class="xref c c-member docutils literal notranslate"><span class="pre">format</span></code> values.</p>
 <p>Important exception: If a consumer requests a buffer without the
-<a class="reference internal" href="#c.PyBUF_FORMAT" title="PyBUF_FORMAT"><code class="xref c c-macro docutils literal notranslate"><span class="pre">PyBUF_FORMAT</span></code></a> flag, <a class="reference internal" href="#c.Py_buffer.format" title="Py_buffer.format"><code class="xref c c-member docutils literal notranslate"><span class="pre">format</span></code></a> will
+<a class="reference internal" href="#c.PyBUF_FORMAT" title="PyBUF_FORMAT"><code class="xref c c-macro docutils literal notranslate"><span class="pre">PyBUF_FORMAT</span></code></a> flag, <code class="xref c c-member docutils literal notranslate"><span class="pre">format</span></code> will
 be set to  <code class="docutils literal notranslate"><span class="pre">NULL</span></code>,  but <a class="reference internal" href="#c.Py_buffer.itemsize" title="Py_buffer.itemsize"><code class="xref c c-member docutils literal notranslate"><span class="pre">itemsize</span></code></a> still has
 the value for the original format.</p>
-<p>If <a class="reference internal" href="#c.Py_buffer.shape" title="Py_buffer.shape"><code class="xref c c-member docutils literal notranslate"><span class="pre">shape</span></code></a> is present, the equality
+<p>If <code class="xref c c-member docutils literal notranslate"><span class="pre">shape</span></code> is present, the equality
 <code class="docutils literal notranslate"><span class="pre">product(shape)</span> <span class="pre">*</span> <span class="pre">itemsize</span> <span class="pre">==</span> <span class="pre">len</span></code> still holds and the consumer
 can use <a class="reference internal" href="#c.Py_buffer.itemsize" title="Py_buffer.itemsize"><code class="xref c c-member docutils literal notranslate"><span class="pre">itemsize</span></code></a> to navigate the buffer.</p>
-<p>If <a class="reference internal" href="#c.Py_buffer.shape" title="Py_buffer.shape"><code class="xref c c-member docutils literal notranslate"><span class="pre">shape</span></code></a> is <code class="docutils literal notranslate"><span class="pre">NULL</span></code> as a result of a <a class="reference internal" href="#c.PyBUF_SIMPLE" title="PyBUF_SIMPLE"><code class="xref c c-macro docutils literal notranslate"><span class="pre">PyBUF_SIMPLE</span></code></a>
+<p>If <code class="xref c c-member docutils literal notranslate"><span class="pre">shape</span></code> is <code class="docutils literal notranslate"><span class="pre">NULL</span></code> as a result of a <a class="reference internal" href="#c.PyBUF_SIMPLE" title="PyBUF_SIMPLE"><code class="xref c c-macro docutils literal notranslate"><span class="pre">PyBUF_SIMPLE</span></code></a>
 or a <a class="reference internal" href="#c.PyBUF_WRITABLE" title="PyBUF_WRITABLE"><code class="xref c c-macro docutils literal notranslate"><span class="pre">PyBUF_WRITABLE</span></code></a> request, the consumer must disregard
 <a class="reference internal" href="#c.Py_buffer.itemsize" title="Py_buffer.itemsize"><code class="xref c c-member docutils literal notranslate"><span class="pre">itemsize</span></code></a> and assume <code class="docutils literal notranslate"><span class="pre">itemsize</span> <span class="pre">==</span> <span class="pre">1</span></code>.</p>
 </dd></dl>
 
 <dl class="c member">
-<dt id="c.Py_buffer.format">
-<em class="property">const</em> char *<code class="sig-name descname">format</code><a class="headerlink" href="#c.Py_buffer.format" title="Permalink to this definition">¶</a><br /></dt>
+<dt>
+<code class="sig-name descname">const char \*format</code></dt>
 <dd><p>A <em>NUL</em> terminated string in <a class="reference internal" href="../library/struct.html#module-struct" title="struct: Interpret bytes as packed binary data."><code class="xref py py-mod docutils literal notranslate"><span class="pre">struct</span></code></a> module style syntax describing
 the contents of a single item. If this is <code class="docutils literal notranslate"><span class="pre">NULL</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;B&quot;</span></code> (unsigned bytes)
 is assumed.</p>
@@ -237,17 +237,17 @@ is assumed.</p>
 <dt id="c.Py_buffer.ndim">
 int <code class="sig-name descname">ndim</code><a class="headerlink" href="#c.Py_buffer.ndim" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>The number of dimensions the memory represents as an n-dimensional array.
-If it is <code class="docutils literal notranslate"><span class="pre">0</span></code>, <a class="reference internal" href="#c.Py_buffer.buf" title="Py_buffer.buf"><code class="xref c c-member docutils literal notranslate"><span class="pre">buf</span></code></a> points to a single item representing
-a scalar. In this case, <a class="reference internal" href="#c.Py_buffer.shape" title="Py_buffer.shape"><code class="xref c c-member docutils literal notranslate"><span class="pre">shape</span></code></a>, <a class="reference internal" href="#c.Py_buffer.strides" title="Py_buffer.strides"><code class="xref c c-member docutils literal notranslate"><span class="pre">strides</span></code></a>
-and <a class="reference internal" href="#c.Py_buffer.suboffsets" title="Py_buffer.suboffsets"><code class="xref c c-member docutils literal notranslate"><span class="pre">suboffsets</span></code></a> MUST be <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.</p>
+If it is <code class="docutils literal notranslate"><span class="pre">0</span></code>, <code class="xref c c-member docutils literal notranslate"><span class="pre">buf</span></code> points to a single item representing
+a scalar. In this case, <code class="xref c c-member docutils literal notranslate"><span class="pre">shape</span></code>, <code class="xref c c-member docutils literal notranslate"><span class="pre">strides</span></code>
+and <code class="xref c c-member docutils literal notranslate"><span class="pre">suboffsets</span></code> MUST be <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.</p>
 <p>The macro <code class="xref c c-macro docutils literal notranslate"><span class="pre">PyBUF_MAX_NDIM</span></code> limits the maximum number of dimensions
 to 64. Exporters MUST respect this limit, consumers of multi-dimensional
 buffers SHOULD be able to handle up to <code class="xref c c-macro docutils literal notranslate"><span class="pre">PyBUF_MAX_NDIM</span></code> dimensions.</p>
 </dd></dl>
 
 <dl class="c member">
-<dt id="c.Py_buffer.shape">
-Py_ssize_t *<code class="sig-name descname">shape</code><a class="headerlink" href="#c.Py_buffer.shape" title="Permalink to this definition">¶</a><br /></dt>
+<dt>
+<code class="sig-name descname">Py_ssize_t \*shape</code></dt>
 <dd><p>An array of <code class="xref c c-type docutils literal notranslate"><span class="pre">Py_ssize_t</span></code> of length <a class="reference internal" href="#c.Py_buffer.ndim" title="Py_buffer.ndim"><code class="xref c c-member docutils literal notranslate"><span class="pre">ndim</span></code></a>
 indicating the shape of the memory as an n-dimensional array. Note that
 <code class="docutils literal notranslate"><span class="pre">shape[0]</span> <span class="pre">*</span> <span class="pre">...</span> <span class="pre">*</span> <span class="pre">shape[ndim-1]</span> <span class="pre">*</span> <span class="pre">itemsize</span></code> MUST be equal to
@@ -259,8 +259,8 @@ for further information.</p>
 </dd></dl>
 
 <dl class="c member">
-<dt id="c.Py_buffer.strides">
-Py_ssize_t *<code class="sig-name descname">strides</code><a class="headerlink" href="#c.Py_buffer.strides" title="Permalink to this definition">¶</a><br /></dt>
+<dt>
+<code class="sig-name descname">Py_ssize_t \*strides</code></dt>
 <dd><p>An array of <code class="xref c c-type docutils literal notranslate"><span class="pre">Py_ssize_t</span></code> of length <a class="reference internal" href="#c.Py_buffer.ndim" title="Py_buffer.ndim"><code class="xref c c-member docutils literal notranslate"><span class="pre">ndim</span></code></a>
 giving the number of bytes to skip to get to a new element in each
 dimension.</p>
@@ -271,8 +271,8 @@ usually positive, but a consumer MUST be able to handle the case
 </dd></dl>
 
 <dl class="c member">
-<dt id="c.Py_buffer.suboffsets">
-Py_ssize_t *<code class="sig-name descname">suboffsets</code><a class="headerlink" href="#c.Py_buffer.suboffsets" title="Permalink to this definition">¶</a><br /></dt>
+<dt>
+<code class="sig-name descname">Py_ssize_t \*suboffsets</code></dt>
 <dd><p>An array of <code class="xref c c-type docutils literal notranslate"><span class="pre">Py_ssize_t</span></code> of length <a class="reference internal" href="#c.Py_buffer.ndim" title="Py_buffer.ndim"><code class="xref c c-member docutils literal notranslate"><span class="pre">ndim</span></code></a>.
 If <code class="docutils literal notranslate"><span class="pre">suboffsets[n]</span> <span class="pre">&gt;=</span> <span class="pre">0</span></code>, the values stored along the nth dimension are
 pointers and the suboffset value dictates how many bytes to add to each
@@ -288,8 +288,8 @@ of such an array.</p>
 </dd></dl>
 
 <dl class="c member">
-<dt id="c.Py_buffer.internal">
-void *<code class="sig-name descname">internal</code><a class="headerlink" href="#c.Py_buffer.internal" title="Permalink to this definition">¶</a><br /></dt>
+<dt>
+<code class="sig-name descname">void \*internal</code></dt>
 <dd><p>This is for use internally by the exporting object. For example, this
 might be re-cast as an integer by the exporter and used to store flags
 about whether or not the shape, strides, and suboffsets arrays must be
@@ -311,7 +311,7 @@ type.</p>
 <div class="section" id="request-independent-fields">
 <h3>request-independent fields<a class="headerlink" href="#request-independent-fields" title="Permalink to this headline">¶</a></h3>
 <p>The following fields are not influenced by <em>flags</em> and must always be filled in
-with the correct values: <a class="reference internal" href="#c.Py_buffer.obj" title="Py_buffer.obj"><code class="xref c c-member docutils literal notranslate"><span class="pre">obj</span></code></a>, <a class="reference internal" href="#c.Py_buffer.buf" title="Py_buffer.buf"><code class="xref c c-member docutils literal notranslate"><span class="pre">buf</span></code></a>,
+with the correct values: <code class="xref c c-member docutils literal notranslate"><span class="pre">obj</span></code>, <code class="xref c c-member docutils literal notranslate"><span class="pre">buf</span></code>,
 <a class="reference internal" href="#c.Py_buffer.len" title="Py_buffer.len"><code class="xref c c-member docutils literal notranslate"><span class="pre">len</span></code></a>, <a class="reference internal" href="#c.Py_buffer.itemsize" title="Py_buffer.itemsize"><code class="xref c c-member docutils literal notranslate"><span class="pre">itemsize</span></code></a>, <a class="reference internal" href="#c.Py_buffer.ndim" title="Py_buffer.ndim"><code class="xref c c-member docutils literal notranslate"><span class="pre">ndim</span></code></a>.</p>
 </div>
 <div class="section" id="readonly-format">
@@ -329,7 +329,7 @@ MUST be consistent for all consumers.</p>
 <dl class="c macro">
 <dt id="c.PyBUF_FORMAT">
 <code class="sig-name descname">PyBUF_FORMAT</code><a class="headerlink" href="#c.PyBUF_FORMAT" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Controls the <a class="reference internal" href="#c.Py_buffer.format" title="Py_buffer.format"><code class="xref c c-member docutils literal notranslate"><span class="pre">format</span></code></a> field. If set, this field MUST
+<dd><p>Controls the <code class="xref c c-member docutils literal notranslate"><span class="pre">format</span></code> field. If set, this field MUST
 be filled in correctly. Otherwise, this field MUST be <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.</p>
 </dd></dl>
 
@@ -613,18 +613,18 @@ have to call <a class="reference internal" href="#c.PyBuffer_IsContiguous" title
 <div class="section" id="numpy-style-shape-and-strides">
 <h3>NumPy-style: shape and strides<a class="headerlink" href="#numpy-style-shape-and-strides" title="Permalink to this headline">¶</a></h3>
 <p>The logical structure of NumPy-style arrays is defined by <a class="reference internal" href="#c.Py_buffer.itemsize" title="Py_buffer.itemsize"><code class="xref c c-member docutils literal notranslate"><span class="pre">itemsize</span></code></a>,
-<a class="reference internal" href="#c.Py_buffer.ndim" title="Py_buffer.ndim"><code class="xref c c-member docutils literal notranslate"><span class="pre">ndim</span></code></a>, <a class="reference internal" href="#c.Py_buffer.shape" title="Py_buffer.shape"><code class="xref c c-member docutils literal notranslate"><span class="pre">shape</span></code></a> and <a class="reference internal" href="#c.Py_buffer.strides" title="Py_buffer.strides"><code class="xref c c-member docutils literal notranslate"><span class="pre">strides</span></code></a>.</p>
-<p>If <code class="docutils literal notranslate"><span class="pre">ndim</span> <span class="pre">==</span> <span class="pre">0</span></code>, the memory location pointed to by <a class="reference internal" href="#c.Py_buffer.buf" title="Py_buffer.buf"><code class="xref c c-member docutils literal notranslate"><span class="pre">buf</span></code></a> is
+<a class="reference internal" href="#c.Py_buffer.ndim" title="Py_buffer.ndim"><code class="xref c c-member docutils literal notranslate"><span class="pre">ndim</span></code></a>, <code class="xref c c-member docutils literal notranslate"><span class="pre">shape</span></code> and <code class="xref c c-member docutils literal notranslate"><span class="pre">strides</span></code>.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">ndim</span> <span class="pre">==</span> <span class="pre">0</span></code>, the memory location pointed to by <code class="xref c c-member docutils literal notranslate"><span class="pre">buf</span></code> is
 interpreted as a scalar of size <a class="reference internal" href="#c.Py_buffer.itemsize" title="Py_buffer.itemsize"><code class="xref c c-member docutils literal notranslate"><span class="pre">itemsize</span></code></a>. In that case,
-both <a class="reference internal" href="#c.Py_buffer.shape" title="Py_buffer.shape"><code class="xref c c-member docutils literal notranslate"><span class="pre">shape</span></code></a> and <a class="reference internal" href="#c.Py_buffer.strides" title="Py_buffer.strides"><code class="xref c c-member docutils literal notranslate"><span class="pre">strides</span></code></a> are <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.</p>
-<p>If <a class="reference internal" href="#c.Py_buffer.strides" title="Py_buffer.strides"><code class="xref c c-member docutils literal notranslate"><span class="pre">strides</span></code></a> is <code class="docutils literal notranslate"><span class="pre">NULL</span></code>, the array is interpreted as
+both <code class="xref c c-member docutils literal notranslate"><span class="pre">shape</span></code> and <code class="xref c c-member docutils literal notranslate"><span class="pre">strides</span></code> are <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.</p>
+<p>If <code class="xref c c-member docutils literal notranslate"><span class="pre">strides</span></code> is <code class="docutils literal notranslate"><span class="pre">NULL</span></code>, the array is interpreted as
 a standard n-dimensional C-array. Otherwise, the consumer must access an
 n-dimensional array as follows:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">ptr</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">buf</span> <span class="o">+</span> <span class="n">indices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">strides</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">...</span> <span class="o">+</span> <span class="n">indices</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">strides</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
 <span class="n">item</span> <span class="o">=</span> <span class="o">*</span><span class="p">((</span><span class="n">typeof</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="o">*</span><span class="p">)</span><span class="n">ptr</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>As noted above, <a class="reference internal" href="#c.Py_buffer.buf" title="Py_buffer.buf"><code class="xref c c-member docutils literal notranslate"><span class="pre">buf</span></code></a> can point to any location within
+<p>As noted above, <code class="xref c c-member docutils literal notranslate"><span class="pre">buf</span></code> can point to any location within
 the actual memory block. An exporter can check the validity of a buffer with
 this function:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">verify_structure</span><span class="p">(</span><span class="n">memlen</span><span class="p">,</span> <span class="n">itemsize</span><span class="p">,</span> <span class="n">ndim</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">strides</span><span class="p">,</span> <span class="n">offset</span><span class="p">):</span>
@@ -662,7 +662,7 @@ that must be followed in order to get to the next element in a dimension.
 For example, the regular three-dimensional C-array <code class="docutils literal notranslate"><span class="pre">char</span> <span class="pre">v[2][2][3]</span></code> can
 also be viewed as an array of 2 pointers to 2 two-dimensional arrays:
 <code class="docutils literal notranslate"><span class="pre">char</span> <span class="pre">(*v[2])[2][3]</span></code>. In suboffsets representation, those two pointers
-can be embedded at the start of <a class="reference internal" href="#c.Py_buffer.buf" title="Py_buffer.buf"><code class="xref c c-member docutils literal notranslate"><span class="pre">buf</span></code></a>, pointing
+can be embedded at the start of <code class="xref c c-member docutils literal notranslate"><span class="pre">buf</span></code>, pointing
 to two <code class="docutils literal notranslate"><span class="pre">char</span> <span class="pre">x[2][3]</span></code> arrays that can be located anywhere in memory.</p>
 <p>Here is a function that returns a pointer to the element in an N-D array
 pointed to by an N-dimensional index when there are both non-<code class="docutils literal notranslate"><span class="pre">NULL</span></code> strides
@@ -723,7 +723,7 @@ is no longer being used, otherwise reference leaks may occur.</p>
 <dl class="c function">
 <dt id="c.PyBuffer_SizeFromFormat">
 Py_ssize_t <code class="sig-name descname">PyBuffer_SizeFromFormat</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>format</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyBuffer_SizeFromFormat" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Return the implied <a class="reference internal" href="#c.Py_buffer.itemsize" title="Py_buffer.itemsize"><code class="xref c c-data docutils literal notranslate"><span class="pre">itemsize</span></code></a> from <a class="reference internal" href="#c.Py_buffer.format" title="Py_buffer.format"><code class="xref c c-data docutils literal notranslate"><span class="pre">format</span></code></a>.
+<dd><p>Return the implied <a class="reference internal" href="#c.Py_buffer.itemsize" title="Py_buffer.itemsize"><code class="xref c c-data docutils literal notranslate"><span class="pre">itemsize</span></code></a> from <code class="xref c c-data docutils literal notranslate"><span class="pre">format</span></code>.
 On error, raise an exception and return -1.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.9.</span></p>
@@ -897,7 +897,7 @@ unmodified. Otherwise, <em>exporter</em> MUST be <code class="docutils literal n
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/b652476.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.0+/b652476.
     </div>
 
   </body>

@@ -114,7 +114,7 @@ version semantics of the standard library.</p>
 package metadata.  Built in part on Python’s import system, this library
 intends to replace similar functionality in the <a class="reference external" href="https://setuptools.readthedocs.io/en/latest/pkg_resources.html#entry-points">entry point
 API</a> and <a class="reference external" href="https://setuptools.readthedocs.io/en/latest/pkg_resources.html#metadata-api">metadata API</a> of <code class="docutils literal notranslate"><span class="pre">pkg_resources</span></code>.  Along with
-<a class="reference internal" href="importlib.html#module-importlib-resources" title="importlib.resources: Package resource reading, opening, and access"><code class="xref py py-mod docutils literal notranslate"><span class="pre">importlib.resources</span></code></a> in Python 3.7
+<a class="reference internal" href="importlib.html#module-importlib.resources" title="importlib.resources: Package resource reading, opening, and access"><code class="xref py py-mod docutils literal notranslate"><span class="pre">importlib.resources</span></code></a> in Python 3.7
 and newer (backported as <a class="reference external" href="https://importlib-resources.readthedocs.io/en/latest/index.html">importlib_resources</a> for older versions of
 Python), this can eliminate the need to use the older and less efficient
 <code class="docutils literal notranslate"><span class="pre">pkg_resources</span></code> package.</p>
@@ -123,7 +123,7 @@ Python’s <code class="docutils literal notranslate"><span class="pre">site-pac
 it means a package with either a discoverable <code class="docutils literal notranslate"><span class="pre">dist-info</span></code> or <code class="docutils literal notranslate"><span class="pre">egg-info</span></code>
 directory, and metadata defined by <span class="target" id="index-0"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0566"><strong>PEP 566</strong></a> or its older specifications.
 By default, package metadata can live on the file system or in zip archives on
-<a class="reference internal" href="sys.html#sys-path" title="sys.path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a>.  Through an extension mechanism, the metadata can live almost
+<a class="reference internal" href="sys.html#sys.path" title="sys.path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a>.  Through an extension mechanism, the metadata can live almost
 anywhere.</p>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
@@ -208,7 +208,7 @@ number, as a string:</p>
 <p>You can also get the full set of files contained within a distribution.  The
 <code class="docutils literal notranslate"><span class="pre">files()</span></code> function takes a distribution package name and returns all of the
 files installed by this distribution.  Each file object returned is a
-<code class="docutils literal notranslate"><span class="pre">PackagePath</span></code>, a <a class="reference internal" href="pathlib.html#pathlib-path" title="pathlib.Path"><code class="xref py py-class docutils literal notranslate"><span class="pre">pathlib.Path</span></code></a> derived object with additional <code class="docutils literal notranslate"><span class="pre">dist</span></code>,
+<code class="docutils literal notranslate"><span class="pre">PackagePath</span></code>, a <a class="reference internal" href="pathlib.html#pathlib.path" title="pathlib.Path"><code class="xref py py-class docutils literal notranslate"><span class="pre">pathlib.Path</span></code></a> derived object with additional <code class="docutils literal notranslate"><span class="pre">dist</span></code>,
 <code class="docutils literal notranslate"><span class="pre">size</span></code>, and <code class="docutils literal notranslate"><span class="pre">hash</span></code> properties as indicated by the metadata.  For example:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">util</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">files</span><span class="p">(</span><span class="s1">&#39;wheel&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="s1">&#39;util.py&#39;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)][</span><span class="mi">0</span><span class="p">]</span>  
 <span class="gp">&gt;&gt;&gt; </span><span class="n">util</span>  
@@ -278,19 +278,19 @@ for additional details.</p>
 </div>
 <div class="section" id="extending-the-search-algorithm">
 <h2>Extending the search algorithm<a class="headerlink" href="#extending-the-search-algorithm" title="Permalink to this headline">¶</a></h2>
-<p>Because package metadata is not available through <a class="reference internal" href="sys.html#sys-path" title="sys.path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a> searches, or
+<p>Because package metadata is not available through <a class="reference internal" href="sys.html#sys.path" title="sys.path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a> searches, or
 package loaders directly, the metadata for a package is found through import
 system <a class="reference internal" href="../reference/import.html#finders-and-loaders"><span class="std std-ref">finders</span></a>.  To find a distribution package’s metadata,
 <code class="docutils literal notranslate"><span class="pre">importlib.metadata</span></code> queries the list of <a class="reference internal" href="../glossary.html#term-meta-path-finder"><span class="xref std std-term">meta path finders</span></a> on
-<a class="reference internal" href="sys.html#sys-meta-path" title="sys.meta_path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.meta_path</span></code></a>.</p>
+<a class="reference internal" href="sys.html#sys.meta_path" title="sys.meta_path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.meta_path</span></code></a>.</p>
 <p>The default <code class="docutils literal notranslate"><span class="pre">PathFinder</span></code> for Python includes a hook that calls into
 <code class="docutils literal notranslate"><span class="pre">importlib.metadata.MetadataPathFinder</span></code> for finding distributions
 loaded from typical file-system-based paths.</p>
-<p>The abstract class <a class="reference internal" href="importlib.html#importlib-abc-metapathfinder" title="importlib.abc.MetaPathFinder"><code class="xref py py-class docutils literal notranslate"><span class="pre">importlib.abc.MetaPathFinder</span></code></a> defines the
+<p>The abstract class <a class="reference internal" href="importlib.html#importlib.abc.metapathfinder" title="importlib.abc.MetaPathFinder"><code class="xref py py-class docutils literal notranslate"><span class="pre">importlib.abc.MetaPathFinder</span></code></a> defines the
 interface expected of finders by Python’s import system.
 <code class="docutils literal notranslate"><span class="pre">importlib.metadata</span></code> extends this protocol by looking for an optional
 <code class="docutils literal notranslate"><span class="pre">find_distributions</span></code> callable on the finders from
-<a class="reference internal" href="sys.html#sys-meta-path" title="sys.meta_path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.meta_path</span></code></a> and presents this extended interface as the
+<a class="reference internal" href="sys.html#sys.meta_path" title="sys.meta_path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.meta_path</span></code></a> and presents this extended interface as the
 <code class="docutils literal notranslate"><span class="pre">DistributionFinder</span></code> abstract base class, which defines this abstract
 method:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
@@ -312,7 +312,7 @@ a custom finder, return instances of this derived <code class="docutils literal 
 <dl class="footnote brackets">
 <dt class="label" id="f1"><span class="brackets"><a class="fn-backref" href="#id2">1</a></span></dt>
 <dd><p>Technically, the returned distribution metadata object is an
-<a class="reference internal" href="email.message.html#email-message-emailmessage" title="email.message.EmailMessage"><code class="xref py py-class docutils literal notranslate"><span class="pre">email.message.EmailMessage</span></code></a>
+<a class="reference internal" href="email.message.html#email.message.emailmessage" title="email.message.EmailMessage"><code class="xref py py-class docutils literal notranslate"><span class="pre">email.message.EmailMessage</span></code></a>
 instance, but this is an implementation detail, and not part of the
 stable API.  You should only use dictionary-like methods and syntax
 to access the metadata contents.</p>
@@ -424,7 +424,7 @@ to access the metadata contents.</p>
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/b652476.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.0+/b652476.
     </div>
 
   </body>

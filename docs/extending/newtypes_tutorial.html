@@ -271,14 +271,14 @@ only used for variable-sized objects and should otherwise be zero.</p>
 <p>If you want your type to be subclassable from Python, and your type has the same
 <a class="reference internal" href="../c-api/typeobj.html#c.PyTypeObject.tp_basicsize" title="PyTypeObject.tp_basicsize"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_basicsize</span></code></a> as its base type, you may have problems with multiple
 inheritance.  A Python subclass of your type will have to list your type first
-in its <a class="reference internal" href="../library/stdtypes.html#class-bases" title="class.__bases__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__bases__</span></code></a>, or else it will not be able to call your type’s
+in its <a class="reference internal" href="../library/stdtypes.html#class.__bases__" title="class.__bases__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__bases__</span></code></a>, or else it will not be able to call your type’s
 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__new__()</span></code> method without getting an error.  You can avoid this problem by
 ensuring that your type has a larger value for <a class="reference internal" href="../c-api/typeobj.html#c.PyTypeObject.tp_basicsize" title="PyTypeObject.tp_basicsize"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_basicsize</span></code></a> than its
 base type does.  Most of the time, this will be true anyway, because either your
 base type will be <a class="reference internal" href="../library/functions.html#object" title="object"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a>, or else you will be adding data members to
 your base type, and therefore increasing its size.</p>
 </div>
-<p>We set the class flags to <a class="reference internal" href="../c-api/typeobj.html#py-tpflags-default" title="Py_TPFLAGS_DEFAULT"><code class="xref py py-const docutils literal notranslate"><span class="pre">Py_TPFLAGS_DEFAULT</span></code></a>.</p>
+<p>We set the class flags to <a class="reference internal" href="../c-api/typeobj.html#py_tpflags_default" title="Py_TPFLAGS_DEFAULT"><code class="xref py py-const docutils literal notranslate"><span class="pre">Py_TPFLAGS_DEFAULT</span></code></a>.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="p">.</span><span class="n">tp_flags</span> <span class="o">=</span> <span class="n">Py_TPFLAGS_DEFAULT</span><span class="p">,</span>
 </pre></div>
 </div>
@@ -746,7 +746,7 @@ definitions:</p>
 <span class="p">};</span>
 </pre></div>
 </div>
-<p>(note that we used the <a class="reference internal" href="../c-api/structures.html#meth-noargs" title="METH_NOARGS"><code class="xref py py-const docutils literal notranslate"><span class="pre">METH_NOARGS</span></code></a> flag to indicate that the method
+<p>(note that we used the <a class="reference internal" href="../c-api/structures.html#meth_noargs" title="METH_NOARGS"><code class="xref py py-const docutils literal notranslate"><span class="pre">METH_NOARGS</span></code></a> flag to indicate that the method
 is expecting no arguments other than <em>self</em>)</p>
 <p>and assign it to the <a class="reference internal" href="../c-api/typeobj.html#c.PyTypeObject.tp_methods" title="PyTypeObject.tp_methods"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_methods</span></code></a> slot:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="p">.</span><span class="n">tp_methods</span> <span class="o">=</span> <span class="n">Custom_methods</span><span class="p">,</span>
@@ -755,7 +755,7 @@ is expecting no arguments other than <em>self</em>)</p>
 <p>Finally, we’ll make our type usable as a base class for subclassing.  We’ve
 written our methods carefully so far so that they don’t make any assumptions
 about the type of the object being created or used, so all we need to do is
-to add the <a class="reference internal" href="../c-api/typeobj.html#py-tpflags-basetype" title="Py_TPFLAGS_BASETYPE"><code class="xref py py-const docutils literal notranslate"><span class="pre">Py_TPFLAGS_BASETYPE</span></code></a> to our class flag definition:</p>
+to add the <a class="reference internal" href="../c-api/typeobj.html#py_tpflags_basetype" title="Py_TPFLAGS_BASETYPE"><code class="xref py py-const docutils literal notranslate"><span class="pre">Py_TPFLAGS_BASETYPE</span></code></a> to our class flag definition:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="p">.</span><span class="n">tp_flags</span> <span class="o">=</span> <span class="n">Py_TPFLAGS_DEFAULT</span> <span class="o">|</span> <span class="n">Py_TPFLAGS_BASETYPE</span><span class="p">,</span>
 </pre></div>
 </div>
@@ -1394,7 +1394,7 @@ and <code class="docutils literal notranslate"><span class="pre">Custom_clear</s
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>Finally, we add the <a class="reference internal" href="../c-api/typeobj.html#py-tpflags-have-gc" title="Py_TPFLAGS_HAVE_GC"><code class="xref py py-const docutils literal notranslate"><span class="pre">Py_TPFLAGS_HAVE_GC</span></code></a> flag to the class flags:</p>
+<p>Finally, we add the <a class="reference internal" href="../c-api/typeobj.html#py_tpflags_have_gc" title="Py_TPFLAGS_HAVE_GC"><code class="xref py py-const docutils literal notranslate"><span class="pre">Py_TPFLAGS_HAVE_GC</span></code></a> flag to the class flags:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="p">.</span><span class="n">tp_flags</span> <span class="o">=</span> <span class="n">Py_TPFLAGS_DEFAULT</span> <span class="o">|</span> <span class="n">Py_TPFLAGS_BASETYPE</span> <span class="o">|</span> <span class="n">Py_TPFLAGS_HAVE_GC</span><span class="p">,</span>
 </pre></div>
 </div>
@@ -1681,7 +1681,7 @@ reference cycles.</p>
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/b652476.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.0+/b652476.
     </div>
 
   </body>

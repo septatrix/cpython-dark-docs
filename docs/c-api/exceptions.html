@@ -129,7 +129,7 @@ propagated, additional calls into the Python/C API may not behave as intended
 and may fail in mysterious ways.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The error indicator is <strong>not</strong> the result of <a class="reference internal" href="../library/sys.html#sys-exc-info" title="sys.exc_info"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys.exc_info()</span></code></a>.
+<p>The error indicator is <strong>not</strong> the result of <a class="reference internal" href="../library/sys.html#sys.exc_info" title="sys.exc_info"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys.exc_info()</span></code></a>.
 The former corresponds to an exception that is not yet caught (and is
 therefore still propagating), while the latter returns an exception after
 it is caught (and has therefore stopped propagating).</p>
@@ -152,8 +152,8 @@ printed and the Python process will exit with the error code specified by
 the <code class="docutils literal notranslate"><span class="pre">SystemExit</span></code> instance.</p>
 <p>Call this function <strong>only</strong> when the error indicator is set.  Otherwise it
 will cause a fatal error!</p>
-<p>If <em>set_sys_last_vars</em> is nonzero, the variables <a class="reference internal" href="../library/sys.html#sys-last-type" title="sys.last_type"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.last_type</span></code></a>,
-<a class="reference internal" href="../library/sys.html#sys-last-value" title="sys.last_value"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.last_value</span></code></a> and <a class="reference internal" href="../library/sys.html#sys-last-traceback" title="sys.last_traceback"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.last_traceback</span></code></a> will be set to the
+<p>If <em>set_sys_last_vars</em> is nonzero, the variables <a class="reference internal" href="../library/sys.html#sys.last_type" title="sys.last_type"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.last_type</span></code></a>,
+<a class="reference internal" href="../library/sys.html#sys.last_value" title="sys.last_value"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.last_value</span></code></a> and <a class="reference internal" href="../library/sys.html#sys.last_traceback" title="sys.last_traceback"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.last_traceback</span></code></a> will be set to the
 type, value and traceback of the printed exception, respectively.</p>
 </dd></dl>
 
@@ -166,7 +166,7 @@ void <code class="sig-name descname">PyErr_Print</code><span class="sig-paren">(
 <dl class="c function">
 <dt id="c.PyErr_WriteUnraisable">
 void <code class="sig-name descname">PyErr_WriteUnraisable</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyErr_WriteUnraisable" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Call <a class="reference internal" href="../library/sys.html#sys-unraisablehook" title="sys.unraisablehook"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys.unraisablehook()</span></code></a> using the current exception and <em>obj</em>
+<dd><p>Call <a class="reference internal" href="../library/sys.html#sys.unraisablehook" title="sys.unraisablehook"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys.unraisablehook()</span></code></a> using the current exception and <em>obj</em>
 argument.</p>
 <p>This utility function prints a warning message to <code class="docutils literal notranslate"><span class="pre">sys.stderr</span></code> when an
 exception has been set but it is impossible for the interpreter to actually
@@ -283,7 +283,7 @@ fails.</p>
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<code class="sig-name descname">PyErr_SetFromErrnoWithFilename</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>type</em>, <em class="property">const</em> char *<em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyErr_SetFromErrnoWithFilename" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Similar to <a class="reference internal" href="#c.PyErr_SetFromErrnoWithFilenameObject" title="PyErr_SetFromErrnoWithFilenameObject"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyErr_SetFromErrnoWithFilenameObject()</span></code></a>, but the filename
 is given as a C string.  <em>filename</em> is decoded from the filesystem encoding
-(<a class="reference internal" href="../library/os.html#os-fsdecode" title="os.fsdecode"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.fsdecode()</span></code></a>).</p>
+(<a class="reference internal" href="../library/os.html#os.fsdecode" title="os.fsdecode"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.fsdecode()</span></code></a>).</p>
 </dd></dl>
 
 <dl class="c function">
@@ -313,7 +313,7 @@ specifying the exception type to be raised.</p>
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<code class="sig-name descname">PyErr_SetFromWindowsErrWithFilename</code><span class="sig-paren">(</span>int <em>ierr</em>, <em class="property">const</em> char *<em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyErr_SetFromWindowsErrWithFilename" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Similar to <code class="xref c c-func docutils literal notranslate"><span class="pre">PyErr_SetFromWindowsErrWithFilenameObject()</span></code>, but the
 filename is given as a C string.  <em>filename</em> is decoded from the filesystem
-encoding (<a class="reference internal" href="../library/os.html#os-fsdecode" title="os.fsdecode"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.fsdecode()</span></code></a>).</p>
+encoding (<a class="reference internal" href="../library/os.html#os.fsdecode" title="os.fsdecode"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.fsdecode()</span></code></a>).</p>
 <p class="availability"><a class="reference internal" href="../library/intro.html#availability"><span class="std std-ref">Availability</span></a>: Windows.</p>
 </dd></dl>
 
@@ -372,7 +372,7 @@ is a <a class="reference internal" href="../library/exceptions.html#syntaxerror"
 <dt id="c.PyErr_SyntaxLocationEx">
 void <code class="sig-name descname">PyErr_SyntaxLocationEx</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>filename</em>, int <em>lineno</em>, int <em>col_offset</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyErr_SyntaxLocationEx" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Like <a class="reference internal" href="#c.PyErr_SyntaxLocationObject" title="PyErr_SyntaxLocationObject"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyErr_SyntaxLocationObject()</span></code></a>, but <em>filename</em> is a byte string
-decoded from the filesystem encoding (<a class="reference internal" href="../library/os.html#os-fsdecode" title="os.fsdecode"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.fsdecode()</span></code></a>).</p>
+decoded from the filesystem encoding (<a class="reference internal" href="../library/os.html#os.fsdecode" title="os.fsdecode"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.fsdecode()</span></code></a>).</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.2.</span></p>
 </div>
@@ -443,7 +443,7 @@ specifying a subclass of <a class="reference internal" href="../library/exceptio
 int <code class="sig-name descname">PyErr_WarnExplicitObject</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>category</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>message</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>filename</em>, int <em>lineno</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>module</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>registry</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyErr_WarnExplicitObject" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Issue a warning message with explicit control over all warning attributes.  This
 is a straightforward wrapper around the Python function
-<a class="reference internal" href="../library/warnings.html#warnings-warn-explicit" title="warnings.warn_explicit"><code class="xref py py-func docutils literal notranslate"><span class="pre">warnings.warn_explicit()</span></code></a>, see there for more information.  The <em>module</em>
+<a class="reference internal" href="../library/warnings.html#warnings.warn_explicit" title="warnings.warn_explicit"><code class="xref py py-func docutils literal notranslate"><span class="pre">warnings.warn_explicit()</span></code></a>, see there for more information.  The <em>module</em>
 and <em>registry</em> arguments may be set to <code class="docutils literal notranslate"><span class="pre">NULL</span></code> to get the default effect
 described there.</p>
 <div class="versionadded">
@@ -456,7 +456,7 @@ described there.</p>
 int <code class="sig-name descname">PyErr_WarnExplicit</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>category</em>, <em class="property">const</em> char *<em>message</em>, <em class="property">const</em> char *<em>filename</em>, int <em>lineno</em>, <em class="property">const</em> char *<em>module</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>registry</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyErr_WarnExplicit" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Similar to <a class="reference internal" href="#c.PyErr_WarnExplicitObject" title="PyErr_WarnExplicitObject"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyErr_WarnExplicitObject()</span></code></a> except that <em>message</em> and
 <em>module</em> are UTF-8 encoded strings, and <em>filename</em> is decoded from the
-filesystem encoding (<a class="reference internal" href="../library/os.html#os-fsdecode" title="os.fsdecode"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.fsdecode()</span></code></a>).</p>
+filesystem encoding (<a class="reference internal" href="../library/os.html#os.fsdecode" title="os.fsdecode"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.fsdecode()</span></code></a>).</p>
 </dd></dl>
 
 <dl class="c function">
@@ -645,7 +645,7 @@ void <code class="sig-name descname">PyErr_SetInterrupt</code><span class="sig-p
 <a class="reference internal" href="#c.PyErr_CheckSignals" title="PyErr_CheckSignals"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyErr_CheckSignals()</span></code></a> is called,  the Python signal handler for
 <code class="xref py py-const docutils literal notranslate"><span class="pre">SIGINT</span></code> will be called.</p>
 <p>If <code class="xref py py-const docutils literal notranslate"><span class="pre">SIGINT</span></code> isn’t handled by Python (it was set to
-<a class="reference internal" href="../library/signal.html#signal-sig-dfl" title="signal.SIG_DFL"><code class="xref py py-data docutils literal notranslate"><span class="pre">signal.SIG_DFL</span></code></a> or <a class="reference internal" href="../library/signal.html#signal-sig-ign" title="signal.SIG_IGN"><code class="xref py py-data docutils literal notranslate"><span class="pre">signal.SIG_IGN</span></code></a>), this function does
+<a class="reference internal" href="../library/signal.html#signal.sig_dfl" title="signal.SIG_DFL"><code class="xref py py-data docutils literal notranslate"><span class="pre">signal.SIG_DFL</span></code></a> or <a class="reference internal" href="../library/signal.html#signal.sig_ign" title="signal.SIG_IGN"><code class="xref py py-data docutils literal notranslate"><span class="pre">signal.SIG_IGN</span></code></a>), this function does
 nothing.</p>
 </dd></dl>
 
@@ -656,7 +656,7 @@ int <code class="sig-name descname">PySignal_SetWakeupFd</code><span class="sig-
 is written as a single byte whenever a signal is received. <em>fd</em> must be
 non-blocking. It returns the previous such file descriptor.</p>
 <p>The value <code class="docutils literal notranslate"><span class="pre">-1</span></code> disables the feature; this is the initial state.
-This is equivalent to <a class="reference internal" href="../library/signal.html#signal-set-wakeup-fd" title="signal.set_wakeup_fd"><code class="xref py py-func docutils literal notranslate"><span class="pre">signal.set_wakeup_fd()</span></code></a> in Python, but without any
+This is equivalent to <a class="reference internal" href="../library/signal.html#signal.set_wakeup_fd" title="signal.set_wakeup_fd"><code class="xref py py-func docutils literal notranslate"><span class="pre">signal.set_wakeup_fd()</span></code></a> in Python, but without any
 error checking.  <em>fd</em> should be a valid file descriptor.  The function should
 only be called from the main thread.</p>
 <div class="versionchanged">
@@ -898,7 +898,7 @@ void <code class="sig-name descname">Py_LeaveRecursiveCall</code><span class="si
 special recursion handling.  In addition to protecting the stack,
 <a class="reference internal" href="typeobj.html#c.PyTypeObject.tp_repr" title="PyTypeObject.tp_repr"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_repr</span></code></a> also needs to track objects to prevent cycles.  The
 following two functions facilitate this functionality.  Effectively,
-these are the C equivalent to <a class="reference internal" href="../library/reprlib.html#reprlib-recursive-repr" title="reprlib.recursive_repr"><code class="xref py py-func docutils literal notranslate"><span class="pre">reprlib.recursive_repr()</span></code></a>.</p>
+these are the C equivalent to <a class="reference internal" href="../library/reprlib.html#reprlib.recursive_repr" title="reprlib.recursive_repr"><code class="xref py py-func docutils literal notranslate"><span class="pre">reprlib.recursive_repr()</span></code></a>.</p>
 <dl class="c function">
 <dt id="c.Py_ReprEnter">
 int <code class="sig-name descname">Py_ReprEnter</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>object</em><span class="sig-paren">)</span><a class="headerlink" href="#c.Py_ReprEnter" title="Permalink to this definition">¶</a><br /></dt>
@@ -1383,7 +1383,7 @@ the variables:</p>
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/b652476.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.0+/b652476.
     </div>
 
   </body>

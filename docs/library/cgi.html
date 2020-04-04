@@ -172,7 +172,7 @@ environment variables set according to the CGI standard).  Since it may consume
 standard input, it should be instantiated only once.</p>
 <p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">FieldStorage</span></code> instance can be indexed like a Python dictionary.
 It allows membership testing with the <a class="reference internal" href="../reference/expressions.html#in"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">in</span></code></a> operator, and also supports
-the standard dictionary method <a class="reference internal" href="stdtypes.html#dict-keys" title="dict.keys"><code class="xref py py-meth docutils literal notranslate"><span class="pre">keys()</span></code></a> and the built-in function
+the standard dictionary method <a class="reference internal" href="stdtypes.html#dict.keys" title="dict.keys"><code class="xref py py-meth docutils literal notranslate"><span class="pre">keys()</span></code></a> and the built-in function
 <a class="reference internal" href="functions.html#len" title="len"><code class="xref py py-func docutils literal notranslate"><span class="pre">len()</span></code></a>.  Form fields containing empty strings are ignored and do not appear
 in the dictionary; to keep such values, provide a true value for the optional
 <em>keep_blank_values</em> keyword parameter when creating the <code class="xref py py-class docutils literal notranslate"><span class="pre">FieldStorage</span></code>
@@ -202,7 +202,7 @@ object retrieved by <code class="docutils literal notranslate"><span class="pre"
 <code class="xref py py-class docutils literal notranslate"><span class="pre">MiniFieldStorage</span></code> instance but a list of such instances.  Similarly, in
 this situation, <code class="docutils literal notranslate"><span class="pre">form.getvalue(key)</span></code> would return a list of strings. If you
 expect this possibility (when your HTML form contains multiple fields with the
-same name), use the <a class="reference internal" href="#cgi-fieldstorage-getlist" title="cgi.FieldStorage.getlist"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getlist()</span></code></a> method, which always returns
+same name), use the <a class="reference internal" href="#cgi.fieldstorage.getlist" title="cgi.FieldStorage.getlist"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getlist()</span></code></a> method, which always returns
 a list of values (so that you do not need to special-case the single item
 case).  For example, this code concatenates any number of username fields,
 separated by commas:</p>
@@ -218,7 +218,7 @@ want.  You can test for an uploaded file by testing either the
 attribute.  You can then read the data from the <code class="xref py py-attr docutils literal notranslate"><span class="pre">file</span></code>
 attribute before it is automatically closed as part of the garbage collection of
 the <code class="xref py py-class docutils literal notranslate"><span class="pre">FieldStorage</span></code> instance
-(the <a class="reference internal" href="io.html#io-rawiobase-read" title="io.RawIOBase.read"><code class="xref py py-func docutils literal notranslate"><span class="pre">read()</span></code></a> and <a class="reference internal" href="io.html#io-iobase-readline" title="io.IOBase.readline"><code class="xref py py-func docutils literal notranslate"><span class="pre">readline()</span></code></a> methods will
+(the <a class="reference internal" href="io.html#io.rawiobase.read" title="io.RawIOBase.read"><code class="xref py py-func docutils literal notranslate"><span class="pre">read()</span></code></a> and <a class="reference internal" href="io.html#io.iobase.readline" title="io.IOBase.readline"><code class="xref py py-func docutils literal notranslate"><span class="pre">readline()</span></code></a> methods will
 return bytes):</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">fileitem</span> <span class="o">=</span> <span class="n">form</span><span class="p">[</span><span class="s2">&quot;userfile&quot;</span><span class="p">]</span>
 <span class="k">if</span> <span class="n">fileitem</span><span class="o">.</span><span class="n">file</span><span class="p">:</span>
@@ -294,17 +294,17 @@ name.  So you write a script containing for example this code:</p>
 provide valid input to your scripts.  For example, if a curious user appends
 another <code class="docutils literal notranslate"><span class="pre">user=foo</span></code> pair to the query string, then the script would crash,
 because in this situation the <code class="docutils literal notranslate"><span class="pre">getvalue(&quot;user&quot;)</span></code> method call returns a list
-instead of a string.  Calling the <a class="reference internal" href="stdtypes.html#str-upper" title="str.upper"><code class="xref py py-meth docutils literal notranslate"><span class="pre">upper()</span></code></a> method on a list is not valid
+instead of a string.  Calling the <a class="reference internal" href="stdtypes.html#str.upper" title="str.upper"><code class="xref py py-meth docutils literal notranslate"><span class="pre">upper()</span></code></a> method on a list is not valid
 (since lists do not have a method of this name) and results in an
 <a class="reference internal" href="exceptions.html#attributeerror" title="AttributeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">AttributeError</span></code></a> exception.</p>
 <p>Therefore, the appropriate way to read form data values was to always use the
 code which checks whether the obtained value is a single value or a list of
 values.  That’s annoying and leads to less readable scripts.</p>
-<p>A more convenient approach is to use the methods <a class="reference internal" href="#cgi-fieldstorage-getfirst" title="cgi.FieldStorage.getfirst"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getfirst()</span></code></a>
-and <a class="reference internal" href="#cgi-fieldstorage-getlist" title="cgi.FieldStorage.getlist"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getlist()</span></code></a> provided by this higher level interface.</p>
+<p>A more convenient approach is to use the methods <a class="reference internal" href="#cgi.fieldstorage.getfirst" title="cgi.FieldStorage.getfirst"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getfirst()</span></code></a>
+and <a class="reference internal" href="#cgi.fieldstorage.getlist" title="cgi.FieldStorage.getlist"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getlist()</span></code></a> provided by this higher level interface.</p>
 <dl class="py method">
-<dt id="cgi-fieldstorage-getfirst">
-<span id="cgi.FieldStorage.getfirst"></span><code class="sig-prename descclassname">FieldStorage.</code><code class="sig-name descname">getfirst</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">default</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cgi-fieldstorage-getfirst" title="Permalink to this definition">¶</a></dt>
+<dt id="cgi.fieldstorage.getfirst">
+<span id="cgi.FieldStorage.getfirst"></span><code class="sig-prename descclassname">FieldStorage.</code><code class="sig-name descname">getfirst</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">default</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cgi.fieldstorage.getfirst" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method always returns only one value associated with form field <em>name</em>.
 The method returns only the first value in case that more values were posted
 under such name.  Please note that the order in which the values are received
@@ -315,8 +315,8 @@ specified.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="cgi-fieldstorage-getlist">
-<span id="cgi.FieldStorage.getlist"></span><code class="sig-prename descclassname">FieldStorage.</code><code class="sig-name descname">getlist</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cgi-fieldstorage-getlist" title="Permalink to this definition">¶</a></dt>
+<dt id="cgi.fieldstorage.getlist">
+<span id="cgi.FieldStorage.getlist"></span><code class="sig-prename descclassname">FieldStorage.</code><code class="sig-name descname">getlist</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cgi.fieldstorage.getlist" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method always returns a list of values associated with form field <em>name</em>.
 The method returns an empty list if no such form field or value exists for
 <em>name</em>.  It returns a list consisting of one item if only one such value exists.</p>
@@ -336,21 +336,21 @@ The method returns an empty list if no such form field or value exists for
 <p>These are useful if you want more control, or if you want to employ some of the
 algorithms implemented in this module in other circumstances.</p>
 <dl class="py function">
-<dt id="cgi-parse">
-<span id="cgi.parse"></span><code class="sig-prename descclassname">cgi.</code><code class="sig-name descname">parse</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fp</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">environ</span><span class="o">=</span><span class="default_value">os.environ</span></em>, <em class="sig-param"><span class="n">keep_blank_values</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">strict_parsing</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cgi-parse" title="Permalink to this definition">¶</a></dt>
+<dt id="cgi.parse">
+<code class="sig-prename descclassname">cgi.</code><code class="sig-name descname">parse</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fp</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">environ</span><span class="o">=</span><span class="default_value">os.environ</span></em>, <em class="sig-param"><span class="n">keep_blank_values</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">strict_parsing</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cgi.parse" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse a query in the environment or from a file (the file defaults to
 <code class="docutils literal notranslate"><span class="pre">sys.stdin</span></code>).  The <em>keep_blank_values</em> and <em>strict_parsing</em> parameters are
-passed to <a class="reference internal" href="urllib.parse.html#urllib-parse-parse-qs" title="urllib.parse.parse_qs"><code class="xref py py-func docutils literal notranslate"><span class="pre">urllib.parse.parse_qs()</span></code></a> unchanged.</p>
+passed to <a class="reference internal" href="urllib.parse.html#urllib.parse.parse_qs" title="urllib.parse.parse_qs"><code class="xref py py-func docutils literal notranslate"><span class="pre">urllib.parse.parse_qs()</span></code></a> unchanged.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="cgi-parse-multipart">
-<span id="cgi.parse_multipart"></span><code class="sig-prename descclassname">cgi.</code><code class="sig-name descname">parse_multipart</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fp</span></em>, <em class="sig-param"><span class="n">pdict</span></em>, <em class="sig-param"><span class="n">encoding</span><span class="o">=</span><span class="default_value">’utf-8’</span></em>, <em class="sig-param"><span class="n">errors</span><span class="o">=</span><span class="default_value">’replace’</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cgi-parse-multipart" title="Permalink to this definition">¶</a></dt>
+<dt id="cgi.parse_multipart">
+<code class="sig-prename descclassname">cgi.</code><code class="sig-name descname">parse_multipart</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fp</span></em>, <em class="sig-param"><span class="n">pdict</span></em>, <em class="sig-param"><span class="n">encoding</span><span class="o">=</span><span class="default_value">'utf-8'</span></em>, <em class="sig-param"><span class="n">errors</span><span class="o">=</span><span class="default_value">'replace'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cgi.parse_multipart" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse input of type <em class="mimetype">multipart/form-data</em> (for  file uploads).
 Arguments are <em>fp</em> for the input file, <em>pdict</em> for a dictionary containing
 other parameters in the <em class="mailheader">Content-Type</em> header, and <em>encoding</em>,
 the request encoding.</p>
-<p>Returns a dictionary just like <a class="reference internal" href="urllib.parse.html#urllib-parse-parse-qs" title="urllib.parse.parse_qs"><code class="xref py py-func docutils literal notranslate"><span class="pre">urllib.parse.parse_qs()</span></code></a>: keys are the
+<p>Returns a dictionary just like <a class="reference internal" href="urllib.parse.html#urllib.parse.parse_qs" title="urllib.parse.parse_qs"><code class="xref py py-func docutils literal notranslate"><span class="pre">urllib.parse.parse_qs()</span></code></a>: keys are the
 field names, each value is a list of values for that field. For non-file
 fields, the value is a list of strings.</p>
 <p>This is easy to use but not much good if you are expecting megabytes to be
@@ -363,40 +363,40 @@ value is now a list of strings, not bytes.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="cgi-parse-header">
-<span id="cgi.parse_header"></span><code class="sig-prename descclassname">cgi.</code><code class="sig-name descname">parse_header</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">string</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cgi-parse-header" title="Permalink to this definition">¶</a></dt>
+<dt id="cgi.parse_header">
+<code class="sig-prename descclassname">cgi.</code><code class="sig-name descname">parse_header</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">string</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cgi.parse_header" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse a MIME header (such as <em class="mailheader">Content-Type</em>) into a main value and a
 dictionary of parameters.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="cgi-test">
-<span id="cgi.test"></span><code class="sig-prename descclassname">cgi.</code><code class="sig-name descname">test</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cgi-test" title="Permalink to this definition">¶</a></dt>
+<dt id="cgi.test">
+<code class="sig-prename descclassname">cgi.</code><code class="sig-name descname">test</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cgi.test" title="Permalink to this definition">¶</a></dt>
 <dd><p>Robust test CGI script, usable as main program. Writes minimal HTTP headers and
 formats all information provided to the script in HTML form.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="cgi-print-environ">
-<span id="cgi.print_environ"></span><code class="sig-prename descclassname">cgi.</code><code class="sig-name descname">print_environ</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cgi-print-environ" title="Permalink to this definition">¶</a></dt>
+<dt id="cgi.print_environ">
+<code class="sig-prename descclassname">cgi.</code><code class="sig-name descname">print_environ</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cgi.print_environ" title="Permalink to this definition">¶</a></dt>
 <dd><p>Format the shell environment in HTML.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="cgi-print-form">
-<span id="cgi.print_form"></span><code class="sig-prename descclassname">cgi.</code><code class="sig-name descname">print_form</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">form</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cgi-print-form" title="Permalink to this definition">¶</a></dt>
+<dt id="cgi.print_form">
+<code class="sig-prename descclassname">cgi.</code><code class="sig-name descname">print_form</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">form</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cgi.print_form" title="Permalink to this definition">¶</a></dt>
 <dd><p>Format a form in HTML.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="cgi-print-directory">
-<span id="cgi.print_directory"></span><code class="sig-prename descclassname">cgi.</code><code class="sig-name descname">print_directory</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cgi-print-directory" title="Permalink to this definition">¶</a></dt>
+<dt id="cgi.print_directory">
+<code class="sig-prename descclassname">cgi.</code><code class="sig-name descname">print_directory</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cgi.print_directory" title="Permalink to this definition">¶</a></dt>
 <dd><p>Format the current directory in HTML.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="cgi-print-environ-usage">
-<span id="cgi.print_environ_usage"></span><code class="sig-prename descclassname">cgi.</code><code class="sig-name descname">print_environ_usage</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cgi-print-environ-usage" title="Permalink to this definition">¶</a></dt>
+<dt id="cgi.print_environ_usage">
+<code class="sig-prename descclassname">cgi.</code><code class="sig-name descname">print_environ_usage</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cgi.print_environ_usage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print a list of useful (used by CGI) environment variables in HTML.</p>
 </dd></dl>
 
@@ -404,7 +404,7 @@ formats all information provided to the script in HTML form.</p>
 <div class="section" id="caring-about-security">
 <span id="cgi-security"></span><h2>Caring about security<a class="headerlink" href="#caring-about-security" title="Permalink to this headline">¶</a></h2>
 <p id="index-1">There’s one important rule: if you invoke an external program (via the
-<a class="reference internal" href="os.html#os-system" title="os.system"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.system()</span></code></a> or <a class="reference internal" href="os.html#os-popen" title="os.popen"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.popen()</span></code></a> functions. or others with similar
+<a class="reference internal" href="os.html#os.system" title="os.system"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.system()</span></code></a> or <a class="reference internal" href="os.html#os.popen" title="os.popen"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.popen()</span></code></a> functions. or others with similar
 functionality), make very sure you don’t pass arbitrary strings received from
 the client to the shell.  This is a well-known security hole whereby clever
 hackers anywhere on the Web can exploit a gullible CGI script to invoke
@@ -656,7 +656,7 @@ tedious and error-prone.</p>
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/b652476.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.0+/b652476.
     </div>
 
   </body>

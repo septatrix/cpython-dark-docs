@@ -152,17 +152,17 @@ and chunk alignment is used</p></td>
 <p>The size field (a 32-bit value, encoded using big-endian byte order) gives the
 size of the chunk data, not including the 8-byte header.</p>
 <p>Usually an IFF-type file consists of one or more chunks.  The proposed usage of
-the <a class="reference internal" href="#chunk-chunk" title="chunk.Chunk"><code class="xref py py-class docutils literal notranslate"><span class="pre">Chunk</span></code></a> class defined here is to instantiate an instance at the start
+the <a class="reference internal" href="#chunk.chunk" title="chunk.Chunk"><code class="xref py py-class docutils literal notranslate"><span class="pre">Chunk</span></code></a> class defined here is to instantiate an instance at the start
 of each chunk and read from the instance until it reaches the end, after which a
 new instance can be instantiated. At the end of the file, creating a new
 instance will fail with an <a class="reference internal" href="exceptions.html#eoferror" title="EOFError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">EOFError</span></code></a> exception.</p>
 <dl class="py class">
-<dt id="chunk-chunk">
-<span id="chunk.Chunk"></span><em class="property">class </em><code class="sig-prename descclassname">chunk.</code><code class="sig-name descname">Chunk</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">file</span></em>, <em class="sig-param"><span class="n">align</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">bigendian</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">inclheader</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#chunk-chunk" title="Permalink to this definition">¶</a></dt>
+<dt id="chunk.chunk">
+<span id="chunk.Chunk"></span><em class="property">class </em><code class="sig-prename descclassname">chunk.</code><code class="sig-name descname">Chunk</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">file</span></em>, <em class="sig-param"><span class="n">align</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">bigendian</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">inclheader</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#chunk.chunk" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class which represents a chunk.  The <em>file</em> argument is expected to be a
 file-like object.  An instance of this class is specifically allowed.  The
 only method that is needed is <code class="xref py py-meth docutils literal notranslate"><span class="pre">read()</span></code>.  If the methods
-<a class="reference internal" href="io.html#io-iobase-seek" title="io.IOBase.seek"><code class="xref py py-meth docutils literal notranslate"><span class="pre">seek()</span></code></a> and <a class="reference internal" href="io.html#io-iobase-tell" title="io.IOBase.tell"><code class="xref py py-meth docutils literal notranslate"><span class="pre">tell()</span></code></a> are present and don’t
+<a class="reference internal" href="io.html#io.iobase.seek" title="io.IOBase.seek"><code class="xref py py-meth docutils literal notranslate"><span class="pre">seek()</span></code></a> and <a class="reference internal" href="io.html#io.iobase.tell" title="io.IOBase.tell"><code class="xref py py-meth docutils literal notranslate"><span class="pre">tell()</span></code></a> are present and don’t
 raise an exception, they are also used.
 If these methods are present and raise an exception, they are expected to not
 have altered the object.  If the optional argument <em>align</em> is true, chunks
@@ -172,39 +172,39 @@ alignment is assumed.  The default value is true.  If the optional argument
 This is needed for WAVE audio files. The default value is true.  If the
 optional argument <em>inclheader</em> is true, the size given in the chunk header
 includes the size of the header.  The default value is false.</p>
-<p>A <a class="reference internal" href="#chunk-chunk" title="chunk.Chunk"><code class="xref py py-class docutils literal notranslate"><span class="pre">Chunk</span></code></a> object supports the following methods:</p>
+<p>A <a class="reference internal" href="#chunk.chunk" title="chunk.Chunk"><code class="xref py py-class docutils literal notranslate"><span class="pre">Chunk</span></code></a> object supports the following methods:</p>
 <dl class="py method">
-<dt id="chunk-chunk-getname">
-<span id="chunk.Chunk.getname"></span><code class="sig-name descname">getname</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#chunk-chunk-getname" title="Permalink to this definition">¶</a></dt>
+<dt id="chunk.chunk.getname">
+<span id="chunk.Chunk.getname"></span><code class="sig-name descname">getname</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#chunk.chunk.getname" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the name (ID) of the chunk.  This is the first 4 bytes of the
 chunk.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="chunk-chunk-getsize">
-<span id="chunk.Chunk.getsize"></span><code class="sig-name descname">getsize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#chunk-chunk-getsize" title="Permalink to this definition">¶</a></dt>
+<dt id="chunk.chunk.getsize">
+<span id="chunk.Chunk.getsize"></span><code class="sig-name descname">getsize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#chunk.chunk.getsize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the size of the chunk.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="chunk-chunk-close">
-<span id="chunk.Chunk.close"></span><code class="sig-name descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#chunk-chunk-close" title="Permalink to this definition">¶</a></dt>
+<dt id="chunk.chunk.close">
+<span id="chunk.Chunk.close"></span><code class="sig-name descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#chunk.chunk.close" title="Permalink to this definition">¶</a></dt>
 <dd><p>Close and skip to the end of the chunk.  This does not close the
 underlying file.</p>
 </dd></dl>
 
 <p>The remaining methods will raise <a class="reference internal" href="exceptions.html#oserror" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> if called after the
-<a class="reference internal" href="#chunk-chunk-close" title="chunk.Chunk.close"><code class="xref py py-meth docutils literal notranslate"><span class="pre">close()</span></code></a> method has been called.  Before Python 3.3, they used to
+<a class="reference internal" href="#chunk.chunk.close" title="chunk.Chunk.close"><code class="xref py py-meth docutils literal notranslate"><span class="pre">close()</span></code></a> method has been called.  Before Python 3.3, they used to
 raise <a class="reference internal" href="exceptions.html#ioerror" title="IOError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">IOError</span></code></a>, now an alias of <a class="reference internal" href="exceptions.html#oserror" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a>.</p>
 <dl class="py method">
-<dt id="chunk-chunk-isatty">
-<span id="chunk.Chunk.isatty"></span><code class="sig-name descname">isatty</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#chunk-chunk-isatty" title="Permalink to this definition">¶</a></dt>
+<dt id="chunk.chunk.isatty">
+<span id="chunk.Chunk.isatty"></span><code class="sig-name descname">isatty</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#chunk.chunk.isatty" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="chunk-chunk-seek">
-<span id="chunk.Chunk.seek"></span><code class="sig-name descname">seek</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pos</span></em>, <em class="sig-param"><span class="n">whence</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#chunk-chunk-seek" title="Permalink to this definition">¶</a></dt>
+<dt id="chunk.chunk.seek">
+<span id="chunk.Chunk.seek"></span><code class="sig-name descname">seek</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pos</span></em>, <em class="sig-param"><span class="n">whence</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#chunk.chunk.seek" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the chunk’s current position.  The <em>whence</em> argument is optional and
 defaults to <code class="docutils literal notranslate"><span class="pre">0</span></code> (absolute file positioning); other values are <code class="docutils literal notranslate"><span class="pre">1</span></code>
 (seek relative to the current position) and <code class="docutils literal notranslate"><span class="pre">2</span></code> (seek relative to the
@@ -213,14 +213,14 @@ allow seek, only forward seeks are allowed.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="chunk-chunk-tell">
-<span id="chunk.Chunk.tell"></span><code class="sig-name descname">tell</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#chunk-chunk-tell" title="Permalink to this definition">¶</a></dt>
+<dt id="chunk.chunk.tell">
+<span id="chunk.Chunk.tell"></span><code class="sig-name descname">tell</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#chunk.chunk.tell" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the current position into the chunk.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="chunk-chunk-read">
-<span id="chunk.Chunk.read"></span><code class="sig-name descname">read</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">size</span><span class="o">=</span><span class="default_value">- 1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#chunk-chunk-read" title="Permalink to this definition">¶</a></dt>
+<dt id="chunk.chunk.read">
+<span id="chunk.Chunk.read"></span><code class="sig-name descname">read</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">size</span><span class="o">=</span><span class="default_value">- 1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#chunk.chunk.read" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read at most <em>size</em> bytes from the chunk (less if the read hits the end of
 the chunk before obtaining <em>size</em> bytes).  If the <em>size</em> argument is
 negative or omitted, read all data until the end of the chunk.  An empty
@@ -229,9 +229,9 @@ immediately.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="chunk-chunk-skip">
-<span id="chunk.Chunk.skip"></span><code class="sig-name descname">skip</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#chunk-chunk-skip" title="Permalink to this definition">¶</a></dt>
-<dd><p>Skip to the end of the chunk.  All further calls to <a class="reference internal" href="#chunk-chunk-read" title="chunk.Chunk.read"><code class="xref py py-meth docutils literal notranslate"><span class="pre">read()</span></code></a> for the
+<dt id="chunk.chunk.skip">
+<span id="chunk.Chunk.skip"></span><code class="sig-name descname">skip</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#chunk.chunk.skip" title="Permalink to this definition">¶</a></dt>
+<dd><p>Skip to the end of the chunk.  All further calls to <a class="reference internal" href="#chunk.chunk.read" title="chunk.Chunk.read"><code class="xref py py-meth docutils literal notranslate"><span class="pre">read()</span></code></a> for the
 chunk will return <code class="docutils literal notranslate"><span class="pre">b''</span></code>.  If you are not interested in the contents of
 the chunk, this method should be called so that the file points to the
 start of the next chunk.</p>
@@ -333,7 +333,7 @@ Arts, January 1985.</p>
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/b652476.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.0+/b652476.
     </div>
 
   </body>

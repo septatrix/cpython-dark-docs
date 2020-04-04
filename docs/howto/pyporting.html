@@ -331,7 +331,7 @@ having to keep track of what type of data you are working with.</p>
 <p>The next issue is making sure you know whether the string literals in your code
 represent text or binary data. You should add a <code class="docutils literal notranslate"><span class="pre">b</span></code> prefix to any
 literal that presents binary data. For text you should add a <code class="docutils literal notranslate"><span class="pre">u</span></code> prefix to
-the text literal. (there is a <a class="reference internal" href="../library/__future__.html#module-future" title="__future__: Future statement definitions"><code class="xref py py-mod docutils literal notranslate"><span class="pre">__future__</span></code></a> import to force all unspecified
+the text literal. (there is a <a class="reference internal" href="../library/__future__.html#module-__future__" title="__future__: Future statement definitions"><code class="xref py py-mod docutils literal notranslate"><span class="pre">__future__</span></code></a> import to force all unspecified
 literals to be Unicode, but usage has shown it isn’t as effective as adding a
 <code class="docutils literal notranslate"><span class="pre">b</span></code> or <code class="docutils literal notranslate"><span class="pre">u</span></code> prefix to all literals explicitly)</p>
 <p>As part of this dichotomy you also need to be careful about opening files.
@@ -341,11 +341,11 @@ binary reading).  Under Python 3, binary files and text files are clearly
 distinct and mutually incompatible; see the <a class="reference internal" href="../library/io.html#module-io" title="io: Core tools for working with streams."><code class="xref py py-mod docutils literal notranslate"><span class="pre">io</span></code></a> module for details.
 Therefore, you <strong>must</strong> make a decision of whether a file will be used for
 binary access (allowing binary data to be read and/or written) or textual access
-(allowing text data to be read and/or written). You should also use <a class="reference internal" href="../library/io.html#io-open" title="io.open"><code class="xref py py-func docutils literal notranslate"><span class="pre">io.open()</span></code></a>
+(allowing text data to be read and/or written). You should also use <a class="reference internal" href="../library/io.html#io.open" title="io.open"><code class="xref py py-func docutils literal notranslate"><span class="pre">io.open()</span></code></a>
 for opening files instead of the built-in <a class="reference internal" href="../library/functions.html#open" title="open"><code class="xref py py-func docutils literal notranslate"><span class="pre">open()</span></code></a> function as the <a class="reference internal" href="../library/io.html#module-io" title="io: Core tools for working with streams."><code class="xref py py-mod docutils literal notranslate"><span class="pre">io</span></code></a>
 module is consistent from Python 2 to 3 while the built-in <a class="reference internal" href="../library/functions.html#open" title="open"><code class="xref py py-func docutils literal notranslate"><span class="pre">open()</span></code></a> function
-is not (in Python 3 it’s actually <a class="reference internal" href="../library/io.html#io-open" title="io.open"><code class="xref py py-func docutils literal notranslate"><span class="pre">io.open()</span></code></a>). Do not bother with the
-outdated practice of using <a class="reference internal" href="../library/codecs.html#codecs-open" title="codecs.open"><code class="xref py py-func docutils literal notranslate"><span class="pre">codecs.open()</span></code></a> as that’s only necessary for
+is not (in Python 3 it’s actually <a class="reference internal" href="../library/io.html#io.open" title="io.open"><code class="xref py py-func docutils literal notranslate"><span class="pre">io.open()</span></code></a>). Do not bother with the
+outdated practice of using <a class="reference internal" href="../library/codecs.html#codecs.open" title="codecs.open"><code class="xref py py-func docutils literal notranslate"><span class="pre">codecs.open()</span></code></a> as that’s only necessary for
 keeping compatibility with Python 2.5.</p>
 <p>The constructors of both <code class="docutils literal notranslate"><span class="pre">str</span></code> and <code class="docutils literal notranslate"><span class="pre">bytes</span></code> have different semantics for the
 same arguments between Python 2 &amp; 3. Passing an integer to <code class="docutils literal notranslate"><span class="pre">bytes</span></code> in Python 2
@@ -374,7 +374,7 @@ for what methods you cannot use for each type)</p></li>
 prefix</p></li>
 <li><p>Decode binary data to text as soon as possible, encode text as binary data as
 late as possible</p></li>
-<li><p>Open files using <a class="reference internal" href="../library/io.html#io-open" title="io.open"><code class="xref py py-func docutils literal notranslate"><span class="pre">io.open()</span></code></a> and make sure to specify the <code class="docutils literal notranslate"><span class="pre">b</span></code> mode when
+<li><p>Open files using <a class="reference internal" href="../library/io.html#io.open" title="io.open"><code class="xref py py-func docutils literal notranslate"><span class="pre">io.open()</span></code></a> and make sure to specify the <code class="docutils literal notranslate"><span class="pre">b</span></code> mode when
 appropriate</p></li>
 <li><p>Be careful when indexing into binary data</p></li>
 </ol>
@@ -390,7 +390,7 @@ example.</p>
 <p>Let’s pretend that you need access to a feature of <a class="reference internal" href="../library/importlib.html#module-importlib" title="importlib: The implementation of the import machinery."><code class="xref py py-mod docutils literal notranslate"><span class="pre">importlib</span></code></a> that
 is available in Python’s standard library since Python 3.3 and available for
 Python 2 through <a class="reference external" href="https://pypi.org/project/importlib2">importlib2</a> on PyPI. You might be tempted to write code to
-access e.g. the <a class="reference internal" href="../library/importlib.html#module-importlib-abc" title="importlib.abc: Abstract base classes related to import"><code class="xref py py-mod docutils literal notranslate"><span class="pre">importlib.abc</span></code></a> module by doing the following:</p>
+access e.g. the <a class="reference internal" href="../library/importlib.html#module-importlib.abc" title="importlib.abc: Abstract base classes related to import"><code class="xref py py-mod docutils literal notranslate"><span class="pre">importlib.abc</span></code></a> module by doing the following:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
 
 <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
@@ -610,7 +610,7 @@ to make sure everything functions as expected in both versions of Python.</p>
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/b652476.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.0+/b652476.
     </div>
 
   </body>

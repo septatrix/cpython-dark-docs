@@ -114,12 +114,12 @@ with high-level async/await code.</p>
 <div class="section" id="future-functions">
 <h2>Future Functions<a class="headerlink" href="#future-functions" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
-<dt id="asyncio-isfuture">
-<span id="asyncio.isfuture"></span><code class="sig-prename descclassname">asyncio.</code><code class="sig-name descname">isfuture</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj</span></em><span class="sig-paren">)</span><a class="headerlink" href="#asyncio-isfuture" title="Permalink to this definition">¶</a></dt>
+<dt id="asyncio.isfuture">
+<code class="sig-prename descclassname">asyncio.</code><code class="sig-name descname">isfuture</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj</span></em><span class="sig-paren">)</span><a class="headerlink" href="#asyncio.isfuture" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return <code class="docutils literal notranslate"><span class="pre">True</span></code> if <em>obj</em> is either of:</p>
 <ul class="simple">
-<li><p>an instance of <a class="reference internal" href="#asyncio-future" title="asyncio.Future"><code class="xref py py-class docutils literal notranslate"><span class="pre">asyncio.Future</span></code></a>,</p></li>
-<li><p>an instance of <a class="reference internal" href="asyncio-task.html#asyncio-task" title="asyncio.Task"><code class="xref py py-class docutils literal notranslate"><span class="pre">asyncio.Task</span></code></a>,</p></li>
+<li><p>an instance of <a class="reference internal" href="#asyncio.future" title="asyncio.Future"><code class="xref py py-class docutils literal notranslate"><span class="pre">asyncio.Future</span></code></a>,</p></li>
+<li><p>an instance of <a class="reference internal" href="asyncio-task.html#asyncio.task" title="asyncio.Task"><code class="xref py py-class docutils literal notranslate"><span class="pre">asyncio.Task</span></code></a>,</p></li>
 <li><p>a Future-like object with a <code class="docutils literal notranslate"><span class="pre">_asyncio_future_blocking</span></code>
 attribute.</p></li>
 </ul>
@@ -129,24 +129,24 @@ attribute.</p></li>
 </dd></dl>
 
 <dl class="py function">
-<dt id="asyncio-ensure-future">
-<span id="asyncio.ensure_future"></span><code class="sig-prename descclassname">asyncio.</code><code class="sig-name descname">ensure_future</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">loop</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#asyncio-ensure-future" title="Permalink to this definition">¶</a></dt>
+<dt id="asyncio.ensure_future">
+<code class="sig-prename descclassname">asyncio.</code><code class="sig-name descname">ensure_future</code><span class="sig-paren">(</span><em class="sig-param">obj</em>, <em class="sig-param">\*</em>, <em class="sig-param">loop=None</em><span class="sig-paren">)</span><a class="headerlink" href="#asyncio.ensure_future" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return:</p>
 <ul class="simple">
-<li><p><em>obj</em> argument as is, if <em>obj</em> is a <a class="reference internal" href="#asyncio-future" title="asyncio.Future"><code class="xref py py-class docutils literal notranslate"><span class="pre">Future</span></code></a>,
-a <a class="reference internal" href="asyncio-task.html#asyncio-task" title="asyncio.Task"><code class="xref py py-class docutils literal notranslate"><span class="pre">Task</span></code></a>, or a Future-like object (<a class="reference internal" href="#asyncio-isfuture" title="asyncio.isfuture"><code class="xref py py-func docutils literal notranslate"><span class="pre">isfuture()</span></code></a>
+<li><p><em>obj</em> argument as is, if <em>obj</em> is a <a class="reference internal" href="#asyncio.future" title="asyncio.Future"><code class="xref py py-class docutils literal notranslate"><span class="pre">Future</span></code></a>,
+a <a class="reference internal" href="asyncio-task.html#asyncio.task" title="asyncio.Task"><code class="xref py py-class docutils literal notranslate"><span class="pre">Task</span></code></a>, or a Future-like object (<a class="reference internal" href="#asyncio.isfuture" title="asyncio.isfuture"><code class="xref py py-func docutils literal notranslate"><span class="pre">isfuture()</span></code></a>
 is used for the test.)</p></li>
-<li><p>a <a class="reference internal" href="asyncio-task.html#asyncio-task" title="asyncio.Task"><code class="xref py py-class docutils literal notranslate"><span class="pre">Task</span></code></a> object wrapping <em>obj</em>, if <em>obj</em> is a
-coroutine (<a class="reference internal" href="asyncio-task.html#asyncio-iscoroutine" title="asyncio.iscoroutine"><code class="xref py py-func docutils literal notranslate"><span class="pre">iscoroutine()</span></code></a> is used for the test);
+<li><p>a <a class="reference internal" href="asyncio-task.html#asyncio.task" title="asyncio.Task"><code class="xref py py-class docutils literal notranslate"><span class="pre">Task</span></code></a> object wrapping <em>obj</em>, if <em>obj</em> is a
+coroutine (<a class="reference internal" href="asyncio-task.html#asyncio.iscoroutine" title="asyncio.iscoroutine"><code class="xref py py-func docutils literal notranslate"><span class="pre">iscoroutine()</span></code></a> is used for the test);
 in this case the coroutine will be scheduled by
 <code class="docutils literal notranslate"><span class="pre">ensure_future()</span></code>.</p></li>
-<li><p>a <a class="reference internal" href="asyncio-task.html#asyncio-task" title="asyncio.Task"><code class="xref py py-class docutils literal notranslate"><span class="pre">Task</span></code></a> object that would await on <em>obj</em>, if <em>obj</em> is an
-awaitable (<a class="reference internal" href="inspect.html#inspect-isawaitable" title="inspect.isawaitable"><code class="xref py py-func docutils literal notranslate"><span class="pre">inspect.isawaitable()</span></code></a> is used for the test.)</p></li>
+<li><p>a <a class="reference internal" href="asyncio-task.html#asyncio.task" title="asyncio.Task"><code class="xref py py-class docutils literal notranslate"><span class="pre">Task</span></code></a> object that would await on <em>obj</em>, if <em>obj</em> is an
+awaitable (<a class="reference internal" href="inspect.html#inspect.isawaitable" title="inspect.isawaitable"><code class="xref py py-func docutils literal notranslate"><span class="pre">inspect.isawaitable()</span></code></a> is used for the test.)</p></li>
 </ul>
 <p>If <em>obj</em> is neither of the above a <a class="reference internal" href="exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> is raised.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>See also the <a class="reference internal" href="asyncio-task.html#asyncio-create-task" title="asyncio.create_task"><code class="xref py py-func docutils literal notranslate"><span class="pre">create_task()</span></code></a> function which is the
+<p>See also the <a class="reference internal" href="asyncio-task.html#asyncio.create_task" title="asyncio.create_task"><code class="xref py py-func docutils literal notranslate"><span class="pre">create_task()</span></code></a> function which is the
 preferred way for creating new Tasks.</p>
 </div>
 <div class="versionchanged">
@@ -155,18 +155,18 @@ preferred way for creating new Tasks.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="asyncio-wrap-future">
-<span id="asyncio.wrap_future"></span><code class="sig-prename descclassname">asyncio.</code><code class="sig-name descname">wrap_future</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">future</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">loop</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#asyncio-wrap-future" title="Permalink to this definition">¶</a></dt>
-<dd><p>Wrap a <a class="reference internal" href="concurrent.futures.html#concurrent-futures-future" title="concurrent.futures.Future"><code class="xref py py-class docutils literal notranslate"><span class="pre">concurrent.futures.Future</span></code></a> object in a
-<a class="reference internal" href="#asyncio-future" title="asyncio.Future"><code class="xref py py-class docutils literal notranslate"><span class="pre">asyncio.Future</span></code></a> object.</p>
+<dt id="asyncio.wrap_future">
+<code class="sig-prename descclassname">asyncio.</code><code class="sig-name descname">wrap_future</code><span class="sig-paren">(</span><em class="sig-param">future</em>, <em class="sig-param">\*</em>, <em class="sig-param">loop=None</em><span class="sig-paren">)</span><a class="headerlink" href="#asyncio.wrap_future" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrap a <a class="reference internal" href="concurrent.futures.html#concurrent.futures.future" title="concurrent.futures.Future"><code class="xref py py-class docutils literal notranslate"><span class="pre">concurrent.futures.Future</span></code></a> object in a
+<a class="reference internal" href="#asyncio.future" title="asyncio.Future"><code class="xref py py-class docutils literal notranslate"><span class="pre">asyncio.Future</span></code></a> object.</p>
 </dd></dl>
 
 </div>
 <div class="section" id="future-object">
 <h2>Future Object<a class="headerlink" href="#future-object" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="asyncio-future">
-<span id="asyncio.Future"></span><em class="property">class </em><code class="sig-prename descclassname">asyncio.</code><code class="sig-name descname">Future</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">loop</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#asyncio-future" title="Permalink to this definition">¶</a></dt>
+<dt id="asyncio.future">
+<span id="asyncio.Future"></span><em class="property">class </em><code class="sig-prename descclassname">asyncio.</code><code class="sig-name descname">Future</code><span class="sig-paren">(</span><em class="sig-param">\*</em>, <em class="sig-param">loop=None</em><span class="sig-paren">)</span><a class="headerlink" href="#asyncio.future" title="Permalink to this definition">¶</a></dt>
 <dd><p>A Future represents an eventual result of an asynchronous
 operation.  Not thread-safe.</p>
 <p>Future is an <a class="reference internal" href="../glossary.html#term-awaitable"><span class="xref std std-term">awaitable</span></a> object.  Coroutines can await on
@@ -178,54 +178,54 @@ callback-based code (e.g. in protocols implemented using asyncio
 to interoperate with high-level async/await code.</p>
 <p>The rule of thumb is to never expose Future objects in user-facing
 APIs, and the recommended way to create a Future object is to call
-<a class="reference internal" href="asyncio-eventloop.html#asyncio-loop-create-future" title="asyncio.loop.create_future"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.create_future()</span></code></a>.  This way alternative event loop
+<a class="reference internal" href="asyncio-eventloop.html#asyncio.loop.create_future" title="asyncio.loop.create_future"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.create_future()</span></code></a>.  This way alternative event loop
 implementations can inject their own optimized implementations
 of a Future object.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">Changed in version 3.7: </span>Added support for the <a class="reference internal" href="contextvars.html#module-contextvars" title="contextvars: Context Variables"><code class="xref py py-mod docutils literal notranslate"><span class="pre">contextvars</span></code></a> module.</p>
 </div>
 <dl class="py method">
-<dt id="asyncio-future-result">
-<span id="asyncio.Future.result"></span><code class="sig-name descname">result</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asyncio-future-result" title="Permalink to this definition">¶</a></dt>
+<dt id="asyncio.future.result">
+<span id="asyncio.Future.result"></span><code class="sig-name descname">result</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asyncio.future.result" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the result of the Future.</p>
 <p>If the Future is <em>done</em> and has a result set by the
-<a class="reference internal" href="#asyncio-future-set-result" title="asyncio.Future.set_result"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_result()</span></code></a> method, the result value is returned.</p>
+<a class="reference internal" href="#asyncio.future.set_result" title="asyncio.Future.set_result"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_result()</span></code></a> method, the result value is returned.</p>
 <p>If the Future is <em>done</em> and has an exception set by the
-<a class="reference internal" href="#asyncio-future-set-exception" title="asyncio.Future.set_exception"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_exception()</span></code></a> method, this method raises the exception.</p>
+<a class="reference internal" href="#asyncio.future.set_exception" title="asyncio.Future.set_exception"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_exception()</span></code></a> method, this method raises the exception.</p>
 <p>If the Future has been <em>cancelled</em>, this method raises
-a <a class="reference internal" href="asyncio-exceptions.html#asyncio-cancellederror" title="asyncio.CancelledError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">CancelledError</span></code></a> exception.</p>
+a <a class="reference internal" href="asyncio-exceptions.html#asyncio.cancellederror" title="asyncio.CancelledError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">CancelledError</span></code></a> exception.</p>
 <p>If the Future’s result isn’t yet available, this method raises
-a <a class="reference internal" href="asyncio-exceptions.html#asyncio-invalidstateerror" title="asyncio.InvalidStateError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InvalidStateError</span></code></a> exception.</p>
+a <a class="reference internal" href="asyncio-exceptions.html#asyncio.invalidstateerror" title="asyncio.InvalidStateError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InvalidStateError</span></code></a> exception.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="asyncio-future-set-result">
-<span id="asyncio.Future.set_result"></span><code class="sig-name descname">set_result</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">result</span></em><span class="sig-paren">)</span><a class="headerlink" href="#asyncio-future-set-result" title="Permalink to this definition">¶</a></dt>
+<dt id="asyncio.future.set_result">
+<span id="asyncio.Future.set_result"></span><code class="sig-name descname">set_result</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">result</span></em><span class="sig-paren">)</span><a class="headerlink" href="#asyncio.future.set_result" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mark the Future as <em>done</em> and set its result.</p>
-<p>Raises a <a class="reference internal" href="asyncio-exceptions.html#asyncio-invalidstateerror" title="asyncio.InvalidStateError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InvalidStateError</span></code></a> error if the Future is
+<p>Raises a <a class="reference internal" href="asyncio-exceptions.html#asyncio.invalidstateerror" title="asyncio.InvalidStateError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InvalidStateError</span></code></a> error if the Future is
 already <em>done</em>.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="asyncio-future-set-exception">
-<span id="asyncio.Future.set_exception"></span><code class="sig-name descname">set_exception</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">exception</span></em><span class="sig-paren">)</span><a class="headerlink" href="#asyncio-future-set-exception" title="Permalink to this definition">¶</a></dt>
+<dt id="asyncio.future.set_exception">
+<span id="asyncio.Future.set_exception"></span><code class="sig-name descname">set_exception</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">exception</span></em><span class="sig-paren">)</span><a class="headerlink" href="#asyncio.future.set_exception" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mark the Future as <em>done</em> and set an exception.</p>
-<p>Raises a <a class="reference internal" href="asyncio-exceptions.html#asyncio-invalidstateerror" title="asyncio.InvalidStateError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InvalidStateError</span></code></a> error if the Future is
+<p>Raises a <a class="reference internal" href="asyncio-exceptions.html#asyncio.invalidstateerror" title="asyncio.InvalidStateError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InvalidStateError</span></code></a> error if the Future is
 already <em>done</em>.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="asyncio-future-done">
-<span id="asyncio.Future.done"></span><code class="sig-name descname">done</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asyncio-future-done" title="Permalink to this definition">¶</a></dt>
+<dt id="asyncio.future.done">
+<span id="asyncio.Future.done"></span><code class="sig-name descname">done</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asyncio.future.done" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return <code class="docutils literal notranslate"><span class="pre">True</span></code> if the Future is <em>done</em>.</p>
 <p>A Future is <em>done</em> if it was <em>cancelled</em> or if it has a result
-or an exception set with <a class="reference internal" href="#asyncio-future-set-result" title="asyncio.Future.set_result"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_result()</span></code></a> or
-<a class="reference internal" href="#asyncio-future-set-exception" title="asyncio.Future.set_exception"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_exception()</span></code></a> calls.</p>
+or an exception set with <a class="reference internal" href="#asyncio.future.set_result" title="asyncio.Future.set_result"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_result()</span></code></a> or
+<a class="reference internal" href="#asyncio.future.set_exception" title="asyncio.Future.set_exception"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_exception()</span></code></a> calls.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="asyncio-future-cancelled">
-<span id="asyncio.Future.cancelled"></span><code class="sig-name descname">cancelled</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asyncio-future-cancelled" title="Permalink to this definition">¶</a></dt>
+<dt id="asyncio.future.cancelled">
+<span id="asyncio.Future.cancelled"></span><code class="sig-name descname">cancelled</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asyncio.future.cancelled" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return <code class="docutils literal notranslate"><span class="pre">True</span></code> if the Future was <em>cancelled</em>.</p>
 <p>The method is usually used to check if a Future is not
 <em>cancelled</em> before setting a result or an exception for it:</p>
@@ -236,17 +236,17 @@ or an exception set with <a class="reference internal" href="#asyncio-future-set
 </dd></dl>
 
 <dl class="py method">
-<dt id="asyncio-future-add-done-callback">
-<span id="asyncio.Future.add_done_callback"></span><code class="sig-name descname">add_done_callback</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">callback</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">context</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#asyncio-future-add-done-callback" title="Permalink to this definition">¶</a></dt>
+<dt id="asyncio.future.add_done_callback">
+<span id="asyncio.Future.add_done_callback"></span><code class="sig-name descname">add_done_callback</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">callback</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">context</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#asyncio.future.add_done_callback" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add a callback to be run when the Future is <em>done</em>.</p>
 <p>The <em>callback</em> is called with the Future object as its only
 argument.</p>
 <p>If the Future is already <em>done</em> when this method is called,
-the callback is scheduled with <a class="reference internal" href="asyncio-eventloop.html#asyncio-loop-call-soon" title="asyncio.loop.call_soon"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.call_soon()</span></code></a>.</p>
+the callback is scheduled with <a class="reference internal" href="asyncio-eventloop.html#asyncio.loop.call_soon" title="asyncio.loop.call_soon"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.call_soon()</span></code></a>.</p>
 <p>An optional keyword-only <em>context</em> argument allows specifying a
-custom <a class="reference internal" href="contextvars.html#contextvars-context" title="contextvars.Context"><code class="xref py py-class docutils literal notranslate"><span class="pre">contextvars.Context</span></code></a> for the <em>callback</em> to run in.
+custom <a class="reference internal" href="contextvars.html#contextvars.context" title="contextvars.Context"><code class="xref py py-class docutils literal notranslate"><span class="pre">contextvars.Context</span></code></a> for the <em>callback</em> to run in.
 The current context is used when no <em>context</em> is provided.</p>
-<p><a class="reference internal" href="functools.html#functools-partial" title="functools.partial"><code class="xref py py-func docutils literal notranslate"><span class="pre">functools.partial()</span></code></a> can be used to pass parameters
+<p><a class="reference internal" href="functools.html#functools.partial" title="functools.partial"><code class="xref py py-func docutils literal notranslate"><span class="pre">functools.partial()</span></code></a> can be used to pass parameters
 to the callback, e.g.:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Call &#39;print(&quot;Future:&quot;, fut)&#39; when &quot;fut&quot; is done.</span>
 <span class="n">fut</span><span class="o">.</span><span class="n">add_done_callback</span><span class="p">(</span>
@@ -260,16 +260,16 @@ See <span class="target" id="index-0"></span><a class="pep reference external" h
 </dd></dl>
 
 <dl class="py method">
-<dt id="asyncio-future-remove-done-callback">
-<span id="asyncio.Future.remove_done_callback"></span><code class="sig-name descname">remove_done_callback</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">callback</span></em><span class="sig-paren">)</span><a class="headerlink" href="#asyncio-future-remove-done-callback" title="Permalink to this definition">¶</a></dt>
+<dt id="asyncio.future.remove_done_callback">
+<span id="asyncio.Future.remove_done_callback"></span><code class="sig-name descname">remove_done_callback</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">callback</span></em><span class="sig-paren">)</span><a class="headerlink" href="#asyncio.future.remove_done_callback" title="Permalink to this definition">¶</a></dt>
 <dd><p>Remove <em>callback</em> from the callbacks list.</p>
 <p>Returns the number of callbacks removed, which is typically 1,
 unless a callback was added more than once.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="asyncio-future-cancel">
-<span id="asyncio.Future.cancel"></span><code class="sig-name descname">cancel</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asyncio-future-cancel" title="Permalink to this definition">¶</a></dt>
+<dt id="asyncio.future.cancel">
+<span id="asyncio.Future.cancel"></span><code class="sig-name descname">cancel</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asyncio.future.cancel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Cancel the Future and schedule callbacks.</p>
 <p>If the Future is already <em>done</em> or <em>cancelled</em>, return <code class="docutils literal notranslate"><span class="pre">False</span></code>.
 Otherwise, change the Future’s state to <em>cancelled</em>,
@@ -277,20 +277,20 @@ schedule the callbacks, and return <code class="docutils literal notranslate"><s
 </dd></dl>
 
 <dl class="py method">
-<dt id="asyncio-future-exception">
-<span id="asyncio.Future.exception"></span><code class="sig-name descname">exception</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asyncio-future-exception" title="Permalink to this definition">¶</a></dt>
+<dt id="asyncio.future.exception">
+<span id="asyncio.Future.exception"></span><code class="sig-name descname">exception</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asyncio.future.exception" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the exception that was set on this Future.</p>
 <p>The exception (or <code class="docutils literal notranslate"><span class="pre">None</span></code> if no exception was set) is
 returned only if the Future is <em>done</em>.</p>
 <p>If the Future has been <em>cancelled</em>, this method raises a
-<a class="reference internal" href="asyncio-exceptions.html#asyncio-cancellederror" title="asyncio.CancelledError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">CancelledError</span></code></a> exception.</p>
+<a class="reference internal" href="asyncio-exceptions.html#asyncio.cancellederror" title="asyncio.CancelledError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">CancelledError</span></code></a> exception.</p>
 <p>If the Future isn’t <em>done</em> yet, this method raises an
-<a class="reference internal" href="asyncio-exceptions.html#asyncio-invalidstateerror" title="asyncio.InvalidStateError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InvalidStateError</span></code></a> exception.</p>
+<a class="reference internal" href="asyncio-exceptions.html#asyncio.invalidstateerror" title="asyncio.InvalidStateError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InvalidStateError</span></code></a> exception.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="asyncio-future-get-loop">
-<span id="asyncio.Future.get_loop"></span><code class="sig-name descname">get_loop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asyncio-future-get-loop" title="Permalink to this definition">¶</a></dt>
+<dt id="asyncio.future.get_loop">
+<span id="asyncio.Future.get_loop"></span><code class="sig-name descname">get_loop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asyncio.future.get_loop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the event loop the Future object is bound to.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.7.</span></p>
@@ -334,21 +334,21 @@ the Future has a result:</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>The Future object was designed to mimic
-<a class="reference internal" href="concurrent.futures.html#concurrent-futures-future" title="concurrent.futures.Future"><code class="xref py py-class docutils literal notranslate"><span class="pre">concurrent.futures.Future</span></code></a>.  Key differences include:</p>
+<a class="reference internal" href="concurrent.futures.html#concurrent.futures.future" title="concurrent.futures.Future"><code class="xref py py-class docutils literal notranslate"><span class="pre">concurrent.futures.Future</span></code></a>.  Key differences include:</p>
 <ul class="simple">
-<li><p>unlike asyncio Futures, <a class="reference internal" href="concurrent.futures.html#concurrent-futures-future" title="concurrent.futures.Future"><code class="xref py py-class docutils literal notranslate"><span class="pre">concurrent.futures.Future</span></code></a>
+<li><p>unlike asyncio Futures, <a class="reference internal" href="concurrent.futures.html#concurrent.futures.future" title="concurrent.futures.Future"><code class="xref py py-class docutils literal notranslate"><span class="pre">concurrent.futures.Future</span></code></a>
 instances cannot be awaited.</p></li>
-<li><p><a class="reference internal" href="#asyncio-future-result" title="asyncio.Future.result"><code class="xref py py-meth docutils literal notranslate"><span class="pre">asyncio.Future.result()</span></code></a> and <a class="reference internal" href="#asyncio-future-exception" title="asyncio.Future.exception"><code class="xref py py-meth docutils literal notranslate"><span class="pre">asyncio.Future.exception()</span></code></a>
+<li><p><a class="reference internal" href="#asyncio.future.result" title="asyncio.Future.result"><code class="xref py py-meth docutils literal notranslate"><span class="pre">asyncio.Future.result()</span></code></a> and <a class="reference internal" href="#asyncio.future.exception" title="asyncio.Future.exception"><code class="xref py py-meth docutils literal notranslate"><span class="pre">asyncio.Future.exception()</span></code></a>
 do not accept the <em>timeout</em> argument.</p></li>
-<li><p><a class="reference internal" href="#asyncio-future-result" title="asyncio.Future.result"><code class="xref py py-meth docutils literal notranslate"><span class="pre">asyncio.Future.result()</span></code></a> and <a class="reference internal" href="#asyncio-future-exception" title="asyncio.Future.exception"><code class="xref py py-meth docutils literal notranslate"><span class="pre">asyncio.Future.exception()</span></code></a>
-raise an <a class="reference internal" href="asyncio-exceptions.html#asyncio-invalidstateerror" title="asyncio.InvalidStateError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InvalidStateError</span></code></a> exception when the Future is not
+<li><p><a class="reference internal" href="#asyncio.future.result" title="asyncio.Future.result"><code class="xref py py-meth docutils literal notranslate"><span class="pre">asyncio.Future.result()</span></code></a> and <a class="reference internal" href="#asyncio.future.exception" title="asyncio.Future.exception"><code class="xref py py-meth docutils literal notranslate"><span class="pre">asyncio.Future.exception()</span></code></a>
+raise an <a class="reference internal" href="asyncio-exceptions.html#asyncio.invalidstateerror" title="asyncio.InvalidStateError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InvalidStateError</span></code></a> exception when the Future is not
 <em>done</em>.</p></li>
-<li><p>Callbacks registered with <a class="reference internal" href="#asyncio-future-add-done-callback" title="asyncio.Future.add_done_callback"><code class="xref py py-meth docutils literal notranslate"><span class="pre">asyncio.Future.add_done_callback()</span></code></a>
+<li><p>Callbacks registered with <a class="reference internal" href="#asyncio.future.add_done_callback" title="asyncio.Future.add_done_callback"><code class="xref py py-meth docutils literal notranslate"><span class="pre">asyncio.Future.add_done_callback()</span></code></a>
 are not called immediately.  They are scheduled with
-<a class="reference internal" href="asyncio-eventloop.html#asyncio-loop-call-soon" title="asyncio.loop.call_soon"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.call_soon()</span></code></a> instead.</p></li>
+<a class="reference internal" href="asyncio-eventloop.html#asyncio.loop.call_soon" title="asyncio.loop.call_soon"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.call_soon()</span></code></a> instead.</p></li>
 <li><p>asyncio Future is not compatible with the
-<a class="reference internal" href="concurrent.futures.html#concurrent-futures-wait" title="concurrent.futures.wait"><code class="xref py py-func docutils literal notranslate"><span class="pre">concurrent.futures.wait()</span></code></a> and
-<a class="reference internal" href="concurrent.futures.html#concurrent-futures-as-completed" title="concurrent.futures.as_completed"><code class="xref py py-func docutils literal notranslate"><span class="pre">concurrent.futures.as_completed()</span></code></a> functions.</p></li>
+<a class="reference internal" href="concurrent.futures.html#concurrent.futures.wait" title="concurrent.futures.wait"><code class="xref py py-func docutils literal notranslate"><span class="pre">concurrent.futures.wait()</span></code></a> and
+<a class="reference internal" href="concurrent.futures.html#concurrent.futures.as_completed" title="concurrent.futures.as_completed"><code class="xref py py-func docutils literal notranslate"><span class="pre">concurrent.futures.as_completed()</span></code></a> functions.</p></li>
 </ul>
 </div>
 </div>
@@ -449,7 +449,7 @@ are not called immediately.  They are scheduled with
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/b652476.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.0+/b652476.
     </div>
 
   </body>

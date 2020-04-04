@@ -104,43 +104,43 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="module-email-iterators">
-<span id="module-email.iterators"></span><span id="email-iterators-iterators"></span><h1><a class="reference internal" href="#module-email-iterators" title="email.iterators: Iterate over a  message object tree."><code class="xref py py-mod docutils literal notranslate"><span class="pre">email.iterators</span></code></a>: Iterators<a class="headerlink" href="#module-email-iterators" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-email.iterators">
+<span id="email-iterators-iterators"></span><h1><a class="reference internal" href="#module-email.iterators" title="email.iterators: Iterate over a  message object tree."><code class="xref py py-mod docutils literal notranslate"><span class="pre">email.iterators</span></code></a>: Iterators<a class="headerlink" href="#module-email.iterators" title="Permalink to this headline">¶</a></h1>
 <p><strong>Source code:</strong> <a class="reference external" href="https://github.com/python/cpython/tree/master/Lib/email/iterators.py">Lib/email/iterators.py</a></p>
 <hr class="docutils" />
 <p>Iterating over a message object tree is fairly easy with the
-<a class="reference internal" href="email.compat32-message.html#email-message-message-walk" title="email.message.Message.walk"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Message.walk</span></code></a> method.  The
-<a class="reference internal" href="#module-email-iterators" title="email.iterators: Iterate over a  message object tree."><code class="xref py py-mod docutils literal notranslate"><span class="pre">email.iterators</span></code></a> module provides some useful higher level iterations over
+<a class="reference internal" href="email.compat32-message.html#email.message.message.walk" title="email.message.Message.walk"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Message.walk</span></code></a> method.  The
+<a class="reference internal" href="#module-email.iterators" title="email.iterators: Iterate over a  message object tree."><code class="xref py py-mod docutils literal notranslate"><span class="pre">email.iterators</span></code></a> module provides some useful higher level iterations over
 message object trees.</p>
 <dl class="py function">
-<dt id="email-iterators-body-line-iterator">
-<span id="email.iterators.body_line_iterator"></span><code class="sig-prename descclassname">email.iterators.</code><code class="sig-name descname">body_line_iterator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg</span></em>, <em class="sig-param"><span class="n">decode</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#email-iterators-body-line-iterator" title="Permalink to this definition">¶</a></dt>
+<dt id="email.iterators.body_line_iterator">
+<code class="sig-prename descclassname">email.iterators.</code><code class="sig-name descname">body_line_iterator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg</span></em>, <em class="sig-param"><span class="n">decode</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#email.iterators.body_line_iterator" title="Permalink to this definition">¶</a></dt>
 <dd><p>This iterates over all the payloads in all the subparts of <em>msg</em>, returning the
 string payloads line-by-line.  It skips over all the subpart headers, and it
 skips over any subpart with a payload that isn’t a Python string.  This is
 somewhat equivalent to reading the flat text representation of the message from
-a file using <a class="reference internal" href="io.html#io-textiobase-readline" title="io.TextIOBase.readline"><code class="xref py py-meth docutils literal notranslate"><span class="pre">readline()</span></code></a>, skipping over all the
+a file using <a class="reference internal" href="io.html#io.textiobase.readline" title="io.TextIOBase.readline"><code class="xref py py-meth docutils literal notranslate"><span class="pre">readline()</span></code></a>, skipping over all the
 intervening headers.</p>
-<p>Optional <em>decode</em> is passed through to <a class="reference internal" href="email.compat32-message.html#email-message-message-get-payload" title="email.message.Message.get_payload"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Message.get_payload</span></code></a>.</p>
+<p>Optional <em>decode</em> is passed through to <a class="reference internal" href="email.compat32-message.html#email.message.message.get_payload" title="email.message.Message.get_payload"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Message.get_payload</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="email-iterators-typed-subpart-iterator">
-<span id="email.iterators.typed_subpart_iterator"></span><code class="sig-prename descclassname">email.iterators.</code><code class="sig-name descname">typed_subpart_iterator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg</span></em>, <em class="sig-param"><span class="n">maintype</span><span class="o">=</span><span class="default_value">’text’</span></em>, <em class="sig-param"><span class="n">subtype</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#email-iterators-typed-subpart-iterator" title="Permalink to this definition">¶</a></dt>
+<dt id="email.iterators.typed_subpart_iterator">
+<code class="sig-prename descclassname">email.iterators.</code><code class="sig-name descname">typed_subpart_iterator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg</span></em>, <em class="sig-param"><span class="n">maintype</span><span class="o">=</span><span class="default_value">'text'</span></em>, <em class="sig-param"><span class="n">subtype</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#email.iterators.typed_subpart_iterator" title="Permalink to this definition">¶</a></dt>
 <dd><p>This iterates over all the subparts of <em>msg</em>, returning only those subparts that
 match the MIME type specified by <em>maintype</em> and <em>subtype</em>.</p>
 <p>Note that <em>subtype</em> is optional; if omitted, then subpart MIME type matching is
 done only with the main type.  <em>maintype</em> is optional too; it defaults to
 <em class="mimetype">text</em>.</p>
-<p>Thus, by default <a class="reference internal" href="#email-iterators-typed-subpart-iterator" title="email.iterators.typed_subpart_iterator"><code class="xref py py-func docutils literal notranslate"><span class="pre">typed_subpart_iterator()</span></code></a> returns each subpart that has a
+<p>Thus, by default <a class="reference internal" href="#email.iterators.typed_subpart_iterator" title="email.iterators.typed_subpart_iterator"><code class="xref py py-func docutils literal notranslate"><span class="pre">typed_subpart_iterator()</span></code></a> returns each subpart that has a
 MIME type of <em class="mimetype">text/*</em>.</p>
 </dd></dl>
 
 <p>The following function has been added as a useful debugging tool.  It should
 <em>not</em> be considered part of the supported public interface for the package.</p>
 <dl class="py function">
-<dt id="email-iterators-structure">
-<span id="email.iterators._structure"></span><code class="sig-prename descclassname">email.iterators.</code><code class="sig-name descname">_structure</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg</span></em>, <em class="sig-param"><span class="n">fp</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">level</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">include_default</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#email-iterators-structure" title="Permalink to this definition">¶</a></dt>
+<dt id="email.iterators._structure">
+<code class="sig-prename descclassname">email.iterators.</code><code class="sig-name descname">_structure</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg</span></em>, <em class="sig-param"><span class="n">fp</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">level</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">include_default</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#email.iterators._structure" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prints an indented representation of the content types of the message object
 structure.  For example:</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">msg</span> <span class="o">=</span> <span class="n">email</span><span class="o">.</span><span class="n">message_from_file</span><span class="p">(</span><span class="n">somefile</span><span class="p">)</span>
@@ -255,7 +255,7 @@ suitable for Python’s <a class="reference internal" href="functions.html#print
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.0+/b652476.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.0+/b652476.
     </div>
 
   </body>
