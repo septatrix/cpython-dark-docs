@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
     <title>functools — Higher-order functions and operations on callable objects &#8212; Python 3.9.0a4 documentation</title>
@@ -79,6 +79,7 @@
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="functional.html" accesskey="U">Functional Programming Modules</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">functools</span></code> — Higher-order functions and operations on callable objects</a></li>
     <li class="right">
         
 
@@ -93,7 +94,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -602,8 +603,8 @@ or non-cls argument, create your function accordingly:</p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="functools.topologicalsorter">
-<span id="functools.TopologicalSorter"></span><em class="property">class </em><code class="sig-prename descclassname">functools.</code><code class="sig-name descname">TopologicalSorter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#functools.topologicalsorter" title="Permalink to this definition">¶</a></dt>
+<dt id="functools.TopologicalSorter">
+<em class="property">class </em><code class="sig-prename descclassname">functools.</code><code class="sig-name descname">TopologicalSorter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#functools.TopologicalSorter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Provides functionality to topologically sort a graph of hashable nodes.</p>
 <p>A topological order is a linear ordering of the vertices in a graph such that
 for every directed edge u -&gt; v from vertex u to vertex v, vertex u comes
@@ -617,24 +618,24 @@ is, if it is a directed acyclic graph.</p>
 representing a directed acyclic graph where the keys are nodes and the values
 are iterables of all predecessors of that node in the graph (the nodes that
 have edges that point to the value in the key). Additional nodes can be added
-to the graph using the <a class="reference internal" href="#functools.topologicalsorter.add" title="functools.TopologicalSorter.add"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add()</span></code></a> method.</p>
+to the graph using the <a class="reference internal" href="#functools.TopologicalSorter.add" title="functools.TopologicalSorter.add"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add()</span></code></a> method.</p>
 <p>In the general case, the steps required to perform the sorting of a given
 graph are as follows:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>Create an instance of the <a class="reference internal" href="#functools.topologicalsorter" title="functools.TopologicalSorter"><code class="xref py py-class docutils literal notranslate"><span class="pre">TopologicalSorter</span></code></a> with an optional
+<li><p>Create an instance of the <a class="reference internal" href="#functools.TopologicalSorter" title="functools.TopologicalSorter"><code class="xref py py-class docutils literal notranslate"><span class="pre">TopologicalSorter</span></code></a> with an optional
 initial graph.</p></li>
 <li><p>Add additional nodes to the graph.</p></li>
-<li><p>Call <a class="reference internal" href="#functools.topologicalsorter.prepare" title="functools.TopologicalSorter.prepare"><code class="xref py py-meth docutils literal notranslate"><span class="pre">prepare()</span></code></a> on the graph.</p></li>
-<li><p>While <a class="reference internal" href="#functools.topologicalsorter.is_active" title="functools.TopologicalSorter.is_active"><code class="xref py py-meth docutils literal notranslate"><span class="pre">is_active()</span></code></a> is <code class="docutils literal notranslate"><span class="pre">True</span></code>, iterate over
-the nodes returned by <a class="reference internal" href="#functools.topologicalsorter.get_ready" title="functools.TopologicalSorter.get_ready"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_ready()</span></code></a> and
-process them. Call <a class="reference internal" href="#functools.topologicalsorter.done" title="functools.TopologicalSorter.done"><code class="xref py py-meth docutils literal notranslate"><span class="pre">done()</span></code></a> on each node as it
+<li><p>Call <a class="reference internal" href="#functools.TopologicalSorter.prepare" title="functools.TopologicalSorter.prepare"><code class="xref py py-meth docutils literal notranslate"><span class="pre">prepare()</span></code></a> on the graph.</p></li>
+<li><p>While <a class="reference internal" href="#functools.TopologicalSorter.is_active" title="functools.TopologicalSorter.is_active"><code class="xref py py-meth docutils literal notranslate"><span class="pre">is_active()</span></code></a> is <code class="docutils literal notranslate"><span class="pre">True</span></code>, iterate over
+the nodes returned by <a class="reference internal" href="#functools.TopologicalSorter.get_ready" title="functools.TopologicalSorter.get_ready"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_ready()</span></code></a> and
+process them. Call <a class="reference internal" href="#functools.TopologicalSorter.done" title="functools.TopologicalSorter.done"><code class="xref py py-meth docutils literal notranslate"><span class="pre">done()</span></code></a> on each node as it
 finishes processing.</p></li>
 </ul>
 </div></blockquote>
 <p>In case just an immediate sorting of the nodes in the graph is required and
 no parallelism is involved, the convenience method
-<a class="reference internal" href="#functools.topologicalsorter.static_order" title="functools.TopologicalSorter.static_order"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TopologicalSorter.static_order()</span></code></a> can be used directly:</p>
+<a class="reference internal" href="#functools.TopologicalSorter.static_order" title="functools.TopologicalSorter.static_order"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TopologicalSorter.static_order()</span></code></a> can be used directly:</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">graph</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;D&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">},</span> <span class="s2">&quot;C&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;A&quot;</span><span class="p">},</span> <span class="s2">&quot;B&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;A&quot;</span><span class="p">}}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ts</span> <span class="o">=</span> <span class="n">TopologicalSorter</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">tuple</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">static_order</span><span class="p">())</span>
@@ -667,8 +668,8 @@ they become ready. For instance:</p>
 </pre></div>
 </div>
 <dl class="py method">
-<dt id="functools.topologicalsorter.add">
-<span id="functools.TopologicalSorter.add"></span><code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">node</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">predecessors</span></em><span class="sig-paren">)</span><a class="headerlink" href="#functools.topologicalsorter.add" title="Permalink to this definition">¶</a></dt>
+<dt id="functools.TopologicalSorter.add">
+<code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">node</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">predecessors</span></em><span class="sig-paren">)</span><a class="headerlink" href="#functools.TopologicalSorter.add" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add a new node and its predecessors to the graph. Both the <em>node</em> and all
 elements in <em>predecessors</em> must be hashable.</p>
 <p>If called multiple times with the same node argument, the set of
@@ -677,29 +678,29 @@ dependencies will be the union of all dependencies passed in.</p>
 provided) or to provide a dependency twice. If a node that has not been
 provided before is included among <em>predecessors</em> it will be automatically
 added to the graph with no predecessors of its own.</p>
-<p>Raises <a class="reference internal" href="exceptions.html#valueerror" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> if called after <a class="reference internal" href="#functools.topologicalsorter.prepare" title="functools.TopologicalSorter.prepare"><code class="xref py py-meth docutils literal notranslate"><span class="pre">prepare()</span></code></a>.</p>
+<p>Raises <a class="reference internal" href="exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> if called after <a class="reference internal" href="#functools.TopologicalSorter.prepare" title="functools.TopologicalSorter.prepare"><code class="xref py py-meth docutils literal notranslate"><span class="pre">prepare()</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="functools.topologicalsorter.prepare">
-<span id="functools.TopologicalSorter.prepare"></span><code class="sig-name descname">prepare</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#functools.topologicalsorter.prepare" title="Permalink to this definition">¶</a></dt>
+<dt id="functools.TopologicalSorter.prepare">
+<code class="sig-name descname">prepare</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#functools.TopologicalSorter.prepare" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mark the graph as finished and check for cycles in the graph. If any cycle
-is detected, <a class="reference internal" href="#functools.cycleerror" title="functools.CycleError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">CycleError</span></code></a> will be raised, but
-<a class="reference internal" href="#functools.topologicalsorter.get_ready" title="functools.TopologicalSorter.get_ready"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_ready()</span></code></a> can still be used to obtain as many
+is detected, <a class="reference internal" href="#functools.CycleError" title="functools.CycleError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">CycleError</span></code></a> will be raised, but
+<a class="reference internal" href="#functools.TopologicalSorter.get_ready" title="functools.TopologicalSorter.get_ready"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_ready()</span></code></a> can still be used to obtain as many
 nodes as possible until cycles block more progress. After a call to this
 function, the graph cannot be modified, and therefore no more nodes can be
-added using <a class="reference internal" href="#functools.topologicalsorter.add" title="functools.TopologicalSorter.add"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add()</span></code></a>.</p>
+added using <a class="reference internal" href="#functools.TopologicalSorter.add" title="functools.TopologicalSorter.add"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add()</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="functools.topologicalsorter.is_active">
-<span id="functools.TopologicalSorter.is_active"></span><code class="sig-name descname">is_active</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#functools.topologicalsorter.is_active" title="Permalink to this definition">¶</a></dt>
+<dt id="functools.TopologicalSorter.is_active">
+<code class="sig-name descname">is_active</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#functools.TopologicalSorter.is_active" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if more progress can be made and <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.
 Progress can be made if cycles do not block the resolution and either
 there are still nodes ready that haven’t yet been returned by
-<a class="reference internal" href="#functools.topologicalsorter.get_ready" title="functools.TopologicalSorter.get_ready"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TopologicalSorter.get_ready()</span></code></a> or the number of nodes marked
-<a class="reference internal" href="#functools.topologicalsorter.done" title="functools.TopologicalSorter.done"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TopologicalSorter.done()</span></code></a> is less than the number that have been
-returned by <a class="reference internal" href="#functools.topologicalsorter.get_ready" title="functools.TopologicalSorter.get_ready"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TopologicalSorter.get_ready()</span></code></a>.</p>
+<a class="reference internal" href="#functools.TopologicalSorter.get_ready" title="functools.TopologicalSorter.get_ready"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TopologicalSorter.get_ready()</span></code></a> or the number of nodes marked
+<a class="reference internal" href="#functools.TopologicalSorter.done" title="functools.TopologicalSorter.done"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TopologicalSorter.done()</span></code></a> is less than the number that have been
+returned by <a class="reference internal" href="#functools.TopologicalSorter.get_ready" title="functools.TopologicalSorter.get_ready"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TopologicalSorter.get_ready()</span></code></a>.</p>
 <p>The <code class="xref py py-meth docutils literal notranslate"><span class="pre">__bool__()</span></code> method of this class defers to
 this function, so instead of:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">ts</span><span class="o">.</span><span class="n">is_active</span><span class="p">():</span>
@@ -711,41 +712,41 @@ this function, so instead of:</p>
     <span class="o">...</span>
 </pre></div>
 </div>
-<p>Raises <a class="reference internal" href="exceptions.html#valueerror" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> if called without calling
-<a class="reference internal" href="#functools.topologicalsorter.prepare" title="functools.TopologicalSorter.prepare"><code class="xref py py-meth docutils literal notranslate"><span class="pre">prepare()</span></code></a> previously.</p>
+<p>Raises <a class="reference internal" href="exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> if called without calling
+<a class="reference internal" href="#functools.TopologicalSorter.prepare" title="functools.TopologicalSorter.prepare"><code class="xref py py-meth docutils literal notranslate"><span class="pre">prepare()</span></code></a> previously.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="functools.topologicalsorter.done">
-<span id="functools.TopologicalSorter.done"></span><code class="sig-name descname">done</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">nodes</span></em><span class="sig-paren">)</span><a class="headerlink" href="#functools.topologicalsorter.done" title="Permalink to this definition">¶</a></dt>
-<dd><p>Marks a set of nodes returned by <a class="reference internal" href="#functools.topologicalsorter.get_ready" title="functools.TopologicalSorter.get_ready"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TopologicalSorter.get_ready()</span></code></a> as
+<dt id="functools.TopologicalSorter.done">
+<code class="sig-name descname">done</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">nodes</span></em><span class="sig-paren">)</span><a class="headerlink" href="#functools.TopologicalSorter.done" title="Permalink to this definition">¶</a></dt>
+<dd><p>Marks a set of nodes returned by <a class="reference internal" href="#functools.TopologicalSorter.get_ready" title="functools.TopologicalSorter.get_ready"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TopologicalSorter.get_ready()</span></code></a> as
 processed, unblocking any successor of each node in <em>nodes</em> for being
-returned in the future by a call to <a class="reference internal" href="#functools.topologicalsorter.get_ready" title="functools.TopologicalSorter.get_ready"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TopologicalSorter.get_ready()</span></code></a>.</p>
-<p>Raises <a class="reference internal" href="exceptions.html#valueerror" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> if any node in <em>nodes</em> has already been marked as
+returned in the future by a call to <a class="reference internal" href="#functools.TopologicalSorter.get_ready" title="functools.TopologicalSorter.get_ready"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TopologicalSorter.get_ready()</span></code></a>.</p>
+<p>Raises <a class="reference internal" href="exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> if any node in <em>nodes</em> has already been marked as
 processed by a previous call to this method or if a node was not added to
-the graph by using <a class="reference internal" href="#functools.topologicalsorter.add" title="functools.TopologicalSorter.add"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TopologicalSorter.add()</span></code></a>, if called without
-calling <a class="reference internal" href="#functools.topologicalsorter.prepare" title="functools.TopologicalSorter.prepare"><code class="xref py py-meth docutils literal notranslate"><span class="pre">prepare()</span></code></a> or if node has not yet been
-returned by <a class="reference internal" href="#functools.topologicalsorter.get_ready" title="functools.TopologicalSorter.get_ready"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_ready()</span></code></a>.</p>
+the graph by using <a class="reference internal" href="#functools.TopologicalSorter.add" title="functools.TopologicalSorter.add"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TopologicalSorter.add()</span></code></a>, if called without
+calling <a class="reference internal" href="#functools.TopologicalSorter.prepare" title="functools.TopologicalSorter.prepare"><code class="xref py py-meth docutils literal notranslate"><span class="pre">prepare()</span></code></a> or if node has not yet been
+returned by <a class="reference internal" href="#functools.TopologicalSorter.get_ready" title="functools.TopologicalSorter.get_ready"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_ready()</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="functools.topologicalsorter.get_ready">
-<span id="functools.TopologicalSorter.get_ready"></span><code class="sig-name descname">get_ready</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#functools.topologicalsorter.get_ready" title="Permalink to this definition">¶</a></dt>
+<dt id="functools.TopologicalSorter.get_ready">
+<code class="sig-name descname">get_ready</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#functools.TopologicalSorter.get_ready" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a <code class="docutils literal notranslate"><span class="pre">tuple</span></code> with all the nodes that are ready. Initially it
 returns all nodes with no predecessors, and once those are marked as
-processed by calling <a class="reference internal" href="#functools.topologicalsorter.done" title="functools.TopologicalSorter.done"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TopologicalSorter.done()</span></code></a>, further calls will
+processed by calling <a class="reference internal" href="#functools.TopologicalSorter.done" title="functools.TopologicalSorter.done"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TopologicalSorter.done()</span></code></a>, further calls will
 return all new nodes that have all their predecessors already processed.
 Once no more progress can be made, empty tuples are returned.</p>
-<p>Raises <a class="reference internal" href="exceptions.html#valueerror" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> if called without calling
-<a class="reference internal" href="#functools.topologicalsorter.prepare" title="functools.TopologicalSorter.prepare"><code class="xref py py-meth docutils literal notranslate"><span class="pre">prepare()</span></code></a> previously.</p>
+<p>Raises <a class="reference internal" href="exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> if called without calling
+<a class="reference internal" href="#functools.TopologicalSorter.prepare" title="functools.TopologicalSorter.prepare"><code class="xref py py-meth docutils literal notranslate"><span class="pre">prepare()</span></code></a> previously.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="functools.topologicalsorter.static_order">
-<span id="functools.TopologicalSorter.static_order"></span><code class="sig-name descname">static_order</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#functools.topologicalsorter.static_order" title="Permalink to this definition">¶</a></dt>
+<dt id="functools.TopologicalSorter.static_order">
+<code class="sig-name descname">static_order</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#functools.TopologicalSorter.static_order" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns an iterable of nodes in a topological order. Using this method
-does not require to call <a class="reference internal" href="#functools.topologicalsorter.prepare" title="functools.TopologicalSorter.prepare"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TopologicalSorter.prepare()</span></code></a> or
-<a class="reference internal" href="#functools.topologicalsorter.done" title="functools.TopologicalSorter.done"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TopologicalSorter.done()</span></code></a>. This method is equivalent to:</p>
+does not require to call <a class="reference internal" href="#functools.TopologicalSorter.prepare" title="functools.TopologicalSorter.prepare"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TopologicalSorter.prepare()</span></code></a> or
+<a class="reference internal" href="#functools.TopologicalSorter.done" title="functools.TopologicalSorter.done"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TopologicalSorter.done()</span></code></a>. This method is equivalent to:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">static_order</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">prepare</span><span class="p">()</span>
     <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_active</span><span class="p">():</span>
@@ -771,9 +772,9 @@ which the items were inserted in the graph. For example:</p>
 </div>
 <p>This is due to the fact that “0” and “2” are in the same level in the
 graph (they would have been returned in the same call to
-<a class="reference internal" href="#functools.topologicalsorter.get_ready" title="functools.TopologicalSorter.get_ready"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_ready()</span></code></a>) and the order between them is
+<a class="reference internal" href="#functools.TopologicalSorter.get_ready" title="functools.TopologicalSorter.get_ready"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_ready()</span></code></a>) and the order between them is
 determined by the order of insertion.</p>
-<p>If any cycle is detected, <a class="reference internal" href="#functools.cycleerror" title="functools.CycleError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">CycleError</span></code></a> will be raised.</p>
+<p>If any cycle is detected, <a class="reference internal" href="#functools.CycleError" title="functools.CycleError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">CycleError</span></code></a> will be raised.</p>
 </dd></dl>
 
 <div class="versionadded">
@@ -805,7 +806,7 @@ than helpful.</p>
 <p><a class="reference internal" href="#functools.update_wrapper" title="functools.update_wrapper"><code class="xref py py-func docutils literal notranslate"><span class="pre">update_wrapper()</span></code></a> may be used with callables other than functions. Any
 attributes named in <em>assigned</em> or <em>updated</em> that are missing from the object
 being wrapped are ignored (i.e. this function will not attempt to set them
-on the wrapper function). <a class="reference internal" href="exceptions.html#attributeerror" title="AttributeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">AttributeError</span></code></a> is still raised if the
+on the wrapper function). <a class="reference internal" href="exceptions.html#AttributeError" title="AttributeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">AttributeError</span></code></a> is still raised if the
 wrapper function itself is missing any attributes named in <em>updated</em>.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.2: </span>Automatic addition of the <code class="docutils literal notranslate"><span class="pre">__wrapped__</span></code> attribute.</p>
@@ -814,7 +815,7 @@ wrapper function itself is missing any attributes named in <em>updated</em>.</p>
 <p><span class="versionmodified added">New in version 3.2: </span>Copying of the <code class="docutils literal notranslate"><span class="pre">__annotations__</span></code> attribute by default.</p>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 3.2: </span>Missing attributes no longer trigger an <a class="reference internal" href="exceptions.html#attributeerror" title="AttributeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">AttributeError</span></code></a>.</p>
+<p><span class="versionmodified changed">Changed in version 3.2: </span>Missing attributes no longer trigger an <a class="reference internal" href="exceptions.html#AttributeError" title="AttributeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">AttributeError</span></code></a>.</p>
 </div>
 <div class="versionchanged">
 <p><span class="versionmodified changed">Changed in version 3.4: </span>The <code class="docutils literal notranslate"><span class="pre">__wrapped__</span></code> attribute now always refers to the wrapped
@@ -893,9 +894,9 @@ during instance attribute look-up.</p>
 <h2>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this headline">¶</a></h2>
 <p>The <a class="reference internal" href="#module-functools" title="functools: Higher-order functions and operations on callable objects."><code class="xref py py-mod docutils literal notranslate"><span class="pre">functools</span></code></a> module defines the following exception classes:</p>
 <dl class="py exception">
-<dt id="functools.cycleerror">
-<span id="functools.CycleError"></span><em class="property">exception </em><code class="sig-prename descclassname">functools.</code><code class="sig-name descname">CycleError</code><a class="headerlink" href="#functools.cycleerror" title="Permalink to this definition">¶</a></dt>
-<dd><p>Subclass of <a class="reference internal" href="exceptions.html#valueerror" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> raised by <a class="reference internal" href="#functools.topologicalsorter.prepare" title="functools.TopologicalSorter.prepare"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TopologicalSorter.prepare()</span></code></a> if cycles exist
+<dt id="functools.CycleError">
+<em class="property">exception </em><code class="sig-prename descclassname">functools.</code><code class="sig-name descname">CycleError</code><a class="headerlink" href="#functools.CycleError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Subclass of <a class="reference internal" href="exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> raised by <a class="reference internal" href="#functools.TopologicalSorter.prepare" title="functools.TopologicalSorter.prepare"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TopologicalSorter.prepare()</span></code></a> if cycles exist
 in the working graph. If multiple cycles exist, only one undefined choice among them will
 be reported and included in the exception.</p>
 <p>The detected cycle can be accessed via the second element in the <code class="xref py py-attr docutils literal notranslate"><span class="pre">args</span></code>
@@ -970,6 +971,7 @@ the first and the last node will be the same, to make it clear that it is cyclic
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="functional.html" >Functional Programming Modules</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">functools</span></code> — Higher-order functions and operations on callable objects</a></li>
     <li class="right">
         
 
@@ -984,7 +986,7 @@ the first and the last node will be the same, to make it clear that it is cyclic
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  

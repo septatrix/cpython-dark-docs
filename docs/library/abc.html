@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
     <title>abc — Abstract Base Classes &#8212; Python 3.9.0a4 documentation</title>
@@ -79,6 +79,7 @@
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="python.html" accesskey="U">Python Runtime Services</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">abc</span></code> — Abstract Base Classes</a></li>
     <li class="right">
         
 
@@ -93,7 +94,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -116,13 +117,13 @@ ABCs; these can, of course, be further derived. In addition, the
 <a class="reference internal" href="collections.abc.html#module-collections.abc" title="collections.abc: Abstract base classes for containers"><code class="xref py py-mod docutils literal notranslate"><span class="pre">collections.abc</span></code></a> submodule has some ABCs that can be used to test whether
 a class or instance provides a particular interface, for example, if it is
 hashable or if it is a mapping.</p>
-<p>This module provides the metaclass <a class="reference internal" href="#abc.abcmeta" title="abc.ABCMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABCMeta</span></code></a> for defining ABCs and
-a helper class <a class="reference internal" href="#abc.abc" title="abc.ABC"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a> to alternatively define ABCs through inheritance:</p>
+<p>This module provides the metaclass <a class="reference internal" href="#abc.ABCMeta" title="abc.ABCMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABCMeta</span></code></a> for defining ABCs and
+a helper class <a class="reference internal" href="#abc.ABC" title="abc.ABC"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a> to alternatively define ABCs through inheritance:</p>
 <dl class="py class">
-<dt id="abc.abc">
-<span id="abc.ABC"></span><em class="property">class </em><code class="sig-prename descclassname">abc.</code><code class="sig-name descname">ABC</code><a class="headerlink" href="#abc.abc" title="Permalink to this definition">¶</a></dt>
-<dd><p>A helper class that has <a class="reference internal" href="#abc.abcmeta" title="abc.ABCMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABCMeta</span></code></a> as its metaclass.  With this class,
-an abstract base class can be created by simply deriving from <a class="reference internal" href="#abc.abc" title="abc.ABC"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a>
+<dt id="abc.ABC">
+<em class="property">class </em><code class="sig-prename descclassname">abc.</code><code class="sig-name descname">ABC</code><a class="headerlink" href="#abc.ABC" title="Permalink to this definition">¶</a></dt>
+<dd><p>A helper class that has <a class="reference internal" href="#abc.ABCMeta" title="abc.ABCMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABCMeta</span></code></a> as its metaclass.  With this class,
+an abstract base class can be created by simply deriving from <a class="reference internal" href="#abc.ABC" title="abc.ABC"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a>
 avoiding sometimes confusing metaclass usage, for example:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span>
 
@@ -130,11 +131,11 @@ avoiding sometimes confusing metaclass usage, for example:</p>
     <span class="k">pass</span>
 </pre></div>
 </div>
-<p>Note that the type of <a class="reference internal" href="#abc.abc" title="abc.ABC"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a> is still <a class="reference internal" href="#abc.abcmeta" title="abc.ABCMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABCMeta</span></code></a>, therefore
-inheriting from <a class="reference internal" href="#abc.abc" title="abc.ABC"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a> requires the usual precautions regarding
+<p>Note that the type of <a class="reference internal" href="#abc.ABC" title="abc.ABC"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a> is still <a class="reference internal" href="#abc.ABCMeta" title="abc.ABCMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABCMeta</span></code></a>, therefore
+inheriting from <a class="reference internal" href="#abc.ABC" title="abc.ABC"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a> requires the usual precautions regarding
 metaclass usage, as multiple inheritance may lead to metaclass conflicts.
 One may also define an abstract base class by passing the metaclass
-keyword and using <a class="reference internal" href="#abc.abcmeta" title="abc.ABCMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABCMeta</span></code></a> directly, for example:</p>
+keyword and using <a class="reference internal" href="#abc.ABCMeta" title="abc.ABCMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABCMeta</span></code></a> directly, for example:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABCMeta</span>
 
 <span class="k">class</span> <span class="nc">MyABC</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">ABCMeta</span><span class="p">):</span>
@@ -147,8 +148,8 @@ keyword and using <a class="reference internal" href="#abc.abcmeta" title="abc.A
 </dd></dl>
 
 <dl class="py class">
-<dt id="abc.abcmeta">
-<span id="abc.ABCMeta"></span><em class="property">class </em><code class="sig-prename descclassname">abc.</code><code class="sig-name descname">ABCMeta</code><a class="headerlink" href="#abc.abcmeta" title="Permalink to this definition">¶</a></dt>
+<dt id="abc.ABCMeta">
+<em class="property">class </em><code class="sig-prename descclassname">abc.</code><code class="sig-name descname">ABCMeta</code><a class="headerlink" href="#abc.ABCMeta" title="Permalink to this definition">¶</a></dt>
 <dd><p>Metaclass for defining Abstract Base Classes (ABCs).</p>
 <p>Use this metaclass to create an ABC.  An ABC can be subclassed directly, and
 then acts as a mix-in class.  You can also register unrelated concrete
@@ -158,10 +159,10 @@ ABC by the built-in <a class="reference internal" href="functions.html#issubclas
 won’t show up in their MRO (Method Resolution Order) nor will method
 implementations defined by the registering ABC be callable (not even via
 <a class="reference internal" href="functions.html#super" title="super"><code class="xref py py-func docutils literal notranslate"><span class="pre">super()</span></code></a>). <a class="footnote-reference brackets" href="#id2" id="id1">1</a></p>
-<p>Classes created with a metaclass of <a class="reference internal" href="#abc.abcmeta" title="abc.ABCMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABCMeta</span></code></a> have the following method:</p>
+<p>Classes created with a metaclass of <a class="reference internal" href="#abc.ABCMeta" title="abc.ABCMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABCMeta</span></code></a> have the following method:</p>
 <dl class="py method">
-<dt id="abc.abcmeta.register">
-<span id="abc.ABCMeta.register"></span><code class="sig-name descname">register</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">subclass</span></em><span class="sig-paren">)</span><a class="headerlink" href="#abc.abcmeta.register" title="Permalink to this definition">¶</a></dt>
+<dt id="abc.ABCMeta.register">
+<code class="sig-name descname">register</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">subclass</span></em><span class="sig-paren">)</span><a class="headerlink" href="#abc.ABCMeta.register" title="Permalink to this definition">¶</a></dt>
 <dd><p>Register <em>subclass</em> as a “virtual subclass” of this ABC. For
 example:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span>
@@ -179,19 +180,19 @@ example:</p>
 <p><span class="versionmodified changed">Changed in version 3.3: </span>Returns the registered subclass, to allow usage as a class decorator.</p>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 3.4: </span>To detect calls to <a class="reference internal" href="#abc.abcmeta.register" title="abc.ABCMeta.register"><code class="xref py py-meth docutils literal notranslate"><span class="pre">register()</span></code></a>, you can use the
+<p><span class="versionmodified changed">Changed in version 3.4: </span>To detect calls to <a class="reference internal" href="#abc.ABCMeta.register" title="abc.ABCMeta.register"><code class="xref py py-meth docutils literal notranslate"><span class="pre">register()</span></code></a>, you can use the
 <a class="reference internal" href="#abc.get_cache_token" title="abc.get_cache_token"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_cache_token()</span></code></a> function.</p>
 </div>
 </dd></dl>
 
 <p>You can also override this method in an abstract base class:</p>
 <dl class="py method">
-<dt id="abc.abcmeta.__subclasshook__">
-<span id="abc.ABCMeta.__subclasshook__"></span><code class="sig-name descname">__subclasshook__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">subclass</span></em><span class="sig-paren">)</span><a class="headerlink" href="#abc.abcmeta.__subclasshook__" title="Permalink to this definition">¶</a></dt>
+<dt id="abc.ABCMeta.__subclasshook__">
+<code class="sig-name descname">__subclasshook__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">subclass</span></em><span class="sig-paren">)</span><a class="headerlink" href="#abc.ABCMeta.__subclasshook__" title="Permalink to this definition">¶</a></dt>
 <dd><p>(Must be defined as a class method.)</p>
 <p>Check whether <em>subclass</em> is considered a subclass of this ABC.  This means
 that you can customize the behavior of <code class="docutils literal notranslate"><span class="pre">issubclass</span></code> further without the
-need to call <a class="reference internal" href="#abc.abcmeta.register" title="abc.ABCMeta.register"><code class="xref py py-meth docutils literal notranslate"><span class="pre">register()</span></code></a> on every class you want to consider a
+need to call <a class="reference internal" href="#abc.ABCMeta.register" title="abc.ABCMeta.register"><code class="xref py py-meth docutils literal notranslate"><span class="pre">register()</span></code></a> on every class you want to consider a
 subclass of the ABC.  (This class method is called from the
 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__subclasscheck__()</span></code> method of the ABC.)</p>
 <p>This method should return <code class="docutils literal notranslate"><span class="pre">True</span></code>, <code class="docutils literal notranslate"><span class="pre">False</span></code> or <code class="docutils literal notranslate"><span class="pre">NotImplemented</span></code>.  If
@@ -236,7 +237,7 @@ mechanism.</p>
 here can still be called from subclasses.  The <code class="xref py py-meth docutils literal notranslate"><span class="pre">get_iterator()</span></code> method
 is also part of the <code class="docutils literal notranslate"><span class="pre">MyIterable</span></code> abstract base class, but it does not have
 to be overridden in non-abstract derived classes.</p>
-<p>The <a class="reference internal" href="#abc.abcmeta.__subclasshook__" title="abc.ABCMeta.__subclasshook__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__subclasshook__()</span></code></a> class method defined here says that any class
+<p>The <a class="reference internal" href="#abc.ABCMeta.__subclasshook__" title="abc.ABCMeta.__subclasshook__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__subclasshook__()</span></code></a> class method defined here says that any class
 that has an <a class="reference internal" href="stdtypes.html#iterator.__iter__" title="iterator.__iter__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__iter__()</span></code></a> method in its
 <a class="reference internal" href="stdtypes.html#object.__dict__" title="object.__dict__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__dict__</span></code></a> (or in that of one of its base classes, accessed
 via the <a class="reference internal" href="stdtypes.html#class.__mro__" title="class.__mro__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__mro__</span></code></a> list) is considered a <code class="docutils literal notranslate"><span class="pre">MyIterable</span></code> too.</p>
@@ -252,9 +253,9 @@ available as a method of <code class="docutils literal notranslate"><span class=
 <dt id="abc.abstractmethod">
 <code class="sig-prename descclassname">&#64;</code><code class="sig-prename descclassname">abc.</code><code class="sig-name descname">abstractmethod</code><a class="headerlink" href="#abc.abstractmethod" title="Permalink to this definition">¶</a></dt>
 <dd><p>A decorator indicating abstract methods.</p>
-<p>Using this decorator requires that the class’s metaclass is <a class="reference internal" href="#abc.abcmeta" title="abc.ABCMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABCMeta</span></code></a>
+<p>Using this decorator requires that the class’s metaclass is <a class="reference internal" href="#abc.ABCMeta" title="abc.ABCMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABCMeta</span></code></a>
 or is derived from it.  A class that has a metaclass derived from
-<a class="reference internal" href="#abc.abcmeta" title="abc.ABCMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABCMeta</span></code></a> cannot be instantiated unless all of its abstract methods
+<a class="reference internal" href="#abc.ABCMeta" title="abc.ABCMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABCMeta</span></code></a> cannot be instantiated unless all of its abstract methods
 and properties are overridden.  The abstract methods can be called using any
 of the normal ‘super’ call mechanisms.  <a class="reference internal" href="#abc.abstractmethod" title="abc.abstractmethod"><code class="xref py py-func docutils literal notranslate"><span class="pre">abstractmethod()</span></code></a> may be used
 to declare abstract methods for properties and descriptors.</p>
@@ -421,7 +422,7 @@ updated to create a concrete property in a subclass:</p>
 <dd><p>Returns the current abstract base class cache token.</p>
 <p>The token is an opaque object (that supports equality testing) identifying
 the current version of the abstract base class cache for virtual subclasses.
-The token changes with every call to <a class="reference internal" href="#abc.abcmeta.register" title="abc.ABCMeta.register"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ABCMeta.register()</span></code></a> on any ABC.</p>
+The token changes with every call to <a class="reference internal" href="#abc.ABCMeta.register" title="abc.ABCMeta.register"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ABCMeta.register()</span></code></a> on any ABC.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.4.</span></p>
 </div>
@@ -490,6 +491,7 @@ concept is not the same as C++’s.</p>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="python.html" >Python Runtime Services</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">abc</span></code> — Abstract Base Classes</a></li>
     <li class="right">
         
 
@@ -504,7 +506,7 @@ concept is not the same as C++’s.</p>
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  

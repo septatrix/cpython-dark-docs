@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
     <title>Unicode HOWTO &#8212; Python 3.9.0a4 documentation</title>
@@ -78,6 +78,7 @@
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python HOWTOs</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Unicode HOWTO</a></li>
     <li class="right">
         
 
@@ -92,7 +93,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -298,7 +299,7 @@ you may see the actual capital-delta glyph instead of a u escape.)</p>
 and optionally an <em>errors</em> argument.</p>
 <p>The <em>errors</em> argument specifies the response when the input string can’t be
 converted according to the encoding’s rules.  Legal values for this argument are
-<code class="docutils literal notranslate"><span class="pre">'strict'</span></code> (raise a <a class="reference internal" href="../library/exceptions.html#unicodedecodeerror" title="UnicodeDecodeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">UnicodeDecodeError</span></code></a> exception), <code class="docutils literal notranslate"><span class="pre">'replace'</span></code> (use
+<code class="docutils literal notranslate"><span class="pre">'strict'</span></code> (raise a <a class="reference internal" href="../library/exceptions.html#UnicodeDecodeError" title="UnicodeDecodeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">UnicodeDecodeError</span></code></a> exception), <code class="docutils literal notranslate"><span class="pre">'replace'</span></code> (use
 <code class="docutils literal notranslate"><span class="pre">U+FFFD</span></code>, <code class="docutils literal notranslate"><span class="pre">REPLACEMENT</span> <span class="pre">CHARACTER</span></code>), <code class="docutils literal notranslate"><span class="pre">'ignore'</span></code> (just leave the
 character out of the Unicode result), or <code class="docutils literal notranslate"><span class="pre">'backslashreplace'</span></code> (inserts a
 <code class="docutils literal notranslate"><span class="pre">\xNN</span></code> escape sequence).
@@ -546,10 +547,10 @@ Arabic numerals:</p>
 </pre></div>
 </div>
 <p>When executed, <code class="docutils literal notranslate"><span class="pre">\d+</span></code> will match the Thai numerals and print them
-out.  If you supply the <a class="reference internal" href="../library/re.html#re.ascii" title="re.ASCII"><code class="xref py py-const docutils literal notranslate"><span class="pre">re.ASCII</span></code></a> flag to
+out.  If you supply the <a class="reference internal" href="../library/re.html#re.ASCII" title="re.ASCII"><code class="xref py py-const docutils literal notranslate"><span class="pre">re.ASCII</span></code></a> flag to
 <a class="reference internal" href="../library/re.html#re.compile" title="re.compile"><code class="xref py py-func docutils literal notranslate"><span class="pre">compile()</span></code></a>, <code class="docutils literal notranslate"><span class="pre">\d+</span></code> will match the substring “57” instead.</p>
 <p>Similarly, <code class="docutils literal notranslate"><span class="pre">\w</span></code> matches a wide variety of Unicode characters but
-only <code class="docutils literal notranslate"><span class="pre">[a-zA-Z0-9_]</span></code> in bytes or if <a class="reference internal" href="../library/re.html#re.ascii" title="re.ASCII"><code class="xref py py-const docutils literal notranslate"><span class="pre">re.ASCII</span></code></a> is supplied,
+only <code class="docutils literal notranslate"><span class="pre">[a-zA-Z0-9_]</span></code> in bytes or if <a class="reference internal" href="../library/re.html#re.ASCII" title="re.ASCII"><code class="xref py py-const docutils literal notranslate"><span class="pre">re.ASCII</span></code></a> is supplied,
 and <code class="docutils literal notranslate"><span class="pre">\s</span></code> will match either Unicode whitespace characters or
 <code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">\t\n\r\f\v]</span></code>.</p>
 </div>
@@ -597,8 +598,8 @@ string and its Unicode version in memory.)</p>
 of partial coding sequences.  The work of implementing this has already been
 done for you: the built-in <a class="reference internal" href="../library/functions.html#open" title="open"><code class="xref py py-func docutils literal notranslate"><span class="pre">open()</span></code></a> function can return a file-like object
 that assumes the file’s contents are in a specified encoding and accepts Unicode
-parameters for methods such as <a class="reference internal" href="../library/io.html#io.textiobase.read" title="io.TextIOBase.read"><code class="xref py py-meth docutils literal notranslate"><span class="pre">read()</span></code></a> and
-<a class="reference internal" href="../library/io.html#io.textiobase.write" title="io.TextIOBase.write"><code class="xref py py-meth docutils literal notranslate"><span class="pre">write()</span></code></a>.  This works through <a class="reference internal" href="../library/functions.html#open" title="open"><code class="xref py py-func docutils literal notranslate"><span class="pre">open()</span></code></a>’s <em>encoding</em> and
+parameters for methods such as <a class="reference internal" href="../library/io.html#io.TextIOBase.read" title="io.TextIOBase.read"><code class="xref py py-meth docutils literal notranslate"><span class="pre">read()</span></code></a> and
+<a class="reference internal" href="../library/io.html#io.TextIOBase.write" title="io.TextIOBase.write"><code class="xref py py-meth docutils literal notranslate"><span class="pre">write()</span></code></a>.  This works through <a class="reference internal" href="../library/functions.html#open" title="open"><code class="xref py py-func docutils literal notranslate"><span class="pre">open()</span></code></a>’s <em>encoding</em> and
 <em>errors</em> parameters which are interpreted just like those in <a class="reference internal" href="../library/stdtypes.html#str.encode" title="str.encode"><code class="xref py py-meth docutils literal notranslate"><span class="pre">str.encode()</span></code></a>
 and <a class="reference internal" href="../library/stdtypes.html#bytes.decode" title="bytes.decode"><code class="xref py py-meth docutils literal notranslate"><span class="pre">bytes.decode()</span></code></a>.</p>
 <p>Reading Unicode from a file is therefore simple:</p>
@@ -693,7 +694,7 @@ data as soon as possible and encoding the output only at the end.</p>
 <p>If you attempt to write processing functions that accept both Unicode and byte
 strings, you will find your program vulnerable to bugs wherever you combine the
 two different kinds of strings.  There is no automatic encoding or decoding: if
-you do e.g. <code class="docutils literal notranslate"><span class="pre">str</span> <span class="pre">+</span> <span class="pre">bytes</span></code>, a <a class="reference internal" href="../library/exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> will be raised.</p>
+you do e.g. <code class="docutils literal notranslate"><span class="pre">str</span> <span class="pre">+</span> <span class="pre">bytes</span></code>, a <a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> will be raised.</p>
 <p>When using data coming from a web browser or some other untrusted source, a
 common technique is to check for illegal characters in a string before using the
 string in a generated command line or storing it in a database.  If you’re doing
@@ -704,11 +705,11 @@ data also specifies the encoding, since the attacker can then choose a
 clever way to hide malicious text in the encoded bytestream.</p>
 <div class="section" id="converting-between-file-encodings">
 <h4>Converting Between File Encodings<a class="headerlink" href="#converting-between-file-encodings" title="Permalink to this headline">¶</a></h4>
-<p>The <a class="reference internal" href="../library/codecs.html#codecs.streamrecoder" title="codecs.StreamRecoder"><code class="xref py py-class docutils literal notranslate"><span class="pre">StreamRecoder</span></code></a> class can transparently convert between
+<p>The <a class="reference internal" href="../library/codecs.html#codecs.StreamRecoder" title="codecs.StreamRecoder"><code class="xref py py-class docutils literal notranslate"><span class="pre">StreamRecoder</span></code></a> class can transparently convert between
 encodings, taking a stream that returns data in encoding #1
 and behaving like a stream returning data in encoding #2.</p>
 <p>For example, if you have an input file <em>f</em> that’s in Latin-1, you
-can wrap it with a <a class="reference internal" href="../library/codecs.html#codecs.streamrecoder" title="codecs.StreamRecoder"><code class="xref py py-class docutils literal notranslate"><span class="pre">StreamRecoder</span></code></a> to return bytes encoded in
+can wrap it with a <a class="reference internal" href="../library/codecs.html#codecs.StreamRecoder" title="codecs.StreamRecoder"><code class="xref py py-class docutils literal notranslate"><span class="pre">StreamRecoder</span></code></a> to return bytes encoded in
 UTF-8:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">new_f</span> <span class="o">=</span> <span class="n">codecs</span><span class="o">.</span><span class="n">StreamRecoder</span><span class="p">(</span><span class="n">f</span><span class="p">,</span>
     <span class="c1"># en/decoder: used by read() to encode its results and</span>
@@ -856,6 +857,7 @@ Eryk Sun, Chad Whitacre, Graham Wideman.</p>
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python HOWTOs</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Unicode HOWTO</a></li>
     <li class="right">
         
 
@@ -870,7 +872,7 @@ Eryk Sun, Chad Whitacre, Graham Wideman.</p>
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  

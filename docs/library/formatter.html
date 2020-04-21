@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
     <title>formatter — Generic output formatting &#8212; Python 3.9.0a4 documentation</title>
@@ -79,6 +79,7 @@
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="misc.html" accesskey="U">Miscellaneous Services</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">formatter</span></code> — Generic output formatting</a></li>
     <li class="right">
         
 
@@ -93,7 +94,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -133,8 +134,8 @@ being instantiated.  The interfaces described below are the required interfaces
 which all formatters must support once initialized.</p>
 <p>One data element is defined at the module level:</p>
 <dl class="py data">
-<dt id="formatter.as_is">
-<span id="formatter.AS_IS"></span><code class="sig-prename descclassname">formatter.</code><code class="sig-name descname">AS_IS</code><a class="headerlink" href="#formatter.as_is" title="Permalink to this definition">¶</a></dt>
+<dt id="formatter.AS_IS">
+<code class="sig-prename descclassname">formatter.</code><code class="sig-name descname">AS_IS</code><a class="headerlink" href="#formatter.AS_IS" title="Permalink to this definition">¶</a></dt>
 <dd><p>Value which can be used in the font specification passed to the <code class="docutils literal notranslate"><span class="pre">push_font()</span></code>
 method described below, or as the new value to any other <code class="docutils literal notranslate"><span class="pre">push_property()</span></code>
 method.  Pushing the <code class="docutils literal notranslate"><span class="pre">AS_IS</span></code> value allows the corresponding <code class="docutils literal notranslate"><span class="pre">pop_property()</span></code>
@@ -224,7 +225,7 @@ before any direct manipulation of the writer object.</p>
 <dt id="formatter.formatter.push_alignment">
 <code class="sig-prename descclassname">formatter.</code><code class="sig-name descname">push_alignment</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">align</span></em><span class="sig-paren">)</span><a class="headerlink" href="#formatter.formatter.push_alignment" title="Permalink to this definition">¶</a></dt>
 <dd><p>Push a new alignment setting onto the alignment stack.  This may be
-<a class="reference internal" href="#formatter.as_is" title="formatter.AS_IS"><code class="xref py py-const docutils literal notranslate"><span class="pre">AS_IS</span></code></a> if no change is desired.  If the alignment value is changed from
+<a class="reference internal" href="#formatter.AS_IS" title="formatter.AS_IS"><code class="xref py py-const docutils literal notranslate"><span class="pre">AS_IS</span></code></a> if no change is desired.  If the alignment value is changed from
 the previous setting, the writer’s <code class="xref py py-meth docutils literal notranslate"><span class="pre">new_alignment()</span></code> method is called with
 the <em>align</em> value.</p>
 </dd></dl>
@@ -239,7 +240,7 @@ the <em>align</em> value.</p>
 <dt id="formatter.formatter.push_font">
 <code class="sig-prename descclassname">formatter.</code><code class="sig-name descname">push_font</code><span class="sig-paren">(</span><em class="sig-param">(size</em>, <em class="sig-param">italic</em>, <em class="sig-param">bold</em>, <em class="sig-param">teletype)</em><span class="sig-paren">)</span><a class="headerlink" href="#formatter.formatter.push_font" title="Permalink to this definition">¶</a></dt>
 <dd><p>Change some or all font properties of the writer object.  Properties which are
-not set to <a class="reference internal" href="#formatter.as_is" title="formatter.AS_IS"><code class="xref py py-const docutils literal notranslate"><span class="pre">AS_IS</span></code></a> are set to the values passed in while others are
+not set to <a class="reference internal" href="#formatter.AS_IS" title="formatter.AS_IS"><code class="xref py py-const docutils literal notranslate"><span class="pre">AS_IS</span></code></a> are set to the values passed in while others are
 maintained at their current settings.  The writer’s <code class="xref py py-meth docutils literal notranslate"><span class="pre">new_font()</span></code> method is
 called with the fully resolved font specification.</p>
 </dd></dl>
@@ -256,7 +257,7 @@ called with the fully resolved font specification.</p>
 <dd><p>Increase the number of left margin indentations by one, associating the logical
 tag <em>margin</em> with the new indentation.  The initial margin level is <code class="docutils literal notranslate"><span class="pre">0</span></code>.
 Changed values of the logical tag must be true values; false values other than
-<a class="reference internal" href="#formatter.as_is" title="formatter.AS_IS"><code class="xref py py-const docutils literal notranslate"><span class="pre">AS_IS</span></code></a> are not sufficient to change the margin.</p>
+<a class="reference internal" href="#formatter.AS_IS" title="formatter.AS_IS"><code class="xref py py-const docutils literal notranslate"><span class="pre">AS_IS</span></code></a> are not sufficient to change the margin.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -270,14 +271,14 @@ Changed values of the logical tag must be true values; false values other than
 <code class="sig-prename descclassname">formatter.</code><code class="sig-name descname">push_style</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">styles</span></em><span class="sig-paren">)</span><a class="headerlink" href="#formatter.formatter.push_style" title="Permalink to this definition">¶</a></dt>
 <dd><p>Push any number of arbitrary style specifications.  All styles are pushed onto
 the styles stack in order.  A tuple representing the entire stack, including
-<a class="reference internal" href="#formatter.as_is" title="formatter.AS_IS"><code class="xref py py-const docutils literal notranslate"><span class="pre">AS_IS</span></code></a> values, is passed to the writer’s <code class="xref py py-meth docutils literal notranslate"><span class="pre">new_styles()</span></code> method.</p>
+<a class="reference internal" href="#formatter.AS_IS" title="formatter.AS_IS"><code class="xref py py-const docutils literal notranslate"><span class="pre">AS_IS</span></code></a> values, is passed to the writer’s <code class="xref py py-meth docutils literal notranslate"><span class="pre">new_styles()</span></code> method.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="formatter.formatter.pop_style">
 <code class="sig-prename descclassname">formatter.</code><code class="sig-name descname">pop_style</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#formatter.formatter.pop_style" title="Permalink to this definition">¶</a></dt>
 <dd><p>Pop the last <em>n</em> style specifications passed to <a class="reference internal" href="#formatter.formatter.push_style" title="formatter.formatter.push_style"><code class="xref py py-meth docutils literal notranslate"><span class="pre">push_style()</span></code></a>.  A tuple
-representing the revised stack, including <a class="reference internal" href="#formatter.as_is" title="formatter.AS_IS"><code class="xref py py-const docutils literal notranslate"><span class="pre">AS_IS</span></code></a> values, is passed to
+representing the revised stack, including <a class="reference internal" href="#formatter.AS_IS" title="formatter.AS_IS"><code class="xref py py-const docutils literal notranslate"><span class="pre">AS_IS</span></code></a> values, is passed to
 the writer’s <code class="xref py py-meth docutils literal notranslate"><span class="pre">new_styles()</span></code> method.</p>
 </dd></dl>
 
@@ -302,18 +303,18 @@ manipulations produced a hard line break at the end of the output.</p>
 <p>Two implementations of formatter objects are provided by this module. Most
 applications may use one of these classes without modification or subclassing.</p>
 <dl class="py class">
-<dt id="formatter.nullformatter">
-<span id="formatter.NullFormatter"></span><em class="property">class </em><code class="sig-prename descclassname">formatter.</code><code class="sig-name descname">NullFormatter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">writer</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#formatter.nullformatter" title="Permalink to this definition">¶</a></dt>
-<dd><p>A formatter which does nothing.  If <em>writer</em> is omitted, a <a class="reference internal" href="#formatter.nullwriter" title="formatter.NullWriter"><code class="xref py py-class docutils literal notranslate"><span class="pre">NullWriter</span></code></a>
+<dt id="formatter.NullFormatter">
+<em class="property">class </em><code class="sig-prename descclassname">formatter.</code><code class="sig-name descname">NullFormatter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">writer</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#formatter.NullFormatter" title="Permalink to this definition">¶</a></dt>
+<dd><p>A formatter which does nothing.  If <em>writer</em> is omitted, a <a class="reference internal" href="#formatter.NullWriter" title="formatter.NullWriter"><code class="xref py py-class docutils literal notranslate"><span class="pre">NullWriter</span></code></a>
 instance is created.  No methods of the writer are called by
-<a class="reference internal" href="#formatter.nullformatter" title="formatter.NullFormatter"><code class="xref py py-class docutils literal notranslate"><span class="pre">NullFormatter</span></code></a> instances.  Implementations should inherit from this
+<a class="reference internal" href="#formatter.NullFormatter" title="formatter.NullFormatter"><code class="xref py py-class docutils literal notranslate"><span class="pre">NullFormatter</span></code></a> instances.  Implementations should inherit from this
 class if implementing a writer interface but don’t need to inherit any
 implementation.</p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="formatter.abstractformatter">
-<span id="formatter.AbstractFormatter"></span><em class="property">class </em><code class="sig-prename descclassname">formatter.</code><code class="sig-name descname">AbstractFormatter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">writer</span></em><span class="sig-paren">)</span><a class="headerlink" href="#formatter.abstractformatter" title="Permalink to this definition">¶</a></dt>
+<dt id="formatter.AbstractFormatter">
+<em class="property">class </em><code class="sig-prename descclassname">formatter.</code><code class="sig-name descname">AbstractFormatter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">writer</span></em><span class="sig-paren">)</span><a class="headerlink" href="#formatter.AbstractFormatter" title="Permalink to this definition">¶</a></dt>
 <dd><p>The standard formatter.  This implementation has demonstrated wide applicability
 to many writers, and may be used directly in most circumstances.  It has been
 used to implement a full-featured World Wide Web browser.</p>
@@ -325,7 +326,7 @@ used to implement a full-featured World Wide Web browser.</p>
 <p>Interfaces to create writers are dependent on the specific writer class being
 instantiated.  The interfaces described below are the required interfaces which
 all writers must support once initialized. Note that while most applications can
-use the <a class="reference internal" href="#formatter.abstractformatter" title="formatter.AbstractFormatter"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractFormatter</span></code></a> class as a formatter, the writer must
+use the <a class="reference internal" href="#formatter.AbstractFormatter" title="formatter.AbstractFormatter"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractFormatter</span></code></a> class as a formatter, the writer must
 typically be provided by the application.</p>
 <dl class="py method">
 <dt id="formatter.writer.flush">
@@ -372,7 +373,7 @@ non-zero values of <em>level</em>.</p>
 <dt id="formatter.writer.new_styles">
 <code class="sig-prename descclassname">writer.</code><code class="sig-name descname">new_styles</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">styles</span></em><span class="sig-paren">)</span><a class="headerlink" href="#formatter.writer.new_styles" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set additional styles.  The <em>styles</em> value is a tuple of arbitrary values; the
-value <a class="reference internal" href="#formatter.as_is" title="formatter.AS_IS"><code class="xref py py-const docutils literal notranslate"><span class="pre">AS_IS</span></code></a> should be ignored.  The <em>styles</em> tuple may be interpreted
+value <a class="reference internal" href="#formatter.AS_IS" title="formatter.AS_IS"><code class="xref py py-const docutils literal notranslate"><span class="pre">AS_IS</span></code></a> should be ignored.  The <em>styles</em> tuple may be interpreted
 either as a set or as a stack depending on the requirements of the application
 and writer implementation.</p>
 </dd></dl>
@@ -435,26 +436,26 @@ beginning of a line.</p>
 <span id="writer-impls"></span><h2>Writer Implementations<a class="headerlink" href="#writer-implementations" title="Permalink to this headline">¶</a></h2>
 <p>Three implementations of the writer object interface are provided as examples by
 this module.  Most applications will need to derive new writer classes from the
-<a class="reference internal" href="#formatter.nullwriter" title="formatter.NullWriter"><code class="xref py py-class docutils literal notranslate"><span class="pre">NullWriter</span></code></a> class.</p>
+<a class="reference internal" href="#formatter.NullWriter" title="formatter.NullWriter"><code class="xref py py-class docutils literal notranslate"><span class="pre">NullWriter</span></code></a> class.</p>
 <dl class="py class">
-<dt id="formatter.nullwriter">
-<span id="formatter.NullWriter"></span><em class="property">class </em><code class="sig-prename descclassname">formatter.</code><code class="sig-name descname">NullWriter</code><a class="headerlink" href="#formatter.nullwriter" title="Permalink to this definition">¶</a></dt>
+<dt id="formatter.NullWriter">
+<em class="property">class </em><code class="sig-prename descclassname">formatter.</code><code class="sig-name descname">NullWriter</code><a class="headerlink" href="#formatter.NullWriter" title="Permalink to this definition">¶</a></dt>
 <dd><p>A writer which only provides the interface definition; no actions are taken on
 any methods.  This should be the base class for all writers which do not need to
 inherit any implementation methods.</p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="formatter.abstractwriter">
-<span id="formatter.AbstractWriter"></span><em class="property">class </em><code class="sig-prename descclassname">formatter.</code><code class="sig-name descname">AbstractWriter</code><a class="headerlink" href="#formatter.abstractwriter" title="Permalink to this definition">¶</a></dt>
+<dt id="formatter.AbstractWriter">
+<em class="property">class </em><code class="sig-prename descclassname">formatter.</code><code class="sig-name descname">AbstractWriter</code><a class="headerlink" href="#formatter.AbstractWriter" title="Permalink to this definition">¶</a></dt>
 <dd><p>A writer which can be used in debugging formatters, but not much else.  Each
 method simply announces itself by printing its name and arguments on standard
 output.</p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="formatter.dumbwriter">
-<span id="formatter.DumbWriter"></span><em class="property">class </em><code class="sig-prename descclassname">formatter.</code><code class="sig-name descname">DumbWriter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">file</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">maxcol</span><span class="o">=</span><span class="default_value">72</span></em><span class="sig-paren">)</span><a class="headerlink" href="#formatter.dumbwriter" title="Permalink to this definition">¶</a></dt>
+<dt id="formatter.DumbWriter">
+<em class="property">class </em><code class="sig-prename descclassname">formatter.</code><code class="sig-name descname">DumbWriter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">file</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">maxcol</span><span class="o">=</span><span class="default_value">72</span></em><span class="sig-paren">)</span><a class="headerlink" href="#formatter.DumbWriter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Simple writer class which writes output on the <a class="reference internal" href="../glossary.html#term-file-object"><span class="xref std std-term">file object</span></a> passed
 in as <em>file</em> or, if <em>file</em> is omitted, on standard output.  The output is
 simply word-wrapped to the number of columns specified by <em>maxcol</em>.  This
@@ -529,6 +530,7 @@ class is suitable for reflowing a sequence of paragraphs.</p>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="misc.html" >Miscellaneous Services</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">formatter</span></code> — Generic output formatting</a></li>
     <li class="right">
         
 
@@ -543,7 +545,7 @@ class is suitable for reflowing a sequence of paragraphs.</p>
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  

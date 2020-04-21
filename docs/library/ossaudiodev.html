@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
     <title>ossaudiodev — Access to OSS-compatible audio devices &#8212; Python 3.9.0a4 documentation</title>
@@ -79,6 +79,7 @@
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="mm.html" accesskey="U">Multimedia Services</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">ossaudiodev</span></code> — Access to OSS-compatible audio devices</a></li>
     <li class="right">
         
 
@@ -93,7 +94,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -110,7 +111,7 @@
 OSS is available for a wide range of open-source and commercial Unices, and is
 the standard audio interface for Linux and recent versions of FreeBSD.</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 3.3: </span>Operations in this module now raise <a class="reference internal" href="exceptions.html#oserror" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> where <a class="reference internal" href="exceptions.html#ioerror" title="IOError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">IOError</span></code></a>
+<p><span class="versionmodified changed">Changed in version 3.3: </span>Operations in this module now raise <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> where <a class="reference internal" href="exceptions.html#IOError" title="IOError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">IOError</span></code></a>
 was raised.</p>
 </div>
 <div class="admonition seealso">
@@ -124,13 +125,13 @@ driver; see <code class="docutils literal notranslate"><span class="pre">&lt;sys
 </div>
 <p><a class="reference internal" href="#module-ossaudiodev" title="ossaudiodev: Access to OSS-compatible audio devices. (Linux, FreeBSD)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ossaudiodev</span></code></a> defines the following variables and functions:</p>
 <dl class="py exception">
-<dt id="ossaudiodev.ossaudioerror">
-<span id="ossaudiodev.OSSAudioError"></span><em class="property">exception </em><code class="sig-prename descclassname">ossaudiodev.</code><code class="sig-name descname">OSSAudioError</code><a class="headerlink" href="#ossaudiodev.ossaudioerror" title="Permalink to this definition">¶</a></dt>
+<dt id="ossaudiodev.OSSAudioError">
+<em class="property">exception </em><code class="sig-prename descclassname">ossaudiodev.</code><code class="sig-name descname">OSSAudioError</code><a class="headerlink" href="#ossaudiodev.OSSAudioError" title="Permalink to this definition">¶</a></dt>
 <dd><p>This exception is raised on certain errors.  The argument is a string describing
 what went wrong.</p>
 <p>(If <a class="reference internal" href="#module-ossaudiodev" title="ossaudiodev: Access to OSS-compatible audio devices. (Linux, FreeBSD)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ossaudiodev</span></code></a> receives an error from a system call such as
-<code class="xref c c-func docutils literal notranslate"><span class="pre">open()</span></code>, <code class="xref c c-func docutils literal notranslate"><span class="pre">write()</span></code>, or <code class="xref c c-func docutils literal notranslate"><span class="pre">ioctl()</span></code>, it raises <a class="reference internal" href="exceptions.html#oserror" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a>.
-Errors detected directly by <a class="reference internal" href="#module-ossaudiodev" title="ossaudiodev: Access to OSS-compatible audio devices. (Linux, FreeBSD)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ossaudiodev</span></code></a> result in <a class="reference internal" href="#ossaudiodev.ossaudioerror" title="ossaudiodev.OSSAudioError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSSAudioError</span></code></a>.)</p>
+<code class="xref c c-func docutils literal notranslate"><span class="pre">open()</span></code>, <code class="xref c c-func docutils literal notranslate"><span class="pre">write()</span></code>, or <code class="xref c c-func docutils literal notranslate"><span class="pre">ioctl()</span></code>, it raises <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a>.
+Errors detected directly by <a class="reference internal" href="#module-ossaudiodev" title="ossaudiodev: Access to OSS-compatible audio devices. (Linux, FreeBSD)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ossaudiodev</span></code></a> result in <a class="reference internal" href="#ossaudiodev.OSSAudioError" title="ossaudiodev.OSSAudioError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSSAudioError</span></code></a>.)</p>
 <p>(For backwards compatibility, the exception class is also available as
 <code class="docutils literal notranslate"><span class="pre">ossaudiodev.error</span></code>.)</p>
 </dd></dl>
@@ -241,7 +242,7 @@ be used in a <a class="reference internal" href="../reference/compound_stmts.htm
 correspondence is obvious: for example, <code class="xref py py-meth docutils literal notranslate"><span class="pre">setfmt()</span></code> corresponds to the
 <code class="docutils literal notranslate"><span class="pre">SNDCTL_DSP_SETFMT</span></code> ioctl, and <code class="xref py py-meth docutils literal notranslate"><span class="pre">sync()</span></code> to <code class="docutils literal notranslate"><span class="pre">SNDCTL_DSP_SYNC</span></code> (this can
 be useful when consulting the OSS documentation).  If the underlying
-<code class="xref c c-func docutils literal notranslate"><span class="pre">ioctl()</span></code> fails, they all raise <a class="reference internal" href="exceptions.html#oserror" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a>.</p>
+<code class="xref c c-func docutils literal notranslate"><span class="pre">ioctl()</span></code> fails, they all raise <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a>.</p>
 <dl class="py method">
 <dt id="ossaudiodev.oss_audio_device.nonblock">
 <code class="sig-prename descclassname">oss_audio_device.</code><code class="sig-name descname">nonblock</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ossaudiodev.oss_audio_device.nonblock" title="Permalink to this definition">¶</a></dt>
@@ -394,7 +395,7 @@ sampling rate—in one method call.  <em>format</em>,  <em>nchannels</em>, and <
 should be as specified in the <a class="reference internal" href="#ossaudiodev.oss_audio_device.setfmt" title="ossaudiodev.oss_audio_device.setfmt"><code class="xref py py-meth docutils literal notranslate"><span class="pre">setfmt()</span></code></a>, <a class="reference internal" href="#ossaudiodev.oss_audio_device.channels" title="ossaudiodev.oss_audio_device.channels"><code class="xref py py-meth docutils literal notranslate"><span class="pre">channels()</span></code></a>, and
 <a class="reference internal" href="#ossaudiodev.oss_audio_device.speed" title="ossaudiodev.oss_audio_device.speed"><code class="xref py py-meth docutils literal notranslate"><span class="pre">speed()</span></code></a>  methods.  If <em>strict</em> is true, <a class="reference internal" href="#ossaudiodev.oss_audio_device.setparameters" title="ossaudiodev.oss_audio_device.setparameters"><code class="xref py py-meth docutils literal notranslate"><span class="pre">setparameters()</span></code></a> checks to
 see if each parameter was actually set to the requested value, and raises
-<a class="reference internal" href="#ossaudiodev.ossaudioerror" title="ossaudiodev.OSSAudioError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSSAudioError</span></code></a> if not.  Returns a tuple (<em>format</em>, <em>nchannels</em>,
+<a class="reference internal" href="#ossaudiodev.OSSAudioError" title="ossaudiodev.OSSAudioError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSSAudioError</span></code></a> if not.  Returns a tuple (<em>format</em>, <em>nchannels</em>,
 <em>samplerate</em>) indicating the parameter values that were actually set by the
 device driver (i.e., the same as the return values of <a class="reference internal" href="#ossaudiodev.oss_audio_device.setfmt" title="ossaudiodev.oss_audio_device.setfmt"><code class="xref py py-meth docutils literal notranslate"><span class="pre">setfmt()</span></code></a>,
 <a class="reference internal" href="#ossaudiodev.oss_audio_device.channels" title="ossaudiodev.oss_audio_device.channels"><code class="xref py py-meth docutils literal notranslate"><span class="pre">channels()</span></code></a>, and <a class="reference internal" href="#ossaudiodev.oss_audio_device.speed" title="ossaudiodev.oss_audio_device.speed"><code class="xref py py-meth docutils literal notranslate"><span class="pre">speed()</span></code></a>).</p>
@@ -456,7 +457,7 @@ be played without blocking.</p>
 <dt id="ossaudiodev.oss_mixer_device.close">
 <code class="sig-prename descclassname">oss_mixer_device.</code><code class="sig-name descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ossaudiodev.oss_mixer_device.close" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method closes the open mixer device file.  Any further attempts to use the
-mixer after this file is closed will raise an <a class="reference internal" href="exceptions.html#oserror" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a>.</p>
+mixer after this file is closed will raise an <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -515,8 +516,8 @@ the code example for <a class="reference internal" href="#ossaudiodev.oss_mixer_
 <code class="docutils literal notranslate"><span class="pre">(left_volume,right_volume)</span></code>.  Volumes are specified as numbers from 0
 (silent) to 100 (full volume).  If the control is monophonic, a 2-tuple is still
 returned, but both volumes are the same.</p>
-<p>Raises <a class="reference internal" href="#ossaudiodev.ossaudioerror" title="ossaudiodev.OSSAudioError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSSAudioError</span></code></a> if an invalid control is specified, or
-<a class="reference internal" href="exceptions.html#oserror" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> if an unsupported control is specified.</p>
+<p>Raises <a class="reference internal" href="#ossaudiodev.OSSAudioError" title="ossaudiodev.OSSAudioError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSSAudioError</span></code></a> if an invalid control is specified, or
+<a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> if an unsupported control is specified.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -527,7 +528,7 @@ returned, but both volumes are the same.</p>
 success, the new volume is returned as a 2-tuple. Note that this may not be
 exactly the same as the volume specified, because of the limited resolution of
 some soundcard’s mixers.</p>
-<p>Raises <a class="reference internal" href="#ossaudiodev.ossaudioerror" title="ossaudiodev.OSSAudioError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSSAudioError</span></code></a> if an invalid mixer control was specified, or if the
+<p>Raises <a class="reference internal" href="#ossaudiodev.OSSAudioError" title="ossaudiodev.OSSAudioError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSSAudioError</span></code></a> if an invalid mixer control was specified, or if the
 specified volumes were out-of-range.</p>
 </dd></dl>
 
@@ -542,7 +543,7 @@ used as a recording source.</p>
 <dt id="ossaudiodev.oss_mixer_device.set_recsrc">
 <code class="sig-prename descclassname">oss_mixer_device.</code><code class="sig-name descname">set_recsrc</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bitmask</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ossaudiodev.oss_mixer_device.set_recsrc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Call this function to specify a recording source.  Returns a bitmask indicating
-the new recording source (or sources) if successful; raises <a class="reference internal" href="exceptions.html#oserror" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> if an
+the new recording source (or sources) if successful; raises <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> if an
 invalid source was specified.  To set the current recording source to the
 microphone input:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">mixer</span><span class="o">.</span><span class="n">setrecsrc</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">ossaudiodev</span><span class="o">.</span><span class="n">SOUND_MIXER_MIC</span><span class="p">)</span>
@@ -616,6 +617,7 @@ microphone input:</p>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="mm.html" >Multimedia Services</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">ossaudiodev</span></code> — Access to OSS-compatible audio devices</a></li>
     <li class="right">
         
 
@@ -630,7 +632,7 @@ microphone input:</p>
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  

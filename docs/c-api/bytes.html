@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
     <title>Bytes Objects &#8212; Python 3.9.0a4 documentation</title>
@@ -79,6 +79,7 @@
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API Reference Manual</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="concrete.html" accesskey="U">Concrete Objects Layer</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Bytes Objects</a></li>
     <li class="right">
         
 
@@ -93,7 +94,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -105,7 +106,7 @@
             
   <div class="section" id="bytes-objects">
 <span id="bytesobjects"></span><h1>Bytes Objects<a class="headerlink" href="#bytes-objects" title="Permalink to this headline">¶</a></h1>
-<p>These functions raise <a class="reference internal" href="../library/exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> when expecting a bytes parameter and are
+<p>These functions raise <a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> when expecting a bytes parameter and are
 called with a non-bytes parameter.</p>
 <span class="target" id="index-0"></span><dl class="c type">
 <dt id="c.PyBytesObject">
@@ -283,7 +284,7 @@ whether there are any other null bytes.  The data must not be
 modified in any way, unless the object was just created using
 <code class="docutils literal notranslate"><span class="pre">PyBytes_FromStringAndSize(NULL,</span> <span class="pre">size)</span></code>. It must not be deallocated.  If
 <em>o</em> is not a bytes object at all, <a class="reference internal" href="#c.PyBytes_AsString" title="PyBytes_AsString"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyBytes_AsString()</span></code></a> returns <code class="docutils literal notranslate"><span class="pre">NULL</span></code>
-and raises <a class="reference internal" href="../library/exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a>.</p>
+and raises <a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a>.</p>
 </dd></dl>
 
 <dl class="c function">
@@ -299,15 +300,15 @@ int <code class="sig-name descname">PyBytes_AsStringAndSize</code><span class="s
 through the output variables <em>buffer</em> and <em>length</em>.</p>
 <p>If <em>length</em> is <code class="docutils literal notranslate"><span class="pre">NULL</span></code>, the bytes object
 may not contain embedded null bytes;
-if it does, the function returns <code class="docutils literal notranslate"><span class="pre">-1</span></code> and a <a class="reference internal" href="../library/exceptions.html#valueerror" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> is raised.</p>
+if it does, the function returns <code class="docutils literal notranslate"><span class="pre">-1</span></code> and a <a class="reference internal" href="../library/exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> is raised.</p>
 <p>The buffer refers to an internal buffer of <em>obj</em>, which includes an
 additional null byte at the end (not counted in <em>length</em>).  The data
 must not be modified in any way, unless the object was just created using
 <code class="docutils literal notranslate"><span class="pre">PyBytes_FromStringAndSize(NULL,</span> <span class="pre">size)</span></code>.  It must not be deallocated.  If
 <em>obj</em> is not a bytes object at all, <a class="reference internal" href="#c.PyBytes_AsStringAndSize" title="PyBytes_AsStringAndSize"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyBytes_AsStringAndSize()</span></code></a>
-returns <code class="docutils literal notranslate"><span class="pre">-1</span></code> and raises <a class="reference internal" href="../library/exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a>.</p>
+returns <code class="docutils literal notranslate"><span class="pre">-1</span></code> and raises <a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a>.</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 3.5: </span>Previously, <a class="reference internal" href="../library/exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> was raised when embedded null bytes were
+<p><span class="versionmodified changed">Changed in version 3.5: </span>Previously, <a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> was raised when embedded null bytes were
 encountered in the bytes object.</p>
 </div>
 </dd></dl>
@@ -341,7 +342,7 @@ existing bytes object as an lvalue (it may be written into), and the new size
 desired.  On success, <em>*bytes</em> holds the resized bytes object and <code class="docutils literal notranslate"><span class="pre">0</span></code> is
 returned; the address in <em>*bytes</em> may differ from its input value.  If the
 reallocation fails, the original bytes object at <em>*bytes</em> is deallocated,
-<em>*bytes</em> is set to <code class="docutils literal notranslate"><span class="pre">NULL</span></code>, <a class="reference internal" href="../library/exceptions.html#memoryerror" title="MemoryError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">MemoryError</span></code></a> is set, and <code class="docutils literal notranslate"><span class="pre">-1</span></code> is
+<em>*bytes</em> is set to <code class="docutils literal notranslate"><span class="pre">NULL</span></code>, <a class="reference internal" href="../library/exceptions.html#MemoryError" title="MemoryError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">MemoryError</span></code></a> is set, and <code class="docutils literal notranslate"><span class="pre">-1</span></code> is
 returned.</p>
 </dd></dl>
 
@@ -401,6 +402,7 @@ returned.</p>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API Reference Manual</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="concrete.html" >Concrete Objects Layer</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Bytes Objects</a></li>
     <li class="right">
         
 
@@ -415,7 +417,7 @@ returned.</p>
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  

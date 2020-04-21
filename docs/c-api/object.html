@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
     <title>Object Protocol &#8212; Python 3.9.0a4 documentation</title>
@@ -79,6 +79,7 @@
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API Reference Manual</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="abstract.html" accesskey="U">Abstract Objects Layer</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Object Protocol</a></li>
     <li class="right">
         
 
@@ -93,7 +94,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -176,7 +177,7 @@ object’s <code class="docutils literal notranslate"><span class="pre">tp_getat
 of classes in the object’s MRO as well as an attribute in the object’s
 <a class="reference internal" href="../library/stdtypes.html#object.__dict__" title="object.__dict__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__dict__</span></code></a> (if present).  As outlined in <a class="reference internal" href="../reference/datamodel.html#descriptors"><span class="std std-ref">Implementing Descriptors</span></a>,
 data descriptors take preference over instance attributes, while non-data
-descriptors don’t.  Otherwise, an <a class="reference internal" href="../library/exceptions.html#attributeerror" title="AttributeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">AttributeError</span></code></a> is raised.</p>
+descriptors don’t.  Otherwise, an <a class="reference internal" href="../library/exceptions.html#AttributeError" title="AttributeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">AttributeError</span></code></a> is raised.</p>
 </dd></dl>
 
 <dl class="c function">
@@ -210,7 +211,7 @@ slot.  It looks for a data descriptor in the
 dictionary of classes in the object’s MRO, and if found it takes preference
 over setting or deleting the attribute in the instance dictionary. Otherwise, the
 attribute is set or deleted in the object’s <a class="reference internal" href="../library/stdtypes.html#object.__dict__" title="object.__dict__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__dict__</span></code></a> (if present).
-On success, <code class="docutils literal notranslate"><span class="pre">0</span></code> is returned, otherwise an <a class="reference internal" href="../library/exceptions.html#attributeerror" title="AttributeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">AttributeError</span></code></a>
+On success, <code class="docutils literal notranslate"><span class="pre">0</span></code> is returned, otherwise an <a class="reference internal" href="../library/exceptions.html#AttributeError" title="AttributeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">AttributeError</span></code></a>
 is raised and <code class="docutils literal notranslate"><span class="pre">-1</span></code> is returned.</p>
 </dd></dl>
 
@@ -370,7 +371,7 @@ as Py_ssize_t.</p>
 <dl class="c function">
 <dt id="c.PyObject_HashNotImplemented">
 Py_hash_t <code class="sig-name descname">PyObject_HashNotImplemented</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>o</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_HashNotImplemented" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Set a <a class="reference internal" href="../library/exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> indicating that <code class="docutils literal notranslate"><span class="pre">type(o)</span></code> is not hashable and return <code class="docutils literal notranslate"><span class="pre">-1</span></code>.
+<dd><p>Set a <a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> indicating that <code class="docutils literal notranslate"><span class="pre">type(o)</span></code> is not hashable and return <code class="docutils literal notranslate"><span class="pre">-1</span></code>.
 This function receives special treatment when stored in a <code class="docutils literal notranslate"><span class="pre">tp_hash</span></code> slot,
 allowing a type to explicitly indicate to the interpreter that it is not
 hashable.</p>
@@ -396,7 +397,7 @@ This is equivalent to the Python expression <code class="docutils literal notran
 <dt id="c.PyObject_Type">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<code class="sig-name descname">PyObject_Type</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>o</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_Type" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p id="index-7">When <em>o</em> is non-<code class="docutils literal notranslate"><span class="pre">NULL</span></code>, returns a type object corresponding to the object type
-of object <em>o</em>. On failure, raises <a class="reference internal" href="../library/exceptions.html#systemerror" title="SystemError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SystemError</span></code></a> and returns <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.  This
+of object <em>o</em>. On failure, raises <a class="reference internal" href="../library/exceptions.html#SystemError" title="SystemError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SystemError</span></code></a> and returns <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.  This
 is equivalent to the Python expression <code class="docutils literal notranslate"><span class="pre">type(o)</span></code>. This function increments the
 reference count of the return value. There’s really no reason to use this
 function instead of the common expression <code class="docutils literal notranslate"><span class="pre">o-&gt;ob_type</span></code>, which returns a
@@ -471,7 +472,7 @@ is active then <code class="docutils literal notranslate"><span class="pre">NULL
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<code class="sig-name descname">PyObject_GetIter</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>o</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_GetIter" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>This is equivalent to the Python expression <code class="docutils literal notranslate"><span class="pre">iter(o)</span></code>. It returns a new
 iterator for the object argument, or the object  itself if the object is already
-an iterator.  Raises <a class="reference internal" href="../library/exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> and returns <code class="docutils literal notranslate"><span class="pre">NULL</span></code> if the object cannot be
+an iterator.  Raises <a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> and returns <code class="docutils literal notranslate"><span class="pre">NULL</span></code> if the object cannot be
 iterated.</p>
 </dd></dl>
 
@@ -531,6 +532,7 @@ iterated.</p>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API Reference Manual</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="abstract.html" >Abstract Objects Layer</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Object Protocol</a></li>
     <li class="right">
         
 
@@ -545,7 +547,7 @@ iterated.</p>
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  

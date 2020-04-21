@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
     <title>xmlrpc.server — Basic XML-RPC servers &#8212; Python 3.9.0a4 documentation</title>
@@ -79,6 +79,7 @@
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="internet.html" accesskey="U">Internet Protocols and Support</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">xmlrpc.server</span></code> — Basic XML-RPC servers</a></li>
     <li class="right">
         
 
@@ -93,7 +94,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -109,8 +110,8 @@
 <hr class="docutils" />
 <p>The <a class="reference internal" href="#module-xmlrpc.server" title="xmlrpc.server: Basic XML-RPC server implementations."><code class="xref py py-mod docutils literal notranslate"><span class="pre">xmlrpc.server</span></code></a> module provides a basic server framework for XML-RPC
 servers written in Python.  Servers can either be free standing, using
-<a class="reference internal" href="#xmlrpc.server.simplexmlrpcserver" title="xmlrpc.server.SimpleXMLRPCServer"><code class="xref py py-class docutils literal notranslate"><span class="pre">SimpleXMLRPCServer</span></code></a>, or embedded in a CGI environment, using
-<a class="reference internal" href="#xmlrpc.server.cgixmlrpcrequesthandler" title="xmlrpc.server.CGIXMLRPCRequestHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">CGIXMLRPCRequestHandler</span></code></a>.</p>
+<a class="reference internal" href="#xmlrpc.server.SimpleXMLRPCServer" title="xmlrpc.server.SimpleXMLRPCServer"><code class="xref py py-class docutils literal notranslate"><span class="pre">SimpleXMLRPCServer</span></code></a>, or embedded in a CGI environment, using
+<a class="reference internal" href="#xmlrpc.server.CGIXMLRPCRequestHandler" title="xmlrpc.server.CGIXMLRPCRequestHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">CGIXMLRPCRequestHandler</span></code></a>.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>The <a class="reference internal" href="#module-xmlrpc.server" title="xmlrpc.server: Basic XML-RPC server implementations."><code class="xref py py-mod docutils literal notranslate"><span class="pre">xmlrpc.server</span></code></a> module is not secure against maliciously
@@ -118,13 +119,13 @@ constructed data.  If you need to parse untrusted or unauthenticated data see
 <a class="reference internal" href="xml.html#xml-vulnerabilities"><span class="std std-ref">XML vulnerabilities</span></a>.</p>
 </div>
 <dl class="py class">
-<dt id="xmlrpc.server.simplexmlrpcserver">
-<span id="xmlrpc.server.SimpleXMLRPCServer"></span><em class="property">class </em><code class="sig-prename descclassname">xmlrpc.server.</code><code class="sig-name descname">SimpleXMLRPCServer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">addr</span></em>, <em class="sig-param"><span class="n">requestHandler</span><span class="o">=</span><span class="default_value">SimpleXMLRPCRequestHandler</span></em>, <em class="sig-param"><span class="n">logRequests</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">allow_none</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">encoding</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">bind_and_activate</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">use_builtin_types</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#xmlrpc.server.simplexmlrpcserver" title="Permalink to this definition">¶</a></dt>
+<dt id="xmlrpc.server.SimpleXMLRPCServer">
+<em class="property">class </em><code class="sig-prename descclassname">xmlrpc.server.</code><code class="sig-name descname">SimpleXMLRPCServer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">addr</span></em>, <em class="sig-param"><span class="n">requestHandler</span><span class="o">=</span><span class="default_value">SimpleXMLRPCRequestHandler</span></em>, <em class="sig-param"><span class="n">logRequests</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">allow_none</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">encoding</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">bind_and_activate</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">use_builtin_types</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#xmlrpc.server.SimpleXMLRPCServer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new server instance.  This class provides methods for registration of
 functions that can be called by the XML-RPC protocol.  The <em>requestHandler</em>
 parameter should be a factory for request handler instances; it defaults to
-<a class="reference internal" href="#xmlrpc.server.simplexmlrpcrequesthandler" title="xmlrpc.server.SimpleXMLRPCRequestHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">SimpleXMLRPCRequestHandler</span></code></a>.  The <em>addr</em> and <em>requestHandler</em> parameters
-are passed to the <a class="reference internal" href="socketserver.html#socketserver.tcpserver" title="socketserver.TCPServer"><code class="xref py py-class docutils literal notranslate"><span class="pre">socketserver.TCPServer</span></code></a> constructor.  If <em>logRequests</em>
+<a class="reference internal" href="#xmlrpc.server.SimpleXMLRPCRequestHandler" title="xmlrpc.server.SimpleXMLRPCRequestHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">SimpleXMLRPCRequestHandler</span></code></a>.  The <em>addr</em> and <em>requestHandler</em> parameters
+are passed to the <a class="reference internal" href="socketserver.html#socketserver.TCPServer" title="socketserver.TCPServer"><code class="xref py py-class docutils literal notranslate"><span class="pre">socketserver.TCPServer</span></code></a> constructor.  If <em>logRequests</em>
 is true (the default), requests will be logged; setting this parameter to false
 will turn off logging.   The <em>allow_none</em> and <em>encoding</em> parameters are passed
 on to <a class="reference internal" href="xmlrpc.client.html#module-xmlrpc.client" title="xmlrpc.client: XML-RPC client access."><code class="xref py py-mod docutils literal notranslate"><span class="pre">xmlrpc.client</span></code></a> and control the XML-RPC responses that will be returned
@@ -141,8 +142,8 @@ when date/times values or binary data are received; it defaults to false.</p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="xmlrpc.server.cgixmlrpcrequesthandler">
-<span id="xmlrpc.server.CGIXMLRPCRequestHandler"></span><em class="property">class </em><code class="sig-prename descclassname">xmlrpc.server.</code><code class="sig-name descname">CGIXMLRPCRequestHandler</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">allow_none</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">encoding</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">use_builtin_types</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#xmlrpc.server.cgixmlrpcrequesthandler" title="Permalink to this definition">¶</a></dt>
+<dt id="xmlrpc.server.CGIXMLRPCRequestHandler">
+<em class="property">class </em><code class="sig-prename descclassname">xmlrpc.server.</code><code class="sig-name descname">CGIXMLRPCRequestHandler</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">allow_none</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">encoding</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">use_builtin_types</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#xmlrpc.server.CGIXMLRPCRequestHandler" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new instance to handle XML-RPC requests in a CGI environment.  The
 <em>allow_none</em> and <em>encoding</em> parameters are passed on to <a class="reference internal" href="xmlrpc.client.html#module-xmlrpc.client" title="xmlrpc.client: XML-RPC client access."><code class="xref py py-mod docutils literal notranslate"><span class="pre">xmlrpc.client</span></code></a>
 and control the XML-RPC responses that will be returned from the server.
@@ -155,21 +156,21 @@ when date/times values or binary data are received; it defaults to false.</p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="xmlrpc.server.simplexmlrpcrequesthandler">
-<span id="xmlrpc.server.SimpleXMLRPCRequestHandler"></span><em class="property">class </em><code class="sig-prename descclassname">xmlrpc.server.</code><code class="sig-name descname">SimpleXMLRPCRequestHandler</code><a class="headerlink" href="#xmlrpc.server.simplexmlrpcrequesthandler" title="Permalink to this definition">¶</a></dt>
+<dt id="xmlrpc.server.SimpleXMLRPCRequestHandler">
+<em class="property">class </em><code class="sig-prename descclassname">xmlrpc.server.</code><code class="sig-name descname">SimpleXMLRPCRequestHandler</code><a class="headerlink" href="#xmlrpc.server.SimpleXMLRPCRequestHandler" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new request handler instance.  This request handler supports <code class="docutils literal notranslate"><span class="pre">POST</span></code>
 requests and modifies logging so that the <em>logRequests</em> parameter to the
-<a class="reference internal" href="#xmlrpc.server.simplexmlrpcserver" title="xmlrpc.server.SimpleXMLRPCServer"><code class="xref py py-class docutils literal notranslate"><span class="pre">SimpleXMLRPCServer</span></code></a> constructor parameter is honored.</p>
+<a class="reference internal" href="#xmlrpc.server.SimpleXMLRPCServer" title="xmlrpc.server.SimpleXMLRPCServer"><code class="xref py py-class docutils literal notranslate"><span class="pre">SimpleXMLRPCServer</span></code></a> constructor parameter is honored.</p>
 </dd></dl>
 
 <div class="section" id="simplexmlrpcserver-objects">
 <span id="simple-xmlrpc-servers"></span><h2>SimpleXMLRPCServer Objects<a class="headerlink" href="#simplexmlrpcserver-objects" title="Permalink to this headline">¶</a></h2>
-<p>The <a class="reference internal" href="#xmlrpc.server.simplexmlrpcserver" title="xmlrpc.server.SimpleXMLRPCServer"><code class="xref py py-class docutils literal notranslate"><span class="pre">SimpleXMLRPCServer</span></code></a> class is based on
-<a class="reference internal" href="socketserver.html#socketserver.tcpserver" title="socketserver.TCPServer"><code class="xref py py-class docutils literal notranslate"><span class="pre">socketserver.TCPServer</span></code></a> and provides a means of creating simple, stand
+<p>The <a class="reference internal" href="#xmlrpc.server.SimpleXMLRPCServer" title="xmlrpc.server.SimpleXMLRPCServer"><code class="xref py py-class docutils literal notranslate"><span class="pre">SimpleXMLRPCServer</span></code></a> class is based on
+<a class="reference internal" href="socketserver.html#socketserver.TCPServer" title="socketserver.TCPServer"><code class="xref py py-class docutils literal notranslate"><span class="pre">socketserver.TCPServer</span></code></a> and provides a means of creating simple, stand
 alone XML-RPC servers.</p>
 <dl class="py method">
-<dt id="xmlrpc.server.simplexmlrpcserver.register_function">
-<span id="xmlrpc.server.SimpleXMLRPCServer.register_function"></span><code class="sig-prename descclassname">SimpleXMLRPCServer.</code><code class="sig-name descname">register_function</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">function</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#xmlrpc.server.simplexmlrpcserver.register_function" title="Permalink to this definition">¶</a></dt>
+<dt id="xmlrpc.server.SimpleXMLRPCServer.register_function">
+<code class="sig-prename descclassname">SimpleXMLRPCServer.</code><code class="sig-name descname">register_function</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">function</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#xmlrpc.server.SimpleXMLRPCServer.register_function" title="Permalink to this definition">¶</a></dt>
 <dd><p>Register a function that can respond to XML-RPC requests.  If <em>name</em> is given,
 it will be the method name associated with <em>function</em>, otherwise
 <code class="docutils literal notranslate"><span class="pre">function.__name__</span></code> will be used.  <em>name</em> is a string, and may contain
@@ -178,15 +179,15 @@ characters not legal in Python identifiers, including the period character.</p>
 <em>name</em> can only be given as a keyword argument to register <em>function</em> under
 <em>name</em>.  If no <em>name</em> is given, <code class="docutils literal notranslate"><span class="pre">function.__name__</span></code> will be used.</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 3.7: </span><a class="reference internal" href="#xmlrpc.server.simplexmlrpcserver.register_function" title="xmlrpc.server.SimpleXMLRPCServer.register_function"><code class="xref py py-meth docutils literal notranslate"><span class="pre">register_function()</span></code></a> can be used as a decorator.</p>
+<p><span class="versionmodified changed">Changed in version 3.7: </span><a class="reference internal" href="#xmlrpc.server.SimpleXMLRPCServer.register_function" title="xmlrpc.server.SimpleXMLRPCServer.register_function"><code class="xref py py-meth docutils literal notranslate"><span class="pre">register_function()</span></code></a> can be used as a decorator.</p>
 </div>
 </dd></dl>
 
 <dl class="py method">
-<dt id="xmlrpc.server.simplexmlrpcserver.register_instance">
-<span id="xmlrpc.server.SimpleXMLRPCServer.register_instance"></span><code class="sig-prename descclassname">SimpleXMLRPCServer.</code><code class="sig-name descname">register_instance</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">instance</span></em>, <em class="sig-param"><span class="n">allow_dotted_names</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#xmlrpc.server.simplexmlrpcserver.register_instance" title="Permalink to this definition">¶</a></dt>
+<dt id="xmlrpc.server.SimpleXMLRPCServer.register_instance">
+<code class="sig-prename descclassname">SimpleXMLRPCServer.</code><code class="sig-name descname">register_instance</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">instance</span></em>, <em class="sig-param"><span class="n">allow_dotted_names</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#xmlrpc.server.SimpleXMLRPCServer.register_instance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Register an object which is used to expose method names which have not been
-registered using <a class="reference internal" href="#xmlrpc.server.simplexmlrpcserver.register_function" title="xmlrpc.server.SimpleXMLRPCServer.register_function"><code class="xref py py-meth docutils literal notranslate"><span class="pre">register_function()</span></code></a>.  If <em>instance</em> contains a
+registered using <a class="reference internal" href="#xmlrpc.server.SimpleXMLRPCServer.register_function" title="xmlrpc.server.SimpleXMLRPCServer.register_function"><code class="xref py py-meth docutils literal notranslate"><span class="pre">register_function()</span></code></a>.  If <em>instance</em> contains a
 <code class="xref py py-meth docutils literal notranslate"><span class="pre">_dispatch()</span></code> method, it is called with the requested method name and the
 parameters from the request.  Its API is <code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">_dispatch(self,</span> <span class="pre">method,</span> <span class="pre">params)</span></code>
 (note that <em>params</em> does not represent a variable argument list).  If it calls
@@ -210,21 +211,21 @@ your machine.  Only use this option on a secure, closed network.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="xmlrpc.server.simplexmlrpcserver.register_introspection_functions">
-<span id="xmlrpc.server.SimpleXMLRPCServer.register_introspection_functions"></span><code class="sig-prename descclassname">SimpleXMLRPCServer.</code><code class="sig-name descname">register_introspection_functions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#xmlrpc.server.simplexmlrpcserver.register_introspection_functions" title="Permalink to this definition">¶</a></dt>
+<dt id="xmlrpc.server.SimpleXMLRPCServer.register_introspection_functions">
+<code class="sig-prename descclassname">SimpleXMLRPCServer.</code><code class="sig-name descname">register_introspection_functions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#xmlrpc.server.SimpleXMLRPCServer.register_introspection_functions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Registers the XML-RPC introspection functions <code class="docutils literal notranslate"><span class="pre">system.listMethods</span></code>,
 <code class="docutils literal notranslate"><span class="pre">system.methodHelp</span></code> and <code class="docutils literal notranslate"><span class="pre">system.methodSignature</span></code>.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="xmlrpc.server.simplexmlrpcserver.register_multicall_functions">
-<span id="xmlrpc.server.SimpleXMLRPCServer.register_multicall_functions"></span><code class="sig-prename descclassname">SimpleXMLRPCServer.</code><code class="sig-name descname">register_multicall_functions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#xmlrpc.server.simplexmlrpcserver.register_multicall_functions" title="Permalink to this definition">¶</a></dt>
+<dt id="xmlrpc.server.SimpleXMLRPCServer.register_multicall_functions">
+<code class="sig-prename descclassname">SimpleXMLRPCServer.</code><code class="sig-name descname">register_multicall_functions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#xmlrpc.server.SimpleXMLRPCServer.register_multicall_functions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Registers the XML-RPC multicall function system.multicall.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="xmlrpc.server.simplexmlrpcrequesthandler.rpc_paths">
-<span id="xmlrpc.server.SimpleXMLRPCRequestHandler.rpc_paths"></span><code class="sig-prename descclassname">SimpleXMLRPCRequestHandler.</code><code class="sig-name descname">rpc_paths</code><a class="headerlink" href="#xmlrpc.server.simplexmlrpcrequesthandler.rpc_paths" title="Permalink to this definition">¶</a></dt>
+<dt id="xmlrpc.server.SimpleXMLRPCRequestHandler.rpc_paths">
+<code class="sig-prename descclassname">SimpleXMLRPCRequestHandler.</code><code class="sig-name descname">rpc_paths</code><a class="headerlink" href="#xmlrpc.server.SimpleXMLRPCRequestHandler.rpc_paths" title="Permalink to this definition">¶</a></dt>
 <dd><p>An attribute value that must be a tuple listing valid path portions of the URL
 for receiving XML-RPC requests.  Requests posted to other paths will result in a
 404 “no such page” HTTP error.  If this tuple is empty, all paths will be
@@ -375,11 +376,11 @@ your machine.  Only use this example only within a secure, closed network.</p>
 </div>
 <div class="section" id="cgixmlrpcrequesthandler">
 <h2>CGIXMLRPCRequestHandler<a class="headerlink" href="#cgixmlrpcrequesthandler" title="Permalink to this headline">¶</a></h2>
-<p>The <a class="reference internal" href="#xmlrpc.server.cgixmlrpcrequesthandler" title="xmlrpc.server.CGIXMLRPCRequestHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">CGIXMLRPCRequestHandler</span></code></a> class can be used to handle XML-RPC
+<p>The <a class="reference internal" href="#xmlrpc.server.CGIXMLRPCRequestHandler" title="xmlrpc.server.CGIXMLRPCRequestHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">CGIXMLRPCRequestHandler</span></code></a> class can be used to handle XML-RPC
 requests sent to Python CGI scripts.</p>
 <dl class="py method">
-<dt id="xmlrpc.server.cgixmlrpcrequesthandler.register_function">
-<span id="xmlrpc.server.CGIXMLRPCRequestHandler.register_function"></span><code class="sig-prename descclassname">CGIXMLRPCRequestHandler.</code><code class="sig-name descname">register_function</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">function</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#xmlrpc.server.cgixmlrpcrequesthandler.register_function" title="Permalink to this definition">¶</a></dt>
+<dt id="xmlrpc.server.CGIXMLRPCRequestHandler.register_function">
+<code class="sig-prename descclassname">CGIXMLRPCRequestHandler.</code><code class="sig-name descname">register_function</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">function</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#xmlrpc.server.CGIXMLRPCRequestHandler.register_function" title="Permalink to this definition">¶</a></dt>
 <dd><p>Register a function that can respond to XML-RPC requests.  If <em>name</em> is given,
 it will be the method name associated with <em>function</em>, otherwise
 <code class="docutils literal notranslate"><span class="pre">function.__name__</span></code> will be used.  <em>name</em> is a string, and may contain
@@ -388,15 +389,15 @@ characters not legal in Python identifiers, including the period character.</p>
 <em>name</em> can only be given as a keyword argument to register <em>function</em> under
 <em>name</em>.  If no <em>name</em> is given, <code class="docutils literal notranslate"><span class="pre">function.__name__</span></code> will be used.</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 3.7: </span><a class="reference internal" href="#xmlrpc.server.cgixmlrpcrequesthandler.register_function" title="xmlrpc.server.CGIXMLRPCRequestHandler.register_function"><code class="xref py py-meth docutils literal notranslate"><span class="pre">register_function()</span></code></a> can be used as a decorator.</p>
+<p><span class="versionmodified changed">Changed in version 3.7: </span><a class="reference internal" href="#xmlrpc.server.CGIXMLRPCRequestHandler.register_function" title="xmlrpc.server.CGIXMLRPCRequestHandler.register_function"><code class="xref py py-meth docutils literal notranslate"><span class="pre">register_function()</span></code></a> can be used as a decorator.</p>
 </div>
 </dd></dl>
 
 <dl class="py method">
-<dt id="xmlrpc.server.cgixmlrpcrequesthandler.register_instance">
-<span id="xmlrpc.server.CGIXMLRPCRequestHandler.register_instance"></span><code class="sig-prename descclassname">CGIXMLRPCRequestHandler.</code><code class="sig-name descname">register_instance</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">instance</span></em><span class="sig-paren">)</span><a class="headerlink" href="#xmlrpc.server.cgixmlrpcrequesthandler.register_instance" title="Permalink to this definition">¶</a></dt>
+<dt id="xmlrpc.server.CGIXMLRPCRequestHandler.register_instance">
+<code class="sig-prename descclassname">CGIXMLRPCRequestHandler.</code><code class="sig-name descname">register_instance</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">instance</span></em><span class="sig-paren">)</span><a class="headerlink" href="#xmlrpc.server.CGIXMLRPCRequestHandler.register_instance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Register an object which is used to expose method names  which have not been
-registered using <a class="reference internal" href="#xmlrpc.server.cgixmlrpcrequesthandler.register_function" title="xmlrpc.server.CGIXMLRPCRequestHandler.register_function"><code class="xref py py-meth docutils literal notranslate"><span class="pre">register_function()</span></code></a>. If  instance contains a
+registered using <a class="reference internal" href="#xmlrpc.server.CGIXMLRPCRequestHandler.register_function" title="xmlrpc.server.CGIXMLRPCRequestHandler.register_function"><code class="xref py py-meth docutils literal notranslate"><span class="pre">register_function()</span></code></a>. If  instance contains a
 <code class="xref py py-meth docutils literal notranslate"><span class="pre">_dispatch()</span></code> method, it is called with the  requested method name and the
 parameters from the  request; the return value is returned to the client as the
 result. If instance does not have a <code class="xref py py-meth docutils literal notranslate"><span class="pre">_dispatch()</span></code> method, it is searched
@@ -408,21 +409,21 @@ request, and the return value is passed  back to the client.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="xmlrpc.server.cgixmlrpcrequesthandler.register_introspection_functions">
-<span id="xmlrpc.server.CGIXMLRPCRequestHandler.register_introspection_functions"></span><code class="sig-prename descclassname">CGIXMLRPCRequestHandler.</code><code class="sig-name descname">register_introspection_functions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#xmlrpc.server.cgixmlrpcrequesthandler.register_introspection_functions" title="Permalink to this definition">¶</a></dt>
+<dt id="xmlrpc.server.CGIXMLRPCRequestHandler.register_introspection_functions">
+<code class="sig-prename descclassname">CGIXMLRPCRequestHandler.</code><code class="sig-name descname">register_introspection_functions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#xmlrpc.server.CGIXMLRPCRequestHandler.register_introspection_functions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Register the XML-RPC introspection functions  <code class="docutils literal notranslate"><span class="pre">system.listMethods</span></code>,
 <code class="docutils literal notranslate"><span class="pre">system.methodHelp</span></code> and  <code class="docutils literal notranslate"><span class="pre">system.methodSignature</span></code>.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="xmlrpc.server.cgixmlrpcrequesthandler.register_multicall_functions">
-<span id="xmlrpc.server.CGIXMLRPCRequestHandler.register_multicall_functions"></span><code class="sig-prename descclassname">CGIXMLRPCRequestHandler.</code><code class="sig-name descname">register_multicall_functions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#xmlrpc.server.cgixmlrpcrequesthandler.register_multicall_functions" title="Permalink to this definition">¶</a></dt>
+<dt id="xmlrpc.server.CGIXMLRPCRequestHandler.register_multicall_functions">
+<code class="sig-prename descclassname">CGIXMLRPCRequestHandler.</code><code class="sig-name descname">register_multicall_functions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#xmlrpc.server.CGIXMLRPCRequestHandler.register_multicall_functions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Register the XML-RPC multicall function <code class="docutils literal notranslate"><span class="pre">system.multicall</span></code>.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="xmlrpc.server.cgixmlrpcrequesthandler.handle_request">
-<span id="xmlrpc.server.CGIXMLRPCRequestHandler.handle_request"></span><code class="sig-prename descclassname">CGIXMLRPCRequestHandler.</code><code class="sig-name descname">handle_request</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request_text</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#xmlrpc.server.cgixmlrpcrequesthandler.handle_request" title="Permalink to this definition">¶</a></dt>
+<dt id="xmlrpc.server.CGIXMLRPCRequestHandler.handle_request">
+<code class="sig-prename descclassname">CGIXMLRPCRequestHandler.</code><code class="sig-name descname">handle_request</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request_text</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#xmlrpc.server.CGIXMLRPCRequestHandler.handle_request" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handle an XML-RPC request. If <em>request_text</em> is given, it should be the POST
 data provided by the HTTP server,  otherwise the contents of stdin will be used.</p>
 </dd></dl>
@@ -446,59 +447,59 @@ data provided by the HTTP server,  otherwise the contents of stdin will be used.
 <h2>Documenting XMLRPC server<a class="headerlink" href="#documenting-xmlrpc-server" title="Permalink to this headline">¶</a></h2>
 <p>These classes extend the above classes to serve HTML documentation in response
 to HTTP GET requests.  Servers can either be free standing, using
-<a class="reference internal" href="#xmlrpc.server.docxmlrpcserver" title="xmlrpc.server.DocXMLRPCServer"><code class="xref py py-class docutils literal notranslate"><span class="pre">DocXMLRPCServer</span></code></a>, or embedded in a CGI environment, using
-<a class="reference internal" href="#xmlrpc.server.doccgixmlrpcrequesthandler" title="xmlrpc.server.DocCGIXMLRPCRequestHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">DocCGIXMLRPCRequestHandler</span></code></a>.</p>
+<a class="reference internal" href="#xmlrpc.server.DocXMLRPCServer" title="xmlrpc.server.DocXMLRPCServer"><code class="xref py py-class docutils literal notranslate"><span class="pre">DocXMLRPCServer</span></code></a>, or embedded in a CGI environment, using
+<a class="reference internal" href="#xmlrpc.server.DocCGIXMLRPCRequestHandler" title="xmlrpc.server.DocCGIXMLRPCRequestHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">DocCGIXMLRPCRequestHandler</span></code></a>.</p>
 <dl class="py class">
-<dt id="xmlrpc.server.docxmlrpcserver">
-<span id="xmlrpc.server.DocXMLRPCServer"></span><em class="property">class </em><code class="sig-prename descclassname">xmlrpc.server.</code><code class="sig-name descname">DocXMLRPCServer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">addr</span></em>, <em class="sig-param"><span class="n">requestHandler</span><span class="o">=</span><span class="default_value">DocXMLRPCRequestHandler</span></em>, <em class="sig-param"><span class="n">logRequests</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">allow_none</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">encoding</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">bind_and_activate</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">use_builtin_types</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#xmlrpc.server.docxmlrpcserver" title="Permalink to this definition">¶</a></dt>
+<dt id="xmlrpc.server.DocXMLRPCServer">
+<em class="property">class </em><code class="sig-prename descclassname">xmlrpc.server.</code><code class="sig-name descname">DocXMLRPCServer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">addr</span></em>, <em class="sig-param"><span class="n">requestHandler</span><span class="o">=</span><span class="default_value">DocXMLRPCRequestHandler</span></em>, <em class="sig-param"><span class="n">logRequests</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">allow_none</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">encoding</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">bind_and_activate</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">use_builtin_types</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#xmlrpc.server.DocXMLRPCServer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new server instance. All parameters have the same meaning as for
-<a class="reference internal" href="#xmlrpc.server.simplexmlrpcserver" title="xmlrpc.server.SimpleXMLRPCServer"><code class="xref py py-class docutils literal notranslate"><span class="pre">SimpleXMLRPCServer</span></code></a>; <em>requestHandler</em> defaults to
-<a class="reference internal" href="#xmlrpc.server.docxmlrpcrequesthandler" title="xmlrpc.server.DocXMLRPCRequestHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">DocXMLRPCRequestHandler</span></code></a>.</p>
+<a class="reference internal" href="#xmlrpc.server.SimpleXMLRPCServer" title="xmlrpc.server.SimpleXMLRPCServer"><code class="xref py py-class docutils literal notranslate"><span class="pre">SimpleXMLRPCServer</span></code></a>; <em>requestHandler</em> defaults to
+<a class="reference internal" href="#xmlrpc.server.DocXMLRPCRequestHandler" title="xmlrpc.server.DocXMLRPCRequestHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">DocXMLRPCRequestHandler</span></code></a>.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">Changed in version 3.3: </span>The <em>use_builtin_types</em> flag was added.</p>
 </div>
 </dd></dl>
 
 <dl class="py class">
-<dt id="xmlrpc.server.doccgixmlrpcrequesthandler">
-<span id="xmlrpc.server.DocCGIXMLRPCRequestHandler"></span><em class="property">class </em><code class="sig-prename descclassname">xmlrpc.server.</code><code class="sig-name descname">DocCGIXMLRPCRequestHandler</code><a class="headerlink" href="#xmlrpc.server.doccgixmlrpcrequesthandler" title="Permalink to this definition">¶</a></dt>
+<dt id="xmlrpc.server.DocCGIXMLRPCRequestHandler">
+<em class="property">class </em><code class="sig-prename descclassname">xmlrpc.server.</code><code class="sig-name descname">DocCGIXMLRPCRequestHandler</code><a class="headerlink" href="#xmlrpc.server.DocCGIXMLRPCRequestHandler" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new instance to handle XML-RPC requests in a CGI environment.</p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="xmlrpc.server.docxmlrpcrequesthandler">
-<span id="xmlrpc.server.DocXMLRPCRequestHandler"></span><em class="property">class </em><code class="sig-prename descclassname">xmlrpc.server.</code><code class="sig-name descname">DocXMLRPCRequestHandler</code><a class="headerlink" href="#xmlrpc.server.docxmlrpcrequesthandler" title="Permalink to this definition">¶</a></dt>
+<dt id="xmlrpc.server.DocXMLRPCRequestHandler">
+<em class="property">class </em><code class="sig-prename descclassname">xmlrpc.server.</code><code class="sig-name descname">DocXMLRPCRequestHandler</code><a class="headerlink" href="#xmlrpc.server.DocXMLRPCRequestHandler" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new request handler instance. This request handler supports XML-RPC
 POST requests, documentation GET requests, and modifies logging so that the
-<em>logRequests</em> parameter to the <a class="reference internal" href="#xmlrpc.server.docxmlrpcserver" title="xmlrpc.server.DocXMLRPCServer"><code class="xref py py-class docutils literal notranslate"><span class="pre">DocXMLRPCServer</span></code></a> constructor parameter is
+<em>logRequests</em> parameter to the <a class="reference internal" href="#xmlrpc.server.DocXMLRPCServer" title="xmlrpc.server.DocXMLRPCServer"><code class="xref py py-class docutils literal notranslate"><span class="pre">DocXMLRPCServer</span></code></a> constructor parameter is
 honored.</p>
 </dd></dl>
 
 </div>
 <div class="section" id="docxmlrpcserver-objects">
 <span id="doc-xmlrpc-servers"></span><h2>DocXMLRPCServer Objects<a class="headerlink" href="#docxmlrpcserver-objects" title="Permalink to this headline">¶</a></h2>
-<p>The <a class="reference internal" href="#xmlrpc.server.docxmlrpcserver" title="xmlrpc.server.DocXMLRPCServer"><code class="xref py py-class docutils literal notranslate"><span class="pre">DocXMLRPCServer</span></code></a> class is derived from <a class="reference internal" href="#xmlrpc.server.simplexmlrpcserver" title="xmlrpc.server.SimpleXMLRPCServer"><code class="xref py py-class docutils literal notranslate"><span class="pre">SimpleXMLRPCServer</span></code></a>
+<p>The <a class="reference internal" href="#xmlrpc.server.DocXMLRPCServer" title="xmlrpc.server.DocXMLRPCServer"><code class="xref py py-class docutils literal notranslate"><span class="pre">DocXMLRPCServer</span></code></a> class is derived from <a class="reference internal" href="#xmlrpc.server.SimpleXMLRPCServer" title="xmlrpc.server.SimpleXMLRPCServer"><code class="xref py py-class docutils literal notranslate"><span class="pre">SimpleXMLRPCServer</span></code></a>
 and provides a means of creating self-documenting, stand alone XML-RPC
 servers. HTTP POST requests are handled as XML-RPC method calls. HTTP GET
 requests are handled by generating pydoc-style HTML documentation. This allows a
 server to provide its own web-based documentation.</p>
 <dl class="py method">
-<dt id="xmlrpc.server.docxmlrpcserver.set_server_title">
-<span id="xmlrpc.server.DocXMLRPCServer.set_server_title"></span><code class="sig-prename descclassname">DocXMLRPCServer.</code><code class="sig-name descname">set_server_title</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">server_title</span></em><span class="sig-paren">)</span><a class="headerlink" href="#xmlrpc.server.docxmlrpcserver.set_server_title" title="Permalink to this definition">¶</a></dt>
+<dt id="xmlrpc.server.DocXMLRPCServer.set_server_title">
+<code class="sig-prename descclassname">DocXMLRPCServer.</code><code class="sig-name descname">set_server_title</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">server_title</span></em><span class="sig-paren">)</span><a class="headerlink" href="#xmlrpc.server.DocXMLRPCServer.set_server_title" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the title used in the generated HTML documentation. This title will be used
 inside the HTML “title” element.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="xmlrpc.server.docxmlrpcserver.set_server_name">
-<span id="xmlrpc.server.DocXMLRPCServer.set_server_name"></span><code class="sig-prename descclassname">DocXMLRPCServer.</code><code class="sig-name descname">set_server_name</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">server_name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#xmlrpc.server.docxmlrpcserver.set_server_name" title="Permalink to this definition">¶</a></dt>
+<dt id="xmlrpc.server.DocXMLRPCServer.set_server_name">
+<code class="sig-prename descclassname">DocXMLRPCServer.</code><code class="sig-name descname">set_server_name</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">server_name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#xmlrpc.server.DocXMLRPCServer.set_server_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the name used in the generated HTML documentation. This name will appear at
 the top of the generated documentation inside a “h1” element.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="xmlrpc.server.docxmlrpcserver.set_server_documentation">
-<span id="xmlrpc.server.DocXMLRPCServer.set_server_documentation"></span><code class="sig-prename descclassname">DocXMLRPCServer.</code><code class="sig-name descname">set_server_documentation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">server_documentation</span></em><span class="sig-paren">)</span><a class="headerlink" href="#xmlrpc.server.docxmlrpcserver.set_server_documentation" title="Permalink to this definition">¶</a></dt>
+<dt id="xmlrpc.server.DocXMLRPCServer.set_server_documentation">
+<code class="sig-prename descclassname">DocXMLRPCServer.</code><code class="sig-name descname">set_server_documentation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">server_documentation</span></em><span class="sig-paren">)</span><a class="headerlink" href="#xmlrpc.server.DocXMLRPCServer.set_server_documentation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the description used in the generated HTML documentation. This description
 will appear as a paragraph, below the server name, in the documentation.</p>
 </dd></dl>
@@ -506,28 +507,28 @@ will appear as a paragraph, below the server name, in the documentation.</p>
 </div>
 <div class="section" id="doccgixmlrpcrequesthandler">
 <h2>DocCGIXMLRPCRequestHandler<a class="headerlink" href="#doccgixmlrpcrequesthandler" title="Permalink to this headline">¶</a></h2>
-<p>The <a class="reference internal" href="#xmlrpc.server.doccgixmlrpcrequesthandler" title="xmlrpc.server.DocCGIXMLRPCRequestHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">DocCGIXMLRPCRequestHandler</span></code></a> class is derived from
-<a class="reference internal" href="#xmlrpc.server.cgixmlrpcrequesthandler" title="xmlrpc.server.CGIXMLRPCRequestHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">CGIXMLRPCRequestHandler</span></code></a> and provides a means of creating
+<p>The <a class="reference internal" href="#xmlrpc.server.DocCGIXMLRPCRequestHandler" title="xmlrpc.server.DocCGIXMLRPCRequestHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">DocCGIXMLRPCRequestHandler</span></code></a> class is derived from
+<a class="reference internal" href="#xmlrpc.server.CGIXMLRPCRequestHandler" title="xmlrpc.server.CGIXMLRPCRequestHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">CGIXMLRPCRequestHandler</span></code></a> and provides a means of creating
 self-documenting, XML-RPC CGI scripts. HTTP POST requests are handled as XML-RPC
 method calls. HTTP GET requests are handled by generating pydoc-style HTML
 documentation. This allows a server to provide its own web-based documentation.</p>
 <dl class="py method">
-<dt id="xmlrpc.server.doccgixmlrpcrequesthandler.set_server_title">
-<span id="xmlrpc.server.DocCGIXMLRPCRequestHandler.set_server_title"></span><code class="sig-prename descclassname">DocCGIXMLRPCRequestHandler.</code><code class="sig-name descname">set_server_title</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">server_title</span></em><span class="sig-paren">)</span><a class="headerlink" href="#xmlrpc.server.doccgixmlrpcrequesthandler.set_server_title" title="Permalink to this definition">¶</a></dt>
+<dt id="xmlrpc.server.DocCGIXMLRPCRequestHandler.set_server_title">
+<code class="sig-prename descclassname">DocCGIXMLRPCRequestHandler.</code><code class="sig-name descname">set_server_title</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">server_title</span></em><span class="sig-paren">)</span><a class="headerlink" href="#xmlrpc.server.DocCGIXMLRPCRequestHandler.set_server_title" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the title used in the generated HTML documentation. This title will be used
 inside the HTML “title” element.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="xmlrpc.server.doccgixmlrpcrequesthandler.set_server_name">
-<span id="xmlrpc.server.DocCGIXMLRPCRequestHandler.set_server_name"></span><code class="sig-prename descclassname">DocCGIXMLRPCRequestHandler.</code><code class="sig-name descname">set_server_name</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">server_name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#xmlrpc.server.doccgixmlrpcrequesthandler.set_server_name" title="Permalink to this definition">¶</a></dt>
+<dt id="xmlrpc.server.DocCGIXMLRPCRequestHandler.set_server_name">
+<code class="sig-prename descclassname">DocCGIXMLRPCRequestHandler.</code><code class="sig-name descname">set_server_name</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">server_name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#xmlrpc.server.DocCGIXMLRPCRequestHandler.set_server_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the name used in the generated HTML documentation. This name will appear at
 the top of the generated documentation inside a “h1” element.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="xmlrpc.server.doccgixmlrpcrequesthandler.set_server_documentation">
-<span id="xmlrpc.server.DocCGIXMLRPCRequestHandler.set_server_documentation"></span><code class="sig-prename descclassname">DocCGIXMLRPCRequestHandler.</code><code class="sig-name descname">set_server_documentation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">server_documentation</span></em><span class="sig-paren">)</span><a class="headerlink" href="#xmlrpc.server.doccgixmlrpcrequesthandler.set_server_documentation" title="Permalink to this definition">¶</a></dt>
+<dt id="xmlrpc.server.DocCGIXMLRPCRequestHandler.set_server_documentation">
+<code class="sig-prename descclassname">DocCGIXMLRPCRequestHandler.</code><code class="sig-name descname">set_server_documentation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">server_documentation</span></em><span class="sig-paren">)</span><a class="headerlink" href="#xmlrpc.server.DocCGIXMLRPCRequestHandler.set_server_documentation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the description used in the generated HTML documentation. This description
 will appear as a paragraph, below the server name, in the documentation.</p>
 </dd></dl>
@@ -604,6 +605,7 @@ will appear as a paragraph, below the server name, in the documentation.</p>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="internet.html" >Internet Protocols and Support</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">xmlrpc.server</span></code> — Basic XML-RPC servers</a></li>
     <li class="right">
         
 
@@ -618,7 +620,7 @@ will appear as a paragraph, below the server name, in the documentation.</p>
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  

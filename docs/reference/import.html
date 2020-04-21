@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
     <title>5. The import system &#8212; Python 3.9.0a4 documentation</title>
@@ -78,6 +78,7 @@
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">The Python Language Reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">5. </span>The import system</a></li>
     <li class="right">
         
 
@@ -92,7 +93,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -128,7 +129,7 @@ import system (such as <a class="reference internal" href="../library/importlib.
 <a class="reference internal" href="../library/functions.html#import__" title="__import__"><code class="xref py py-func docutils literal notranslate"><span class="pre">__import__()</span></code></a> and use their own solutions to implement import semantics.</p>
 <p>When a module is first imported, Python searches for the module and if found,
 it creates a module object <a class="footnote-reference brackets" href="#fnmo" id="id1">1</a>, initializing it.  If the named module
-cannot be found, a <a class="reference internal" href="../library/exceptions.html#modulenotfounderror" title="ModuleNotFoundError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ModuleNotFoundError</span></code></a> is raised.  Python implements various
+cannot be found, a <a class="reference internal" href="../library/exceptions.html#ModuleNotFoundError" title="ModuleNotFoundError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ModuleNotFoundError</span></code></a> is raised.  Python implements various
 strategies to search for the named module when the import machinery is
 invoked.  These strategies can be modified and extended by using various hooks
 described in the sections below.</p>
@@ -228,7 +229,7 @@ arguments to the <a class="reference internal" href="simple_stmts.html#import"><
 <p>This name will be used in various phases of the import search, and it may be
 the dotted path to a submodule, e.g. <code class="docutils literal notranslate"><span class="pre">foo.bar.baz</span></code>.  In this case, Python
 first tries to import <code class="docutils literal notranslate"><span class="pre">foo</span></code>, then <code class="docutils literal notranslate"><span class="pre">foo.bar</span></code>, and finally <code class="docutils literal notranslate"><span class="pre">foo.bar.baz</span></code>.
-If any of the intermediate imports fail, a <a class="reference internal" href="../library/exceptions.html#modulenotfounderror" title="ModuleNotFoundError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ModuleNotFoundError</span></code></a> is raised.</p>
+If any of the intermediate imports fail, a <a class="reference internal" href="../library/exceptions.html#ModuleNotFoundError" title="ModuleNotFoundError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ModuleNotFoundError</span></code></a> is raised.</p>
 <div class="section" id="the-module-cache">
 <h3><span class="section-number">5.3.1. </span>The module cache<a class="headerlink" href="#the-module-cache" title="Permalink to this headline">¶</a></h3>
 <p id="index-7">The first place checked during import search is <a class="reference internal" href="../library/sys.html#sys.modules" title="sys.modules"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.modules</span></code></a>.  This
@@ -240,14 +241,14 @@ object.</p>
 <p>During import, the module name is looked up in <a class="reference internal" href="../library/sys.html#sys.modules" title="sys.modules"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.modules</span></code></a> and if
 present, the associated value is the module satisfying the import, and the
 process completes.  However, if the value is <code class="docutils literal notranslate"><span class="pre">None</span></code>, then a
-<a class="reference internal" href="../library/exceptions.html#modulenotfounderror" title="ModuleNotFoundError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ModuleNotFoundError</span></code></a> is raised.  If the module name is missing, Python will
+<a class="reference internal" href="../library/exceptions.html#ModuleNotFoundError" title="ModuleNotFoundError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ModuleNotFoundError</span></code></a> is raised.  If the module name is missing, Python will
 continue searching for the module.</p>
 <p><a class="reference internal" href="../library/sys.html#sys.modules" title="sys.modules"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.modules</span></code></a> is writable.  Deleting a key may not destroy the
 associated module (as other modules may hold references to it),
 but it will invalidate the cache entry for the named module, causing
 Python to search anew for the named module upon its next
 import. The key can also be assigned to <code class="docutils literal notranslate"><span class="pre">None</span></code>, forcing the next import
-of the module to result in a <a class="reference internal" href="../library/exceptions.html#modulenotfounderror" title="ModuleNotFoundError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ModuleNotFoundError</span></code></a>.</p>
+of the module to result in a <a class="reference internal" href="../library/exceptions.html#ModuleNotFoundError" title="ModuleNotFoundError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ModuleNotFoundError</span></code></a>.</p>
 <p>Beware though, as if you keep a reference to the module object,
 invalidate its cache entry in <a class="reference internal" href="../library/sys.html#sys.modules" title="sys.modules"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.modules</span></code></a>, and then re-import the
 named module, the two module objects will <em>not</em> be the same. By contrast,
@@ -304,23 +305,23 @@ to <a class="reference internal" href="../library/sys.html#sys.path_hooks" title
 searches <a class="reference internal" href="../library/sys.html#sys.meta_path" title="sys.meta_path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.meta_path</span></code></a>, which contains a list of meta path finder
 objects.  These finders are queried in order to see if they know how to handle
 the named module.  Meta path finders must implement a method called
-<a class="reference internal" href="../library/importlib.html#importlib.abc.metapathfinder.find_spec" title="importlib.abc.MetaPathFinder.find_spec"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_spec()</span></code></a> which takes three arguments:
+<a class="reference internal" href="../library/importlib.html#importlib.abc.MetaPathFinder.find_spec" title="importlib.abc.MetaPathFinder.find_spec"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_spec()</span></code></a> which takes three arguments:
 a name, an import path, and (optionally) a target module.  The meta path
 finder can use any strategy it wants to determine whether it can handle
 the named module or not.</p>
 <p>If the meta path finder knows how to handle the named module, it returns a
 spec object.  If it cannot handle the named module, it returns <code class="docutils literal notranslate"><span class="pre">None</span></code>.  If
 <a class="reference internal" href="../library/sys.html#sys.meta_path" title="sys.meta_path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.meta_path</span></code></a> processing reaches the end of its list without returning
-a spec, then a <a class="reference internal" href="../library/exceptions.html#modulenotfounderror" title="ModuleNotFoundError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ModuleNotFoundError</span></code></a> is raised.  Any other exceptions
+a spec, then a <a class="reference internal" href="../library/exceptions.html#ModuleNotFoundError" title="ModuleNotFoundError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ModuleNotFoundError</span></code></a> is raised.  Any other exceptions
 raised are simply propagated up, aborting the import process.</p>
-<p>The <a class="reference internal" href="../library/importlib.html#importlib.abc.metapathfinder.find_spec" title="importlib.abc.MetaPathFinder.find_spec"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_spec()</span></code></a> method of meta path
+<p>The <a class="reference internal" href="../library/importlib.html#importlib.abc.MetaPathFinder.find_spec" title="importlib.abc.MetaPathFinder.find_spec"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_spec()</span></code></a> method of meta path
 finders is called with two or three arguments.  The first is the fully
 qualified name of the module being imported, for example <code class="docutils literal notranslate"><span class="pre">foo.bar.baz</span></code>.
 The second argument is the path entries to use for the module search.  For
 top-level modules, the second argument is <code class="docutils literal notranslate"><span class="pre">None</span></code>, but for submodules or
 subpackages, the second argument is the value of the parent package’s
 <code class="docutils literal notranslate"><span class="pre">__path__</span></code> attribute. If the appropriate <code class="docutils literal notranslate"><span class="pre">__path__</span></code> attribute cannot
-be accessed, a <a class="reference internal" href="../library/exceptions.html#modulenotfounderror" title="ModuleNotFoundError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ModuleNotFoundError</span></code></a> is raised.  The third argument
+be accessed, a <a class="reference internal" href="../library/exceptions.html#ModuleNotFoundError" title="ModuleNotFoundError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ModuleNotFoundError</span></code></a> is raised.  The third argument
 is an existing module object that will be the target of loading later.
 The import system passes in a target module only during reload.</p>
 <p>The meta path may be traversed multiple times for a single import request.
@@ -340,8 +341,8 @@ knows how to import built-in modules, one that knows how to import frozen
 modules, and one that knows how to import modules from an <a class="reference internal" href="../glossary.html#term-import-path"><span class="xref std std-term">import path</span></a>
 (i.e. the <a class="reference internal" href="../glossary.html#term-path-based-finder"><span class="xref std std-term">path based finder</span></a>).</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 3.4: </span>The <a class="reference internal" href="../library/importlib.html#importlib.abc.metapathfinder.find_spec" title="importlib.abc.MetaPathFinder.find_spec"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_spec()</span></code></a> method of meta path
-finders replaced <a class="reference internal" href="../library/importlib.html#importlib.abc.metapathfinder.find_module" title="importlib.abc.MetaPathFinder.find_module"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_module()</span></code></a>, which
+<p><span class="versionmodified changed">Changed in version 3.4: </span>The <a class="reference internal" href="../library/importlib.html#importlib.abc.MetaPathFinder.find_spec" title="importlib.abc.MetaPathFinder.find_spec"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_spec()</span></code></a> method of meta path
+finders replaced <a class="reference internal" href="../library/importlib.html#importlib.abc.MetaPathFinder.find_module" title="importlib.abc.MetaPathFinder.find_module"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_module()</span></code></a>, which
 is now deprecated.  While it will continue to work without change, the
 import machinery will try it only if the finder does not implement
 <code class="docutils literal notranslate"><span class="pre">find_spec()</span></code>.</p>
@@ -413,14 +414,14 @@ not be the one returned at the end of import <a class="footnote-reference bracke
 <div class="versionchanged">
 <p><span class="versionmodified changed">Changed in version 3.4: </span>The import system has taken over the boilerplate responsibilities of
 loaders.  These were previously performed by the
-<a class="reference internal" href="../library/importlib.html#importlib.abc.loader.load_module" title="importlib.abc.Loader.load_module"><code class="xref py py-meth docutils literal notranslate"><span class="pre">importlib.abc.Loader.load_module()</span></code></a> method.</p>
+<a class="reference internal" href="../library/importlib.html#importlib.abc.Loader.load_module" title="importlib.abc.Loader.load_module"><code class="xref py py-meth docutils literal notranslate"><span class="pre">importlib.abc.Loader.load_module()</span></code></a> method.</p>
 </div>
 <div class="section" id="loaders">
 <h3><span class="section-number">5.4.1. </span>Loaders<a class="headerlink" href="#loaders" title="Permalink to this headline">¶</a></h3>
 <p>Module loaders provide the critical function of loading: module execution.
-The import machinery calls the <a class="reference internal" href="../library/importlib.html#importlib.abc.loader.exec_module" title="importlib.abc.Loader.exec_module"><code class="xref py py-meth docutils literal notranslate"><span class="pre">importlib.abc.Loader.exec_module()</span></code></a>
+The import machinery calls the <a class="reference internal" href="../library/importlib.html#importlib.abc.Loader.exec_module" title="importlib.abc.Loader.exec_module"><code class="xref py py-meth docutils literal notranslate"><span class="pre">importlib.abc.Loader.exec_module()</span></code></a>
 method with a single argument, the module object to execute.  Any value
-returned from <a class="reference internal" href="../library/importlib.html#importlib.abc.loader.exec_module" title="importlib.abc.Loader.exec_module"><code class="xref py py-meth docutils literal notranslate"><span class="pre">exec_module()</span></code></a> is ignored.</p>
+returned from <a class="reference internal" href="../library/importlib.html#importlib.abc.Loader.exec_module" title="importlib.abc.Loader.exec_module"><code class="xref py py-meth docutils literal notranslate"><span class="pre">exec_module()</span></code></a> is ignored.</p>
 <p>Loaders must satisfy the following requirements:</p>
 <blockquote>
 <div><ul class="simple">
@@ -428,25 +429,25 @@ returned from <a class="reference internal" href="../library/importlib.html#impo
 dynamically loaded extension), the loader should execute the module’s code
 in the module’s global name space (<code class="docutils literal notranslate"><span class="pre">module.__dict__</span></code>).</p></li>
 <li><p>If the loader cannot execute the module, it should raise an
-<a class="reference internal" href="../library/exceptions.html#importerror" title="ImportError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ImportError</span></code></a>, although any other exception raised during
-<a class="reference internal" href="../library/importlib.html#importlib.abc.loader.exec_module" title="importlib.abc.Loader.exec_module"><code class="xref py py-meth docutils literal notranslate"><span class="pre">exec_module()</span></code></a> will be propagated.</p></li>
+<a class="reference internal" href="../library/exceptions.html#ImportError" title="ImportError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ImportError</span></code></a>, although any other exception raised during
+<a class="reference internal" href="../library/importlib.html#importlib.abc.Loader.exec_module" title="importlib.abc.Loader.exec_module"><code class="xref py py-meth docutils literal notranslate"><span class="pre">exec_module()</span></code></a> will be propagated.</p></li>
 </ul>
 </div></blockquote>
 <p>In many cases, the finder and loader can be the same object; in such cases the
-<a class="reference internal" href="../library/importlib.html#importlib.abc.metapathfinder.find_spec" title="importlib.abc.MetaPathFinder.find_spec"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_spec()</span></code></a> method would just return a
+<a class="reference internal" href="../library/importlib.html#importlib.abc.MetaPathFinder.find_spec" title="importlib.abc.MetaPathFinder.find_spec"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_spec()</span></code></a> method would just return a
 spec with the loader set to <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p>
 <p>Module loaders may opt in to creating the module object during loading
-by implementing a <a class="reference internal" href="../library/importlib.html#importlib.abc.loader.create_module" title="importlib.abc.Loader.create_module"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_module()</span></code></a> method.
+by implementing a <a class="reference internal" href="../library/importlib.html#importlib.abc.Loader.create_module" title="importlib.abc.Loader.create_module"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_module()</span></code></a> method.
 It takes one argument, the module spec, and returns the new module object
 to use during loading.  <code class="docutils literal notranslate"><span class="pre">create_module()</span></code> does not need to set any attributes
 on the module object.  If the method returns <code class="docutils literal notranslate"><span class="pre">None</span></code>, the
 import machinery will create the new module itself.</p>
 <div class="versionadded">
-<p><span class="versionmodified added">New in version 3.4: </span>The <a class="reference internal" href="../library/importlib.html#importlib.abc.loader.create_module" title="importlib.abc.Loader.create_module"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_module()</span></code></a> method of loaders.</p>
+<p><span class="versionmodified added">New in version 3.4: </span>The <a class="reference internal" href="../library/importlib.html#importlib.abc.Loader.create_module" title="importlib.abc.Loader.create_module"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_module()</span></code></a> method of loaders.</p>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 3.4: </span>The <a class="reference internal" href="../library/importlib.html#importlib.abc.loader.load_module" title="importlib.abc.Loader.load_module"><code class="xref py py-meth docutils literal notranslate"><span class="pre">load_module()</span></code></a> method was replaced by
-<a class="reference internal" href="../library/importlib.html#importlib.abc.loader.exec_module" title="importlib.abc.Loader.exec_module"><code class="xref py py-meth docutils literal notranslate"><span class="pre">exec_module()</span></code></a> and the import
+<p><span class="versionmodified changed">Changed in version 3.4: </span>The <a class="reference internal" href="../library/importlib.html#importlib.abc.Loader.load_module" title="importlib.abc.Loader.load_module"><code class="xref py py-meth docutils literal notranslate"><span class="pre">load_module()</span></code></a> method was replaced by
+<a class="reference internal" href="../library/importlib.html#importlib.abc.Loader.exec_module" title="importlib.abc.Loader.exec_module"><code class="xref py py-meth docutils literal notranslate"><span class="pre">exec_module()</span></code></a> and the import
 machinery assumed all the boilerplate responsibilities of loading.</p>
 <p>For compatibility with existing loaders, the import machinery will use
 the <code class="docutils literal notranslate"><span class="pre">load_module()</span></code> method of loaders if it exists and the loader does
@@ -473,11 +474,11 @@ explicitly.</p></li>
 </div></blockquote>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 3.5: </span>A <a class="reference internal" href="../library/exceptions.html#deprecationwarning" title="DeprecationWarning"><code class="xref py py-exc docutils literal notranslate"><span class="pre">DeprecationWarning</span></code></a> is raised when <code class="docutils literal notranslate"><span class="pre">exec_module()</span></code> is defined but
+<p><span class="versionmodified changed">Changed in version 3.5: </span>A <a class="reference internal" href="../library/exceptions.html#DeprecationWarning" title="DeprecationWarning"><code class="xref py py-exc docutils literal notranslate"><span class="pre">DeprecationWarning</span></code></a> is raised when <code class="docutils literal notranslate"><span class="pre">exec_module()</span></code> is defined but
 <code class="docutils literal notranslate"><span class="pre">create_module()</span></code> is not.</p>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 3.6: </span>An <a class="reference internal" href="../library/exceptions.html#importerror" title="ImportError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ImportError</span></code></a> is raised when <code class="docutils literal notranslate"><span class="pre">exec_module()</span></code> is defined but
+<p><span class="versionmodified changed">Changed in version 3.6: </span>An <a class="reference internal" href="../library/exceptions.html#ImportError" title="ImportError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ImportError</span></code></a> is raised when <code class="docutils literal notranslate"><span class="pre">exec_module()</span></code> is defined but
 <code class="docutils literal notranslate"><span class="pre">create_module()</span></code> is not.</p>
 </div>
 </div>
@@ -527,7 +528,7 @@ and the loader that executes it.  Most importantly, it allows the
 import machinery to perform the boilerplate operations of loading,
 whereas without a module spec the loader had that responsibility.</p>
 <p>The module’s spec is exposed as the <code class="docutils literal notranslate"><span class="pre">__spec__</span></code> attribute on a module object.
-See <a class="reference internal" href="../library/importlib.html#importlib.machinery.modulespec" title="importlib.machinery.ModuleSpec"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModuleSpec</span></code></a> for details on the contents of
+See <a class="reference internal" href="../library/importlib.html#importlib.machinery.ModuleSpec" title="importlib.machinery.ModuleSpec"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModuleSpec</span></code></a> for details on the contents of
 the module spec.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.4.</span></p>
@@ -673,12 +674,12 @@ module’s repr.</p></li>
 </ul>
 </div></blockquote>
 <div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 3.4: </span>Use of <a class="reference internal" href="../library/importlib.html#importlib.abc.loader.module_repr" title="importlib.abc.Loader.module_repr"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loader.module_repr()</span></code></a>
+<p><span class="versionmodified changed">Changed in version 3.4: </span>Use of <a class="reference internal" href="../library/importlib.html#importlib.abc.Loader.module_repr" title="importlib.abc.Loader.module_repr"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loader.module_repr()</span></code></a>
 has been deprecated and the module spec is now used by the import
 machinery to generate a module repr.</p>
 <p>For backward compatibility with Python 3.3, the module repr will be
 generated by calling the loader’s
-<a class="reference internal" href="../library/importlib.html#importlib.abc.loader.module_repr" title="importlib.abc.Loader.module_repr"><code class="xref py py-meth docutils literal notranslate"><span class="pre">module_repr()</span></code></a> method, if defined, before
+<a class="reference internal" href="../library/importlib.html#importlib.abc.Loader.module_repr" title="importlib.abc.Loader.module_repr"><code class="xref py py-meth docutils literal notranslate"><span class="pre">module_repr()</span></code></a> method, if defined, before
 trying either approach described above.  However, the method is deprecated.</p>
 </div>
 </div>
@@ -710,7 +711,7 @@ timestamp-based invalidation of bytecode caches.</p>
 <h2><span class="section-number">5.5. </span>The Path Based Finder<a class="headerlink" href="#the-path-based-finder" title="Permalink to this headline">¶</a></h2>
 <p id="index-16">As mentioned previously, Python comes with several default meta path finders.
 One of these, called the <a class="reference internal" href="../glossary.html#term-path-based-finder"><span class="xref std std-term">path based finder</span></a>
-(<a class="reference internal" href="../library/importlib.html#importlib.machinery.pathfinder" title="importlib.machinery.PathFinder"><code class="xref py py-class docutils literal notranslate"><span class="pre">PathFinder</span></code></a>), searches an <a class="reference internal" href="../glossary.html#term-import-path"><span class="xref std std-term">import path</span></a>,
+(<a class="reference internal" href="../library/importlib.html#importlib.machinery.PathFinder" title="importlib.machinery.PathFinder"><code class="xref py py-class docutils literal notranslate"><span class="pre">PathFinder</span></code></a>), searches an <a class="reference internal" href="../glossary.html#term-import-path"><span class="xref std std-term">import path</span></a>,
 which contains a list of <a class="reference internal" href="../glossary.html#term-path-entry"><span class="xref std std-term">path entries</span></a>.  Each path
 entry names a location to search for modules.</p>
 <p>The path based finder itself doesn’t know how to import anything. Instead, it
@@ -750,7 +751,7 @@ Python modules and packages whose location is specified with a string
 <a class="reference internal" href="../glossary.html#term-path-entry"><span class="xref std std-term">path entry</span></a>.  Most path entries name locations in the file system,
 but they need not be limited to this.</p>
 <p>As a meta path finder, the <a class="reference internal" href="../glossary.html#term-path-based-finder"><span class="xref std std-term">path based finder</span></a> implements the
-<a class="reference internal" href="../library/importlib.html#importlib.abc.metapathfinder.find_spec" title="importlib.abc.MetaPathFinder.find_spec"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_spec()</span></code></a> protocol previously
+<a class="reference internal" href="../library/importlib.html#importlib.abc.MetaPathFinder.find_spec" title="importlib.abc.MetaPathFinder.find_spec"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_spec()</span></code></a> protocol previously
 described, however it exposes additional hooks that can be used to
 customize how modules are found and loaded from the <a class="reference internal" href="../glossary.html#term-import-path"><span class="xref std std-term">import path</span></a>.</p>
 <p>Three variables are used by the <a class="reference internal" href="../glossary.html#term-path-based-finder"><span class="xref std std-term">path based finder</span></a>, <a class="reference internal" href="../library/sys.html#sys.path" title="sys.path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a>,
@@ -768,15 +769,15 @@ URLs, or database queries.  Only strings and bytes should be present on
 entries is determined by the individual <a class="reference internal" href="../glossary.html#term-path-entry-finder"><span class="xref std std-term">path entry finders</span></a>.</p>
 <p>The <a class="reference internal" href="../glossary.html#term-path-based-finder"><span class="xref std std-term">path based finder</span></a> is a <a class="reference internal" href="../glossary.html#term-meta-path-finder"><span class="xref std std-term">meta path finder</span></a>, so the import
 machinery begins the <a class="reference internal" href="../glossary.html#term-import-path"><span class="xref std std-term">import path</span></a> search by calling the path
-based finder’s <a class="reference internal" href="../library/importlib.html#importlib.machinery.pathfinder.find_spec" title="importlib.machinery.PathFinder.find_spec"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_spec()</span></code></a> method as
+based finder’s <a class="reference internal" href="../library/importlib.html#importlib.machinery.PathFinder.find_spec" title="importlib.machinery.PathFinder.find_spec"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_spec()</span></code></a> method as
 described previously.  When the <code class="docutils literal notranslate"><span class="pre">path</span></code> argument to
-<a class="reference internal" href="../library/importlib.html#importlib.machinery.pathfinder.find_spec" title="importlib.machinery.PathFinder.find_spec"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_spec()</span></code></a> is given, it will be a
+<a class="reference internal" href="../library/importlib.html#importlib.machinery.PathFinder.find_spec" title="importlib.machinery.PathFinder.find_spec"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_spec()</span></code></a> is given, it will be a
 list of string paths to traverse - typically a package’s <code class="docutils literal notranslate"><span class="pre">__path__</span></code>
 attribute for an import within that package.  If the <code class="docutils literal notranslate"><span class="pre">path</span></code> argument is
 <code class="docutils literal notranslate"><span class="pre">None</span></code>, this indicates a top level import and <a class="reference internal" href="../library/sys.html#sys.path" title="sys.path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a> is used.</p>
 <p>The path based finder iterates over every entry in the search path, and
 for each of these, looks for an appropriate <a class="reference internal" href="../glossary.html#term-path-entry-finder"><span class="xref std std-term">path entry finder</span></a>
-(<a class="reference internal" href="../library/importlib.html#importlib.abc.pathentryfinder" title="importlib.abc.PathEntryFinder"><code class="xref py py-class docutils literal notranslate"><span class="pre">PathEntryFinder</span></code></a>) for the
+(<a class="reference internal" href="../library/importlib.html#importlib.abc.PathEntryFinder" title="importlib.abc.PathEntryFinder"><code class="xref py py-class docutils literal notranslate"><span class="pre">PathEntryFinder</span></code></a>) for the
 path entry.  Because this can be an expensive operation (e.g. there may be
 <cite>stat()</cite> call overheads for this search), the path based finder maintains
 a cache mapping path entries to path entry finders.  This cache is maintained
@@ -791,17 +792,17 @@ over every callable in <a class="reference internal" href="../library/sys.html#s
 hooks</span></a> in this list is called with a single argument, the
 path entry to be searched.  This callable may either return a <a class="reference internal" href="../glossary.html#term-path-entry-finder"><span class="xref std std-term">path
 entry finder</span></a> that can handle the path entry, or it may raise
-<a class="reference internal" href="../library/exceptions.html#importerror" title="ImportError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ImportError</span></code></a>.  An <a class="reference internal" href="../library/exceptions.html#importerror" title="ImportError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ImportError</span></code></a> is used by the path based finder to
+<a class="reference internal" href="../library/exceptions.html#ImportError" title="ImportError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ImportError</span></code></a>.  An <a class="reference internal" href="../library/exceptions.html#ImportError" title="ImportError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ImportError</span></code></a> is used by the path based finder to
 signal that the hook cannot find a <a class="reference internal" href="../glossary.html#term-path-entry-finder"><span class="xref std std-term">path entry finder</span></a>
 for that <a class="reference internal" href="../glossary.html#term-path-entry"><span class="xref std std-term">path entry</span></a>.  The
 exception is ignored and <a class="reference internal" href="../glossary.html#term-import-path"><span class="xref std std-term">import path</span></a> iteration continues.  The hook
 should expect either a string or bytes object; the encoding of bytes objects
 is up to the hook (e.g. it may be a file system encoding, UTF-8, or something
 else), and if the hook cannot decode the argument, it should raise
-<a class="reference internal" href="../library/exceptions.html#importerror" title="ImportError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ImportError</span></code></a>.</p>
+<a class="reference internal" href="../library/exceptions.html#ImportError" title="ImportError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ImportError</span></code></a>.</p>
 <p>If <a class="reference internal" href="../library/sys.html#sys.path_hooks" title="sys.path_hooks"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path_hooks</span></code></a> iteration ends with no <a class="reference internal" href="../glossary.html#term-path-entry-finder"><span class="xref std std-term">path entry finder</span></a>
 being returned, then the path based finder’s
-<a class="reference internal" href="../library/importlib.html#importlib.machinery.pathfinder.find_spec" title="importlib.machinery.PathFinder.find_spec"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_spec()</span></code></a> method will store <code class="docutils literal notranslate"><span class="pre">None</span></code>
+<a class="reference internal" href="../library/importlib.html#importlib.machinery.PathFinder.find_spec" title="importlib.machinery.PathFinder.find_spec"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_spec()</span></code></a> method will store <code class="docutils literal notranslate"><span class="pre">None</span></code>
 in <a class="reference internal" href="../library/sys.html#sys.path_importer_cache" title="sys.path_importer_cache"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path_importer_cache</span></code></a> (to indicate that there is no finder for
 this path entry) and return <code class="docutils literal notranslate"><span class="pre">None</span></code>, indicating that this
 <a class="reference internal" href="../glossary.html#term-meta-path-finder"><span class="xref std std-term">meta path finder</span></a> could not find the module.</p>
@@ -815,15 +816,15 @@ current working directory is found to not exist, no value is stored in
 <a class="reference internal" href="../library/sys.html#sys.path_importer_cache" title="sys.path_importer_cache"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path_importer_cache</span></code></a>. Second, the value for the current working
 directory is looked up fresh for each module lookup. Third, the path used for
 <a class="reference internal" href="../library/sys.html#sys.path_importer_cache" title="sys.path_importer_cache"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path_importer_cache</span></code></a> and returned by
-<a class="reference internal" href="../library/importlib.html#importlib.machinery.pathfinder.find_spec" title="importlib.machinery.PathFinder.find_spec"><code class="xref py py-meth docutils literal notranslate"><span class="pre">importlib.machinery.PathFinder.find_spec()</span></code></a> will be the actual current
+<a class="reference internal" href="../library/importlib.html#importlib.machinery.PathFinder.find_spec" title="importlib.machinery.PathFinder.find_spec"><code class="xref py py-meth docutils literal notranslate"><span class="pre">importlib.machinery.PathFinder.find_spec()</span></code></a> will be the actual current
 working directory and not the empty string.</p>
 </div>
 <div class="section" id="path-entry-finder-protocol">
 <h3><span class="section-number">5.5.2. </span>Path entry finder protocol<a class="headerlink" href="#path-entry-finder-protocol" title="Permalink to this headline">¶</a></h3>
 <p>In order to support imports of modules and initialized packages and also to
 contribute portions to namespace packages, path entry finders must implement
-the <a class="reference internal" href="../library/importlib.html#importlib.abc.pathentryfinder.find_spec" title="importlib.abc.PathEntryFinder.find_spec"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_spec()</span></code></a> method.</p>
-<p><a class="reference internal" href="../library/importlib.html#importlib.abc.pathentryfinder.find_spec" title="importlib.abc.PathEntryFinder.find_spec"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_spec()</span></code></a> takes two arguments: the
+the <a class="reference internal" href="../library/importlib.html#importlib.abc.PathEntryFinder.find_spec" title="importlib.abc.PathEntryFinder.find_spec"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_spec()</span></code></a> method.</p>
+<p><a class="reference internal" href="../library/importlib.html#importlib.abc.PathEntryFinder.find_spec" title="importlib.abc.PathEntryFinder.find_spec"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_spec()</span></code></a> takes two arguments: the
 fully qualified name of the module being imported, and the (optional) target
 module.  <code class="docutils literal notranslate"><span class="pre">find_spec()</span></code> returns a fully populated spec for the module.
 This spec will always have “loader” set (with one exception).</p>
@@ -832,15 +833,15 @@ This spec will always have “loader” set (with one exception).</p>
 <code class="docutils literal notranslate"><span class="pre">None</span></code> and “submodule_search_locations” to a list containing the
 portion.</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 3.4: </span><a class="reference internal" href="../library/importlib.html#importlib.abc.pathentryfinder.find_spec" title="importlib.abc.PathEntryFinder.find_spec"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_spec()</span></code></a> replaced
-<a class="reference internal" href="../library/importlib.html#importlib.abc.pathentryfinder.find_loader" title="importlib.abc.PathEntryFinder.find_loader"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_loader()</span></code></a> and
-<a class="reference internal" href="../library/importlib.html#importlib.abc.pathentryfinder.find_module" title="importlib.abc.PathEntryFinder.find_module"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_module()</span></code></a>, both of which
+<p><span class="versionmodified changed">Changed in version 3.4: </span><a class="reference internal" href="../library/importlib.html#importlib.abc.PathEntryFinder.find_spec" title="importlib.abc.PathEntryFinder.find_spec"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_spec()</span></code></a> replaced
+<a class="reference internal" href="../library/importlib.html#importlib.abc.PathEntryFinder.find_loader" title="importlib.abc.PathEntryFinder.find_loader"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_loader()</span></code></a> and
+<a class="reference internal" href="../library/importlib.html#importlib.abc.PathEntryFinder.find_module" title="importlib.abc.PathEntryFinder.find_module"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_module()</span></code></a>, both of which
 are now deprecated, but will be used if <code class="docutils literal notranslate"><span class="pre">find_spec()</span></code> is not defined.</p>
 <p>Older path entry finders may implement one of these two deprecated methods
 instead of <code class="docutils literal notranslate"><span class="pre">find_spec()</span></code>.  The methods are still respected for the
 sake of backward compatibility.  However, if <code class="docutils literal notranslate"><span class="pre">find_spec()</span></code> is
 implemented on the path entry finder, the legacy methods are ignored.</p>
-<p><a class="reference internal" href="../library/importlib.html#importlib.abc.pathentryfinder.find_loader" title="importlib.abc.PathEntryFinder.find_loader"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_loader()</span></code></a> takes one argument, the
+<p><a class="reference internal" href="../library/importlib.html#importlib.abc.PathEntryFinder.find_loader" title="importlib.abc.PathEntryFinder.find_loader"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_loader()</span></code></a> takes one argument, the
 fully qualified name of the module being imported.  <code class="docutils literal notranslate"><span class="pre">find_loader()</span></code>
 returns a 2-tuple where the first item is the loader and the second item
 is a namespace <a class="reference internal" href="../glossary.html#term-portion"><span class="xref std std-term">portion</span></a>.  When the first item (i.e. the loader) is
@@ -880,8 +881,8 @@ may also be employed at the module level to only alter the behaviour of
 import statements within that module.</p>
 <p>To selectively prevent the import of some modules from a hook early on the
 meta path (rather than disabling the standard import system entirely),
-it is sufficient to raise <a class="reference internal" href="../library/exceptions.html#modulenotfounderror" title="ModuleNotFoundError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ModuleNotFoundError</span></code></a> directly from
-<a class="reference internal" href="../library/importlib.html#importlib.abc.metapathfinder.find_spec" title="importlib.abc.MetaPathFinder.find_spec"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_spec()</span></code></a> instead of returning
+it is sufficient to raise <a class="reference internal" href="../library/exceptions.html#ModuleNotFoundError" title="ModuleNotFoundError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ModuleNotFoundError</span></code></a> directly from
+<a class="reference internal" href="../library/importlib.html#importlib.abc.MetaPathFinder.find_spec" title="importlib.abc.MetaPathFinder.find_spec"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_spec()</span></code></a> instead of returning
 <code class="docutils literal notranslate"><span class="pre">None</span></code>. The latter indicates that the meta path search should continue,
 while raising an exception terminates it immediately.</p>
 </div>
@@ -996,7 +997,7 @@ methods to finders and loaders.</p>
 <p class="rubric">Footnotes</p>
 <dl class="footnote brackets">
 <dt class="label" id="fnmo"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
-<dd><p>See <a class="reference internal" href="../library/types.html#types.moduletype" title="types.ModuleType"><code class="xref py py-class docutils literal notranslate"><span class="pre">types.ModuleType</span></code></a>.</p>
+<dd><p>See <a class="reference internal" href="../library/types.html#types.ModuleType" title="types.ModuleType"><code class="xref py py-class docutils literal notranslate"><span class="pre">types.ModuleType</span></code></a>.</p>
 </dd>
 <dt class="label" id="fnlo"><span class="brackets"><a class="fn-backref" href="#id3">2</a></span></dt>
 <dd><p>The importlib implementation avoids using the return value
@@ -1008,7 +1009,7 @@ Python implementations.</p>
 </dd>
 <dt class="label" id="fnpic"><span class="brackets"><a class="fn-backref" href="#id4">3</a></span></dt>
 <dd><p>In legacy code, it is possible to find instances of
-<a class="reference internal" href="../library/imp.html#imp.nullimporter" title="imp.NullImporter"><code class="xref py py-class docutils literal notranslate"><span class="pre">imp.NullImporter</span></code></a> in the <a class="reference internal" href="../library/sys.html#sys.path_importer_cache" title="sys.path_importer_cache"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path_importer_cache</span></code></a>.  It
+<a class="reference internal" href="../library/imp.html#imp.NullImporter" title="imp.NullImporter"><code class="xref py py-class docutils literal notranslate"><span class="pre">imp.NullImporter</span></code></a> in the <a class="reference internal" href="../library/sys.html#sys.path_importer_cache" title="sys.path_importer_cache"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path_importer_cache</span></code></a>.  It
 is recommended that code be changed to use <code class="docutils literal notranslate"><span class="pre">None</span></code> instead.  See
 <a class="reference internal" href="../whatsnew/3.3.html#portingpythoncode"><span class="std std-ref">Porting Python code</span></a> for more details.</p>
 </dd>
@@ -1112,6 +1113,7 @@ is recommended that code be changed to use <code class="docutils literal notrans
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Language Reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">5. </span>The import system</a></li>
     <li class="right">
         
 
@@ -1126,7 +1128,7 @@ is recommended that code be changed to use <code class="docutils literal notrans
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  

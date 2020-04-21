@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
     <title>struct — Interpret bytes as packed binary data &#8212; Python 3.9.0a4 documentation</title>
@@ -79,6 +79,7 @@
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="binary.html" accesskey="U">Binary Data Services</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">struct</span></code> — Interpret bytes as packed binary data</a></li>
     <li class="right">
         
 
@@ -93,7 +94,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -122,7 +123,7 @@ of the corresponding C struct.  To handle platform-independent data formats
 or omit implicit pad bytes, use <code class="docutils literal notranslate"><span class="pre">standard</span></code> size and alignment instead of
 <code class="docutils literal notranslate"><span class="pre">native</span></code> size and alignment: see <a class="reference internal" href="#struct-alignment"><span class="std std-ref">Byte Order, Size, and Alignment</span></a> for details.</p>
 </div>
-<p>Several <a class="reference internal" href="#module-struct" title="struct: Interpret bytes as packed binary data."><code class="xref py py-mod docutils literal notranslate"><span class="pre">struct</span></code></a> functions (and methods of <a class="reference internal" href="#struct.struct" title="struct.Struct"><code class="xref py py-class docutils literal notranslate"><span class="pre">Struct</span></code></a>) take a <em>buffer</em>
+<p>Several <a class="reference internal" href="#module-struct" title="struct: Interpret bytes as packed binary data."><code class="xref py py-mod docutils literal notranslate"><span class="pre">struct</span></code></a> functions (and methods of <a class="reference internal" href="#struct.Struct" title="struct.Struct"><code class="xref py py-class docutils literal notranslate"><span class="pre">Struct</span></code></a>) take a <em>buffer</em>
 argument.  This refers to objects that implement the <a class="reference internal" href="../c-api/buffer.html#bufferobjects"><span class="std std-ref">Buffer Protocol</span></a> and
 provide either a readable or read-writable buffer.  The most common types used
 for that purpose are <a class="reference internal" href="stdtypes.html#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> and <a class="reference internal" href="stdtypes.html#bytearray" title="bytearray"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytearray</span></code></a>, but many other types
@@ -490,7 +491,7 @@ of bytes.  As a special case, <code class="docutils literal notranslate"><span c
 then <a class="reference internal" href="#struct.error" title="struct.error"><code class="xref py py-exc docutils literal notranslate"><span class="pre">struct.error</span></code></a> is raised.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">Changed in version 3.1: </span>Previously, some of the integer formats wrapped out-of-range values and
-raised <a class="reference internal" href="exceptions.html#deprecationwarning" title="DeprecationWarning"><code class="xref py py-exc docutils literal notranslate"><span class="pre">DeprecationWarning</span></code></a> instead of <a class="reference internal" href="#struct.error" title="struct.error"><code class="xref py py-exc docutils literal notranslate"><span class="pre">struct.error</span></code></a>.</p>
+raised <a class="reference internal" href="exceptions.html#DeprecationWarning" title="DeprecationWarning"><code class="xref py py-exc docutils literal notranslate"><span class="pre">DeprecationWarning</span></code></a> instead of <a class="reference internal" href="#struct.error" title="struct.error"><code class="xref py py-exc docutils literal notranslate"><span class="pre">struct.error</span></code></a>.</p>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">'p'</span></code> format character encodes a “Pascal string”, meaning a short
 variable-length string stored in a <em>fixed number of bytes</em>, given by the count.
@@ -502,8 +503,8 @@ smaller.  The bytes of the string follow.  If the string passed in to
 are used.  Note that for <a class="reference internal" href="#struct.unpack" title="struct.unpack"><code class="xref py py-func docutils literal notranslate"><span class="pre">unpack()</span></code></a>, the <code class="docutils literal notranslate"><span class="pre">'p'</span></code> format character consumes
 <code class="docutils literal notranslate"><span class="pre">count</span></code> bytes, but that the string returned can never contain more than 255
 bytes.</p>
-<p id="index-3">For the <code class="docutils literal notranslate"><span class="pre">'?'</span></code> format character, the return value is either <a class="reference internal" href="constants.html#true" title="True"><code class="xref py py-const docutils literal notranslate"><span class="pre">True</span></code></a> or
-<a class="reference internal" href="constants.html#false" title="False"><code class="xref py py-const docutils literal notranslate"><span class="pre">False</span></code></a>. When packing, the truth value of the argument object is used.
+<p id="index-3">For the <code class="docutils literal notranslate"><span class="pre">'?'</span></code> format character, the return value is either <a class="reference internal" href="constants.html#True" title="True"><code class="xref py py-const docutils literal notranslate"><span class="pre">True</span></code></a> or
+<a class="reference internal" href="constants.html#False" title="False"><code class="xref py py-const docutils literal notranslate"><span class="pre">False</span></code></a>. When packing, the truth value of the argument object is used.
 Either 0 or 1 in the native or standard bool representation will be packed, and
 any non-zero value will be <code class="docutils literal notranslate"><span class="pre">True</span></code> when unpacking.</p>
 </div>
@@ -570,8 +571,8 @@ alignment does not enforce any alignment.</p>
 <span id="struct-objects"></span><h2>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h2>
 <p>The <a class="reference internal" href="#module-struct" title="struct: Interpret bytes as packed binary data."><code class="xref py py-mod docutils literal notranslate"><span class="pre">struct</span></code></a> module also defines the following type:</p>
 <dl class="py class">
-<dt id="struct.struct">
-<span id="struct.Struct"></span><em class="property">class </em><code class="sig-prename descclassname">struct.</code><code class="sig-name descname">Struct</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">format</span></em><span class="sig-paren">)</span><a class="headerlink" href="#struct.struct" title="Permalink to this definition">¶</a></dt>
+<dt id="struct.Struct">
+<em class="property">class </em><code class="sig-prename descclassname">struct.</code><code class="sig-name descname">Struct</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">format</span></em><span class="sig-paren">)</span><a class="headerlink" href="#struct.Struct" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a new Struct object which writes and reads binary data according to
 the format string <em>format</em>.  Creating a Struct object once and calling its
 methods is more efficient than calling the <a class="reference internal" href="#module-struct" title="struct: Interpret bytes as packed binary data."><code class="xref py py-mod docutils literal notranslate"><span class="pre">struct</span></code></a> functions with the
@@ -579,52 +580,52 @@ same format since the format string only needs to be compiled once.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The compiled versions of the most recent format strings passed to
-<a class="reference internal" href="#struct.struct" title="struct.Struct"><code class="xref py py-class docutils literal notranslate"><span class="pre">Struct</span></code></a> and the module-level functions are cached, so programs
+<a class="reference internal" href="#struct.Struct" title="struct.Struct"><code class="xref py py-class docutils literal notranslate"><span class="pre">Struct</span></code></a> and the module-level functions are cached, so programs
 that use only a few format strings needn’t worry about reusing a single
-<a class="reference internal" href="#struct.struct" title="struct.Struct"><code class="xref py py-class docutils literal notranslate"><span class="pre">Struct</span></code></a> instance.</p>
+<a class="reference internal" href="#struct.Struct" title="struct.Struct"><code class="xref py py-class docutils literal notranslate"><span class="pre">Struct</span></code></a> instance.</p>
 </div>
 <p>Compiled Struct objects support the following methods and attributes:</p>
 <dl class="py method">
-<dt id="struct.struct.pack">
-<span id="struct.Struct.pack"></span><code class="sig-name descname">pack</code><span class="sig-paren">(</span><em class="sig-param">v1</em>, <em class="sig-param">v2</em>, <em class="sig-param">...</em><span class="sig-paren">)</span><a class="headerlink" href="#struct.struct.pack" title="Permalink to this definition">¶</a></dt>
+<dt id="struct.Struct.pack">
+<code class="sig-name descname">pack</code><span class="sig-paren">(</span><em class="sig-param">v1</em>, <em class="sig-param">v2</em>, <em class="sig-param">...</em><span class="sig-paren">)</span><a class="headerlink" href="#struct.Struct.pack" title="Permalink to this definition">¶</a></dt>
 <dd><p>Identical to the <a class="reference internal" href="#struct.pack" title="struct.pack"><code class="xref py py-func docutils literal notranslate"><span class="pre">pack()</span></code></a> function, using the compiled format.
-(<code class="docutils literal notranslate"><span class="pre">len(result)</span></code> will equal <a class="reference internal" href="#struct.struct.size" title="struct.Struct.size"><code class="xref py py-attr docutils literal notranslate"><span class="pre">size</span></code></a>.)</p>
+(<code class="docutils literal notranslate"><span class="pre">len(result)</span></code> will equal <a class="reference internal" href="#struct.Struct.size" title="struct.Struct.size"><code class="xref py py-attr docutils literal notranslate"><span class="pre">size</span></code></a>.)</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="struct.struct.pack_into">
-<span id="struct.Struct.pack_into"></span><code class="sig-name descname">pack_into</code><span class="sig-paren">(</span><em class="sig-param">buffer</em>, <em class="sig-param">offset</em>, <em class="sig-param">v1</em>, <em class="sig-param">v2</em>, <em class="sig-param">...</em><span class="sig-paren">)</span><a class="headerlink" href="#struct.struct.pack_into" title="Permalink to this definition">¶</a></dt>
+<dt id="struct.Struct.pack_into">
+<code class="sig-name descname">pack_into</code><span class="sig-paren">(</span><em class="sig-param">buffer</em>, <em class="sig-param">offset</em>, <em class="sig-param">v1</em>, <em class="sig-param">v2</em>, <em class="sig-param">...</em><span class="sig-paren">)</span><a class="headerlink" href="#struct.Struct.pack_into" title="Permalink to this definition">¶</a></dt>
 <dd><p>Identical to the <a class="reference internal" href="#struct.pack_into" title="struct.pack_into"><code class="xref py py-func docutils literal notranslate"><span class="pre">pack_into()</span></code></a> function, using the compiled format.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="struct.struct.unpack">
-<span id="struct.Struct.unpack"></span><code class="sig-name descname">unpack</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">buffer</span></em><span class="sig-paren">)</span><a class="headerlink" href="#struct.struct.unpack" title="Permalink to this definition">¶</a></dt>
+<dt id="struct.Struct.unpack">
+<code class="sig-name descname">unpack</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">buffer</span></em><span class="sig-paren">)</span><a class="headerlink" href="#struct.Struct.unpack" title="Permalink to this definition">¶</a></dt>
 <dd><p>Identical to the <a class="reference internal" href="#struct.unpack" title="struct.unpack"><code class="xref py py-func docutils literal notranslate"><span class="pre">unpack()</span></code></a> function, using the compiled format.
-The buffer’s size in bytes must equal <a class="reference internal" href="#struct.struct.size" title="struct.Struct.size"><code class="xref py py-attr docutils literal notranslate"><span class="pre">size</span></code></a>.</p>
+The buffer’s size in bytes must equal <a class="reference internal" href="#struct.Struct.size" title="struct.Struct.size"><code class="xref py py-attr docutils literal notranslate"><span class="pre">size</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="struct.struct.unpack_from">
-<span id="struct.Struct.unpack_from"></span><code class="sig-name descname">unpack_from</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">buffer</span></em>, <em class="sig-param"><span class="n">offset</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#struct.struct.unpack_from" title="Permalink to this definition">¶</a></dt>
+<dt id="struct.Struct.unpack_from">
+<code class="sig-name descname">unpack_from</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">buffer</span></em>, <em class="sig-param"><span class="n">offset</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#struct.Struct.unpack_from" title="Permalink to this definition">¶</a></dt>
 <dd><p>Identical to the <a class="reference internal" href="#struct.unpack_from" title="struct.unpack_from"><code class="xref py py-func docutils literal notranslate"><span class="pre">unpack_from()</span></code></a> function, using the compiled format.
 The buffer’s size in bytes, starting at position <em>offset</em>, must be at least
-<a class="reference internal" href="#struct.struct.size" title="struct.Struct.size"><code class="xref py py-attr docutils literal notranslate"><span class="pre">size</span></code></a>.</p>
+<a class="reference internal" href="#struct.Struct.size" title="struct.Struct.size"><code class="xref py py-attr docutils literal notranslate"><span class="pre">size</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="struct.struct.iter_unpack">
-<span id="struct.Struct.iter_unpack"></span><code class="sig-name descname">iter_unpack</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">buffer</span></em><span class="sig-paren">)</span><a class="headerlink" href="#struct.struct.iter_unpack" title="Permalink to this definition">¶</a></dt>
+<dt id="struct.Struct.iter_unpack">
+<code class="sig-name descname">iter_unpack</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">buffer</span></em><span class="sig-paren">)</span><a class="headerlink" href="#struct.Struct.iter_unpack" title="Permalink to this definition">¶</a></dt>
 <dd><p>Identical to the <a class="reference internal" href="#struct.iter_unpack" title="struct.iter_unpack"><code class="xref py py-func docutils literal notranslate"><span class="pre">iter_unpack()</span></code></a> function, using the compiled format.
-The buffer’s size in bytes must be a multiple of <a class="reference internal" href="#struct.struct.size" title="struct.Struct.size"><code class="xref py py-attr docutils literal notranslate"><span class="pre">size</span></code></a>.</p>
+The buffer’s size in bytes must be a multiple of <a class="reference internal" href="#struct.Struct.size" title="struct.Struct.size"><code class="xref py py-attr docutils literal notranslate"><span class="pre">size</span></code></a>.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.4.</span></p>
 </div>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="struct.struct.format">
-<span id="struct.Struct.format"></span><code class="sig-name descname">format</code><a class="headerlink" href="#struct.struct.format" title="Permalink to this definition">¶</a></dt>
+<dt id="struct.Struct.format">
+<code class="sig-name descname">format</code><a class="headerlink" href="#struct.Struct.format" title="Permalink to this definition">¶</a></dt>
 <dd><p>The format string used to construct this Struct object.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">Changed in version 3.7: </span>The format string type is now <a class="reference internal" href="stdtypes.html#str" title="str"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> instead of <a class="reference internal" href="stdtypes.html#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a>.</p>
@@ -632,8 +633,8 @@ The buffer’s size in bytes must be a multiple of <a class="reference internal"
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="struct.struct.size">
-<span id="struct.Struct.size"></span><code class="sig-name descname">size</code><a class="headerlink" href="#struct.struct.size" title="Permalink to this definition">¶</a></dt>
+<dt id="struct.Struct.size">
+<code class="sig-name descname">size</code><a class="headerlink" href="#struct.Struct.size" title="Permalink to this definition">¶</a></dt>
 <dd><p>The calculated size of the struct (and hence of the bytes object produced
 by the <a class="reference internal" href="#struct.pack" title="struct.pack"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pack()</span></code></a> method) corresponding to <a class="reference internal" href="functions.html#format" title="format"><code class="xref py py-attr docutils literal notranslate"><span class="pre">format</span></code></a>.</p>
 </dd></dl>
@@ -712,6 +713,7 @@ by the <a class="reference internal" href="#struct.pack" title="struct.pack"><co
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="binary.html" >Binary Data Services</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">struct</span></code> — Interpret bytes as packed binary data</a></li>
     <li class="right">
         
 
@@ -726,7 +728,7 @@ by the <a class="reference internal" href="#struct.pack" title="struct.pack"><co
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  

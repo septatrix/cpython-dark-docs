@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
     <title>marshal — Internal Python object serialization &#8212; Python 3.9.0a4 documentation</title>
@@ -79,6 +79,7 @@
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="persistence.html" accesskey="U">Data Persistence</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">marshal</span></code> — Internal Python object serialization</a></li>
     <li class="right">
         
 
@@ -93,7 +94,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -134,7 +135,7 @@ point numbers, complex numbers, strings, bytes, bytearrays, tuples, lists, sets,
 frozensets, dictionaries, and code objects, where it should be understood that
 tuples, lists, sets, frozensets and dictionaries are only supported as long as
 the values contained therein are themselves supported.  The
-singletons <a class="reference internal" href="constants.html#none" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a>, <a class="reference internal" href="constants.html#ellipsis" title="Ellipsis"><code class="xref py py-const docutils literal notranslate"><span class="pre">Ellipsis</span></code></a> and <a class="reference internal" href="exceptions.html#stopiteration" title="StopIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopIteration</span></code></a> can also be
+singletons <a class="reference internal" href="constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a>, <a class="reference internal" href="constants.html#Ellipsis" title="Ellipsis"><code class="xref py py-const docutils literal notranslate"><span class="pre">Ellipsis</span></code></a> and <a class="reference internal" href="exceptions.html#StopIteration" title="StopIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopIteration</span></code></a> can also be
 marshalled and unmarshalled.
 For format <em>version</em> lower than 3, recursive lists, sets and dictionaries cannot
 be written (see below).</p>
@@ -147,7 +148,7 @@ bytes-like objects.</p>
 <dd><p>Write the value on the open file.  The value must be a supported type.  The
 file must be a writeable <a class="reference internal" href="../glossary.html#term-binary-file"><span class="xref std std-term">binary file</span></a>.</p>
 <p>If the value has (or contains an object that has) an unsupported type, a
-<a class="reference internal" href="exceptions.html#valueerror" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> exception is raised — but garbage data will also be written
+<a class="reference internal" href="exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> exception is raised — but garbage data will also be written
 to the file.  The object will not be properly read back by <a class="reference internal" href="#marshal.load" title="marshal.load"><code class="xref py py-func docutils literal notranslate"><span class="pre">load()</span></code></a>.</p>
 <p>The <em>version</em> argument indicates the data format that <code class="docutils literal notranslate"><span class="pre">dump</span></code> should use
 (see below).</p>
@@ -158,7 +159,7 @@ to the file.  The object will not be properly read back by <a class="reference i
 <code class="sig-prename descclassname">marshal.</code><code class="sig-name descname">load</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">file</span></em><span class="sig-paren">)</span><a class="headerlink" href="#marshal.load" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read one value from the open file and return it.  If no valid value is read
 (e.g. because the data has a different Python version’s incompatible marshal
-format), raise <a class="reference internal" href="exceptions.html#eoferror" title="EOFError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">EOFError</span></code></a>, <a class="reference internal" href="exceptions.html#valueerror" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> or <a class="reference internal" href="exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a>.  The
+format), raise <a class="reference internal" href="exceptions.html#EOFError" title="EOFError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">EOFError</span></code></a>, <a class="reference internal" href="exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> or <a class="reference internal" href="exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a>.  The
 file must be a readable <a class="reference internal" href="../glossary.html#term-binary-file"><span class="xref std std-term">binary file</span></a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -171,7 +172,7 @@ file must be a readable <a class="reference internal" href="../glossary.html#ter
 <dt id="marshal.dumps">
 <code class="sig-prename descclassname">marshal.</code><code class="sig-name descname">dumps</code><span class="sig-paren">(</span><em class="sig-param">value</em><span class="optional">[</span>, <em class="sig-param">version</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#marshal.dumps" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the bytes object that would be written to a file by <code class="docutils literal notranslate"><span class="pre">dump(value,</span> <span class="pre">file)</span></code>.  The
-value must be a supported type.  Raise a <a class="reference internal" href="exceptions.html#valueerror" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> exception if value
+value must be a supported type.  Raise a <a class="reference internal" href="exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> exception if value
 has (or contains an object that has) an unsupported type.</p>
 <p>The <em>version</em> argument indicates the data format that <code class="docutils literal notranslate"><span class="pre">dumps</span></code> should use
 (see below).</p>
@@ -181,7 +182,7 @@ has (or contains an object that has) an unsupported type.</p>
 <dt id="marshal.loads">
 <code class="sig-prename descclassname">marshal.</code><code class="sig-name descname">loads</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bytes</span></em><span class="sig-paren">)</span><a class="headerlink" href="#marshal.loads" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert the <a class="reference internal" href="../glossary.html#term-bytes-like-object"><span class="xref std std-term">bytes-like object</span></a> to a value.  If no valid value is found, raise
-<a class="reference internal" href="exceptions.html#eoferror" title="EOFError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">EOFError</span></code></a>, <a class="reference internal" href="exceptions.html#valueerror" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> or <a class="reference internal" href="exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a>.  Extra bytes in the
+<a class="reference internal" href="exceptions.html#EOFError" title="EOFError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">EOFError</span></code></a>, <a class="reference internal" href="exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> or <a class="reference internal" href="exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a>.  Extra bytes in the
 input are ignored.</p>
 </dd></dl>
 
@@ -262,6 +263,7 @@ and “unmarshalling” for the reverse process.</p>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="persistence.html" >Data Persistence</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">marshal</span></code> — Internal Python object serialization</a></li>
     <li class="right">
         
 
@@ -276,7 +278,7 @@ and “unmarshalling” for the reverse process.</p>
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  

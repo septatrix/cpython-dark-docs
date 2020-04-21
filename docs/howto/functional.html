@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
     <title>Functional Programming HOWTO &#8212; Python 3.9.0a4 documentation</title>
@@ -78,6 +78,7 @@
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python HOWTOs</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Functional Programming HOWTO</a></li>
     <li class="right">
         
 
@@ -92,7 +93,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -261,12 +262,12 @@ foundation for writing functional-style programs: iterators.</p>
 data one element at a time.  A Python iterator must support a method called
 <a class="reference internal" href="../library/stdtypes.html#iterator.__next__" title="iterator.__next__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__next__()</span></code></a> that takes no arguments and always returns the next
 element of the stream.  If there are no more elements in the stream,
-<a class="reference internal" href="../library/stdtypes.html#iterator.__next__" title="iterator.__next__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__next__()</span></code></a> must raise the <a class="reference internal" href="../library/exceptions.html#stopiteration" title="StopIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopIteration</span></code></a> exception.
+<a class="reference internal" href="../library/stdtypes.html#iterator.__next__" title="iterator.__next__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__next__()</span></code></a> must raise the <a class="reference internal" href="../library/exceptions.html#StopIteration" title="StopIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopIteration</span></code></a> exception.
 Iterators don’t have to be finite, though; it’s perfectly reasonable to write
 an iterator that produces an infinite stream of data.</p>
 <p>The built-in <a class="reference internal" href="../library/functions.html#iter" title="iter"><code class="xref py py-func docutils literal notranslate"><span class="pre">iter()</span></code></a> function takes an arbitrary object and tries to return
 an iterator that will return the object’s contents or elements, raising
-<a class="reference internal" href="../library/exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> if the object doesn’t support iteration.  Several of Python’s
+<a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> if the object doesn’t support iteration.  Several of Python’s
 built-in data types support iteration, the most common being lists and
 dictionaries.  An object is called <a class="reference internal" href="../glossary.html#term-iterable"><span class="xref std std-term">iterable</span></a> if you can get an iterator
 for it.</p>
@@ -370,7 +371,7 @@ of <code class="docutils literal notranslate"><span class="pre">(key,</span> <sp
 <span class="go">{&#39;Italy&#39;: &#39;Rome&#39;, &#39;France&#39;: &#39;Paris&#39;, &#39;US&#39;: &#39;Washington DC&#39;}</span>
 </pre></div>
 </div>
-<p>Files also support iteration by calling the <a class="reference internal" href="../library/io.html#io.textiobase.readline" title="io.TextIOBase.readline"><code class="xref py py-meth docutils literal notranslate"><span class="pre">readline()</span></code></a>
+<p>Files also support iteration by calling the <a class="reference internal" href="../library/io.html#io.TextIOBase.readline" title="io.TextIOBase.readline"><code class="xref py py-meth docutils literal notranslate"><span class="pre">readline()</span></code></a>
 method until there are no more lines in the file.  This means you can read each
 line of a file like this:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">file</span><span class="p">:</span>
@@ -632,15 +633,15 @@ generators:</p>
 <li><p><a class="reference internal" href="../reference/expressions.html#generator.throw" title="generator.throw"><code class="xref py py-meth docutils literal notranslate"><span class="pre">throw(type,</span> <span class="pre">value=None,</span> <span class="pre">traceback=None)</span></code></a> is used to
 raise an exception inside the generator; the exception is raised by the
 <code class="docutils literal notranslate"><span class="pre">yield</span></code> expression where the generator’s execution is paused.</p></li>
-<li><p><a class="reference internal" href="../reference/expressions.html#generator.close" title="generator.close"><code class="xref py py-meth docutils literal notranslate"><span class="pre">close()</span></code></a> raises a <a class="reference internal" href="../library/exceptions.html#generatorexit" title="GeneratorExit"><code class="xref py py-exc docutils literal notranslate"><span class="pre">GeneratorExit</span></code></a> exception inside the
+<li><p><a class="reference internal" href="../reference/expressions.html#generator.close" title="generator.close"><code class="xref py py-meth docutils literal notranslate"><span class="pre">close()</span></code></a> raises a <a class="reference internal" href="../library/exceptions.html#GeneratorExit" title="GeneratorExit"><code class="xref py py-exc docutils literal notranslate"><span class="pre">GeneratorExit</span></code></a> exception inside the
 generator to terminate the iteration.  On receiving this exception, the
-generator’s code must either raise <a class="reference internal" href="../library/exceptions.html#generatorexit" title="GeneratorExit"><code class="xref py py-exc docutils literal notranslate"><span class="pre">GeneratorExit</span></code></a> or
-<a class="reference internal" href="../library/exceptions.html#stopiteration" title="StopIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopIteration</span></code></a>; catching the exception and doing anything else is
-illegal and will trigger a <a class="reference internal" href="../library/exceptions.html#runtimeerror" title="RuntimeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RuntimeError</span></code></a>.  <a class="reference internal" href="../reference/expressions.html#generator.close" title="generator.close"><code class="xref py py-meth docutils literal notranslate"><span class="pre">close()</span></code></a>
+generator’s code must either raise <a class="reference internal" href="../library/exceptions.html#GeneratorExit" title="GeneratorExit"><code class="xref py py-exc docutils literal notranslate"><span class="pre">GeneratorExit</span></code></a> or
+<a class="reference internal" href="../library/exceptions.html#StopIteration" title="StopIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopIteration</span></code></a>; catching the exception and doing anything else is
+illegal and will trigger a <a class="reference internal" href="../library/exceptions.html#RuntimeError" title="RuntimeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RuntimeError</span></code></a>.  <a class="reference internal" href="../reference/expressions.html#generator.close" title="generator.close"><code class="xref py py-meth docutils literal notranslate"><span class="pre">close()</span></code></a>
 will also be called by Python’s garbage collector when the generator is
 garbage-collected.</p>
-<p>If you need to run cleanup code when a <a class="reference internal" href="../library/exceptions.html#generatorexit" title="GeneratorExit"><code class="xref py py-exc docutils literal notranslate"><span class="pre">GeneratorExit</span></code></a> occurs, I suggest
-using a <code class="docutils literal notranslate"><span class="pre">try:</span> <span class="pre">...</span> <span class="pre">finally:</span></code> suite instead of catching <a class="reference internal" href="../library/exceptions.html#generatorexit" title="GeneratorExit"><code class="xref py py-exc docutils literal notranslate"><span class="pre">GeneratorExit</span></code></a>.</p>
+<p>If you need to run cleanup code when a <a class="reference internal" href="../library/exceptions.html#GeneratorExit" title="GeneratorExit"><code class="xref py py-exc docutils literal notranslate"><span class="pre">GeneratorExit</span></code></a> occurs, I suggest
+using a <code class="docutils literal notranslate"><span class="pre">try:</span> <span class="pre">...</span> <span class="pre">finally:</span></code> suite instead of catching <a class="reference internal" href="../library/exceptions.html#GeneratorExit" title="GeneratorExit"><code class="xref py py-exc docutils literal notranslate"><span class="pre">GeneratorExit</span></code></a>.</p>
 </li>
 </ul>
 <p>The cumulative effect of these changes is to turn generators from one-way
@@ -1034,7 +1035,7 @@ takes the first two elements A and B returned by the iterator and calculates
 <code class="docutils literal notranslate"><span class="pre">func(A,</span> <span class="pre">B)</span></code>.  It then requests the third element, C, calculates
 <code class="docutils literal notranslate"><span class="pre">func(func(A,</span> <span class="pre">B),</span> <span class="pre">C)</span></code>, combines this result with the fourth element returned,
 and continues until the iterable is exhausted.  If the iterable returns no
-values at all, a <a class="reference internal" href="../library/exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> exception is raised.  If the initial value is
+values at all, a <a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> exception is raised.  If the initial value is
 supplied, it’s used as a starting point and <code class="docutils literal notranslate"><span class="pre">func(initial_value,</span> <span class="pre">A)</span></code> is the
 first calculation.</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">operator</span><span class="o">,</span> <span class="nn">functools</span>
@@ -1328,6 +1329,7 @@ features in Python 2.5.</p>
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python HOWTOs</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Functional Programming HOWTO</a></li>
     <li class="right">
         
 
@@ -1342,7 +1344,7 @@ features in Python 2.5.</p>
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  

@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
     <title>gc — Garbage Collector interface &#8212; Python 3.9.0a4 documentation</title>
@@ -79,6 +79,7 @@
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="python.html" accesskey="U">Python Runtime Services</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">gc</span></code> — Garbage Collector interface</a></li>
     <li class="right">
         
 
@@ -93,7 +94,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -140,7 +141,7 @@ gc.garbage for inspection.</p>
 <code class="sig-prename descclassname">gc.</code><code class="sig-name descname">collect</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">generation</span><span class="o">=</span><span class="default_value">2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gc.collect" title="Permalink to this definition">¶</a></dt>
 <dd><p>With no arguments, run a full collection.  The optional argument <em>generation</em>
 may be an integer specifying which generation to collect (from 0 to 2).  A
-<a class="reference internal" href="exceptions.html#valueerror" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> is raised if the generation number  is invalid. The number of
+<a class="reference internal" href="exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> is raised if the generation number  is invalid. The number of
 unreachable objects found is returned.</p>
 <p>The free lists maintained for a number of built-in types are cleared
 whenever a full collection or collection of the highest generation (2)
@@ -350,12 +351,12 @@ values but should not rebind them):</p>
 not be freed (uncollectable objects).  Starting with Python 3.4, this
 list should be empty most of the time, except when using instances of
 C extension types with a non-<code class="docutils literal notranslate"><span class="pre">NULL</span></code> <code class="docutils literal notranslate"><span class="pre">tp_del</span></code> slot.</p>
-<p>If <a class="reference internal" href="#gc.debug_saveall" title="gc.DEBUG_SAVEALL"><code class="xref py py-const docutils literal notranslate"><span class="pre">DEBUG_SAVEALL</span></code></a> is set, then all unreachable objects will be
+<p>If <a class="reference internal" href="#gc.DEBUG_SAVEALL" title="gc.DEBUG_SAVEALL"><code class="xref py py-const docutils literal notranslate"><span class="pre">DEBUG_SAVEALL</span></code></a> is set, then all unreachable objects will be
 added to this list rather than freed.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">Changed in version 3.2: </span>If this list is non-empty at <a class="reference internal" href="../glossary.html#term-interpreter-shutdown"><span class="xref std std-term">interpreter shutdown</span></a>, a
-<a class="reference internal" href="exceptions.html#resourcewarning" title="ResourceWarning"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ResourceWarning</span></code></a> is emitted, which is silent by default.  If
-<a class="reference internal" href="#gc.debug_uncollectable" title="gc.DEBUG_UNCOLLECTABLE"><code class="xref py py-const docutils literal notranslate"><span class="pre">DEBUG_UNCOLLECTABLE</span></code></a> is set, in addition all uncollectable objects
+<a class="reference internal" href="exceptions.html#ResourceWarning" title="ResourceWarning"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ResourceWarning</span></code></a> is emitted, which is silent by default.  If
+<a class="reference internal" href="#gc.DEBUG_UNCOLLECTABLE" title="gc.DEBUG_UNCOLLECTABLE"><code class="xref py py-const docutils literal notranslate"><span class="pre">DEBUG_UNCOLLECTABLE</span></code></a> is set, in addition all uncollectable objects
 are printed.</p>
 </div>
 <div class="versionchanged">
@@ -400,21 +401,21 @@ types when they appear in <a class="reference internal" href="#gc.garbage" title
 
 <p>The following constants are provided for use with <a class="reference internal" href="#gc.set_debug" title="gc.set_debug"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_debug()</span></code></a>:</p>
 <dl class="py data">
-<dt id="gc.debug_stats">
-<span id="gc.DEBUG_STATS"></span><code class="sig-prename descclassname">gc.</code><code class="sig-name descname">DEBUG_STATS</code><a class="headerlink" href="#gc.debug_stats" title="Permalink to this definition">¶</a></dt>
+<dt id="gc.DEBUG_STATS">
+<code class="sig-prename descclassname">gc.</code><code class="sig-name descname">DEBUG_STATS</code><a class="headerlink" href="#gc.DEBUG_STATS" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print statistics during collection.  This information can be useful when tuning
 the collection frequency.</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="gc.debug_collectable">
-<span id="gc.DEBUG_COLLECTABLE"></span><code class="sig-prename descclassname">gc.</code><code class="sig-name descname">DEBUG_COLLECTABLE</code><a class="headerlink" href="#gc.debug_collectable" title="Permalink to this definition">¶</a></dt>
+<dt id="gc.DEBUG_COLLECTABLE">
+<code class="sig-prename descclassname">gc.</code><code class="sig-name descname">DEBUG_COLLECTABLE</code><a class="headerlink" href="#gc.DEBUG_COLLECTABLE" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print information on collectable objects found.</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="gc.debug_uncollectable">
-<span id="gc.DEBUG_UNCOLLECTABLE"></span><code class="sig-prename descclassname">gc.</code><code class="sig-name descname">DEBUG_UNCOLLECTABLE</code><a class="headerlink" href="#gc.debug_uncollectable" title="Permalink to this definition">¶</a></dt>
+<dt id="gc.DEBUG_UNCOLLECTABLE">
+<code class="sig-prename descclassname">gc.</code><code class="sig-name descname">DEBUG_UNCOLLECTABLE</code><a class="headerlink" href="#gc.DEBUG_UNCOLLECTABLE" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print information of uncollectable objects found (objects which are not
 reachable but cannot be freed by the collector).  These objects will be added
 to the <code class="docutils literal notranslate"><span class="pre">garbage</span></code> list.</p>
@@ -425,15 +426,15 @@ to the <code class="docutils literal notranslate"><span class="pre">garbage</spa
 </dd></dl>
 
 <dl class="py data">
-<dt id="gc.debug_saveall">
-<span id="gc.DEBUG_SAVEALL"></span><code class="sig-prename descclassname">gc.</code><code class="sig-name descname">DEBUG_SAVEALL</code><a class="headerlink" href="#gc.debug_saveall" title="Permalink to this definition">¶</a></dt>
+<dt id="gc.DEBUG_SAVEALL">
+<code class="sig-prename descclassname">gc.</code><code class="sig-name descname">DEBUG_SAVEALL</code><a class="headerlink" href="#gc.DEBUG_SAVEALL" title="Permalink to this definition">¶</a></dt>
 <dd><p>When set, all unreachable objects found will be appended to <em>garbage</em> rather
 than being freed.  This can be useful for debugging a leaking program.</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="gc.debug_leak">
-<span id="gc.DEBUG_LEAK"></span><code class="sig-prename descclassname">gc.</code><code class="sig-name descname">DEBUG_LEAK</code><a class="headerlink" href="#gc.debug_leak" title="Permalink to this definition">¶</a></dt>
+<dt id="gc.DEBUG_LEAK">
+<code class="sig-prename descclassname">gc.</code><code class="sig-name descname">DEBUG_LEAK</code><a class="headerlink" href="#gc.DEBUG_LEAK" title="Permalink to this definition">¶</a></dt>
 <dd><p>The debugging flags necessary for the collector to print information about a
 leaking program (equal to <code class="docutils literal notranslate"><span class="pre">DEBUG_COLLECTABLE</span> <span class="pre">|</span> <span class="pre">DEBUG_UNCOLLECTABLE</span> <span class="pre">|</span>
 <span class="pre">DEBUG_SAVEALL</span></code>).</p>
@@ -495,6 +496,7 @@ leaking program (equal to <code class="docutils literal notranslate"><span class
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="python.html" >Python Runtime Services</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">gc</span></code> — Garbage Collector interface</a></li>
     <li class="right">
         
 
@@ -509,7 +511,7 @@ leaking program (equal to <code class="docutils literal notranslate"><span class
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  

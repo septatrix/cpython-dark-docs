@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
     <title>Platform Support &#8212; Python 3.9.0a4 documentation</title>
@@ -80,6 +80,7 @@
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="ipc.html" >Networking and Interprocess Communication</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="asyncio.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asyncio</span></code> — Asynchronous I/O</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Platform Support</a></li>
     <li class="right">
         
 
@@ -94,7 +95,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -123,19 +124,19 @@ cannot be used to monitor file I/O.</p></li>
 <a class="reference external" href="https://github.com/python/cpython/tree/master/Lib/asyncio/windows_utils.py">Lib/asyncio/windows_utils.py</a></p>
 <hr class="docutils" />
 <div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 3.8: </span>On Windows, <a class="reference internal" href="asyncio-eventloop.html#asyncio.proactoreventloop" title="asyncio.ProactorEventLoop"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProactorEventLoop</span></code></a> is now the default event loop.</p>
+<p><span class="versionmodified changed">Changed in version 3.8: </span>On Windows, <a class="reference internal" href="asyncio-eventloop.html#asyncio.ProactorEventLoop" title="asyncio.ProactorEventLoop"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProactorEventLoop</span></code></a> is now the default event loop.</p>
 </div>
 <p>All event loops on Windows do not support the following methods:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="asyncio-eventloop.html#asyncio.loop.create_unix_connection" title="asyncio.loop.create_unix_connection"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.create_unix_connection()</span></code></a> and
 <a class="reference internal" href="asyncio-eventloop.html#asyncio.loop.create_unix_server" title="asyncio.loop.create_unix_server"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.create_unix_server()</span></code></a> are not supported.
-The <a class="reference internal" href="socket.html#socket.af_unix" title="socket.AF_UNIX"><code class="xref py py-data docutils literal notranslate"><span class="pre">socket.AF_UNIX</span></code></a> socket family is specific to Unix.</p></li>
+The <a class="reference internal" href="socket.html#socket.AF_UNIX" title="socket.AF_UNIX"><code class="xref py py-data docutils literal notranslate"><span class="pre">socket.AF_UNIX</span></code></a> socket family is specific to Unix.</p></li>
 <li><p><a class="reference internal" href="asyncio-eventloop.html#asyncio.loop.add_signal_handler" title="asyncio.loop.add_signal_handler"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.add_signal_handler()</span></code></a> and
 <a class="reference internal" href="asyncio-eventloop.html#asyncio.loop.remove_signal_handler" title="asyncio.loop.remove_signal_handler"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.remove_signal_handler()</span></code></a> are not supported.</p></li>
 </ul>
-<p><a class="reference internal" href="asyncio-eventloop.html#asyncio.selectoreventloop" title="asyncio.SelectorEventLoop"><code class="xref py py-class docutils literal notranslate"><span class="pre">SelectorEventLoop</span></code></a> has the following limitations:</p>
+<p><a class="reference internal" href="asyncio-eventloop.html#asyncio.SelectorEventLoop" title="asyncio.SelectorEventLoop"><code class="xref py py-class docutils literal notranslate"><span class="pre">SelectorEventLoop</span></code></a> has the following limitations:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="selectors.html#selectors.selectselector" title="selectors.SelectSelector"><code class="xref py py-class docutils literal notranslate"><span class="pre">SelectSelector</span></code></a> is used to wait on socket events:
+<li><p><a class="reference internal" href="selectors.html#selectors.SelectSelector" title="selectors.SelectSelector"><code class="xref py py-class docutils literal notranslate"><span class="pre">SelectSelector</span></code></a> is used to wait on socket events:
 it supports sockets and is limited to 512 sockets.</p></li>
 <li><p><a class="reference internal" href="asyncio-eventloop.html#asyncio.loop.add_reader" title="asyncio.loop.add_reader"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.add_reader()</span></code></a> and <a class="reference internal" href="asyncio-eventloop.html#asyncio.loop.add_writer" title="asyncio.loop.add_writer"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.add_writer()</span></code></a> only accept
 socket handles (e.g. pipe file descriptors are not supported).</p></li>
@@ -145,7 +146,7 @@ and <a class="reference internal" href="asyncio-eventloop.html#asyncio.loop.conn
 <a class="reference internal" href="asyncio-eventloop.html#asyncio.loop.subprocess_exec" title="asyncio.loop.subprocess_exec"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.subprocess_exec()</span></code></a> and <a class="reference internal" href="asyncio-eventloop.html#asyncio.loop.subprocess_shell" title="asyncio.loop.subprocess_shell"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.subprocess_shell()</span></code></a>
 methods are not implemented.</p></li>
 </ul>
-<p><a class="reference internal" href="asyncio-eventloop.html#asyncio.proactoreventloop" title="asyncio.ProactorEventLoop"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProactorEventLoop</span></code></a> has the following limitations:</p>
+<p><a class="reference internal" href="asyncio-eventloop.html#asyncio.ProactorEventLoop" title="asyncio.ProactorEventLoop"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProactorEventLoop</span></code></a> has the following limitations:</p>
 <ul class="simple">
 <li><p>The <a class="reference internal" href="asyncio-eventloop.html#asyncio.loop.add_reader" title="asyncio.loop.add_reader"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.add_reader()</span></code></a> and <a class="reference internal" href="asyncio-eventloop.html#asyncio.loop.add_writer" title="asyncio.loop.add_writer"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.add_writer()</span></code></a>
 methods are not supported.</p></li>
@@ -156,10 +157,10 @@ hardware (availability of <a class="reference external" href="https://en.wikiped
 Windows configuration.</p>
 <div class="section" id="subprocess-support-on-windows">
 <span id="asyncio-windows-subprocess"></span><h3>Subprocess Support on Windows<a class="headerlink" href="#subprocess-support-on-windows" title="Permalink to this headline">¶</a></h3>
-<p>On Windows, the default event loop <a class="reference internal" href="asyncio-eventloop.html#asyncio.proactoreventloop" title="asyncio.ProactorEventLoop"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProactorEventLoop</span></code></a> supports
-subprocesses, whereas <a class="reference internal" href="asyncio-eventloop.html#asyncio.selectoreventloop" title="asyncio.SelectorEventLoop"><code class="xref py py-class docutils literal notranslate"><span class="pre">SelectorEventLoop</span></code></a> does not.</p>
-<p>The <a class="reference internal" href="asyncio-policy.html#asyncio.abstracteventlooppolicy.set_child_watcher" title="asyncio.AbstractEventLoopPolicy.set_child_watcher"><code class="xref py py-meth docutils literal notranslate"><span class="pre">policy.set_child_watcher()</span></code></a> function is also
-not supported, as <a class="reference internal" href="asyncio-eventloop.html#asyncio.proactoreventloop" title="asyncio.ProactorEventLoop"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProactorEventLoop</span></code></a> has a different mechanism
+<p>On Windows, the default event loop <a class="reference internal" href="asyncio-eventloop.html#asyncio.ProactorEventLoop" title="asyncio.ProactorEventLoop"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProactorEventLoop</span></code></a> supports
+subprocesses, whereas <a class="reference internal" href="asyncio-eventloop.html#asyncio.SelectorEventLoop" title="asyncio.SelectorEventLoop"><code class="xref py py-class docutils literal notranslate"><span class="pre">SelectorEventLoop</span></code></a> does not.</p>
+<p>The <a class="reference internal" href="asyncio-policy.html#asyncio.AbstractEventLoopPolicy.set_child_watcher" title="asyncio.AbstractEventLoopPolicy.set_child_watcher"><code class="xref py py-meth docutils literal notranslate"><span class="pre">policy.set_child_watcher()</span></code></a> function is also
+not supported, as <a class="reference internal" href="asyncio-eventloop.html#asyncio.ProactorEventLoop" title="asyncio.ProactorEventLoop"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProactorEventLoop</span></code></a> has a different mechanism
 to watch child processes.</p>
 </div>
 </div>
@@ -168,10 +169,10 @@ to watch child processes.</p>
 <p>Modern macOS versions are fully supported.</p>
 <p class="rubric">macOS &lt;= 10.8</p>
 <p>On macOS 10.6, 10.7 and 10.8, the default event loop
-uses <a class="reference internal" href="selectors.html#selectors.kqueueselector" title="selectors.KqueueSelector"><code class="xref py py-class docutils literal notranslate"><span class="pre">selectors.KqueueSelector</span></code></a>, which does not support
-character devices on these versions.  The <a class="reference internal" href="asyncio-eventloop.html#asyncio.selectoreventloop" title="asyncio.SelectorEventLoop"><code class="xref py py-class docutils literal notranslate"><span class="pre">SelectorEventLoop</span></code></a>
-can be manually configured to use <a class="reference internal" href="selectors.html#selectors.selectselector" title="selectors.SelectSelector"><code class="xref py py-class docutils literal notranslate"><span class="pre">SelectSelector</span></code></a>
-or <a class="reference internal" href="selectors.html#selectors.pollselector" title="selectors.PollSelector"><code class="xref py py-class docutils literal notranslate"><span class="pre">PollSelector</span></code></a> to support character devices on
+uses <a class="reference internal" href="selectors.html#selectors.KqueueSelector" title="selectors.KqueueSelector"><code class="xref py py-class docutils literal notranslate"><span class="pre">selectors.KqueueSelector</span></code></a>, which does not support
+character devices on these versions.  The <a class="reference internal" href="asyncio-eventloop.html#asyncio.SelectorEventLoop" title="asyncio.SelectorEventLoop"><code class="xref py py-class docutils literal notranslate"><span class="pre">SelectorEventLoop</span></code></a>
+can be manually configured to use <a class="reference internal" href="selectors.html#selectors.SelectSelector" title="selectors.SelectSelector"><code class="xref py py-class docutils literal notranslate"><span class="pre">SelectSelector</span></code></a>
+or <a class="reference internal" href="selectors.html#selectors.PollSelector" title="selectors.PollSelector"><code class="xref py py-class docutils literal notranslate"><span class="pre">PollSelector</span></code></a> to support character devices on
 these older versions of macOS.  Example:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">asyncio</span>
 <span class="kn">import</span> <span class="nn">selectors</span>
@@ -252,6 +253,7 @@ these older versions of macOS.  Example:</p>
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="ipc.html" >Networking and Interprocess Communication</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="asyncio.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">asyncio</span></code> — Asynchronous I/O</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Platform Support</a></li>
     <li class="right">
         
 
@@ -266,7 +268,7 @@ these older versions of macOS.  Example:</p>
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  

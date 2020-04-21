@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
     <title>Common Object Structures &#8212; Python 3.9.0a4 documentation</title>
@@ -79,6 +79,7 @@
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API Reference Manual</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="objimpl.html" accesskey="U">Object Implementation Support</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Common Object Structures</a></li>
     <li class="right">
         
 
@@ -93,7 +94,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -277,7 +278,7 @@ with signature <code class="xref py py-const docutils literal notranslate"><span
 <dt id="c._PyCFunctionFast">
 <em class="property">type </em><code class="sig-name descname">_PyCFunctionFast</code><a class="headerlink" href="#c._PyCFunctionFast" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Type of the functions used to implement Python callables in C
-with signature <a class="reference internal" href="#meth_fastcall" title="METH_FASTCALL"><code class="xref py py-const docutils literal notranslate"><span class="pre">METH_FASTCALL</span></code></a>.</p>
+with signature <a class="reference internal" href="#METH_FASTCALL" title="METH_FASTCALL"><code class="xref py py-const docutils literal notranslate"><span class="pre">METH_FASTCALL</span></code></a>.</p>
 </dd></dl>
 
 <dl class="c type">
@@ -341,8 +342,8 @@ convention.</p>
 and two of them can be combined with <code class="xref py py-const docutils literal notranslate"><span class="pre">METH_KEYWORDS</span></code> to support
 also keyword arguments.  So there are a total of 6 calling conventions:</p>
 <dl class="py data">
-<dt id="meth_varargs">
-<span id="METH_VARARGS"></span><code class="sig-name descname">METH_VARARGS</code><a class="headerlink" href="#meth_varargs" title="Permalink to this definition">¶</a></dt>
+<dt id="METH_VARARGS">
+<code class="sig-name descname">METH_VARARGS</code><a class="headerlink" href="#METH_VARARGS" title="Permalink to this definition">¶</a></dt>
 <dd><p>This is the typical calling convention, where the methods have the type
 <a class="reference internal" href="#c.PyCFunction" title="PyCFunction"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyCFunction</span></code></a>. The function expects two <code class="xref c c-type docutils literal notranslate"><span class="pre">PyObject*</span></code> values.
 The first one is the <em>self</em> object for methods; for module functions, it is
@@ -362,8 +363,8 @@ using <a class="reference internal" href="arg.html#c.PyArg_ParseTupleAndKeywords
 </dd></dl>
 
 <dl class="py data">
-<dt id="meth_fastcall">
-<span id="METH_FASTCALL"></span><code class="sig-name descname">METH_FASTCALL</code><a class="headerlink" href="#meth_fastcall" title="Permalink to this definition">¶</a></dt>
+<dt id="METH_FASTCALL">
+<code class="sig-name descname">METH_FASTCALL</code><a class="headerlink" href="#METH_FASTCALL" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fast calling convention supporting only positional arguments.
 The methods have the type <a class="reference internal" href="#c._PyCFunctionFast" title="_PyCFunctionFast"><code class="xref c c-type docutils literal notranslate"><span class="pre">_PyCFunctionFast</span></code></a>.
 The first parameter is <em>self</em>, the second parameter is a C array
@@ -378,7 +379,7 @@ parameter is the number of arguments (the length of the array).</p>
 <dl class="py data">
 <dt>
 <code class="sig-name descname">METH_FASTCALL | METH_KEYWORDS</code></dt>
-<dd><p>Extension of <a class="reference internal" href="#meth_fastcall" title="METH_FASTCALL"><code class="xref py py-const docutils literal notranslate"><span class="pre">METH_FASTCALL</span></code></a> supporting also keyword arguments,
+<dd><p>Extension of <a class="reference internal" href="#METH_FASTCALL" title="METH_FASTCALL"><code class="xref py py-const docutils literal notranslate"><span class="pre">METH_FASTCALL</span></code></a> supporting also keyword arguments,
 with methods of type <a class="reference internal" href="#c._PyCFunctionFastWithKeywords" title="_PyCFunctionFastWithKeywords"><code class="xref c c-type docutils literal notranslate"><span class="pre">_PyCFunctionFastWithKeywords</span></code></a>.
 Keyword arguments are passed the same way as in the
 <a class="reference internal" href="call.html#vectorcall"><span class="std std-ref">vectorcall protocol</span></a>:
@@ -394,19 +395,19 @@ arguments are stored in the <em>args</em> array, after the positional arguments.
 </dd></dl>
 
 <dl class="py data">
-<dt id="meth_noargs">
-<span id="METH_NOARGS"></span><code class="sig-name descname">METH_NOARGS</code><a class="headerlink" href="#meth_noargs" title="Permalink to this definition">¶</a></dt>
+<dt id="METH_NOARGS">
+<code class="sig-name descname">METH_NOARGS</code><a class="headerlink" href="#METH_NOARGS" title="Permalink to this definition">¶</a></dt>
 <dd><p>Methods without parameters don’t need to check whether arguments are given if
-they are listed with the <a class="reference internal" href="#meth_noargs" title="METH_NOARGS"><code class="xref py py-const docutils literal notranslate"><span class="pre">METH_NOARGS</span></code></a> flag.  They need to be of type
+they are listed with the <a class="reference internal" href="#METH_NOARGS" title="METH_NOARGS"><code class="xref py py-const docutils literal notranslate"><span class="pre">METH_NOARGS</span></code></a> flag.  They need to be of type
 <a class="reference internal" href="#c.PyCFunction" title="PyCFunction"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyCFunction</span></code></a>.  The first parameter is typically named <em>self</em> and will
 hold a reference to the module or object instance.  In all cases the second
 parameter will be <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="meth_o">
-<span id="METH_O"></span><code class="sig-name descname">METH_O</code><a class="headerlink" href="#meth_o" title="Permalink to this definition">¶</a></dt>
-<dd><p>Methods with a single object argument can be listed with the <a class="reference internal" href="#meth_o" title="METH_O"><code class="xref py py-const docutils literal notranslate"><span class="pre">METH_O</span></code></a>
+<dt id="METH_O">
+<code class="sig-name descname">METH_O</code><a class="headerlink" href="#METH_O" title="Permalink to this definition">¶</a></dt>
+<dd><p>Methods with a single object argument can be listed with the <a class="reference internal" href="#METH_O" title="METH_O"><code class="xref py py-const docutils literal notranslate"><span class="pre">METH_O</span></code></a>
 flag, instead of invoking <a class="reference internal" href="arg.html#c.PyArg_ParseTuple" title="PyArg_ParseTuple"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyArg_ParseTuple()</span></code></a> with a <code class="docutils literal notranslate"><span class="pre">&quot;O&quot;</span></code> argument.
 They have the type <a class="reference internal" href="#c.PyCFunction" title="PyCFunction"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyCFunction</span></code></a>, with the <em>self</em> parameter, and a
 <code class="xref c c-type docutils literal notranslate"><span class="pre">PyObject*</span></code> parameter representing the single argument.</p>
@@ -417,8 +418,8 @@ binding when use with methods of classes.  These may not be used for functions
 defined for modules.  At most one of these flags may be set for any given
 method.</p>
 <dl class="py data">
-<dt id="meth_class">
-<span id="METH_CLASS"></span><code class="sig-name descname">METH_CLASS</code><a class="headerlink" href="#meth_class" title="Permalink to this definition">¶</a></dt>
+<dt id="METH_CLASS">
+<code class="sig-name descname">METH_CLASS</code><a class="headerlink" href="#METH_CLASS" title="Permalink to this definition">¶</a></dt>
 <dd><p id="index-0">The method will be passed the type object as the first parameter rather
 than an instance of the type.  This is used to create <em>class methods</em>,
 similar to what is created when using the <a class="reference internal" href="../library/functions.html#classmethod" title="classmethod"><code class="xref py py-func docutils literal notranslate"><span class="pre">classmethod()</span></code></a> built-in
@@ -426,8 +427,8 @@ function.</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="meth_static">
-<span id="METH_STATIC"></span><code class="sig-name descname">METH_STATIC</code><a class="headerlink" href="#meth_static" title="Permalink to this definition">¶</a></dt>
+<dt id="METH_STATIC">
+<code class="sig-name descname">METH_STATIC</code><a class="headerlink" href="#METH_STATIC" title="Permalink to this definition">¶</a></dt>
 <dd><p id="index-1">The method will be passed <code class="docutils literal notranslate"><span class="pre">NULL</span></code> as the first parameter rather than an
 instance of the type.  This is used to create <em>static methods</em>, similar to
 what is created when using the <a class="reference internal" href="../library/functions.html#staticmethod" title="staticmethod"><code class="xref py py-func docutils literal notranslate"><span class="pre">staticmethod()</span></code></a> built-in function.</p>
@@ -436,8 +437,8 @@ what is created when using the <a class="reference internal" href="../library/fu
 <p>One other constant controls whether a method is loaded in place of another
 definition with the same method name.</p>
 <dl class="py data">
-<dt id="meth_coexist">
-<span id="METH_COEXIST"></span><code class="sig-name descname">METH_COEXIST</code><a class="headerlink" href="#meth_coexist" title="Permalink to this definition">¶</a></dt>
+<dt id="METH_COEXIST">
+<code class="sig-name descname">METH_COEXIST</code><a class="headerlink" href="#METH_COEXIST" title="Permalink to this definition">¶</a></dt>
 <dd><p>The method will be loaded in place of existing definitions.  Without
 <em>METH_COEXIST</em>, the default is to skip repeated definitions.  Since slot
 wrappers are loaded before the method table, the existence of a
@@ -570,7 +571,7 @@ equivalent Python type.</p>
 </table>
 <p><code class="xref c c-macro docutils literal notranslate"><span class="pre">T_OBJECT</span></code> and <code class="xref c c-macro docutils literal notranslate"><span class="pre">T_OBJECT_EX</span></code> differ in that
 <code class="xref c c-macro docutils literal notranslate"><span class="pre">T_OBJECT</span></code> returns <code class="docutils literal notranslate"><span class="pre">None</span></code> if the member is <code class="docutils literal notranslate"><span class="pre">NULL</span></code> and
-<code class="xref c c-macro docutils literal notranslate"><span class="pre">T_OBJECT_EX</span></code> raises an <a class="reference internal" href="../library/exceptions.html#attributeerror" title="AttributeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">AttributeError</span></code></a>.  Try to use
+<code class="xref c c-macro docutils literal notranslate"><span class="pre">T_OBJECT_EX</span></code> raises an <a class="reference internal" href="../library/exceptions.html#AttributeError" title="AttributeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">AttributeError</span></code></a>.  Try to use
 <code class="xref c c-macro docutils literal notranslate"><span class="pre">T_OBJECT_EX</span></code> over <code class="xref c c-macro docutils literal notranslate"><span class="pre">T_OBJECT</span></code> because <code class="xref c c-macro docutils literal notranslate"><span class="pre">T_OBJECT_EX</span></code>
 handles use of the <a class="reference internal" href="../reference/simple_stmts.html#del"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">del</span></code></a> statement on that attribute more correctly
 than <code class="xref c c-macro docutils literal notranslate"><span class="pre">T_OBJECT</span></code>.</p>
@@ -720,6 +721,7 @@ Should return <code class="docutils literal notranslate"><span class="pre">0</sp
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API Reference Manual</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="objimpl.html" >Object Implementation Support</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Common Object Structures</a></li>
     <li class="right">
         
 
@@ -734,7 +736,7 @@ Should return <code class="docutils literal notranslate"><span class="pre">0</sp
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  

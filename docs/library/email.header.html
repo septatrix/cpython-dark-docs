@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
     <title>email.header: Internationalized headers &#8212; Python 3.9.0a4 documentation</title>
@@ -80,6 +80,7 @@
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="netdata.html" >Internet Data Handling</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="email.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">email</span></code> — An email and MIME handling package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">email.header</span></code>: Internationalized headers</a></li>
     <li class="right">
         
 
@@ -94,7 +95,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -110,7 +111,7 @@
 <hr class="docutils" />
 <p>This module is part of the legacy (<code class="docutils literal notranslate"><span class="pre">Compat32</span></code>) email API.  In the current API
 encoding and decoding of headers is handled transparently by the
-dictionary-like API of the <a class="reference internal" href="email.message.html#email.message.emailmessage" title="email.message.EmailMessage"><code class="xref py py-class docutils literal notranslate"><span class="pre">EmailMessage</span></code></a> class.  In
+dictionary-like API of the <a class="reference internal" href="email.message.html#email.message.EmailMessage" title="email.message.EmailMessage"><code class="xref py py-class docutils literal notranslate"><span class="pre">EmailMessage</span></code></a> class.  In
 addition to uses in legacy code, this module can be useful in applications that
 need to completely control the character sets used when encoding headers.</p>
 <p>The remaining text in this section is the original documentation of the module.</p>
@@ -128,9 +129,9 @@ written describing how to encode email containing non-ASCII characters into
 in its <a class="reference internal" href="#module-email.header" title="email.header: Representing non-ASCII headers"><code class="xref py py-mod docutils literal notranslate"><span class="pre">email.header</span></code></a> and <a class="reference internal" href="email.charset.html#module-email.charset" title="email.charset: Character Sets"><code class="xref py py-mod docutils literal notranslate"><span class="pre">email.charset</span></code></a> modules.</p>
 <p>If you want to include non-ASCII characters in your email headers, say in the
 <em class="mailheader">Subject</em> or <em class="mailheader">To</em> fields, you should use the
-<a class="reference internal" href="#email.header.header" title="email.header.Header"><code class="xref py py-class docutils literal notranslate"><span class="pre">Header</span></code></a> class and assign the field in the <a class="reference internal" href="email.compat32-message.html#email.message.message" title="email.message.Message"><code class="xref py py-class docutils literal notranslate"><span class="pre">Message</span></code></a>
-object to an instance of <a class="reference internal" href="#email.header.header" title="email.header.Header"><code class="xref py py-class docutils literal notranslate"><span class="pre">Header</span></code></a> instead of using a string for the header
-value.  Import the <a class="reference internal" href="#email.header.header" title="email.header.Header"><code class="xref py py-class docutils literal notranslate"><span class="pre">Header</span></code></a> class from the <a class="reference internal" href="#module-email.header" title="email.header: Representing non-ASCII headers"><code class="xref py py-mod docutils literal notranslate"><span class="pre">email.header</span></code></a> module.
+<a class="reference internal" href="#email.header.Header" title="email.header.Header"><code class="xref py py-class docutils literal notranslate"><span class="pre">Header</span></code></a> class and assign the field in the <a class="reference internal" href="email.compat32-message.html#email.message.Message" title="email.message.Message"><code class="xref py py-class docutils literal notranslate"><span class="pre">Message</span></code></a>
+object to an instance of <a class="reference internal" href="#email.header.Header" title="email.header.Header"><code class="xref py py-class docutils literal notranslate"><span class="pre">Header</span></code></a> instead of using a string for the header
+value.  Import the <a class="reference internal" href="#email.header.Header" title="email.header.Header"><code class="xref py py-class docutils literal notranslate"><span class="pre">Header</span></code></a> class from the <a class="reference internal" href="#module-email.header" title="email.header: Representing non-ASCII headers"><code class="xref py py-mod docutils literal notranslate"><span class="pre">email.header</span></code></a> module.
 For example:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">email.message</span> <span class="kn">import</span> <span class="n">Message</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">email.header</span> <span class="kn">import</span> <span class="n">Header</span>
@@ -142,27 +143,27 @@ For example:</p>
 </pre></div>
 </div>
 <p>Notice here how we wanted the <em class="mailheader">Subject</em> field to contain a non-ASCII
-character?  We did this by creating a <a class="reference internal" href="#email.header.header" title="email.header.Header"><code class="xref py py-class docutils literal notranslate"><span class="pre">Header</span></code></a> instance and passing in
+character?  We did this by creating a <a class="reference internal" href="#email.header.Header" title="email.header.Header"><code class="xref py py-class docutils literal notranslate"><span class="pre">Header</span></code></a> instance and passing in
 the character set that the byte string was encoded in.  When the subsequent
-<a class="reference internal" href="email.compat32-message.html#email.message.message" title="email.message.Message"><code class="xref py py-class docutils literal notranslate"><span class="pre">Message</span></code></a> instance was flattened, the <em class="mailheader">Subject</em>
+<a class="reference internal" href="email.compat32-message.html#email.message.Message" title="email.message.Message"><code class="xref py py-class docutils literal notranslate"><span class="pre">Message</span></code></a> instance was flattened, the <em class="mailheader">Subject</em>
 field was properly <span class="target" id="index-8"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2047.html"><strong>RFC 2047</strong></a> encoded.  MIME-aware mail readers would show this
 header using the embedded ISO-8859-1 character.</p>
-<p>Here is the <a class="reference internal" href="#email.header.header" title="email.header.Header"><code class="xref py py-class docutils literal notranslate"><span class="pre">Header</span></code></a> class description:</p>
+<p>Here is the <a class="reference internal" href="#email.header.Header" title="email.header.Header"><code class="xref py py-class docutils literal notranslate"><span class="pre">Header</span></code></a> class description:</p>
 <dl class="py class">
-<dt id="email.header.header">
-<span id="email.header.Header"></span><em class="property">class </em><code class="sig-prename descclassname">email.header.</code><code class="sig-name descname">Header</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">charset</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">maxlinelen</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">header_name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">continuation_ws</span><span class="o">=</span><span class="default_value">' '</span></em>, <em class="sig-param"><span class="n">errors</span><span class="o">=</span><span class="default_value">'strict'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#email.header.header" title="Permalink to this definition">¶</a></dt>
+<dt id="email.header.Header">
+<em class="property">class </em><code class="sig-prename descclassname">email.header.</code><code class="sig-name descname">Header</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">charset</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">maxlinelen</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">header_name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">continuation_ws</span><span class="o">=</span><span class="default_value">' '</span></em>, <em class="sig-param"><span class="n">errors</span><span class="o">=</span><span class="default_value">'strict'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#email.header.Header" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a MIME-compliant header that can contain strings in different character
 sets.</p>
 <p>Optional <em>s</em> is the initial header value.  If <code class="docutils literal notranslate"><span class="pre">None</span></code> (the default), the
 initial header value is not set.  You can later append to the header with
-<a class="reference internal" href="#email.header.header.append" title="email.header.Header.append"><code class="xref py py-meth docutils literal notranslate"><span class="pre">append()</span></code></a> method calls.  <em>s</em> may be an instance of <a class="reference internal" href="stdtypes.html#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> or
-<a class="reference internal" href="stdtypes.html#str" title="str"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, but see the <a class="reference internal" href="#email.header.header.append" title="email.header.Header.append"><code class="xref py py-meth docutils literal notranslate"><span class="pre">append()</span></code></a> documentation for semantics.</p>
+<a class="reference internal" href="#email.header.Header.append" title="email.header.Header.append"><code class="xref py py-meth docutils literal notranslate"><span class="pre">append()</span></code></a> method calls.  <em>s</em> may be an instance of <a class="reference internal" href="stdtypes.html#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> or
+<a class="reference internal" href="stdtypes.html#str" title="str"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, but see the <a class="reference internal" href="#email.header.Header.append" title="email.header.Header.append"><code class="xref py py-meth docutils literal notranslate"><span class="pre">append()</span></code></a> documentation for semantics.</p>
 <p>Optional <em>charset</em> serves two purposes: it has the same meaning as the <em>charset</em>
-argument to the <a class="reference internal" href="#email.header.header.append" title="email.header.Header.append"><code class="xref py py-meth docutils literal notranslate"><span class="pre">append()</span></code></a> method.  It also sets the default character set
-for all subsequent <a class="reference internal" href="#email.header.header.append" title="email.header.Header.append"><code class="xref py py-meth docutils literal notranslate"><span class="pre">append()</span></code></a> calls that omit the <em>charset</em> argument.  If
+argument to the <a class="reference internal" href="#email.header.Header.append" title="email.header.Header.append"><code class="xref py py-meth docutils literal notranslate"><span class="pre">append()</span></code></a> method.  It also sets the default character set
+for all subsequent <a class="reference internal" href="#email.header.Header.append" title="email.header.Header.append"><code class="xref py py-meth docutils literal notranslate"><span class="pre">append()</span></code></a> calls that omit the <em>charset</em> argument.  If
 <em>charset</em> is not provided in the constructor (the default), the <code class="docutils literal notranslate"><span class="pre">us-ascii</span></code>
 character set is used both as <em>s</em>’s initial charset and as the default for
-subsequent <a class="reference internal" href="#email.header.header.append" title="email.header.Header.append"><code class="xref py py-meth docutils literal notranslate"><span class="pre">append()</span></code></a> calls.</p>
+subsequent <a class="reference internal" href="#email.header.Header.append" title="email.header.Header.append"><code class="xref py py-meth docutils literal notranslate"><span class="pre">append()</span></code></a> calls.</p>
 <p>The maximum line length can be specified explicitly via <em>maxlinelen</em>.  For
 splitting the first line to a shorter value (to account for the field header
 which isn’t included in <em>s</em>, e.g. <em class="mailheader">Subject</em>) pass in the name of the
@@ -173,19 +174,19 @@ first line of a long, split header.</p>
 whitespace, and is usually either a space or a hard tab character.  This
 character will be prepended to continuation lines.  <em>continuation_ws</em>
 defaults to a single space character.</p>
-<p>Optional <em>errors</em> is passed straight through to the <a class="reference internal" href="#email.header.header.append" title="email.header.Header.append"><code class="xref py py-meth docutils literal notranslate"><span class="pre">append()</span></code></a> method.</p>
+<p>Optional <em>errors</em> is passed straight through to the <a class="reference internal" href="#email.header.Header.append" title="email.header.Header.append"><code class="xref py py-meth docutils literal notranslate"><span class="pre">append()</span></code></a> method.</p>
 <dl class="py method">
-<dt id="email.header.header.append">
-<span id="email.header.Header.append"></span><code class="sig-name descname">append</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span></em>, <em class="sig-param"><span class="n">charset</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">errors</span><span class="o">=</span><span class="default_value">'strict'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#email.header.header.append" title="Permalink to this definition">¶</a></dt>
+<dt id="email.header.Header.append">
+<code class="sig-name descname">append</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span></em>, <em class="sig-param"><span class="n">charset</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">errors</span><span class="o">=</span><span class="default_value">'strict'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#email.header.Header.append" title="Permalink to this definition">¶</a></dt>
 <dd><p>Append the string <em>s</em> to the MIME header.</p>
-<p>Optional <em>charset</em>, if given, should be a <a class="reference internal" href="email.charset.html#email.charset.charset" title="email.charset.Charset"><code class="xref py py-class docutils literal notranslate"><span class="pre">Charset</span></code></a>
+<p>Optional <em>charset</em>, if given, should be a <a class="reference internal" href="email.charset.html#email.charset.Charset" title="email.charset.Charset"><code class="xref py py-class docutils literal notranslate"><span class="pre">Charset</span></code></a>
 instance (see <a class="reference internal" href="email.charset.html#module-email.charset" title="email.charset: Character Sets"><code class="xref py py-mod docutils literal notranslate"><span class="pre">email.charset</span></code></a>) or the name of a character set, which
-will be converted to a <a class="reference internal" href="email.charset.html#email.charset.charset" title="email.charset.Charset"><code class="xref py py-class docutils literal notranslate"><span class="pre">Charset</span></code></a> instance.  A value
+will be converted to a <a class="reference internal" href="email.charset.html#email.charset.Charset" title="email.charset.Charset"><code class="xref py py-class docutils literal notranslate"><span class="pre">Charset</span></code></a> instance.  A value
 of <code class="docutils literal notranslate"><span class="pre">None</span></code> (the default) means that the <em>charset</em> given in the constructor
 is used.</p>
 <p><em>s</em> may be an instance of <a class="reference internal" href="stdtypes.html#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> or <a class="reference internal" href="stdtypes.html#str" title="str"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>.  If it is an
 instance of <a class="reference internal" href="stdtypes.html#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a>, then <em>charset</em> is the encoding of that byte
-string, and a <a class="reference internal" href="exceptions.html#unicodeerror" title="UnicodeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">UnicodeError</span></code></a> will be raised if the string cannot be
+string, and a <a class="reference internal" href="exceptions.html#UnicodeError" title="UnicodeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">UnicodeError</span></code></a> will be raised if the string cannot be
 decoded with that character set.</p>
 <p>If <em>s</em> is an instance of <a class="reference internal" href="stdtypes.html#str" title="str"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, then <em>charset</em> is a hint specifying
 the character set of the characters in the string.</p>
@@ -198,8 +199,8 @@ if <em>s</em> is a byte string.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="email.header.header.encode">
-<span id="email.header.Header.encode"></span><code class="sig-name descname">encode</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">splitchars</span><span class="o">=</span><span class="default_value">';, \\t'</span></em>, <em class="sig-param"><span class="n">maxlinelen</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">linesep</span><span class="o">=</span><span class="default_value">'\\n'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#email.header.header.encode" title="Permalink to this definition">¶</a></dt>
+<dt id="email.header.Header.encode">
+<code class="sig-name descname">encode</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">splitchars</span><span class="o">=</span><span class="default_value">';, \\t'</span></em>, <em class="sig-param"><span class="n">maxlinelen</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">linesep</span><span class="o">=</span><span class="default_value">'\\n'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#email.header.Header.encode" title="Permalink to this definition">¶</a></dt>
 <dd><p>Encode a message header into an RFC-compliant format, possibly wrapping
 long lines and encapsulating non-ASCII parts in base64 or quoted-printable
 encodings.</p>
@@ -223,12 +224,12 @@ to produce headers with RFC-compliant line separators.</p>
 </div>
 </dd></dl>
 
-<p>The <a class="reference internal" href="#email.header.header" title="email.header.Header"><code class="xref py py-class docutils literal notranslate"><span class="pre">Header</span></code></a> class also provides a number of methods to support
+<p>The <a class="reference internal" href="#email.header.Header" title="email.header.Header"><code class="xref py py-class docutils literal notranslate"><span class="pre">Header</span></code></a> class also provides a number of methods to support
 standard operators and built-in functions.</p>
 <dl class="py method">
-<dt id="email.header.header.__str__">
-<span id="email.header.Header.__str__"></span><code class="sig-name descname">__str__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#email.header.header.__str__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns an approximation of the <a class="reference internal" href="#email.header.header" title="email.header.Header"><code class="xref py py-class docutils literal notranslate"><span class="pre">Header</span></code></a> as a string, using an
+<dt id="email.header.Header.__str__">
+<code class="sig-name descname">__str__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#email.header.Header.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an approximation of the <a class="reference internal" href="#email.header.Header" title="email.header.Header"><code class="xref py py-class docutils literal notranslate"><span class="pre">Header</span></code></a> as a string, using an
 unlimited line length.  All pieces are converted to unicode using the
 specified encoding and joined together appropriately.  Any pieces with a
 charset of <code class="docutils literal notranslate"><span class="pre">'unknown-8bit'</span></code> are decoded as ASCII using the <code class="docutils literal notranslate"><span class="pre">'replace'</span></code>
@@ -239,16 +240,16 @@ error handler.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="email.header.header.__eq__">
-<span id="email.header.Header.__eq__"></span><code class="sig-name descname">__eq__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span></em><span class="sig-paren">)</span><a class="headerlink" href="#email.header.header.__eq__" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method allows you to compare two <a class="reference internal" href="#email.header.header" title="email.header.Header"><code class="xref py py-class docutils literal notranslate"><span class="pre">Header</span></code></a> instances for
+<dt id="email.header.Header.__eq__">
+<code class="sig-name descname">__eq__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span></em><span class="sig-paren">)</span><a class="headerlink" href="#email.header.Header.__eq__" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method allows you to compare two <a class="reference internal" href="#email.header.Header" title="email.header.Header"><code class="xref py py-class docutils literal notranslate"><span class="pre">Header</span></code></a> instances for
 equality.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="email.header.header.__ne__">
-<span id="email.header.Header.__ne__"></span><code class="sig-name descname">__ne__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span></em><span class="sig-paren">)</span><a class="headerlink" href="#email.header.header.__ne__" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method allows you to compare two <a class="reference internal" href="#email.header.header" title="email.header.Header"><code class="xref py py-class docutils literal notranslate"><span class="pre">Header</span></code></a> instances for
+<dt id="email.header.Header.__ne__">
+<code class="sig-name descname">__ne__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span></em><span class="sig-paren">)</span><a class="headerlink" href="#email.header.Header.__ne__" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method allows you to compare two <a class="reference internal" href="#email.header.Header" title="email.header.Header"><code class="xref py py-class docutils literal notranslate"><span class="pre">Header</span></code></a> instances for
 inequality.</p>
 </dd></dl>
 
@@ -275,14 +276,14 @@ character set specified in the encoded string.</p>
 <dl class="py function">
 <dt id="email.header.make_header">
 <code class="sig-prename descclassname">email.header.</code><code class="sig-name descname">make_header</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">decoded_seq</span></em>, <em class="sig-param"><span class="n">maxlinelen</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">header_name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">continuation_ws</span><span class="o">=</span><span class="default_value">' '</span></em><span class="sig-paren">)</span><a class="headerlink" href="#email.header.make_header" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a <a class="reference internal" href="#email.header.header" title="email.header.Header"><code class="xref py py-class docutils literal notranslate"><span class="pre">Header</span></code></a> instance from a sequence of pairs as returned by
+<dd><p>Create a <a class="reference internal" href="#email.header.Header" title="email.header.Header"><code class="xref py py-class docutils literal notranslate"><span class="pre">Header</span></code></a> instance from a sequence of pairs as returned by
 <a class="reference internal" href="#email.header.decode_header" title="email.header.decode_header"><code class="xref py py-func docutils literal notranslate"><span class="pre">decode_header()</span></code></a>.</p>
 <p><a class="reference internal" href="#email.header.decode_header" title="email.header.decode_header"><code class="xref py py-func docutils literal notranslate"><span class="pre">decode_header()</span></code></a> takes a header value string and returns a sequence of
 pairs of the format <code class="docutils literal notranslate"><span class="pre">(decoded_string,</span> <span class="pre">charset)</span></code> where <em>charset</em> is the name of
 the character set.</p>
 <p>This function takes one of those sequence of pairs and returns a
-<a class="reference internal" href="#email.header.header" title="email.header.Header"><code class="xref py py-class docutils literal notranslate"><span class="pre">Header</span></code></a> instance.  Optional <em>maxlinelen</em>, <em>header_name</em>, and
-<em>continuation_ws</em> are as in the <a class="reference internal" href="#email.header.header" title="email.header.Header"><code class="xref py py-class docutils literal notranslate"><span class="pre">Header</span></code></a> constructor.</p>
+<a class="reference internal" href="#email.header.Header" title="email.header.Header"><code class="xref py py-class docutils literal notranslate"><span class="pre">Header</span></code></a> instance.  Optional <em>maxlinelen</em>, <em>header_name</em>, and
+<em>continuation_ws</em> are as in the <a class="reference internal" href="#email.header.Header" title="email.header.Header"><code class="xref py py-class docutils literal notranslate"><span class="pre">Header</span></code></a> constructor.</p>
 </dd></dl>
 
 </div>
@@ -342,6 +343,7 @@ the character set.</p>
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="netdata.html" >Internet Data Handling</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="email.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">email</span></code> — An email and MIME handling package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">email.header</span></code>: Internationalized headers</a></li>
     <li class="right">
         
 
@@ -356,7 +358,7 @@ the character set.</p>
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  

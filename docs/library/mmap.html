@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
     <title>mmap — Memory-mapped file support &#8212; Python 3.9.0a4 documentation</title>
@@ -79,6 +79,7 @@
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="ipc.html" accesskey="U">Networking and Interprocess Communication</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">mmap</span></code> — Memory-mapped file support</a></li>
     <li class="right">
         
 
@@ -93,7 +94,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -123,7 +124,7 @@ still needs to be closed when done).</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If you want to create a memory-mapping for a writable, buffered file, you
-should <a class="reference internal" href="io.html#io.iobase.flush" title="io.IOBase.flush"><code class="xref py py-func docutils literal notranslate"><span class="pre">flush()</span></code></a> the file first.  This is necessary to ensure
+should <a class="reference internal" href="io.html#io.IOBase.flush" title="io.IOBase.flush"><code class="xref py py-func docutils literal notranslate"><span class="pre">flush()</span></code></a> the file first.  This is necessary to ensure
 that local modifications to the buffers are actually available to the
 mapping.</p>
 </div>
@@ -135,7 +136,7 @@ specify read-only, write-through or copy-on-write memory respectively, or
 and Windows.  If <em>access</em> is not specified, Windows mmap returns a
 write-through mapping.  The initial memory values for all three access types
 are taken from the specified file.  Assignment to an <code class="xref py py-const docutils literal notranslate"><span class="pre">ACCESS_READ</span></code>
-memory map raises a <a class="reference internal" href="exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> exception.  Assignment to an
+memory map raises a <a class="reference internal" href="exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> exception.  Assignment to an
 <code class="xref py py-const docutils literal notranslate"><span class="pre">ACCESS_WRITE</span></code> memory map affects both memory and the underlying file.
 Assignment to an <code class="xref py py-const docutils literal notranslate"><span class="pre">ACCESS_COPY</span></code> memory map affects memory but does not
 update the underlying file.</p>
@@ -313,7 +314,7 @@ some systems (including Linux), <em>start</em> must be a multiple of the
 <code class="sig-name descname">move</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dest</span></em>, <em class="sig-param"><span class="n">src</span></em>, <em class="sig-param"><span class="n">count</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mmap.mmap.move" title="Permalink to this definition">¶</a></dt>
 <dd><p>Copy the <em>count</em> bytes starting at offset <em>src</em> to the destination index
 <em>dest</em>.  If the mmap was created with <code class="xref py py-const docutils literal notranslate"><span class="pre">ACCESS_READ</span></code>, then calls to
-move will raise a <a class="reference internal" href="exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> exception.</p>
+move will raise a <a class="reference internal" href="exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> exception.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -349,7 +350,7 @@ returned.</p>
 <code class="sig-name descname">resize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">newsize</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mmap.mmap.resize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Resizes the map and the underlying file, if any. If the mmap was created
 with <code class="xref py py-const docutils literal notranslate"><span class="pre">ACCESS_READ</span></code> or <code class="xref py py-const docutils literal notranslate"><span class="pre">ACCESS_COPY</span></code>, resizing the map will
-raise a <a class="reference internal" href="exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> exception.</p>
+raise a <a class="reference internal" href="exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> exception.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -391,10 +392,10 @@ memory-mapped area.</p>
 <code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bytes</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mmap.mmap.write" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write the bytes in <em>bytes</em> into memory at the current position of the
 file pointer and return the number of bytes written (never less than
-<code class="docutils literal notranslate"><span class="pre">len(bytes)</span></code>, since if the write fails, a <a class="reference internal" href="exceptions.html#valueerror" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> will be
+<code class="docutils literal notranslate"><span class="pre">len(bytes)</span></code>, since if the write fails, a <a class="reference internal" href="exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> will be
 raised).  The file position is updated to point after the bytes that
 were written.  If the mmap was created with <code class="xref py py-const docutils literal notranslate"><span class="pre">ACCESS_READ</span></code>, then
-writing to it will raise a <a class="reference internal" href="exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> exception.</p>
+writing to it will raise a <a class="reference internal" href="exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> exception.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">Changed in version 3.5: </span>Writable <a class="reference internal" href="../glossary.html#term-bytes-like-object"><span class="xref std std-term">bytes-like object</span></a> is now accepted.</p>
 </div>
@@ -409,7 +410,7 @@ writing to it will raise a <a class="reference internal" href="exceptions.html#t
 <dd><p>Write the integer <em>byte</em> into memory at the current
 position of the file pointer; the file position is advanced by <code class="docutils literal notranslate"><span class="pre">1</span></code>. If
 the mmap was created with <code class="xref py py-const docutils literal notranslate"><span class="pre">ACCESS_READ</span></code>, then writing to it will
-raise a <a class="reference internal" href="exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> exception.</p>
+raise a <a class="reference internal" href="exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> exception.</p>
 </dd></dl>
 
 </dd></dl>
@@ -417,50 +418,50 @@ raise a <a class="reference internal" href="exceptions.html#typeerror" title="Ty
 <div class="section" id="madv-constants">
 <span id="madvise-constants"></span><h2>MADV_* Constants<a class="headerlink" href="#madv-constants" title="Permalink to this headline">¶</a></h2>
 <dl class="py data">
-<dt id="mmap.madv_normal">
-<span id="mmap.MADV_NORMAL"></span><code class="sig-prename descclassname">mmap.</code><code class="sig-name descname">MADV_NORMAL</code><a class="headerlink" href="#mmap.madv_normal" title="Permalink to this definition">¶</a></dt>
-<dt id="mmap.madv_random">
-<span id="mmap.MADV_RANDOM"></span><code class="sig-prename descclassname">mmap.</code><code class="sig-name descname">MADV_RANDOM</code><a class="headerlink" href="#mmap.madv_random" title="Permalink to this definition">¶</a></dt>
-<dt id="mmap.madv_sequential">
-<span id="mmap.MADV_SEQUENTIAL"></span><code class="sig-prename descclassname">mmap.</code><code class="sig-name descname">MADV_SEQUENTIAL</code><a class="headerlink" href="#mmap.madv_sequential" title="Permalink to this definition">¶</a></dt>
-<dt id="mmap.madv_willneed">
-<span id="mmap.MADV_WILLNEED"></span><code class="sig-prename descclassname">mmap.</code><code class="sig-name descname">MADV_WILLNEED</code><a class="headerlink" href="#mmap.madv_willneed" title="Permalink to this definition">¶</a></dt>
-<dt id="mmap.madv_dontneed">
-<span id="mmap.MADV_DONTNEED"></span><code class="sig-prename descclassname">mmap.</code><code class="sig-name descname">MADV_DONTNEED</code><a class="headerlink" href="#mmap.madv_dontneed" title="Permalink to this definition">¶</a></dt>
-<dt id="mmap.madv_remove">
-<span id="mmap.MADV_REMOVE"></span><code class="sig-prename descclassname">mmap.</code><code class="sig-name descname">MADV_REMOVE</code><a class="headerlink" href="#mmap.madv_remove" title="Permalink to this definition">¶</a></dt>
-<dt id="mmap.madv_dontfork">
-<span id="mmap.MADV_DONTFORK"></span><code class="sig-prename descclassname">mmap.</code><code class="sig-name descname">MADV_DONTFORK</code><a class="headerlink" href="#mmap.madv_dontfork" title="Permalink to this definition">¶</a></dt>
-<dt id="mmap.madv_dofork">
-<span id="mmap.MADV_DOFORK"></span><code class="sig-prename descclassname">mmap.</code><code class="sig-name descname">MADV_DOFORK</code><a class="headerlink" href="#mmap.madv_dofork" title="Permalink to this definition">¶</a></dt>
-<dt id="mmap.madv_hwpoison">
-<span id="mmap.MADV_HWPOISON"></span><code class="sig-prename descclassname">mmap.</code><code class="sig-name descname">MADV_HWPOISON</code><a class="headerlink" href="#mmap.madv_hwpoison" title="Permalink to this definition">¶</a></dt>
-<dt id="mmap.madv_mergeable">
-<span id="mmap.MADV_MERGEABLE"></span><code class="sig-prename descclassname">mmap.</code><code class="sig-name descname">MADV_MERGEABLE</code><a class="headerlink" href="#mmap.madv_mergeable" title="Permalink to this definition">¶</a></dt>
-<dt id="mmap.madv_unmergeable">
-<span id="mmap.MADV_UNMERGEABLE"></span><code class="sig-prename descclassname">mmap.</code><code class="sig-name descname">MADV_UNMERGEABLE</code><a class="headerlink" href="#mmap.madv_unmergeable" title="Permalink to this definition">¶</a></dt>
-<dt id="mmap.madv_soft_offline">
-<span id="mmap.MADV_SOFT_OFFLINE"></span><code class="sig-prename descclassname">mmap.</code><code class="sig-name descname">MADV_SOFT_OFFLINE</code><a class="headerlink" href="#mmap.madv_soft_offline" title="Permalink to this definition">¶</a></dt>
-<dt id="mmap.madv_hugepage">
-<span id="mmap.MADV_HUGEPAGE"></span><code class="sig-prename descclassname">mmap.</code><code class="sig-name descname">MADV_HUGEPAGE</code><a class="headerlink" href="#mmap.madv_hugepage" title="Permalink to this definition">¶</a></dt>
-<dt id="mmap.madv_nohugepage">
-<span id="mmap.MADV_NOHUGEPAGE"></span><code class="sig-prename descclassname">mmap.</code><code class="sig-name descname">MADV_NOHUGEPAGE</code><a class="headerlink" href="#mmap.madv_nohugepage" title="Permalink to this definition">¶</a></dt>
-<dt id="mmap.madv_dontdump">
-<span id="mmap.MADV_DONTDUMP"></span><code class="sig-prename descclassname">mmap.</code><code class="sig-name descname">MADV_DONTDUMP</code><a class="headerlink" href="#mmap.madv_dontdump" title="Permalink to this definition">¶</a></dt>
-<dt id="mmap.madv_dodump">
-<span id="mmap.MADV_DODUMP"></span><code class="sig-prename descclassname">mmap.</code><code class="sig-name descname">MADV_DODUMP</code><a class="headerlink" href="#mmap.madv_dodump" title="Permalink to this definition">¶</a></dt>
-<dt id="mmap.madv_free">
-<span id="mmap.MADV_FREE"></span><code class="sig-prename descclassname">mmap.</code><code class="sig-name descname">MADV_FREE</code><a class="headerlink" href="#mmap.madv_free" title="Permalink to this definition">¶</a></dt>
-<dt id="mmap.madv_nosync">
-<span id="mmap.MADV_NOSYNC"></span><code class="sig-prename descclassname">mmap.</code><code class="sig-name descname">MADV_NOSYNC</code><a class="headerlink" href="#mmap.madv_nosync" title="Permalink to this definition">¶</a></dt>
-<dt id="mmap.madv_autosync">
-<span id="mmap.MADV_AUTOSYNC"></span><code class="sig-prename descclassname">mmap.</code><code class="sig-name descname">MADV_AUTOSYNC</code><a class="headerlink" href="#mmap.madv_autosync" title="Permalink to this definition">¶</a></dt>
-<dt id="mmap.madv_nocore">
-<span id="mmap.MADV_NOCORE"></span><code class="sig-prename descclassname">mmap.</code><code class="sig-name descname">MADV_NOCORE</code><a class="headerlink" href="#mmap.madv_nocore" title="Permalink to this definition">¶</a></dt>
-<dt id="mmap.madv_core">
-<span id="mmap.MADV_CORE"></span><code class="sig-prename descclassname">mmap.</code><code class="sig-name descname">MADV_CORE</code><a class="headerlink" href="#mmap.madv_core" title="Permalink to this definition">¶</a></dt>
-<dt id="mmap.madv_protect">
-<span id="mmap.MADV_PROTECT"></span><code class="sig-prename descclassname">mmap.</code><code class="sig-name descname">MADV_PROTECT</code><a class="headerlink" href="#mmap.madv_protect" title="Permalink to this definition">¶</a></dt>
+<dt id="mmap.MADV_NORMAL">
+<code class="sig-prename descclassname">mmap.</code><code class="sig-name descname">MADV_NORMAL</code><a class="headerlink" href="#mmap.MADV_NORMAL" title="Permalink to this definition">¶</a></dt>
+<dt id="mmap.MADV_RANDOM">
+<code class="sig-prename descclassname">mmap.</code><code class="sig-name descname">MADV_RANDOM</code><a class="headerlink" href="#mmap.MADV_RANDOM" title="Permalink to this definition">¶</a></dt>
+<dt id="mmap.MADV_SEQUENTIAL">
+<code class="sig-prename descclassname">mmap.</code><code class="sig-name descname">MADV_SEQUENTIAL</code><a class="headerlink" href="#mmap.MADV_SEQUENTIAL" title="Permalink to this definition">¶</a></dt>
+<dt id="mmap.MADV_WILLNEED">
+<code class="sig-prename descclassname">mmap.</code><code class="sig-name descname">MADV_WILLNEED</code><a class="headerlink" href="#mmap.MADV_WILLNEED" title="Permalink to this definition">¶</a></dt>
+<dt id="mmap.MADV_DONTNEED">
+<code class="sig-prename descclassname">mmap.</code><code class="sig-name descname">MADV_DONTNEED</code><a class="headerlink" href="#mmap.MADV_DONTNEED" title="Permalink to this definition">¶</a></dt>
+<dt id="mmap.MADV_REMOVE">
+<code class="sig-prename descclassname">mmap.</code><code class="sig-name descname">MADV_REMOVE</code><a class="headerlink" href="#mmap.MADV_REMOVE" title="Permalink to this definition">¶</a></dt>
+<dt id="mmap.MADV_DONTFORK">
+<code class="sig-prename descclassname">mmap.</code><code class="sig-name descname">MADV_DONTFORK</code><a class="headerlink" href="#mmap.MADV_DONTFORK" title="Permalink to this definition">¶</a></dt>
+<dt id="mmap.MADV_DOFORK">
+<code class="sig-prename descclassname">mmap.</code><code class="sig-name descname">MADV_DOFORK</code><a class="headerlink" href="#mmap.MADV_DOFORK" title="Permalink to this definition">¶</a></dt>
+<dt id="mmap.MADV_HWPOISON">
+<code class="sig-prename descclassname">mmap.</code><code class="sig-name descname">MADV_HWPOISON</code><a class="headerlink" href="#mmap.MADV_HWPOISON" title="Permalink to this definition">¶</a></dt>
+<dt id="mmap.MADV_MERGEABLE">
+<code class="sig-prename descclassname">mmap.</code><code class="sig-name descname">MADV_MERGEABLE</code><a class="headerlink" href="#mmap.MADV_MERGEABLE" title="Permalink to this definition">¶</a></dt>
+<dt id="mmap.MADV_UNMERGEABLE">
+<code class="sig-prename descclassname">mmap.</code><code class="sig-name descname">MADV_UNMERGEABLE</code><a class="headerlink" href="#mmap.MADV_UNMERGEABLE" title="Permalink to this definition">¶</a></dt>
+<dt id="mmap.MADV_SOFT_OFFLINE">
+<code class="sig-prename descclassname">mmap.</code><code class="sig-name descname">MADV_SOFT_OFFLINE</code><a class="headerlink" href="#mmap.MADV_SOFT_OFFLINE" title="Permalink to this definition">¶</a></dt>
+<dt id="mmap.MADV_HUGEPAGE">
+<code class="sig-prename descclassname">mmap.</code><code class="sig-name descname">MADV_HUGEPAGE</code><a class="headerlink" href="#mmap.MADV_HUGEPAGE" title="Permalink to this definition">¶</a></dt>
+<dt id="mmap.MADV_NOHUGEPAGE">
+<code class="sig-prename descclassname">mmap.</code><code class="sig-name descname">MADV_NOHUGEPAGE</code><a class="headerlink" href="#mmap.MADV_NOHUGEPAGE" title="Permalink to this definition">¶</a></dt>
+<dt id="mmap.MADV_DONTDUMP">
+<code class="sig-prename descclassname">mmap.</code><code class="sig-name descname">MADV_DONTDUMP</code><a class="headerlink" href="#mmap.MADV_DONTDUMP" title="Permalink to this definition">¶</a></dt>
+<dt id="mmap.MADV_DODUMP">
+<code class="sig-prename descclassname">mmap.</code><code class="sig-name descname">MADV_DODUMP</code><a class="headerlink" href="#mmap.MADV_DODUMP" title="Permalink to this definition">¶</a></dt>
+<dt id="mmap.MADV_FREE">
+<code class="sig-prename descclassname">mmap.</code><code class="sig-name descname">MADV_FREE</code><a class="headerlink" href="#mmap.MADV_FREE" title="Permalink to this definition">¶</a></dt>
+<dt id="mmap.MADV_NOSYNC">
+<code class="sig-prename descclassname">mmap.</code><code class="sig-name descname">MADV_NOSYNC</code><a class="headerlink" href="#mmap.MADV_NOSYNC" title="Permalink to this definition">¶</a></dt>
+<dt id="mmap.MADV_AUTOSYNC">
+<code class="sig-prename descclassname">mmap.</code><code class="sig-name descname">MADV_AUTOSYNC</code><a class="headerlink" href="#mmap.MADV_AUTOSYNC" title="Permalink to this definition">¶</a></dt>
+<dt id="mmap.MADV_NOCORE">
+<code class="sig-prename descclassname">mmap.</code><code class="sig-name descname">MADV_NOCORE</code><a class="headerlink" href="#mmap.MADV_NOCORE" title="Permalink to this definition">¶</a></dt>
+<dt id="mmap.MADV_CORE">
+<code class="sig-prename descclassname">mmap.</code><code class="sig-name descname">MADV_CORE</code><a class="headerlink" href="#mmap.MADV_CORE" title="Permalink to this definition">¶</a></dt>
+<dt id="mmap.MADV_PROTECT">
+<code class="sig-prename descclassname">mmap.</code><code class="sig-name descname">MADV_PROTECT</code><a class="headerlink" href="#mmap.MADV_PROTECT" title="Permalink to this definition">¶</a></dt>
 <dd><p>These options can be passed to <a class="reference internal" href="#mmap.mmap.madvise" title="mmap.mmap.madvise"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mmap.madvise()</span></code></a>.  Not every option will
 be present on every system.</p>
 <p>Availability: Systems with the madvise() system call.</p>
@@ -534,6 +535,7 @@ be present on every system.</p>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="ipc.html" >Networking and Interprocess Communication</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">mmap</span></code> — Memory-mapped file support</a></li>
     <li class="right">
         
 
@@ -548,7 +550,7 @@ be present on every system.</p>
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  

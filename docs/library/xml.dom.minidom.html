@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
     <title>xml.dom.minidom — Minimal DOM implementation &#8212; Python 3.9.0a4 documentation</title>
@@ -79,6 +79,7 @@
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="markup.html" accesskey="U">Structured Markup Processing Tools</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">xml.dom.minidom</span></code> — Minimal DOM implementation</a></li>
     <li class="right">
         
 
@@ -93,7 +94,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -111,7 +112,7 @@
 Model interface, with an API similar to that in other languages.  It is intended
 to be simpler than the full DOM and also significantly smaller.  Users who are
 not already proficient with the DOM should consider using the
-<a class="reference internal" href="xml.etree.elementtree.html#module-xml.etree.elementtree" title="xml.etree.ElementTree: Implementation of the ElementTree API."><code class="xref py py-mod docutils literal notranslate"><span class="pre">xml.etree.ElementTree</span></code></a> module for their XML processing instead.</p>
+<a class="reference internal" href="xml.etree.elementtree.html#module-xml.etree.ElementTree" title="xml.etree.ElementTree: Implementation of the ElementTree API."><code class="xref py py-mod docutils literal notranslate"><span class="pre">xml.etree.ElementTree</span></code></a> module for their XML processing instead.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>The <a class="reference internal" href="#module-xml.dom.minidom" title="xml.dom.minidom: Minimal Document Object Model (DOM) implementation."><code class="xref py py-mod docutils literal notranslate"><span class="pre">xml.dom.minidom</span></code></a> module is not secure against
@@ -141,18 +142,18 @@ activate namespace support; other parser configuration (like setting an entity
 resolver) must have been done in advance.</p>
 </dd></dl>
 
-<p>If you have XML in a string, you can use the <a class="reference internal" href="#xml.dom.minidom.parsestring" title="xml.dom.minidom.parseString"><code class="xref py py-func docutils literal notranslate"><span class="pre">parseString()</span></code></a> function
+<p>If you have XML in a string, you can use the <a class="reference internal" href="#xml.dom.minidom.parseString" title="xml.dom.minidom.parseString"><code class="xref py py-func docutils literal notranslate"><span class="pre">parseString()</span></code></a> function
 instead:</p>
 <dl class="py function">
-<dt id="xml.dom.minidom.parsestring">
-<span id="xml.dom.minidom.parseString"></span><code class="sig-prename descclassname">xml.dom.minidom.</code><code class="sig-name descname">parseString</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">string</span></em>, <em class="sig-param"><span class="n">parser</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#xml.dom.minidom.parsestring" title="Permalink to this definition">¶</a></dt>
+<dt id="xml.dom.minidom.parseString">
+<code class="sig-prename descclassname">xml.dom.minidom.</code><code class="sig-name descname">parseString</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">string</span></em>, <em class="sig-param"><span class="n">parser</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#xml.dom.minidom.parseString" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a <code class="xref py py-class docutils literal notranslate"><span class="pre">Document</span></code> that represents the <em>string</em>. This method creates an
-<a class="reference internal" href="io.html#io.stringio" title="io.StringIO"><code class="xref py py-class docutils literal notranslate"><span class="pre">io.StringIO</span></code></a> object for the string and passes that on to <a class="reference internal" href="#xml.dom.minidom.parse" title="xml.dom.minidom.parse"><code class="xref py py-func docutils literal notranslate"><span class="pre">parse()</span></code></a>.</p>
+<a class="reference internal" href="io.html#io.StringIO" title="io.StringIO"><code class="xref py py-class docutils literal notranslate"><span class="pre">io.StringIO</span></code></a> object for the string and passes that on to <a class="reference internal" href="#xml.dom.minidom.parse" title="xml.dom.minidom.parse"><code class="xref py py-func docutils literal notranslate"><span class="pre">parse()</span></code></a>.</p>
 </dd></dl>
 
 <p>Both functions return a <code class="xref py py-class docutils literal notranslate"><span class="pre">Document</span></code> object representing the content of the
 document.</p>
-<p>What the <a class="reference internal" href="#xml.dom.minidom.parse" title="xml.dom.minidom.parse"><code class="xref py py-func docutils literal notranslate"><span class="pre">parse()</span></code></a> and <a class="reference internal" href="#xml.dom.minidom.parsestring" title="xml.dom.minidom.parseString"><code class="xref py py-func docutils literal notranslate"><span class="pre">parseString()</span></code></a> functions do is connect an XML
+<p>What the <a class="reference internal" href="#xml.dom.minidom.parse" title="xml.dom.minidom.parse"><code class="xref py py-func docutils literal notranslate"><span class="pre">parse()</span></code></a> and <a class="reference internal" href="#xml.dom.minidom.parseString" title="xml.dom.minidom.parseString"><code class="xref py py-func docutils literal notranslate"><span class="pre">parseString()</span></code></a> functions do is connect an XML
 parser with a “DOM builder” that can accept parse events from any SAX parser and
 convert them into a DOM tree.  The name of the functions are perhaps misleading,
 but are easy to grasp when learning the interfaces.  The parsing of the document
@@ -201,8 +202,8 @@ eventually take care of the objects in the tree.</p>
 module documentation.  This section lists the differences between the API and
 <a class="reference internal" href="#module-xml.dom.minidom" title="xml.dom.minidom: Minimal Document Object Model (DOM) implementation."><code class="xref py py-mod docutils literal notranslate"><span class="pre">xml.dom.minidom</span></code></a>.</p>
 <dl class="py method">
-<dt id="xml.dom.minidom.node.unlink">
-<span id="xml.dom.minidom.Node.unlink"></span><code class="sig-prename descclassname">Node.</code><code class="sig-name descname">unlink</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#xml.dom.minidom.node.unlink" title="Permalink to this definition">¶</a></dt>
+<dt id="xml.dom.minidom.Node.unlink">
+<code class="sig-prename descclassname">Node.</code><code class="sig-name descname">unlink</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#xml.dom.minidom.Node.unlink" title="Permalink to this definition">¶</a></dt>
 <dd><p>Break internal references within the DOM so that it will be garbage collected on
 versions of Python without cyclic GC.  Even when cyclic GC is available, using
 this can make large amounts of memory available sooner, so calling this on DOM
@@ -244,8 +245,8 @@ by the user.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="xml.dom.minidom.node.toxml">
-<span id="xml.dom.minidom.Node.toxml"></span><code class="sig-prename descclassname">Node.</code><code class="sig-name descname">toxml</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">encoding</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">standalone</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#xml.dom.minidom.node.toxml" title="Permalink to this definition">¶</a></dt>
+<dt id="xml.dom.minidom.Node.toxml">
+<code class="sig-prename descclassname">Node.</code><code class="sig-name descname">toxml</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">encoding</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">standalone</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#xml.dom.minidom.Node.toxml" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a string or byte string containing the XML represented by
 the DOM node.</p>
 <p>With an explicit <em>encoding</em> <a class="footnote-reference brackets" href="#id3" id="id1">1</a> argument, the result is a byte
@@ -256,7 +257,7 @@ encoding. Encoding this string in an encoding other than UTF-8 is
 likely incorrect, since UTF-8 is the default encoding of XML.</p>
 <p>The <em>standalone</em> argument behaves exactly as in <code class="xref py py-meth docutils literal notranslate"><span class="pre">writexml()</span></code>.</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 3.8: </span>The <a class="reference internal" href="#xml.dom.minidom.node.toxml" title="xml.dom.minidom.Node.toxml"><code class="xref py py-meth docutils literal notranslate"><span class="pre">toxml()</span></code></a> method now preserves the attribute order specified
+<p><span class="versionmodified changed">Changed in version 3.8: </span>The <a class="reference internal" href="#xml.dom.minidom.Node.toxml" title="xml.dom.minidom.Node.toxml"><code class="xref py py-meth docutils literal notranslate"><span class="pre">toxml()</span></code></a> method now preserves the attribute order specified
 by the user.</p>
 </div>
 </dd></dl>
@@ -378,7 +379,7 @@ Values of type <code class="docutils literal notranslate"><span class="pre">DOMS
 <code class="docutils literal notranslate"><span class="pre">xml.dom.minidom.Node.PROCESSING_INSTRUCTION_NODE</span></code>); they must not be changed.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">DOMException</span></code> is currently not supported in <a class="reference internal" href="#module-xml.dom.minidom" title="xml.dom.minidom: Minimal Document Object Model (DOM) implementation."><code class="xref py py-mod docutils literal notranslate"><span class="pre">xml.dom.minidom</span></code></a>.
 Instead, <a class="reference internal" href="#module-xml.dom.minidom" title="xml.dom.minidom: Minimal Document Object Model (DOM) implementation."><code class="xref py py-mod docutils literal notranslate"><span class="pre">xml.dom.minidom</span></code></a> uses standard Python exceptions such as
-<a class="reference internal" href="exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> and <a class="reference internal" href="exceptions.html#attributeerror" title="AttributeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">AttributeError</span></code></a>.</p></li>
+<a class="reference internal" href="exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> and <a class="reference internal" href="exceptions.html#AttributeError" title="AttributeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">AttributeError</span></code></a>.</p></li>
 <li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">NodeList</span></code> objects are implemented using Python’s built-in list type.
 These objects provide the interface defined in the DOM specification, but with
 earlier versions of Python they do not support the official API.  They are,
@@ -470,6 +471,7 @@ and <a class="reference external" href="https://www.iana.org/assignments/charact
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="markup.html" >Structured Markup Processing Tools</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">xml.dom.minidom</span></code> — Minimal DOM implementation</a></li>
     <li class="right">
         
 
@@ -484,7 +486,7 @@ and <a class="reference external" href="https://www.iana.org/assignments/charact
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  

@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
     <title>ctypes — A foreign function library for Python &#8212; Python 3.9.0a4 documentation</title>
@@ -79,6 +79,7 @@
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="allos.html" accesskey="U">Generic Operating System Services</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code> — A foreign function library for Python</a></li>
     <li class="right">
         
 
@@ -93,7 +94,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -127,11 +128,11 @@ loads libraries which export functions using the standard <code class="docutils 
 convention, while <em>windll</em> libraries call functions using the <code class="docutils literal notranslate"><span class="pre">stdcall</span></code>
 calling convention. <em>oledll</em> also uses the <code class="docutils literal notranslate"><span class="pre">stdcall</span></code> calling convention, and
 assumes the functions return a Windows <code class="xref c c-type docutils literal notranslate"><span class="pre">HRESULT</span></code> error code. The error
-code is used to automatically raise an <a class="reference internal" href="exceptions.html#oserror" title="OSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">OSError</span></code></a> exception when the
+code is used to automatically raise an <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">OSError</span></code></a> exception when the
 function call fails.</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 3.3: </span>Windows errors used to raise <a class="reference internal" href="exceptions.html#windowserror" title="WindowsError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">WindowsError</span></code></a>, which is now an alias
-of <a class="reference internal" href="exceptions.html#oserror" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a>.</p>
+<p><span class="versionmodified changed">Changed in version 3.3: </span>Windows errors used to raise <a class="reference internal" href="exceptions.html#WindowsError" title="WindowsError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">WindowsError</span></code></a>, which is now an alias
+of <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a>.</p>
 </div>
 <p>Here are some examples for Windows. Note that <code class="docutils literal notranslate"><span class="pre">msvcrt</span></code> is the MS standard C
 library containing most standard C functions, and uses the cdecl calling
@@ -236,7 +237,7 @@ as the <code class="docutils literal notranslate"><span class="pre">NULL</span><
 <span class="go">&gt;&gt;&gt;</span>
 </pre></div>
 </div>
-<p><a class="reference internal" href="exceptions.html#valueerror" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> is raised when you call an <code class="docutils literal notranslate"><span class="pre">stdcall</span></code> function with the
+<p><a class="reference internal" href="exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> is raised when you call an <code class="docutils literal notranslate"><span class="pre">stdcall</span></code> function with the
 <code class="docutils literal notranslate"><span class="pre">cdecl</span></code> calling convention, or vice versa:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cdll</span><span class="o">.</span><span class="n">kernel32</span><span class="o">.</span><span class="n">GetModuleHandleA</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>  
 <span class="gt">Traceback (most recent call last):</span>
@@ -608,7 +609,7 @@ useful to check for error return values and automatically raise an exception:</p
 <p><code class="docutils literal notranslate"><span class="pre">WinError</span></code> is a function which will call Windows <code class="docutils literal notranslate"><span class="pre">FormatMessage()</span></code> api to
 get the string representation of an error code, and <em>returns</em> an exception.
 <code class="docutils literal notranslate"><span class="pre">WinError</span></code> takes an optional error code parameter, if no one is used, it calls
-<a class="reference internal" href="#ctypes.getlasterror" title="ctypes.GetLastError"><code class="xref py py-func docutils literal notranslate"><span class="pre">GetLastError()</span></code></a> to retrieve it.</p>
+<a class="reference internal" href="#ctypes.GetLastError" title="ctypes.GetLastError"><code class="xref py py-func docutils literal notranslate"><span class="pre">GetLastError()</span></code></a> to retrieve it.</p>
 <p>Please note that a much more powerful error checking mechanism is available
 through the <code class="xref py py-attr docutils literal notranslate"><span class="pre">errcheck</span></code> attribute; see the reference manual for details.</p>
 </div>
@@ -638,7 +639,7 @@ object in Python itself:</p>
 </div>
 <div class="section" id="structures-and-unions">
 <span id="ctypes-structures-unions"></span><h3>Structures and unions<a class="headerlink" href="#structures-and-unions" title="Permalink to this headline">¶</a></h3>
-<p>Structures and unions must derive from the <a class="reference internal" href="#ctypes.structure" title="ctypes.Structure"><code class="xref py py-class docutils literal notranslate"><span class="pre">Structure</span></code></a> and <a class="reference internal" href="#ctypes.union" title="ctypes.Union"><code class="xref py py-class docutils literal notranslate"><span class="pre">Union</span></code></a>
+<p>Structures and unions must derive from the <a class="reference internal" href="#ctypes.Structure" title="ctypes.Structure"><code class="xref py py-class docutils literal notranslate"><span class="pre">Structure</span></code></a> and <a class="reference internal" href="#ctypes.Union" title="ctypes.Union"><code class="xref py py-class docutils literal notranslate"><span class="pre">Union</span></code></a>
 base classes which are defined in the <a class="reference internal" href="#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> module. Each subclass must
 define a <code class="xref py py-attr docutils literal notranslate"><span class="pre">_fields_</span></code> attribute.  <code class="xref py py-attr docutils literal notranslate"><span class="pre">_fields_</span></code> must be a list of
 <em>2-tuples</em>, containing a <em>field name</em> and a <em>field type</em>.</p>
@@ -711,7 +712,7 @@ positive integer and specifies the maximum alignment for the fields. This is
 what <code class="docutils literal notranslate"><span class="pre">#pragma</span> <span class="pre">pack(n)</span></code> also does in MSVC.</p>
 <p><a class="reference internal" href="#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> uses the native byte order for Structures and Unions.  To build
 structures with non-native byte order, you can use one of the
-<a class="reference internal" href="#ctypes.bigendianstructure" title="ctypes.BigEndianStructure"><code class="xref py py-class docutils literal notranslate"><span class="pre">BigEndianStructure</span></code></a>, <a class="reference internal" href="#ctypes.littleendianstructure" title="ctypes.LittleEndianStructure"><code class="xref py py-class docutils literal notranslate"><span class="pre">LittleEndianStructure</span></code></a>,
+<a class="reference internal" href="#ctypes.BigEndianStructure" title="ctypes.BigEndianStructure"><code class="xref py py-class docutils literal notranslate"><span class="pre">BigEndianStructure</span></code></a>, <a class="reference internal" href="#ctypes.LittleEndianStructure" title="ctypes.LittleEndianStructure"><code class="xref py py-class docutils literal notranslate"><span class="pre">LittleEndianStructure</span></code></a>,
 <code class="xref py py-class docutils literal notranslate"><span class="pre">BigEndianUnion</span></code>, and <code class="xref py py-class docutils literal notranslate"><span class="pre">LittleEndianUnion</span></code> base classes.  These
 classes cannot contain pointer fields.</p>
 </div>
@@ -787,7 +788,7 @@ initialized to zeros.</p>
 <span class="go">&gt;&gt;&gt;</span>
 </pre></div>
 </div>
-<p>Pointer instances have a <a class="reference internal" href="#ctypes._pointer.contents" title="ctypes._Pointer.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a> attribute which
+<p>Pointer instances have a <a class="reference internal" href="#ctypes._Pointer.contents" title="ctypes._Pointer.contents"><code class="xref py py-attr docutils literal notranslate"><span class="pre">contents</span></code></a> attribute which
 returns the object to which the pointer points, the <code class="docutils literal notranslate"><span class="pre">i</span></code> object above:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pi</span><span class="o">.</span><span class="n">contents</span>
 <span class="go">c_long(42)</span>
@@ -834,7 +835,7 @@ and you <em>know</em> that the pointer actually points to an array instead of a 
 item.</p>
 <p>Behind the scenes, the <a class="reference internal" href="#ctypes.pointer" title="ctypes.pointer"><code class="xref py py-func docutils literal notranslate"><span class="pre">pointer()</span></code></a> function does more than simply create
 pointer instances, it has to create pointer <em>types</em> first. This is done with the
-<a class="reference internal" href="#ctypes.pointer" title="ctypes.POINTER"><code class="xref py py-func docutils literal notranslate"><span class="pre">POINTER()</span></code></a> function, which accepts any <a class="reference internal" href="#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> type, and returns a
+<a class="reference internal" href="#ctypes.POINTER" title="ctypes.POINTER"><code class="xref py py-func docutils literal notranslate"><span class="pre">POINTER()</span></code></a> function, which accepts any <a class="reference internal" href="#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> type, and returns a
 new type:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">PI</span> <span class="o">=</span> <span class="n">POINTER</span><span class="p">(</span><span class="n">c_int</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">PI</span>
@@ -1001,8 +1002,8 @@ These are sometimes called <em>callback functions</em>.</p>
 <p>First, you must create a class for the callback function. The class knows the
 calling convention, the return type, and the number and types of arguments this
 function will receive.</p>
-<p>The <a class="reference internal" href="#ctypes.cfunctype" title="ctypes.CFUNCTYPE"><code class="xref py py-func docutils literal notranslate"><span class="pre">CFUNCTYPE()</span></code></a> factory function creates types for callback functions
-using the <code class="docutils literal notranslate"><span class="pre">cdecl</span></code> calling convention. On Windows, the <a class="reference internal" href="#ctypes.winfunctype" title="ctypes.WINFUNCTYPE"><code class="xref py py-func docutils literal notranslate"><span class="pre">WINFUNCTYPE()</span></code></a>
+<p>The <a class="reference internal" href="#ctypes.CFUNCTYPE" title="ctypes.CFUNCTYPE"><code class="xref py py-func docutils literal notranslate"><span class="pre">CFUNCTYPE()</span></code></a> factory function creates types for callback functions
+using the <code class="docutils literal notranslate"><span class="pre">cdecl</span></code> calling convention. On Windows, the <a class="reference internal" href="#ctypes.WINFUNCTYPE" title="ctypes.WINFUNCTYPE"><code class="xref py py-func docutils literal notranslate"><span class="pre">WINFUNCTYPE()</span></code></a>
 factory function creates types for callback functions using the <code class="docutils literal notranslate"><span class="pre">stdcall</span></code>
 calling convention.</p>
 <p>Both of these factory functions are called with the result type as first
@@ -1089,7 +1090,7 @@ write:</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Make sure you keep references to <a class="reference internal" href="#ctypes.cfunctype" title="ctypes.CFUNCTYPE"><code class="xref py py-func docutils literal notranslate"><span class="pre">CFUNCTYPE()</span></code></a> objects as long as they
+<p>Make sure you keep references to <a class="reference internal" href="#ctypes.CFUNCTYPE" title="ctypes.CFUNCTYPE"><code class="xref py py-func docutils literal notranslate"><span class="pre">CFUNCTYPE()</span></code></a> objects as long as they
 are used from C code. <a class="reference internal" href="#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> doesn’t, and if you don’t, they may be
 garbage collected, crashing your program when a callback is made.</p>
 <p>Also, note that if the callback function is called in a thread created
@@ -1104,7 +1105,7 @@ those calls are made from the same C thread.</p>
 <span id="ctypes-accessing-values-exported-from-dlls"></span><h3>Accessing values exported from dlls<a class="headerlink" href="#accessing-values-exported-from-dlls" title="Permalink to this headline">¶</a></h3>
 <p>Some shared libraries not only export functions, they also export variables. An
 example in the Python library itself is the <code class="xref c c-data docutils literal notranslate"><span class="pre">Py_OptimizeFlag</span></code>, an integer
-set to 0, 1, or 2, depending on the <a class="reference internal" href="../using/cmdline.html#cmdoption-o"><code class="xref std std-option docutils literal notranslate"><span class="pre">-O</span></code></a> or <a class="reference internal" href="../using/cmdline.html#cmdoption-oo"><code class="xref std std-option docutils literal notranslate"><span class="pre">-OO</span></code></a> flag given on
+set to 0, 1, or 2, depending on the <a class="reference internal" href="../using/cmdline.html#cmdoption-O"><code class="xref std std-option docutils literal notranslate"><span class="pre">-O</span></code></a> or <a class="reference internal" href="../using/cmdline.html#cmdoption-OO"><code class="xref std std-option docutils literal notranslate"><span class="pre">-OO</span></code></a> flag given on
 startup.</p>
 <p><a class="reference internal" href="#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> can access values like this with the <code class="xref py py-meth docutils literal notranslate"><span class="pre">in_dll()</span></code> class methods of
 the type.  <em>pythonapi</em> is a predefined symbol giving access to the Python C
@@ -1115,8 +1116,8 @@ api:</p>
 <span class="go">&gt;&gt;&gt;</span>
 </pre></div>
 </div>
-<p>If the interpreter would have been started with <a class="reference internal" href="../using/cmdline.html#cmdoption-o"><code class="xref std std-option docutils literal notranslate"><span class="pre">-O</span></code></a>, the sample would
-have printed <code class="docutils literal notranslate"><span class="pre">c_long(1)</span></code>, or <code class="docutils literal notranslate"><span class="pre">c_long(2)</span></code> if <a class="reference internal" href="../using/cmdline.html#cmdoption-oo"><code class="xref std std-option docutils literal notranslate"><span class="pre">-OO</span></code></a> would have been
+<p>If the interpreter would have been started with <a class="reference internal" href="../using/cmdline.html#cmdoption-O"><code class="xref std std-option docutils literal notranslate"><span class="pre">-O</span></code></a>, the sample would
+have printed <code class="docutils literal notranslate"><span class="pre">c_long(1)</span></code>, or <code class="docutils literal notranslate"><span class="pre">c_long(2)</span></code> if <a class="reference internal" href="../using/cmdline.html#cmdoption-OO"><code class="xref std std-option docutils literal notranslate"><span class="pre">-OO</span></code></a> would have been
 specified.</p>
 <p>An extended example which also demonstrates the use of pointers accesses the
 <a class="reference internal" href="../c-api/import.html#c.PyImport_FrozenModules" title="PyImport_FrozenModules"><code class="xref c c-data docutils literal notranslate"><span class="pre">PyImport_FrozenModules</span></code></a> pointer exported by Python.</p>
@@ -1236,7 +1237,7 @@ constructs a new Python object each time!</p>
 existing ctypes object.  The function takes the object as first argument, and
 the requested size in bytes as the second argument.  The memory block cannot be
 made smaller than the natural memory block specified by the objects type, a
-<a class="reference internal" href="exceptions.html#valueerror" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> is raised if this is tried:</p>
+<a class="reference internal" href="exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> is raised if this is tried:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">short_array</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_short</span> <span class="o">*</span> <span class="mi">4</span><span class="p">)()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">sizeof</span><span class="p">(</span><span class="n">short_array</span><span class="p">))</span>
 <span class="go">8</span>
@@ -1336,44 +1337,44 @@ module instead of using <code class="xref py py-func docutils literal notranslat
 <p>There are several ways to load shared libraries into the Python process.  One
 way is to instantiate one of the following classes:</p>
 <dl class="py class">
-<dt id="ctypes.cdll">
-<span id="ctypes.CDLL"></span><em class="property">class </em><code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">CDLL</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">DEFAULT_MODE</span></em>, <em class="sig-param"><span class="n">handle</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">use_errno</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">use_last_error</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">winmode</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.cdll" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes.CDLL">
+<em class="property">class </em><code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">CDLL</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">DEFAULT_MODE</span></em>, <em class="sig-param"><span class="n">handle</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">use_errno</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">use_last_error</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">winmode</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.CDLL" title="Permalink to this definition">¶</a></dt>
 <dd><p>Instances of this class represent loaded shared libraries. Functions in these
 libraries use the standard C calling convention, and are assumed to return
 <code class="xref c c-type docutils literal notranslate"><span class="pre">int</span></code>.</p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="ctypes.oledll">
-<span id="ctypes.OleDLL"></span><em class="property">class </em><code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">OleDLL</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">DEFAULT_MODE</span></em>, <em class="sig-param"><span class="n">handle</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">use_errno</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">use_last_error</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">winmode</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.oledll" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes.OleDLL">
+<em class="property">class </em><code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">OleDLL</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">DEFAULT_MODE</span></em>, <em class="sig-param"><span class="n">handle</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">use_errno</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">use_last_error</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">winmode</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.OleDLL" title="Permalink to this definition">¶</a></dt>
 <dd><p>Windows only: Instances of this class represent loaded shared libraries,
 functions in these libraries use the <code class="docutils literal notranslate"><span class="pre">stdcall</span></code> calling convention, and are
-assumed to return the windows specific <a class="reference internal" href="#ctypes.hresult" title="ctypes.HRESULT"><code class="xref py py-class docutils literal notranslate"><span class="pre">HRESULT</span></code></a> code.  <a class="reference internal" href="#ctypes.hresult" title="ctypes.HRESULT"><code class="xref py py-class docutils literal notranslate"><span class="pre">HRESULT</span></code></a>
+assumed to return the windows specific <a class="reference internal" href="#ctypes.HRESULT" title="ctypes.HRESULT"><code class="xref py py-class docutils literal notranslate"><span class="pre">HRESULT</span></code></a> code.  <a class="reference internal" href="#ctypes.HRESULT" title="ctypes.HRESULT"><code class="xref py py-class docutils literal notranslate"><span class="pre">HRESULT</span></code></a>
 values contain information specifying whether the function call failed or
 succeeded, together with additional error code.  If the return value signals a
-failure, an <a class="reference internal" href="exceptions.html#oserror" title="OSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">OSError</span></code></a> is automatically raised.</p>
+failure, an <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">OSError</span></code></a> is automatically raised.</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 3.3: </span><a class="reference internal" href="exceptions.html#windowserror" title="WindowsError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">WindowsError</span></code></a> used to be raised.</p>
+<p><span class="versionmodified changed">Changed in version 3.3: </span><a class="reference internal" href="exceptions.html#WindowsError" title="WindowsError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">WindowsError</span></code></a> used to be raised.</p>
 </div>
 </dd></dl>
 
 <dl class="py class">
-<dt id="ctypes.windll">
-<span id="ctypes.WinDLL"></span><em class="property">class </em><code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">WinDLL</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">DEFAULT_MODE</span></em>, <em class="sig-param"><span class="n">handle</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">use_errno</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">use_last_error</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">winmode</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.windll" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes.WinDLL">
+<em class="property">class </em><code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">WinDLL</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">DEFAULT_MODE</span></em>, <em class="sig-param"><span class="n">handle</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">use_errno</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">use_last_error</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">winmode</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.WinDLL" title="Permalink to this definition">¶</a></dt>
 <dd><p>Windows only: Instances of this class represent loaded shared libraries,
 functions in these libraries use the <code class="docutils literal notranslate"><span class="pre">stdcall</span></code> calling convention, and are
 assumed to return <code class="xref c c-type docutils literal notranslate"><span class="pre">int</span></code> by default.</p>
 <p>On Windows CE only the standard calling convention is used, for convenience the
-<a class="reference internal" href="#ctypes.windll" title="ctypes.WinDLL"><code class="xref py py-class docutils literal notranslate"><span class="pre">WinDLL</span></code></a> and <a class="reference internal" href="#ctypes.oledll" title="ctypes.OleDLL"><code class="xref py py-class docutils literal notranslate"><span class="pre">OleDLL</span></code></a> use the standard calling convention on this
+<a class="reference internal" href="#ctypes.WinDLL" title="ctypes.WinDLL"><code class="xref py py-class docutils literal notranslate"><span class="pre">WinDLL</span></code></a> and <a class="reference internal" href="#ctypes.OleDLL" title="ctypes.OleDLL"><code class="xref py py-class docutils literal notranslate"><span class="pre">OleDLL</span></code></a> use the standard calling convention on this
 platform.</p>
 </dd></dl>
 
 <p>The Python <a class="reference internal" href="../glossary.html#term-global-interpreter-lock"><span class="xref std std-term">global interpreter lock</span></a> is released before calling any
 function exported by these libraries, and reacquired afterwards.</p>
 <dl class="py class">
-<dt id="ctypes.pydll">
-<span id="ctypes.PyDLL"></span><em class="property">class </em><code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">PyDLL</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">DEFAULT_MODE</span></em>, <em class="sig-param"><span class="n">handle</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.pydll" title="Permalink to this definition">¶</a></dt>
-<dd><p>Instances of this class behave like <a class="reference internal" href="#ctypes.cdll" title="ctypes.CDLL"><code class="xref py py-class docutils literal notranslate"><span class="pre">CDLL</span></code></a> instances, except that the
+<dt id="ctypes.PyDLL">
+<em class="property">class </em><code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">PyDLL</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">DEFAULT_MODE</span></em>, <em class="sig-param"><span class="n">handle</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.PyDLL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instances of this class behave like <a class="reference internal" href="#ctypes.CDLL" title="ctypes.CDLL"><code class="xref py py-class docutils literal notranslate"><span class="pre">CDLL</span></code></a> instances, except that the
 Python GIL is <em>not</em> released during the function call, and after the function
 execution the Python error flag is checked. If the error flag is set, a Python
 exception is raised.</p>
@@ -1400,7 +1401,7 @@ copy, the same happens immediately after the function call.</p>
 copy, and the function <a class="reference internal" href="#ctypes.set_errno" title="ctypes.set_errno"><code class="xref py py-func docutils literal notranslate"><span class="pre">ctypes.set_errno()</span></code></a> changes the ctypes private copy
 to a new value and returns the former value.</p>
 <p>The <em>use_last_error</em> parameter, when set to true, enables the same mechanism for
-the Windows error code which is managed by the <a class="reference internal" href="#ctypes.getlasterror" title="ctypes.GetLastError"><code class="xref py py-func docutils literal notranslate"><span class="pre">GetLastError()</span></code></a> and
+the Windows error code which is managed by the <a class="reference internal" href="#ctypes.GetLastError" title="ctypes.GetLastError"><code class="xref py py-func docutils literal notranslate"><span class="pre">GetLastError()</span></code></a> and
 <code class="xref py py-func docutils literal notranslate"><span class="pre">SetLastError()</span></code> Windows API functions; <a class="reference internal" href="#ctypes.get_last_error" title="ctypes.get_last_error"><code class="xref py py-func docutils literal notranslate"><span class="pre">ctypes.get_last_error()</span></code></a> and
 <a class="reference internal" href="#ctypes.set_last_error" title="ctypes.set_last_error"><code class="xref py py-func docutils literal notranslate"><span class="pre">ctypes.set_last_error()</span></code></a> are used to request and change the ctypes private
 copy of the windows error code.</p>
@@ -1450,32 +1451,32 @@ accessing it through an index returns a new object each time:</p>
 <p>The following public attributes are available, their name starts with an
 underscore to not clash with exported function names:</p>
 <dl class="py attribute">
-<dt id="ctypes.pydll._handle">
-<span id="ctypes.PyDLL._handle"></span><code class="sig-prename descclassname">PyDLL.</code><code class="sig-name descname">_handle</code><a class="headerlink" href="#ctypes.pydll._handle" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes.PyDLL._handle">
+<code class="sig-prename descclassname">PyDLL.</code><code class="sig-name descname">_handle</code><a class="headerlink" href="#ctypes.PyDLL._handle" title="Permalink to this definition">¶</a></dt>
 <dd><p>The system handle used to access the library.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="ctypes.pydll._name">
-<span id="ctypes.PyDLL._name"></span><code class="sig-prename descclassname">PyDLL.</code><code class="sig-name descname">_name</code><a class="headerlink" href="#ctypes.pydll._name" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes.PyDLL._name">
+<code class="sig-prename descclassname">PyDLL.</code><code class="sig-name descname">_name</code><a class="headerlink" href="#ctypes.PyDLL._name" title="Permalink to this definition">¶</a></dt>
 <dd><p>The name of the library passed in the constructor.</p>
 </dd></dl>
 
 <p>Shared libraries can also be loaded by using one of the prefabricated objects,
-which are instances of the <a class="reference internal" href="#ctypes.libraryloader" title="ctypes.LibraryLoader"><code class="xref py py-class docutils literal notranslate"><span class="pre">LibraryLoader</span></code></a> class, either by calling the
+which are instances of the <a class="reference internal" href="#ctypes.LibraryLoader" title="ctypes.LibraryLoader"><code class="xref py py-class docutils literal notranslate"><span class="pre">LibraryLoader</span></code></a> class, either by calling the
 <code class="xref py py-meth docutils literal notranslate"><span class="pre">LoadLibrary()</span></code> method, or by retrieving the library as attribute of the
 loader instance.</p>
 <dl class="py class">
-<dt id="ctypes.libraryloader">
-<span id="ctypes.LibraryLoader"></span><em class="property">class </em><code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">LibraryLoader</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dlltype</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.libraryloader" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes.LibraryLoader">
+<em class="property">class </em><code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">LibraryLoader</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dlltype</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.LibraryLoader" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class which loads shared libraries.  <em>dlltype</em> should be one of the
-<a class="reference internal" href="#ctypes.cdll" title="ctypes.CDLL"><code class="xref py py-class docutils literal notranslate"><span class="pre">CDLL</span></code></a>, <a class="reference internal" href="#ctypes.pydll" title="ctypes.PyDLL"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyDLL</span></code></a>, <a class="reference internal" href="#ctypes.windll" title="ctypes.WinDLL"><code class="xref py py-class docutils literal notranslate"><span class="pre">WinDLL</span></code></a>, or <a class="reference internal" href="#ctypes.oledll" title="ctypes.OleDLL"><code class="xref py py-class docutils literal notranslate"><span class="pre">OleDLL</span></code></a> types.</p>
+<a class="reference internal" href="#ctypes.CDLL" title="ctypes.CDLL"><code class="xref py py-class docutils literal notranslate"><span class="pre">CDLL</span></code></a>, <a class="reference internal" href="#ctypes.PyDLL" title="ctypes.PyDLL"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyDLL</span></code></a>, <a class="reference internal" href="#ctypes.WinDLL" title="ctypes.WinDLL"><code class="xref py py-class docutils literal notranslate"><span class="pre">WinDLL</span></code></a>, or <a class="reference internal" href="#ctypes.OleDLL" title="ctypes.OleDLL"><code class="xref py py-class docutils literal notranslate"><span class="pre">OleDLL</span></code></a> types.</p>
 <p><code class="xref py py-meth docutils literal notranslate"><span class="pre">__getattr__()</span></code> has special behavior: It allows loading a shared library by
 accessing it as attribute of a library loader instance.  The result is cached,
 so repeated attribute accesses return the same library each time.</p>
 <dl class="py method">
-<dt id="ctypes.libraryloader.loadlibrary">
-<span id="ctypes.LibraryLoader.LoadLibrary"></span><code class="sig-name descname">LoadLibrary</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.libraryloader.loadlibrary" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes.LibraryLoader.LoadLibrary">
+<code class="sig-name descname">LoadLibrary</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.LibraryLoader.LoadLibrary" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load a shared library into the process and return it.  This method always
 returns a new instance of the library.</p>
 </dd></dl>
@@ -1486,25 +1487,25 @@ returns a new instance of the library.</p>
 <dl class="py data">
 <dt>
 <code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">cdll</code></dt>
-<dd><p>Creates <a class="reference internal" href="#ctypes.cdll" title="ctypes.CDLL"><code class="xref py py-class docutils literal notranslate"><span class="pre">CDLL</span></code></a> instances.</p>
+<dd><p>Creates <a class="reference internal" href="#ctypes.CDLL" title="ctypes.CDLL"><code class="xref py py-class docutils literal notranslate"><span class="pre">CDLL</span></code></a> instances.</p>
 </dd></dl>
 
 <dl class="py data">
 <dt>
 <code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">windll</code></dt>
-<dd><p>Windows only: Creates <a class="reference internal" href="#ctypes.windll" title="ctypes.WinDLL"><code class="xref py py-class docutils literal notranslate"><span class="pre">WinDLL</span></code></a> instances.</p>
+<dd><p>Windows only: Creates <a class="reference internal" href="#ctypes.WinDLL" title="ctypes.WinDLL"><code class="xref py py-class docutils literal notranslate"><span class="pre">WinDLL</span></code></a> instances.</p>
 </dd></dl>
 
 <dl class="py data">
 <dt>
 <code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">oledll</code></dt>
-<dd><p>Windows only: Creates <a class="reference internal" href="#ctypes.oledll" title="ctypes.OleDLL"><code class="xref py py-class docutils literal notranslate"><span class="pre">OleDLL</span></code></a> instances.</p>
+<dd><p>Windows only: Creates <a class="reference internal" href="#ctypes.OleDLL" title="ctypes.OleDLL"><code class="xref py py-class docutils literal notranslate"><span class="pre">OleDLL</span></code></a> instances.</p>
 </dd></dl>
 
 <dl class="py data">
 <dt>
 <code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">pydll</code></dt>
-<dd><p>Creates <a class="reference internal" href="#ctypes.pydll" title="ctypes.PyDLL"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyDLL</span></code></a> instances.</p>
+<dd><p>Creates <a class="reference internal" href="#ctypes.PyDLL" title="ctypes.PyDLL"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyDLL</span></code></a> instances.</p>
 </dd></dl>
 
 <p>For accessing the C Python api directly, a ready-to-use Python shared library
@@ -1512,7 +1513,7 @@ object is available:</p>
 <dl class="py data">
 <dt>
 <code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">pythonapi</code></dt>
-<dd><p>An instance of <a class="reference internal" href="#ctypes.pydll" title="ctypes.PyDLL"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyDLL</span></code></a> that exposes Python C API functions as
+<dd><p>An instance of <a class="reference internal" href="#ctypes.PyDLL" title="ctypes.PyDLL"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyDLL</span></code></a> that exposes Python C API functions as
 attributes.  Note that all these functions are assumed to return C
 <code class="xref c c-type docutils literal notranslate"><span class="pre">int</span></code>, which is of course not always the truth, so you have to assign
 the correct <code class="xref py py-attr docutils literal notranslate"><span class="pre">restype</span></code> attribute to use these functions.</p>
@@ -1539,16 +1540,16 @@ by default accept any number of arguments, accept any ctypes data instances as
 arguments, and return the default result type specified by the library loader.
 They are instances of a private class:</p>
 <dl class="py class">
-<dt id="ctypes._funcptr">
-<span id="ctypes._FuncPtr"></span><em class="property">class </em><code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">_FuncPtr</code><a class="headerlink" href="#ctypes._funcptr" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes._FuncPtr">
+<em class="property">class </em><code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">_FuncPtr</code><a class="headerlink" href="#ctypes._FuncPtr" title="Permalink to this definition">¶</a></dt>
 <dd><p>Base class for C callable foreign functions.</p>
 <p>Instances of foreign functions are also C compatible data types; they
 represent C function pointers.</p>
 <p>This behavior can be customized by assigning to special attributes of the
 foreign function object.</p>
 <dl class="py attribute">
-<dt id="ctypes._funcptr.restype">
-<span id="ctypes._FuncPtr.restype"></span><code class="sig-name descname">restype</code><a class="headerlink" href="#ctypes._funcptr.restype" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes._FuncPtr.restype">
+<code class="sig-name descname">restype</code><a class="headerlink" href="#ctypes._FuncPtr.restype" title="Permalink to this definition">¶</a></dt>
 <dd><p>Assign a ctypes type to specify the result type of the foreign function.
 Use <code class="docutils literal notranslate"><span class="pre">None</span></code> for <code class="xref c c-type docutils literal notranslate"><span class="pre">void</span></code>, a function not returning anything.</p>
 <p>It is possible to assign a callable Python object that is not a ctypes
@@ -1556,22 +1557,22 @@ type, in this case the function is assumed to return a C <code class="xref c c-t
 the callable will be called with this integer, allowing further
 processing or error checking.  Using this is deprecated, for more flexible
 post processing or error checking use a ctypes data type as
-<a class="reference internal" href="#ctypes._funcptr.restype" title="ctypes._FuncPtr.restype"><code class="xref py py-attr docutils literal notranslate"><span class="pre">restype</span></code></a> and assign a callable to the <a class="reference internal" href="#ctypes._funcptr.errcheck" title="ctypes._FuncPtr.errcheck"><code class="xref py py-attr docutils literal notranslate"><span class="pre">errcheck</span></code></a> attribute.</p>
+<a class="reference internal" href="#ctypes._FuncPtr.restype" title="ctypes._FuncPtr.restype"><code class="xref py py-attr docutils literal notranslate"><span class="pre">restype</span></code></a> and assign a callable to the <a class="reference internal" href="#ctypes._FuncPtr.errcheck" title="ctypes._FuncPtr.errcheck"><code class="xref py py-attr docutils literal notranslate"><span class="pre">errcheck</span></code></a> attribute.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="ctypes._funcptr.argtypes">
-<span id="ctypes._FuncPtr.argtypes"></span><code class="sig-name descname">argtypes</code><a class="headerlink" href="#ctypes._funcptr.argtypes" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes._FuncPtr.argtypes">
+<code class="sig-name descname">argtypes</code><a class="headerlink" href="#ctypes._FuncPtr.argtypes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Assign a tuple of ctypes types to specify the argument types that the
 function accepts.  Functions using the <code class="docutils literal notranslate"><span class="pre">stdcall</span></code> calling convention can
 only be called with the same number of arguments as the length of this
 tuple; functions using the C calling convention accept additional,
 unspecified arguments as well.</p>
 <p>When a foreign function is called, each actual argument is passed to the
-<code class="xref py py-meth docutils literal notranslate"><span class="pre">from_param()</span></code> class method of the items in the <a class="reference internal" href="#ctypes._funcptr.argtypes" title="ctypes._FuncPtr.argtypes"><code class="xref py py-attr docutils literal notranslate"><span class="pre">argtypes</span></code></a>
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">from_param()</span></code> class method of the items in the <a class="reference internal" href="#ctypes._FuncPtr.argtypes" title="ctypes._FuncPtr.argtypes"><code class="xref py py-attr docutils literal notranslate"><span class="pre">argtypes</span></code></a>
 tuple, this method allows adapting the actual argument to an object that
 the foreign function accepts.  For example, a <a class="reference internal" href="#ctypes.c_char_p" title="ctypes.c_char_p"><code class="xref py py-class docutils literal notranslate"><span class="pre">c_char_p</span></code></a> item in
-the <a class="reference internal" href="#ctypes._funcptr.argtypes" title="ctypes._FuncPtr.argtypes"><code class="xref py py-attr docutils literal notranslate"><span class="pre">argtypes</span></code></a> tuple will convert a string passed as argument into
+the <a class="reference internal" href="#ctypes._FuncPtr.argtypes" title="ctypes._FuncPtr.argtypes"><code class="xref py py-attr docutils literal notranslate"><span class="pre">argtypes</span></code></a> tuple will convert a string passed as argument into
 a bytes object using ctypes conversion rules.</p>
 <p>New: It is now possible to put items in argtypes which are not ctypes
 types, but each item must have a <code class="xref py py-meth docutils literal notranslate"><span class="pre">from_param()</span></code> method which returns a
@@ -1580,8 +1581,8 @@ defining adapters that can adapt custom objects as function parameters.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="ctypes._funcptr.errcheck">
-<span id="ctypes._FuncPtr.errcheck"></span><code class="sig-name descname">errcheck</code><a class="headerlink" href="#ctypes._funcptr.errcheck" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes._FuncPtr.errcheck">
+<code class="sig-name descname">errcheck</code><a class="headerlink" href="#ctypes._FuncPtr.errcheck" title="Permalink to this definition">¶</a></dt>
 <dd><p>Assign a Python function or another callable to this attribute. The
 callable will be called with three or more arguments:</p>
 <dl class="py function">
@@ -1605,8 +1606,8 @@ and raise an exception if the foreign function call failed.</p>
 </dd></dl>
 
 <dl class="py exception">
-<dt id="ctypes.argumenterror">
-<span id="ctypes.ArgumentError"></span><em class="property">exception </em><code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">ArgumentError</code><a class="headerlink" href="#ctypes.argumenterror" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes.ArgumentError">
+<em class="property">exception </em><code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">ArgumentError</code><a class="headerlink" href="#ctypes.ArgumentError" title="Permalink to this definition">¶</a></dt>
 <dd><p>This exception is raised when a foreign function call cannot convert one of the
 passed arguments.</p>
 </dd></dl>
@@ -1631,8 +1632,8 @@ type and the argument types of the function, and can be used as decorator
 factories, and as such, be applied to functions through the <code class="docutils literal notranslate"><span class="pre">&#64;wrapper</span></code> syntax.
 See <a class="reference internal" href="#ctypes-callback-functions"><span class="std std-ref">Callback functions</span></a> for examples.</p>
 <dl class="py function">
-<dt id="ctypes.cfunctype">
-<span id="ctypes.CFUNCTYPE"></span><code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">CFUNCTYPE</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">restype</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">argtypes</span></em>, <em class="sig-param"><span class="n">use_errno</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">use_last_error</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.cfunctype" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes.CFUNCTYPE">
+<code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">CFUNCTYPE</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">restype</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">argtypes</span></em>, <em class="sig-param"><span class="n">use_errno</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">use_last_error</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.CFUNCTYPE" title="Permalink to this definition">¶</a></dt>
 <dd><p>The returned function prototype creates functions that use the standard C
 calling convention.  The function will release the GIL during the call.  If
 <em>use_errno</em> is set to true, the ctypes private copy of the system
@@ -1642,18 +1643,18 @@ code.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="ctypes.winfunctype">
-<span id="ctypes.WINFUNCTYPE"></span><code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">WINFUNCTYPE</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">restype</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">argtypes</span></em>, <em class="sig-param"><span class="n">use_errno</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">use_last_error</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.winfunctype" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes.WINFUNCTYPE">
+<code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">WINFUNCTYPE</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">restype</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">argtypes</span></em>, <em class="sig-param"><span class="n">use_errno</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">use_last_error</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.WINFUNCTYPE" title="Permalink to this definition">¶</a></dt>
 <dd><p>Windows only: The returned function prototype creates functions that use the
 <code class="docutils literal notranslate"><span class="pre">stdcall</span></code> calling convention, except on Windows CE where
-<a class="reference internal" href="#ctypes.winfunctype" title="ctypes.WINFUNCTYPE"><code class="xref py py-func docutils literal notranslate"><span class="pre">WINFUNCTYPE()</span></code></a> is the same as <a class="reference internal" href="#ctypes.cfunctype" title="ctypes.CFUNCTYPE"><code class="xref py py-func docutils literal notranslate"><span class="pre">CFUNCTYPE()</span></code></a>.  The function will
+<a class="reference internal" href="#ctypes.WINFUNCTYPE" title="ctypes.WINFUNCTYPE"><code class="xref py py-func docutils literal notranslate"><span class="pre">WINFUNCTYPE()</span></code></a> is the same as <a class="reference internal" href="#ctypes.CFUNCTYPE" title="ctypes.CFUNCTYPE"><code class="xref py py-func docutils literal notranslate"><span class="pre">CFUNCTYPE()</span></code></a>.  The function will
 release the GIL during the call.  <em>use_errno</em> and <em>use_last_error</em> have the
 same meaning as above.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="ctypes.pyfunctype">
-<span id="ctypes.PYFUNCTYPE"></span><code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">PYFUNCTYPE</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">restype</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">argtypes</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.pyfunctype" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes.PYFUNCTYPE">
+<code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">PYFUNCTYPE</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">restype</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">argtypes</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.PYFUNCTYPE" title="Permalink to this definition">¶</a></dt>
 <dd><p>The returned function prototype creates functions that use the Python calling
 convention.  The function will <em>not</em> release the GIL during the call.</p>
 </dd></dl>
@@ -1861,16 +1862,16 @@ be used.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="ctypes.dllcanunloadnow">
-<span id="ctypes.DllCanUnloadNow"></span><code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">DllCanUnloadNow</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.dllcanunloadnow" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes.DllCanUnloadNow">
+<code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">DllCanUnloadNow</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.DllCanUnloadNow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Windows only: This function is a hook which allows implementing in-process
 COM servers with ctypes.  It is called from the DllCanUnloadNow function that
 the _ctypes extension dll exports.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="ctypes.dllgetclassobject">
-<span id="ctypes.DllGetClassObject"></span><code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">DllGetClassObject</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.dllgetclassobject" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes.DllGetClassObject">
+<code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">DllGetClassObject</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.DllGetClassObject" title="Permalink to this definition">¶</a></dt>
 <dd><p>Windows only: This function is a hook which allows implementing in-process
 COM servers with ctypes.  It is called from the DllGetClassObject function
 that the <code class="docutils literal notranslate"><span class="pre">_ctypes</span></code> extension dll exports.</p>
@@ -1898,16 +1899,16 @@ function in the same library that allocated the memory.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="ctypes.formaterror">
-<span id="ctypes.FormatError"></span><code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">FormatError</code><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param">code</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.formaterror" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes.FormatError">
+<code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">FormatError</code><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param">code</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.FormatError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Windows only: Returns a textual description of the error code <em>code</em>.  If no
 error code is specified, the last error code is used by calling the Windows
 api function GetLastError.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="ctypes.getlasterror">
-<span id="ctypes.GetLastError"></span><code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">GetLastError</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.getlasterror" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes.GetLastError">
+<code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">GetLastError</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.GetLastError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Windows only: Returns the last error code set by Windows in the calling thread.
 This function calls the Windows <cite>GetLastError()</cite> function directly,
 it does not return the ctypes-private copy of the error code.</p>
@@ -1946,8 +1947,8 @@ specifying an address, or a ctypes instance.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="ctypes.pointer">
-<span id="ctypes.POINTER"></span><code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">POINTER</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">type</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.pointer" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes.POINTER">
+<code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">POINTER</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">type</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.POINTER" title="Permalink to this definition">¶</a></dt>
 <dd><p>This factory function creates and returns a new ctypes pointer type. Pointer
 types are cached and reused internally, so calling this function repeatedly is
 cheap. <em>type</em> must be a ctypes type.</p>
@@ -2005,15 +2006,15 @@ to be zero-terminated.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="ctypes.winerror">
-<span id="ctypes.WinError"></span><code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">WinError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">code</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">descr</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.winerror" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes.WinError">
+<code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">WinError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">code</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">descr</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.WinError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Windows only: this function is probably the worst-named thing in ctypes. It
 creates an instance of OSError.  If <em>code</em> is not specified,
 <code class="docutils literal notranslate"><span class="pre">GetLastError</span></code> is called to determine the error code. If <em>descr</em> is not
-specified, <a class="reference internal" href="#ctypes.formaterror" title="ctypes.FormatError"><code class="xref py py-func docutils literal notranslate"><span class="pre">FormatError()</span></code></a> is called to get a textual description of the
+specified, <a class="reference internal" href="#ctypes.FormatError" title="ctypes.FormatError"><code class="xref py py-func docutils literal notranslate"><span class="pre">FormatError()</span></code></a> is called to get a textual description of the
 error.</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 3.3: </span>An instance of <a class="reference internal" href="exceptions.html#windowserror" title="WindowsError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">WindowsError</span></code></a> used to be created.</p>
+<p><span class="versionmodified changed">Changed in version 3.3: </span>An instance of <a class="reference internal" href="exceptions.html#WindowsError" title="WindowsError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">WindowsError</span></code></a> used to be created.</p>
 </div>
 </dd></dl>
 
@@ -2031,41 +2032,41 @@ zero-terminated.</p>
 <div class="section" id="data-types">
 <span id="ctypes-data-types"></span><h3>Data types<a class="headerlink" href="#data-types" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="ctypes._cdata">
-<span id="ctypes._CData"></span><em class="property">class </em><code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">_CData</code><a class="headerlink" href="#ctypes._cdata" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes._CData">
+<em class="property">class </em><code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">_CData</code><a class="headerlink" href="#ctypes._CData" title="Permalink to this definition">¶</a></dt>
 <dd><p>This non-public class is the common base class of all ctypes data types.
 Among other things, all ctypes type instances contain a memory block that
 hold C compatible data; the address of the memory block is returned by the
 <a class="reference internal" href="#ctypes.addressof" title="ctypes.addressof"><code class="xref py py-func docutils literal notranslate"><span class="pre">addressof()</span></code></a> helper function. Another instance variable is exposed as
-<a class="reference internal" href="#ctypes._cdata._objects" title="ctypes._CData._objects"><code class="xref py py-attr docutils literal notranslate"><span class="pre">_objects</span></code></a>; this contains other Python objects that need to be kept
+<a class="reference internal" href="#ctypes._CData._objects" title="ctypes._CData._objects"><code class="xref py py-attr docutils literal notranslate"><span class="pre">_objects</span></code></a>; this contains other Python objects that need to be kept
 alive in case the memory block contains pointers.</p>
 <p>Common methods of ctypes data types, these are all class methods (to be
 exact, they are methods of the <a class="reference internal" href="../glossary.html#term-metaclass"><span class="xref std std-term">metaclass</span></a>):</p>
 <dl class="py method">
-<dt id="ctypes._cdata.from_buffer">
-<span id="ctypes._CData.from_buffer"></span><code class="sig-name descname">from_buffer</code><span class="sig-paren">(</span><em class="sig-param">source</em><span class="optional">[</span>, <em class="sig-param">offset</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#ctypes._cdata.from_buffer" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes._CData.from_buffer">
+<code class="sig-name descname">from_buffer</code><span class="sig-paren">(</span><em class="sig-param">source</em><span class="optional">[</span>, <em class="sig-param">offset</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#ctypes._CData.from_buffer" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method returns a ctypes instance that shares the buffer of the
 <em>source</em> object.  The <em>source</em> object must support the writeable buffer
 interface.  The optional <em>offset</em> parameter specifies an offset into the
 source buffer in bytes; the default is zero.  If the source buffer is not
-large enough a <a class="reference internal" href="exceptions.html#valueerror" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> is raised.</p>
+large enough a <a class="reference internal" href="exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> is raised.</p>
 <p class="audit-hook">Raises an <a class="reference internal" href="sys.html#auditing"><span class="std std-ref">auditing event</span></a> <code class="docutils literal notranslate"><span class="pre">ctypes.cdata/buffer</span></code> with arguments <code class="docutils literal notranslate"><span class="pre">pointer</span></code>, <code class="docutils literal notranslate"><span class="pre">size</span></code>, <code class="docutils literal notranslate"><span class="pre">offset</span></code>.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="ctypes._cdata.from_buffer_copy">
-<span id="ctypes._CData.from_buffer_copy"></span><code class="sig-name descname">from_buffer_copy</code><span class="sig-paren">(</span><em class="sig-param">source</em><span class="optional">[</span>, <em class="sig-param">offset</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#ctypes._cdata.from_buffer_copy" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes._CData.from_buffer_copy">
+<code class="sig-name descname">from_buffer_copy</code><span class="sig-paren">(</span><em class="sig-param">source</em><span class="optional">[</span>, <em class="sig-param">offset</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#ctypes._CData.from_buffer_copy" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method creates a ctypes instance, copying the buffer from the
 <em>source</em> object buffer which must be readable.  The optional <em>offset</em>
 parameter specifies an offset into the source buffer in bytes; the default
-is zero.  If the source buffer is not large enough a <a class="reference internal" href="exceptions.html#valueerror" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> is
+is zero.  If the source buffer is not large enough a <a class="reference internal" href="exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> is
 raised.</p>
 <p class="audit-hook">Raises an <a class="reference internal" href="sys.html#auditing"><span class="std std-ref">auditing event</span></a> <code class="docutils literal notranslate"><span class="pre">ctypes.cdata/buffer</span></code> with arguments <code class="docutils literal notranslate"><span class="pre">pointer</span></code>, <code class="docutils literal notranslate"><span class="pre">size</span></code>, <code class="docutils literal notranslate"><span class="pre">offset</span></code>.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="ctypes._cdata.from_address">
-<span id="ctypes._CData.from_address"></span><code class="sig-name descname">from_address</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">address</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes._cdata.from_address" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes._CData.from_address">
+<code class="sig-name descname">from_address</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">address</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes._CData.from_address" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method returns a ctypes type instance using the memory specified by
 <em>address</em> which must be an integer.</p>
 <p class="audit-hook"><p>This method, and others that indirectly call this method, raises an
@@ -2075,8 +2076,8 @@ raised.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="ctypes._cdata.from_param">
-<span id="ctypes._CData.from_param"></span><code class="sig-name descname">from_param</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes._cdata.from_param" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes._CData.from_param">
+<code class="sig-name descname">from_param</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes._CData.from_param" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method adapts <em>obj</em> to a ctypes type.  It is called with the actual
 object used in a foreign function call when the type is present in the
 foreign function’s <code class="xref py py-attr docutils literal notranslate"><span class="pre">argtypes</span></code> tuple; it must return an object that
@@ -2087,8 +2088,8 @@ types accept other objects as well.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="ctypes._cdata.in_dll">
-<span id="ctypes._CData.in_dll"></span><code class="sig-name descname">in_dll</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">library</span></em>, <em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes._cdata.in_dll" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes._CData.in_dll">
+<code class="sig-name descname">in_dll</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">library</span></em>, <em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes._CData.in_dll" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method returns a ctypes type instance exported by a shared
 library. <em>name</em> is the name of the symbol that exports the data, <em>library</em>
 is the loaded shared library.</p>
@@ -2096,24 +2097,24 @@ is the loaded shared library.</p>
 
 <p>Common instance variables of ctypes data types:</p>
 <dl class="py attribute">
-<dt id="ctypes._cdata._b_base_">
-<span id="ctypes._CData._b_base_"></span><code class="sig-name descname">_b_base_</code><a class="headerlink" href="#ctypes._cdata._b_base_" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes._CData._b_base_">
+<code class="sig-name descname">_b_base_</code><a class="headerlink" href="#ctypes._CData._b_base_" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sometimes ctypes data instances do not own the memory block they contain,
 instead they share part of the memory block of a base object.  The
-<a class="reference internal" href="#ctypes._cdata._b_base_" title="ctypes._CData._b_base_"><code class="xref py py-attr docutils literal notranslate"><span class="pre">_b_base_</span></code></a> read-only member is the root ctypes object that owns the
+<a class="reference internal" href="#ctypes._CData._b_base_" title="ctypes._CData._b_base_"><code class="xref py py-attr docutils literal notranslate"><span class="pre">_b_base_</span></code></a> read-only member is the root ctypes object that owns the
 memory block.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="ctypes._cdata._b_needsfree_">
-<span id="ctypes._CData._b_needsfree_"></span><code class="sig-name descname">_b_needsfree_</code><a class="headerlink" href="#ctypes._cdata._b_needsfree_" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes._CData._b_needsfree_">
+<code class="sig-name descname">_b_needsfree_</code><a class="headerlink" href="#ctypes._CData._b_needsfree_" title="Permalink to this definition">¶</a></dt>
 <dd><p>This read-only variable is true when the ctypes data instance has
 allocated the memory block itself, false otherwise.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="ctypes._cdata._objects">
-<span id="ctypes._CData._objects"></span><code class="sig-name descname">_objects</code><a class="headerlink" href="#ctypes._cdata._objects" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes._CData._objects">
+<code class="sig-name descname">_objects</code><a class="headerlink" href="#ctypes._CData._objects" title="Permalink to this definition">¶</a></dt>
 <dd><p>This member is either <code class="docutils literal notranslate"><span class="pre">None</span></code> or a dictionary containing Python objects
 that need to be kept alive so that the memory block contents is kept
 valid.  This object is only exposed for debugging; never modify the
@@ -2126,17 +2127,17 @@ contents of this dictionary.</p>
 <div class="section" id="ctypes-fundamental-data-types-2">
 <span id="id1"></span><h3>Fundamental data types<a class="headerlink" href="#ctypes-fundamental-data-types-2" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="ctypes._simplecdata">
-<span id="ctypes._SimpleCData"></span><em class="property">class </em><code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">_SimpleCData</code><a class="headerlink" href="#ctypes._simplecdata" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes._SimpleCData">
+<em class="property">class </em><code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">_SimpleCData</code><a class="headerlink" href="#ctypes._SimpleCData" title="Permalink to this definition">¶</a></dt>
 <dd><p>This non-public class is the base class of all fundamental ctypes data
 types. It is mentioned here because it contains the common attributes of the
-fundamental ctypes data types.  <a class="reference internal" href="#ctypes._simplecdata" title="ctypes._SimpleCData"><code class="xref py py-class docutils literal notranslate"><span class="pre">_SimpleCData</span></code></a> is a subclass of
-<a class="reference internal" href="#ctypes._cdata" title="ctypes._CData"><code class="xref py py-class docutils literal notranslate"><span class="pre">_CData</span></code></a>, so it inherits their methods and attributes. ctypes data
+fundamental ctypes data types.  <a class="reference internal" href="#ctypes._SimpleCData" title="ctypes._SimpleCData"><code class="xref py py-class docutils literal notranslate"><span class="pre">_SimpleCData</span></code></a> is a subclass of
+<a class="reference internal" href="#ctypes._CData" title="ctypes._CData"><code class="xref py py-class docutils literal notranslate"><span class="pre">_CData</span></code></a>, so it inherits their methods and attributes. ctypes data
 types that are not and do not contain pointers can now be pickled.</p>
 <p>Instances have a single attribute:</p>
 <dl class="py attribute">
-<dt id="ctypes._simplecdata.value">
-<span id="ctypes._SimpleCData.value"></span><code class="sig-name descname">value</code><a class="headerlink" href="#ctypes._simplecdata.value" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes._SimpleCData.value">
+<code class="sig-name descname">value</code><a class="headerlink" href="#ctypes._SimpleCData.value" title="Permalink to this definition">¶</a></dt>
 <dd><p>This attribute contains the actual value of the instance. For integer and
 pointer types, it is an integer, for character types, it is a single
 character bytes object or string, for character pointer types it is a
@@ -2375,8 +2376,8 @@ that has a truth value.</p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="ctypes.hresult">
-<span id="ctypes.HRESULT"></span><em class="property">class </em><code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">HRESULT</code><a class="headerlink" href="#ctypes.hresult" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes.HRESULT">
+<em class="property">class </em><code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">HRESULT</code><a class="headerlink" href="#ctypes.HRESULT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Windows only: Represents a <code class="xref c c-type docutils literal notranslate"><span class="pre">HRESULT</span></code> value, which contains success or
 error information for a function or method call.</p>
 </dd></dl>
@@ -2395,36 +2396,36 @@ useful structures like <code class="xref c c-type docutils literal notranslate">
 <div class="section" id="structured-data-types">
 <span id="ctypes-structured-data-types"></span><h3>Structured data types<a class="headerlink" href="#structured-data-types" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="ctypes.union">
-<span id="ctypes.Union"></span><em class="property">class </em><code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">Union</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kw</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.union" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes.Union">
+<em class="property">class </em><code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">Union</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kw</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.Union" title="Permalink to this definition">¶</a></dt>
 <dd><p>Abstract base class for unions in native byte order.</p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="ctypes.bigendianstructure">
-<span id="ctypes.BigEndianStructure"></span><em class="property">class </em><code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">BigEndianStructure</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kw</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.bigendianstructure" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes.BigEndianStructure">
+<em class="property">class </em><code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">BigEndianStructure</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kw</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.BigEndianStructure" title="Permalink to this definition">¶</a></dt>
 <dd><p>Abstract base class for structures in <em>big endian</em> byte order.</p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="ctypes.littleendianstructure">
-<span id="ctypes.LittleEndianStructure"></span><em class="property">class </em><code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">LittleEndianStructure</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kw</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.littleendianstructure" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes.LittleEndianStructure">
+<em class="property">class </em><code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">LittleEndianStructure</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kw</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.LittleEndianStructure" title="Permalink to this definition">¶</a></dt>
 <dd><p>Abstract base class for structures in <em>little endian</em> byte order.</p>
 </dd></dl>
 
 <p>Structures with non-native byte order cannot contain pointer type fields, or any
 other data types containing pointer type fields.</p>
 <dl class="py class">
-<dt id="ctypes.structure">
-<span id="ctypes.Structure"></span><em class="property">class </em><code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">Structure</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kw</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.structure" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes.Structure">
+<em class="property">class </em><code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">Structure</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kw</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.Structure" title="Permalink to this definition">¶</a></dt>
 <dd><p>Abstract base class for structures in <em>native</em> byte order.</p>
 <p>Concrete structure and union types must be created by subclassing one of these
-types, and at least define a <a class="reference internal" href="#ctypes.structure._fields_" title="ctypes.Structure._fields_"><code class="xref py py-attr docutils literal notranslate"><span class="pre">_fields_</span></code></a> class variable. <a class="reference internal" href="#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> will
+types, and at least define a <a class="reference internal" href="#ctypes.Structure._fields_" title="ctypes.Structure._fields_"><code class="xref py py-attr docutils literal notranslate"><span class="pre">_fields_</span></code></a> class variable. <a class="reference internal" href="#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> will
 create <a class="reference internal" href="../glossary.html#term-descriptor"><span class="xref std std-term">descriptor</span></a>s which allow reading and writing the fields by direct
 attribute accesses.  These are the</p>
 <dl class="py attribute">
-<dt id="ctypes.structure._fields_">
-<span id="ctypes.Structure._fields_"></span><code class="sig-name descname">_fields_</code><a class="headerlink" href="#ctypes.structure._fields_" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes.Structure._fields_">
+<code class="sig-name descname">_fields_</code><a class="headerlink" href="#ctypes.Structure._fields_" title="Permalink to this definition">¶</a></dt>
 <dd><p>A sequence defining the structure fields.  The items must be 2-tuples or
 3-tuples.  The first item is the name of the field, the second item
 specifies the type of the field; it can be any ctypes data type.</p>
@@ -2433,7 +2434,7 @@ given.  It must be a small positive integer defining the bit width of the
 field.</p>
 <p>Field names must be unique within one structure or union.  This is not
 checked, only one field can be accessed when names are repeated.</p>
-<p>It is possible to define the <a class="reference internal" href="#ctypes.structure._fields_" title="ctypes.Structure._fields_"><code class="xref py py-attr docutils literal notranslate"><span class="pre">_fields_</span></code></a> class variable <em>after</em> the
+<p>It is possible to define the <a class="reference internal" href="#ctypes.Structure._fields_" title="ctypes.Structure._fields_"><code class="xref py py-attr docutils literal notranslate"><span class="pre">_fields_</span></code></a> class variable <em>after</em> the
 class statement that defines the Structure subclass, this allows creating
 data types that directly or indirectly reference themselves:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">List</span><span class="p">(</span><span class="n">Structure</span><span class="p">):</span>
@@ -2443,28 +2444,28 @@ data types that directly or indirectly reference themselves:</p>
                 <span class="p">]</span>
 </pre></div>
 </div>
-<p>The <a class="reference internal" href="#ctypes.structure._fields_" title="ctypes.Structure._fields_"><code class="xref py py-attr docutils literal notranslate"><span class="pre">_fields_</span></code></a> class variable must, however, be defined before the
+<p>The <a class="reference internal" href="#ctypes.Structure._fields_" title="ctypes.Structure._fields_"><code class="xref py py-attr docutils literal notranslate"><span class="pre">_fields_</span></code></a> class variable must, however, be defined before the
 type is first used (an instance is created, <a class="reference internal" href="#ctypes.sizeof" title="ctypes.sizeof"><code class="xref py py-func docutils literal notranslate"><span class="pre">sizeof()</span></code></a> is called on it,
-and so on).  Later assignments to the <a class="reference internal" href="#ctypes.structure._fields_" title="ctypes.Structure._fields_"><code class="xref py py-attr docutils literal notranslate"><span class="pre">_fields_</span></code></a> class variable will
+and so on).  Later assignments to the <a class="reference internal" href="#ctypes.Structure._fields_" title="ctypes.Structure._fields_"><code class="xref py py-attr docutils literal notranslate"><span class="pre">_fields_</span></code></a> class variable will
 raise an AttributeError.</p>
 <p>It is possible to define sub-subclasses of structure types, they inherit
-the fields of the base class plus the <a class="reference internal" href="#ctypes.structure._fields_" title="ctypes.Structure._fields_"><code class="xref py py-attr docutils literal notranslate"><span class="pre">_fields_</span></code></a> defined in the
+the fields of the base class plus the <a class="reference internal" href="#ctypes.Structure._fields_" title="ctypes.Structure._fields_"><code class="xref py py-attr docutils literal notranslate"><span class="pre">_fields_</span></code></a> defined in the
 sub-subclass, if any.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="ctypes.structure._pack_">
-<span id="ctypes.Structure._pack_"></span><code class="sig-name descname">_pack_</code><a class="headerlink" href="#ctypes.structure._pack_" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes.Structure._pack_">
+<code class="sig-name descname">_pack_</code><a class="headerlink" href="#ctypes.Structure._pack_" title="Permalink to this definition">¶</a></dt>
 <dd><p>An optional small integer that allows overriding the alignment of
-structure fields in the instance.  <a class="reference internal" href="#ctypes.structure._pack_" title="ctypes.Structure._pack_"><code class="xref py py-attr docutils literal notranslate"><span class="pre">_pack_</span></code></a> must already be defined
-when <a class="reference internal" href="#ctypes.structure._fields_" title="ctypes.Structure._fields_"><code class="xref py py-attr docutils literal notranslate"><span class="pre">_fields_</span></code></a> is assigned, otherwise it will have no effect.</p>
+structure fields in the instance.  <a class="reference internal" href="#ctypes.Structure._pack_" title="ctypes.Structure._pack_"><code class="xref py py-attr docutils literal notranslate"><span class="pre">_pack_</span></code></a> must already be defined
+when <a class="reference internal" href="#ctypes.Structure._fields_" title="ctypes.Structure._fields_"><code class="xref py py-attr docutils literal notranslate"><span class="pre">_fields_</span></code></a> is assigned, otherwise it will have no effect.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="ctypes.structure._anonymous_">
-<span id="ctypes.Structure._anonymous_"></span><code class="sig-name descname">_anonymous_</code><a class="headerlink" href="#ctypes.structure._anonymous_" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes.Structure._anonymous_">
+<code class="sig-name descname">_anonymous_</code><a class="headerlink" href="#ctypes.Structure._anonymous_" title="Permalink to this definition">¶</a></dt>
 <dd><p>An optional sequence that lists the names of unnamed (anonymous) fields.
-<a class="reference internal" href="#ctypes.structure._anonymous_" title="ctypes.Structure._anonymous_"><code class="xref py py-attr docutils literal notranslate"><span class="pre">_anonymous_</span></code></a> must be already defined when <a class="reference internal" href="#ctypes.structure._fields_" title="ctypes.Structure._fields_"><code class="xref py py-attr docutils literal notranslate"><span class="pre">_fields_</span></code></a> is
+<a class="reference internal" href="#ctypes.Structure._anonymous_" title="ctypes.Structure._anonymous_"><code class="xref py py-attr docutils literal notranslate"><span class="pre">_anonymous_</span></code></a> must be already defined when <a class="reference internal" href="#ctypes.Structure._fields_" title="ctypes.Structure._fields_"><code class="xref py py-attr docutils literal notranslate"><span class="pre">_fields_</span></code></a> is
 assigned, otherwise it will have no effect.</p>
 <p>The fields listed in this variable must be structure or union type fields.
 <a class="reference internal" href="#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> will create descriptors in the structure type that allows
@@ -2498,40 +2499,40 @@ a temporary union instance:</p>
 
 <p>It is possible to define sub-subclasses of structures, they inherit the
 fields of the base class.  If the subclass definition has a separate
-<a class="reference internal" href="#ctypes.structure._fields_" title="ctypes.Structure._fields_"><code class="xref py py-attr docutils literal notranslate"><span class="pre">_fields_</span></code></a> variable, the fields specified in this are appended to the
+<a class="reference internal" href="#ctypes.Structure._fields_" title="ctypes.Structure._fields_"><code class="xref py py-attr docutils literal notranslate"><span class="pre">_fields_</span></code></a> variable, the fields specified in this are appended to the
 fields of the base class.</p>
 <p>Structure and union constructors accept both positional and keyword
 arguments.  Positional arguments are used to initialize member fields in the
-same order as they are appear in <a class="reference internal" href="#ctypes.structure._fields_" title="ctypes.Structure._fields_"><code class="xref py py-attr docutils literal notranslate"><span class="pre">_fields_</span></code></a>.  Keyword arguments in the
+same order as they are appear in <a class="reference internal" href="#ctypes.Structure._fields_" title="ctypes.Structure._fields_"><code class="xref py py-attr docutils literal notranslate"><span class="pre">_fields_</span></code></a>.  Keyword arguments in the
 constructor are interpreted as attribute assignments, so they will initialize
-<a class="reference internal" href="#ctypes.structure._fields_" title="ctypes.Structure._fields_"><code class="xref py py-attr docutils literal notranslate"><span class="pre">_fields_</span></code></a> with the same name, or create new attributes for names not
-present in <a class="reference internal" href="#ctypes.structure._fields_" title="ctypes.Structure._fields_"><code class="xref py py-attr docutils literal notranslate"><span class="pre">_fields_</span></code></a>.</p>
+<a class="reference internal" href="#ctypes.Structure._fields_" title="ctypes.Structure._fields_"><code class="xref py py-attr docutils literal notranslate"><span class="pre">_fields_</span></code></a> with the same name, or create new attributes for names not
+present in <a class="reference internal" href="#ctypes.Structure._fields_" title="ctypes.Structure._fields_"><code class="xref py py-attr docutils literal notranslate"><span class="pre">_fields_</span></code></a>.</p>
 </dd></dl>
 
 </div>
 <div class="section" id="arrays-and-pointers">
 <span id="ctypes-arrays-pointers"></span><h3>Arrays and pointers<a class="headerlink" href="#arrays-and-pointers" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="ctypes.array">
-<span id="ctypes.Array"></span><em class="property">class </em><code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">Array</code><span class="sig-paren">(</span><em class="sig-param">\*args</em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.array" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes.Array">
+<em class="property">class </em><code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">Array</code><span class="sig-paren">(</span><em class="sig-param">\*args</em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.Array" title="Permalink to this definition">¶</a></dt>
 <dd><p>Abstract base class for arrays.</p>
 <p>The recommended way to create concrete array types is by multiplying any
 <a class="reference internal" href="#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> data type with a positive integer.  Alternatively, you can subclass
-this type and define <a class="reference internal" href="#ctypes.array._length_" title="ctypes.Array._length_"><code class="xref py py-attr docutils literal notranslate"><span class="pre">_length_</span></code></a> and <a class="reference internal" href="#ctypes.array._type_" title="ctypes.Array._type_"><code class="xref py py-attr docutils literal notranslate"><span class="pre">_type_</span></code></a> class variables.
+this type and define <a class="reference internal" href="#ctypes.Array._length_" title="ctypes.Array._length_"><code class="xref py py-attr docutils literal notranslate"><span class="pre">_length_</span></code></a> and <a class="reference internal" href="#ctypes.Array._type_" title="ctypes.Array._type_"><code class="xref py py-attr docutils literal notranslate"><span class="pre">_type_</span></code></a> class variables.
 Array elements can be read and written using standard
 subscript and slice accesses; for slice reads, the resulting object is
-<em>not</em> itself an <a class="reference internal" href="#ctypes.array" title="ctypes.Array"><code class="xref py py-class docutils literal notranslate"><span class="pre">Array</span></code></a>.</p>
+<em>not</em> itself an <a class="reference internal" href="#ctypes.Array" title="ctypes.Array"><code class="xref py py-class docutils literal notranslate"><span class="pre">Array</span></code></a>.</p>
 <dl class="py attribute">
-<dt id="ctypes.array._length_">
-<span id="ctypes.Array._length_"></span><code class="sig-name descname">_length_</code><a class="headerlink" href="#ctypes.array._length_" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes.Array._length_">
+<code class="sig-name descname">_length_</code><a class="headerlink" href="#ctypes.Array._length_" title="Permalink to this definition">¶</a></dt>
 <dd><p>A positive integer specifying the number of elements in the array.
-Out-of-range subscripts result in an <a class="reference internal" href="exceptions.html#indexerror" title="IndexError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">IndexError</span></code></a>. Will be
+Out-of-range subscripts result in an <a class="reference internal" href="exceptions.html#IndexError" title="IndexError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">IndexError</span></code></a>. Will be
 returned by <a class="reference internal" href="functions.html#len" title="len"><code class="xref py py-func docutils literal notranslate"><span class="pre">len()</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="ctypes.array._type_">
-<span id="ctypes.Array._type_"></span><code class="sig-name descname">_type_</code><a class="headerlink" href="#ctypes.array._type_" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes.Array._type_">
+<code class="sig-name descname">_type_</code><a class="headerlink" href="#ctypes.Array._type_" title="Permalink to this definition">¶</a></dt>
 <dd><p>Specifies the type of each element in the array.</p>
 </dd></dl>
 
@@ -2540,27 +2541,27 @@ initialize the elements in order.</p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="ctypes._pointer">
-<span id="ctypes._Pointer"></span><em class="property">class </em><code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">_Pointer</code><a class="headerlink" href="#ctypes._pointer" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes._Pointer">
+<em class="property">class </em><code class="sig-prename descclassname">ctypes.</code><code class="sig-name descname">_Pointer</code><a class="headerlink" href="#ctypes._Pointer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Private, abstract base class for pointers.</p>
-<p>Concrete pointer types are created by calling <a class="reference internal" href="#ctypes.pointer" title="ctypes.POINTER"><code class="xref py py-func docutils literal notranslate"><span class="pre">POINTER()</span></code></a> with the
+<p>Concrete pointer types are created by calling <a class="reference internal" href="#ctypes.POINTER" title="ctypes.POINTER"><code class="xref py py-func docutils literal notranslate"><span class="pre">POINTER()</span></code></a> with the
 type that will be pointed to; this is done automatically by
 <a class="reference internal" href="#ctypes.pointer" title="ctypes.pointer"><code class="xref py py-func docutils literal notranslate"><span class="pre">pointer()</span></code></a>.</p>
 <p>If a pointer points to an array, its elements can be read and
 written using standard subscript and slice accesses.  Pointer objects
-have no size, so <a class="reference internal" href="functions.html#len" title="len"><code class="xref py py-func docutils literal notranslate"><span class="pre">len()</span></code></a> will raise <a class="reference internal" href="exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a>.  Negative
+have no size, so <a class="reference internal" href="functions.html#len" title="len"><code class="xref py py-func docutils literal notranslate"><span class="pre">len()</span></code></a> will raise <a class="reference internal" href="exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a>.  Negative
 subscripts will read from the memory <em>before</em> the pointer (as in C), and
 out-of-range subscripts will probably crash with an access violation (if
 you’re lucky).</p>
 <dl class="py attribute">
-<dt id="ctypes._pointer._type_">
-<span id="ctypes._Pointer._type_"></span><code class="sig-name descname">_type_</code><a class="headerlink" href="#ctypes._pointer._type_" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes._Pointer._type_">
+<code class="sig-name descname">_type_</code><a class="headerlink" href="#ctypes._Pointer._type_" title="Permalink to this definition">¶</a></dt>
 <dd><p>Specifies the type pointed to.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="ctypes._pointer.contents">
-<span id="ctypes._Pointer.contents"></span><code class="sig-name descname">contents</code><a class="headerlink" href="#ctypes._pointer.contents" title="Permalink to this definition">¶</a></dt>
+<dt id="ctypes._Pointer.contents">
+<code class="sig-name descname">contents</code><a class="headerlink" href="#ctypes._Pointer.contents" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the object to which to pointer points.  Assigning to this
 attribute changes the pointer to point to the assigned object.</p>
 </dd></dl>
@@ -2667,6 +2668,7 @@ attribute changes the pointer to point to the assigned object.</p>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="allos.html" >Generic Operating System Services</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code> — A foreign function library for Python</a></li>
     <li class="right">
         
 
@@ -2681,7 +2683,7 @@ attribute changes the pointer to point to the assigned object.</p>
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  

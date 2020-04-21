@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
     <title>pdb — The Python Debugger &#8212; Python 3.9.0a4 documentation</title>
@@ -79,6 +79,7 @@
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="debug.html" accesskey="U">Debugging and Profiling</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">pdb</span></code> — The Python Debugger</a></li>
     <li class="right">
         
 
@@ -93,7 +94,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -112,7 +113,7 @@ programs.  It supports setting (conditional) breakpoints and single stepping at
 the source line level, inspection of stack frames, source code listing, and
 evaluation of arbitrary Python code in the context of any stack frame.  It also
 supports post-mortem debugging and can be called under program control.</p>
-<p id="index-1">The debugger is extensible – it is actually defined as the class <a class="reference internal" href="#pdb.pdb" title="pdb.Pdb"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pdb</span></code></a>.
+<p id="index-1">The debugger is extensible – it is actually defined as the class <a class="reference internal" href="#pdb.Pdb" title="pdb.Pdb"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pdb</span></code></a>.
 This is currently undocumented but easily understood by reading the source.  The
 extension interface uses the modules <a class="reference internal" href="bdb.html#module-bdb" title="bdb: Debugger framework."><code class="xref py py-mod docutils literal notranslate"><span class="pre">bdb</span></code></a> and <a class="reference internal" href="cmd.html#module-cmd" title="cmd: Build line-oriented command interpreters."><code class="xref py py-mod docutils literal notranslate"><span class="pre">cmd</span></code></a>.</p>
 <p>The debugger’s prompt is <code class="docutils literal notranslate"><span class="pre">(Pdb)</span></code>. Typical usage to run a program under control
@@ -243,14 +244,14 @@ used).</p>
 </dd></dl>
 
 <p>The <code class="docutils literal notranslate"><span class="pre">run*</span></code> functions and <a class="reference internal" href="#pdb.set_trace" title="pdb.set_trace"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_trace()</span></code></a> are aliases for instantiating the
-<a class="reference internal" href="#pdb.pdb" title="pdb.Pdb"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pdb</span></code></a> class and calling the method of the same name.  If you want to
+<a class="reference internal" href="#pdb.Pdb" title="pdb.Pdb"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pdb</span></code></a> class and calling the method of the same name.  If you want to
 access further features, you have to do this yourself:</p>
 <dl class="py class">
-<dt id="pdb.pdb">
-<span id="pdb.Pdb"></span><em class="property">class </em><code class="sig-prename descclassname">pdb.</code><code class="sig-name descname">Pdb</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">completekey</span><span class="o">=</span><span class="default_value">'tab'</span></em>, <em class="sig-param"><span class="n">stdin</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">stdout</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">skip</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">nosigint</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">readrc</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pdb.pdb" title="Permalink to this definition">¶</a></dt>
-<dd><p><a class="reference internal" href="#pdb.pdb" title="pdb.Pdb"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pdb</span></code></a> is the debugger class.</p>
+<dt id="pdb.Pdb">
+<em class="property">class </em><code class="sig-prename descclassname">pdb.</code><code class="sig-name descname">Pdb</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">completekey</span><span class="o">=</span><span class="default_value">'tab'</span></em>, <em class="sig-param"><span class="n">stdin</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">stdout</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">skip</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">nosigint</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">readrc</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pdb.Pdb" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="#pdb.Pdb" title="pdb.Pdb"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pdb</span></code></a> is the debugger class.</p>
 <p>The <em>completekey</em>, <em>stdin</em> and <em>stdout</em> arguments are passed to the
-underlying <a class="reference internal" href="cmd.html#cmd.cmd" title="cmd.Cmd"><code class="xref py py-class docutils literal notranslate"><span class="pre">cmd.Cmd</span></code></a> class; see the description there.</p>
+underlying <a class="reference internal" href="cmd.html#cmd.Cmd" title="cmd.Cmd"><code class="xref py py-class docutils literal notranslate"><span class="pre">cmd.Cmd</span></code></a> class; see the description there.</p>
 <p>The <em>skip</em> argument, if given, must be an iterable of glob-style module name
 patterns.  The debugger will not step into frames that originate in a module
 that matches one of these patterns. <a class="footnote-reference brackets" href="#id3" id="id1">1</a></p>
@@ -276,14 +277,14 @@ Pdb.</p>
 <p><span class="versionmodified changed">Changed in version 3.6: </span>The <em>readrc</em> argument.</p>
 </div>
 <dl class="py method">
-<dt id="pdb.pdb.run">
-<span id="pdb.Pdb.run"></span><code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">statement</span></em>, <em class="sig-param"><span class="n">globals</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">locals</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pdb.pdb.run" title="Permalink to this definition">¶</a></dt>
-<dt id="pdb.pdb.runeval">
-<span id="pdb.Pdb.runeval"></span><code class="sig-name descname">runeval</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">expression</span></em>, <em class="sig-param"><span class="n">globals</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">locals</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pdb.pdb.runeval" title="Permalink to this definition">¶</a></dt>
-<dt id="pdb.pdb.runcall">
-<span id="pdb.Pdb.runcall"></span><code class="sig-name descname">runcall</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">function</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwds</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pdb.pdb.runcall" title="Permalink to this definition">¶</a></dt>
-<dt id="pdb.pdb.set_trace">
-<span id="pdb.Pdb.set_trace"></span><code class="sig-name descname">set_trace</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pdb.pdb.set_trace" title="Permalink to this definition">¶</a></dt>
+<dt id="pdb.Pdb.run">
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">statement</span></em>, <em class="sig-param"><span class="n">globals</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">locals</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pdb.Pdb.run" title="Permalink to this definition">¶</a></dt>
+<dt id="pdb.Pdb.runeval">
+<code class="sig-name descname">runeval</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">expression</span></em>, <em class="sig-param"><span class="n">globals</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">locals</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pdb.Pdb.runeval" title="Permalink to this definition">¶</a></dt>
+<dt id="pdb.Pdb.runcall">
+<code class="sig-name descname">runcall</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">function</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwds</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pdb.Pdb.runcall" title="Permalink to this definition">¶</a></dt>
+<dt id="pdb.Pdb.set_trace">
+<code class="sig-name descname">set_trace</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pdb.Pdb.set_trace" title="Permalink to this definition">¶</a></dt>
 <dd><p>See the documentation for the functions explained above.</p>
 </dd></dl>
 
@@ -751,6 +752,7 @@ is determined by the <code class="docutils literal notranslate"><span class="pre
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="debug.html" >Debugging and Profiling</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">pdb</span></code> — The Python Debugger</a></li>
     <li class="right">
         
 
@@ -765,7 +767,7 @@ is determined by the <code class="docutils literal notranslate"><span class="pre
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  

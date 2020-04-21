@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
     <title>fileinput — Iterate over lines from multiple input streams &#8212; Python 3.9.0a4 documentation</title>
@@ -79,6 +79,7 @@
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="filesys.html" accesskey="U">File and Directory Access</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">fileinput</span></code> — Iterate over lines from multiple input streams</a></li>
     <li class="right">
         
 
@@ -93,7 +94,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -123,10 +124,10 @@ are ignored.  To specify an alternative list of filenames, pass it as the
 first argument to <a class="reference internal" href="#fileinput.input" title="fileinput.input"><code class="xref py py-func docutils literal notranslate"><span class="pre">input()</span></code></a>.  A single file name is also allowed.</p>
 <p>All files are opened in text mode by default, but you can override this by
 specifying the <em>mode</em> parameter in the call to <a class="reference internal" href="#fileinput.input" title="fileinput.input"><code class="xref py py-func docutils literal notranslate"><span class="pre">input()</span></code></a> or
-<a class="reference internal" href="#fileinput.fileinput" title="fileinput.FileInput"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileInput</span></code></a>.  If an I/O error occurs during opening or reading a file,
-<a class="reference internal" href="exceptions.html#oserror" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> is raised.</p>
+<a class="reference internal" href="#fileinput.FileInput" title="fileinput.FileInput"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileInput</span></code></a>.  If an I/O error occurs during opening or reading a file,
+<a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> is raised.</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 3.3: </span><a class="reference internal" href="exceptions.html#ioerror" title="IOError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">IOError</span></code></a> used to be raised; it is now an alias of <a class="reference internal" href="exceptions.html#oserror" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a>.</p>
+<p><span class="versionmodified changed">Changed in version 3.3: </span><a class="reference internal" href="exceptions.html#IOError" title="IOError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">IOError</span></code></a> used to be raised; it is now an alias of <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a>.</p>
 </div>
 <p>If <code class="docutils literal notranslate"><span class="pre">sys.stdin</span></code> is used more than once, the second and further use will return
 no lines, except perhaps for interactive use, or if it has been explicitly reset
@@ -137,7 +138,7 @@ empty.</p>
 <p>Lines are returned with any newlines intact, which means that the last line in
 a file may not have one.</p>
 <p>You can control how files are opened by providing an opening hook via the
-<em>openhook</em> parameter to <a class="reference internal" href="#fileinput.input" title="fileinput.input"><code class="xref py py-func docutils literal notranslate"><span class="pre">fileinput.input()</span></code></a> or <a class="reference internal" href="#fileinput.fileinput" title="fileinput.FileInput"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileInput()</span></code></a>. The
+<em>openhook</em> parameter to <a class="reference internal" href="#fileinput.input" title="fileinput.input"><code class="xref py py-func docutils literal notranslate"><span class="pre">fileinput.input()</span></code></a> or <a class="reference internal" href="#fileinput.FileInput" title="fileinput.FileInput"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileInput()</span></code></a>. The
 hook must be a function that takes two arguments, <em>filename</em> and <em>mode</em>, and
 returns an accordingly opened file-like object. Two useful hooks are already
 provided by this module.</p>
@@ -145,11 +146,11 @@ provided by this module.</p>
 <dl class="py function">
 <dt id="fileinput.input">
 <code class="sig-prename descclassname">fileinput.</code><code class="sig-name descname">input</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">files</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">inplace</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">backup</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">'r'</span></em>, <em class="sig-param"><span class="n">openhook</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#fileinput.input" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create an instance of the <a class="reference internal" href="#fileinput.fileinput" title="fileinput.FileInput"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileInput</span></code></a> class.  The instance will be used
+<dd><p>Create an instance of the <a class="reference internal" href="#fileinput.FileInput" title="fileinput.FileInput"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileInput</span></code></a> class.  The instance will be used
 as global state for the functions of this module, and is also returned to use
 during iteration.  The parameters to this function will be passed along to the
-constructor of the <a class="reference internal" href="#fileinput.fileinput" title="fileinput.FileInput"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileInput</span></code></a> class.</p>
-<p>The <a class="reference internal" href="#fileinput.fileinput" title="fileinput.FileInput"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileInput</span></code></a> instance can be used as a context manager in the
+constructor of the <a class="reference internal" href="#fileinput.FileInput" title="fileinput.FileInput"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileInput</span></code></a> class.</p>
+<p>The <a class="reference internal" href="#fileinput.FileInput" title="fileinput.FileInput"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileInput</span></code></a> instance can be used as a context manager in the
 <a class="reference internal" href="../reference/compound_stmts.html#with"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">with</span></code></a> statement.  In this example, <em>input</em> is closed after the
 <code class="xref std std-keyword docutils literal notranslate"><span class="pre">with</span></code> statement is exited, even if an exception occurs:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">fileinput</span><span class="o">.</span><span class="n">input</span><span class="p">(</span><span class="n">files</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;spam.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;eggs.txt&#39;</span><span class="p">))</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
@@ -166,7 +167,7 @@ constructor of the <a class="reference internal" href="#fileinput.fileinput" tit
 </dd></dl>
 
 <p>The following functions use the global state created by <a class="reference internal" href="#fileinput.input" title="fileinput.input"><code class="xref py py-func docutils literal notranslate"><span class="pre">fileinput.input()</span></code></a>;
-if there is no active state, <a class="reference internal" href="exceptions.html#runtimeerror" title="RuntimeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RuntimeError</span></code></a> is raised.</p>
+if there is no active state, <a class="reference internal" href="exceptions.html#RuntimeError" title="RuntimeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RuntimeError</span></code></a> is raised.</p>
 <dl class="py function">
 <dt id="fileinput.filename">
 <code class="sig-prename descclassname">fileinput.</code><code class="sig-name descname">filename</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fileinput.filename" title="Permalink to this definition">¶</a></dt>
@@ -231,22 +232,22 @@ last line of the last file has been read, this function has no effect.</p>
 <p>The class which implements the sequence behavior provided by the module is
 available for subclassing as well:</p>
 <dl class="py class">
-<dt id="fileinput.fileinput">
-<span id="fileinput.FileInput"></span><em class="property">class </em><code class="sig-prename descclassname">fileinput.</code><code class="sig-name descname">FileInput</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">files</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">inplace</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">backup</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">'r'</span></em>, <em class="sig-param"><span class="n">openhook</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#fileinput.fileinput" title="Permalink to this definition">¶</a></dt>
-<dd><p>Class <a class="reference internal" href="#fileinput.fileinput" title="fileinput.FileInput"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileInput</span></code></a> is the implementation; its methods <a class="reference internal" href="#fileinput.filename" title="fileinput.filename"><code class="xref py py-meth docutils literal notranslate"><span class="pre">filename()</span></code></a>,
+<dt id="fileinput.FileInput">
+<em class="property">class </em><code class="sig-prename descclassname">fileinput.</code><code class="sig-name descname">FileInput</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">files</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">inplace</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">backup</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">'r'</span></em>, <em class="sig-param"><span class="n">openhook</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#fileinput.FileInput" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class <a class="reference internal" href="#fileinput.FileInput" title="fileinput.FileInput"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileInput</span></code></a> is the implementation; its methods <a class="reference internal" href="#fileinput.filename" title="fileinput.filename"><code class="xref py py-meth docutils literal notranslate"><span class="pre">filename()</span></code></a>,
 <a class="reference internal" href="#fileinput.fileno" title="fileinput.fileno"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fileno()</span></code></a>, <a class="reference internal" href="#fileinput.lineno" title="fileinput.lineno"><code class="xref py py-meth docutils literal notranslate"><span class="pre">lineno()</span></code></a>, <a class="reference internal" href="#fileinput.filelineno" title="fileinput.filelineno"><code class="xref py py-meth docutils literal notranslate"><span class="pre">filelineno()</span></code></a>, <a class="reference internal" href="#fileinput.isfirstline" title="fileinput.isfirstline"><code class="xref py py-meth docutils literal notranslate"><span class="pre">isfirstline()</span></code></a>,
 <a class="reference internal" href="#fileinput.isstdin" title="fileinput.isstdin"><code class="xref py py-meth docutils literal notranslate"><span class="pre">isstdin()</span></code></a>, <a class="reference internal" href="#fileinput.nextfile" title="fileinput.nextfile"><code class="xref py py-meth docutils literal notranslate"><span class="pre">nextfile()</span></code></a> and <a class="reference internal" href="#fileinput.close" title="fileinput.close"><code class="xref py py-meth docutils literal notranslate"><span class="pre">close()</span></code></a> correspond to the
 functions of the same name in the module. In addition it has a
-<a class="reference internal" href="io.html#io.textiobase.readline" title="io.TextIOBase.readline"><code class="xref py py-meth docutils literal notranslate"><span class="pre">readline()</span></code></a> method which returns the next input line,
+<a class="reference internal" href="io.html#io.TextIOBase.readline" title="io.TextIOBase.readline"><code class="xref py py-meth docutils literal notranslate"><span class="pre">readline()</span></code></a> method which returns the next input line,
 and a <code class="xref py py-meth docutils literal notranslate"><span class="pre">__getitem__()</span></code> method which implements the sequence behavior.
 The sequence must be accessed in strictly sequential order; random access
-and <a class="reference internal" href="io.html#io.textiobase.readline" title="io.TextIOBase.readline"><code class="xref py py-meth docutils literal notranslate"><span class="pre">readline()</span></code></a> cannot be mixed.</p>
+and <a class="reference internal" href="io.html#io.TextIOBase.readline" title="io.TextIOBase.readline"><code class="xref py py-meth docutils literal notranslate"><span class="pre">readline()</span></code></a> cannot be mixed.</p>
 <p>With <em>mode</em> you can specify which file mode will be passed to <a class="reference internal" href="functions.html#open" title="open"><code class="xref py py-func docutils literal notranslate"><span class="pre">open()</span></code></a>. It
 must be one of <code class="docutils literal notranslate"><span class="pre">'r'</span></code>, <code class="docutils literal notranslate"><span class="pre">'rU'</span></code>, <code class="docutils literal notranslate"><span class="pre">'U'</span></code> and <code class="docutils literal notranslate"><span class="pre">'rb'</span></code>.</p>
 <p>The <em>openhook</em>, when given, must be a function that takes two arguments,
 <em>filename</em> and <em>mode</em>, and returns an accordingly opened file-like object. You
 cannot use <em>inplace</em> and <em>openhook</em> together.</p>
-<p>A <a class="reference internal" href="#fileinput.fileinput" title="fileinput.FileInput"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileInput</span></code></a> instance can be used as a context manager in the
+<p>A <a class="reference internal" href="#fileinput.FileInput" title="fileinput.FileInput"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileInput</span></code></a> instance can be used as a context manager in the
 <a class="reference internal" href="../reference/compound_stmts.html#with"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">with</span></code></a> statement.  In this example, <em>input</em> is closed after the
 <code class="xref std std-keyword docutils literal notranslate"><span class="pre">with</span></code> statement is exited, even if an exception occurs:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">FileInput</span><span class="p">(</span><span class="n">files</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;spam.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;eggs.txt&#39;</span><span class="p">))</span> <span class="k">as</span> <span class="nb">input</span><span class="p">:</span>
@@ -268,7 +269,7 @@ cannot use <em>inplace</em> and <em>openhook</em> together.</p>
 </dd></dl>
 
 <p><strong>Optional in-place filtering:</strong> if the keyword argument <code class="docutils literal notranslate"><span class="pre">inplace=True</span></code> is
-passed to <a class="reference internal" href="#fileinput.input" title="fileinput.input"><code class="xref py py-func docutils literal notranslate"><span class="pre">fileinput.input()</span></code></a> or to the <a class="reference internal" href="#fileinput.fileinput" title="fileinput.FileInput"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileInput</span></code></a> constructor, the
+passed to <a class="reference internal" href="#fileinput.input" title="fileinput.input"><code class="xref py py-func docutils literal notranslate"><span class="pre">fileinput.input()</span></code></a> or to the <a class="reference internal" href="#fileinput.FileInput" title="fileinput.FileInput"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileInput</span></code></a> constructor, the
 file is moved to a backup file and standard output is directed to the input file
 (if a file of the same name as the backup file already exists, it will be
 replaced silently).  This makes it possible to write a filter that rewrites its
@@ -357,6 +358,7 @@ opened normally (ie, using <a class="reference internal" href="functions.html#op
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="filesys.html" >File and Directory Access</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">fileinput</span></code> — Iterate over lines from multiple input streams</a></li>
     <li class="right">
         
 
@@ -371,7 +373,7 @@ opened normally (ie, using <a class="reference internal" href="functions.html#op
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  

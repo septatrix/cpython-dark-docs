@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
     <title>6. Expressions &#8212; Python 3.9.0a4 documentation</title>
@@ -78,6 +78,7 @@
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">The Python Language Reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">6. </span>Expressions</a></li>
     <li class="right">
         
 
@@ -92,7 +93,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -144,7 +145,7 @@ also categorized syntactically as atoms.  The syntax for atoms is:</p>
 for lexical definition and section <a class="reference internal" href="executionmodel.html#naming"><span class="std std-ref">Naming and binding</span></a> for documentation of naming and
 binding.</p>
 <p id="index-4">When the name is bound to an object, evaluation of the atom yields that object.
-When a name is not bound, an attempt to evaluate it raises a <a class="reference internal" href="../library/exceptions.html#nameerror" title="NameError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NameError</span></code></a>
+When a name is not bound, an attempt to evaluate it raises a <a class="reference internal" href="../library/exceptions.html#NameError" title="NameError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NameError</span></code></a>
 exception.</p>
 <p id="index-5"><strong>Private name mangling:</strong> When an identifier that textually occurs in a class
 definition begins with two or more underscore characters and does not end in two
@@ -394,7 +395,7 @@ generator’s methods, the function can proceed exactly as if the yield expressi
 were just another external call.  The value of the yield expression after
 resuming depends on the method which resumed the execution.  If
 <a class="reference internal" href="#generator.__next__" title="generator.__next__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__next__()</span></code></a> is used (typically via either a <a class="reference internal" href="compound_stmts.html#for"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">for</span></code></a> or
-the <a class="reference internal" href="../library/functions.html#next" title="next"><code class="xref py py-func docutils literal notranslate"><span class="pre">next()</span></code></a> builtin) then the result is <a class="reference internal" href="../library/constants.html#none" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a>.  Otherwise, if
+the <a class="reference internal" href="../library/functions.html#next" title="next"><code class="xref py py-func docutils literal notranslate"><span class="pre">next()</span></code></a> builtin) then the result is <a class="reference internal" href="../library/constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a>.  Otherwise, if
 <a class="reference internal" href="#generator.send" title="generator.send"><code class="xref py py-meth docutils literal notranslate"><span class="pre">send()</span></code></a> is used, then the result will be the value passed in to
 that method.</p>
 <p id="index-23">All of this makes generator functions quite similar to coroutines; they yield
@@ -413,12 +414,12 @@ to the caller of the current generator’s methods. Any values passed in with
 <a class="reference internal" href="#generator.send" title="generator.send"><code class="xref py py-meth docutils literal notranslate"><span class="pre">send()</span></code></a> and any exceptions passed in with
 <a class="reference internal" href="#generator.throw" title="generator.throw"><code class="xref py py-meth docutils literal notranslate"><span class="pre">throw()</span></code></a> are passed to the underlying iterator if it has the
 appropriate methods.  If this is not the case, then <a class="reference internal" href="#generator.send" title="generator.send"><code class="xref py py-meth docutils literal notranslate"><span class="pre">send()</span></code></a>
-will raise <a class="reference internal" href="../library/exceptions.html#attributeerror" title="AttributeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">AttributeError</span></code></a> or <a class="reference internal" href="../library/exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a>, while
+will raise <a class="reference internal" href="../library/exceptions.html#AttributeError" title="AttributeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">AttributeError</span></code></a> or <a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a>, while
 <a class="reference internal" href="#generator.throw" title="generator.throw"><code class="xref py py-meth docutils literal notranslate"><span class="pre">throw()</span></code></a> will just raise the passed in exception immediately.</p>
 <p>When the underlying iterator is complete, the <code class="xref py py-attr docutils literal notranslate"><span class="pre">value</span></code>
-attribute of the raised <a class="reference internal" href="../library/exceptions.html#stopiteration" title="StopIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopIteration</span></code></a> instance becomes the value of
+attribute of the raised <a class="reference internal" href="../library/exceptions.html#StopIteration" title="StopIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopIteration</span></code></a> instance becomes the value of
 the yield expression. It can be either set explicitly when raising
-<a class="reference internal" href="../library/exceptions.html#stopiteration" title="StopIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopIteration</span></code></a>, or automatically when the subiterator is a generator
+<a class="reference internal" href="../library/exceptions.html#StopIteration" title="StopIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopIteration</span></code></a>, or automatically when the subiterator is a generator
 (by returning a value from the subgenerator).</p>
 <blockquote>
 <div><div class="versionchanged">
@@ -448,17 +449,17 @@ coroutine functions.</p>
 <p>This subsection describes the methods of a generator iterator.  They can
 be used to control the execution of a generator function.</p>
 <p>Note that calling any of the generator methods below when the generator
-is already executing raises a <a class="reference internal" href="../library/exceptions.html#valueerror" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> exception.</p>
+is already executing raises a <a class="reference internal" href="../library/exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> exception.</p>
 <span class="target" id="index-31"></span><dl class="py method">
 <dt id="generator.__next__">
 <code class="sig-prename descclassname">generator.</code><code class="sig-name descname">__next__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#generator.__next__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Starts the execution of a generator function or resumes it at the last
 executed yield expression.  When a generator function is resumed with a
 <a class="reference internal" href="#generator.__next__" title="generator.__next__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__next__()</span></code></a> method, the current yield expression always
-evaluates to <a class="reference internal" href="../library/constants.html#none" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a>.  The execution then continues to the next yield
+evaluates to <a class="reference internal" href="../library/constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a>.  The execution then continues to the next yield
 expression, where the generator is suspended again, and the value of the
 <a class="reference internal" href="#grammar-token-expression_list"><code class="xref std std-token docutils literal notranslate"><span class="pre">expression_list</span></code></a> is returned to <a class="reference internal" href="#generator.__next__" title="generator.__next__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__next__()</span></code></a>’s caller.  If the
-generator exits without yielding another value, a <a class="reference internal" href="../library/exceptions.html#stopiteration" title="StopIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopIteration</span></code></a>
+generator exits without yielding another value, a <a class="reference internal" href="../library/exceptions.html#StopIteration" title="StopIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopIteration</span></code></a>
 exception is raised.</p>
 <p>This method is normally called implicitly, e.g. by a <a class="reference internal" href="compound_stmts.html#for"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">for</span></code></a> loop, or
 by the built-in <a class="reference internal" href="../library/functions.html#next" title="next"><code class="xref py py-func docutils literal notranslate"><span class="pre">next()</span></code></a> function.</p>
@@ -470,9 +471,9 @@ by the built-in <a class="reference internal" href="../library/functions.html#ne
 <dd><p>Resumes the execution and “sends” a value into the generator function.  The
 <em>value</em> argument becomes the result of the current yield expression.  The
 <a class="reference internal" href="#generator.send" title="generator.send"><code class="xref py py-meth docutils literal notranslate"><span class="pre">send()</span></code></a> method returns the next value yielded by the generator, or
-raises <a class="reference internal" href="../library/exceptions.html#stopiteration" title="StopIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopIteration</span></code></a> if the generator exits without yielding another
+raises <a class="reference internal" href="../library/exceptions.html#StopIteration" title="StopIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopIteration</span></code></a> if the generator exits without yielding another
 value.  When <a class="reference internal" href="#generator.send" title="generator.send"><code class="xref py py-meth docutils literal notranslate"><span class="pre">send()</span></code></a> is called to start the generator, it must be called
-with <a class="reference internal" href="../library/constants.html#none" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a> as the argument, because there is no yield expression that
+with <a class="reference internal" href="../library/constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a> as the argument, because there is no yield expression that
 could receive the value.</p>
 </dd></dl>
 
@@ -481,7 +482,7 @@ could receive the value.</p>
 <code class="sig-prename descclassname">generator.</code><code class="sig-name descname">throw</code><span class="sig-paren">(</span><em class="sig-param">type</em><span class="optional">[</span>, <em class="sig-param">value</em><span class="optional">[</span>, <em class="sig-param">traceback</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#generator.throw" title="Permalink to this definition">¶</a></dt>
 <dd><p>Raises an exception of type <code class="docutils literal notranslate"><span class="pre">type</span></code> at the point where the generator was paused,
 and returns the next value yielded by the generator function.  If the generator
-exits without yielding another value, a <a class="reference internal" href="../library/exceptions.html#stopiteration" title="StopIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopIteration</span></code></a> exception is
+exits without yielding another value, a <a class="reference internal" href="../library/exceptions.html#StopIteration" title="StopIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopIteration</span></code></a> exception is
 raised.  If the generator function does not catch the passed-in exception, or
 raises a different exception, then that exception propagates to the caller.</p>
 </dd></dl>
@@ -489,11 +490,11 @@ raises a different exception, then that exception propagates to the caller.</p>
 <span class="target" id="index-32"></span><dl class="py method">
 <dt id="generator.close">
 <code class="sig-prename descclassname">generator.</code><code class="sig-name descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#generator.close" title="Permalink to this definition">¶</a></dt>
-<dd><p>Raises a <a class="reference internal" href="../library/exceptions.html#generatorexit" title="GeneratorExit"><code class="xref py py-exc docutils literal notranslate"><span class="pre">GeneratorExit</span></code></a> at the point where the generator function was
+<dd><p>Raises a <a class="reference internal" href="../library/exceptions.html#GeneratorExit" title="GeneratorExit"><code class="xref py py-exc docutils literal notranslate"><span class="pre">GeneratorExit</span></code></a> at the point where the generator function was
 paused.  If the generator function then exits gracefully, is already closed,
-or raises <a class="reference internal" href="../library/exceptions.html#generatorexit" title="GeneratorExit"><code class="xref py py-exc docutils literal notranslate"><span class="pre">GeneratorExit</span></code></a> (by not catching the exception), close
+or raises <a class="reference internal" href="../library/exceptions.html#GeneratorExit" title="GeneratorExit"><code class="xref py py-exc docutils literal notranslate"><span class="pre">GeneratorExit</span></code></a> (by not catching the exception), close
 returns to its caller.  If the generator yields a value, a
-<a class="reference internal" href="../library/exceptions.html#runtimeerror" title="RuntimeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RuntimeError</span></code></a> is raised.  If the generator raises any other exception,
+<a class="reference internal" href="../library/exceptions.html#RuntimeError" title="RuntimeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RuntimeError</span></code></a> is raised.  If the generator raises any other exception,
 it is propagated to the caller.  <a class="reference internal" href="#generator.close" title="generator.close"><code class="xref py py-meth docutils literal notranslate"><span class="pre">close()</span></code></a> does nothing if the generator
 has already exited due to an exception or normal exit.</p>
 </dd></dl>
@@ -554,7 +555,7 @@ is resumed by awaiting on the next object returned by the asynchronous
 generator’s methods, the function can proceed exactly as if the yield
 expression were just another external call. The value of the yield expression
 after resuming depends on the method which resumed the execution.  If
-<a class="reference internal" href="#agen.__anext__" title="agen.__anext__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__anext__()</span></code></a> is used then the result is <a class="reference internal" href="../library/constants.html#none" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a>. Otherwise, if
+<a class="reference internal" href="#agen.__anext__" title="agen.__anext__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__anext__()</span></code></a> is used then the result is <a class="reference internal" href="../library/constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a>. Otherwise, if
 <a class="reference internal" href="#agen.asend" title="agen.asend"><code class="xref py py-meth docutils literal notranslate"><span class="pre">asend()</span></code></a> is used, then the result will be the value passed in to
 that method.</p>
 <p>In an asynchronous generator function, yield expressions are allowed anywhere
@@ -588,13 +589,13 @@ which are used to control the execution of a generator function.</p>
 <dd><p>Returns an awaitable which when run starts to execute the asynchronous
 generator or resumes it at the last executed yield expression.  When an
 asynchronous generator function is resumed with an <a class="reference internal" href="#agen.__anext__" title="agen.__anext__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__anext__()</span></code></a>
-method, the current yield expression always evaluates to <a class="reference internal" href="../library/constants.html#none" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a> in
+method, the current yield expression always evaluates to <a class="reference internal" href="../library/constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a> in
 the returned awaitable, which when run will continue to the next yield
 expression. The value of the <a class="reference internal" href="#grammar-token-expression_list"><code class="xref std std-token docutils literal notranslate"><span class="pre">expression_list</span></code></a> of the yield
-expression is the value of the <a class="reference internal" href="../library/exceptions.html#stopiteration" title="StopIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopIteration</span></code></a> exception raised by
+expression is the value of the <a class="reference internal" href="../library/exceptions.html#StopIteration" title="StopIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopIteration</span></code></a> exception raised by
 the completing coroutine.  If the asynchronous generator exits without
 yielding another value, the awaitable instead raises a
-<a class="reference internal" href="../library/exceptions.html#stopasynciteration" title="StopAsyncIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopAsyncIteration</span></code></a> exception, signalling that the asynchronous
+<a class="reference internal" href="../library/exceptions.html#StopAsyncIteration" title="StopAsyncIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopAsyncIteration</span></code></a> exception, signalling that the asynchronous
 iteration has completed.</p>
 <p>This method is normally called implicitly by a <a class="reference internal" href="compound_stmts.html#async-for"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">async</span> <span class="pre">for</span></code></a> loop.</p>
 </dd></dl>
@@ -608,10 +609,10 @@ generator, this “sends” a value into the asynchronous generator function,
 and the <em>value</em> argument becomes the result of the current yield expression.
 The awaitable returned by the <a class="reference internal" href="#agen.asend" title="agen.asend"><code class="xref py py-meth docutils literal notranslate"><span class="pre">asend()</span></code></a> method will return the next
 value yielded by the generator as the value of the raised
-<a class="reference internal" href="../library/exceptions.html#stopiteration" title="StopIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopIteration</span></code></a>, or raises <a class="reference internal" href="../library/exceptions.html#stopasynciteration" title="StopAsyncIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopAsyncIteration</span></code></a> if the
+<a class="reference internal" href="../library/exceptions.html#StopIteration" title="StopIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopIteration</span></code></a>, or raises <a class="reference internal" href="../library/exceptions.html#StopAsyncIteration" title="StopAsyncIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopAsyncIteration</span></code></a> if the
 asynchronous generator exits without yielding another value.  When
 <a class="reference internal" href="#agen.asend" title="agen.asend"><code class="xref py py-meth docutils literal notranslate"><span class="pre">asend()</span></code></a> is called to start the asynchronous
-generator, it must be called with <a class="reference internal" href="../library/constants.html#none" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a> as the argument,
+generator, it must be called with <a class="reference internal" href="../library/constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a> as the argument,
 because there is no yield expression that could receive the value.</p>
 </dd></dl>
 
@@ -621,8 +622,8 @@ because there is no yield expression that could receive the value.</p>
 <dd><p>Returns an awaitable that raises an exception of type <code class="docutils literal notranslate"><span class="pre">type</span></code> at the point
 where the asynchronous generator was paused, and returns the next value
 yielded by the generator function as the value of the raised
-<a class="reference internal" href="../library/exceptions.html#stopiteration" title="StopIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopIteration</span></code></a> exception.  If the asynchronous generator exits
-without yielding another value, a <a class="reference internal" href="../library/exceptions.html#stopasynciteration" title="StopAsyncIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopAsyncIteration</span></code></a> exception is
+<a class="reference internal" href="../library/exceptions.html#StopIteration" title="StopIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopIteration</span></code></a> exception.  If the asynchronous generator exits
+without yielding another value, a <a class="reference internal" href="../library/exceptions.html#StopAsyncIteration" title="StopAsyncIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopAsyncIteration</span></code></a> exception is
 raised by the awaitable.
 If the generator function does not catch the passed-in exception, or
 raises a different exception, then when the awaitable is run that exception
@@ -632,14 +633,14 @@ propagates to the caller of the awaitable.</p>
 <span class="target" id="index-36"></span><dl class="py method">
 <dt id="agen.aclose">
 <em class="property">coroutine </em><code class="sig-prename descclassname">agen.</code><code class="sig-name descname">aclose</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#agen.aclose" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns an awaitable that when run will throw a <a class="reference internal" href="../library/exceptions.html#generatorexit" title="GeneratorExit"><code class="xref py py-exc docutils literal notranslate"><span class="pre">GeneratorExit</span></code></a> into
+<dd><p>Returns an awaitable that when run will throw a <a class="reference internal" href="../library/exceptions.html#GeneratorExit" title="GeneratorExit"><code class="xref py py-exc docutils literal notranslate"><span class="pre">GeneratorExit</span></code></a> into
 the asynchronous generator function at the point where it was paused.
 If the asynchronous generator function then exits gracefully, is already
-closed, or raises <a class="reference internal" href="../library/exceptions.html#generatorexit" title="GeneratorExit"><code class="xref py py-exc docutils literal notranslate"><span class="pre">GeneratorExit</span></code></a> (by not catching the exception),
-then the returned awaitable will raise a <a class="reference internal" href="../library/exceptions.html#stopiteration" title="StopIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopIteration</span></code></a> exception.
+closed, or raises <a class="reference internal" href="../library/exceptions.html#GeneratorExit" title="GeneratorExit"><code class="xref py py-exc docutils literal notranslate"><span class="pre">GeneratorExit</span></code></a> (by not catching the exception),
+then the returned awaitable will raise a <a class="reference internal" href="../library/exceptions.html#StopIteration" title="StopIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopIteration</span></code></a> exception.
 Any further awaitables returned by subsequent calls to the asynchronous
-generator will raise a <a class="reference internal" href="../library/exceptions.html#stopasynciteration" title="StopAsyncIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopAsyncIteration</span></code></a> exception.  If the
-asynchronous generator yields a value, a <a class="reference internal" href="../library/exceptions.html#runtimeerror" title="RuntimeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RuntimeError</span></code></a> is raised
+generator will raise a <a class="reference internal" href="../library/exceptions.html#StopAsyncIteration" title="StopAsyncIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopAsyncIteration</span></code></a> exception.  If the
+asynchronous generator yields a value, a <a class="reference internal" href="../library/exceptions.html#RuntimeError" title="RuntimeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RuntimeError</span></code></a> is raised
 by the awaitable.  If the asynchronous generator raises any other exception,
 it is propagated to the caller of the awaitable.  If the asynchronous
 generator has already exited due to an exception or normal exit, then
@@ -666,7 +667,7 @@ syntax is:</p>
 references, which most objects do.  This object is then asked to produce the
 attribute whose name is the identifier.  This production can be customized by
 overriding the <code class="xref py py-meth docutils literal notranslate"><span class="pre">__getattr__()</span></code> method.  If this attribute is not available,
-the exception <a class="reference internal" href="../library/exceptions.html#attributeerror" title="AttributeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">AttributeError</span></code></a> is raised.  Otherwise, the type and value of
+the exception <a class="reference internal" href="../library/exceptions.html#AttributeError" title="AttributeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">AttributeError</span></code></a> is raised.  Otherwise, the type and value of
 the object produced is determined by the object.  Multiple evaluations of the
 same attribute reference may yield different objects.</p>
 </div>
@@ -762,7 +763,7 @@ formal parameters.  If there are N positional arguments, they are placed in the
 first N slots.  Next, for each keyword argument, the identifier is used to
 determine the corresponding slot (if the identifier is the same as the first
 formal parameter name, the first slot is used, and so on).  If the slot is
-already filled, a <a class="reference internal" href="../library/exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> exception is raised. Otherwise, the value of
+already filled, a <a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> exception is raised. Otherwise, the value of
 the argument is placed in the slot, filling it (even if the expression is
 <code class="docutils literal notranslate"><span class="pre">None</span></code>, it fills the slot).  When all arguments have been processed, the slots
 that are still unfilled are filled with the corresponding default value from the
@@ -770,7 +771,7 @@ function definition.  (Default values are calculated, once, when the function is
 defined; thus, a mutable object such as a list or dictionary used as default
 value will be shared by all calls that don’t specify an argument value for the
 corresponding slot; this should usually be avoided.)  If there are any unfilled
-slots for which no default value is specified, a <a class="reference internal" href="../library/exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> exception is
+slots for which no default value is specified, a <a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> exception is
 raised.  Otherwise, the list of filled slots is used as the argument list for
 the call.</p>
 <div class="impl-detail compound">
@@ -781,12 +782,12 @@ case for functions implemented in C that use <a class="reference internal" href=
 parse their arguments.</p>
 </div>
 <p>If there are more positional arguments than there are formal parameter slots, a
-<a class="reference internal" href="../library/exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> exception is raised, unless a formal parameter using the syntax
+<a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> exception is raised, unless a formal parameter using the syntax
 <code class="docutils literal notranslate"><span class="pre">*identifier</span></code> is present; in this case, that formal parameter receives a tuple
 containing the excess positional arguments (or an empty tuple if there were no
 excess positional arguments).</p>
 <p>If any keyword argument does not correspond to a formal parameter name, a
-<a class="reference internal" href="../library/exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> exception is raised, unless a formal parameter using the syntax
+<a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> exception is raised, unless a formal parameter using the syntax
 <code class="docutils literal notranslate"><span class="pre">**identifier</span></code> is present; in this case, that formal parameter receives a
 dictionary containing the excess keyword arguments (using the keywords as keys
 and the argument values as corresponding values), or a (new) empty dictionary if
@@ -819,7 +820,7 @@ used in the same call, so in practice this confusion does not arise.</p>
 evaluate to a <a class="reference internal" href="../glossary.html#term-mapping"><span class="xref std std-term">mapping</span></a>, the contents of which are treated as
 additional keyword arguments.  If a keyword is already present
 (as an explicit keyword argument, or from another unpacking),
-a <a class="reference internal" href="../library/exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> exception is raised.</p>
+a <a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> exception is raised.</p>
 <p>Formal parameters using the syntax <code class="docutils literal notranslate"><span class="pre">*identifier</span></code> or <code class="docutils literal notranslate"><span class="pre">**identifier</span></code> cannot be
 used as positional argument slots or as keyword argument names.</p>
 <div class="versionchanged">
@@ -883,9 +884,9 @@ type, and the result is of that type.</p>
 argument is negative; in that case, all arguments are converted to float and a
 float result is delivered. For example, <code class="docutils literal notranslate"><span class="pre">10**2</span></code> returns <code class="docutils literal notranslate"><span class="pre">100</span></code>, but
 <code class="docutils literal notranslate"><span class="pre">10**-2</span></code> returns <code class="docutils literal notranslate"><span class="pre">0.01</span></code>.</p>
-<p>Raising <code class="docutils literal notranslate"><span class="pre">0.0</span></code> to a negative power results in a <a class="reference internal" href="../library/exceptions.html#zerodivisionerror" title="ZeroDivisionError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ZeroDivisionError</span></code></a>.
+<p>Raising <code class="docutils literal notranslate"><span class="pre">0.0</span></code> to a negative power results in a <a class="reference internal" href="../library/exceptions.html#ZeroDivisionError" title="ZeroDivisionError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ZeroDivisionError</span></code></a>.
 Raising a negative number to a fractional power results in a <a class="reference internal" href="../library/functions.html#complex" title="complex"><code class="xref py py-class docutils literal notranslate"><span class="pre">complex</span></code></a>
-number. (In earlier versions it raised a <a class="reference internal" href="../library/exceptions.html#valueerror" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>.)</p>
+number. (In earlier versions it raised a <a class="reference internal" href="../library/exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>.)</p>
 </div>
 <div class="section" id="unary-arithmetic-and-bitwise-operations">
 <span id="unary"></span><h2><span class="section-number">6.6. </span>Unary arithmetic and bitwise operations<a class="headerlink" href="#unary-arithmetic-and-bitwise-operations" title="Permalink to this headline">¶</a></h2>
@@ -899,7 +900,7 @@ number. (In earlier versions it raised a <a class="reference internal" href="../
 argument.  The bitwise inversion of <code class="docutils literal notranslate"><span class="pre">x</span></code> is defined as <code class="docutils literal notranslate"><span class="pre">-(x+1)</span></code>.  It only
 applies to integral numbers.</p>
 <p id="index-62">In all three cases, if the argument does not have the proper type, a
-<a class="reference internal" href="../library/exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> exception is raised.</p>
+<a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> exception is raised.</p>
 </div>
 <div class="section" id="binary-arithmetic-operations">
 <span id="binary"></span><h2><span class="section-number">6.7. </span>Binary arithmetic operations<a class="headerlink" href="#binary-arithmetic-operations" title="Permalink to this headline">¶</a></h2>
@@ -927,11 +928,11 @@ builtin Python types implement this operator.</p>
 their arguments.  The numeric arguments are first converted to a common type.
 Division of integers yields a float, while floor division of integers results in an
 integer; the result is that of mathematical division with the ‘floor’ function
-applied to the result.  Division by zero raises the <a class="reference internal" href="../library/exceptions.html#zerodivisionerror" title="ZeroDivisionError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ZeroDivisionError</span></code></a>
+applied to the result.  Division by zero raises the <a class="reference internal" href="../library/exceptions.html#ZeroDivisionError" title="ZeroDivisionError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ZeroDivisionError</span></code></a>
 exception.</p>
 <p id="index-67">The <code class="docutils literal notranslate"><span class="pre">%</span></code> (modulo) operator yields the remainder from the division of the first
 argument by the second.  The numeric arguments are first converted to a common
-type.  A zero right argument raises the <a class="reference internal" href="../library/exceptions.html#zerodivisionerror" title="ZeroDivisionError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ZeroDivisionError</span></code></a> exception.  The
+type.  A zero right argument raises the <a class="reference internal" href="../library/exceptions.html#ZeroDivisionError" title="ZeroDivisionError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ZeroDivisionError</span></code></a> exception.  The
 arguments may be floating point numbers, e.g., <code class="docutils literal notranslate"><span class="pre">3.14%0.7</span></code> equals <code class="docutils literal notranslate"><span class="pre">0.34</span></code>
 (since <code class="docutils literal notranslate"><span class="pre">3.14</span></code> equals <code class="docutils literal notranslate"><span class="pre">4*0.7</span> <span class="pre">+</span> <span class="pre">0.34</span></code>.)  The modulo operator always yields a
 result with the same sign as its second operand (or zero); the absolute value of
@@ -1027,7 +1028,7 @@ different identities results in inequality.  A motivation for this default
 behavior is the desire that all objects should be reflexive (i.e. <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">is</span> <span class="pre">y</span></code>
 implies <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">==</span> <span class="pre">y</span></code>).</p>
 <p>A default order comparison (<code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>, and <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code>) is not provided;
-an attempt raises <a class="reference internal" href="../library/exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a>.  A motivation for this default behavior is
+an attempt raises <a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a>.  A motivation for this default behavior is
 the lack of a similar invariant as for equality.</p>
 <p>The behavior of the default equality comparison, that instances with different
 identities are always unequal, may be in contrast to what types will need that
@@ -1038,7 +1039,7 @@ of built-in types have done that.</p>
 built-in types.</p>
 <ul>
 <li><p>Numbers of built-in numeric types (<a class="reference internal" href="../library/stdtypes.html#typesnumeric"><span class="std std-ref">Numeric Types — int, float, complex</span></a>) and of the standard
-library types <a class="reference internal" href="../library/fractions.html#fractions.fraction" title="fractions.Fraction"><code class="xref py py-class docutils literal notranslate"><span class="pre">fractions.Fraction</span></code></a> and <a class="reference internal" href="../library/decimal.html#decimal.decimal" title="decimal.Decimal"><code class="xref py py-class docutils literal notranslate"><span class="pre">decimal.Decimal</span></code></a> can be
+library types <a class="reference internal" href="../library/fractions.html#fractions.Fraction" title="fractions.Fraction"><code class="xref py py-class docutils literal notranslate"><span class="pre">fractions.Fraction</span></code></a> and <a class="reference internal" href="../library/decimal.html#decimal.Decimal" title="decimal.Decimal"><code class="xref py py-class docutils literal notranslate"><span class="pre">decimal.Decimal</span></code></a> can be
 compared within and across their types, with the restriction that complex
 numbers do not support order comparison.  Within the limits of the types
 involved, they compare mathematically (algorithmically) correct without loss
@@ -1064,7 +1065,7 @@ numerical Unicode code points (the result of the built-in function
 be compared only within each of their types, with the restriction that ranges
 do not support order comparison.  Equality comparison across these types
 results in inequality, and ordering comparison across these types raises
-<a class="reference internal" href="../library/exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a>.</p>
+<a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a>.</p>
 <p>Sequences compare lexicographically using comparison of corresponding
 elements.  The built-in containers typically assume identical objects are
 equal to themselves.  That lets them bypass equality tests for identical
@@ -1085,7 +1086,7 @@ true).</p></li>
 <li><p>Mappings (instances of <a class="reference internal" href="../library/stdtypes.html#dict" title="dict"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>) compare equal if and only if they have
 equal <cite>(key, value)</cite> pairs. Equality comparison of the keys and values
 enforces reflexivity.</p>
-<p>Order comparisons (<code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>, and <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code>) raise <a class="reference internal" href="../library/exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a>.</p>
+<p>Order comparisons (<code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>, and <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code>) raise <a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a>.</p>
 </li>
 <li><p>Sets (instances of <a class="reference internal" href="../library/stdtypes.html#set" title="set"><code class="xref py py-class docutils literal notranslate"><span class="pre">set</span></code></a> or <a class="reference internal" href="../library/stdtypes.html#frozenset" title="frozenset"><code class="xref py py-class docutils literal notranslate"><span class="pre">frozenset</span></code></a>) can be compared within
 and across their types.</p>
@@ -1168,7 +1169,7 @@ that exception.</p>
 <p>Lastly, the old-style iteration protocol is tried: if a class defines
 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__getitem__()</span></code>, <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">in</span> <span class="pre">y</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code> if and only if there is a non-negative
 integer index <em>i</em> such that <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">is</span> <span class="pre">y[i]</span> <span class="pre">or</span> <span class="pre">x</span> <span class="pre">==</span> <span class="pre">y[i]</span></code>, and no lower integer index
-raises the <a class="reference internal" href="../library/exceptions.html#indexerror" title="IndexError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">IndexError</span></code></a> exception.  (If any other exception is raised, it is as
+raises the <a class="reference internal" href="../library/exceptions.html#IndexError" title="IndexError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">IndexError</span></code></a> exception.  (If any other exception is raised, it is as
 if <a class="reference internal" href="#in"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">in</span></code></a> raised that exception).</p>
 <p id="index-79">The operator <a class="reference internal" href="#not-in"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">not</span> <span class="pre">in</span></code></a> is defined to have the inverse truth value of
 <a class="reference internal" href="#in"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">in</span></code></a>.</p>
@@ -1537,6 +1538,7 @@ bitwise unary operator on its right, that is, <code class="docutils literal notr
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Language Reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">6. </span>Expressions</a></li>
     <li class="right">
         
 
@@ -1551,7 +1553,7 @@ bitwise unary operator on its right, that is, <code class="docutils literal notr
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  

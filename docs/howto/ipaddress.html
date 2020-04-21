@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
     <title>An introduction to the ipaddress module &#8212; Python 3.9.0a4 documentation</title>
@@ -78,6 +78,7 @@
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python HOWTOs</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">An introduction to the ipaddress module</a></li>
     <li class="right">
         
 
@@ -92,7 +93,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -195,7 +196,7 @@ referred to as interface objects since the ip-on-a-network notation is
 commonly used to describe network interfaces of a computer on a given network
 and are described further in the next section.</p>
 <p>By default, attempting to create a network object with host bits set will
-result in <a class="reference internal" href="../library/exceptions.html#valueerror" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> being raised. To request that the
+result in <a class="reference internal" href="../library/exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> being raised. To request that the
 additional bits instead be coerced to zero, the flag <code class="docutils literal notranslate"><span class="pre">strict=False</span></code> can
 be passed to the constructor:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ipaddress</span><span class="o">.</span><span class="n">ip_network</span><span class="p">(</span><span class="s1">&#39;192.0.2.1/24&#39;</span><span class="p">)</span>
@@ -354,7 +355,7 @@ objects, where it makes sense:</p>
 <span class="go">True</span>
 </pre></div>
 </div>
-<p>A <a class="reference internal" href="../library/exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> exception is raised if you try to compare objects of
+<p>A <a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> exception is raised if you try to compare objects of
 different versions or different types.</p>
 </div>
 <div class="section" id="using-ip-addresses-with-other-modules">
@@ -373,15 +374,15 @@ an integer or string that the other module will accept:</p>
 <div class="section" id="getting-more-detail-when-instance-creation-fails">
 <h2>Getting more detail when instance creation fails<a class="headerlink" href="#getting-more-detail-when-instance-creation-fails" title="Permalink to this headline">¶</a></h2>
 <p>When creating address/network/interface objects using the version-agnostic
-factory functions, any errors will be reported as <a class="reference internal" href="../library/exceptions.html#valueerror" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> with
+factory functions, any errors will be reported as <a class="reference internal" href="../library/exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> with
 a generic error message that simply says the passed in value was not
 recognized as an object of that type. The lack of a specific error is
 because it’s necessary to know whether the value is <em>supposed</em> to be IPv4
 or IPv6 in order to provide more detail on why it has been rejected.</p>
 <p>To support use cases where it is useful to have access to this additional
 detail, the individual class constructors actually raise the
-<a class="reference internal" href="../library/exceptions.html#valueerror" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> subclasses <a class="reference internal" href="../library/ipaddress.html#ipaddress.addressvalueerror" title="ipaddress.AddressValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ipaddress.AddressValueError</span></code></a> and
-<a class="reference internal" href="../library/ipaddress.html#ipaddress.netmaskvalueerror" title="ipaddress.NetmaskValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ipaddress.NetmaskValueError</span></code></a> to indicate exactly which part of
+<a class="reference internal" href="../library/exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> subclasses <a class="reference internal" href="../library/ipaddress.html#ipaddress.AddressValueError" title="ipaddress.AddressValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ipaddress.AddressValueError</span></code></a> and
+<a class="reference internal" href="../library/ipaddress.html#ipaddress.NetmaskValueError" title="ipaddress.NetmaskValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ipaddress.NetmaskValueError</span></code></a> to indicate exactly which part of
 the definition failed to parse correctly.</p>
 <p>The error messages are significantly more detailed when using the
 class constructors directly. For example:</p>
@@ -404,7 +405,7 @@ class constructors directly. For example:</p>
 <span class="gr">ipaddress.NetmaskValueError</span>: <span class="n">&#39;64&#39; is not a valid netmask</span>
 </pre></div>
 </div>
-<p>However, both of the module specific exceptions have <a class="reference internal" href="../library/exceptions.html#valueerror" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> as their
+<p>However, both of the module specific exceptions have <a class="reference internal" href="../library/exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> as their
 parent class, so if you’re not concerned with the particular type of error,
 you can still write code like the following:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
@@ -488,6 +489,7 @@ you can still write code like the following:</p>
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python HOWTOs</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">An introduction to the ipaddress module</a></li>
     <li class="right">
         
 
@@ -502,7 +504,7 @@ you can still write code like the following:</p>
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  

@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
     <title>What’s New in Python 2.2 &#8212; Python 3.9.0a4 documentation</title>
@@ -78,6 +78,7 @@
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">What’s New in Python</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">What’s New in Python 2.2</a></li>
     <li class="right">
         
 
@@ -92,7 +93,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -436,7 +437,7 @@ attributes  to a particular set of names.  An example will make this clear:</p>
 <span class="gr">AttributeError</span>: <span class="n">&#39;C&#39; object has no attribute &#39;newattr&#39;</span>
 </pre></div>
 </div>
-<p>Note how you get an <a class="reference internal" href="../library/exceptions.html#attributeerror" title="AttributeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">AttributeError</span></code></a> on the attempt to assign to an
+<p>Note how you get an <a class="reference internal" href="../library/exceptions.html#AttributeError" title="AttributeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">AttributeError</span></code></a> on the attempt to assign to an
 attribute not listed in <a class="reference internal" href="../reference/datamodel.html#object.__slots__" title="object.__slots__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__slots__</span></code></a>.</p>
 </div>
 <div class="section" id="related-links">
@@ -497,7 +498,7 @@ as iterators can define a <a class="reference internal" href="../c-api/typeobj.h
 <p>So, after all this, what do iterators actually do?  They have one required
 method, <a class="reference internal" href="../library/functions.html#next" title="next"><code class="xref py py-meth docutils literal notranslate"><span class="pre">next()</span></code></a>, which takes no arguments and returns the next value.  When
 there are no more values to be returned, calling <a class="reference internal" href="../library/functions.html#next" title="next"><code class="xref py py-meth docutils literal notranslate"><span class="pre">next()</span></code></a> should raise the
-<a class="reference internal" href="../library/exceptions.html#stopiteration" title="StopIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopIteration</span></code></a> exception.</p>
+<a class="reference internal" href="../library/exceptions.html#StopIteration" title="StopIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopIteration</span></code></a> exception.</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">i</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">i</span>
@@ -635,7 +636,7 @@ explanation of the interaction between <code class="xref std std-keyword docutil
 without a value, and signals the end of the procession of values; afterwards the
 generator cannot return any further values. <code class="xref std std-keyword docutils literal notranslate"><span class="pre">return</span></code> with a value, such
 as <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">5</span></code>, is a syntax error inside a generator function.  The end of the
-generator’s results can also be indicated by raising <a class="reference internal" href="../library/exceptions.html#stopiteration" title="StopIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopIteration</span></code></a>
+generator’s results can also be indicated by raising <a class="reference internal" href="../library/exceptions.html#StopIteration" title="StopIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopIteration</span></code></a>
 manually, or by just letting the flow of execution fall off the bottom of the
 function.</p>
 <p>You could achieve the effect of generators manually by writing your own class
@@ -700,14 +701,14 @@ becoming an annoyance.  For example, on platforms that support files larger than
 integer. However, there were various bits of Python that expected plain integers
 and would raise an error if a long integer was provided instead.  For example,
 in Python 1.5, only regular integers could be used as a slice index, and
-<code class="docutils literal notranslate"><span class="pre">'abc'[1L:]</span></code> would raise a <a class="reference internal" href="../library/exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> exception with the message ‘slice
+<code class="docutils literal notranslate"><span class="pre">'abc'[1L:]</span></code> would raise a <a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> exception with the message ‘slice
 index must be int’.</p>
 <p>Python 2.2 will shift values from short to long integers as required. The ‘L’
 suffix is no longer needed to indicate a long integer literal, as now the
 compiler will choose the appropriate type.  (Using the ‘L’ suffix will be
 discouraged in future 2.x versions of Python, triggering a warning in Python
 2.4, and probably dropped in Python 3.0.)  Many operations that used to raise an
-<a class="reference internal" href="../library/exceptions.html#overflowerror" title="OverflowError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OverflowError</span></code></a> will now return a long integer as their result.  For
+<a class="reference internal" href="../library/exceptions.html#OverflowError" title="OverflowError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OverflowError</span></code></a> will now return a long integer as their result.  For
 example:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="mi">1234567890123</span>
 <span class="go">1234567890123L</span>
@@ -798,7 +799,7 @@ support.)</p>
 Unicode characters from U+000000 to U+110000, so the range of legal values for
 the <code class="xref py py-func docutils literal notranslate"><span class="pre">unichr()</span></code> function is expanded accordingly.  Using an interpreter
 compiled to use UCS-2 (a “narrow Python”), values greater than 65535 will still
-cause <code class="xref py py-func docutils literal notranslate"><span class="pre">unichr()</span></code> to raise a <a class="reference internal" href="../library/exceptions.html#valueerror" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> exception. This is all
+cause <code class="xref py py-func docutils literal notranslate"><span class="pre">unichr()</span></code> to raise a <a class="reference internal" href="../library/exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> exception. This is all
 described in <span class="target" id="index-14"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0261"><strong>PEP 261</strong></a>, “Support for ‘wide’ Unicode characters”; consult it for
 further details.</p>
 <p>Another change is simpler to explain. Since their introduction, Unicode strings
@@ -863,7 +864,7 @@ doesn’t work:</p>
     <span class="o">...</span>
 </pre></div>
 </div>
-<p>The function <code class="xref py py-func docutils literal notranslate"><span class="pre">g()</span></code> will always raise a <a class="reference internal" href="../library/exceptions.html#nameerror" title="NameError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NameError</span></code></a> exception, because
+<p>The function <code class="xref py py-func docutils literal notranslate"><span class="pre">g()</span></code> will always raise a <a class="reference internal" href="../library/exceptions.html#NameError" title="NameError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NameError</span></code></a> exception, because
 the binding of the name <code class="docutils literal notranslate"><span class="pre">g</span></code> isn’t in either its local namespace or in the
 module-level namespace.  This isn’t much of a problem in practice (how often do
 you recursively define interior functions like this?), but this also made using
@@ -903,7 +904,7 @@ generate different code to access variables in a containing scope.  <code class=
 figure this out, because they add names to the local namespace that are
 unknowable at compile time. Therefore, if a function contains function
 definitions or <a class="reference internal" href="../reference/expressions.html#lambda"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">lambda</span></code></a> expressions with free variables, the compiler
-will flag this by raising a <a class="reference internal" href="../library/exceptions.html#syntaxerror" title="SyntaxError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SyntaxError</span></code></a> exception.</p>
+will flag this by raising a <a class="reference internal" href="../library/exceptions.html#SyntaxError" title="SyntaxError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SyntaxError</span></code></a> exception.</p>
 <p>To make the preceding explanation a bit clearer, here’s an example:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="k">def</span> <span class="nf">f</span><span class="p">():</span>
@@ -1081,10 +1082,10 @@ added that’s simpler and presumably faster.  Instead of specifying a format
 string, the caller simply gives the minimum and maximum number of arguments
 expected, and a set of pointers to <code class="xref c c-type docutils literal notranslate"><span class="pre">PyObject*</span></code> variables that will be
 filled in with argument values.</p></li>
-<li><p>Two new flags <a class="reference internal" href="../c-api/structures.html#meth_noargs" title="METH_NOARGS"><code class="xref py py-const docutils literal notranslate"><span class="pre">METH_NOARGS</span></code></a> and <a class="reference internal" href="../c-api/structures.html#meth_o" title="METH_O"><code class="xref py py-const docutils literal notranslate"><span class="pre">METH_O</span></code></a> are available in method
+<li><p>Two new flags <a class="reference internal" href="../c-api/structures.html#METH_NOARGS" title="METH_NOARGS"><code class="xref py py-const docutils literal notranslate"><span class="pre">METH_NOARGS</span></code></a> and <a class="reference internal" href="../c-api/structures.html#METH_O" title="METH_O"><code class="xref py py-const docutils literal notranslate"><span class="pre">METH_O</span></code></a> are available in method
 definition tables to simplify implementation of methods with no arguments or a
 single untyped argument. Calling such methods is more efficient than calling a
-corresponding method that uses <a class="reference internal" href="../c-api/structures.html#meth_varargs" title="METH_VARARGS"><code class="xref py py-const docutils literal notranslate"><span class="pre">METH_VARARGS</span></code></a>.  Also, the old
+corresponding method that uses <a class="reference internal" href="../c-api/structures.html#METH_VARARGS" title="METH_VARARGS"><code class="xref py py-const docutils literal notranslate"><span class="pre">METH_VARARGS</span></code></a>.  Also, the old
 <code class="xref py py-const docutils literal notranslate"><span class="pre">METH_OLDARGS</span></code> style of writing C methods is  now officially deprecated.</p></li>
 <li><p>Two new wrapper functions, <a class="reference internal" href="../c-api/conversion.html#c.PyOS_snprintf" title="PyOS_snprintf"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyOS_snprintf()</span></code></a> and <a class="reference internal" href="../c-api/conversion.html#c.PyOS_vsnprintf" title="PyOS_vsnprintf"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyOS_vsnprintf()</span></code></a>
 were added to provide  cross-platform implementations for the relatively new
@@ -1124,11 +1125,11 @@ left commented out in <code class="file docutils literal notranslate"><span clas
 these modules can uncomment them manually.</p>
 </li>
 <li><p>Keyword arguments passed to built-in functions that don’t take them now cause a
-<a class="reference internal" href="../library/exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> exception to be raised, with the message “<em>function</em> takes no
+<a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> exception to be raised, with the message “<em>function</em> takes no
 keyword arguments”.</p></li>
 <li><p>Weak references, added in Python 2.1 as an extension module, are now part of
 the core because they’re used in the implementation of new-style classes.  The
-<a class="reference internal" href="../library/exceptions.html#referenceerror" title="ReferenceError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ReferenceError</span></code></a> exception has therefore moved from the <a class="reference internal" href="../library/weakref.html#module-weakref" title="weakref: Support for weak references and weak dictionaries."><code class="xref py py-mod docutils literal notranslate"><span class="pre">weakref</span></code></a>
+<a class="reference internal" href="../library/exceptions.html#ReferenceError" title="ReferenceError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ReferenceError</span></code></a> exception has therefore moved from the <a class="reference internal" href="../library/weakref.html#module-weakref" title="weakref: Support for weak references and weak dictionaries."><code class="xref py py-mod docutils literal notranslate"><span class="pre">weakref</span></code></a>
 module to become a built-in exception.</p></li>
 <li><p>A new script, <code class="file docutils literal notranslate"><span class="pre">Tools/scripts/cleanfuture.py</span></code> by Tim Peters,
 automatically removes obsolete <code class="docutils literal notranslate"><span class="pre">__future__</span></code> statements from Python source
@@ -1187,7 +1188,7 @@ using the <a class="reference internal" href="../library/sys.html#sys.getdlopenf
 floating-point numbers are supplied. <code class="docutils literal notranslate"><span class="pre">pow(x,</span> <span class="pre">y,</span> <span class="pre">z)</span></code> returns <code class="docutils literal notranslate"><span class="pre">(x**y)</span> <span class="pre">%</span> <span class="pre">z</span></code>,
 but this is never useful for floating point numbers, and the final result varies
 unpredictably depending on the platform.  A call such as <code class="docutils literal notranslate"><span class="pre">pow(2.0,</span> <span class="pre">8.0,</span> <span class="pre">7.0)</span></code>
-will now raise a <a class="reference internal" href="../library/exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> exception.</p></li>
+will now raise a <a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> exception.</p></li>
 </ul>
 </div>
 <div class="section" id="acknowledgements">
@@ -1281,6 +1282,7 @@ Reinhardt, Neil Schemenauer, Guido van Rossum, Greg Ward, Edward Welbourne.</p>
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >What’s New in Python</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">What’s New in Python 2.2</a></li>
     <li class="right">
         
 
@@ -1295,7 +1297,7 @@ Reinhardt, Neil Schemenauer, Guido van Rossum, Greg Ward, Edward Welbourne.</p>
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  

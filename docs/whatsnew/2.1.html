@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
     <title>What’s New in Python 2.1 &#8212; Python 3.9.0a4 documentation</title>
@@ -78,6 +78,7 @@
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">What’s New in Python</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">What’s New in Python 2.1</a></li>
     <li class="right">
         
 
@@ -92,7 +93,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -141,7 +142,7 @@ nested recursive function definition doesn’t work:</p>
     <span class="o">...</span>
 </pre></div>
 </div>
-<p>The function <code class="xref py py-func docutils literal notranslate"><span class="pre">g()</span></code> will always raise a <a class="reference internal" href="../library/exceptions.html#nameerror" title="NameError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NameError</span></code></a> exception, because
+<p>The function <code class="xref py py-func docutils literal notranslate"><span class="pre">g()</span></code> will always raise a <a class="reference internal" href="../library/exceptions.html#NameError" title="NameError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NameError</span></code></a> exception, because
 the binding of the name <code class="docutils literal notranslate"><span class="pre">g</span></code> isn’t in either its local namespace or in the
 module-level namespace.  This isn’t much of a problem in practice (how often do
 you recursively define interior functions like this?), but this also made using
@@ -181,7 +182,7 @@ generate different code to access variables in a containing scope.  <code class=
 figure this out, because they add names to the local namespace that are
 unknowable at compile time. Therefore, if a function contains function
 definitions or <a class="reference internal" href="../reference/expressions.html#lambda"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">lambda</span></code></a> expressions with free variables, the compiler
-will flag this by raising a <a class="reference internal" href="../library/exceptions.html#syntaxerror" title="SyntaxError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SyntaxError</span></code></a> exception.</p>
+will flag this by raising a <a class="reference internal" href="../library/exceptions.html#SyntaxError" title="SyntaxError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SyntaxError</span></code></a> exception.</p>
 <p>To make the preceding explanation a bit clearer, here’s an example:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="k">def</span> <span class="nf">f</span><span class="p">():</span>
@@ -356,7 +357,7 @@ now.  The warning can be suppressed by calling</p>
 </pre></div>
 </div>
 <p>This adds a filter that will apply only to warnings of the class
-<a class="reference internal" href="../library/exceptions.html#deprecationwarning" title="DeprecationWarning"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeprecationWarning</span></code></a> triggered in the <a class="reference internal" href="../library/__main__.html#module-__main__" title="__main__: The environment where the top-level script is run."><code class="xref py py-mod docutils literal notranslate"><span class="pre">__main__</span></code></a> module, and applies
+<a class="reference internal" href="../library/exceptions.html#DeprecationWarning" title="DeprecationWarning"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeprecationWarning</span></code></a> triggered in the <a class="reference internal" href="../library/__main__.html#module-__main__" title="__main__: The environment where the top-level script is run."><code class="xref py py-mod docutils literal notranslate"><span class="pre">__main__</span></code></a> module, and applies
 a regular expression to only match the message about the <code class="xref py py-mod docutils literal notranslate"><span class="pre">regex</span></code> module
 being deprecated, and will cause such warnings to be ignored.  Warnings can also
 be printed only once, printed every time the offending code is executed, or
@@ -528,9 +529,9 @@ distinguish the filenames <code class="docutils literal notranslate"><span class
 the file’s name  in its original case (they’re case-preserving, too).</p>
 <p>In Python 2.1, the <a class="reference internal" href="../reference/simple_stmts.html#import"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">import</span></code></a> statement will work to simulate case-sensitivity
 on case-insensitive platforms.  Python will now search for the first
-case-sensitive match by default, raising an <a class="reference internal" href="../library/exceptions.html#importerror" title="ImportError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ImportError</span></code></a> if no such file
+case-sensitive match by default, raising an <a class="reference internal" href="../library/exceptions.html#ImportError" title="ImportError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ImportError</span></code></a> if no such file
 is found, so <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">file</span></code> will not import a module named <code class="docutils literal notranslate"><span class="pre">FILE.PY</span></code>.
-Case-insensitive matching can be requested by setting the <span class="target" id="index-11"></span><a class="reference internal" href="../using/cmdline.html#envvar-pythoncaseok"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONCASEOK</span></code></a>
+Case-insensitive matching can be requested by setting the <span class="target" id="index-11"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONCASEOK"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONCASEOK</span></code></a>
 environment variable before starting the Python interpreter.</p>
 </div>
 <div class="section" id="pep-217-interactive-display-hook">
@@ -575,9 +576,9 @@ If the slot function is passed a type it can’t handle, it can indicate the
 failure by returning a reference to the <code class="docutils literal notranslate"><span class="pre">Py_NotImplemented</span></code> singleton value.
 The numeric functions of the other type will then be tried, and perhaps they can
 handle the operation; if the other type also returns <code class="docutils literal notranslate"><span class="pre">Py_NotImplemented</span></code>, then
-a <a class="reference internal" href="../library/exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> will be raised.  Numeric methods written in Python can also
+a <a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> will be raised.  Numeric methods written in Python can also
 return <code class="docutils literal notranslate"><span class="pre">Py_NotImplemented</span></code>, causing the interpreter to act as if the method
-did not exist (perhaps raising a <a class="reference internal" href="../library/exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a>, perhaps trying another
+did not exist (perhaps raising a <a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a>, perhaps trying another
 object’s numeric methods).</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
@@ -891,6 +892,7 @@ Hudson, Marc-André Lemburg, Fredrik Lundh, Neil Schemenauer, Thomas Wouters.</p
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >What’s New in Python</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">What’s New in Python 2.1</a></li>
     <li class="right">
         
 
@@ -905,7 +907,7 @@ Hudson, Marc-André Lemburg, Fredrik Lundh, Neil Schemenauer, Thomas Wouters.</p
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  

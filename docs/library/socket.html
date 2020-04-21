@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
     <title>socket — Low-level networking interface &#8212; Python 3.9.0a4 documentation</title>
@@ -79,6 +79,7 @@
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="ipc.html" accesskey="U">Networking and Interprocess Communication</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">socket</span></code> — Low-level networking interface</a></li>
     <li class="right">
         
 
@@ -93,7 +94,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -138,7 +139,7 @@ are supported by this module.</p>
 selected based on the address family specified when the socket object was
 created.  Socket addresses are represented as follows:</p>
 <ul>
-<li><p>The address of an <a class="reference internal" href="#socket.af_unix" title="socket.AF_UNIX"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_UNIX</span></code></a> socket bound to a file system node
+<li><p>The address of an <a class="reference internal" href="#socket.AF_UNIX" title="socket.AF_UNIX"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_UNIX</span></code></a> socket bound to a file system node
 is represented as a string, using the file system encoding and the
 <code class="docutils literal notranslate"><span class="pre">'surrogateescape'</span></code> error handler (see <span class="target" id="index-1"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0383"><strong>PEP 383</strong></a>).  An address in
 Linux’s abstract namespace is returned as a <a class="reference internal" href="../glossary.html#term-bytes-like-object"><span class="xref std std-term">bytes-like object</span></a> with
@@ -149,7 +150,7 @@ bytes-like object can be used for either type of address when
 passing it as an argument.</p>
 <blockquote>
 <div><div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 3.3: </span>Previously, <a class="reference internal" href="#socket.af_unix" title="socket.AF_UNIX"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_UNIX</span></code></a> socket paths were assumed to use UTF-8
+<p><span class="versionmodified changed">Changed in version 3.3: </span>Previously, <a class="reference internal" href="#socket.AF_UNIX" title="socket.AF_UNIX"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_UNIX</span></code></a> socket paths were assumed to use UTF-8
 encoding.</p>
 </div>
 <div class="versionchanged">
@@ -159,7 +160,7 @@ encoding.</p>
 </li>
 </ul>
 <ul id="host-port">
-<li><p>A pair <code class="docutils literal notranslate"><span class="pre">(host,</span> <span class="pre">port)</span></code> is used for the <a class="reference internal" href="#socket.af_inet" title="socket.AF_INET"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_INET</span></code></a> address family,
+<li><p>A pair <code class="docutils literal notranslate"><span class="pre">(host,</span> <span class="pre">port)</span></code> is used for the <a class="reference internal" href="#socket.AF_INET" title="socket.AF_INET"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_INET</span></code></a> address family,
 where <em>host</em> is a string representing either a hostname in Internet domain
 notation like <code class="docutils literal notranslate"><span class="pre">'daring.cwi.nl'</span></code> or an IPv4 address like <code class="docutils literal notranslate"><span class="pre">'100.50.200.5'</span></code>,
 and <em>port</em> is an integer.</p>
@@ -172,7 +173,7 @@ therefore, you may want to avoid these if you intend to support IPv6 with your
 Python programs.</p></li>
 </ul>
 </li>
-<li><p>For <a class="reference internal" href="#socket.af_inet6" title="socket.AF_INET6"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_INET6</span></code></a> address family, a four-tuple <code class="docutils literal notranslate"><span class="pre">(host,</span> <span class="pre">port,</span> <span class="pre">flowinfo,</span>
+<li><p>For <a class="reference internal" href="#socket.AF_INET6" title="socket.AF_INET6"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_INET6</span></code></a> address family, a four-tuple <code class="docutils literal notranslate"><span class="pre">(host,</span> <span class="pre">port,</span> <span class="pre">flowinfo,</span>
 <span class="pre">scope_id)</span></code> is used, where <em>flowinfo</em> and <em>scope_id</em> represent the <code class="docutils literal notranslate"><span class="pre">sin6_flowinfo</span></code>
 and <code class="docutils literal notranslate"><span class="pre">sin6_scope_id</span></code> members in <code class="xref py py-const docutils literal notranslate"><span class="pre">struct</span> <span class="pre">sockaddr_in6</span></code> in C.  For
 <a class="reference internal" href="#module-socket" title="socket: Low-level networking interface."><code class="xref py py-mod docutils literal notranslate"><span class="pre">socket</span></code></a> module methods, <em>flowinfo</em> and <em>scope_id</em> can be omitted just for
@@ -204,12 +205,12 @@ reference, and <em>v3</em> should be set to 0.</p>
 </li>
 </ul>
 </li>
-<li><p>A tuple <code class="docutils literal notranslate"><span class="pre">(interface,</span> <span class="pre">)</span></code> is used for the <a class="reference internal" href="#socket.af_can" title="socket.AF_CAN"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_CAN</span></code></a> address family,
+<li><p>A tuple <code class="docutils literal notranslate"><span class="pre">(interface,</span> <span class="pre">)</span></code> is used for the <a class="reference internal" href="#socket.AF_CAN" title="socket.AF_CAN"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_CAN</span></code></a> address family,
 where <em>interface</em> is a string representing a network interface name like
 <code class="docutils literal notranslate"><span class="pre">'can0'</span></code>. The network interface name <code class="docutils literal notranslate"><span class="pre">''</span></code> can be used to receive packets
 from all network interfaces of this family.</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#socket.can_isotp" title="socket.CAN_ISOTP"><code class="xref py py-const docutils literal notranslate"><span class="pre">CAN_ISOTP</span></code></a> protocol require a tuple <code class="docutils literal notranslate"><span class="pre">(interface,</span> <span class="pre">rx_addr,</span> <span class="pre">tx_addr)</span></code>
+<li><p><a class="reference internal" href="#socket.CAN_ISOTP" title="socket.CAN_ISOTP"><code class="xref py py-const docutils literal notranslate"><span class="pre">CAN_ISOTP</span></code></a> protocol require a tuple <code class="docutils literal notranslate"><span class="pre">(interface,</span> <span class="pre">rx_addr,</span> <span class="pre">tx_addr)</span></code>
 where both additional parameters are unsigned long integer that represent a
 CAN identifier (standard or extended).</p></li>
 </ul>
@@ -244,7 +245,7 @@ string format. (ex. <code class="docutils literal notranslate"><span class="pre"
 supported under FreeBSD.</p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#socket.af_alg" title="socket.AF_ALG"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_ALG</span></code></a> is a Linux-only socket based interface to Kernel
+<li><p><a class="reference internal" href="#socket.AF_ALG" title="socket.AF_ALG"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_ALG</span></code></a> is a Linux-only socket based interface to Kernel
 cryptography. An algorithm socket is configured with a tuple of two to four
 elements <code class="docutils literal notranslate"><span class="pre">(type,</span> <span class="pre">name</span> <span class="pre">[,</span> <span class="pre">feat</span> <span class="pre">[,</span> <span class="pre">mask]])</span></code>, where:</p>
 <ul class="simple">
@@ -259,7 +260,7 @@ elements <code class="docutils literal notranslate"><span class="pre">(type,</sp
 <p><span class="versionmodified added">New in version 3.6.</span></p>
 </div>
 </li>
-<li><p><a class="reference internal" href="#socket.af_vsock" title="socket.AF_VSOCK"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_VSOCK</span></code></a> allows communication between virtual machines and
+<li><p><a class="reference internal" href="#socket.AF_VSOCK" title="socket.AF_VSOCK"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_VSOCK</span></code></a> allows communication between virtual machines and
 their hosts. The sockets are represented as a <code class="docutils literal notranslate"><span class="pre">(CID,</span> <span class="pre">port)</span></code> tuple
 where the context ID or CID and port are integers.</p>
 <p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Linux &gt;= 4.8 QEMU &gt;= 2.8 ESX &gt;= 4.0 ESX Workstation &gt;= 6.5.</p>
@@ -267,7 +268,7 @@ where the context ID or CID and port are integers.</p>
 <p><span class="versionmodified added">New in version 3.7.</span></p>
 </div>
 </li>
-<li><p><a class="reference internal" href="#socket.af_packet" title="socket.AF_PACKET"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_PACKET</span></code></a> is a low-level interface directly to network devices.
+<li><p><a class="reference internal" href="#socket.AF_PACKET" title="socket.AF_PACKET"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_PACKET</span></code></a> is a low-level interface directly to network devices.
 The packets are represented by the tuple
 <code class="docutils literal notranslate"><span class="pre">(ifname,</span> <span class="pre">proto[,</span> <span class="pre">pkttype[,</span> <span class="pre">hatype[,</span> <span class="pre">addr]]])</span></code> where:</p>
 <ul class="simple">
@@ -290,7 +291,7 @@ looped back to a packet socket.</p></li>
 address, whose interpretation depends on the device.</p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#socket.af_qipcrtr" title="socket.AF_QIPCRTR"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_QIPCRTR</span></code></a> is a Linux-only socket based interface for communicating
+<li><p><a class="reference internal" href="#socket.AF_QIPCRTR" title="socket.AF_QIPCRTR"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_QIPCRTR</span></code></a> is a Linux-only socket based interface for communicating
 with services running on co-processors in Qualcomm platforms. The address
 family is represented as a <code class="docutils literal notranslate"><span class="pre">(node,</span> <span class="pre">port)</span></code> tuple where the <em>node</em> and <em>port</em>
 are non-negative integers.</p>
@@ -323,7 +324,7 @@ resolution and/or the host configuration.  For deterministic behavior use a
 numeric address in <em>host</em> portion.</p>
 <p>All errors raise exceptions.  The normal exceptions for invalid argument types
 and out-of-memory conditions can be raised; starting from Python 3.3, errors
-related to socket or address semantics raise <a class="reference internal" href="exceptions.html#oserror" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> or one of its
+related to socket or address semantics raise <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> or one of its
 subclasses (they used to raise <a class="reference internal" href="#socket.error" title="socket.error"><code class="xref py py-exc docutils literal notranslate"><span class="pre">socket.error</span></code></a>).</p>
 <p>Non-blocking mode is supported through <a class="reference internal" href="#socket.socket.setblocking" title="socket.socket.setblocking"><code class="xref py py-meth docutils literal notranslate"><span class="pre">setblocking()</span></code></a>.  A
 generalization of this based on timeouts is supported through
@@ -337,16 +338,16 @@ generalization of this based on timeouts is supported through
 <dl class="py exception">
 <dt id="socket.error">
 <em class="property">exception </em><code class="sig-prename descclassname">socket.</code><code class="sig-name descname">error</code><a class="headerlink" href="#socket.error" title="Permalink to this definition">¶</a></dt>
-<dd><p>A deprecated alias of <a class="reference internal" href="exceptions.html#oserror" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a>.</p>
+<dd><p>A deprecated alias of <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a>.</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 3.3: </span>Following <span class="target" id="index-2"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-3151"><strong>PEP 3151</strong></a>, this class was made an alias of <a class="reference internal" href="exceptions.html#oserror" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a>.</p>
+<p><span class="versionmodified changed">Changed in version 3.3: </span>Following <span class="target" id="index-2"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-3151"><strong>PEP 3151</strong></a>, this class was made an alias of <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a>.</p>
 </div>
 </dd></dl>
 
 <dl class="py exception">
 <dt id="socket.herror">
 <em class="property">exception </em><code class="sig-prename descclassname">socket.</code><code class="sig-name descname">herror</code><a class="headerlink" href="#socket.herror" title="Permalink to this definition">¶</a></dt>
-<dd><p>A subclass of <a class="reference internal" href="exceptions.html#oserror" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a>, this exception is raised for
+<dd><p>A subclass of <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a>, this exception is raised for
 address-related errors, i.e. for functions that use <em>h_errno</em> in the POSIX
 C API, including <a class="reference internal" href="#socket.gethostbyname_ex" title="socket.gethostbyname_ex"><code class="xref py py-func docutils literal notranslate"><span class="pre">gethostbyname_ex()</span></code></a> and <a class="reference internal" href="#socket.gethostbyaddr" title="socket.gethostbyaddr"><code class="xref py py-func docutils literal notranslate"><span class="pre">gethostbyaddr()</span></code></a>.
 The accompanying value is a pair <code class="docutils literal notranslate"><span class="pre">(h_errno,</span> <span class="pre">string)</span></code> representing an
@@ -354,14 +355,14 @@ error returned by a library call.  <em>h_errno</em> is a numeric value, while
 <em>string</em> represents the description of <em>h_errno</em>, as returned by the
 <code class="xref c c-func docutils literal notranslate"><span class="pre">hstrerror()</span></code> C function.</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 3.3: </span>This class was made a subclass of <a class="reference internal" href="exceptions.html#oserror" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a>.</p>
+<p><span class="versionmodified changed">Changed in version 3.3: </span>This class was made a subclass of <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a>.</p>
 </div>
 </dd></dl>
 
 <dl class="py exception">
 <dt id="socket.gaierror">
 <em class="property">exception </em><code class="sig-prename descclassname">socket.</code><code class="sig-name descname">gaierror</code><a class="headerlink" href="#socket.gaierror" title="Permalink to this definition">¶</a></dt>
-<dd><p>A subclass of <a class="reference internal" href="exceptions.html#oserror" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a>, this exception is raised for
+<dd><p>A subclass of <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a>, this exception is raised for
 address-related errors by <a class="reference internal" href="#socket.getaddrinfo" title="socket.getaddrinfo"><code class="xref py py-func docutils literal notranslate"><span class="pre">getaddrinfo()</span></code></a> and <a class="reference internal" href="#socket.getnameinfo" title="socket.getnameinfo"><code class="xref py py-func docutils literal notranslate"><span class="pre">getnameinfo()</span></code></a>.
 The accompanying value is a pair <code class="docutils literal notranslate"><span class="pre">(error,</span> <span class="pre">string)</span></code> representing an error
 returned by a library call.  <em>string</em> represents the description of
@@ -369,20 +370,20 @@ returned by a library call.  <em>string</em> represents the description of
 numeric <em>error</em> value will match one of the <code class="xref py py-const docutils literal notranslate"><span class="pre">EAI_*</span></code> constants
 defined in this module.</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 3.3: </span>This class was made a subclass of <a class="reference internal" href="exceptions.html#oserror" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a>.</p>
+<p><span class="versionmodified changed">Changed in version 3.3: </span>This class was made a subclass of <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a>.</p>
 </div>
 </dd></dl>
 
 <dl class="py exception">
 <dt id="socket.timeout">
 <em class="property">exception </em><code class="sig-prename descclassname">socket.</code><code class="sig-name descname">timeout</code><a class="headerlink" href="#socket.timeout" title="Permalink to this definition">¶</a></dt>
-<dd><p>A subclass of <a class="reference internal" href="exceptions.html#oserror" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a>, this exception is raised when a timeout
+<dd><p>A subclass of <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a>, this exception is raised when a timeout
 occurs on a socket which has had timeouts enabled via a prior call to
 <a class="reference internal" href="#socket.socket.settimeout" title="socket.socket.settimeout"><code class="xref py py-meth docutils literal notranslate"><span class="pre">settimeout()</span></code></a> (or implicitly through
 <a class="reference internal" href="#socket.setdefaulttimeout" title="socket.setdefaulttimeout"><code class="xref py py-func docutils literal notranslate"><span class="pre">setdefaulttimeout()</span></code></a>).  The accompanying value is a string
 whose value is currently always “timed out”.</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 3.3: </span>This class was made a subclass of <a class="reference internal" href="exceptions.html#oserror" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a>.</p>
+<p><span class="versionmodified changed">Changed in version 3.3: </span>This class was made a subclass of <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a>.</p>
 </div>
 </dd></dl>
 
@@ -391,46 +392,46 @@ whose value is currently always “timed out”.</p>
 <h3>Constants<a class="headerlink" href="#constants" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><p>The AF_* and SOCK_* constants are now <code class="xref py py-class docutils literal notranslate"><span class="pre">AddressFamily</span></code> and
-<code class="xref py py-class docutils literal notranslate"><span class="pre">SocketKind</span></code> <a class="reference internal" href="enum.html#enum.intenum" title="enum.IntEnum"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></a> collections.</p>
+<code class="xref py py-class docutils literal notranslate"><span class="pre">SocketKind</span></code> <a class="reference internal" href="enum.html#enum.IntEnum" title="enum.IntEnum"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></a> collections.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.4.</span></p>
 </div>
 </div></blockquote>
 <dl class="py data">
-<dt id="socket.af_unix">
-<span id="socket.AF_UNIX"></span><code class="sig-prename descclassname">socket.</code><code class="sig-name descname">AF_UNIX</code><a class="headerlink" href="#socket.af_unix" title="Permalink to this definition">¶</a></dt>
-<dt id="socket.af_inet">
-<span id="socket.AF_INET"></span><code class="sig-prename descclassname">socket.</code><code class="sig-name descname">AF_INET</code><a class="headerlink" href="#socket.af_inet" title="Permalink to this definition">¶</a></dt>
-<dt id="socket.af_inet6">
-<span id="socket.AF_INET6"></span><code class="sig-prename descclassname">socket.</code><code class="sig-name descname">AF_INET6</code><a class="headerlink" href="#socket.af_inet6" title="Permalink to this definition">¶</a></dt>
+<dt id="socket.AF_UNIX">
+<code class="sig-prename descclassname">socket.</code><code class="sig-name descname">AF_UNIX</code><a class="headerlink" href="#socket.AF_UNIX" title="Permalink to this definition">¶</a></dt>
+<dt id="socket.AF_INET">
+<code class="sig-prename descclassname">socket.</code><code class="sig-name descname">AF_INET</code><a class="headerlink" href="#socket.AF_INET" title="Permalink to this definition">¶</a></dt>
+<dt id="socket.AF_INET6">
+<code class="sig-prename descclassname">socket.</code><code class="sig-name descname">AF_INET6</code><a class="headerlink" href="#socket.AF_INET6" title="Permalink to this definition">¶</a></dt>
 <dd><p>These constants represent the address (and protocol) families, used for the
-first argument to <a class="reference internal" href="#socket.socket" title="socket.socket"><code class="xref py py-func docutils literal notranslate"><span class="pre">socket()</span></code></a>.  If the <a class="reference internal" href="#socket.af_unix" title="socket.AF_UNIX"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_UNIX</span></code></a> constant is not
+first argument to <a class="reference internal" href="#socket.socket" title="socket.socket"><code class="xref py py-func docutils literal notranslate"><span class="pre">socket()</span></code></a>.  If the <a class="reference internal" href="#socket.AF_UNIX" title="socket.AF_UNIX"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_UNIX</span></code></a> constant is not
 defined then this protocol is unsupported.  More constants may be available
 depending on the system.</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="socket.sock_stream">
-<span id="socket.SOCK_STREAM"></span><code class="sig-prename descclassname">socket.</code><code class="sig-name descname">SOCK_STREAM</code><a class="headerlink" href="#socket.sock_stream" title="Permalink to this definition">¶</a></dt>
-<dt id="socket.sock_dgram">
-<span id="socket.SOCK_DGRAM"></span><code class="sig-prename descclassname">socket.</code><code class="sig-name descname">SOCK_DGRAM</code><a class="headerlink" href="#socket.sock_dgram" title="Permalink to this definition">¶</a></dt>
-<dt id="socket.sock_raw">
-<span id="socket.SOCK_RAW"></span><code class="sig-prename descclassname">socket.</code><code class="sig-name descname">SOCK_RAW</code><a class="headerlink" href="#socket.sock_raw" title="Permalink to this definition">¶</a></dt>
-<dt id="socket.sock_rdm">
-<span id="socket.SOCK_RDM"></span><code class="sig-prename descclassname">socket.</code><code class="sig-name descname">SOCK_RDM</code><a class="headerlink" href="#socket.sock_rdm" title="Permalink to this definition">¶</a></dt>
-<dt id="socket.sock_seqpacket">
-<span id="socket.SOCK_SEQPACKET"></span><code class="sig-prename descclassname">socket.</code><code class="sig-name descname">SOCK_SEQPACKET</code><a class="headerlink" href="#socket.sock_seqpacket" title="Permalink to this definition">¶</a></dt>
+<dt id="socket.SOCK_STREAM">
+<code class="sig-prename descclassname">socket.</code><code class="sig-name descname">SOCK_STREAM</code><a class="headerlink" href="#socket.SOCK_STREAM" title="Permalink to this definition">¶</a></dt>
+<dt id="socket.SOCK_DGRAM">
+<code class="sig-prename descclassname">socket.</code><code class="sig-name descname">SOCK_DGRAM</code><a class="headerlink" href="#socket.SOCK_DGRAM" title="Permalink to this definition">¶</a></dt>
+<dt id="socket.SOCK_RAW">
+<code class="sig-prename descclassname">socket.</code><code class="sig-name descname">SOCK_RAW</code><a class="headerlink" href="#socket.SOCK_RAW" title="Permalink to this definition">¶</a></dt>
+<dt id="socket.SOCK_RDM">
+<code class="sig-prename descclassname">socket.</code><code class="sig-name descname">SOCK_RDM</code><a class="headerlink" href="#socket.SOCK_RDM" title="Permalink to this definition">¶</a></dt>
+<dt id="socket.SOCK_SEQPACKET">
+<code class="sig-prename descclassname">socket.</code><code class="sig-name descname">SOCK_SEQPACKET</code><a class="headerlink" href="#socket.SOCK_SEQPACKET" title="Permalink to this definition">¶</a></dt>
 <dd><p>These constants represent the socket types, used for the second argument to
 <a class="reference internal" href="#socket.socket" title="socket.socket"><code class="xref py py-func docutils literal notranslate"><span class="pre">socket()</span></code></a>.  More constants may be available depending on the system.
-(Only <a class="reference internal" href="#socket.sock_stream" title="socket.SOCK_STREAM"><code class="xref py py-const docutils literal notranslate"><span class="pre">SOCK_STREAM</span></code></a> and <a class="reference internal" href="#socket.sock_dgram" title="socket.SOCK_DGRAM"><code class="xref py py-const docutils literal notranslate"><span class="pre">SOCK_DGRAM</span></code></a> appear to be generally
+(Only <a class="reference internal" href="#socket.SOCK_STREAM" title="socket.SOCK_STREAM"><code class="xref py py-const docutils literal notranslate"><span class="pre">SOCK_STREAM</span></code></a> and <a class="reference internal" href="#socket.SOCK_DGRAM" title="socket.SOCK_DGRAM"><code class="xref py py-const docutils literal notranslate"><span class="pre">SOCK_DGRAM</span></code></a> appear to be generally
 useful.)</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="socket.sock_cloexec">
-<span id="socket.SOCK_CLOEXEC"></span><code class="sig-prename descclassname">socket.</code><code class="sig-name descname">SOCK_CLOEXEC</code><a class="headerlink" href="#socket.sock_cloexec" title="Permalink to this definition">¶</a></dt>
-<dt id="socket.sock_nonblock">
-<span id="socket.SOCK_NONBLOCK"></span><code class="sig-prename descclassname">socket.</code><code class="sig-name descname">SOCK_NONBLOCK</code><a class="headerlink" href="#socket.sock_nonblock" title="Permalink to this definition">¶</a></dt>
+<dt id="socket.SOCK_CLOEXEC">
+<code class="sig-prename descclassname">socket.</code><code class="sig-name descname">SOCK_CLOEXEC</code><a class="headerlink" href="#socket.SOCK_CLOEXEC" title="Permalink to this definition">¶</a></dt>
+<dt id="socket.SOCK_NONBLOCK">
+<code class="sig-prename descclassname">socket.</code><code class="sig-name descname">SOCK_NONBLOCK</code><a class="headerlink" href="#socket.SOCK_NONBLOCK" title="Permalink to this definition">¶</a></dt>
 <dd><p>These two constants, if defined, can be combined with the socket types and
 allow you to set some flags atomically (thus avoiding possible race
 conditions and the need for separate calls).</p>
@@ -448,8 +449,8 @@ for a more thorough explanation.</p>
 <dl class="py data">
 <dt>
 <code class="sig-name descname">SO_*</code></dt>
-<dt id="socket.somaxconn">
-<span id="socket.SOMAXCONN"></span><code class="sig-prename descclassname">socket.</code><code class="sig-name descname">SOMAXCONN</code><a class="headerlink" href="#socket.somaxconn" title="Permalink to this definition">¶</a></dt>
+<dt id="socket.SOMAXCONN">
+<code class="sig-prename descclassname">socket.</code><code class="sig-name descname">SOMAXCONN</code><a class="headerlink" href="#socket.SOMAXCONN" title="Permalink to this definition">¶</a></dt>
 <dt>
 <code class="sig-name descname">MSG_*</code></dt>
 <dt>
@@ -496,10 +497,10 @@ supports.</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="socket.af_can">
-<span id="socket.AF_CAN"></span><code class="sig-prename descclassname">socket.</code><code class="sig-name descname">AF_CAN</code><a class="headerlink" href="#socket.af_can" title="Permalink to this definition">¶</a></dt>
-<dt id="socket.pf_can">
-<span id="socket.PF_CAN"></span><code class="sig-prename descclassname">socket.</code><code class="sig-name descname">PF_CAN</code><a class="headerlink" href="#socket.pf_can" title="Permalink to this definition">¶</a></dt>
+<dt id="socket.AF_CAN">
+<code class="sig-prename descclassname">socket.</code><code class="sig-name descname">AF_CAN</code><a class="headerlink" href="#socket.AF_CAN" title="Permalink to this definition">¶</a></dt>
+<dt id="socket.PF_CAN">
+<code class="sig-prename descclassname">socket.</code><code class="sig-name descname">PF_CAN</code><a class="headerlink" href="#socket.PF_CAN" title="Permalink to this definition">¶</a></dt>
 <dt>
 <code class="sig-name descname">SOL_CAN_*</code></dt>
 <dt>
@@ -513,8 +514,8 @@ also defined in the socket module.</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="socket.can_bcm">
-<span id="socket.CAN_BCM"></span><code class="sig-prename descclassname">socket.</code><code class="sig-name descname">CAN_BCM</code><a class="headerlink" href="#socket.can_bcm" title="Permalink to this definition">¶</a></dt>
+<dt id="socket.CAN_BCM">
+<code class="sig-prename descclassname">socket.</code><code class="sig-name descname">CAN_BCM</code><a class="headerlink" href="#socket.CAN_BCM" title="Permalink to this definition">¶</a></dt>
 <dt>
 <code class="sig-name descname">CAN_BCM_*</code></dt>
 <dd><p>CAN_BCM, in the CAN protocol family, is the broadcast manager (BCM) protocol.
@@ -531,8 +532,8 @@ defined in the socket module.</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="socket.can_raw_fd_frames">
-<span id="socket.CAN_RAW_FD_FRAMES"></span><code class="sig-prename descclassname">socket.</code><code class="sig-name descname">CAN_RAW_FD_FRAMES</code><a class="headerlink" href="#socket.can_raw_fd_frames" title="Permalink to this definition">¶</a></dt>
+<dt id="socket.CAN_RAW_FD_FRAMES">
+<code class="sig-prename descclassname">socket.</code><code class="sig-name descname">CAN_RAW_FD_FRAMES</code><a class="headerlink" href="#socket.CAN_RAW_FD_FRAMES" title="Permalink to this definition">¶</a></dt>
 <dd><p>Enables CAN FD support in a CAN_RAW socket. This is disabled by default.
 This allows your application to send both CAN and CAN FD frames; however,
 you must accept both CAN and CAN FD frames when reading from the socket.</p>
@@ -544,8 +545,8 @@ you must accept both CAN and CAN FD frames when reading from the socket.</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="socket.can_isotp">
-<span id="socket.CAN_ISOTP"></span><code class="sig-prename descclassname">socket.</code><code class="sig-name descname">CAN_ISOTP</code><a class="headerlink" href="#socket.can_isotp" title="Permalink to this definition">¶</a></dt>
+<dt id="socket.CAN_ISOTP">
+<code class="sig-prename descclassname">socket.</code><code class="sig-name descname">CAN_ISOTP</code><a class="headerlink" href="#socket.CAN_ISOTP" title="Permalink to this definition">¶</a></dt>
 <dd><p>CAN_ISOTP, in the CAN protocol family, is the ISO-TP (ISO 15765-2) protocol.
 ISO-TP constants, documented in the Linux documentation.</p>
 <p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Linux &gt;= 2.6.25.</p>
@@ -555,10 +556,10 @@ ISO-TP constants, documented in the Linux documentation.</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="socket.af_packet">
-<span id="socket.AF_PACKET"></span><code class="sig-prename descclassname">socket.</code><code class="sig-name descname">AF_PACKET</code><a class="headerlink" href="#socket.af_packet" title="Permalink to this definition">¶</a></dt>
-<dt id="socket.pf_packet">
-<span id="socket.PF_PACKET"></span><code class="sig-prename descclassname">socket.</code><code class="sig-name descname">PF_PACKET</code><a class="headerlink" href="#socket.pf_packet" title="Permalink to this definition">¶</a></dt>
+<dt id="socket.AF_PACKET">
+<code class="sig-prename descclassname">socket.</code><code class="sig-name descname">AF_PACKET</code><a class="headerlink" href="#socket.AF_PACKET" title="Permalink to this definition">¶</a></dt>
+<dt id="socket.PF_PACKET">
+<code class="sig-prename descclassname">socket.</code><code class="sig-name descname">PF_PACKET</code><a class="headerlink" href="#socket.PF_PACKET" title="Permalink to this definition">¶</a></dt>
 <dt>
 <code class="sig-name descname">PACKET_*</code></dt>
 <dd><p>Many constants of these forms, documented in the Linux documentation, are
@@ -567,12 +568,12 @@ also defined in the socket module.</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="socket.af_rds">
-<span id="socket.AF_RDS"></span><code class="sig-prename descclassname">socket.</code><code class="sig-name descname">AF_RDS</code><a class="headerlink" href="#socket.af_rds" title="Permalink to this definition">¶</a></dt>
-<dt id="socket.pf_rds">
-<span id="socket.PF_RDS"></span><code class="sig-prename descclassname">socket.</code><code class="sig-name descname">PF_RDS</code><a class="headerlink" href="#socket.pf_rds" title="Permalink to this definition">¶</a></dt>
-<dt id="socket.sol_rds">
-<span id="socket.SOL_RDS"></span><code class="sig-prename descclassname">socket.</code><code class="sig-name descname">SOL_RDS</code><a class="headerlink" href="#socket.sol_rds" title="Permalink to this definition">¶</a></dt>
+<dt id="socket.AF_RDS">
+<code class="sig-prename descclassname">socket.</code><code class="sig-name descname">AF_RDS</code><a class="headerlink" href="#socket.AF_RDS" title="Permalink to this definition">¶</a></dt>
+<dt id="socket.PF_RDS">
+<code class="sig-prename descclassname">socket.</code><code class="sig-name descname">PF_RDS</code><a class="headerlink" href="#socket.PF_RDS" title="Permalink to this definition">¶</a></dt>
+<dt id="socket.SOL_RDS">
+<code class="sig-prename descclassname">socket.</code><code class="sig-name descname">SOL_RDS</code><a class="headerlink" href="#socket.SOL_RDS" title="Permalink to this definition">¶</a></dt>
 <dt>
 <code class="sig-name descname">RDS_*</code></dt>
 <dd><p>Many constants of these forms, documented in the Linux documentation, are
@@ -584,12 +585,12 @@ also defined in the socket module.</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="socket.sio_rcvall">
-<span id="socket.SIO_RCVALL"></span><code class="sig-prename descclassname">socket.</code><code class="sig-name descname">SIO_RCVALL</code><a class="headerlink" href="#socket.sio_rcvall" title="Permalink to this definition">¶</a></dt>
-<dt id="socket.sio_keepalive_vals">
-<span id="socket.SIO_KEEPALIVE_VALS"></span><code class="sig-prename descclassname">socket.</code><code class="sig-name descname">SIO_KEEPALIVE_VALS</code><a class="headerlink" href="#socket.sio_keepalive_vals" title="Permalink to this definition">¶</a></dt>
-<dt id="socket.sio_loopback_fast_path">
-<span id="socket.SIO_LOOPBACK_FAST_PATH"></span><code class="sig-prename descclassname">socket.</code><code class="sig-name descname">SIO_LOOPBACK_FAST_PATH</code><a class="headerlink" href="#socket.sio_loopback_fast_path" title="Permalink to this definition">¶</a></dt>
+<dt id="socket.SIO_RCVALL">
+<code class="sig-prename descclassname">socket.</code><code class="sig-name descname">SIO_RCVALL</code><a class="headerlink" href="#socket.SIO_RCVALL" title="Permalink to this definition">¶</a></dt>
+<dt id="socket.SIO_KEEPALIVE_VALS">
+<code class="sig-prename descclassname">socket.</code><code class="sig-name descname">SIO_KEEPALIVE_VALS</code><a class="headerlink" href="#socket.SIO_KEEPALIVE_VALS" title="Permalink to this definition">¶</a></dt>
+<dt id="socket.SIO_LOOPBACK_FAST_PATH">
+<code class="sig-prename descclassname">socket.</code><code class="sig-name descname">SIO_LOOPBACK_FAST_PATH</code><a class="headerlink" href="#socket.SIO_LOOPBACK_FAST_PATH" title="Permalink to this definition">¶</a></dt>
 <dt>
 <code class="sig-name descname">RCVALL_*</code></dt>
 <dd><p>Constants for Windows’ WSAIoctl(). The constants are used as arguments to the
@@ -607,10 +608,10 @@ the TIPC documentation for more information.</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="socket.af_alg">
-<span id="socket.AF_ALG"></span><code class="sig-prename descclassname">socket.</code><code class="sig-name descname">AF_ALG</code><a class="headerlink" href="#socket.af_alg" title="Permalink to this definition">¶</a></dt>
-<dt id="socket.sol_alg">
-<span id="socket.SOL_ALG"></span><code class="sig-prename descclassname">socket.</code><code class="sig-name descname">SOL_ALG</code><a class="headerlink" href="#socket.sol_alg" title="Permalink to this definition">¶</a></dt>
+<dt id="socket.AF_ALG">
+<code class="sig-prename descclassname">socket.</code><code class="sig-name descname">AF_ALG</code><a class="headerlink" href="#socket.AF_ALG" title="Permalink to this definition">¶</a></dt>
+<dt id="socket.SOL_ALG">
+<code class="sig-prename descclassname">socket.</code><code class="sig-name descname">SOL_ALG</code><a class="headerlink" href="#socket.SOL_ALG" title="Permalink to this definition">¶</a></dt>
 <dt>
 <code class="sig-name descname">ALG_*</code></dt>
 <dd><p>Constants for Linux Kernel cryptography.</p>
@@ -621,10 +622,10 @@ the TIPC documentation for more information.</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="socket.af_vsock">
-<span id="socket.AF_VSOCK"></span><code class="sig-prename descclassname">socket.</code><code class="sig-name descname">AF_VSOCK</code><a class="headerlink" href="#socket.af_vsock" title="Permalink to this definition">¶</a></dt>
-<dt id="socket.ioctl_vm_sockets_get_local_cid">
-<span id="socket.IOCTL_VM_SOCKETS_GET_LOCAL_CID"></span><code class="sig-prename descclassname">socket.</code><code class="sig-name descname">IOCTL_VM_SOCKETS_GET_LOCAL_CID</code><a class="headerlink" href="#socket.ioctl_vm_sockets_get_local_cid" title="Permalink to this definition">¶</a></dt>
+<dt id="socket.AF_VSOCK">
+<code class="sig-prename descclassname">socket.</code><code class="sig-name descname">AF_VSOCK</code><a class="headerlink" href="#socket.AF_VSOCK" title="Permalink to this definition">¶</a></dt>
+<dt id="socket.IOCTL_VM_SOCKETS_GET_LOCAL_CID">
+<code class="sig-prename descclassname">socket.</code><code class="sig-name descname">IOCTL_VM_SOCKETS_GET_LOCAL_CID</code><a class="headerlink" href="#socket.IOCTL_VM_SOCKETS_GET_LOCAL_CID" title="Permalink to this definition">¶</a></dt>
 <dt>
 <code class="sig-name descname">VMADDR*</code></dt>
 <dt>
@@ -637,8 +638,8 @@ the TIPC documentation for more information.</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="socket.af_link">
-<span id="socket.AF_LINK"></span><code class="sig-prename descclassname">socket.</code><code class="sig-name descname">AF_LINK</code><a class="headerlink" href="#socket.af_link" title="Permalink to this definition">¶</a></dt>
+<dt id="socket.AF_LINK">
+<code class="sig-prename descclassname">socket.</code><code class="sig-name descname">AF_LINK</code><a class="headerlink" href="#socket.AF_LINK" title="Permalink to this definition">¶</a></dt>
 <dd><p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: BSD, OSX.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.4.</span></p>
@@ -653,32 +654,32 @@ this platform.</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="socket.bdaddr_any">
-<span id="socket.BDADDR_ANY"></span><code class="sig-prename descclassname">socket.</code><code class="sig-name descname">BDADDR_ANY</code><a class="headerlink" href="#socket.bdaddr_any" title="Permalink to this definition">¶</a></dt>
-<dt id="socket.bdaddr_local">
-<span id="socket.BDADDR_LOCAL"></span><code class="sig-prename descclassname">socket.</code><code class="sig-name descname">BDADDR_LOCAL</code><a class="headerlink" href="#socket.bdaddr_local" title="Permalink to this definition">¶</a></dt>
+<dt id="socket.BDADDR_ANY">
+<code class="sig-prename descclassname">socket.</code><code class="sig-name descname">BDADDR_ANY</code><a class="headerlink" href="#socket.BDADDR_ANY" title="Permalink to this definition">¶</a></dt>
+<dt id="socket.BDADDR_LOCAL">
+<code class="sig-prename descclassname">socket.</code><code class="sig-name descname">BDADDR_LOCAL</code><a class="headerlink" href="#socket.BDADDR_LOCAL" title="Permalink to this definition">¶</a></dt>
 <dd><p>These are string constants containing Bluetooth addresses with special
-meanings. For example, <a class="reference internal" href="#socket.bdaddr_any" title="socket.BDADDR_ANY"><code class="xref py py-const docutils literal notranslate"><span class="pre">BDADDR_ANY</span></code></a> can be used to indicate
+meanings. For example, <a class="reference internal" href="#socket.BDADDR_ANY" title="socket.BDADDR_ANY"><code class="xref py py-const docutils literal notranslate"><span class="pre">BDADDR_ANY</span></code></a> can be used to indicate
 any address when specifying the binding socket with
 <code class="xref py py-const docutils literal notranslate"><span class="pre">BTPROTO_RFCOMM</span></code>.</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="socket.hci_filter">
-<span id="socket.HCI_FILTER"></span><code class="sig-prename descclassname">socket.</code><code class="sig-name descname">HCI_FILTER</code><a class="headerlink" href="#socket.hci_filter" title="Permalink to this definition">¶</a></dt>
-<dt id="socket.hci_time_stamp">
-<span id="socket.HCI_TIME_STAMP"></span><code class="sig-prename descclassname">socket.</code><code class="sig-name descname">HCI_TIME_STAMP</code><a class="headerlink" href="#socket.hci_time_stamp" title="Permalink to this definition">¶</a></dt>
-<dt id="socket.hci_data_dir">
-<span id="socket.HCI_DATA_DIR"></span><code class="sig-prename descclassname">socket.</code><code class="sig-name descname">HCI_DATA_DIR</code><a class="headerlink" href="#socket.hci_data_dir" title="Permalink to this definition">¶</a></dt>
-<dd><p>For use with <code class="xref py py-const docutils literal notranslate"><span class="pre">BTPROTO_HCI</span></code>. <a class="reference internal" href="#socket.hci_filter" title="socket.HCI_FILTER"><code class="xref py py-const docutils literal notranslate"><span class="pre">HCI_FILTER</span></code></a> is not
-available for NetBSD or DragonFlyBSD. <a class="reference internal" href="#socket.hci_time_stamp" title="socket.HCI_TIME_STAMP"><code class="xref py py-const docutils literal notranslate"><span class="pre">HCI_TIME_STAMP</span></code></a> and
-<a class="reference internal" href="#socket.hci_data_dir" title="socket.HCI_DATA_DIR"><code class="xref py py-const docutils literal notranslate"><span class="pre">HCI_DATA_DIR</span></code></a> are not available for FreeBSD, NetBSD, or
+<dt id="socket.HCI_FILTER">
+<code class="sig-prename descclassname">socket.</code><code class="sig-name descname">HCI_FILTER</code><a class="headerlink" href="#socket.HCI_FILTER" title="Permalink to this definition">¶</a></dt>
+<dt id="socket.HCI_TIME_STAMP">
+<code class="sig-prename descclassname">socket.</code><code class="sig-name descname">HCI_TIME_STAMP</code><a class="headerlink" href="#socket.HCI_TIME_STAMP" title="Permalink to this definition">¶</a></dt>
+<dt id="socket.HCI_DATA_DIR">
+<code class="sig-prename descclassname">socket.</code><code class="sig-name descname">HCI_DATA_DIR</code><a class="headerlink" href="#socket.HCI_DATA_DIR" title="Permalink to this definition">¶</a></dt>
+<dd><p>For use with <code class="xref py py-const docutils literal notranslate"><span class="pre">BTPROTO_HCI</span></code>. <a class="reference internal" href="#socket.HCI_FILTER" title="socket.HCI_FILTER"><code class="xref py py-const docutils literal notranslate"><span class="pre">HCI_FILTER</span></code></a> is not
+available for NetBSD or DragonFlyBSD. <a class="reference internal" href="#socket.HCI_TIME_STAMP" title="socket.HCI_TIME_STAMP"><code class="xref py py-const docutils literal notranslate"><span class="pre">HCI_TIME_STAMP</span></code></a> and
+<a class="reference internal" href="#socket.HCI_DATA_DIR" title="socket.HCI_DATA_DIR"><code class="xref py py-const docutils literal notranslate"><span class="pre">HCI_DATA_DIR</span></code></a> are not available for FreeBSD, NetBSD, or
 DragonFlyBSD.</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="socket.af_qipcrtr">
-<span id="socket.AF_QIPCRTR"></span><code class="sig-prename descclassname">socket.</code><code class="sig-name descname">AF_QIPCRTR</code><a class="headerlink" href="#socket.af_qipcrtr" title="Permalink to this definition">¶</a></dt>
+<dt id="socket.AF_QIPCRTR">
+<code class="sig-prename descclassname">socket.</code><code class="sig-name descname">AF_QIPCRTR</code><a class="headerlink" href="#socket.AF_QIPCRTR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constant for Qualcomm’s IPC router protocol, used to communicate with
 service providing remote processors.</p>
 <p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Linux &gt;= 4.7.</p>
@@ -694,13 +695,13 @@ service providing remote processors.</p>
 <dt id="socket.socket">
 <code class="sig-prename descclassname">socket.</code><code class="sig-name descname">socket</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">family</span><span class="o">=</span><span class="default_value">AF_INET</span></em>, <em class="sig-param"><span class="n">type</span><span class="o">=</span><span class="default_value">SOCK_STREAM</span></em>, <em class="sig-param"><span class="n">proto</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">fileno</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#socket.socket" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new socket using the given address family, socket type and protocol
-number.  The address family should be <a class="reference internal" href="#socket.af_inet" title="socket.AF_INET"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_INET</span></code></a> (the default),
-<a class="reference internal" href="#socket.af_inet6" title="socket.AF_INET6"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_INET6</span></code></a>, <a class="reference internal" href="#socket.af_unix" title="socket.AF_UNIX"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_UNIX</span></code></a>, <a class="reference internal" href="#socket.af_can" title="socket.AF_CAN"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_CAN</span></code></a>, <a class="reference internal" href="#socket.af_packet" title="socket.AF_PACKET"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_PACKET</span></code></a>,
-or <a class="reference internal" href="#socket.af_rds" title="socket.AF_RDS"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_RDS</span></code></a>. The socket type should be <a class="reference internal" href="#socket.sock_stream" title="socket.SOCK_STREAM"><code class="xref py py-const docutils literal notranslate"><span class="pre">SOCK_STREAM</span></code></a> (the
-default), <a class="reference internal" href="#socket.sock_dgram" title="socket.SOCK_DGRAM"><code class="xref py py-const docutils literal notranslate"><span class="pre">SOCK_DGRAM</span></code></a>, <a class="reference internal" href="#socket.sock_raw" title="socket.SOCK_RAW"><code class="xref py py-const docutils literal notranslate"><span class="pre">SOCK_RAW</span></code></a> or perhaps one of the other
+number.  The address family should be <a class="reference internal" href="#socket.AF_INET" title="socket.AF_INET"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_INET</span></code></a> (the default),
+<a class="reference internal" href="#socket.AF_INET6" title="socket.AF_INET6"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_INET6</span></code></a>, <a class="reference internal" href="#socket.AF_UNIX" title="socket.AF_UNIX"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_UNIX</span></code></a>, <a class="reference internal" href="#socket.AF_CAN" title="socket.AF_CAN"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_CAN</span></code></a>, <a class="reference internal" href="#socket.AF_PACKET" title="socket.AF_PACKET"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_PACKET</span></code></a>,
+or <a class="reference internal" href="#socket.AF_RDS" title="socket.AF_RDS"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_RDS</span></code></a>. The socket type should be <a class="reference internal" href="#socket.SOCK_STREAM" title="socket.SOCK_STREAM"><code class="xref py py-const docutils literal notranslate"><span class="pre">SOCK_STREAM</span></code></a> (the
+default), <a class="reference internal" href="#socket.SOCK_DGRAM" title="socket.SOCK_DGRAM"><code class="xref py py-const docutils literal notranslate"><span class="pre">SOCK_DGRAM</span></code></a>, <a class="reference internal" href="#socket.SOCK_RAW" title="socket.SOCK_RAW"><code class="xref py py-const docutils literal notranslate"><span class="pre">SOCK_RAW</span></code></a> or perhaps one of the other
 <code class="docutils literal notranslate"><span class="pre">SOCK_</span></code> constants. The protocol number is usually zero and may be omitted
-or in the case where the address family is <a class="reference internal" href="#socket.af_can" title="socket.AF_CAN"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_CAN</span></code></a> the protocol
-should be one of <code class="xref py py-const docutils literal notranslate"><span class="pre">CAN_RAW</span></code>, <a class="reference internal" href="#socket.can_bcm" title="socket.CAN_BCM"><code class="xref py py-const docutils literal notranslate"><span class="pre">CAN_BCM</span></code></a> or <a class="reference internal" href="#socket.can_isotp" title="socket.CAN_ISOTP"><code class="xref py py-const docutils literal notranslate"><span class="pre">CAN_ISOTP</span></code></a>.</p>
+or in the case where the address family is <a class="reference internal" href="#socket.AF_CAN" title="socket.AF_CAN"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_CAN</span></code></a> the protocol
+should be one of <code class="xref py py-const docutils literal notranslate"><span class="pre">CAN_RAW</span></code>, <a class="reference internal" href="#socket.CAN_BCM" title="socket.CAN_BCM"><code class="xref py py-const docutils literal notranslate"><span class="pre">CAN_BCM</span></code></a> or <a class="reference internal" href="#socket.CAN_ISOTP" title="socket.CAN_ISOTP"><code class="xref py py-const docutils literal notranslate"><span class="pre">CAN_ISOTP</span></code></a>.</p>
 <p>If <em>fileno</em> is specified, the values for <em>family</em>, <em>type</em>, and <em>proto</em> are
 auto-detected from the specified file descriptor.  Auto-detection can be
 overruled by calling the function with explicit <em>family</em>, <em>type</em>, or <em>proto</em>
@@ -725,7 +726,7 @@ The AF_RDS family was added.</p>
 <p><span class="versionmodified changed">Changed in version 3.7: </span>The CAN_ISOTP protocol was added.</p>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 3.7: </span>When <a class="reference internal" href="#socket.sock_nonblock" title="socket.SOCK_NONBLOCK"><code class="xref py py-const docutils literal notranslate"><span class="pre">SOCK_NONBLOCK</span></code></a> or <a class="reference internal" href="#socket.sock_cloexec" title="socket.SOCK_CLOEXEC"><code class="xref py py-const docutils literal notranslate"><span class="pre">SOCK_CLOEXEC</span></code></a>
+<p><span class="versionmodified changed">Changed in version 3.7: </span>When <a class="reference internal" href="#socket.SOCK_NONBLOCK" title="socket.SOCK_NONBLOCK"><code class="xref py py-const docutils literal notranslate"><span class="pre">SOCK_NONBLOCK</span></code></a> or <a class="reference internal" href="#socket.SOCK_CLOEXEC" title="socket.SOCK_CLOEXEC"><code class="xref py py-const docutils literal notranslate"><span class="pre">SOCK_CLOEXEC</span></code></a>
 bit flags are applied to <em>type</em> they are cleared, and
 <a class="reference internal" href="#socket.socket.type" title="socket.socket.type"><code class="xref py py-attr docutils literal notranslate"><span class="pre">socket.type</span></code></a> will not reflect them.  They are still passed
 to the underlying system <cite>socket()</cite> call.  Therefore,</p>
@@ -745,8 +746,8 @@ to the underlying system <cite>socket()</cite> call.  Therefore,</p>
 <code class="sig-prename descclassname">socket.</code><code class="sig-name descname">socketpair</code><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param">family</em><span class="optional">[</span>, <em class="sig-param">type</em><span class="optional">[</span>, <em class="sig-param">proto</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#socket.socketpair" title="Permalink to this definition">¶</a></dt>
 <dd><p>Build a pair of connected socket objects using the given address family, socket
 type, and protocol number.  Address family, socket type, and protocol number are
-as for the <a class="reference internal" href="#socket.socket" title="socket.socket"><code class="xref py py-func docutils literal notranslate"><span class="pre">socket()</span></code></a> function above. The default family is <a class="reference internal" href="#socket.af_unix" title="socket.AF_UNIX"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_UNIX</span></code></a>
-if defined on the platform; otherwise, the default is <a class="reference internal" href="#socket.af_inet" title="socket.AF_INET"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_INET</span></code></a>.</p>
+as for the <a class="reference internal" href="#socket.socket" title="socket.socket"><code class="xref py py-func docutils literal notranslate"><span class="pre">socket()</span></code></a> function above. The default family is <a class="reference internal" href="#socket.AF_UNIX" title="socket.AF_UNIX"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_UNIX</span></code></a>
+if defined on the platform; otherwise, the default is <a class="reference internal" href="#socket.AF_INET" title="socket.AF_INET"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_INET</span></code></a>.</p>
 <p>The newly created sockets are <a class="reference internal" href="os.html#fd-inheritance"><span class="std std-ref">non-inheritable</span></a>.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">Changed in version 3.2: </span>The returned socket objects now support the whole socket API, rather
@@ -766,7 +767,7 @@ than a subset.</p>
 <dd><p>Connect to a TCP service listening on the Internet <em>address</em> (a 2-tuple
 <code class="docutils literal notranslate"><span class="pre">(host,</span> <span class="pre">port)</span></code>), and return the socket object.  This is a higher-level
 function than <a class="reference internal" href="#socket.socket.connect" title="socket.socket.connect"><code class="xref py py-meth docutils literal notranslate"><span class="pre">socket.connect()</span></code></a>: if <em>host</em> is a non-numeric hostname,
-it will try to resolve it for both <a class="reference internal" href="#socket.af_inet" title="socket.AF_INET"><code class="xref py py-data docutils literal notranslate"><span class="pre">AF_INET</span></code></a> and <a class="reference internal" href="#socket.af_inet6" title="socket.AF_INET6"><code class="xref py py-data docutils literal notranslate"><span class="pre">AF_INET6</span></code></a>,
+it will try to resolve it for both <a class="reference internal" href="#socket.AF_INET" title="socket.AF_INET"><code class="xref py py-data docutils literal notranslate"><span class="pre">AF_INET</span></code></a> and <a class="reference internal" href="#socket.AF_INET6" title="socket.AF_INET6"><code class="xref py py-data docutils literal notranslate"><span class="pre">AF_INET6</span></code></a>,
 and then try to connect to all possible addresses in turn until a
 connection succeeds.  This makes it easy to write clients that are
 compatible to both IPv4 and IPv6.</p>
@@ -787,13 +788,13 @@ are ‘’ or 0 respectively the OS default behavior will be used.</p>
 <code class="sig-prename descclassname">socket.</code><code class="sig-name descname">create_server</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">address</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">family</span><span class="o">=</span><span class="default_value">AF_INET</span></em>, <em class="sig-param"><span class="n">backlog</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">reuse_port</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">dualstack_ipv6</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#socket.create_server" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convenience function which creates a TCP socket bound to <em>address</em> (a 2-tuple
 <code class="docutils literal notranslate"><span class="pre">(host,</span> <span class="pre">port)</span></code>) and return the socket object.</p>
-<p><em>family</em> should be either <a class="reference internal" href="#socket.af_inet" title="socket.AF_INET"><code class="xref py py-data docutils literal notranslate"><span class="pre">AF_INET</span></code></a> or <a class="reference internal" href="#socket.af_inet6" title="socket.AF_INET6"><code class="xref py py-data docutils literal notranslate"><span class="pre">AF_INET6</span></code></a>.
+<p><em>family</em> should be either <a class="reference internal" href="#socket.AF_INET" title="socket.AF_INET"><code class="xref py py-data docutils literal notranslate"><span class="pre">AF_INET</span></code></a> or <a class="reference internal" href="#socket.AF_INET6" title="socket.AF_INET6"><code class="xref py py-data docutils literal notranslate"><span class="pre">AF_INET6</span></code></a>.
 <em>backlog</em> is the queue size passed to <a class="reference internal" href="#socket.socket.listen" title="socket.socket.listen"><code class="xref py py-meth docutils literal notranslate"><span class="pre">socket.listen()</span></code></a>; when <code class="docutils literal notranslate"><span class="pre">0</span></code>
 a default reasonable value is chosen.
 <em>reuse_port</em> dictates whether to set the <code class="xref py py-data docutils literal notranslate"><span class="pre">SO_REUSEPORT</span></code> socket option.</p>
 <p>If <em>dualstack_ipv6</em> is true and the platform supports it the socket will
 be able to accept both IPv4 and IPv6 connections, else it will raise
-<a class="reference internal" href="exceptions.html#valueerror" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>. Most POSIX platforms and Windows are supposed to support
+<a class="reference internal" href="exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>. Most POSIX platforms and Windows are supposed to support
 this functionality.
 When this functionality is enabled the address returned by
 <a class="reference internal" href="#socket.socket.getpeername" title="socket.socket.getpeername"><code class="xref py py-meth docutils literal notranslate"><span class="pre">socket.getpeername()</span></code></a> when an IPv4 connection occurs will be an IPv6
@@ -860,8 +861,8 @@ method.  The socket is assumed to be in blocking mode.</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="socket.sockettype">
-<span id="socket.SocketType"></span><code class="sig-prename descclassname">socket.</code><code class="sig-name descname">SocketType</code><a class="headerlink" href="#socket.sockettype" title="Permalink to this definition">¶</a></dt>
+<dt id="socket.SocketType">
+<code class="sig-prename descclassname">socket.</code><code class="sig-name descname">SocketType</code><a class="headerlink" href="#socket.SocketType" title="Permalink to this definition">¶</a></dt>
 <dd><p>This is a Python type object that represents the socket object type. It is the
 same as <code class="docutils literal notranslate"><span class="pre">type(socket(...))</span></code>.</p>
 </dd></dl>
@@ -905,8 +906,8 @@ a string representing the canonical name of the <em>host</em> if
 <code class="xref py py-const docutils literal notranslate"><span class="pre">AI_CANONNAME</span></code> is part of the <em>flags</em> argument; else <em>canonname</em>
 will be empty.  <em>sockaddr</em> is a tuple describing a socket address, whose
 format depends on the returned <em>family</em> (a <code class="docutils literal notranslate"><span class="pre">(address,</span> <span class="pre">port)</span></code> 2-tuple for
-<a class="reference internal" href="#socket.af_inet" title="socket.AF_INET"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_INET</span></code></a>, a <code class="docutils literal notranslate"><span class="pre">(address,</span> <span class="pre">port,</span> <span class="pre">flowinfo,</span> <span class="pre">scope_id)</span></code> 4-tuple for
-<a class="reference internal" href="#socket.af_inet6" title="socket.AF_INET6"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_INET6</span></code></a>), and is meant to be passed to the <a class="reference internal" href="#socket.socket.connect" title="socket.socket.connect"><code class="xref py py-meth docutils literal notranslate"><span class="pre">socket.connect()</span></code></a>
+<a class="reference internal" href="#socket.AF_INET" title="socket.AF_INET"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_INET</span></code></a>, a <code class="docutils literal notranslate"><span class="pre">(address,</span> <span class="pre">port,</span> <span class="pre">flowinfo,</span> <span class="pre">scope_id)</span></code> 4-tuple for
+<a class="reference internal" href="#socket.AF_INET6" title="socket.AF_INET6"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_INET6</span></code></a>), and is meant to be passed to the <a class="reference internal" href="#socket.socket.connect" title="socket.socket.connect"><code class="xref py py-meth docutils literal notranslate"><span class="pre">socket.connect()</span></code></a>
 method.</p>
 <p class="audit-hook">Raises an <a class="reference internal" href="sys.html#auditing"><span class="std std-ref">auditing event</span></a> <code class="docutils literal notranslate"><span class="pre">socket.getaddrinfo</span></code> with arguments <code class="docutils literal notranslate"><span class="pre">host</span></code>, <code class="docutils literal notranslate"><span class="pre">port</span></code>, <code class="docutils literal notranslate"><span class="pre">family</span></code>, <code class="docutils literal notranslate"><span class="pre">type</span></code>, <code class="docutils literal notranslate"><span class="pre">protocol</span></code>.</p>
 <p>The following example fetches address information for a hypothetical TCP
@@ -1006,7 +1007,7 @@ contains meaningful <em>scope_id</em>. Usually this happens for multicast addres
 <dd><p>Translate an Internet protocol name (for example, <code class="docutils literal notranslate"><span class="pre">'icmp'</span></code>) to a constant
 suitable for passing as the (optional) third argument to the <a class="reference internal" href="#socket.socket" title="socket.socket"><code class="xref py py-func docutils literal notranslate"><span class="pre">socket()</span></code></a>
 function.  This is usually only needed for sockets opened in “raw” mode
-(<a class="reference internal" href="#socket.sock_raw" title="socket.SOCK_RAW"><code class="xref py py-const docutils literal notranslate"><span class="pre">SOCK_RAW</span></code></a>); for the normal socket modes, the correct protocol is chosen
+(<a class="reference internal" href="#socket.SOCK_RAW" title="socket.SOCK_RAW"><code class="xref py py-const docutils literal notranslate"><span class="pre">SOCK_RAW</span></code></a>); for the normal socket modes, the correct protocol is chosen
 automatically if the protocol is omitted or zero.</p>
 </dd></dl>
 
@@ -1083,7 +1084,7 @@ for the 32-bit packed binary this function returns.</p>
 <p><a class="reference internal" href="#socket.inet_aton" title="socket.inet_aton"><code class="xref py py-func docutils literal notranslate"><span class="pre">inet_aton()</span></code></a> also accepts strings with less than three dots; see the
 Unix manual page <em class="manpage"><a class="manpage reference external" href="https://manpages.debian.org/inet(3)">inet(3)</a></em> for details.</p>
 <p>If the IPv4 address string passed to this function is invalid,
-<a class="reference internal" href="exceptions.html#oserror" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> will be raised. Note that exactly what is valid depends on
+<a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> will be raised. Note that exactly what is valid depends on
 the underlying C implementation of <code class="xref c c-func docutils literal notranslate"><span class="pre">inet_aton()</span></code>.</p>
 <p><a class="reference internal" href="#socket.inet_aton" title="socket.inet_aton"><code class="xref py py-func docutils literal notranslate"><span class="pre">inet_aton()</span></code></a> does not support IPv6, and <a class="reference internal" href="#socket.inet_pton" title="socket.inet_pton"><code class="xref py py-func docutils literal notranslate"><span class="pre">inet_pton()</span></code></a> should be used
 instead for IPv4/v6 dual stack support.</p>
@@ -1099,7 +1100,7 @@ standard C library and needs objects of type <code class="xref c c-type docutils
 is the C type for the 32-bit packed binary data this function takes as an
 argument.</p>
 <p>If the byte sequence passed to this function is not exactly 4 bytes in
-length, <a class="reference internal" href="exceptions.html#oserror" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> will be raised. <a class="reference internal" href="#socket.inet_ntoa" title="socket.inet_ntoa"><code class="xref py py-func docutils literal notranslate"><span class="pre">inet_ntoa()</span></code></a> does not
+length, <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> will be raised. <a class="reference internal" href="#socket.inet_ntoa" title="socket.inet_ntoa"><code class="xref py py-func docutils literal notranslate"><span class="pre">inet_ntoa()</span></code></a> does not
 support IPv6, and <a class="reference internal" href="#socket.inet_ntop" title="socket.inet_ntop"><code class="xref py py-func docutils literal notranslate"><span class="pre">inet_ntop()</span></code></a> should be used instead for IPv4/v6 dual
 stack support.</p>
 <div class="versionchanged">
@@ -1114,9 +1115,9 @@ stack support.</p>
 binary format. <a class="reference internal" href="#socket.inet_pton" title="socket.inet_pton"><code class="xref py py-func docutils literal notranslate"><span class="pre">inet_pton()</span></code></a> is useful when a library or network protocol
 calls for an object of type <code class="xref c c-type docutils literal notranslate"><span class="pre">struct</span> <span class="pre">in_addr</span></code> (similar to
 <a class="reference internal" href="#socket.inet_aton" title="socket.inet_aton"><code class="xref py py-func docutils literal notranslate"><span class="pre">inet_aton()</span></code></a>) or <code class="xref c c-type docutils literal notranslate"><span class="pre">struct</span> <span class="pre">in6_addr</span></code>.</p>
-<p>Supported values for <em>address_family</em> are currently <a class="reference internal" href="#socket.af_inet" title="socket.AF_INET"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_INET</span></code></a> and
-<a class="reference internal" href="#socket.af_inet6" title="socket.AF_INET6"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_INET6</span></code></a>. If the IP address string <em>ip_string</em> is invalid,
-<a class="reference internal" href="exceptions.html#oserror" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> will be raised. Note that exactly what is valid depends on
+<p>Supported values for <em>address_family</em> are currently <a class="reference internal" href="#socket.AF_INET" title="socket.AF_INET"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_INET</span></code></a> and
+<a class="reference internal" href="#socket.AF_INET6" title="socket.AF_INET6"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_INET6</span></code></a>. If the IP address string <em>ip_string</em> is invalid,
+<a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> will be raised. Note that exactly what is valid depends on
 both the value of <em>address_family</em> and the underlying implementation of
 <code class="xref c c-func docutils literal notranslate"><span class="pre">inet_pton()</span></code>.</p>
 <p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Unix (maybe not all platforms), Windows.</p>
@@ -1134,10 +1135,10 @@ example, <code class="docutils literal notranslate"><span class="pre">'7.10.0.5'
 <a class="reference internal" href="#socket.inet_ntop" title="socket.inet_ntop"><code class="xref py py-func docutils literal notranslate"><span class="pre">inet_ntop()</span></code></a> is useful when a library or network protocol returns an
 object of type <code class="xref c c-type docutils literal notranslate"><span class="pre">struct</span> <span class="pre">in_addr</span></code> (similar to <a class="reference internal" href="#socket.inet_ntoa" title="socket.inet_ntoa"><code class="xref py py-func docutils literal notranslate"><span class="pre">inet_ntoa()</span></code></a>) or
 <code class="xref c c-type docutils literal notranslate"><span class="pre">struct</span> <span class="pre">in6_addr</span></code>.</p>
-<p>Supported values for <em>address_family</em> are currently <a class="reference internal" href="#socket.af_inet" title="socket.AF_INET"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_INET</span></code></a> and
-<a class="reference internal" href="#socket.af_inet6" title="socket.AF_INET6"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_INET6</span></code></a>. If the bytes object <em>packed_ip</em> is not the correct
-length for the specified address family, <a class="reference internal" href="exceptions.html#valueerror" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> will be raised.
-<a class="reference internal" href="exceptions.html#oserror" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> is raised for errors from the call to <a class="reference internal" href="#socket.inet_ntop" title="socket.inet_ntop"><code class="xref py py-func docutils literal notranslate"><span class="pre">inet_ntop()</span></code></a>.</p>
+<p>Supported values for <em>address_family</em> are currently <a class="reference internal" href="#socket.AF_INET" title="socket.AF_INET"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_INET</span></code></a> and
+<a class="reference internal" href="#socket.AF_INET6" title="socket.AF_INET6"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_INET6</span></code></a>. If the bytes object <em>packed_ip</em> is not the correct
+length for the specified address family, <a class="reference internal" href="exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> will be raised.
+<a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> is raised for errors from the call to <a class="reference internal" href="#socket.inet_ntop" title="socket.inet_ntop"><code class="xref py py-func docutils literal notranslate"><span class="pre">inet_ntop()</span></code></a>.</p>
 <p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Unix (maybe not all platforms), Windows.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">Changed in version 3.4: </span>Windows support added</p>
@@ -1148,15 +1149,15 @@ length for the specified address family, <a class="reference internal" href="exc
 </dd></dl>
 
 <dl class="py function">
-<dt id="socket.cmsg_len">
-<span id="socket.CMSG_LEN"></span><code class="sig-prename descclassname">socket.</code><code class="sig-name descname">CMSG_LEN</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">length</span></em><span class="sig-paren">)</span><a class="headerlink" href="#socket.cmsg_len" title="Permalink to this definition">¶</a></dt>
+<dt id="socket.CMSG_LEN">
+<code class="sig-prename descclassname">socket.</code><code class="sig-name descname">CMSG_LEN</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">length</span></em><span class="sig-paren">)</span><a class="headerlink" href="#socket.CMSG_LEN" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the total length, without trailing padding, of an ancillary
 data item with associated data of the given <em>length</em>.  This value
 can often be used as the buffer size for <a class="reference internal" href="#socket.socket.recvmsg" title="socket.socket.recvmsg"><code class="xref py py-meth docutils literal notranslate"><span class="pre">recvmsg()</span></code></a> to
 receive a single item of ancillary data, but <span class="target" id="index-3"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc3542.html"><strong>RFC 3542</strong></a> requires
-portable applications to use <a class="reference internal" href="#socket.cmsg_space" title="socket.CMSG_SPACE"><code class="xref py py-func docutils literal notranslate"><span class="pre">CMSG_SPACE()</span></code></a> and thus include
+portable applications to use <a class="reference internal" href="#socket.CMSG_SPACE" title="socket.CMSG_SPACE"><code class="xref py py-func docutils literal notranslate"><span class="pre">CMSG_SPACE()</span></code></a> and thus include
 space for padding, even when the item will be the last in the
-buffer.  Raises <a class="reference internal" href="exceptions.html#overflowerror" title="OverflowError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OverflowError</span></code></a> if <em>length</em> is outside the
+buffer.  Raises <a class="reference internal" href="exceptions.html#OverflowError" title="OverflowError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OverflowError</span></code></a> if <em>length</em> is outside the
 permissible range of values.</p>
 <p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: most Unix platforms, possibly others.</p>
 <div class="versionadded">
@@ -1165,14 +1166,14 @@ permissible range of values.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="socket.cmsg_space">
-<span id="socket.CMSG_SPACE"></span><code class="sig-prename descclassname">socket.</code><code class="sig-name descname">CMSG_SPACE</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">length</span></em><span class="sig-paren">)</span><a class="headerlink" href="#socket.cmsg_space" title="Permalink to this definition">¶</a></dt>
+<dt id="socket.CMSG_SPACE">
+<code class="sig-prename descclassname">socket.</code><code class="sig-name descname">CMSG_SPACE</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">length</span></em><span class="sig-paren">)</span><a class="headerlink" href="#socket.CMSG_SPACE" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the buffer size needed for <a class="reference internal" href="#socket.socket.recvmsg" title="socket.socket.recvmsg"><code class="xref py py-meth docutils literal notranslate"><span class="pre">recvmsg()</span></code></a> to
 receive an ancillary data item with associated data of the given
 <em>length</em>, along with any trailing padding.  The buffer space needed
-to receive multiple items is the sum of the <a class="reference internal" href="#socket.cmsg_space" title="socket.CMSG_SPACE"><code class="xref py py-func docutils literal notranslate"><span class="pre">CMSG_SPACE()</span></code></a>
+to receive multiple items is the sum of the <a class="reference internal" href="#socket.CMSG_SPACE" title="socket.CMSG_SPACE"><code class="xref py py-func docutils literal notranslate"><span class="pre">CMSG_SPACE()</span></code></a>
 values for their associated data lengths.  Raises
-<a class="reference internal" href="exceptions.html#overflowerror" title="OverflowError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OverflowError</span></code></a> if <em>length</em> is outside the permissible range
+<a class="reference internal" href="exceptions.html#OverflowError" title="OverflowError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OverflowError</span></code></a> if <em>length</em> is outside the permissible range
 of values.</p>
 <p>Note that some systems might support ancillary data without
 providing this function.  Also note that setting the buffer size
@@ -1206,7 +1207,7 @@ meanings.</p>
 <dt id="socket.sethostname">
 <code class="sig-prename descclassname">socket.</code><code class="sig-name descname">sethostname</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#socket.sethostname" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the machine’s hostname to <em>name</em>.  This will raise an
-<a class="reference internal" href="exceptions.html#oserror" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> if you don’t have enough rights.</p>
+<a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> if you don’t have enough rights.</p>
 <p class="audit-hook">Raises an <a class="reference internal" href="sys.html#auditing"><span class="std std-ref">auditing event</span></a> <code class="docutils literal notranslate"><span class="pre">socket.sethostname</span></code> with argument <code class="docutils literal notranslate"><span class="pre">name</span></code>.</p>
 <p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Unix.</p>
 <div class="versionadded">
@@ -1219,7 +1220,7 @@ meanings.</p>
 <code class="sig-prename descclassname">socket.</code><code class="sig-name descname">if_nameindex</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#socket.if_nameindex" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a list of network interface information
 (index int, name string) tuples.
-<a class="reference internal" href="exceptions.html#oserror" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> if the system call fails.</p>
+<a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> if the system call fails.</p>
 <p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Unix, Windows.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.3.</span></p>
@@ -1234,7 +1235,7 @@ meanings.</p>
 <code class="sig-prename descclassname">socket.</code><code class="sig-name descname">if_nametoindex</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">if_name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#socket.if_nametoindex" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a network interface index number corresponding to an
 interface name.
-<a class="reference internal" href="exceptions.html#oserror" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> if no interface with the given name exists.</p>
+<a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> if no interface with the given name exists.</p>
 <p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Unix, Windows.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.3.</span></p>
@@ -1249,7 +1250,7 @@ interface name.
 <code class="sig-prename descclassname">socket.</code><code class="sig-name descname">if_indextoname</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">if_index</span></em><span class="sig-paren">)</span><a class="headerlink" href="#socket.if_indextoname" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a network interface name corresponding to an
 interface index number.
-<a class="reference internal" href="exceptions.html#oserror" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> if no interface with the given index exists.</p>
+<a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> if no interface with the given index exists.</p>
 <p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Unix, Windows.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.3.</span></p>
@@ -1285,7 +1286,7 @@ connections. The return value is a pair <code class="docutils literal notranslat
 <div class="versionchanged">
 <p><span class="versionmodified changed">Changed in version 3.5: </span>If the system call is interrupted and the signal handler does not raise
 an exception, the method now retries the system call instead of raising
-an <a class="reference internal" href="exceptions.html#interruptederror" title="InterruptedError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InterruptedError</span></code></a> exception (see <span class="target" id="index-4"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0475"><strong>PEP 475</strong></a> for the rationale).</p>
+an <a class="reference internal" href="exceptions.html#InterruptedError" title="InterruptedError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InterruptedError</span></code></a> exception (see <span class="target" id="index-4"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0475"><strong>PEP 475</strong></a> for the rationale).</p>
 </div>
 </dd></dl>
 
@@ -1309,7 +1310,7 @@ queued data is flushed).</p>
 it is recommended to <a class="reference internal" href="#socket.close" title="socket.close"><code class="xref py py-meth docutils literal notranslate"><span class="pre">close()</span></code></a> them explicitly, or to use a
 <a class="reference internal" href="../reference/compound_stmts.html#with"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">with</span></code></a> statement around them.</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 3.6: </span><a class="reference internal" href="exceptions.html#oserror" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> is now raised if an error occurs when the underlying
+<p><span class="versionmodified changed">Changed in version 3.6: </span><a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> is now raised if an error occurs when the underlying
 <code class="xref c c-func docutils literal notranslate"><span class="pre">close()</span></code> call is made.</p>
 </div>
 <div class="admonition note">
@@ -1330,12 +1331,12 @@ address family — see above.)</p>
 connection completes, or raise a <a class="reference internal" href="#socket.timeout" title="socket.timeout"><code class="xref py py-exc docutils literal notranslate"><span class="pre">socket.timeout</span></code></a> on timeout, if the
 signal handler doesn’t raise an exception and the socket is blocking or has
 a timeout. For non-blocking sockets, the method raises an
-<a class="reference internal" href="exceptions.html#interruptederror" title="InterruptedError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InterruptedError</span></code></a> exception if the connection is interrupted by a
+<a class="reference internal" href="exceptions.html#InterruptedError" title="InterruptedError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InterruptedError</span></code></a> exception if the connection is interrupted by a
 signal (or the exception raised by the signal handler).</p>
 <p class="audit-hook">Raises an <a class="reference internal" href="sys.html#auditing"><span class="std std-ref">auditing event</span></a> <code class="docutils literal notranslate"><span class="pre">socket.connect</span></code> with arguments <code class="docutils literal notranslate"><span class="pre">self</span></code>, <code class="docutils literal notranslate"><span class="pre">address</span></code>.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">Changed in version 3.5: </span>The method now waits until the connection completes instead of raising an
-<a class="reference internal" href="exceptions.html#interruptederror" title="InterruptedError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InterruptedError</span></code></a> exception if the connection is interrupted by a
+<a class="reference internal" href="exceptions.html#InterruptedError" title="InterruptedError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InterruptedError</span></code></a> exception if the connection is interrupted by a
 signal, the signal handler doesn’t raise an exception and the socket is
 blocking or has a timeout (see the <span class="target" id="index-5"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0475"><strong>PEP 475</strong></a> for the rationale).</p>
 </div>
@@ -1493,7 +1494,7 @@ original socket unless all other file objects have been closed and
 <p class="admonition-title">Note</p>
 <p>On Windows, the file-like object created by <a class="reference internal" href="#socket.socket.makefile" title="socket.socket.makefile"><code class="xref py py-meth docutils literal notranslate"><span class="pre">makefile()</span></code></a> cannot be
 used where a file object with a file descriptor is expected, such as the
-stream arguments of <a class="reference internal" href="subprocess.html#subprocess.popen" title="subprocess.Popen"><code class="xref py py-meth docutils literal notranslate"><span class="pre">subprocess.Popen()</span></code></a>.</p>
+stream arguments of <a class="reference internal" href="subprocess.html#subprocess.Popen" title="subprocess.Popen"><code class="xref py py-meth docutils literal notranslate"><span class="pre">subprocess.Popen()</span></code></a>.</p>
 </div>
 </dd></dl>
 
@@ -1512,7 +1513,7 @@ should be a relatively small power of 2, for example, 4096.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">Changed in version 3.5: </span>If the system call is interrupted and the signal handler does not raise
 an exception, the method now retries the system call instead of raising
-an <a class="reference internal" href="exceptions.html#interruptederror" title="InterruptedError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InterruptedError</span></code></a> exception (see <span class="target" id="index-7"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0475"><strong>PEP 475</strong></a> for the rationale).</p>
+an <a class="reference internal" href="exceptions.html#InterruptedError" title="InterruptedError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InterruptedError</span></code></a> exception (see <span class="target" id="index-7"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0475"><strong>PEP 475</strong></a> for the rationale).</p>
 </div>
 </dd></dl>
 
@@ -1527,7 +1528,7 @@ to zero. (The format of <em>address</em> depends on the address family — see a
 <div class="versionchanged">
 <p><span class="versionmodified changed">Changed in version 3.5: </span>If the system call is interrupted and the signal handler does not raise
 an exception, the method now retries the system call instead of raising
-an <a class="reference internal" href="exceptions.html#interruptederror" title="InterruptedError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InterruptedError</span></code></a> exception (see <span class="target" id="index-8"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0475"><strong>PEP 475</strong></a> for the rationale).</p>
+an <a class="reference internal" href="exceptions.html#InterruptedError" title="InterruptedError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InterruptedError</span></code></a> exception (see <span class="target" id="index-8"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0475"><strong>PEP 475</strong></a> for the rationale).</p>
 </div>
 <div class="versionchanged">
 <p><span class="versionmodified changed">Changed in version 3.7: </span>For multicast IPv6 address, first item of <em>address</em> does not contain
@@ -1544,7 +1545,7 @@ the socket.  The <em>ancbufsize</em> argument sets the size in bytes of
 the internal buffer used to receive the ancillary data; it defaults
 to 0, meaning that no ancillary data will be received.  Appropriate
 buffer sizes for ancillary data can be calculated using
-<a class="reference internal" href="#socket.cmsg_space" title="socket.CMSG_SPACE"><code class="xref py py-func docutils literal notranslate"><span class="pre">CMSG_SPACE()</span></code></a> or <a class="reference internal" href="#socket.cmsg_len" title="socket.CMSG_LEN"><code class="xref py py-func docutils literal notranslate"><span class="pre">CMSG_LEN()</span></code></a>, and items which do not fit
+<a class="reference internal" href="#socket.CMSG_SPACE" title="socket.CMSG_SPACE"><code class="xref py py-func docutils literal notranslate"><span class="pre">CMSG_SPACE()</span></code></a> or <a class="reference internal" href="#socket.CMSG_LEN" title="socket.CMSG_LEN"><code class="xref py py-func docutils literal notranslate"><span class="pre">CMSG_LEN()</span></code></a>, and items which do not fit
 into the buffer might be truncated or discarded.  The <em>flags</em>
 argument defaults to 0 and has the same meaning as for
 <a class="reference internal" href="#socket.socket.recv" title="socket.socket.recv"><code class="xref py py-meth docutils literal notranslate"><span class="pre">recv()</span></code></a>.</p>
@@ -1562,9 +1563,9 @@ If the receiving socket is unconnected, <em>address</em> is the address of
 the sending socket, if available; otherwise, its value is
 unspecified.</p>
 <p>On some systems, <a class="reference internal" href="#socket.socket.sendmsg" title="socket.socket.sendmsg"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sendmsg()</span></code></a> and <a class="reference internal" href="#socket.socket.recvmsg" title="socket.socket.recvmsg"><code class="xref py py-meth docutils literal notranslate"><span class="pre">recvmsg()</span></code></a> can be used to
-pass file descriptors between processes over an <a class="reference internal" href="#socket.af_unix" title="socket.AF_UNIX"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_UNIX</span></code></a>
+pass file descriptors between processes over an <a class="reference internal" href="#socket.AF_UNIX" title="socket.AF_UNIX"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_UNIX</span></code></a>
 socket.  When this facility is used (it is often restricted to
-<a class="reference internal" href="#socket.sock_stream" title="socket.SOCK_STREAM"><code class="xref py py-const docutils literal notranslate"><span class="pre">SOCK_STREAM</span></code></a> sockets), <a class="reference internal" href="#socket.socket.recvmsg" title="socket.socket.recvmsg"><code class="xref py py-meth docutils literal notranslate"><span class="pre">recvmsg()</span></code></a> will return, in its
+<a class="reference internal" href="#socket.SOCK_STREAM" title="socket.SOCK_STREAM"><code class="xref py py-const docutils literal notranslate"><span class="pre">SOCK_STREAM</span></code></a> sockets), <a class="reference internal" href="#socket.socket.recvmsg" title="socket.socket.recvmsg"><code class="xref py py-meth docutils literal notranslate"><span class="pre">recvmsg()</span></code></a> will return, in its
 ancillary data, items of the form <code class="docutils literal notranslate"><span class="pre">(socket.SOL_SOCKET,</span>
 <span class="pre">socket.SCM_RIGHTS,</span> <span class="pre">fds)</span></code>, where <em>fds</em> is a <a class="reference internal" href="stdtypes.html#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> object
 representing the new file descriptors as a binary array of the
@@ -1574,7 +1575,7 @@ close any file descriptors received via this mechanism.</p>
 <p>Some systems do not indicate the truncated length of ancillary data
 items which have been only partially received.  If an item appears
 to extend beyond the end of the buffer, <a class="reference internal" href="#socket.socket.recvmsg" title="socket.socket.recvmsg"><code class="xref py py-meth docutils literal notranslate"><span class="pre">recvmsg()</span></code></a> will issue
-a <a class="reference internal" href="exceptions.html#runtimewarning" title="RuntimeWarning"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RuntimeWarning</span></code></a>, and will return the part of it which is
+a <a class="reference internal" href="exceptions.html#RuntimeWarning" title="RuntimeWarning"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RuntimeWarning</span></code></a>, and will return the part of it which is
 inside the buffer provided it has not been truncated before the
 start of its associated data.</p>
 <p>On systems which support the <code class="xref py py-const docutils literal notranslate"><span class="pre">SCM_RIGHTS</span></code> mechanism, the
@@ -1601,7 +1602,7 @@ messages being received).  See also <a class="reference internal" href="#socket.
 <div class="versionchanged">
 <p><span class="versionmodified changed">Changed in version 3.5: </span>If the system call is interrupted and the signal handler does not raise
 an exception, the method now retries the system call instead of raising
-an <a class="reference internal" href="exceptions.html#interruptederror" title="InterruptedError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InterruptedError</span></code></a> exception (see <span class="target" id="index-9"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0475"><strong>PEP 475</strong></a> for the rationale).</p>
+an <a class="reference internal" href="exceptions.html#InterruptedError" title="InterruptedError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InterruptedError</span></code></a> exception (see <span class="target" id="index-9"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0475"><strong>PEP 475</strong></a> for the rationale).</p>
 </div>
 </dd></dl>
 
@@ -1675,7 +1676,7 @@ information on this topic, consult the <a class="reference internal" href="../ho
 <div class="versionchanged">
 <p><span class="versionmodified changed">Changed in version 3.5: </span>If the system call is interrupted and the signal handler does not raise
 an exception, the method now retries the system call instead of raising
-an <a class="reference internal" href="exceptions.html#interruptederror" title="InterruptedError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InterruptedError</span></code></a> exception (see <span class="target" id="index-10"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0475"><strong>PEP 475</strong></a> for the rationale).</p>
+an <a class="reference internal" href="exceptions.html#InterruptedError" title="InterruptedError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InterruptedError</span></code></a> exception (see <span class="target" id="index-10"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0475"><strong>PEP 475</strong></a> for the rationale).</p>
 </div>
 </dd></dl>
 
@@ -1695,7 +1696,7 @@ The socket timeout is now the maximum total duration to send all data.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">Changed in version 3.5: </span>If the system call is interrupted and the signal handler does not raise
 an exception, the method now retries the system call instead of raising
-an <a class="reference internal" href="exceptions.html#interruptederror" title="InterruptedError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InterruptedError</span></code></a> exception (see <span class="target" id="index-11"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0475"><strong>PEP 475</strong></a> for the rationale).</p>
+an <a class="reference internal" href="exceptions.html#InterruptedError" title="InterruptedError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InterruptedError</span></code></a> exception (see <span class="target" id="index-11"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0475"><strong>PEP 475</strong></a> for the rationale).</p>
 </div>
 </dd></dl>
 
@@ -1713,7 +1714,7 @@ above.)</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">Changed in version 3.5: </span>If the system call is interrupted and the signal handler does not raise
 an exception, the method now retries the system call instead of raising
-an <a class="reference internal" href="exceptions.html#interruptederror" title="InterruptedError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InterruptedError</span></code></a> exception (see <span class="target" id="index-12"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0475"><strong>PEP 475</strong></a> for the rationale).</p>
+an <a class="reference internal" href="exceptions.html#InterruptedError" title="InterruptedError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InterruptedError</span></code></a> exception (see <span class="target" id="index-12"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0475"><strong>PEP 475</strong></a> for the rationale).</p>
 </div>
 </dd></dl>
 
@@ -1733,14 +1734,14 @@ data (control messages) as an iterable of zero or more tuples
 <em>cmsg_type</em> are integers specifying the protocol level and
 protocol-specific type respectively, and <em>cmsg_data</em> is a
 bytes-like object holding the associated data.  Note that
-some systems (in particular, systems without <a class="reference internal" href="#socket.cmsg_space" title="socket.CMSG_SPACE"><code class="xref py py-func docutils literal notranslate"><span class="pre">CMSG_SPACE()</span></code></a>)
+some systems (in particular, systems without <a class="reference internal" href="#socket.CMSG_SPACE" title="socket.CMSG_SPACE"><code class="xref py py-func docutils literal notranslate"><span class="pre">CMSG_SPACE()</span></code></a>)
 might support sending only one control message per call.  The
 <em>flags</em> argument defaults to 0 and has the same meaning as for
 <a class="reference internal" href="#socket.socket.send" title="socket.socket.send"><code class="xref py py-meth docutils literal notranslate"><span class="pre">send()</span></code></a>.  If <em>address</em> is supplied and not <code class="docutils literal notranslate"><span class="pre">None</span></code>, it sets a
 destination address for the message.  The return value is the
 number of bytes of non-ancillary data sent.</p>
 <p>The following function sends the list of file descriptors <em>fds</em>
-over an <a class="reference internal" href="#socket.af_unix" title="socket.AF_UNIX"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_UNIX</span></code></a> socket, on systems which support the
+over an <a class="reference internal" href="#socket.AF_UNIX" title="socket.AF_UNIX"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_UNIX</span></code></a> socket, on systems which support the
 <code class="xref py py-const docutils literal notranslate"><span class="pre">SCM_RIGHTS</span></code> mechanism.  See also <a class="reference internal" href="#socket.socket.recvmsg" title="socket.socket.recvmsg"><code class="xref py py-meth docutils literal notranslate"><span class="pre">recvmsg()</span></code></a>.</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">socket</span><span class="o">,</span> <span class="nn">array</span>
 
@@ -1756,15 +1757,15 @@ over an <a class="reference internal" href="#socket.af_unix" title="socket.AF_UN
 <div class="versionchanged">
 <p><span class="versionmodified changed">Changed in version 3.5: </span>If the system call is interrupted and the signal handler does not raise
 an exception, the method now retries the system call instead of raising
-an <a class="reference internal" href="exceptions.html#interruptederror" title="InterruptedError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InterruptedError</span></code></a> exception (see <span class="target" id="index-13"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0475"><strong>PEP 475</strong></a> for the rationale).</p>
+an <a class="reference internal" href="exceptions.html#InterruptedError" title="InterruptedError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InterruptedError</span></code></a> exception (see <span class="target" id="index-13"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0475"><strong>PEP 475</strong></a> for the rationale).</p>
 </div>
 </dd></dl>
 
 <dl class="py method">
 <dt id="socket.socket.sendmsg_afalg">
 <code class="sig-prename descclassname">socket.</code><code class="sig-name descname">sendmsg_afalg</code><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param">msg</em>, <span class="optional">]</span><em class="sig-param">*</em>, <em class="sig-param">op</em><span class="optional">[</span>, <em class="sig-param">iv</em><span class="optional">[</span>, <em class="sig-param">assoclen</em><span class="optional">[</span>, <em class="sig-param">flags</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#socket.socket.sendmsg_afalg" title="Permalink to this definition">¶</a></dt>
-<dd><p>Specialized version of <a class="reference internal" href="#socket.socket.sendmsg" title="socket.socket.sendmsg"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sendmsg()</span></code></a> for <a class="reference internal" href="#socket.af_alg" title="socket.AF_ALG"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_ALG</span></code></a> socket.
-Set mode, IV, AEAD associated data length and flags for <a class="reference internal" href="#socket.af_alg" title="socket.AF_ALG"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_ALG</span></code></a> socket.</p>
+<dd><p>Specialized version of <a class="reference internal" href="#socket.socket.sendmsg" title="socket.socket.sendmsg"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sendmsg()</span></code></a> for <a class="reference internal" href="#socket.AF_ALG" title="socket.AF_ALG"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_ALG</span></code></a> socket.
+Set mode, IV, AEAD associated data length and flags for <a class="reference internal" href="#socket.AF_ALG" title="socket.AF_ALG"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_ALG</span></code></a> socket.</p>
 <p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Linux &gt;= 2.6.38.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.6.</span></p>
@@ -1774,7 +1775,7 @@ Set mode, IV, AEAD associated data length and flags for <a class="reference inte
 <dl class="py method">
 <dt id="socket.socket.send_fds">
 <code class="sig-prename descclassname">socket.</code><code class="sig-name descname">send_fds</code><span class="sig-paren">(</span><em class="sig-param">sock</em>, <em class="sig-param">buffers</em>, <em class="sig-param">fds</em><span class="optional">[</span>, <em class="sig-param">flags</em><span class="optional">[</span>, <em class="sig-param">address</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#socket.socket.send_fds" title="Permalink to this definition">¶</a></dt>
-<dd><p>Send the list of file descriptors <em>fds</em> over an <a class="reference internal" href="#socket.af_unix" title="socket.AF_UNIX"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_UNIX</span></code></a> socket.
+<dd><p>Send the list of file descriptors <em>fds</em> over an <a class="reference internal" href="#socket.AF_UNIX" title="socket.AF_UNIX"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_UNIX</span></code></a> socket.
 The <em>fds</em> parameter is a sequence of file descriptors.
 Consult <a class="reference internal" href="#socket.socket.sendmsg" title="socket.socket.sendmsg"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sendmsg()</span></code></a> for the documentation of these parameters.</p>
 <p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Unix supporting <a class="reference internal" href="#socket.socket.sendmsg" title="socket.socket.sendmsg"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sendmsg()</span></code></a> and <code class="xref py py-const docutils literal notranslate"><span class="pre">SCM_RIGHTS</span></code> mechanism.</p>
@@ -1809,8 +1810,8 @@ regular file <a class="reference internal" href="#socket.socket.send" title="soc
 start reading the file. If specified, <em>count</em> is the total number of bytes
 to transmit as opposed to sending the file until EOF is reached. File
 position is updated on return or also in case of error in which case
-<a class="reference internal" href="io.html#io.iobase.tell" title="io.IOBase.tell"><code class="xref py py-meth docutils literal notranslate"><span class="pre">file.tell()</span></code></a> can be used to figure out the number of
-bytes which were sent. The socket must be of <a class="reference internal" href="#socket.sock_stream" title="socket.SOCK_STREAM"><code class="xref py py-const docutils literal notranslate"><span class="pre">SOCK_STREAM</span></code></a> type.
+<a class="reference internal" href="io.html#io.IOBase.tell" title="io.IOBase.tell"><code class="xref py py-meth docutils literal notranslate"><span class="pre">file.tell()</span></code></a> can be used to figure out the number of
+bytes which were sent. The socket must be of <a class="reference internal" href="#socket.SOCK_STREAM" title="socket.SOCK_STREAM"><code class="xref py py-const docutils literal notranslate"><span class="pre">SOCK_STREAM</span></code></a> type.
 Non-blocking sockets are not supported.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.5.</span></p>
@@ -1838,7 +1839,7 @@ socket is set to non-blocking, else to blocking mode.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">sock.setblocking(False)</span></code> is equivalent to <code class="docutils literal notranslate"><span class="pre">sock.settimeout(0.0)</span></code></p></li>
 </ul>
 <div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 3.7: </span>The method no longer applies <a class="reference internal" href="#socket.sock_nonblock" title="socket.SOCK_NONBLOCK"><code class="xref py py-const docutils literal notranslate"><span class="pre">SOCK_NONBLOCK</span></code></a> flag on
+<p><span class="versionmodified changed">Changed in version 3.7: </span>The method no longer applies <a class="reference internal" href="#socket.SOCK_NONBLOCK" title="socket.SOCK_NONBLOCK"><code class="xref py py-const docutils literal notranslate"><span class="pre">SOCK_NONBLOCK</span></code></a> flag on
 <a class="reference internal" href="#socket.socket.type" title="socket.socket.type"><code class="xref py py-attr docutils literal notranslate"><span class="pre">socket.type</span></code></a>.</p>
 </div>
 </dd></dl>
@@ -1854,7 +1855,7 @@ the operation has completed.  If zero is given, the socket is put in
 non-blocking mode. If <code class="docutils literal notranslate"><span class="pre">None</span></code> is given, the socket is put in blocking mode.</p>
 <p>For further information, please consult the <a class="reference internal" href="#socket-timeouts"><span class="std std-ref">notes on socket timeouts</span></a>.</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 3.7: </span>The method no longer toggles <a class="reference internal" href="#socket.sock_nonblock" title="socket.SOCK_NONBLOCK"><code class="xref py py-const docutils literal notranslate"><span class="pre">SOCK_NONBLOCK</span></code></a> flag on
+<p><span class="versionmodified changed">Changed in version 3.7: </span>The method no longer toggles <a class="reference internal" href="#socket.SOCK_NONBLOCK" title="socket.SOCK_NONBLOCK"><code class="xref py py-const docutils literal notranslate"><span class="pre">SOCK_NONBLOCK</span></code></a> flag on
 <a class="reference internal" href="#socket.socket.type" title="socket.socket.type"><code class="xref py py-attr docutils literal notranslate"><span class="pre">socket.type</span></code></a>.</p>
 </div>
 </dd></dl>
@@ -1971,7 +1972,7 @@ timeout setting.</p>
 </div>
 <div class="section" id="timeouts-and-the-accept-method">
 <h3>Timeouts and the <code class="docutils literal notranslate"><span class="pre">accept</span></code> method<a class="headerlink" href="#timeouts-and-the-accept-method" title="Permalink to this headline">¶</a></h3>
-<p>If <a class="reference internal" href="#socket.getdefaulttimeout" title="socket.getdefaulttimeout"><code class="xref py py-func docutils literal notranslate"><span class="pre">getdefaulttimeout()</span></code></a> is not <a class="reference internal" href="constants.html#none" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a>, sockets returned by
+<p>If <a class="reference internal" href="#socket.getdefaulttimeout" title="socket.getdefaulttimeout"><code class="xref py py-func docutils literal notranslate"><span class="pre">getdefaulttimeout()</span></code></a> is not <a class="reference internal" href="constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a>, sockets returned by
 the <a class="reference internal" href="#socket.socket.accept" title="socket.socket.accept"><code class="xref py py-meth docutils literal notranslate"><span class="pre">accept()</span></code></a> method inherit that timeout.  Otherwise, the
 behaviour depends on settings of the listening socket:</p>
 <ul class="simple">
@@ -2127,7 +2128,7 @@ manager protocol instead, open a socket with:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_CAN</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_DGRAM</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">CAN_BCM</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>After binding (<code class="xref py py-const docutils literal notranslate"><span class="pre">CAN_RAW</span></code>) or connecting (<a class="reference internal" href="#socket.can_bcm" title="socket.CAN_BCM"><code class="xref py py-const docutils literal notranslate"><span class="pre">CAN_BCM</span></code></a>) the socket, you
+<p>After binding (<code class="xref py py-const docutils literal notranslate"><span class="pre">CAN_RAW</span></code>) or connecting (<a class="reference internal" href="#socket.CAN_BCM" title="socket.CAN_BCM"><code class="xref py py-const docutils literal notranslate"><span class="pre">CAN_BCM</span></code></a>) the socket, you
 can use the <a class="reference internal" href="#socket.socket.send" title="socket.socket.send"><code class="xref py py-meth docutils literal notranslate"><span class="pre">socket.send()</span></code></a>, and the <a class="reference internal" href="#socket.socket.recv" title="socket.socket.recv"><code class="xref py py-meth docutils literal notranslate"><span class="pre">socket.recv()</span></code></a> operations (and
 their counterparts) on the socket object as usual.</p>
 <p>This last example might require special privileges:</p>
@@ -2283,6 +2284,7 @@ want to refer to <span class="target" id="index-15"></span><a class="rfc referen
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="ipc.html" >Networking and Interprocess Communication</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">socket</span></code> — Low-level networking interface</a></li>
     <li class="right">
         
 
@@ -2297,7 +2299,7 @@ want to refer to <span class="target" id="index-15"></span><a class="rfc referen
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  

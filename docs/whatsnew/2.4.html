@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
     <title>What’s New in Python 2.4 &#8212; Python 3.9.0a4 documentation</title>
@@ -78,6 +78,7 @@
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">What’s New in Python</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">What’s New in Python 2.4</a></li>
     <li class="right">
         
 
@@ -92,7 +93,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -177,7 +178,7 @@ Hettinger.</p>
 <h2>PEP 237: Unifying Long Integers and Integers<a class="headerlink" href="#pep-237-unifying-long-integers-and-integers" title="Permalink to this headline">¶</a></h2>
 <p>The lengthy transition process for this PEP, begun in Python 2.2, takes another
 step forward in Python 2.4.  In 2.3, certain integer operations that would
-behave differently after int/long unification triggered <a class="reference internal" href="../library/exceptions.html#futurewarning" title="FutureWarning"><code class="xref py py-exc docutils literal notranslate"><span class="pre">FutureWarning</span></code></a>
+behave differently after int/long unification triggered <a class="reference internal" href="../library/exceptions.html#FutureWarning" title="FutureWarning"><code class="xref py py-exc docutils literal notranslate"><span class="pre">FutureWarning</span></code></a>
 warnings and returned values limited to 32 or 64 bits (depending on your
 platform).  In 2.4, these expressions no longer produce a warning and instead
 produce a different result that’s usually a long integer.</p>
@@ -260,7 +261,7 @@ for applications where untrained users need to edit templates.</p>
 <p>When writing the template string, it can be easy to forget the <code class="docutils literal notranslate"><span class="pre">i</span></code> or <code class="docutils literal notranslate"><span class="pre">s</span></code>
 after the closing parenthesis.  This isn’t a big problem if the template is in a
 Python module, because you run the code, get an “Unsupported format character”
-<a class="reference internal" href="../library/exceptions.html#valueerror" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>, and fix the problem.  However, consider an application such
+<a class="reference internal" href="../library/exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>, and fix the problem.  However, consider an application such
 as Mailman where template strings or translations are being edited by users who
 aren’t aware of the Python language.  The format string’s syntax is complicated
 to explain to such users, and if they make a mistake, it’s difficult to provide
@@ -274,7 +275,7 @@ helpful feedback to them.</p>
 </pre></div>
 </div>
 <p>If a key is missing from the dictionary, the <code class="xref py py-meth docutils literal notranslate"><span class="pre">substitute()</span></code> method will
-raise a <a class="reference internal" href="../library/exceptions.html#keyerror" title="KeyError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">KeyError</span></code></a>.  There’s also a <code class="xref py py-meth docutils literal notranslate"><span class="pre">safe_substitute()</span></code> method that
+raise a <a class="reference internal" href="../library/exceptions.html#KeyError" title="KeyError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">KeyError</span></code></a>.  There’s also a <code class="xref py py-meth docutils literal notranslate"><span class="pre">safe_substitute()</span></code> method that
 ignores missing keys:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">Template</span><span class="p">(</span><span class="s1">&#39;$page: $title&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">safe_substitute</span><span class="p">({</span><span class="s1">&#39;page&#39;</span><span class="p">:</span><span class="mi">3</span><span class="p">})</span>
@@ -901,7 +902,7 @@ for the <em>locals</em> parameter.  Previously this had to be a regular Python
 dictionary.  (Contributed by Raymond Hettinger.)</p></li>
 <li><p>The <a class="reference internal" href="../library/functions.html#zip" title="zip"><code class="xref py py-func docutils literal notranslate"><span class="pre">zip()</span></code></a> built-in function and <code class="xref py py-func docutils literal notranslate"><span class="pre">itertools.izip()</span></code> now return an
 empty list if called with no arguments. Previously they raised a
-<a class="reference internal" href="../library/exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> exception.  This makes them more suitable for use with variable
+<a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> exception.  This makes them more suitable for use with variable
 length argument lists:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">transpose</span><span class="p">(</span><span class="n">array</span><span class="p">):</span>
 <span class="gp">... </span>   <span class="k">return</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">array</span><span class="p">)</span>
@@ -918,7 +919,7 @@ length argument lists:</p>
 module object in <code class="docutils literal notranslate"><span class="pre">sys.modules</span></code>.  The incomplete module object left
 behind would fool further imports of the same module into succeeding, leading to
 confusing errors.   (Fixed by Tim Peters.)</p></li>
-<li><p><a class="reference internal" href="../library/constants.html#none" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a> is now a constant; code that binds a new value to  the name
+<li><p><a class="reference internal" href="../library/constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a> is now a constant; code that binds a new value to  the name
 <code class="docutils literal notranslate"><span class="pre">None</span></code> is now a syntax error. (Contributed by Raymond Hettinger.)</p></li>
 </ul>
 <div class="section" id="optimizations">
@@ -1023,7 +1024,7 @@ by Raymond Hettinger.)</p>
 </li>
 <li><p>The <code class="xref py py-mod docutils literal notranslate"><span class="pre">ConfigParser</span></code> classes have been enhanced slightly. The <code class="xref py py-meth docutils literal notranslate"><span class="pre">read()</span></code>
 method now returns a list of the files that were successfully parsed, and the
-<a class="reference internal" href="../library/stdtypes.html#set" title="set"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set()</span></code></a> method raises <a class="reference internal" href="../library/exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> if passed a <em>value</em> argument that
+<a class="reference internal" href="../library/stdtypes.html#set" title="set"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set()</span></code></a> method raises <a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> if passed a <em>value</em> argument that
 isn’t a string.   (Contributed by John Belmonte and David Goodger.)</p></li>
 <li><p>The <a class="reference internal" href="../library/curses.html#module-curses" title="curses: An interface to the curses library, providing portable terminal handling. (Unix)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">curses</span></code></a> module now supports the ncurses extension
 <code class="xref py py-func docutils literal notranslate"><span class="pre">use_default_colors()</span></code>.  On platforms where the terminal supports
@@ -1211,13 +1212,13 @@ patterns result in a large amount of C stack space being consumed, and it was
 possible to overflow the stack. For example, if you matched a 30000-byte string
 of <code class="docutils literal notranslate"><span class="pre">a</span></code> characters against the expression <code class="docutils literal notranslate"><span class="pre">(a|b)+</span></code>, one stack frame was
 consumed per character.  Python 2.3 tried to check for stack overflow and raise
-a <a class="reference internal" href="../library/exceptions.html#runtimeerror" title="RuntimeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RuntimeError</span></code></a> exception, but certain patterns could sidestep the
+a <a class="reference internal" href="../library/exceptions.html#RuntimeError" title="RuntimeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RuntimeError</span></code></a> exception, but certain patterns could sidestep the
 checking and if you were unlucky Python could segfault. Python 2.4’s regular
 expression engine can match this pattern without problems.</p></li>
 <li><p>The <a class="reference internal" href="../library/signal.html#module-signal" title="signal: Set handlers for asynchronous events."><code class="xref py py-mod docutils literal notranslate"><span class="pre">signal</span></code></a> module now performs tighter error-checking on the parameters
 to the <a class="reference internal" href="../library/signal.html#signal.signal" title="signal.signal"><code class="xref py py-func docutils literal notranslate"><span class="pre">signal.signal()</span></code></a> function.  For example, you can’t set a handler on
 the <code class="xref py py-const docutils literal notranslate"><span class="pre">SIGKILL</span></code> signal; previous versions of Python would quietly accept
-this, but 2.4 will raise a <a class="reference internal" href="../library/exceptions.html#runtimeerror" title="RuntimeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RuntimeError</span></code></a> exception.</p></li>
+this, but 2.4 will raise a <a class="reference internal" href="../library/exceptions.html#RuntimeError" title="RuntimeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RuntimeError</span></code></a> exception.</p></li>
 <li><p>Two new functions were added to the <a class="reference internal" href="../library/socket.html#module-socket" title="socket: Low-level networking interface."><code class="xref py py-mod docutils literal notranslate"><span class="pre">socket</span></code></a> module. <code class="xref py py-func docutils literal notranslate"><span class="pre">socketpair()</span></code>
 returns a pair of connected sockets and <code class="docutils literal notranslate"><span class="pre">getservbyport(port)</span></code> looks up the
 service name for a given port number. (Contributed by Dave Cole and Barry
@@ -1316,7 +1317,7 @@ compare the expected output with the actual output.  This class takes a number
 of different flags that customize its behaviour; ambitious users can also write
 a completely new subclass of <code class="xref py py-class docutils literal notranslate"><span class="pre">OutputChecker</span></code>.</p>
 <p>The default output checker provides a number of handy features. For example,
-with the <a class="reference internal" href="../library/doctest.html#doctest.ellipsis" title="doctest.ELLIPSIS"><code class="xref py py-const docutils literal notranslate"><span class="pre">doctest.ELLIPSIS</span></code></a> option flag, an ellipsis (<code class="docutils literal notranslate"><span class="pre">...</span></code>) in the
+with the <a class="reference internal" href="../library/doctest.html#doctest.ELLIPSIS" title="doctest.ELLIPSIS"><code class="xref py py-const docutils literal notranslate"><span class="pre">doctest.ELLIPSIS</span></code></a> option flag, an ellipsis (<code class="docutils literal notranslate"><span class="pre">...</span></code>) in the
 expected output matches any substring,  making it easier to accommodate outputs
 that vary in minor ways:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">o</span> <span class="p">(</span><span class="n">n</span><span class="p">):</span>
@@ -1335,8 +1336,8 @@ that vary in minor ways:</p>
 </pre></div>
 </div>
 <p>Another new capability is producing a diff-style display of the output by
-specifying the <a class="reference internal" href="../library/doctest.html#doctest.report_udiff" title="doctest.REPORT_UDIFF"><code class="xref py py-const docutils literal notranslate"><span class="pre">doctest.REPORT_UDIFF</span></code></a> (unified diffs),
-<a class="reference internal" href="../library/doctest.html#doctest.report_cdiff" title="doctest.REPORT_CDIFF"><code class="xref py py-const docutils literal notranslate"><span class="pre">doctest.REPORT_CDIFF</span></code></a> (context diffs), or <a class="reference internal" href="../library/doctest.html#doctest.report_ndiff" title="doctest.REPORT_NDIFF"><code class="xref py py-const docutils literal notranslate"><span class="pre">doctest.REPORT_NDIFF</span></code></a>
+specifying the <a class="reference internal" href="../library/doctest.html#doctest.REPORT_UDIFF" title="doctest.REPORT_UDIFF"><code class="xref py py-const docutils literal notranslate"><span class="pre">doctest.REPORT_UDIFF</span></code></a> (unified diffs),
+<a class="reference internal" href="../library/doctest.html#doctest.REPORT_CDIFF" title="doctest.REPORT_CDIFF"><code class="xref py py-const docutils literal notranslate"><span class="pre">doctest.REPORT_CDIFF</span></code></a> (context diffs), or <a class="reference internal" href="../library/doctest.html#doctest.REPORT_NDIFF" title="doctest.REPORT_NDIFF"><code class="xref py py-const docutils literal notranslate"><span class="pre">doctest.REPORT_NDIFF</span></code></a>
 (delta-style) option flags.  For example:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">g</span> <span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;&gt;&gt;&gt; g(4)</span>
@@ -1350,7 +1351,7 @@ specifying the <a class="reference internal" href="../library/doctest.html#docte
         <span class="nb">print</span> <span class="n">word</span>
 </pre></div>
 </div>
-<p>Running the above function’s tests with <a class="reference internal" href="../library/doctest.html#doctest.report_udiff" title="doctest.REPORT_UDIFF"><code class="xref py py-const docutils literal notranslate"><span class="pre">doctest.REPORT_UDIFF</span></code></a> specified,
+<p>Running the above function’s tests with <a class="reference internal" href="../library/doctest.html#doctest.REPORT_UDIFF" title="doctest.REPORT_UDIFF"><code class="xref py py-const docutils literal notranslate"><span class="pre">doctest.REPORT_UDIFF</span></code></a> specified,
 you get the following output:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>**********************************************************************
 File &quot;t.py&quot;, line 15, in g
@@ -1421,17 +1422,17 @@ register”.  (Contributed by Jeremy Hylton.)</p></li>
 code:</p>
 <ul class="simple">
 <li><p>Left shifts and hexadecimal/octal constants that are too  large no longer
-trigger a <a class="reference internal" href="../library/exceptions.html#futurewarning" title="FutureWarning"><code class="xref py py-exc docutils literal notranslate"><span class="pre">FutureWarning</span></code></a> and return  a value limited to 32 or 64 bits;
+trigger a <a class="reference internal" href="../library/exceptions.html#FutureWarning" title="FutureWarning"><code class="xref py py-exc docutils literal notranslate"><span class="pre">FutureWarning</span></code></a> and return  a value limited to 32 or 64 bits;
 instead they return a long integer.</p></li>
 <li><p>Integer operations will no longer trigger an <code class="xref py py-exc docutils literal notranslate"><span class="pre">OverflowWarning</span></code>. The
 <code class="xref py py-exc docutils literal notranslate"><span class="pre">OverflowWarning</span></code> warning will disappear in Python 2.5.</p></li>
 <li><p>The <a class="reference internal" href="../library/functions.html#zip" title="zip"><code class="xref py py-func docutils literal notranslate"><span class="pre">zip()</span></code></a> built-in function and <code class="xref py py-func docutils literal notranslate"><span class="pre">itertools.izip()</span></code> now return  an
-empty list instead of raising a <a class="reference internal" href="../library/exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> exception if called with no
+empty list instead of raising a <a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> exception if called with no
 arguments.</p></li>
 <li><p>You can no longer compare the <code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code> and <a class="reference internal" href="../library/datetime.html#datetime.datetime" title="datetime.datetime"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a> instances
 provided by the <a class="reference internal" href="../library/datetime.html#module-datetime" title="datetime: Basic date and time types."><code class="xref py py-mod docutils literal notranslate"><span class="pre">datetime</span></code></a> module.  Two  instances of different classes
 will now always be unequal, and  relative comparisons (<code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>) will raise
-a <a class="reference internal" href="../library/exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a>.</p></li>
+a <a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a>.</p></li>
 <li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">dircache.listdir()</span></code> now passes exceptions to the caller instead of
 returning empty lists.</p></li>
 <li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">LexicalHandler.startDTD()</span></code> used to receive the public and system IDs in
@@ -1442,9 +1443,9 @@ relevant.</p></li>
 <li><p>The <a class="reference internal" href="../library/tarfile.html#module-tarfile" title="tarfile: Read and write tar-format archive files."><code class="xref py py-mod docutils literal notranslate"><span class="pre">tarfile</span></code></a> module now generates GNU-format tar files by default.</p></li>
 <li><p>Encountering a failure while importing a module no longer leaves a
 partially-initialized module object in <code class="docutils literal notranslate"><span class="pre">sys.modules</span></code>.</p></li>
-<li><p><a class="reference internal" href="../library/constants.html#none" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a> is now a constant; code that binds a new value to  the name
+<li><p><a class="reference internal" href="../library/constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a> is now a constant; code that binds a new value to  the name
 <code class="docutils literal notranslate"><span class="pre">None</span></code> is now a syntax error.</p></li>
-<li><p>The <code class="xref py py-func docutils literal notranslate"><span class="pre">signals.signal()</span></code> function now raises a <a class="reference internal" href="../library/exceptions.html#runtimeerror" title="RuntimeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RuntimeError</span></code></a> exception
+<li><p>The <code class="xref py py-func docutils literal notranslate"><span class="pre">signals.signal()</span></code> function now raises a <a class="reference internal" href="../library/exceptions.html#RuntimeError" title="RuntimeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RuntimeError</span></code></a> exception
 for certain illegal values; previously these errors would pass silently.  For
 example, you can no longer set a handler on the <code class="xref py py-const docutils literal notranslate"><span class="pre">SIGKILL</span></code> signal.</p></li>
 </ul>
@@ -1548,6 +1549,7 @@ Fredrik Lundh, Sean Reifschneider, Sadruddin Rejeb.</p>
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >What’s New in Python</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">What’s New in Python 2.4</a></li>
     <li class="right">
         
 
@@ -1562,7 +1564,7 @@ Fredrik Lundh, Sean Reifschneider, Sadruddin Rejeb.</p>
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  

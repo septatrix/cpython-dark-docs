@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
     <title>Module Objects &#8212; Python 3.9.0a4 documentation</title>
@@ -79,6 +79,7 @@
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API Reference Manual</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="concrete.html" accesskey="U">Concrete Objects Layer</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Module Objects</a></li>
     <li class="right">
         
 
@@ -93,7 +94,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -154,7 +155,7 @@ string instead of a Unicode object.</p>
 <dd><p id="index-3">Return the dictionary object that implements <em>module</em>’s namespace; this object
 is the same as the <a class="reference internal" href="../library/stdtypes.html#object.__dict__" title="object.__dict__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__dict__</span></code></a> attribute of the module object.
 If <em>module</em> is not a module object (or a subtype of a module object),
-<a class="reference internal" href="../library/exceptions.html#systemerror" title="SystemError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SystemError</span></code></a> is raised and <code class="docutils literal notranslate"><span class="pre">NULL</span></code> is returned.</p>
+<a class="reference internal" href="../library/exceptions.html#SystemError" title="SystemError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SystemError</span></code></a> is raised and <code class="docutils literal notranslate"><span class="pre">NULL</span></code> is returned.</p>
 <p>It is recommended extensions use other <code class="xref c c-func docutils literal notranslate"><span class="pre">PyModule_*()</span></code> and
 <code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_*()</span></code> functions rather than directly manipulate a module’s
 <a class="reference internal" href="../library/stdtypes.html#object.__dict__" title="object.__dict__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__dict__</span></code></a>.</p>
@@ -164,7 +165,7 @@ If <em>module</em> is not a module object (or a subtype of a module object),
 <dt id="c.PyModule_GetNameObject">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<code class="sig-name descname">PyModule_GetNameObject</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>module</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyModule_GetNameObject" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p id="index-4">Return <em>module</em>’s <a class="reference internal" href="../reference/import.html#name__" title="__name__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__name__</span></code></a> value.  If the module does not provide one,
-or if it is not a string, <a class="reference internal" href="../library/exceptions.html#systemerror" title="SystemError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SystemError</span></code></a> is raised and <code class="docutils literal notranslate"><span class="pre">NULL</span></code> is returned.</p>
+or if it is not a string, <a class="reference internal" href="../library/exceptions.html#SystemError" title="SystemError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SystemError</span></code></a> is raised and <code class="docutils literal notranslate"><span class="pre">NULL</span></code> is returned.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.3.</span></p>
 </div>
@@ -197,7 +198,7 @@ created, or <code class="docutils literal notranslate"><span class="pre">NULL</s
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<code class="sig-name descname">PyModule_GetFilenameObject</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>module</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyModule_GetFilenameObject" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p id="index-5">Return the name of the file from which <em>module</em> was loaded using <em>module</em>’s
 <a class="reference internal" href="../reference/import.html#file__" title="__file__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__file__</span></code></a> attribute.  If this is not defined, or if it is not a
-unicode string, raise <a class="reference internal" href="../library/exceptions.html#systemerror" title="SystemError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SystemError</span></code></a> and return <code class="docutils literal notranslate"><span class="pre">NULL</span></code>; otherwise return
+unicode string, raise <a class="reference internal" href="../library/exceptions.html#SystemError" title="SystemError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SystemError</span></code></a> and return <code class="docutils literal notranslate"><span class="pre">NULL</span></code>; otherwise return
 a reference to a Unicode object.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.2.</span></p>
@@ -340,7 +341,7 @@ like <a class="reference internal" href="#c.PyModule_Create2" title="PyModule_Cr
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<code class="sig-name descname">PyModule_Create2</code><span class="sig-paren">(</span><a class="reference internal" href="#c.PyModuleDef" title="PyModuleDef">PyModuleDef</a> *<em>def</em>, int <em>module_api_version</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyModule_Create2" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Create a new module object, given the definition in <em>def</em>, assuming the
 API version <em>module_api_version</em>.  If that version does not match the version
-of the running interpreter, a <a class="reference internal" href="../library/exceptions.html#runtimewarning" title="RuntimeWarning"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RuntimeWarning</span></code></a> is emitted.</p>
+of the running interpreter, a <a class="reference internal" href="../library/exceptions.html#RuntimeWarning" title="RuntimeWarning"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RuntimeWarning</span></code></a> is emitted.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Most uses of this function should be using <a class="reference internal" href="#c.PyModule_Create" title="PyModule_Create"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyModule_Create()</span></code></a>
@@ -420,7 +421,7 @@ The <em>value</em> pointer of this slot must point to a function of the signatur
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<code class="sig-name descname">create_module</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>spec</em>, <a class="reference internal" href="#c.PyModuleDef" title="PyModuleDef">PyModuleDef</a> *<em>def</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PhonyNameDueToError.create_module" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
-<p>The function receives a <a class="reference internal" href="../library/importlib.html#importlib.machinery.modulespec" title="importlib.machinery.ModuleSpec"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModuleSpec</span></code></a>
+<p>The function receives a <a class="reference internal" href="../library/importlib.html#importlib.machinery.ModuleSpec" title="importlib.machinery.ModuleSpec"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModuleSpec</span></code></a>
 instance, as defined in <span class="target" id="index-7"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0451"><strong>PEP 451</strong></a>, and the module definition.
 It should return a new module object, or set an error
 and return <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.</p>
@@ -483,7 +484,7 @@ with <em>module_api_version</em> set to <code class="xref py py-const docutils l
 <dd><p>Create a new module object, given the definition in <em>module</em> and the
 ModuleSpec <em>spec</em>, assuming the API version <em>module_api_version</em>.
 If that version does not match the version of the running interpreter,
-a <a class="reference internal" href="../library/exceptions.html#runtimewarning" title="RuntimeWarning"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RuntimeWarning</span></code></a> is emitted.</p>
+a <a class="reference internal" href="../library/exceptions.html#RuntimeWarning" title="RuntimeWarning"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RuntimeWarning</span></code></a> is emitted.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Most uses of this function should be using <a class="reference internal" href="#c.PyModule_FromDefAndSpec" title="PyModule_FromDefAndSpec"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyModule_FromDefAndSpec()</span></code></a>
@@ -711,6 +712,7 @@ Return 0 on success or -1 on failure.</p>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API Reference Manual</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="concrete.html" >Concrete Objects Layer</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Module Objects</a></li>
     <li class="right">
         
 
@@ -725,7 +727,7 @@ Return 0 on success or -1 on failure.</p>
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  

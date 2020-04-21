@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
     <title>Initialization, Finalization, and Threads &#8212; Python 3.9.0a4 documentation</title>
@@ -78,6 +78,7 @@
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python/C API Reference Manual</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Initialization, Finalization, and Threads</a></li>
     <li class="right">
         
 
@@ -92,7 +93,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -186,7 +187,7 @@ or equal to <code class="docutils literal notranslate"><span class="pre">2</span
 <code class="sig-name descname">Py_DebugFlag</code></dt>
 <dd><p>Turn on parser debugging output (for expert only, depending on compilation
 options).</p>
-<p>Set by the <a class="reference internal" href="../using/cmdline.html#cmdoption-d"><code class="xref std std-option docutils literal notranslate"><span class="pre">-d</span></code></a> option and the <span class="target" id="index-0"></span><a class="reference internal" href="../using/cmdline.html#envvar-pythondebug"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONDEBUG</span></code></a> environment
+<p>Set by the <a class="reference internal" href="../using/cmdline.html#cmdoption-d"><code class="xref std std-option docutils literal notranslate"><span class="pre">-d</span></code></a> option and the <span class="target" id="index-0"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONDEBUG"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONDEBUG</span></code></a> environment
 variable.</p>
 </dd></dl>
 
@@ -195,7 +196,7 @@ variable.</p>
 <code class="sig-name descname">Py_DontWriteBytecodeFlag</code></dt>
 <dd><p>If set to non-zero, Python won’t try to write <code class="docutils literal notranslate"><span class="pre">.pyc</span></code> files on the
 import of source modules.</p>
-<p>Set by the <a class="reference internal" href="../using/cmdline.html#cmdoption-1"><code class="xref std std-option docutils literal notranslate"><span class="pre">-B</span></code></a> option and the <span class="target" id="index-1"></span><a class="reference internal" href="../using/cmdline.html#envvar-pythondontwritebytecode"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONDONTWRITEBYTECODE</span></code></a>
+<p>Set by the <a class="reference internal" href="../using/cmdline.html#cmdoption-B"><code class="xref std std-option docutils literal notranslate"><span class="pre">-B</span></code></a> option and the <span class="target" id="index-1"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONDONTWRITEBYTECODE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONDONTWRITEBYTECODE</span></code></a>
 environment variable.</p>
 </dd></dl>
 
@@ -210,9 +211,9 @@ environment variable.</p>
 <dl class="c var">
 <dt>
 <code class="sig-name descname">Py_HashRandomizationFlag</code></dt>
-<dd><p>Set to <code class="docutils literal notranslate"><span class="pre">1</span></code> if the <span class="target" id="index-2"></span><a class="reference internal" href="../using/cmdline.html#envvar-pythonhashseed"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONHASHSEED</span></code></a> environment variable is set to
+<dd><p>Set to <code class="docutils literal notranslate"><span class="pre">1</span></code> if the <span class="target" id="index-2"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONHASHSEED"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONHASHSEED</span></code></a> environment variable is set to
 a non-empty string.</p>
-<p>If the flag is non-zero, read the <span class="target" id="index-3"></span><a class="reference internal" href="../using/cmdline.html#envvar-pythonhashseed"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONHASHSEED</span></code></a> environment
+<p>If the flag is non-zero, read the <span class="target" id="index-3"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONHASHSEED"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONHASHSEED</span></code></a> environment
 variable to initialize the secret hash seed.</p>
 </dd></dl>
 
@@ -220,8 +221,8 @@ variable to initialize the secret hash seed.</p>
 <dt>
 <code class="sig-name descname">Py_IgnoreEnvironmentFlag</code></dt>
 <dd><p>Ignore all <span class="target" id="index-4"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHON*</span></code> environment variables, e.g.
-<span class="target" id="index-5"></span><a class="reference internal" href="../using/cmdline.html#envvar-pythonpath"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONPATH</span></code></a> and <span class="target" id="index-6"></span><a class="reference internal" href="../using/cmdline.html#envvar-pythonhome"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONHOME</span></code></a>, that might be set.</p>
-<p>Set by the <a class="reference internal" href="../using/cmdline.html#cmdoption-e"><code class="xref std std-option docutils literal notranslate"><span class="pre">-E</span></code></a> and <a class="reference internal" href="../using/cmdline.html#cmdoption-2"><code class="xref std std-option docutils literal notranslate"><span class="pre">-I</span></code></a> options.</p>
+<span class="target" id="index-5"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONPATH"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONPATH</span></code></a> and <span class="target" id="index-6"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONHOME"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONHOME</span></code></a>, that might be set.</p>
+<p>Set by the <a class="reference internal" href="../using/cmdline.html#cmdoption-E"><code class="xref std std-option docutils literal notranslate"><span class="pre">-E</span></code></a> and <a class="reference internal" href="../using/cmdline.html#cmdoption-I"><code class="xref std std-option docutils literal notranslate"><span class="pre">-I</span></code></a> options.</p>
 </dd></dl>
 
 <dl class="c var">
@@ -230,7 +231,7 @@ variable to initialize the secret hash seed.</p>
 <dd><p>When a script is passed as first argument or the <a class="reference internal" href="../using/cmdline.html#cmdoption-c"><code class="xref std std-option docutils literal notranslate"><span class="pre">-c</span></code></a> option is used,
 enter interactive mode after executing the script or the command, even when
 <a class="reference internal" href="../library/sys.html#sys.stdin" title="sys.stdin"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.stdin</span></code></a> does not appear to be a terminal.</p>
-<p>Set by the <a class="reference internal" href="../using/cmdline.html#cmdoption-i"><code class="xref std std-option docutils literal notranslate"><span class="pre">-i</span></code></a> option and the <span class="target" id="index-7"></span><a class="reference internal" href="../using/cmdline.html#envvar-pythoninspect"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONINSPECT</span></code></a> environment
+<p>Set by the <a class="reference internal" href="../using/cmdline.html#cmdoption-i"><code class="xref std std-option docutils literal notranslate"><span class="pre">-i</span></code></a> option and the <span class="target" id="index-7"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONINSPECT"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONINSPECT</span></code></a> environment
 variable.</p>
 </dd></dl>
 
@@ -245,7 +246,7 @@ variable.</p>
 <code class="sig-name descname">Py_IsolatedFlag</code></dt>
 <dd><p>Run Python in isolated mode. In isolated mode <a class="reference internal" href="../library/sys.html#sys.path" title="sys.path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a> contains
 neither the script’s directory nor the user’s site-packages directory.</p>
-<p>Set by the <a class="reference internal" href="../using/cmdline.html#cmdoption-2"><code class="xref std std-option docutils literal notranslate"><span class="pre">-I</span></code></a> option.</p>
+<p>Set by the <a class="reference internal" href="../using/cmdline.html#cmdoption-I"><code class="xref std std-option docutils literal notranslate"><span class="pre">-I</span></code></a> option.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.4.</span></p>
 </div>
@@ -256,7 +257,7 @@ neither the script’s directory nor the user’s site-packages directory.</p>
 <code class="sig-name descname">Py_LegacyWindowsFSEncodingFlag</code></dt>
 <dd><p>If the flag is non-zero, use the <code class="docutils literal notranslate"><span class="pre">mbcs</span></code> encoding instead of the UTF-8
 encoding for the filesystem encoding.</p>
-<p>Set to <code class="docutils literal notranslate"><span class="pre">1</span></code> if the <span class="target" id="index-8"></span><a class="reference internal" href="../using/cmdline.html#envvar-pythonlegacywindowsfsencoding"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONLEGACYWINDOWSFSENCODING</span></code></a> environment
+<p>Set to <code class="docutils literal notranslate"><span class="pre">1</span></code> if the <span class="target" id="index-8"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONLEGACYWINDOWSFSENCODING"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONLEGACYWINDOWSFSENCODING</span></code></a> environment
 variable is set to a non-empty string.</p>
 <p>See <span class="target" id="index-9"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0529"><strong>PEP 529</strong></a> for more details.</p>
 <p class="availability"><a class="reference internal" href="../library/intro.html#availability"><span class="std std-ref">Availability</span></a>: Windows.</p>
@@ -265,9 +266,9 @@ variable is set to a non-empty string.</p>
 <dl class="c var">
 <dt>
 <code class="sig-name descname">Py_LegacyWindowsStdioFlag</code></dt>
-<dd><p>If the flag is non-zero, use <a class="reference internal" href="../library/io.html#io.fileio" title="io.FileIO"><code class="xref py py-class docutils literal notranslate"><span class="pre">io.FileIO</span></code></a> instead of
+<dd><p>If the flag is non-zero, use <a class="reference internal" href="../library/io.html#io.FileIO" title="io.FileIO"><code class="xref py py-class docutils literal notranslate"><span class="pre">io.FileIO</span></code></a> instead of
 <code class="xref py py-class docutils literal notranslate"><span class="pre">WindowsConsoleIO</span></code> for <a class="reference internal" href="../library/sys.html#module-sys" title="sys: Access system-specific parameters and functions."><code class="xref py py-mod docutils literal notranslate"><span class="pre">sys</span></code></a> standard streams.</p>
-<p>Set to <code class="docutils literal notranslate"><span class="pre">1</span></code> if the <span class="target" id="index-10"></span><a class="reference internal" href="../using/cmdline.html#envvar-pythonlegacywindowsstdio"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONLEGACYWINDOWSSTDIO</span></code></a> environment
+<p>Set to <code class="docutils literal notranslate"><span class="pre">1</span></code> if the <span class="target" id="index-10"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONLEGACYWINDOWSSTDIO"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONLEGACYWINDOWSSTDIO</span></code></a> environment
 variable is set to a non-empty string.</p>
 <p>See <span class="target" id="index-11"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0528"><strong>PEP 528</strong></a> for more details.</p>
 <p class="availability"><a class="reference internal" href="../library/intro.html#availability"><span class="std std-ref">Availability</span></a>: Windows.</p>
@@ -280,22 +281,22 @@ variable is set to a non-empty string.</p>
 manipulations of <a class="reference internal" href="../library/sys.html#sys.path" title="sys.path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a> that it entails.  Also disable these
 manipulations if <a class="reference internal" href="../library/site.html#module-site" title="site: Module responsible for site-specific configuration."><code class="xref py py-mod docutils literal notranslate"><span class="pre">site</span></code></a> is explicitly imported later (call
 <a class="reference internal" href="../library/site.html#site.main" title="site.main"><code class="xref py py-func docutils literal notranslate"><span class="pre">site.main()</span></code></a> if you want them to be triggered).</p>
-<p>Set by the <a class="reference internal" href="../using/cmdline.html#cmdoption-3"><code class="xref std std-option docutils literal notranslate"><span class="pre">-S</span></code></a> option.</p>
+<p>Set by the <a class="reference internal" href="../using/cmdline.html#cmdoption-S"><code class="xref std std-option docutils literal notranslate"><span class="pre">-S</span></code></a> option.</p>
 </dd></dl>
 
 <dl class="c var">
 <dt>
 <code class="sig-name descname">Py_NoUserSiteDirectory</code></dt>
-<dd><p>Don’t add the <a class="reference internal" href="../library/site.html#site.user_site" title="site.USER_SITE"><code class="xref py py-data docutils literal notranslate"><span class="pre">user</span> <span class="pre">site-packages</span> <span class="pre">directory</span></code></a> to
+<dd><p>Don’t add the <a class="reference internal" href="../library/site.html#site.USER_SITE" title="site.USER_SITE"><code class="xref py py-data docutils literal notranslate"><span class="pre">user</span> <span class="pre">site-packages</span> <span class="pre">directory</span></code></a> to
 <a class="reference internal" href="../library/sys.html#sys.path" title="sys.path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a>.</p>
-<p>Set by the <a class="reference internal" href="../using/cmdline.html#cmdoption-s"><code class="xref std std-option docutils literal notranslate"><span class="pre">-s</span></code></a> and <a class="reference internal" href="../using/cmdline.html#cmdoption-2"><code class="xref std std-option docutils literal notranslate"><span class="pre">-I</span></code></a> options, and the
-<span class="target" id="index-12"></span><a class="reference internal" href="../using/cmdline.html#envvar-pythonnousersite"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONNOUSERSITE</span></code></a> environment variable.</p>
+<p>Set by the <a class="reference internal" href="../using/cmdline.html#cmdoption-s"><code class="xref std std-option docutils literal notranslate"><span class="pre">-s</span></code></a> and <a class="reference internal" href="../using/cmdline.html#cmdoption-I"><code class="xref std std-option docutils literal notranslate"><span class="pre">-I</span></code></a> options, and the
+<span class="target" id="index-12"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONNOUSERSITE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONNOUSERSITE</span></code></a> environment variable.</p>
 </dd></dl>
 
 <dl class="c var">
 <dt>
 <code class="sig-name descname">Py_OptimizeFlag</code></dt>
-<dd><p>Set by the <a class="reference internal" href="../using/cmdline.html#cmdoption-o"><code class="xref std std-option docutils literal notranslate"><span class="pre">-O</span></code></a> option and the <span class="target" id="index-13"></span><a class="reference internal" href="../using/cmdline.html#envvar-pythonoptimize"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONOPTIMIZE</span></code></a> environment
+<dd><p>Set by the <a class="reference internal" href="../using/cmdline.html#cmdoption-O"><code class="xref std std-option docutils literal notranslate"><span class="pre">-O</span></code></a> option and the <span class="target" id="index-13"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONOPTIMIZE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONOPTIMIZE</span></code></a> environment
 variable.</p>
 </dd></dl>
 
@@ -313,7 +314,7 @@ variable.</p>
 <dt>
 <code class="sig-name descname">Py_UnbufferedStdioFlag</code></dt>
 <dd><p>Force the stdout and stderr streams to be unbuffered.</p>
-<p>Set by the <a class="reference internal" href="../using/cmdline.html#cmdoption-u"><code class="xref std std-option docutils literal notranslate"><span class="pre">-u</span></code></a> option and the <span class="target" id="index-14"></span><a class="reference internal" href="../using/cmdline.html#envvar-pythonunbuffered"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONUNBUFFERED</span></code></a>
+<p>Set by the <a class="reference internal" href="../using/cmdline.html#cmdoption-u"><code class="xref std std-option docutils literal notranslate"><span class="pre">-u</span></code></a> option and the <span class="target" id="index-14"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONUNBUFFERED"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONUNBUFFERED</span></code></a>
 environment variable.</p>
 </dd></dl>
 
@@ -324,7 +325,7 @@ environment variable.</p>
 (filename or built-in module) from which it is loaded.  If greater or equal
 to <code class="docutils literal notranslate"><span class="pre">2</span></code>, print a message for each file that is checked for when
 searching for a module. Also provides information on module cleanup at exit.</p>
-<p>Set by the <a class="reference internal" href="../using/cmdline.html#cmdoption-4"><code class="xref std std-option docutils literal notranslate"><span class="pre">-v</span></code></a> option and the <span class="target" id="index-15"></span><a class="reference internal" href="../using/cmdline.html#envvar-pythonverbose"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONVERBOSE</span></code></a> environment
+<p>Set by the <a class="reference internal" href="../using/cmdline.html#cmdoption-v"><code class="xref std std-option docutils literal notranslate"><span class="pre">-v</span></code></a> option and the <span class="target" id="index-15"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONVERBOSE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONVERBOSE</span></code></a> environment
 variable.</p>
 </dd></dl>
 
@@ -417,10 +418,10 @@ int <code class="sig-name descname">Py_SetStandardStreamEncoding</code><span cla
 <dd><p id="index-17">This function should be called before <a class="reference internal" href="#c.Py_Initialize" title="Py_Initialize"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_Initialize()</span></code></a>, if it is
 called at all. It specifies which encoding and error handling to use
 with standard IO, with the same meanings as in <a class="reference internal" href="../library/stdtypes.html#str.encode" title="str.encode"><code class="xref py py-func docutils literal notranslate"><span class="pre">str.encode()</span></code></a>.</p>
-<p>It overrides <span class="target" id="index-18"></span><a class="reference internal" href="../using/cmdline.html#envvar-pythonioencoding"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONIOENCODING</span></code></a> values, and allows embedding code
+<p>It overrides <span class="target" id="index-18"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONIOENCODING"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONIOENCODING</span></code></a> values, and allows embedding code
 to control IO encoding when the environment variable does not work.</p>
 <p><em>encoding</em> and/or <em>errors</em> may be <code class="docutils literal notranslate"><span class="pre">NULL</span></code> to use
-<span class="target" id="index-19"></span><a class="reference internal" href="../using/cmdline.html#envvar-pythonioencoding"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONIOENCODING</span></code></a> and/or default values (depending on other
+<span class="target" id="index-19"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONIOENCODING"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONIOENCODING</span></code></a> and/or default values (depending on other
 settings).</p>
 <p>Note that <a class="reference internal" href="../library/sys.html#sys.stderr" title="sys.stderr"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.stderr</span></code></a> always uses the “backslashreplace” error
 handler, regardless of this (or any other) setting.</p>
@@ -661,11 +662,11 @@ popping the first <a class="reference internal" href="../library/sys.html#sys.pa
 void <code class="sig-name descname">PySys_SetArgv</code><span class="sig-paren">(</span>int <em>argc</em>, wchar_t **<em>argv</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PySys_SetArgv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>This function works like <a class="reference internal" href="#c.PySys_SetArgvEx" title="PySys_SetArgvEx"><code class="xref c c-func docutils literal notranslate"><span class="pre">PySys_SetArgvEx()</span></code></a> with <em>updatepath</em> set
 to <code class="docutils literal notranslate"><span class="pre">1</span></code> unless the <strong class="program">python</strong> interpreter was started with the
-<a class="reference internal" href="../using/cmdline.html#cmdoption-2"><code class="xref std std-option docutils literal notranslate"><span class="pre">-I</span></code></a>.</p>
+<a class="reference internal" href="../using/cmdline.html#cmdoption-I"><code class="xref std std-option docutils literal notranslate"><span class="pre">-I</span></code></a>.</p>
 <p>Use <a class="reference internal" href="sys.html#c.Py_DecodeLocale" title="Py_DecodeLocale"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_DecodeLocale()</span></code></a> to decode a bytes string to get a
 <code class="xref c c-type docutils literal notranslate"><span class="pre">wchar_*</span></code> string.</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 3.4: </span>The <em>updatepath</em> value depends on <a class="reference internal" href="../using/cmdline.html#cmdoption-2"><code class="xref std std-option docutils literal notranslate"><span class="pre">-I</span></code></a>.</p>
+<p><span class="versionmodified changed">Changed in version 3.4: </span>The <em>updatepath</em> value depends on <a class="reference internal" href="../using/cmdline.html#cmdoption-I"><code class="xref std std-option docutils literal notranslate"><span class="pre">-I</span></code></a>.</p>
 </div>
 </dd></dl>
 
@@ -673,7 +674,7 @@ to <code class="docutils literal notranslate"><span class="pre">1</span></code> 
 <dt id="c.Py_SetPythonHome">
 void <code class="sig-name descname">Py_SetPythonHome</code><span class="sig-paren">(</span><em class="property">const</em> wchar_t *<em>home</em><span class="sig-paren">)</span><a class="headerlink" href="#c.Py_SetPythonHome" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Set the default “home” directory, that is, the location of the standard
-Python libraries.  See <span class="target" id="index-31"></span><a class="reference internal" href="../using/cmdline.html#envvar-pythonhome"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONHOME</span></code></a> for the meaning of the
+Python libraries.  See <span class="target" id="index-31"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONHOME"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONHOME</span></code></a> for the meaning of the
 argument string.</p>
 <p>The argument should point to a zero-terminated character string in static
 storage whose contents will not change for the duration of the program’s
@@ -687,7 +688,7 @@ this storage.</p>
 <dt id="c.Py_GetPythonHome">
 w_char *<code class="sig-name descname">Py_GetPythonHome</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#c.Py_GetPythonHome" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Return the default “home”, that is, the value set by a previous call to
-<a class="reference internal" href="#c.Py_SetPythonHome" title="Py_SetPythonHome"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_SetPythonHome()</span></code></a>, or the value of the <span class="target" id="index-32"></span><a class="reference internal" href="../using/cmdline.html#envvar-pythonhome"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONHOME</span></code></a>
+<a class="reference internal" href="#c.Py_SetPythonHome" title="Py_SetPythonHome"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_SetPythonHome()</span></code></a>, or the value of the <span class="target" id="index-32"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONHOME"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONHOME</span></code></a>
 environment variable if it is set.</p>
 </dd></dl>
 
@@ -696,13 +697,13 @@ environment variable if it is set.</p>
 <span id="threads"></span><h2>Thread State and the Global Interpreter Lock<a class="headerlink" href="#thread-state-and-the-global-interpreter-lock" title="Permalink to this headline">¶</a></h2>
 <p id="index-33">The Python interpreter is not fully thread-safe.  In order to support
 multi-threaded Python programs, there’s a global lock, called the <a class="reference internal" href="../glossary.html#term-global-interpreter-lock"><span class="xref std std-term">global
-interpreter lock</span></a> or <a class="reference internal" href="../glossary.html#term-gil"><span class="xref std std-term">GIL</span></a>, that must be held by the current thread before
+interpreter lock</span></a> or <a class="reference internal" href="../glossary.html#term-GIL"><span class="xref std std-term">GIL</span></a>, that must be held by the current thread before
 it can safely access Python objects. Without the lock, even the simplest
 operations could cause problems in a multi-threaded program: for example, when
 two threads simultaneously increment the reference count of the same object, the
 reference count could end up being incremented only once instead of twice.</p>
 <p id="index-34">Therefore, the rule exists that only the thread that has acquired the
-<a class="reference internal" href="../glossary.html#term-gil"><span class="xref std std-term">GIL</span></a> may operate on Python objects or call Python/C API functions.
+<a class="reference internal" href="../glossary.html#term-GIL"><span class="xref std std-term">GIL</span></a> may operate on Python objects or call Python/C API functions.
 In order to emulate concurrency of execution, the interpreter regularly
 tries to switch threads (see <a class="reference internal" href="../library/sys.html#sys.setswitchinterval" title="sys.setswitchinterval"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys.setswitchinterval()</span></code></a>).  The lock is also
 released around potentially blocking I/O operations like reading or writing
@@ -713,7 +714,7 @@ global variable pointing to the current <a class="reference internal" href="#c.P
 be retrieved using <a class="reference internal" href="#c.PyThreadState_Get" title="PyThreadState_Get"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyThreadState_Get()</span></code></a>.</p>
 <div class="section" id="releasing-the-gil-from-extension-code">
 <h3>Releasing the GIL from extension code<a class="headerlink" href="#releasing-the-gil-from-extension-code" title="Permalink to this headline">¶</a></h3>
-<p>Most extension code manipulating the <a class="reference internal" href="../glossary.html#term-gil"><span class="xref std std-term">GIL</span></a> has the following simple
+<p>Most extension code manipulating the <a class="reference internal" href="../glossary.html#term-GIL"><span class="xref std std-term">GIL</span></a> has the following simple
 structure:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Save</span> <span class="n">the</span> <span class="kr">thread</span> <span class="n">state</span> <span class="n">in</span> <span class="n">a</span> <span class="n">local</span> <span class="n">variable</span><span class="p">.</span>
 <span class="n">Release</span> <span class="n">the</span> <span class="n">global</span> <span class="n">interpreter</span> <span class="n">lock</span><span class="p">.</span>
@@ -875,7 +876,7 @@ int <code class="sig-name descname">PyEval_ThreadsInitialized</code><span class=
 function can be called without holding the GIL, and therefore can be used to
 avoid calls to the locking API when running single-threaded.</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 3.7: </span>The <a class="reference internal" href="../glossary.html#term-gil"><span class="xref std std-term">GIL</span></a> is now initialized by <a class="reference internal" href="#c.Py_Initialize" title="Py_Initialize"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_Initialize()</span></code></a>.</p>
+<p><span class="versionmodified changed">Changed in version 3.7: </span>The <a class="reference internal" href="../glossary.html#term-GIL"><span class="xref std std-term">GIL</span></a> is now initialized by <a class="reference internal" href="#c.Py_Initialize" title="Py_Initialize"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_Initialize()</span></code></a>.</p>
 </div>
 <div class="deprecated-removed">
 <p><span class="versionmodified">Deprecated since version 3.9, will be removed in version 3.11.</span></p>
@@ -1032,7 +1033,7 @@ declaration.</p>
 <h3>Low-level API<a class="headerlink" href="#low-level-api" title="Permalink to this headline">¶</a></h3>
 <p>All of the following functions must be called after <a class="reference internal" href="#c.Py_Initialize" title="Py_Initialize"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_Initialize()</span></code></a>.</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 3.7: </span><a class="reference internal" href="#c.Py_Initialize" title="Py_Initialize"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_Initialize()</span></code></a> now initializes the <a class="reference internal" href="../glossary.html#term-gil"><span class="xref std std-term">GIL</span></a>.</p>
+<p><span class="versionmodified changed">Changed in version 3.7: </span><a class="reference internal" href="#c.Py_Initialize" title="Py_Initialize"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_Initialize()</span></code></a> now initializes the <a class="reference internal" href="../glossary.html#term-GIL"><span class="xref std std-term">GIL</span></a>.</p>
 </div>
 <dl class="c function">
 <dt id="c.PyInterpreterState_New">
@@ -1550,7 +1551,7 @@ the profile function needs to maintain state, using a different value for <em>ob
 for each thread provides a convenient and thread-safe place to store it.  The
 profile function is called for all monitored events except <code class="xref py py-const docutils literal notranslate"><span class="pre">PyTrace_LINE</span></code>
 <code class="xref py py-const docutils literal notranslate"><span class="pre">PyTrace_OPCODE</span></code> and <code class="xref py py-const docutils literal notranslate"><span class="pre">PyTrace_EXCEPTION</span></code>.</p>
-<p>The caller must hold the <a class="reference internal" href="../glossary.html#term-gil"><span class="xref std std-term">GIL</span></a>.</p>
+<p>The caller must hold the <a class="reference internal" href="../glossary.html#term-GIL"><span class="xref std std-term">GIL</span></a>.</p>
 </dd></dl>
 
 <dl class="c function">
@@ -1562,7 +1563,7 @@ events and per-opcode events, but does not receive any event related to C functi
 objects being called.  Any trace function registered using <a class="reference internal" href="#c.PyEval_SetTrace" title="PyEval_SetTrace"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyEval_SetTrace()</span></code></a>
 will not receive <code class="xref py py-const docutils literal notranslate"><span class="pre">PyTrace_C_CALL</span></code>, <code class="xref py py-const docutils literal notranslate"><span class="pre">PyTrace_C_EXCEPTION</span></code> or
 <code class="xref py py-const docutils literal notranslate"><span class="pre">PyTrace_C_RETURN</span></code> as a value for the <em>what</em> parameter.</p>
-<p>The caller must hold the <a class="reference internal" href="../glossary.html#term-gil"><span class="xref std std-term">GIL</span></a>.</p>
+<p>The caller must hold the <a class="reference internal" href="../glossary.html#term-GIL"><span class="xref std std-term">GIL</span></a>.</p>
 </dd></dl>
 
 </div>
@@ -1868,6 +1869,7 @@ void <code class="sig-name descname">PyThread_ReInitTLS</code><span class="sig-p
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API Reference Manual</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Initialization, Finalization, and Threads</a></li>
     <li class="right">
         
 
@@ -1882,7 +1884,7 @@ void <code class="sig-name descname">PyThread_ReInitTLS</code><span class="sig-p
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  

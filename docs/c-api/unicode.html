@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
     <title>Unicode Objects and Codecs &#8212; Python 3.9.0a4 documentation</title>
@@ -79,6 +79,7 @@
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API Reference Manual</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="concrete.html" accesskey="U">Concrete Objects Layer</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Unicode Objects and Codecs</a></li>
     <li class="right">
         
 
@@ -93,7 +94,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -763,7 +764,7 @@ arguments.</p>
 are decoded according to the given <em>encoding</em> and using the error handling
 defined by <em>errors</em>. Both can be <code class="docutils literal notranslate"><span class="pre">NULL</span></code> to have the interface use the default
 values (see <a class="reference internal" href="#builtincodecs"><span class="std std-ref">Built-in Codecs</span></a> for details).</p>
-<p>All other objects, including Unicode objects, cause a <a class="reference internal" href="../library/exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> to be
+<p>All other objects, including Unicode objects, cause a <a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> to be
 set.</p>
 <p>The API returns <code class="docutils literal notranslate"><span class="pre">NULL</span></code> if there was an error.  The caller is responsible for
 decref’ing the returned objects.</p>
@@ -844,7 +845,7 @@ character index <em>end</em> (excluded).  Negative indices are not supported.</p
 <a class="reference internal" href="#c.Py_UCS4" title="Py_UCS4">Py_UCS4</a> *<code class="sig-name descname">PyUnicode_AsUCS4</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>u</em>, <a class="reference internal" href="#c.Py_UCS4" title="Py_UCS4">Py_UCS4</a> *<em>buffer</em>, Py_ssize_t <em>buflen</em>, int <em>copy_null</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyUnicode_AsUCS4" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Copy the string <em>u</em> into a UCS4 buffer, including a null character, if
 <em>copy_null</em> is set.  Returns <code class="docutils literal notranslate"><span class="pre">NULL</span></code> and sets an exception on error (in
-particular, a <a class="reference internal" href="../library/exceptions.html#systemerror" title="SystemError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SystemError</span></code></a> if <em>buflen</em> is smaller than the length of
+particular, a <a class="reference internal" href="../library/exceptions.html#SystemError" title="SystemError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SystemError</span></code></a> if <em>buflen</em> is smaller than the length of
 <em>u</em>).  <em>buffer</em> is returned on success.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.3.</span></p>
@@ -856,7 +857,7 @@ particular, a <a class="reference internal" href="../library/exceptions.html#sys
 <a class="reference internal" href="#c.Py_UCS4" title="Py_UCS4">Py_UCS4</a> *<code class="sig-name descname">PyUnicode_AsUCS4Copy</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>u</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyUnicode_AsUCS4Copy" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Copy the string <em>u</em> into a new UCS4 buffer that is allocated using
 <a class="reference internal" href="memory.html#c.PyMem_Malloc" title="PyMem_Malloc"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyMem_Malloc()</span></code></a>.  If this fails, <code class="docutils literal notranslate"><span class="pre">NULL</span></code> is returned with a
-<a class="reference internal" href="../library/exceptions.html#memoryerror" title="MemoryError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">MemoryError</span></code></a> set.  The returned buffer always has an extra
+<a class="reference internal" href="../library/exceptions.html#MemoryError" title="MemoryError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">MemoryError</span></code></a> set.  The returned buffer always has an extra
 null code point appended.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.3.</span></p>
@@ -929,7 +930,7 @@ truncated when used in most C functions.</p>
 <dt id="c.PyUnicode_AsUnicodeCopy">
 <a class="reference internal" href="#c.Py_UNICODE" title="Py_UNICODE">Py_UNICODE</a> *<code class="sig-name descname">PyUnicode_AsUnicodeCopy</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>unicode</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyUnicode_AsUnicodeCopy" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Create a copy of a Unicode string ending with a null code point. Return <code class="docutils literal notranslate"><span class="pre">NULL</span></code>
-and raise a <a class="reference internal" href="../library/exceptions.html#memoryerror" title="MemoryError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">MemoryError</span></code></a> exception on memory allocation failure,
+and raise a <a class="reference internal" href="../library/exceptions.html#MemoryError" title="MemoryError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">MemoryError</span></code></a> exception on memory allocation failure,
 otherwise return a new allocated buffer (use <a class="reference internal" href="memory.html#c.PyMem_Free" title="PyMem_Free"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyMem_Free()</span></code></a> to free
 the buffer). Note that the resulting <code class="xref c c-type docutils literal notranslate"><span class="pre">Py_UNICODE*</span></code> string may
 contain embedded null code points, which would cause the string to be
@@ -954,7 +955,7 @@ code units (this includes surrogate pairs as 2 units).</p>
 <dd><p>Copy an instance of a Unicode subtype to a new true Unicode object if
 necessary. If <em>obj</em> is already a true Unicode object (not a subtype),
 return the reference with incremented refcount.</p>
-<p>Objects other than Unicode or its subtypes will cause a <a class="reference internal" href="../library/exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a>.</p>
+<p>Objects other than Unicode or its subtypes will cause a <a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a>.</p>
 </dd></dl>
 
 </div>
@@ -1042,7 +1043,7 @@ argument parsing, the <code class="docutils literal notranslate"><span class="pr
 <dt id="c.PyUnicode_FSConverter">
 int <code class="sig-name descname">PyUnicode_FSConverter</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>obj</em>, void *<em>result</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyUnicode_FSConverter" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>ParseTuple converter: encode <a class="reference internal" href="../library/stdtypes.html#str" title="str"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> objects – obtained directly or
-through the <a class="reference internal" href="../library/os.html#os.pathlike" title="os.PathLike"><code class="xref py py-class docutils literal notranslate"><span class="pre">os.PathLike</span></code></a> interface – to <a class="reference internal" href="../library/stdtypes.html#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> using
+through the <a class="reference internal" href="../library/os.html#os.PathLike" title="os.PathLike"><code class="xref py py-class docutils literal notranslate"><span class="pre">os.PathLike</span></code></a> interface – to <a class="reference internal" href="../library/stdtypes.html#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> using
 <a class="reference internal" href="#c.PyUnicode_EncodeFSDefault" title="PyUnicode_EncodeFSDefault"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyUnicode_EncodeFSDefault()</span></code></a>; <a class="reference internal" href="../library/stdtypes.html#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> objects are output as-is.
 <em>result</em> must be a <code class="xref c c-type docutils literal notranslate"><span class="pre">PyBytesObject*</span></code> which must be released when it is
 no longer used.</p>
@@ -1061,7 +1062,7 @@ conversion function:</p>
 <dt id="c.PyUnicode_FSDecoder">
 int <code class="sig-name descname">PyUnicode_FSDecoder</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>obj</em>, void *<em>result</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyUnicode_FSDecoder" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>ParseTuple converter: decode <a class="reference internal" href="../library/stdtypes.html#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> objects – obtained either
-directly or indirectly through the <a class="reference internal" href="../library/os.html#os.pathlike" title="os.PathLike"><code class="xref py py-class docutils literal notranslate"><span class="pre">os.PathLike</span></code></a> interface – to
+directly or indirectly through the <a class="reference internal" href="../library/os.html#os.PathLike" title="os.PathLike"><code class="xref py py-class docutils literal notranslate"><span class="pre">os.PathLike</span></code></a> interface – to
 <a class="reference internal" href="../library/stdtypes.html#str" title="str"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> using <a class="reference internal" href="#c.PyUnicode_DecodeFSDefaultAndSize" title="PyUnicode_DecodeFSDefaultAndSize"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyUnicode_DecodeFSDefaultAndSize()</span></code></a>; <a class="reference internal" href="../library/stdtypes.html#str" title="str"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>
 objects are output as-is. <em>result</em> must be a <code class="xref c c-type docutils literal notranslate"><span class="pre">PyUnicodeObject*</span></code> which
 must be released when it is no longer used.</p>
@@ -1166,16 +1167,16 @@ of wide characters (excluding the trailing null termination character) into
 <em>*size</em>. Note that the resulting <code class="xref c c-type docutils literal notranslate"><span class="pre">wchar_t</span></code> string might contain
 null characters, which would cause the string to be truncated when used with
 most C functions. If <em>size</em> is <code class="docutils literal notranslate"><span class="pre">NULL</span></code> and the <code class="xref c c-type docutils literal notranslate"><span class="pre">wchar_t*</span></code> string
-contains null characters a <a class="reference internal" href="../library/exceptions.html#valueerror" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> is raised.</p>
+contains null characters a <a class="reference internal" href="../library/exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> is raised.</p>
 <p>Returns a buffer allocated by <code class="xref c c-func docutils literal notranslate"><span class="pre">PyMem_Alloc()</span></code> (use
 <a class="reference internal" href="memory.html#c.PyMem_Free" title="PyMem_Free"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyMem_Free()</span></code></a> to free it) on success. On error, returns <code class="docutils literal notranslate"><span class="pre">NULL</span></code>
-and <em>*size</em> is undefined. Raises a <a class="reference internal" href="../library/exceptions.html#memoryerror" title="MemoryError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">MemoryError</span></code></a> if memory allocation
+and <em>*size</em> is undefined. Raises a <a class="reference internal" href="../library/exceptions.html#MemoryError" title="MemoryError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">MemoryError</span></code></a> if memory allocation
 is failed.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.2.</span></p>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 3.7: </span>Raises a <a class="reference internal" href="../library/exceptions.html#valueerror" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> if <em>size</em> is <code class="docutils literal notranslate"><span class="pre">NULL</span></code> and the <code class="xref c c-type docutils literal notranslate"><span class="pre">wchar_t*</span></code>
+<p><span class="versionmodified changed">Changed in version 3.7: </span>Raises a <a class="reference internal" href="../library/exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> if <em>size</em> is <code class="docutils literal notranslate"><span class="pre">NULL</span></code> and the <code class="xref c c-type docutils literal notranslate"><span class="pre">wchar_t*</span></code>
 string contains null characters.</p>
 </div>
 </dd></dl>
@@ -1198,7 +1199,7 @@ pointer to a static string, on others, it will change at run-time
 (such as when the application invokes setlocale).</p>
 <p>Error handling is set by errors which may also be set to <code class="docutils literal notranslate"><span class="pre">NULL</span></code> meaning to use
 the default handling defined for the codec.  Default error handling for all
-built-in codecs is “strict” (<a class="reference internal" href="../library/exceptions.html#valueerror" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> is raised).</p>
+built-in codecs is “strict” (<a class="reference internal" href="../library/exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> is raised).</p>
 <p>The codecs all use a similar interface.  Only deviation from the following
 generic ones are documented for simplicity.</p>
 <div class="section" id="generic-codecs">
@@ -1628,7 +1629,7 @@ by the codec.</p>
 <em>mapping</em> must map bytes ordinals (integers in the range from 0 to 255)
 to Unicode strings, integers (which are then interpreted as Unicode
 ordinals) or <code class="docutils literal notranslate"><span class="pre">None</span></code>.  Unmapped data bytes – ones which cause a
-<a class="reference internal" href="../library/exceptions.html#lookuperror" title="LookupError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">LookupError</span></code></a>, as well as ones which get mapped to <code class="docutils literal notranslate"><span class="pre">None</span></code>,
+<a class="reference internal" href="../library/exceptions.html#LookupError" title="LookupError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">LookupError</span></code></a>, as well as ones which get mapped to <code class="docutils literal notranslate"><span class="pre">None</span></code>,
 <code class="docutils literal notranslate"><span class="pre">0xFFFE</span></code> or <code class="docutils literal notranslate"><span class="pre">'\ufffe'</span></code>, are treated as undefined mappings and cause
 an error.</p>
 </dd></dl>
@@ -1641,7 +1642,7 @@ result as a bytes object.  Error handling is “strict”.  Return <code class="
 exception was raised by the codec.</p>
 <p>The <em>mapping</em> object must map Unicode ordinal integers to bytes objects,
 integers in the range from 0 to 255 or <code class="docutils literal notranslate"><span class="pre">None</span></code>.  Unmapped character
-ordinals (ones which cause a <a class="reference internal" href="../library/exceptions.html#lookuperror" title="LookupError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">LookupError</span></code></a>) as well as mapped to
+ordinals (ones which cause a <a class="reference internal" href="../library/exceptions.html#LookupError" title="LookupError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">LookupError</span></code></a>) as well as mapped to
 <code class="docutils literal notranslate"><span class="pre">None</span></code> are treated as “undefined mapping” and cause an error.</p>
 </dd></dl>
 
@@ -1668,7 +1669,7 @@ codec.</p>
 <p>The <em>mapping</em> object must map Unicode ordinal integers to Unicode strings,
 integers (which are then interpreted as Unicode ordinals) or <code class="docutils literal notranslate"><span class="pre">None</span></code>
 (causing deletion of the character).  Unmapped character ordinals (ones
-which cause a <a class="reference internal" href="../library/exceptions.html#lookuperror" title="LookupError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">LookupError</span></code></a>) are left untouched and are copied as-is.</p>
+which cause a <a class="reference internal" href="../library/exceptions.html#LookupError" title="LookupError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">LookupError</span></code></a>) are left untouched and are copied as-is.</p>
 </dd></dl>
 
 <dl class="c function">
@@ -1781,7 +1782,7 @@ resulting Unicode object.</p>
 or <code class="docutils literal notranslate"><span class="pre">None</span></code> (causing deletion of the character).</p>
 <p>Mapping tables need only provide the <code class="xref py py-meth docutils literal notranslate"><span class="pre">__getitem__()</span></code> interface; dictionaries
 and sequences work well.  Unmapped character ordinals (ones which cause a
-<a class="reference internal" href="../library/exceptions.html#lookuperror" title="LookupError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">LookupError</span></code></a>) are left untouched and are copied as-is.</p>
+<a class="reference internal" href="../library/exceptions.html#LookupError" title="LookupError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">LookupError</span></code></a>) are left untouched and are copied as-is.</p>
 <p><em>errors</em> has the usual meaning for codecs. It may be <code class="docutils literal notranslate"><span class="pre">NULL</span></code> which indicates to
 use the default error handling.</p>
 </dd></dl>
@@ -2003,6 +2004,7 @@ interned string object with the same value.</p>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API Reference Manual</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="concrete.html" >Concrete Objects Layer</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Unicode Objects and Codecs</a></li>
     <li class="right">
         
 
@@ -2017,7 +2019,7 @@ interned string object with the same value.</p>
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  

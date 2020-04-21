@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
     <title>What’s New in Python 2.0 &#8212; Python 3.9.0a4 documentation</title>
@@ -78,6 +78,7 @@
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">What’s New in Python</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">What’s New in Python 2.0</a></li>
     <li class="right">
         
 
@@ -92,7 +93,7 @@
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>    
@@ -560,7 +561,7 @@ which inserts the <a class="reference internal" href="../library/stdtypes.html#s
 <a class="reference internal" href="../reference/expressions.html#in"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">in</span></code></a> operator and implemented a custom version.  <code class="docutils literal notranslate"><span class="pre">obj</span> <span class="pre">in</span> <span class="pre">seq</span></code> returns
 true if <em>obj</em> is present in the sequence <em>seq</em>; Python computes this by simply
 trying every index of the sequence until either <em>obj</em> is found or an
-<a class="reference internal" href="../library/exceptions.html#indexerror" title="IndexError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">IndexError</span></code></a> is encountered.  Moshe Zadka contributed a patch which adds a
+<a class="reference internal" href="../library/exceptions.html#IndexError" title="IndexError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">IndexError</span></code></a> is encountered.  Moshe Zadka contributed a patch which adds a
 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__contains__()</span></code> magic method for providing a custom implementation for
 <code class="xref std std-keyword docutils literal notranslate"><span class="pre">in</span></code>. Additionally, new built-in objects written in C can define what
 <code class="xref std std-keyword docutils literal notranslate"><span class="pre">in</span></code> means for them via a new slot in the sequence protocol.</p>
@@ -593,12 +594,12 @@ Python CE page at <a class="reference external" href="http://pythonce.sourceforg
 Dynamic loading works, if you specify “configure –with-dyld –with-suffix=.x”.
 Consult the README in the Python source distribution for more instructions.</p>
 <p>An attempt has been made to alleviate one of Python’s warts, the often-confusing
-<a class="reference internal" href="../library/exceptions.html#nameerror" title="NameError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NameError</span></code></a> exception when code refers to a local variable before the
+<a class="reference internal" href="../library/exceptions.html#NameError" title="NameError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NameError</span></code></a> exception when code refers to a local variable before the
 variable has been assigned a value.  For example, the following code raises an
 exception on the <code class="docutils literal notranslate"><span class="pre">print</span></code> statement in both 1.5.2 and 2.0; in 1.5.2 a
-<a class="reference internal" href="../library/exceptions.html#nameerror" title="NameError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NameError</span></code></a> exception is raised, while 2.0 raises a new
-<a class="reference internal" href="../library/exceptions.html#unboundlocalerror" title="UnboundLocalError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">UnboundLocalError</span></code></a> exception. <a class="reference internal" href="../library/exceptions.html#unboundlocalerror" title="UnboundLocalError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">UnboundLocalError</span></code></a> is a subclass of
-<a class="reference internal" href="../library/exceptions.html#nameerror" title="NameError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NameError</span></code></a>, so any existing code that expects <a class="reference internal" href="../library/exceptions.html#nameerror" title="NameError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NameError</span></code></a> to be
+<a class="reference internal" href="../library/exceptions.html#NameError" title="NameError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NameError</span></code></a> exception is raised, while 2.0 raises a new
+<a class="reference internal" href="../library/exceptions.html#UnboundLocalError" title="UnboundLocalError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">UnboundLocalError</span></code></a> exception. <a class="reference internal" href="../library/exceptions.html#UnboundLocalError" title="UnboundLocalError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">UnboundLocalError</span></code></a> is a subclass of
+<a class="reference internal" href="../library/exceptions.html#NameError" title="NameError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NameError</span></code></a>, so any existing code that expects <a class="reference internal" href="../library/exceptions.html#NameError" title="NameError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NameError</span></code></a> to be
 raised should still work.</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">():</span>
     <span class="nb">print</span> <span class="s2">&quot;i=&quot;</span><span class="p">,</span><span class="n">i</span>
@@ -606,8 +607,8 @@ raised should still work.</p>
 <span class="n">f</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>Two new exceptions, <a class="reference internal" href="../library/exceptions.html#taberror" title="TabError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TabError</span></code></a> and <a class="reference internal" href="../library/exceptions.html#indentationerror" title="IndentationError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">IndentationError</span></code></a>, have been
-introduced.  They’re both subclasses of <a class="reference internal" href="../library/exceptions.html#syntaxerror" title="SyntaxError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SyntaxError</span></code></a>, and are raised when
+<p>Two new exceptions, <a class="reference internal" href="../library/exceptions.html#TabError" title="TabError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TabError</span></code></a> and <a class="reference internal" href="../library/exceptions.html#IndentationError" title="IndentationError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">IndentationError</span></code></a>, have been
+introduced.  They’re both subclasses of <a class="reference internal" href="../library/exceptions.html#SyntaxError" title="SyntaxError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SyntaxError</span></code></a>, and are raised when
 Python code is found to be improperly indented.</p>
 </div>
 <div class="section" id="changes-to-built-in-functions">
@@ -621,7 +622,7 @@ returned list to the length of the shortest argument sequence.</p>
 <p>The <a class="reference internal" href="../library/functions.html#int" title="int"><code class="xref py py-func docutils literal notranslate"><span class="pre">int()</span></code></a> and <code class="xref py py-func docutils literal notranslate"><span class="pre">long()</span></code> functions now accept an optional “base”
 parameter when the first argument is a string. <code class="docutils literal notranslate"><span class="pre">int('123',</span> <span class="pre">10)</span></code> returns 123,
 while <code class="docutils literal notranslate"><span class="pre">int('123',</span> <span class="pre">16)</span></code> returns 291.  <code class="docutils literal notranslate"><span class="pre">int(123,</span> <span class="pre">16)</span></code> raises a
-<a class="reference internal" href="../library/exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> exception with the message “can’t convert non-string with
+<a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> exception with the message “can’t convert non-string with
 explicit base”.</p>
 <p>A new variable holding more detailed version information has been added to the
 <a class="reference internal" href="../library/sys.html#module-sys" title="sys: Access system-specific parameters and functions."><code class="xref py py-mod docutils literal notranslate"><span class="pre">sys</span></code></a> module.  <code class="docutils literal notranslate"><span class="pre">sys.version_info</span></code> is a tuple <code class="docutils literal notranslate"><span class="pre">(major,</span> <span class="pre">minor,</span> <span class="pre">micro,</span>
@@ -662,7 +663,7 @@ arguments accepted by some methods.  Some methods would take multiple arguments
 and treat them as a tuple, particularly various list methods such as
 <code class="xref py py-meth docutils literal notranslate"><span class="pre">append()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">insert()</span></code>. In earlier versions of Python, if <code class="docutils literal notranslate"><span class="pre">L</span></code> is
 a list, <code class="docutils literal notranslate"><span class="pre">L.append(</span> <span class="pre">1,2</span> <span class="pre">)</span></code> appends the tuple <code class="docutils literal notranslate"><span class="pre">(1,2)</span></code> to the list.  In Python
-2.0 this causes a <a class="reference internal" href="../library/exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> exception to be raised, with the message:
+2.0 this causes a <a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> exception to be raised, with the message:
 ‘append requires exactly 1 argument; 2 given’.  The fix is to simply add an
 extra set of parentheses to pass both values as a tuple:  <code class="docutils literal notranslate"><span class="pre">L.append(</span> <span class="pre">(1,2)</span> <span class="pre">)</span></code>.</p>
 <p>The earlier versions of these methods were more forgiving because they used an
@@ -685,7 +686,7 @@ deprecated; it <em>will</em> be tightened up again in a future Python version.</
 <p>The <code class="docutils literal notranslate"><span class="pre">\x</span></code> escape in string literals now takes exactly 2 hex digits.  Previously
 it would consume all the hex digits following the ‘x’ and take the lowest 8 bits
 of the result, so <code class="docutils literal notranslate"><span class="pre">\x123456</span></code> was equivalent to <code class="docutils literal notranslate"><span class="pre">\x56</span></code>.</p>
-<p>The <a class="reference internal" href="../library/exceptions.html#attributeerror" title="AttributeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">AttributeError</span></code></a> and <a class="reference internal" href="../library/exceptions.html#nameerror" title="NameError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NameError</span></code></a> exceptions have a more friendly
+<p>The <a class="reference internal" href="../library/exceptions.html#AttributeError" title="AttributeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">AttributeError</span></code></a> and <a class="reference internal" href="../library/exceptions.html#NameError" title="NameError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NameError</span></code></a> exceptions have a more friendly
 error message, whose text will be something like <code class="docutils literal notranslate"><span class="pre">'Spam'</span> <span class="pre">instance</span> <span class="pre">has</span> <span class="pre">no</span>
 <span class="pre">attribute</span> <span class="pre">'eggs'</span></code> or <code class="docutils literal notranslate"><span class="pre">name</span> <span class="pre">'eggs'</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">defined</span></code>.  Previously the error
 message was just the missing attribute name <code class="docutils literal notranslate"><span class="pre">eggs</span></code>, and code written to take
@@ -695,7 +696,7 @@ interchangeable.  In 1.5.2, large-file support was added for Solaris, to allow
 reading files larger than 2 GiB; this made the <code class="xref py py-meth docutils literal notranslate"><span class="pre">tell()</span></code> method of file
 objects return a long integer instead of a regular integer.  Some code would
 subtract two file offsets and attempt to use the result to multiply a sequence
-or slice a string, but this raised a <a class="reference internal" href="../library/exceptions.html#typeerror" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a>.  In 2.0, long integers
+or slice a string, but this raised a <a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a>.  In 2.0, long integers
 can be used to multiply or slice a sequence, and it’ll behave as you’d
 intuitively expect it to; <code class="docutils literal notranslate"><span class="pre">3L</span> <span class="pre">*</span> <span class="pre">'abc'</span></code> produces ‘abcabcabc’, and
 <code class="docutils literal notranslate"><span class="pre">(0,1,2,3)[2L:4L]</span></code> produces (2,3). Long integers can also be used in various
@@ -1202,6 +1203,7 @@ Marangozov, Tobias Polzin, Guido van Rossum, Neil Schemenauer, and Russ Schmidt.
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >What’s New in Python</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">What’s New in Python 2.0</a></li>
     <li class="right">
         
 
@@ -1216,7 +1218,7 @@ Marangozov, Tobias Polzin, Guido van Rossum, Neil Schemenauer, and Russ Schmidt.
     <script type="text/javascript">$('.inline-search').show(0);</script>
          |
     </li>
-    <li class="right"><input type="button" value="Toggle theme" onclick="toggleTheme()"> |</li>
+    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
 
       </ul>
     </div>  
