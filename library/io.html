@@ -4,8 +4,10 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>io — Core tools for working with streams &#8212; Python 3.10.0a6 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>io — Core tools for working with streams &#8212; Python 3.10.0b1 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
@@ -19,7 +21,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.10.0a6 documentation"
+          title="Search within Python 3.10.0b1 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -40,17 +42,101 @@
         }
       }
     </style>
+<link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.svg" />
+            <script type="text/javascript" src="../_static/copybutton.js"></script>
+            <script type="text/javascript" src="../_static/menu.js"></script>
+            <script type="text/javascript" src="../_static/themetoggle.js"></script> 
 
-    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
-    
-    <script type="text/javascript" src="../_static/copybutton.js"></script>
-    <script type="text/javascript" src="../_static/themetoggle.js"></script>
-    
-     
+  </head>
+<body>
+<div class="mobile-nav">
+    <input type="checkbox" id="menuToggler" class="toggler__input" aria-controls="navigation"
+           aria-pressed="false" aria-expanded="false" role="button" aria-label="Menu" />
+    <nav class="nav-content" role="navigation">
+        <label for="menuToggler" class="toggler__label">
+            <span></span>
+        </label>
+        <span class="nav-items-wrapper">
+            <a href="https://www.python.org/" class="nav-logo">
+                <img src="../_static/py.svg" alt="Logo"/>
+            </a>
+            <span class="version_switcher_placeholder"></span>
+            <form id="searchbox" role="search" class="search" action="../search.html" method="get">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="search-icon">
+                    <path fill-rule="nonzero" fill="currentColor" d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 001.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 00-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 005.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                </svg>
+                <input type="search" name="q" aria-label="Quick search"/>
+                <input type="submit" value="Go"/>
+                
+            </form>
+        </span>
+    </nav>
+    <div class="menu-wrapper">
+        <nav class="menu" role="navigation" aria-label="main navigation">
+            <div class="language_switcher_placeholder"></div>
+            
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label>
+  <h3><a href="../contents.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">io</span></code> — Core tools for working with streams</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a><ul>
+<li><a class="reference internal" href="#text-i-o">Text I/O</a></li>
+<li><a class="reference internal" href="#binary-i-o">Binary I/O</a></li>
+<li><a class="reference internal" href="#raw-i-o">Raw I/O</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#text-encoding">Text Encoding</a><ul>
+<li><a class="reference internal" href="#opt-in-encodingwarning">Opt-in EncodingWarning</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#high-level-module-interface">High-level Module Interface</a></li>
+<li><a class="reference internal" href="#class-hierarchy">Class hierarchy</a><ul>
+<li><a class="reference internal" href="#i-o-base-classes">I/O Base Classes</a></li>
+<li><a class="reference internal" href="#raw-file-i-o">Raw File I/O</a></li>
+<li><a class="reference internal" href="#buffered-streams">Buffered Streams</a></li>
+<li><a class="reference internal" href="#id1">Text I/O</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#performance">Performance</a><ul>
+<li><a class="reference internal" href="#id2">Binary I/O</a></li>
+<li><a class="reference internal" href="#id3">Text I/O</a></li>
+<li><a class="reference internal" href="#multi-threading">Multi-threading</a></li>
+<li><a class="reference internal" href="#reentrancy">Reentrancy</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="os.html"
+                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">os</span></code> — Miscellaneous operating system interfaces</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="time.html"
+                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">time</span></code> — Time access and conversions</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../bugs.html">Report a Bug</a></li>
+      <li>
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/library/io.rst"
+            rel="nofollow">Show Source
+        </a>
+      </li>
+    </ul>
+  </div>
+        </nav>
+    </div>
+</div>
 
-  </head><body>
   
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -68,34 +154,45 @@
           <a href="os.html" title="os — Miscellaneous operating system interfaces"
              accesskey="P">previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="allos.html" accesskey="U">Generic Operating System Services</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">io</span></code> — Core tools for working with streams</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>    
 
@@ -104,11 +201,11 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="module-io">
+  <section id="module-io">
 <span id="io-core-tools-for-working-with-streams"></span><h1><a class="reference internal" href="#module-io" title="io: Core tools for working with streams."><code class="xref py py-mod docutils literal notranslate"><span class="pre">io</span></code></a> — Core tools for working with streams<a class="headerlink" href="#module-io" title="Permalink to this headline">¶</a></h1>
-<p><strong>Source code:</strong> <a class="reference external" href="https://github.com/python/cpython/tree/master/Lib/io.py">Lib/io.py</a></p>
+<p><strong>Source code:</strong> <a class="reference external" href="https://github.com/python/cpython/tree/3.10/Lib/io.py">Lib/io.py</a></p>
 <hr class="docutils" />
-<div class="section" id="overview">
+<section id="overview">
 <span id="io-overview"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <p id="index-0">The <a class="reference internal" href="#module-io" title="io: Core tools for working with streams."><code class="xref py py-mod docutils literal notranslate"><span class="pre">io</span></code></a> module provides Python’s main facilities for dealing with various
 types of I/O.  There are three main types of I/O: <em>text I/O</em>, <em>binary I/O</em>
@@ -129,7 +226,7 @@ will raise a <a class="reference internal" href="exceptions.html#TypeError" titl
 <p><span class="versionmodified changed">Changed in version 3.3: </span>Operations that used to raise <a class="reference internal" href="exceptions.html#IOError" title="IOError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">IOError</span></code></a> now raise <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a>, since
 <a class="reference internal" href="exceptions.html#IOError" title="IOError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">IOError</span></code></a> is now an alias of <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a>.</p>
 </div>
-<div class="section" id="text-i-o">
+<section id="text-i-o">
 <h3>Text I/O<a class="headerlink" href="#text-i-o" title="Permalink to this headline">¶</a></h3>
 <p>Text I/O expects and produces <a class="reference internal" href="stdtypes.html#str" title="str"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> objects.  This means that whenever
 the backing store is natively made of bytes (such as in the case of a file),
@@ -146,8 +243,8 @@ specifying an encoding:</p>
 </div>
 <p>The text stream API is described in detail in the documentation of
 <a class="reference internal" href="#io.TextIOBase" title="io.TextIOBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextIOBase</span></code></a>.</p>
-</div>
-<div class="section" id="binary-i-o">
+</section>
+<section id="binary-i-o">
 <h3>Binary I/O<a class="headerlink" href="#binary-i-o" title="Permalink to this headline">¶</a></h3>
 <p>Binary I/O (also called <em>buffered I/O</em>) expects
 <a class="reference internal" href="../glossary.html#term-bytes-like-object"><span class="xref std std-term">bytes-like objects</span></a> and produces <a class="reference internal" href="stdtypes.html#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a>
@@ -167,8 +264,8 @@ the mode string:</p>
 <a class="reference internal" href="#io.BufferedIOBase" title="io.BufferedIOBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">BufferedIOBase</span></code></a>.</p>
 <p>Other library modules may provide additional ways to create text or binary
 streams.  See <a class="reference internal" href="socket.html#socket.socket.makefile" title="socket.socket.makefile"><code class="xref py py-meth docutils literal notranslate"><span class="pre">socket.socket.makefile()</span></code></a> for example.</p>
-</div>
-<div class="section" id="raw-i-o">
+</section>
+<section id="raw-i-o">
 <h3>Raw I/O<a class="headerlink" href="#raw-i-o" title="Permalink to this headline">¶</a></h3>
 <p>Raw I/O (also called <em>unbuffered I/O</em>) is generally used as a low-level
 building-block for binary and text streams; it is rarely useful to directly
@@ -178,9 +275,48 @@ stream by opening a file in binary mode with buffering disabled:</p>
 </pre></div>
 </div>
 <p>The raw stream API is described in detail in the docs of <a class="reference internal" href="#io.RawIOBase" title="io.RawIOBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">RawIOBase</span></code></a>.</p>
+</section>
+</section>
+<section id="text-encoding">
+<span id="io-text-encoding"></span><h2>Text Encoding<a class="headerlink" href="#text-encoding" title="Permalink to this headline">¶</a></h2>
+<p>The default encoding of <a class="reference internal" href="#io.TextIOWrapper" title="io.TextIOWrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextIOWrapper</span></code></a> and <a class="reference internal" href="functions.html#open" title="open"><code class="xref py py-func docutils literal notranslate"><span class="pre">open()</span></code></a> is
+locale-specific (<a class="reference internal" href="locale.html#locale.getpreferredencoding" title="locale.getpreferredencoding"><code class="xref py py-func docutils literal notranslate"><span class="pre">locale.getpreferredencoding(False)</span></code></a>).</p>
+<p>However, many developers forget to specify the encoding when opening text files
+encoded in UTF-8 (e.g. JSON, TOML, Markdown, etc…) since most Unix
+platforms use UTF-8 locale by default. This causes bugs because the locale
+encoding is not UTF-8 for most Windows users. For example:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># May not work on Windows when non-ASCII characters in the file.</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;README.md&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">long_description</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</pre></div>
 </div>
+<p>Additionally, while there is no concrete plan as of yet, Python may change
+the default text file encoding to UTF-8 in the future.</p>
+<p>Accordingly, it is highly recommended that you specify the encoding
+explicitly when opening text files. If you want to use UTF-8, pass
+<code class="docutils literal notranslate"><span class="pre">encoding=&quot;utf-8&quot;</span></code>. To use the current locale encoding,
+<code class="docutils literal notranslate"><span class="pre">encoding=&quot;locale&quot;</span></code> is supported in Python 3.10.</p>
+<p>When you need to run existing code on Windows that attempts to opens
+UTF-8 files using the default locale encoding, you can enable the UTF-8
+mode. See <a class="reference internal" href="../using/windows.html#win-utf8-mode"><span class="std std-ref">UTF-8 mode on Windows</span></a>.</p>
+<section id="opt-in-encodingwarning">
+<span id="io-encoding-warning"></span><h3>Opt-in EncodingWarning<a class="headerlink" href="#opt-in-encodingwarning" title="Permalink to this headline">¶</a></h3>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 3.10: </span>See <span class="target" id="index-1"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0597"><strong>PEP 597</strong></a> for more details.</p>
 </div>
-<div class="section" id="high-level-module-interface">
+<p>To find where the default locale encoding is used, you can enable
+the <code class="docutils literal notranslate"><span class="pre">-X</span> <span class="pre">warn_default_encoding</span></code> command line option or set the
+<span class="target" id="index-2"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONWARNDEFAULTENCODING"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONWARNDEFAULTENCODING</span></code></a> environment variable, which will
+emit an <a class="reference internal" href="exceptions.html#EncodingWarning" title="EncodingWarning"><code class="xref py py-exc docutils literal notranslate"><span class="pre">EncodingWarning</span></code></a> when the default encoding is used.</p>
+<p>If you are providing an API that uses <a class="reference internal" href="functions.html#open" title="open"><code class="xref py py-func docutils literal notranslate"><span class="pre">open()</span></code></a> or
+<a class="reference internal" href="#io.TextIOWrapper" title="io.TextIOWrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextIOWrapper</span></code></a> and passes <code class="docutils literal notranslate"><span class="pre">encoding=None</span></code> as a parameter, you
+can use <a class="reference internal" href="#io.text_encoding" title="io.text_encoding"><code class="xref py py-func docutils literal notranslate"><span class="pre">text_encoding()</span></code></a> so that callers of the API will emit an
+<a class="reference internal" href="exceptions.html#EncodingWarning" title="EncodingWarning"><code class="xref py py-exc docutils literal notranslate"><span class="pre">EncodingWarning</span></code></a> if they don’t pass an <code class="docutils literal notranslate"><span class="pre">encoding</span></code>. However,
+please consider using UTF-8 by default (i.e. <code class="docutils literal notranslate"><span class="pre">encoding=&quot;utf-8&quot;</span></code>) for
+new APIs.</p>
+</section>
+</section>
+<section id="high-level-module-interface">
 <h2>High-level Module Interface<a class="headerlink" href="#high-level-module-interface" title="Permalink to this headline">¶</a></h2>
 <dl class="py data">
 <dt id="io.DEFAULT_BUFFER_SIZE">
@@ -216,6 +352,31 @@ additional validation or preprocessing of the file.</p>
 </div>
 </dd></dl>
 
+<dl class="py function">
+<dt id="io.text_encoding">
+<code class="sig-prename descclassname">io.</code><code class="sig-name descname">text_encoding</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">encoding</span></em>, <em class="sig-param"><span class="n">stacklevel</span><span class="o">=</span><span class="default_value">2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#io.text_encoding" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is a helper function for callables that use <a class="reference internal" href="functions.html#open" title="open"><code class="xref py py-func docutils literal notranslate"><span class="pre">open()</span></code></a> or
+<a class="reference internal" href="#io.TextIOWrapper" title="io.TextIOWrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextIOWrapper</span></code></a> and have an <code class="docutils literal notranslate"><span class="pre">encoding=None</span></code> parameter.</p>
+<p>This function returns <em>encoding</em> if it is not <code class="docutils literal notranslate"><span class="pre">None</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;locale&quot;</span></code> if
+<em>encoding</em> is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<p>This function emits an <a class="reference internal" href="exceptions.html#EncodingWarning" title="EncodingWarning"><code class="xref py py-class docutils literal notranslate"><span class="pre">EncodingWarning</span></code></a> if
+<a class="reference internal" href="sys.html#sys.flags" title="sys.flags"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.flags.warn_default_encoding</span></code></a> is true and <em>encoding</em>
+is None. <em>stacklevel</em> specifies where the warning is emitted.
+For example:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">read_text</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">encoding</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">text_encoding</span><span class="p">(</span><span class="n">encoding</span><span class="p">)</span>  <span class="c1"># stacklevel=2</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">encoding</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>In this example, an <a class="reference internal" href="exceptions.html#EncodingWarning" title="EncodingWarning"><code class="xref py py-class docutils literal notranslate"><span class="pre">EncodingWarning</span></code></a> is emitted for the caller of
+<code class="docutils literal notranslate"><span class="pre">read_text()</span></code>.</p>
+<p>See <a class="reference internal" href="#io-text-encoding"><span class="std std-ref">Text Encoding</span></a> for more information.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 3.10.</span></p>
+</div>
+</dd></dl>
+
 <dl class="py exception">
 <dt id="io.BlockingIOError">
 <em class="property">exception </em><code class="sig-prename descclassname">io.</code><code class="sig-name descname">BlockingIOError</code><a class="headerlink" href="#io.BlockingIOError" title="Permalink to this definition">¶</a></dt>
@@ -230,13 +391,6 @@ exception.</p>
 when an unsupported operation is called on a stream.</p>
 </dd></dl>
 
-<div class="section" id="in-memory-streams">
-<h3>In-memory streams<a class="headerlink" href="#in-memory-streams" title="Permalink to this headline">¶</a></h3>
-<p>It is also possible to use a <a class="reference internal" href="stdtypes.html#str" title="str"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> or <a class="reference internal" href="../glossary.html#term-bytes-like-object"><span class="xref std std-term">bytes-like object</span></a> as a
-file for both reading and writing.  For strings <a class="reference internal" href="#io.StringIO" title="io.StringIO"><code class="xref py py-class docutils literal notranslate"><span class="pre">StringIO</span></code></a> can be used
-like a file opened in text mode.  <a class="reference internal" href="#io.BytesIO" title="io.BytesIO"><code class="xref py py-class docutils literal notranslate"><span class="pre">BytesIO</span></code></a> can be used like a file
-opened in binary mode.  Both provide full read-write capabilities with random
-access.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
@@ -245,9 +399,8 @@ and <a class="reference internal" href="sys.html#sys.stderr" title="sys.stderr">
 </dd>
 </dl>
 </div>
-</div>
-</div>
-<div class="section" id="class-hierarchy">
+</section>
+<section id="class-hierarchy">
 <h2>Class hierarchy<a class="headerlink" href="#class-hierarchy" title="Permalink to this headline">¶</a></h2>
 <p>The implementation of I/O streams is organized as a hierarchy of classes.  First
 <a class="reference internal" href="../glossary.html#term-abstract-base-class"><span class="xref std std-term">abstract base classes</span></a> (ABCs), which are used to
@@ -333,7 +486,7 @@ and <code class="docutils literal notranslate"><span class="pre">readinto1</span
 </tr>
 </tbody>
 </table>
-<div class="section" id="i-o-base-classes">
+<section id="i-o-base-classes">
 <h3>I/O Base Classes<a class="headerlink" href="#i-o-base-classes" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="io.IOBase">
@@ -680,8 +833,8 @@ so the implementation should only access <em>b</em> during the method call.</p>
 
 </dd></dl>
 
-</div>
-<div class="section" id="raw-file-i-o">
+</section>
+<section id="raw-file-i-o">
 <h3>Raw File I/O<a class="headerlink" href="#raw-file-i-o" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="io.FileIO">
@@ -739,8 +892,8 @@ given in the constructor.</p>
 
 </dd></dl>
 
-</div>
-<div class="section" id="buffered-streams">
+</section>
+<section id="buffered-streams">
 <h3>Buffered Streams<a class="headerlink" href="#buffered-streams" title="Permalink to this headline">¶</a></h3>
 <p>Buffered I/O streams provide a higher-level interface to an I/O device
 than raw I/O does.</p>
@@ -917,8 +1070,8 @@ as reader and writer; use <a class="reference internal" href="#io.BufferedRandom
 </div>
 </dd></dl>
 
-</div>
-<div class="section" id="id1">
+</section>
+<section id="id1">
 <h3>Text I/O<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="io.TextIOBase">
@@ -1035,7 +1188,9 @@ written.</p>
 <a class="reference internal" href="#io.TextIOBase" title="io.TextIOBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextIOBase</span></code></a>.</p>
 <p><em>encoding</em> gives the name of the encoding that the stream will be decoded or
 encoded with.  It defaults to
-<a class="reference internal" href="locale.html#locale.getpreferredencoding" title="locale.getpreferredencoding"><code class="xref py py-func docutils literal notranslate"><span class="pre">locale.getpreferredencoding(False)</span></code></a>.</p>
+<a class="reference internal" href="locale.html#locale.getpreferredencoding" title="locale.getpreferredencoding"><code class="xref py py-func docutils literal notranslate"><span class="pre">locale.getpreferredencoding(False)</span></code></a>.
+<code class="docutils literal notranslate"><span class="pre">encoding=&quot;locale&quot;</span></code> can be used to specify the current locale’s encoding
+explicitly. See <a class="reference internal" href="#io-text-encoding"><span class="std std-ref">Text Encoding</span></a> for more information.</p>
 <p><em>errors</em> is an optional string that specifies how encoding and decoding
 errors are to be handled.  Pass <code class="docutils literal notranslate"><span class="pre">'strict'</span></code> to raise a <a class="reference internal" href="exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>
 exception if there is an encoding error (the default of <code class="docutils literal notranslate"><span class="pre">None</span></code> has the same
@@ -1048,7 +1203,7 @@ backslashed escape sequence.  When writing, <code class="docutils literal notran
 (replace with <code class="docutils literal notranslate"><span class="pre">\N{...}</span></code> escape sequences) can be used.  Any other error
 handling name that has been registered with
 <a class="reference internal" href="codecs.html#codecs.register_error" title="codecs.register_error"><code class="xref py py-func docutils literal notranslate"><span class="pre">codecs.register_error()</span></code></a> is also valid.</p>
-<p id="index-1"><em>newline</em> controls how line endings are handled.  It can be <code class="docutils literal notranslate"><span class="pre">None</span></code>,
+<p id="index-3"><em>newline</em> controls how line endings are handled.  It can be <code class="docutils literal notranslate"><span class="pre">None</span></code>,
 <code class="docutils literal notranslate"><span class="pre">''</span></code>, <code class="docutils literal notranslate"><span class="pre">'\n'</span></code>, <code class="docutils literal notranslate"><span class="pre">'\r'</span></code>, and <code class="docutils literal notranslate"><span class="pre">'\r\n'</span></code>.  It works as follows:</p>
 <ul class="simple">
 <li><p>When reading input from the stream, if <em>newline</em> is <code class="docutils literal notranslate"><span class="pre">None</span></code>,
@@ -1078,6 +1233,9 @@ object is immediately handled to its underlying binary <em>buffer</em>.</p>
 instead of <code class="docutils literal notranslate"><span class="pre">locale.getpreferredencoding()</span></code>. Don’t change temporary the
 locale encoding using <a class="reference internal" href="locale.html#locale.setlocale" title="locale.setlocale"><code class="xref py py-func docutils literal notranslate"><span class="pre">locale.setlocale()</span></code></a>, use the current locale
 encoding instead of the user preferred encoding.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 3.10: </span>The <em>encoding</em> argument now supports the <code class="docutils literal notranslate"><span class="pre">&quot;locale&quot;</span></code> dummy encoding name.</p>
 </div>
 <p><a class="reference internal" href="#io.TextIOWrapper" title="io.TextIOWrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextIOWrapper</span></code></a> provides these data attributes and methods in
 addition to those from <a class="reference internal" href="#io.TextIOBase" title="io.TextIOBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextIOBase</span></code></a> and <a class="reference internal" href="#io.IOBase" title="io.IOBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">IOBase</span></code></a>:</p>
@@ -1159,20 +1317,20 @@ the stream position is not changed.</p>
 </div>
 </dd></dl>
 
-<span class="target" id="index-2"></span><dl class="py class">
+<span class="target" id="index-4"></span><dl class="py class">
 <dt id="io.IncrementalNewlineDecoder">
 <em class="property">class </em><code class="sig-prename descclassname">io.</code><code class="sig-name descname">IncrementalNewlineDecoder</code><a class="headerlink" href="#io.IncrementalNewlineDecoder" title="Permalink to this definition">¶</a></dt>
 <dd><p>A helper codec that decodes newlines for <a class="reference internal" href="../glossary.html#term-universal-newlines"><span class="xref std std-term">universal newlines</span></a> mode.
 It inherits <a class="reference internal" href="codecs.html#codecs.IncrementalDecoder" title="codecs.IncrementalDecoder"><code class="xref py py-class docutils literal notranslate"><span class="pre">codecs.IncrementalDecoder</span></code></a>.</p>
 </dd></dl>
 
-</div>
-</div>
-<div class="section" id="performance">
+</section>
+</section>
+<section id="performance">
 <h2>Performance<a class="headerlink" href="#performance" title="Permalink to this headline">¶</a></h2>
 <p>This section discusses the performance of the provided concrete I/O
 implementations.</p>
-<div class="section" id="id2">
+<section id="id2">
 <h3>Binary I/O<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <p>By reading and writing only large chunks of data even when the user asks for a
 single byte, buffered I/O hides any inefficiency in calling and executing the
@@ -1182,8 +1340,8 @@ unbuffered disk I/O can be as fast as buffered I/O.  The bottom line, however,
 is that buffered I/O offers predictable performance regardless of the platform
 and the backing device.  Therefore, it is almost always preferable to use
 buffered I/O rather than unbuffered I/O for binary data.</p>
-</div>
-<div class="section" id="id3">
+</section>
+<section id="id3">
 <h3>Text I/O<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <p>Text I/O over a binary storage (such as a file) is significantly slower than
 binary I/O over the same storage, because it requires conversions between
@@ -1193,8 +1351,8 @@ handling huge amounts of text data like large log files.  Also,
 due to the reconstruction algorithm used.</p>
 <p><a class="reference internal" href="#io.StringIO" title="io.StringIO"><code class="xref py py-class docutils literal notranslate"><span class="pre">StringIO</span></code></a>, however, is a native in-memory unicode container and will
 exhibit similar speed to <a class="reference internal" href="#io.BytesIO" title="io.BytesIO"><code class="xref py py-class docutils literal notranslate"><span class="pre">BytesIO</span></code></a>.</p>
-</div>
-<div class="section" id="multi-threading">
+</section>
+<section id="multi-threading">
 <h3>Multi-threading<a class="headerlink" href="#multi-threading" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="#io.FileIO" title="io.FileIO"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileIO</span></code></a> objects are thread-safe to the extent that the operating system
 calls (such as <code class="docutils literal notranslate"><span class="pre">read(2)</span></code> under Unix) they wrap are thread-safe too.</p>
@@ -1203,8 +1361,8 @@ calls (such as <code class="docutils literal notranslate"><span class="pre">read
 protect their internal structures using a lock; it is therefore safe to call
 them from multiple threads at once.</p>
 <p><a class="reference internal" href="#io.TextIOWrapper" title="io.TextIOWrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextIOWrapper</span></code></a> objects are not thread-safe.</p>
-</div>
-<div class="section" id="reentrancy">
+</section>
+<section id="reentrancy">
 <h3>Reentrancy<a class="headerlink" href="#reentrancy" title="Permalink to this headline">¶</a></h3>
 <p>Binary buffered objects (instances of <a class="reference internal" href="#io.BufferedReader" title="io.BufferedReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">BufferedReader</span></code></a>,
 <a class="reference internal" href="#io.BufferedWriter" title="io.BufferedWriter"><code class="xref py py-class docutils literal notranslate"><span class="pre">BufferedWriter</span></code></a>, <a class="reference internal" href="#io.BufferedRandom" title="io.BufferedRandom"><code class="xref py py-class docutils literal notranslate"><span class="pre">BufferedRandom</span></code></a> and <a class="reference internal" href="#io.BufferedRWPair" title="io.BufferedRWPair"><code class="xref py py-class docutils literal notranslate"><span class="pre">BufferedRWPair</span></code></a>)
@@ -1217,9 +1375,9 @@ buffered object.</p>
 will wrap a buffered object inside a <a class="reference internal" href="#io.TextIOWrapper" title="io.TextIOWrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextIOWrapper</span></code></a>.  This includes
 standard streams and therefore affects the built-in <a class="reference internal" href="functions.html#print" title="print"><code class="xref py py-func docutils literal notranslate"><span class="pre">print()</span></code></a> function as
 well.</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -1237,10 +1395,11 @@ well.</p>
 <li><a class="reference internal" href="#raw-i-o">Raw I/O</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#high-level-module-interface">High-level Module Interface</a><ul>
-<li><a class="reference internal" href="#in-memory-streams">In-memory streams</a></li>
+<li><a class="reference internal" href="#text-encoding">Text Encoding</a><ul>
+<li><a class="reference internal" href="#opt-in-encodingwarning">Opt-in EncodingWarning</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#high-level-module-interface">High-level Module Interface</a></li>
 <li><a class="reference internal" href="#class-hierarchy">Class hierarchy</a><ul>
 <li><a class="reference internal" href="#i-o-base-classes">I/O Base Classes</a></li>
 <li><a class="reference internal" href="#raw-file-i-o">Raw File I/O</a></li>
@@ -1270,7 +1429,7 @@ well.</p>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/master/Doc/library/io.rst"
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/library/io.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -1296,34 +1455,45 @@ well.</p>
           <a href="os.html" title="os — Miscellaneous operating system interfaces"
              >previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="allos.html" >Generic Operating System Services</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">io</span></code> — Core tools for working with streams</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>  
     <div class="footer">
@@ -1341,7 +1511,7 @@ well.</p>
 <br />
     <br />
 
-    Last updated on Mar 24, 2021.
+    Last updated on May 10, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 

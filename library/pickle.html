@@ -4,8 +4,10 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>pickle — Python object serialization &#8212; Python 3.10.0a6 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>pickle — Python object serialization &#8212; Python 3.10.0b1 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
@@ -19,7 +21,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.10.0a6 documentation"
+          title="Search within Python 3.10.0b1 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -40,17 +42,100 @@
         }
       }
     </style>
+<link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.svg" />
+            <script type="text/javascript" src="../_static/copybutton.js"></script>
+            <script type="text/javascript" src="../_static/menu.js"></script>
+            <script type="text/javascript" src="../_static/themetoggle.js"></script> 
 
-    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
-    
-    <script type="text/javascript" src="../_static/copybutton.js"></script>
-    <script type="text/javascript" src="../_static/themetoggle.js"></script>
-    
-     
+  </head>
+<body>
+<div class="mobile-nav">
+    <input type="checkbox" id="menuToggler" class="toggler__input" aria-controls="navigation"
+           aria-pressed="false" aria-expanded="false" role="button" aria-label="Menu" />
+    <nav class="nav-content" role="navigation">
+        <label for="menuToggler" class="toggler__label">
+            <span></span>
+        </label>
+        <span class="nav-items-wrapper">
+            <a href="https://www.python.org/" class="nav-logo">
+                <img src="../_static/py.svg" alt="Logo"/>
+            </a>
+            <span class="version_switcher_placeholder"></span>
+            <form id="searchbox" role="search" class="search" action="../search.html" method="get">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="search-icon">
+                    <path fill-rule="nonzero" fill="currentColor" d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 001.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 00-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 005.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                </svg>
+                <input type="search" name="q" aria-label="Quick search"/>
+                <input type="submit" value="Go"/>
+                
+            </form>
+        </span>
+    </nav>
+    <div class="menu-wrapper">
+        <nav class="menu" role="navigation" aria-label="main navigation">
+            <div class="language_switcher_placeholder"></div>
+            
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label>
+  <h3><a href="../contents.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pickle</span></code> — Python object serialization</a><ul>
+<li><a class="reference internal" href="#relationship-to-other-python-modules">Relationship to other Python modules</a><ul>
+<li><a class="reference internal" href="#comparison-with-marshal">Comparison with <code class="docutils literal notranslate"><span class="pre">marshal</span></code></a></li>
+<li><a class="reference internal" href="#comparison-with-json">Comparison with <code class="docutils literal notranslate"><span class="pre">json</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#data-stream-format">Data stream format</a></li>
+<li><a class="reference internal" href="#module-interface">Module Interface</a></li>
+<li><a class="reference internal" href="#what-can-be-pickled-and-unpickled">What can be pickled and unpickled?</a></li>
+<li><a class="reference internal" href="#pickling-class-instances">Pickling Class Instances</a><ul>
+<li><a class="reference internal" href="#persistence-of-external-objects">Persistence of External Objects</a></li>
+<li><a class="reference internal" href="#dispatch-tables">Dispatch Tables</a></li>
+<li><a class="reference internal" href="#handling-stateful-objects">Handling Stateful Objects</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#custom-reduction-for-types-functions-and-other-objects">Custom Reduction for Types, Functions, and Other Objects</a></li>
+<li><a class="reference internal" href="#out-of-band-buffers">Out-of-band Buffers</a><ul>
+<li><a class="reference internal" href="#provider-api">Provider API</a></li>
+<li><a class="reference internal" href="#consumer-api">Consumer API</a></li>
+<li><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#restricting-globals">Restricting Globals</a></li>
+<li><a class="reference internal" href="#performance">Performance</a></li>
+<li><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+</ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="persistence.html"
+                        title="previous chapter">Data Persistence</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="copyreg.html"
+                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">copyreg</span></code> — Register <code class="xref py py-mod docutils literal notranslate"><span class="pre">pickle</span></code> support functions</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../bugs.html">Report a Bug</a></li>
+      <li>
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/library/pickle.rst"
+            rel="nofollow">Show Source
+        </a>
+      </li>
+    </ul>
+  </div>
+        </nav>
+    </div>
+</div>
 
-  </head><body>
   
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -68,34 +153,45 @@
           <a href="persistence.html" title="Data Persistence"
              accesskey="P">previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="persistence.html" accesskey="U">Data Persistence</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">pickle</span></code> — Python object serialization</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>    
 
@@ -104,9 +200,9 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="module-pickle">
+  <section id="module-pickle">
 <span id="pickle-python-object-serialization"></span><h1><a class="reference internal" href="#module-pickle" title="pickle: Convert Python objects to streams of bytes and back."><code class="xref py py-mod docutils literal notranslate"><span class="pre">pickle</span></code></a> — Python object serialization<a class="headerlink" href="#module-pickle" title="Permalink to this headline">¶</a></h1>
-<p><strong>Source code:</strong> <a class="reference external" href="https://github.com/python/cpython/tree/master/Lib/pickle.py">Lib/pickle.py</a></p>
+<p><strong>Source code:</strong> <a class="reference external" href="https://github.com/python/cpython/tree/3.10/Lib/pickle.py">Lib/pickle.py</a></p>
 <hr class="docutils" id="index-0" />
 <p>The <a class="reference internal" href="#module-pickle" title="pickle: Convert Python objects to streams of bytes and back."><code class="xref py py-mod docutils literal notranslate"><span class="pre">pickle</span></code></a> module implements binary protocols for serializing and
 de-serializing a Python object structure.  <em>“Pickling”</em> is the process
@@ -127,9 +223,9 @@ been tampered with.</p>
 <p>Safer serialization formats such as <a class="reference internal" href="json.html#module-json" title="json: Encode and decode the JSON format."><code class="xref py py-mod docutils literal notranslate"><span class="pre">json</span></code></a> may be more appropriate if
 you are processing untrusted data. See <a class="reference internal" href="#comparison-with-json"><span class="std std-ref">Comparison with json</span></a>.</p>
 </div>
-<div class="section" id="relationship-to-other-python-modules">
+<section id="relationship-to-other-python-modules">
 <h2>Relationship to other Python modules<a class="headerlink" href="#relationship-to-other-python-modules" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="comparison-with-marshal">
+<section id="comparison-with-marshal">
 <h3>Comparison with <code class="docutils literal notranslate"><span class="pre">marshal</span></code><a class="headerlink" href="#comparison-with-marshal" title="Permalink to this headline">¶</a></h3>
 <p>Python has a more primitive serialization module called <a class="reference internal" href="marshal.html#module-marshal" title="marshal: Convert Python objects to streams of bytes and back (with different constraints)."><code class="xref py py-mod docutils literal notranslate"><span class="pre">marshal</span></code></a>, but in
 general <a class="reference internal" href="#module-pickle" title="pickle: Convert Python objects to streams of bytes and back."><code class="xref py py-mod docutils literal notranslate"><span class="pre">pickle</span></code></a> should always be the preferred way to serialize Python
@@ -162,8 +258,8 @@ across Python releases provided a compatible pickle protocol is chosen and
 pickling and unpickling code deals with Python 2 to Python 3 type differences
 if your data is crossing that unique breaking change language boundary.</p></li>
 </ul>
-</div>
-<div class="section" id="comparison-with-json">
+</section>
+<section id="comparison-with-json">
 <span id="id2"></span><h3>Comparison with <code class="docutils literal notranslate"><span class="pre">json</span></code><a class="headerlink" href="#comparison-with-json" title="Permalink to this headline">¶</a></h3>
 <p>There are fundamental differences between the pickle protocols and
 <a class="reference external" href="http://json.org">JSON (JavaScript Object Notation)</a>:</p>
@@ -187,9 +283,9 @@ arbitrary code execution vulnerability.</p></li>
 <p>The <a class="reference internal" href="json.html#module-json" title="json: Encode and decode the JSON format."><code class="xref py py-mod docutils literal notranslate"><span class="pre">json</span></code></a> module: a standard library module allowing JSON
 serialization and deserialization.</p>
 </div>
-</div>
-</div>
-<div class="section" id="data-stream-format">
+</section>
+</section>
+<section id="data-stream-format">
 <span id="pickle-protocols"></span><h2>Data stream format<a class="headerlink" href="#data-stream-format" title="Permalink to this headline">¶</a></h2>
 <p id="index-1">The data format used by <a class="reference internal" href="#module-pickle" title="pickle: Convert Python objects to streams of bytes and back."><code class="xref py py-mod docutils literal notranslate"><span class="pre">pickle</span></code></a> is Python-specific.  This has the
 advantage that there are no restrictions imposed by external standards such as
@@ -237,8 +333,8 @@ send them across a network or store them in a database.  The <a class="reference
 module provides a simple interface to pickle and unpickle objects on
 DBM-style database files.</p>
 </div>
-</div>
-<div class="section" id="module-interface">
+</section>
+<section id="module-interface">
 <h2>Module Interface<a class="headerlink" href="#module-interface" title="Permalink to this headline">¶</a></h2>
 <p>To serialize an object hierarchy, you simply call the <a class="reference internal" href="#pickle.dumps" title="pickle.dumps"><code class="xref py py-func docutils literal notranslate"><span class="pre">dumps()</span></code></a> function.
 Similarly, to de-serialize a data stream, you call the <a class="reference internal" href="#pickle.loads" title="pickle.loads"><code class="xref py py-func docutils literal notranslate"><span class="pre">loads()</span></code></a> function.
@@ -551,8 +647,8 @@ the buffer is neither C- nor Fortran-contiguous.</p>
 
 </dd></dl>
 
-</div>
-<div class="section" id="what-can-be-pickled-and-unpickled">
+</section>
+<section id="what-can-be-pickled-and-unpickled">
 <span id="pickle-picklable"></span><h2>What can be pickled and unpickled?<a class="headerlink" href="#what-can-be-pickled-and-unpickled" title="Permalink to this headline">¶</a></h2>
 <p>The following types can be pickled:</p>
 <ul class="simple">
@@ -599,8 +695,8 @@ load objects that were created with an earlier version of the class.  If you
 plan to have long-lived objects that will see many versions of a class, it may
 be worthwhile to put a version number in the objects so that suitable
 conversions can be made by the class’s <code class="xref py py-meth docutils literal notranslate"><span class="pre">__setstate__()</span></code> method.</p>
-</div>
-<div class="section" id="pickling-class-instances">
+</section>
+<section id="pickling-class-instances">
 <span id="pickle-inst"></span><h2>Pickling Class Instances<a class="headerlink" href="#pickling-class-instances" title="Permalink to this headline">¶</a></h2>
 <p>In this section, we describe the general mechanisms available to you to define,
 customize, and control how class instances are pickled and unpickled.</p>
@@ -756,7 +852,7 @@ the extended version.  The main use for this method is to provide
 backwards-compatible reduce values for older Python releases.</p>
 </dd></dl>
 
-<div class="section" id="persistence-of-external-objects">
+<section id="persistence-of-external-objects">
 <span id="pickle-persistent"></span><h3>Persistence of External Objects<a class="headerlink" href="#persistence-of-external-objects" title="Permalink to this headline">¶</a></h3>
 <p id="index-6">For the benefit of object persistence, the <a class="reference internal" href="#module-pickle" title="pickle: Convert Python objects to streams of bytes and back."><code class="xref py py-mod docutils literal notranslate"><span class="pre">pickle</span></code></a> module supports the
 notion of a reference to an object outside the pickled data stream.  Such
@@ -867,8 +963,8 @@ pickle external objects by reference.</p>
     <span class="n">main</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="dispatch-tables">
+</section>
+<section id="dispatch-tables">
 <span id="pickle-dispatch"></span><h3>Dispatch Tables<a class="headerlink" href="#dispatch-tables" title="Permalink to this headline">¶</a></h3>
 <p>If one wants to customize pickling of some classes without disturbing
 any other code which depends on pickling, then one can create a
@@ -902,8 +998,8 @@ share the same dispatch table.  The equivalent code using the
 <span class="n">p</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">Pickler</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="handling-stateful-objects">
+</section>
+<section id="handling-stateful-objects">
 <span id="pickle-state"></span><h3>Handling Stateful Objects<a class="headerlink" href="#handling-stateful-objects" title="Permalink to this headline">¶</a></h3>
 <p id="index-7">Here’s an example that shows how to modify pickling behavior for a class.
 The <code class="xref py py-class docutils literal notranslate"><span class="pre">TextReader</span></code> class opens a text file, and returns the line number and
@@ -961,9 +1057,9 @@ reading resumes from the last location. The <code class="xref py py-meth docutil
 <span class="go">&#39;3: Goodbye!&#39;</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="custom-reduction-for-types-functions-and-other-objects">
+</section>
+</section>
+<section id="custom-reduction-for-types-functions-and-other-objects">
 <span id="reducer-override"></span><h2>Custom Reduction for Types, Functions, and Other Objects<a class="headerlink" href="#custom-reduction-for-types-functions-and-other-objects" title="Permalink to this headline">¶</a></h2>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.8.</span></p>
@@ -1018,8 +1114,8 @@ a given class:</p>
 <span class="k">assert</span> <span class="n">unpickled_class</span><span class="o">.</span><span class="n">my_attribute</span> <span class="o">==</span> <span class="mi">1</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="out-of-band-buffers">
+</section>
+<section id="out-of-band-buffers">
 <span id="pickle-oob"></span><h2>Out-of-band Buffers<a class="headerlink" href="#out-of-band-buffers" title="Permalink to this headline">¶</a></h2>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.8.</span></p>
@@ -1034,7 +1130,7 @@ data to and from the pickle stream.</p>
 of the object types to be transferred) and the <em>consumer</em> (the implementation
 of the communications system) support the out-of-band transfer facilities
 provided by pickle protocol 5 and higher.</p>
-<div class="section" id="provider-api">
+<section id="provider-api">
 <h3>Provider API<a class="headerlink" href="#provider-api" title="Permalink to this headline">¶</a></h3>
 <p>The large data objects to be pickled must implement a <code class="xref py py-meth docutils literal notranslate"><span class="pre">__reduce_ex__()</span></code>
 method specialized for protocol 5 and higher, which returns a
@@ -1045,8 +1141,8 @@ eligible for out-of-band data transfer.  Those objects remain compatible
 with normal usage of the <a class="reference internal" href="#module-pickle" title="pickle: Convert Python objects to streams of bytes and back."><code class="xref py py-mod docutils literal notranslate"><span class="pre">pickle</span></code></a> module.  However, consumers can also
 opt-in to tell <a class="reference internal" href="#module-pickle" title="pickle: Convert Python objects to streams of bytes and back."><code class="xref py py-mod docutils literal notranslate"><span class="pre">pickle</span></code></a> that they will handle those buffers by
 themselves.</p>
-</div>
-<div class="section" id="consumer-api">
+</section>
+<section id="consumer-api">
 <h3>Consumer API<a class="headerlink" href="#consumer-api" title="Permalink to this headline">¶</a></h3>
 <p>A communications system can enable custom handling of the <a class="reference internal" href="#pickle.PickleBuffer" title="pickle.PickleBuffer"><code class="xref py py-class docutils literal notranslate"><span class="pre">PickleBuffer</span></code></a>
 objects generated when serializing an object graph.</p>
@@ -1067,8 +1163,8 @@ reconstructors of the objects whose pickling produced the original
 is free to implement its own transfer mechanism for out-of-band buffers.
 Potential optimizations include the use of shared memory or datatype-dependent
 compression.</p>
-</div>
-<div class="section" id="example">
+</section>
+<section id="example">
 <h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
 <p>Here is a trivial example where we implement a <a class="reference internal" href="stdtypes.html#bytearray" title="bytearray"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytearray</span></code></a> subclass
 able to participate in out-of-band buffer pickling:</p>
@@ -1126,9 +1222,9 @@ processes or systems.</p>
 <p class="admonition-title">See also</p>
 <p><span class="target" id="index-8"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0574"><strong>PEP 574</strong></a> – Pickle protocol 5 with out-of-band data</p>
 </div>
-</div>
-</div>
-<div class="section" id="restricting-globals">
+</section>
+</section>
+<section id="restricting-globals">
 <span id="pickle-restrict"></span><h2>Restricting Globals<a class="headerlink" href="#restricting-globals" title="Permalink to this headline">¶</a></h2>
 <p id="index-9">By default, unpickling will import any class or function that it finds in the
 pickle data.  For many applications, this behaviour is unacceptable as it
@@ -1196,14 +1292,14 @@ globals or restrict them to a safe subset.</p>
 unpickled.  Therefore if security is a concern, you may want to consider
 alternatives such as the marshalling API in <a class="reference internal" href="xmlrpc.client.html#module-xmlrpc.client" title="xmlrpc.client: XML-RPC client access."><code class="xref py py-mod docutils literal notranslate"><span class="pre">xmlrpc.client</span></code></a> or
 third-party solutions.</p>
-</div>
-<div class="section" id="performance">
+</section>
+<section id="performance">
 <h2>Performance<a class="headerlink" href="#performance" title="Permalink to this headline">¶</a></h2>
 <p>Recent versions of the pickle protocol (from protocol 2 and upwards) feature
 efficient binary encodings for several common features and built-in types.
 Also, the <a class="reference internal" href="#module-pickle" title="pickle: Convert Python objects to streams of bytes and back."><code class="xref py py-mod docutils literal notranslate"><span class="pre">pickle</span></code></a> module has a transparent optimizer written in C.</p>
-</div>
-<div class="section" id="examples">
+</section>
+<section id="examples">
 <span id="pickle-example"></span><h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <p>For the simplest code, use the <a class="reference internal" href="#pickle.dump" title="pickle.dump"><code class="xref py py-func docutils literal notranslate"><span class="pre">dump()</span></code></a> and <a class="reference internal" href="#pickle.load" title="pickle.load"><code class="xref py py-func docutils literal notranslate"><span class="pre">load()</span></code></a> functions.</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pickle</span>
@@ -1268,8 +1364,8 @@ character.  Therefore if any kind of newline characters occurs in
 persistent IDs, the resulting pickle will become unreadable.</p>
 </dd>
 </dl>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -1320,7 +1416,7 @@ persistent IDs, the resulting pickle will become unreadable.</p>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/master/Doc/library/pickle.rst"
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/library/pickle.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -1346,34 +1442,45 @@ persistent IDs, the resulting pickle will become unreadable.</p>
           <a href="persistence.html" title="Data Persistence"
              >previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="persistence.html" >Data Persistence</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">pickle</span></code> — Python object serialization</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>  
     <div class="footer">
@@ -1391,7 +1498,7 @@ persistent IDs, the resulting pickle will become unreadable.</p>
 <br />
     <br />
 
-    Last updated on Mar 24, 2021.
+    Last updated on May 10, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 

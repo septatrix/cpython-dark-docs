@@ -4,8 +4,10 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>7. Extending Distutils &#8212; Python 3.10.0a6 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>7. Extending Distutils &#8212; Python 3.10.0b1 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
@@ -19,7 +21,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.10.0a6 documentation"
+          title="Search within Python 3.10.0b1 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -40,17 +42,78 @@
         }
       }
     </style>
+<link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.svg" />
+            <script type="text/javascript" src="../_static/copybutton.js"></script>
+            <script type="text/javascript" src="../_static/menu.js"></script>
+            <script type="text/javascript" src="../_static/themetoggle.js"></script> 
 
-    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
-    
-    <script type="text/javascript" src="../_static/copybutton.js"></script>
-    <script type="text/javascript" src="../_static/themetoggle.js"></script>
-    
-     
+  </head>
+<body>
+<div class="mobile-nav">
+    <input type="checkbox" id="menuToggler" class="toggler__input" aria-controls="navigation"
+           aria-pressed="false" aria-expanded="false" role="button" aria-label="Menu" />
+    <nav class="nav-content" role="navigation">
+        <label for="menuToggler" class="toggler__label">
+            <span></span>
+        </label>
+        <span class="nav-items-wrapper">
+            <a href="https://www.python.org/" class="nav-logo">
+                <img src="../_static/py.svg" alt="Logo"/>
+            </a>
+            <span class="version_switcher_placeholder"></span>
+            <form id="searchbox" role="search" class="search" action="../search.html" method="get">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="search-icon">
+                    <path fill-rule="nonzero" fill="currentColor" d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 001.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 00-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 005.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                </svg>
+                <input type="search" name="q" aria-label="Quick search"/>
+                <input type="submit" value="Go"/>
+                
+            </form>
+        </span>
+    </nav>
+    <div class="menu-wrapper">
+        <nav class="menu" role="navigation" aria-label="main navigation">
+            <div class="language_switcher_placeholder"></div>
+            
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label>
+  <h3><a href="../contents.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">7. Extending Distutils</a><ul>
+<li><a class="reference internal" href="#integrating-new-commands">7.1. Integrating new commands</a></li>
+<li><a class="reference internal" href="#adding-new-distribution-types">7.2. Adding new distribution types</a></li>
+</ul>
+</li>
+</ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="examples.html"
+                        title="previous chapter"><span class="section-number">6. </span>Distutils Examples</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="commandref.html"
+                        title="next chapter"><span class="section-number">8. </span>Command Reference</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../bugs.html">Report a Bug</a></li>
+      <li>
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/distutils/extending.rst"
+            rel="nofollow">Show Source
+        </a>
+      </li>
+    </ul>
+  </div>
+        </nav>
+    </div>
+</div>
 
-  </head><body>
   
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -68,33 +131,44 @@
           <a href="examples.html" title="6. Distutils Examples"
              accesskey="P">previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Distributing Python Modules (Legacy version)</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><span class="section-number">7. </span>Extending Distutils</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>    
 
@@ -103,7 +177,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="extending-distutils">
+  <section id="extending-distutils">
 <span id="id1"></span><h1><span class="section-number">7. </span>Extending Distutils<a class="headerlink" href="#extending-distutils" title="Permalink to this headline">¶</a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -125,7 +199,7 @@ convenience.</p>
 <code class="xref py py-class docutils literal notranslate"><span class="pre">Command</span></code>, while replacements often derive from <code class="xref py py-class docutils literal notranslate"><span class="pre">Command</span></code>
 indirectly, directly subclassing the command they are replacing.  Commands are
 required to derive from <code class="xref py py-class docutils literal notranslate"><span class="pre">Command</span></code>.</p>
-<div class="section" id="integrating-new-commands">
+<section id="integrating-new-commands">
 <h2><span class="section-number">7.1. </span>Integrating new commands<a class="headerlink" href="#integrating-new-commands" title="Permalink to this headline">¶</a></h2>
 <p>There are different ways to integrate new command implementations into
 distutils.  The most difficult is to lobby for the inclusion of the new features
@@ -174,16 +248,16 @@ same name as the command by classes sharing the same name.  Given the example
 command line option above, the command <strong class="command">bdist_openpkg</strong> could be
 implemented by the class <code class="xref py py-class docutils literal notranslate"><span class="pre">distcmds.bdist_openpkg.bdist_openpkg</span></code> or
 <code class="xref py py-class docutils literal notranslate"><span class="pre">buildcmds.bdist_openpkg.bdist_openpkg</span></code>.</p>
-</div>
-<div class="section" id="adding-new-distribution-types">
+</section>
+<section id="adding-new-distribution-types">
 <h2><span class="section-number">7.2. </span>Adding new distribution types<a class="headerlink" href="#adding-new-distribution-types" title="Permalink to this headline">¶</a></h2>
 <p>Commands that create distributions (files in the <code class="file docutils literal notranslate"><span class="pre">dist/</span></code> directory) need
 to add <code class="docutils literal notranslate"><span class="pre">(command,</span> <span class="pre">filename)</span></code> pairs to <code class="docutils literal notranslate"><span class="pre">self.distribution.dist_files</span></code> so that
 <strong class="command">upload</strong> can upload it to PyPI.  The <em>filename</em> in the pair contains no
 path information, only the name of the file itself.  In dry-run mode, pairs
 should still be added to represent what would have been created.</p>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -212,7 +286,7 @@ should still be added to represent what would have been created.</p>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/master/Doc/distutils/extending.rst"
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/distutils/extending.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -238,33 +312,44 @@ should still be added to represent what would have been created.</p>
           <a href="examples.html" title="6. Distutils Examples"
              >previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Distributing Python Modules (Legacy version)</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><span class="section-number">7. </span>Extending Distutils</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>  
     <div class="footer">
@@ -282,7 +367,7 @@ should still be added to represent what would have been created.</p>
 <br />
     <br />
 
-    Last updated on Mar 24, 2021.
+    Last updated on May 10, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 

@@ -4,8 +4,10 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Buffer Protocol &#8212; Python 3.10.0a6 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Buffer Protocol &#8212; Python 3.10.0b1 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
@@ -19,7 +21,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.10.0a6 documentation"
+          title="Search within Python 3.10.0b1 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -40,17 +42,91 @@
         }
       }
     </style>
+<link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.svg" />
+            <script type="text/javascript" src="../_static/copybutton.js"></script>
+            <script type="text/javascript" src="../_static/menu.js"></script>
+            <script type="text/javascript" src="../_static/themetoggle.js"></script> 
 
-    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
-    
-    <script type="text/javascript" src="../_static/copybutton.js"></script>
-    <script type="text/javascript" src="../_static/themetoggle.js"></script>
-    
-     
+  </head>
+<body>
+<div class="mobile-nav">
+    <input type="checkbox" id="menuToggler" class="toggler__input" aria-controls="navigation"
+           aria-pressed="false" aria-expanded="false" role="button" aria-label="Menu" />
+    <nav class="nav-content" role="navigation">
+        <label for="menuToggler" class="toggler__label">
+            <span></span>
+        </label>
+        <span class="nav-items-wrapper">
+            <a href="https://www.python.org/" class="nav-logo">
+                <img src="../_static/py.svg" alt="Logo"/>
+            </a>
+            <span class="version_switcher_placeholder"></span>
+            <form id="searchbox" role="search" class="search" action="../search.html" method="get">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="search-icon">
+                    <path fill-rule="nonzero" fill="currentColor" d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 001.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 00-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 005.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                </svg>
+                <input type="search" name="q" aria-label="Quick search"/>
+                <input type="submit" value="Go"/>
+                
+            </form>
+        </span>
+    </nav>
+    <div class="menu-wrapper">
+        <nav class="menu" role="navigation" aria-label="main navigation">
+            <div class="language_switcher_placeholder"></div>
+            
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label>
+  <h3><a href="../contents.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Buffer Protocol</a><ul>
+<li><a class="reference internal" href="#buffer-structure">Buffer structure</a></li>
+<li><a class="reference internal" href="#buffer-request-types">Buffer request types</a><ul>
+<li><a class="reference internal" href="#request-independent-fields">request-independent fields</a></li>
+<li><a class="reference internal" href="#readonly-format">readonly, format</a></li>
+<li><a class="reference internal" href="#shape-strides-suboffsets">shape, strides, suboffsets</a></li>
+<li><a class="reference internal" href="#contiguity-requests">contiguity requests</a></li>
+<li><a class="reference internal" href="#compound-requests">compound requests</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#complex-arrays">Complex arrays</a><ul>
+<li><a class="reference internal" href="#numpy-style-shape-and-strides">NumPy-style: shape and strides</a></li>
+<li><a class="reference internal" href="#pil-style-shape-strides-and-suboffsets">PIL-style: shape, strides and suboffsets</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#buffer-related-functions">Buffer-related functions</a></li>
+</ul>
+</li>
+</ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="iter.html"
+                        title="previous chapter">Iterator Protocol</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="concrete.html"
+                        title="next chapter">Concrete Objects Layer</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../bugs.html">Report a Bug</a></li>
+      <li>
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/c-api/buffer.rst"
+            rel="nofollow">Show Source
+        </a>
+      </li>
+    </ul>
+  </div>
+        </nav>
+    </div>
+</div>
 
-  </head><body>
   
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -68,34 +144,45 @@
           <a href="iter.html" title="Iterator Protocol"
              accesskey="P">previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API Reference Manual</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="abstract.html" accesskey="U">Abstract Objects Layer</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Buffer Protocol</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>    
 
@@ -104,7 +191,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="buffer-protocol">
+  <section id="buffer-protocol">
 <span id="bufferobjects"></span><span id="index-0"></span><h1>Buffer Protocol<a class="headerlink" href="#buffer-protocol" title="Permalink to this headline">¶</a></h1>
 <p>Certain objects available in Python wrap access to an underlying memory
 array or <em>buffer</em>.  Such objects include the built-in <a class="reference internal" href="../library/stdtypes.html#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> and
@@ -144,7 +231,7 @@ over a target object:</p>
 <p>In both cases, <a class="reference internal" href="#c.PyBuffer_Release" title="PyBuffer_Release"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyBuffer_Release()</span></code></a> must be called when the buffer
 isn’t needed anymore.  Failure to do so could lead to various issues such as
 resource leaks.</p>
-<div class="section" id="buffer-structure">
+<section id="buffer-structure">
 <span id="id1"></span><h2>Buffer structure<a class="headerlink" href="#buffer-structure" title="Permalink to this headline">¶</a></h2>
 <p>Buffer structures (or simply “buffers”) are useful as a way to expose the
 binary data from another object to the Python programmer.  They can also be
@@ -300,8 +387,8 @@ value.</p>
 
 </dd></dl>
 
-</div>
-<div class="section" id="buffer-request-types">
+</section>
+<section id="buffer-request-types">
 <span id="id2"></span><h2>Buffer request types<a class="headerlink" href="#buffer-request-types" title="Permalink to this headline">¶</a></h2>
 <p>Buffers are usually obtained by sending a buffer request to an exporting
 object via <a class="reference internal" href="#c.PyObject_GetBuffer" title="PyObject_GetBuffer"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_GetBuffer()</span></code></a>. Since the complexity of the logical
@@ -309,13 +396,13 @@ structure of the memory can vary drastically, the consumer uses the <em>flags</e
 argument to specify the exact buffer type it can handle.</p>
 <p>All <a class="reference internal" href="#c.Py_buffer" title="Py_buffer"><code class="xref c c-data docutils literal notranslate"><span class="pre">Py_buffer</span></code></a> fields are unambiguously defined by the request
 type.</p>
-<div class="section" id="request-independent-fields">
+<section id="request-independent-fields">
 <h3>request-independent fields<a class="headerlink" href="#request-independent-fields" title="Permalink to this headline">¶</a></h3>
 <p>The following fields are not influenced by <em>flags</em> and must always be filled in
 with the correct values: <a class="reference internal" href="#c.Py_buffer.obj" title="Py_buffer.obj"><code class="xref c c-member docutils literal notranslate"><span class="pre">obj</span></code></a>, <a class="reference internal" href="#c.Py_buffer.buf" title="Py_buffer.buf"><code class="xref c c-member docutils literal notranslate"><span class="pre">buf</span></code></a>,
 <a class="reference internal" href="#c.Py_buffer.len" title="Py_buffer.len"><code class="xref c c-member docutils literal notranslate"><span class="pre">len</span></code></a>, <a class="reference internal" href="#c.Py_buffer.itemsize" title="Py_buffer.itemsize"><code class="xref c c-member docutils literal notranslate"><span class="pre">itemsize</span></code></a>, <a class="reference internal" href="#c.Py_buffer.ndim" title="Py_buffer.ndim"><code class="xref c c-member docutils literal notranslate"><span class="pre">ndim</span></code></a>.</p>
-</div>
-<div class="section" id="readonly-format">
+</section>
+<section id="readonly-format">
 <h3>readonly, format<a class="headerlink" href="#readonly-format" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><dl class="c macro">
@@ -340,8 +427,8 @@ Since <a class="reference internal" href="#c.PyBUF_SIMPLE" title="PyBUF_SIMPLE">
 can be used as a stand-alone flag to request a simple writable buffer.</p>
 <p><a class="reference internal" href="#c.PyBUF_FORMAT" title="PyBUF_FORMAT"><code class="xref c c-macro docutils literal notranslate"><span class="pre">PyBUF_FORMAT</span></code></a> can be |’d to any of the flags except <a class="reference internal" href="#c.PyBUF_SIMPLE" title="PyBUF_SIMPLE"><code class="xref c c-macro docutils literal notranslate"><span class="pre">PyBUF_SIMPLE</span></code></a>.
 The latter already implies format <code class="docutils literal notranslate"><span class="pre">B</span></code> (unsigned bytes).</p>
-</div>
-<div class="section" id="shape-strides-suboffsets">
+</section>
+<section id="shape-strides-suboffsets">
 <h3>shape, strides, suboffsets<a class="headerlink" href="#shape-strides-suboffsets" title="Permalink to this headline">¶</a></h3>
 <p>The flags that control the logical structure of the memory are listed
 in decreasing order of complexity. Note that each flag contains all bits
@@ -403,8 +490,8 @@ of the flags below it.</p>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="contiguity-requests">
+</section>
+<section id="contiguity-requests">
 <span id="index-2"></span><h3>contiguity requests<a class="headerlink" href="#contiguity-requests" title="Permalink to this headline">¶</a></h3>
 <p>C or Fortran <a class="reference internal" href="../glossary.html#term-contiguous"><span class="xref std std-term">contiguity</span></a> can be explicitly requested,
 with and without stride information. Without stride information, the buffer
@@ -467,8 +554,8 @@ must be C-contiguous.</p>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="compound-requests">
+</section>
+<section id="compound-requests">
 <h3>compound requests<a class="headerlink" href="#compound-requests" title="Permalink to this headline">¶</a></h3>
 <p>All possible requests are fully defined by some combination of the flags in
 the previous section. For convenience, the buffer protocol provides frequently
@@ -602,11 +689,11 @@ have to call <a class="reference internal" href="#c.PyBuffer_IsContiguous" title
 </tr>
 </tbody>
 </table>
-</div>
-</div>
-<div class="section" id="complex-arrays">
+</section>
+</section>
+<section id="complex-arrays">
 <h2>Complex arrays<a class="headerlink" href="#complex-arrays" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="numpy-style-shape-and-strides">
+<section id="numpy-style-shape-and-strides">
 <h3>NumPy-style: shape and strides<a class="headerlink" href="#numpy-style-shape-and-strides" title="Permalink to this headline">¶</a></h3>
 <p>The logical structure of NumPy-style arrays is defined by <a class="reference internal" href="#c.Py_buffer.itemsize" title="Py_buffer.itemsize"><code class="xref c c-member docutils literal notranslate"><span class="pre">itemsize</span></code></a>,
 <a class="reference internal" href="#c.Py_buffer.ndim" title="Py_buffer.ndim"><code class="xref c c-member docutils literal notranslate"><span class="pre">ndim</span></code></a>, <a class="reference internal" href="#c.Py_buffer.shape" title="Py_buffer.shape"><code class="xref c c-member docutils literal notranslate"><span class="pre">shape</span></code></a> and <a class="reference internal" href="#c.Py_buffer.strides" title="Py_buffer.strides"><code class="xref c c-member docutils literal notranslate"><span class="pre">strides</span></code></a>.</p>
@@ -650,8 +737,8 @@ this function:</p>
     <span class="k">return</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">offset</span><span class="o">+</span><span class="n">imin</span> <span class="ow">and</span> <span class="n">offset</span><span class="o">+</span><span class="n">imax</span><span class="o">+</span><span class="n">itemsize</span> <span class="o">&lt;=</span> <span class="n">memlen</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="pil-style-shape-strides-and-suboffsets">
+</section>
+<section id="pil-style-shape-strides-and-suboffsets">
 <h3>PIL-style: shape, strides and suboffsets<a class="headerlink" href="#pil-style-shape-strides-and-suboffsets" title="Permalink to this headline">¶</a></h3>
 <p>In addition to the regular items, PIL-style arrays can contain pointers
 that must be followed in order to get to the next element in a dimension.
@@ -677,9 +764,9 @@ and suboffsets:</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="buffer-related-functions">
+</section>
+</section>
+<section id="buffer-related-functions">
 <h2>Buffer-related functions<a class="headerlink" href="#buffer-related-functions" title="Permalink to this headline">¶</a></h2>
 <dl class="c function">
 <dt id="c.PyObject_CheckBuffer">
@@ -783,8 +870,8 @@ return 0. Otherwise, raise <code class="xref c c-data docutils literal notransla
 unmodified. Otherwise, <em>exporter</em> MUST be <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.</p>
 </dd></dl>
 
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -826,7 +913,7 @@ unmodified. Otherwise, <em>exporter</em> MUST be <code class="docutils literal n
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/master/Doc/c-api/buffer.rst"
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/c-api/buffer.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -852,34 +939,45 @@ unmodified. Otherwise, <em>exporter</em> MUST be <code class="docutils literal n
           <a href="iter.html" title="Iterator Protocol"
              >previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API Reference Manual</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="abstract.html" >Abstract Objects Layer</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Buffer Protocol</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>  
     <div class="footer">
@@ -897,7 +995,7 @@ unmodified. Otherwise, <em>exporter</em> MUST be <code class="docutils literal n
 <br />
     <br />
 
-    Last updated on Mar 24, 2021.
+    Last updated on May 10, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 

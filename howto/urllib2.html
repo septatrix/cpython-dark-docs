@@ -4,8 +4,10 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>HOWTO Fetch Internet Resources Using The urllib Package &#8212; Python 3.10.0a6 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>HOWTO Fetch Internet Resources Using The urllib Package &#8212; Python 3.10.0b1 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
@@ -19,7 +21,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.10.0a6 documentation"
+          title="Search within Python 3.10.0b1 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -40,17 +42,101 @@
         }
       }
     </style>
+<link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.svg" />
+            <script type="text/javascript" src="../_static/copybutton.js"></script>
+            <script type="text/javascript" src="../_static/menu.js"></script>
+            <script type="text/javascript" src="../_static/themetoggle.js"></script> 
 
-    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
-    
-    <script type="text/javascript" src="../_static/copybutton.js"></script>
-    <script type="text/javascript" src="../_static/themetoggle.js"></script>
-    
-     
+  </head>
+<body>
+<div class="mobile-nav">
+    <input type="checkbox" id="menuToggler" class="toggler__input" aria-controls="navigation"
+           aria-pressed="false" aria-expanded="false" role="button" aria-label="Menu" />
+    <nav class="nav-content" role="navigation">
+        <label for="menuToggler" class="toggler__label">
+            <span></span>
+        </label>
+        <span class="nav-items-wrapper">
+            <a href="https://www.python.org/" class="nav-logo">
+                <img src="../_static/py.svg" alt="Logo"/>
+            </a>
+            <span class="version_switcher_placeholder"></span>
+            <form id="searchbox" role="search" class="search" action="../search.html" method="get">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="search-icon">
+                    <path fill-rule="nonzero" fill="currentColor" d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 001.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 00-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 005.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                </svg>
+                <input type="search" name="q" aria-label="Quick search"/>
+                <input type="submit" value="Go"/>
+                
+            </form>
+        </span>
+    </nav>
+    <div class="menu-wrapper">
+        <nav class="menu" role="navigation" aria-label="main navigation">
+            <div class="language_switcher_placeholder"></div>
+            
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label>
+  <h3><a href="../contents.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">HOWTO Fetch Internet Resources Using The urllib Package</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#fetching-urls">Fetching URLs</a><ul>
+<li><a class="reference internal" href="#data">Data</a></li>
+<li><a class="reference internal" href="#headers">Headers</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#handling-exceptions">Handling Exceptions</a><ul>
+<li><a class="reference internal" href="#urlerror">URLError</a></li>
+<li><a class="reference internal" href="#httperror">HTTPError</a><ul>
+<li><a class="reference internal" href="#error-codes">Error Codes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#wrapping-it-up">Wrapping it Up</a><ul>
+<li><a class="reference internal" href="#number-1">Number 1</a></li>
+<li><a class="reference internal" href="#number-2">Number 2</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#info-and-geturl">info and geturl</a></li>
+<li><a class="reference internal" href="#openers-and-handlers">Openers and Handlers</a></li>
+<li><a class="reference internal" href="#id5">Basic Authentication</a></li>
+<li><a class="reference internal" href="#proxies">Proxies</a></li>
+<li><a class="reference internal" href="#sockets-and-layers">Sockets and Layers</a></li>
+<li><a class="reference internal" href="#footnotes">Footnotes</a></li>
+</ul>
+</li>
+</ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="unicode.html"
+                        title="previous chapter">Unicode HOWTO</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="argparse.html"
+                        title="next chapter">Argparse Tutorial</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../bugs.html">Report a Bug</a></li>
+      <li>
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/howto/urllib2.rst"
+            rel="nofollow">Show Source
+        </a>
+      </li>
+    </ul>
+  </div>
+        </nav>
+    </div>
+</div>
 
-  </head><body>
   
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -68,33 +154,44 @@
           <a href="unicode.html" title="Unicode HOWTO"
              accesskey="P">previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python HOWTOs</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">HOWTO Fetch Internet Resources Using The urllib Package</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>    
 
@@ -103,7 +200,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="howto-fetch-internet-resources-using-the-urllib-package">
+  <section id="howto-fetch-internet-resources-using-the-urllib-package">
 <span id="urllib-howto"></span><h1>HOWTO Fetch Internet Resources Using The urllib Package<a class="headerlink" href="#howto-fetch-internet-resources-using-the-urllib-package" title="Permalink to this headline">¶</a></h1>
 <dl class="field-list simple">
 <dt class="field-odd">Author</dt>
@@ -115,9 +212,9 @@
 <p>There is a French translation of an earlier revision of this
 HOWTO, available at <a class="reference external" href="http://www.voidspace.org.uk/python/articles/urllib2_francais.shtml">urllib2 - Le Manuel manquant</a>.</p>
 </div>
-<div class="section" id="introduction">
+<section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<div class="sidebar">
+<aside class="sidebar">
 <p class="sidebar-title">Related Articles</p>
 <p>You may also find useful the following article on fetching web resources
 with Python:</p>
@@ -128,7 +225,7 @@ with Python:</p>
 </div></blockquote>
 </li>
 </ul>
-</div>
+</aside>
 <p><strong>urllib.request</strong> is a Python module for fetching URLs
 (Uniform Resource Locators). It offers a very simple interface, in the form of
 the <em>urlopen</em> function. This is capable of fetching URLs using a variety of
@@ -146,8 +243,8 @@ authoritative reference to HTTP is <span class="target" id="index-0"></span><a c
 not intended to be easy to read. This HOWTO aims to illustrate using <em>urllib</em>,
 with enough detail about HTTP to help you through. It is not intended to replace
 the <a class="reference internal" href="../library/urllib.request.html#module-urllib.request" title="urllib.request: Extensible library for opening URLs."><code class="xref py py-mod docutils literal notranslate"><span class="pre">urllib.request</span></code></a> docs, but is supplementary to them.</p>
-</div>
-<div class="section" id="fetching-urls">
+</section>
+<section id="fetching-urls">
 <h2>Fetching URLs<a class="headerlink" href="#fetching-urls" title="Permalink to this headline">¶</a></h2>
 <p>The simplest way to use urllib.request is as follows:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">urllib.request</span>
@@ -198,7 +295,7 @@ to do: First, you can pass data to be sent to the server.  Second, you can pass
 extra information (“metadata”) <em>about</em> the data or about the request itself, to
 the server - this information is sent as HTTP “headers”.  Let’s look at each of
 these in turn.</p>
-<div class="section" id="data">
+<section id="data">
 <h3>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h3>
 <p>Sometimes you want to send data to a URL (often the URL will refer to a CGI
 (Common Gateway Interface) script or other web application). With HTTP,
@@ -253,8 +350,8 @@ GET request by encoding it in the URL itself.</p>
 </div>
 <p>Notice that the full URL is created by adding a <code class="docutils literal notranslate"><span class="pre">?</span></code> to the URL, followed by
 the encoded values.</p>
-</div>
-<div class="section" id="headers">
+</section>
+<section id="headers">
 <h3>Headers<a class="headerlink" href="#headers" title="Permalink to this headline">¶</a></h3>
 <p>We’ll discuss here one particular HTTP header, to illustrate how to add headers
 to your HTTP request.</p>
@@ -287,9 +384,9 @@ Explorer <a class="footnote-reference brackets" href="#id11" id="id4">4</a>.</p>
 </div>
 <p>The response also has two useful methods. See the section on <a class="reference internal" href="#info-and-geturl">info and geturl</a>
 which comes after we have a look at what happens when things go wrong.</p>
-</div>
-</div>
-<div class="section" id="handling-exceptions">
+</section>
+</section>
+<section id="handling-exceptions">
 <h2>Handling Exceptions<a class="headerlink" href="#handling-exceptions" title="Permalink to this headline">¶</a></h2>
 <p><em>urlopen</em> raises <code class="xref py py-exc docutils literal notranslate"><span class="pre">URLError</span></code> when it cannot handle a response (though as
 usual with Python APIs, built-in exceptions such as <a class="reference internal" href="../library/exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>,
@@ -297,7 +394,7 @@ usual with Python APIs, built-in exceptions such as <a class="reference internal
 <p><code class="xref py py-exc docutils literal notranslate"><span class="pre">HTTPError</span></code> is the subclass of <code class="xref py py-exc docutils literal notranslate"><span class="pre">URLError</span></code> raised in the specific case of
 HTTP URLs.</p>
 <p>The exception classes are exported from the <a class="reference internal" href="../library/urllib.error.html#module-urllib.error" title="urllib.error: Exception classes raised by urllib.request."><code class="xref py py-mod docutils literal notranslate"><span class="pre">urllib.error</span></code></a> module.</p>
-<div class="section" id="urlerror">
+<section id="urlerror">
 <h3>URLError<a class="headerlink" href="#urlerror" title="Permalink to this headline">¶</a></h3>
 <p>Often, URLError is raised because there is no network connection (no route to
 the specified server), or the specified server doesn’t exist.  In this case, the
@@ -312,8 +409,8 @@ error code and a text error message.</p>
 <span class="go">(4, &#39;getaddrinfo failed&#39;)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="httperror">
+</section>
+<section id="httperror">
 <h3>HTTPError<a class="headerlink" href="#httperror" title="Permalink to this headline">¶</a></h3>
 <p>Every HTTP response from the server contains a numeric “status code”. Sometimes
 the status code indicates that the server is unable to fulfil the request. The
@@ -325,7 +422,7 @@ found), ‘403’ (request forbidden), and ‘401’ (authentication required).<
 <p>See section 10 of <span class="target" id="index-1"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2616.html"><strong>RFC 2616</strong></a> for a reference on all the HTTP error codes.</p>
 <p>The <code class="xref py py-exc docutils literal notranslate"><span class="pre">HTTPError</span></code> instance raised will have an integer ‘code’ attribute, which
 corresponds to the error sent by the server.</p>
-<div class="section" id="error-codes">
+<section id="error-codes">
 <h4>Error Codes<a class="headerlink" href="#error-codes" title="Permalink to this headline">¶</a></h4>
 <p>Because the default handlers handle redirects (codes in the 300 range), and
 codes in the 100–299 range indicate success, you will usually only see error
@@ -421,13 +518,13 @@ geturl, and info, methods as returned by the <code class="docutils literal notra
 <span class="go">  ...</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="wrapping-it-up">
+</section>
+</section>
+<section id="wrapping-it-up">
 <h3>Wrapping it Up<a class="headerlink" href="#wrapping-it-up" title="Permalink to this headline">¶</a></h3>
 <p>So if you want to be prepared for <code class="xref py py-exc docutils literal notranslate"><span class="pre">HTTPError</span></code> <em>or</em> <code class="xref py py-exc docutils literal notranslate"><span class="pre">URLError</span></code> there are two
 basic approaches. I prefer the second approach.</p>
-<div class="section" id="number-1">
+<section id="number-1">
 <h4>Number 1<a class="headerlink" href="#number-1" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">Request</span><span class="p">,</span> <span class="n">urlopen</span>
 <span class="kn">from</span> <span class="nn">urllib.error</span> <span class="kn">import</span> <span class="n">URLError</span><span class="p">,</span> <span class="n">HTTPError</span>
@@ -449,8 +546,8 @@ basic approaches. I prefer the second approach.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">except</span> <span class="pre">HTTPError</span></code> <em>must</em> come first, otherwise <code class="docutils literal notranslate"><span class="pre">except</span> <span class="pre">URLError</span></code>
 will <em>also</em> catch an <code class="xref py py-exc docutils literal notranslate"><span class="pre">HTTPError</span></code>.</p>
 </div>
-</div>
-<div class="section" id="number-2">
+</section>
+<section id="number-2">
 <h4>Number 2<a class="headerlink" href="#number-2" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">Request</span><span class="p">,</span> <span class="n">urlopen</span>
 <span class="kn">from</span> <span class="nn">urllib.error</span> <span class="kn">import</span> <span class="n">URLError</span>
@@ -468,10 +565,10 @@ will <em>also</em> catch an <code class="xref py py-exc docutils literal notrans
     <span class="c1"># everything is fine</span>
 </pre></div>
 </div>
-</div>
-</div>
-</div>
-<div class="section" id="info-and-geturl">
+</section>
+</section>
+</section>
+<section id="info-and-geturl">
 <h2>info and geturl<a class="headerlink" href="#info-and-geturl" title="Permalink to this headline">¶</a></h2>
 <p>The response returned by urlopen (or the <code class="xref py py-exc docutils literal notranslate"><span class="pre">HTTPError</span></code> instance) has two
 useful methods <code class="xref py py-meth docutils literal notranslate"><span class="pre">info()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">geturl()</span></code> and is defined in the module
@@ -486,8 +583,8 @@ fetched, particularly the headers sent by the server. It is currently an
 <a class="reference external" href="http://jkorpela.fi/http.html">Quick Reference to HTTP Headers</a>
 for a useful listing of HTTP headers with brief explanations of their meaning
 and use.</p>
-</div>
-<div class="section" id="openers-and-handlers">
+</section>
+<section id="openers-and-handlers">
 <h2>Openers and Handlers<a class="headerlink" href="#openers-and-handlers" title="Permalink to this headline">¶</a></h2>
 <p>When you fetch a URL you use an opener (an instance of the perhaps
 confusingly-named <a class="reference internal" href="../library/urllib.request.html#urllib.request.OpenerDirector" title="urllib.request.OpenerDirector"><code class="xref py py-class docutils literal notranslate"><span class="pre">urllib.request.OpenerDirector</span></code></a>). Normally we have been using
@@ -513,8 +610,8 @@ installed.</p>
 <p>Opener objects have an <code class="docutils literal notranslate"><span class="pre">open</span></code> method, which can be called directly to fetch
 urls in the same way as the <code class="docutils literal notranslate"><span class="pre">urlopen</span></code> function: there’s no need to call
 <code class="docutils literal notranslate"><span class="pre">install_opener</span></code>, except as a convenience.</p>
-</div>
-<div class="section" id="id5">
+</section>
+<section id="id5">
 <h2>Basic Authentication<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <p>To illustrate creating and installing a handler we will use the
 <code class="docutils literal notranslate"><span class="pre">HTTPBasicAuthHandler</span></code>. For a more detailed discussion of this subject –
@@ -580,8 +677,8 @@ optionally including the port number) e.g. <code class="docutils literal notrans
 (the latter example includes a port number).  The authority, if present, must
 NOT contain the “userinfo” component - for example <code class="docutils literal notranslate"><span class="pre">&quot;joe:password&#64;example.com&quot;</span></code> is
 not correct.</p>
-</div>
-<div class="section" id="proxies">
+</section>
+<section id="proxies">
 <h2>Proxies<a class="headerlink" href="#proxies" title="Permalink to this headline">¶</a></h2>
 <p><strong>urllib</strong> will auto-detect your proxy settings and use those. This is through
 the <code class="docutils literal notranslate"><span class="pre">ProxyHandler</span></code>, which is part of the normal handler chain when a proxy
@@ -605,8 +702,8 @@ shown in the recipe <a class="footnote-reference brackets" href="#id13" id="id7"
 <p><code class="docutils literal notranslate"><span class="pre">HTTP_PROXY</span></code> will be ignored if a variable <code class="docutils literal notranslate"><span class="pre">REQUEST_METHOD</span></code> is set; see
 the documentation on <a class="reference internal" href="../library/urllib.request.html#urllib.request.getproxies" title="urllib.request.getproxies"><code class="xref py py-func docutils literal notranslate"><span class="pre">getproxies()</span></code></a>.</p>
 </div>
-</div>
-<div class="section" id="sockets-and-layers">
+</section>
+<section id="sockets-and-layers">
 <h2>Sockets and Layers<a class="headerlink" href="#sockets-and-layers" title="Permalink to this headline">¶</a></h2>
 <p>The Python support for fetching resources from the web is layered.  urllib uses
 the <a class="reference internal" href="../library/http.client.html#module-http.client" title="http.client: HTTP and HTTPS protocol client (requires sockets)."><code class="xref py py-mod docutils literal notranslate"><span class="pre">http.client</span></code></a> library, which in turn uses the socket library.</p>
@@ -628,9 +725,9 @@ However, you can set the default timeout globally for all sockets using</p>
 <span class="n">response</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
+</section>
 <hr class="docutils" />
-<div class="section" id="footnotes">
+<section id="footnotes">
 <h2>Footnotes<a class="headerlink" href="#footnotes" title="Permalink to this headline">¶</a></h2>
 <p>This document was reviewed and revised by John Lee.</p>
 <dl class="footnote brackets">
@@ -661,8 +758,8 @@ the proxy.</p>
 <dd><p>urllib opener for SSL proxy (CONNECT method): <a class="reference external" href="https://code.activestate.com/recipes/456195/">ASPN Cookbook Recipe</a>.</p>
 </dd>
 </dl>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -714,7 +811,7 @@ the proxy.</p>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/master/Doc/howto/urllib2.rst"
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/howto/urllib2.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -740,33 +837,44 @@ the proxy.</p>
           <a href="unicode.html" title="Unicode HOWTO"
              >previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python HOWTOs</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">HOWTO Fetch Internet Resources Using The urllib Package</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>  
     <div class="footer">
@@ -784,7 +892,7 @@ the proxy.</p>
 <br />
     <br />
 
-    Last updated on Mar 24, 2021.
+    Last updated on May 10, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 

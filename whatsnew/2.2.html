@@ -4,8 +4,10 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>What’s New in Python 2.2 &#8212; Python 3.10.0a6 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>What’s New in Python 2.2 &#8212; Python 3.10.0b1 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
@@ -19,7 +21,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.10.0a6 documentation"
+          title="Search within Python 3.10.0b1 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -40,17 +42,95 @@
         }
       }
     </style>
+<link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.svg" />
+            <script type="text/javascript" src="../_static/copybutton.js"></script>
+            <script type="text/javascript" src="../_static/menu.js"></script>
+            <script type="text/javascript" src="../_static/themetoggle.js"></script> 
 
-    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
-    
-    <script type="text/javascript" src="../_static/copybutton.js"></script>
-    <script type="text/javascript" src="../_static/themetoggle.js"></script>
-    
-     
+  </head>
+<body>
+<div class="mobile-nav">
+    <input type="checkbox" id="menuToggler" class="toggler__input" aria-controls="navigation"
+           aria-pressed="false" aria-expanded="false" role="button" aria-label="Menu" />
+    <nav class="nav-content" role="navigation">
+        <label for="menuToggler" class="toggler__label">
+            <span></span>
+        </label>
+        <span class="nav-items-wrapper">
+            <a href="https://www.python.org/" class="nav-logo">
+                <img src="../_static/py.svg" alt="Logo"/>
+            </a>
+            <span class="version_switcher_placeholder"></span>
+            <form id="searchbox" role="search" class="search" action="../search.html" method="get">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="search-icon">
+                    <path fill-rule="nonzero" fill="currentColor" d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 001.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 00-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 005.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                </svg>
+                <input type="search" name="q" aria-label="Quick search"/>
+                <input type="submit" value="Go"/>
+                
+            </form>
+        </span>
+    </nav>
+    <div class="menu-wrapper">
+        <nav class="menu" role="navigation" aria-label="main navigation">
+            <div class="language_switcher_placeholder"></div>
+            
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label>
+  <h3><a href="../contents.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">What’s New in Python 2.2</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#peps-252-and-253-type-and-class-changes">PEPs 252 and 253: Type and Class Changes</a><ul>
+<li><a class="reference internal" href="#old-and-new-classes">Old and New Classes</a></li>
+<li><a class="reference internal" href="#descriptors">Descriptors</a></li>
+<li><a class="reference internal" href="#multiple-inheritance-the-diamond-rule">Multiple Inheritance: The Diamond Rule</a></li>
+<li><a class="reference internal" href="#attribute-access">Attribute Access</a></li>
+<li><a class="reference internal" href="#related-links">Related Links</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pep-234-iterators">PEP 234: Iterators</a></li>
+<li><a class="reference internal" href="#pep-255-simple-generators">PEP 255: Simple Generators</a></li>
+<li><a class="reference internal" href="#pep-237-unifying-long-integers-and-integers">PEP 237: Unifying Long Integers and Integers</a></li>
+<li><a class="reference internal" href="#pep-238-changing-the-division-operator">PEP 238: Changing the Division Operator</a></li>
+<li><a class="reference internal" href="#unicode-changes">Unicode Changes</a></li>
+<li><a class="reference internal" href="#pep-227-nested-scopes">PEP 227: Nested Scopes</a></li>
+<li><a class="reference internal" href="#new-and-improved-modules">New and Improved Modules</a></li>
+<li><a class="reference internal" href="#interpreter-changes-and-fixes">Interpreter Changes and Fixes</a></li>
+<li><a class="reference internal" href="#other-changes-and-fixes">Other Changes and Fixes</a></li>
+<li><a class="reference internal" href="#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+</ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="2.3.html"
+                        title="previous chapter">What’s New in Python 2.3</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="2.1.html"
+                        title="next chapter">What’s New in Python 2.1</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../bugs.html">Report a Bug</a></li>
+      <li>
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/whatsnew/2.2.rst"
+            rel="nofollow">Show Source
+        </a>
+      </li>
+    </ul>
+  </div>
+        </nav>
+    </div>
+</div>
 
-  </head><body>
   
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -68,33 +148,44 @@
           <a href="2.3.html" title="What’s New in Python 2.3"
              accesskey="P">previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">What’s New in Python</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">What’s New in Python 2.2</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>    
 
@@ -103,14 +194,14 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="what-s-new-in-python-2-2">
+  <section id="what-s-new-in-python-2-2">
 <h1>What’s New in Python 2.2<a class="headerlink" href="#what-s-new-in-python-2-2" title="Permalink to this headline">¶</a></h1>
 <dl class="field-list simple">
 <dt class="field-odd">Author</dt>
 <dd class="field-odd"><p>A.M. Kuchling</p>
 </dd>
 </dl>
-<div class="section" id="introduction">
+<section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>This article explains the new features in Python 2.2.2, released on October 14,
 2002.  Python 2.2.2 is a bugfix release of Python 2.2, originally released on
@@ -126,8 +217,8 @@ Reference</a> and the <a class="reference external" href="https://docs.python.or
 Reference Manual</a>.  If you want to
 understand the complete implementation and design rationale for a change, refer
 to the PEP for a particular new feature.</p>
-</div>
-<div class="section" id="peps-252-and-253-type-and-class-changes">
+</section>
+<section id="peps-252-and-253-type-and-class-changes">
 <h2>PEPs 252 and 253: Type and Class Changes<a class="headerlink" href="#peps-252-and-253-type-and-class-changes" title="Permalink to this headline">¶</a></h2>
 <p>The largest and most far-reaching changes in Python 2.2 are to Python’s model of
 objects and classes.  The changes should be backward compatible, so it’s likely
@@ -174,7 +265,7 @@ will now be possible in pure Python, and to my mind that’s all for the better.
 were required to make the new features work.  Instead this section will paint
 only the broad strokes.  See section <a class="reference internal" href="#sect-rellinks"><span class="std std-ref">Related Links</span></a>, “Related Links”, for
 further sources of information about Python 2.2’s new object model.</p>
-<div class="section" id="old-and-new-classes">
+<section id="old-and-new-classes">
 <h3>Old and New Classes<a class="headerlink" href="#old-and-new-classes" title="Permalink to this headline">¶</a></h3>
 <p>First, you should know that Python 2.2 really has two kinds of classes: classic
 or old-style classes, and new-style classes.  The old-style class model is
@@ -222,8 +313,8 @@ type objects that behave as factories when called.</p>
 a file object’s methods and also added a <code class="xref py py-meth docutils literal notranslate"><span class="pre">lock()</span></code> method, but this class
 couldn’t be passed to internal functions that expected a built-in file,
 something which is possible with our new <code class="xref py py-class docutils literal notranslate"><span class="pre">LockableFile</span></code>.</p>
-</div>
-<div class="section" id="descriptors">
+</section>
+<section id="descriptors">
 <h3>Descriptors<a class="headerlink" href="#descriptors" title="Permalink to this headline">¶</a></h3>
 <p>In previous versions of Python, there was no consistent way to discover what
 attributes and methods were supported by an object. There were some informal
@@ -304,8 +395,8 @@ the basic complexity of the language. There will be a few wizards who need to
 know about it in order to write <code class="xref py py-func docutils literal notranslate"><span class="pre">eiffelmethod()</span></code> or the ZODB or whatever,
 but most users will just write code on top of the resulting libraries and ignore
 the implementation details.</p>
-</div>
-<div class="section" id="multiple-inheritance-the-diamond-rule">
+</section>
+<section id="multiple-inheritance-the-diamond-rule">
 <h3>Multiple Inheritance: The Diamond Rule<a class="headerlink" href="#multiple-inheritance-the-diamond-rule" title="Permalink to this headline">¶</a></h3>
 <p>Multiple inheritance has also been made more useful through changing the rules
 under which names are resolved.  Consider this set of classes (diagram taken
@@ -365,8 +456,8 @@ will be used in methods to call a method in the superclass; for example,
 <p><a class="reference internal" href="../library/functions.html#super" title="super"><code class="xref py py-func docutils literal notranslate"><span class="pre">super()</span></code></a> can also return unbound superclass objects when called as
 <code class="docutils literal notranslate"><span class="pre">super(class)</span></code> or <code class="docutils literal notranslate"><span class="pre">super(class1,</span> <span class="pre">class2)</span></code>, but this probably won’t
 often be useful.</p>
-</div>
-<div class="section" id="attribute-access">
+</section>
+<section id="attribute-access">
 <h3>Attribute Access<a class="headerlink" href="#attribute-access" title="Permalink to this headline">¶</a></h3>
 <p>A fair number of sophisticated Python classes define hooks for attribute access
 using <code class="xref py py-meth docutils literal notranslate"><span class="pre">__getattr__()</span></code>; most commonly this is done for convenience, to make
@@ -439,8 +530,8 @@ attributes  to a particular set of names.  An example will make this clear:</p>
 </div>
 <p>Note how you get an <a class="reference internal" href="../library/exceptions.html#AttributeError" title="AttributeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">AttributeError</span></code></a> on the attempt to assign to an
 attribute not listed in <a class="reference internal" href="../reference/datamodel.html#object.__slots__" title="object.__slots__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__slots__</span></code></a>.</p>
-</div>
-<div class="section" id="related-links">
+</section>
+<section id="related-links">
 <span id="sect-rellinks"></span><h3>Related Links<a class="headerlink" href="#related-links" title="Permalink to this headline">¶</a></h3>
 <p>This section has just been a quick overview of the new features, giving enough
 of an explanation to start you programming, but many details have been
@@ -461,9 +552,9 @@ from the rest of the Zope Corp. team.</p>
 for the type handling is in <code class="file docutils literal notranslate"><span class="pre">Objects/typeobject.c</span></code>, but you should only
 resort to it after all other avenues have been exhausted, including posting a
 question to python-list or python-dev.</p>
-</div>
-</div>
-<div class="section" id="pep-234-iterators">
+</section>
+</section>
+<section id="pep-234-iterators">
 <h2>PEP 234: Iterators<a class="headerlink" href="#pep-234-iterators" title="Permalink to this headline">¶</a></h2>
 <p>Another significant addition to 2.2 is an iteration interface at both the C and
 Python levels.  Objects can define how they can be looped over by callers.</p>
@@ -575,8 +666,8 @@ GvR and Tim Peters.</p>
 </dd>
 </dl>
 </div>
-</div>
-<div class="section" id="pep-255-simple-generators">
+</section>
+<section id="pep-255-simple-generators">
 <h2>PEP 255: Simple Generators<a class="headerlink" href="#pep-255-simple-generators" title="Permalink to this headline">¶</a></h2>
 <p>Generators are another new feature, one that interacts with the introduction of
 iterators.</p>
@@ -691,8 +782,8 @@ by Neil Schemenauer and Tim Peters, with other fixes from the Python Labs crew.<
 </dd>
 </dl>
 </div>
-</div>
-<div class="section" id="pep-237-unifying-long-integers-and-integers">
+</section>
+<section id="pep-237-unifying-long-integers-and-integers">
 <h2>PEP 237: Unifying Long Integers and Integers<a class="headerlink" href="#pep-237-unifying-long-integers-and-integers" title="Permalink to this headline">¶</a></h2>
 <p>In recent versions, the distinction between regular integers, which are 32-bit
 values on most machines, and long integers, which can be of arbitrary size, was
@@ -727,8 +818,8 @@ Rossum.</p>
 </dd>
 </dl>
 </div>
-</div>
-<div class="section" id="pep-238-changing-the-division-operator">
+</section>
+<section id="pep-238-changing-the-division-operator">
 <h2>PEP 238: Changing the Division Operator<a class="headerlink" href="#pep-238-changing-the-division-operator" title="Permalink to this headline">¶</a></h2>
 <p>The most controversial change in Python 2.2 heralds the start of an effort to
 fix an old design flaw that’s been in Python from the beginning. Currently
@@ -786,8 +877,8 @@ warning; the warning will be turned on by default in Python 2.3.</p></li>
 </dd>
 </dl>
 </div>
-</div>
-<div class="section" id="unicode-changes">
+</section>
+<section id="unicode-changes">
 <h2>Unicode Changes<a class="headerlink" href="#unicode-changes" title="Permalink to this headline">¶</a></h2>
 <p>Python’s Unicode support has been enhanced a bit in 2.2.  Unicode strings are
 usually stored as UCS-2, as 16-bit unsigned integers. Python 2.2 can also be
@@ -841,8 +932,8 @@ implemented by Fredrik Lundh and Martin von Löwis.</p>
 </dd>
 </dl>
 </div>
-</div>
-<div class="section" id="pep-227-nested-scopes">
+</section>
+<section id="pep-227-nested-scopes">
 <h2>PEP 227: Nested Scopes<a class="headerlink" href="#pep-227-nested-scopes" title="Permalink to this headline">¶</a></h2>
 <p>In Python 2.1, statically nested scopes were added as an optional feature, to be
 enabled by a <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">__future__</span> <span class="pre">import</span> <span class="pre">nested_scopes</span></code> directive.  In 2.2 nested
@@ -927,8 +1018,8 @@ anyway).</p>
 </dd>
 </dl>
 </div>
-</div>
-<div class="section" id="new-and-improved-modules">
+</section>
+<section id="new-and-improved-modules">
 <h2>New and Improved Modules<a class="headerlink" href="#new-and-improved-modules" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><p>The <code class="xref py py-mod docutils literal notranslate"><span class="pre">xmlrpclib</span></code> module was contributed to the standard library by Fredrik
@@ -1026,8 +1117,8 @@ filenames to be parsed.  (Contributed by Fred L. Drake, Jr.)</p></li>
 scheduling an activity to happen at some future time.  (Contributed by Itamar
 Shtull-Trauring.)</p></li>
 </ul>
-</div>
-<div class="section" id="interpreter-changes-and-fixes">
+</section>
+<section id="interpreter-changes-and-fixes">
 <h2>Interpreter Changes and Fixes<a class="headerlink" href="#interpreter-changes-and-fixes" title="Permalink to this headline">¶</a></h2>
 <p>Some of the changes only affect people who deal with the Python interpreter at
 the C level because they’re writing Python extension modules, embedding the
@@ -1097,8 +1188,8 @@ M.-A. Lemburg.)</p></li>
 takes 2 parameters instead of 3.  The third argument was never used, and can
 simply be discarded when porting code from earlier versions to Python 2.2.</p></li>
 </ul>
-</div>
-<div class="section" id="other-changes-and-fixes">
+</section>
+<section id="other-changes-and-fixes">
 <h2>Other Changes and Fixes<a class="headerlink" href="#other-changes-and-fixes" title="Permalink to this headline">¶</a></h2>
 <p>As usual there were a bunch of other improvements and bugfixes scattered
 throughout the source tree.  A search through the CVS change logs finds there
@@ -1190,8 +1281,8 @@ but this is never useful for floating point numbers, and the final result varies
 unpredictably depending on the platform.  A call such as <code class="docutils literal notranslate"><span class="pre">pow(2.0,</span> <span class="pre">8.0,</span> <span class="pre">7.0)</span></code>
 will now raise a <a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> exception.</p></li>
 </ul>
-</div>
-<div class="section" id="acknowledgements">
+</section>
+<section id="acknowledgements">
 <h2>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Permalink to this headline">¶</a></h2>
 <p>The author would like to thank the following people for offering suggestions,
 corrections and assistance with various drafts of this article: Fred Bremmer,
@@ -1200,8 +1291,8 @@ Mark Hammond, Stephen Hansen, Michael Hudson, Jack Jansen, Marc-André Lemburg,
 Martin von Löwis, Fredrik Lundh, Michael McLay, Nick Mathewson, Paul Moore,
 Gustavo Niemeyer, Don O’Donnell, Joonas Paalasma, Tim Peters, Jens Quade, Tom
 Reinhardt, Neil Schemenauer, Guido van Rossum, Greg Ward, Edward Welbourne.</p>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -1247,7 +1338,7 @@ Reinhardt, Neil Schemenauer, Guido van Rossum, Greg Ward, Edward Welbourne.</p>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/master/Doc/whatsnew/2.2.rst"
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/whatsnew/2.2.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -1273,33 +1364,44 @@ Reinhardt, Neil Schemenauer, Guido van Rossum, Greg Ward, Edward Welbourne.</p>
           <a href="2.3.html" title="What’s New in Python 2.3"
              >previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >What’s New in Python</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">What’s New in Python 2.2</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>  
     <div class="footer">
@@ -1317,7 +1419,7 @@ Reinhardt, Neil Schemenauer, Guido van Rossum, Greg Ward, Edward Welbourne.</p>
 <br />
     <br />
 
-    Last updated on Mar 24, 2021.
+    Last updated on May 10, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 

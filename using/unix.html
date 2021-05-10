@@ -4,8 +4,10 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2. Using Python on Unix platforms &#8212; Python 3.10.0a6 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>2. Using Python on Unix platforms &#8212; Python 3.10.0b1 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
@@ -19,13 +21,13 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.10.0a6 documentation"
+          title="Search within Python 3.10.0b1 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="copyright" title="Copyright" href="../copyright.html" />
-    <link rel="next" title="3. Using Python on Windows" href="windows.html" />
+    <link rel="next" title="3. Configure Python" href="configure.html" />
     <link rel="prev" title="1. Command line and environment" href="cmdline.html" />
     <link rel="canonical" href="https://docs.python.org/3/using/unix.html" />
     
@@ -40,17 +42,86 @@
         }
       }
     </style>
+<link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.svg" />
+            <script type="text/javascript" src="../_static/copybutton.js"></script>
+            <script type="text/javascript" src="../_static/menu.js"></script>
+            <script type="text/javascript" src="../_static/themetoggle.js"></script> 
 
-    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
-    
-    <script type="text/javascript" src="../_static/copybutton.js"></script>
-    <script type="text/javascript" src="../_static/themetoggle.js"></script>
-    
-     
+  </head>
+<body>
+<div class="mobile-nav">
+    <input type="checkbox" id="menuToggler" class="toggler__input" aria-controls="navigation"
+           aria-pressed="false" aria-expanded="false" role="button" aria-label="Menu" />
+    <nav class="nav-content" role="navigation">
+        <label for="menuToggler" class="toggler__label">
+            <span></span>
+        </label>
+        <span class="nav-items-wrapper">
+            <a href="https://www.python.org/" class="nav-logo">
+                <img src="../_static/py.svg" alt="Logo"/>
+            </a>
+            <span class="version_switcher_placeholder"></span>
+            <form id="searchbox" role="search" class="search" action="../search.html" method="get">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="search-icon">
+                    <path fill-rule="nonzero" fill="currentColor" d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 001.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 00-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 005.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                </svg>
+                <input type="search" name="q" aria-label="Quick search"/>
+                <input type="submit" value="Go"/>
+                
+            </form>
+        </span>
+    </nav>
+    <div class="menu-wrapper">
+        <nav class="menu" role="navigation" aria-label="main navigation">
+            <div class="language_switcher_placeholder"></div>
+            
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label>
+  <h3><a href="../contents.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">2. Using Python on Unix platforms</a><ul>
+<li><a class="reference internal" href="#getting-and-installing-the-latest-version-of-python">2.1. Getting and installing the latest version of Python</a><ul>
+<li><a class="reference internal" href="#on-linux">2.1.1. On Linux</a></li>
+<li><a class="reference internal" href="#on-freebsd-and-openbsd">2.1.2. On FreeBSD and OpenBSD</a></li>
+<li><a class="reference internal" href="#on-opensolaris">2.1.3. On OpenSolaris</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#building-python">2.2. Building Python</a></li>
+<li><a class="reference internal" href="#python-related-paths-and-files">2.3. Python-related paths and files</a></li>
+<li><a class="reference internal" href="#miscellaneous">2.4. Miscellaneous</a></li>
+<li><a class="reference internal" href="#custom-openssl">2.5. Custom OpenSSL</a></li>
+</ul>
+</li>
+</ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="cmdline.html"
+                        title="previous chapter"><span class="section-number">1. </span>Command line and environment</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="configure.html"
+                        title="next chapter"><span class="section-number">3. </span>Configure Python</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../bugs.html">Report a Bug</a></li>
+      <li>
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/using/unix.rst"
+            rel="nofollow">Show Source
+        </a>
+      </li>
+    </ul>
+  </div>
+        </nav>
+    </div>
+</div>
 
-  </head><body>
   
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -62,39 +133,50 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="windows.html" title="3. Using Python on Windows"
+          <a href="configure.html" title="3. Configure Python"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="cmdline.html" title="1. Command line and environment"
              accesskey="P">previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python Setup and Usage</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><span class="section-number">2. </span>Using Python on Unix platforms</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>    
 
@@ -103,11 +185,11 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="using-python-on-unix-platforms">
+  <section id="using-python-on-unix-platforms">
 <span id="using-on-unix"></span><h1><span class="section-number">2. </span>Using Python on Unix platforms<a class="headerlink" href="#using-python-on-unix-platforms" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="getting-and-installing-the-latest-version-of-python">
+<section id="getting-and-installing-the-latest-version-of-python">
 <h2><span class="section-number">2.1. </span>Getting and installing the latest version of Python<a class="headerlink" href="#getting-and-installing-the-latest-version-of-python" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="on-linux">
+<section id="on-linux">
 <h3><span class="section-number">2.1.1. </span>On Linux<a class="headerlink" href="#on-linux" title="Permalink to this headline">¶</a></h3>
 <p>Python comes preinstalled on most Linux distributions, and is available as a
 package on all others.  However there are certain features you might want to use
@@ -129,8 +211,8 @@ following links:</p>
 </dd>
 </dl>
 </div>
-</div>
-<div class="section" id="on-freebsd-and-openbsd">
+</section>
+<section id="on-freebsd-and-openbsd">
 <h3><span class="section-number">2.1.2. </span>On FreeBSD and OpenBSD<a class="headerlink" href="#on-freebsd-and-openbsd" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p>FreeBSD users, to add the package use:</p>
@@ -150,14 +232,14 @@ pkg_add ftp://ftp.openbsd.org/pub/OpenBSD/4.2/packages/&lt;insert your architect
 </div>
 </li>
 </ul>
-</div>
-<div class="section" id="on-opensolaris">
+</section>
+<section id="on-opensolaris">
 <h3><span class="section-number">2.1.3. </span>On OpenSolaris<a class="headerlink" href="#on-opensolaris" title="Permalink to this headline">¶</a></h3>
 <p>You can get Python from <a class="reference external" href="https://www.opencsw.org/">OpenCSW</a>.  Various versions
 of Python are available and can be installed with e.g. <code class="docutils literal notranslate"><span class="pre">pkgutil</span> <span class="pre">-i</span> <span class="pre">python27</span></code>.</p>
-</div>
-</div>
-<div class="section" id="building-python">
+</section>
+</section>
+<section id="building-python">
 <span id="building-python-on-unix"></span><h2><span class="section-number">2.2. </span>Building Python<a class="headerlink" href="#building-python" title="Permalink to this headline">¶</a></h2>
 <p>If you want to compile CPython yourself, first thing you should do is get the
 <a class="reference external" href="https://www.python.org/downloads/source/">source</a>. You can download either the
@@ -169,17 +251,17 @@ make
 make install
 </pre></div>
 </div>
-<p>Configuration options and caveats for specific Unix platforms are extensively
-documented in the <a class="reference external" href="https://github.com/python/cpython/tree/master/README.rst">README.rst</a> file in the root of the Python source
-tree.</p>
+<p><a class="reference internal" href="configure.html#configure-options"><span class="std std-ref">Configuration options</span></a> and caveats for specific Unix
+platforms are extensively documented in the <a class="reference external" href="https://github.com/python/cpython/tree/3.10/README.rst">README.rst</a> file in the
+root of the Python source tree.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">install</span></code> can overwrite or masquerade the <code class="file docutils literal notranslate"><span class="pre">python3</span></code> binary.
 <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">altinstall</span></code> is therefore recommended instead of <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">install</span></code>
 since it only installs <code class="file docutils literal notranslate"><em><span class="pre">exec_prefix</span></em><span class="pre">/bin/python</span><em><span class="pre">version</span></em></code>.</p>
 </div>
-</div>
-<div class="section" id="python-related-paths-and-files">
+</section>
+<section id="python-related-paths-and-files">
 <h2><span class="section-number">2.3. </span>Python-related paths and files<a class="headerlink" href="#python-related-paths-and-files" title="Permalink to this headline">¶</a></h2>
 <p>These are subject to difference depending on local installation conventions;
 <span class="target" id="index-0"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">prefix</span></code> (<code class="docutils literal notranslate"><span class="pre">${prefix}</span></code>) and <span class="target" id="index-1"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">exec_prefix</span></code> (<code class="docutils literal notranslate"><span class="pre">${exec_prefix}</span></code>)
@@ -214,8 +296,8 @@ embedding the interpreter.</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="miscellaneous">
+</section>
+<section id="miscellaneous">
 <h2><span class="section-number">2.4. </span>Miscellaneous<a class="headerlink" href="#miscellaneous" title="Permalink to this headline">¶</a></h2>
 <p>To easily use Python scripts on Unix, you need to make them executable,
 e.g. with</p>
@@ -231,9 +313,9 @@ usually</p>
 some Unices may not have the <strong class="program">env</strong> command, so you may need to hardcode
 <code class="docutils literal notranslate"><span class="pre">/usr/bin/python3</span></code> as the interpreter path.</p>
 <p>To use shell commands in your Python scripts, look at the <a class="reference internal" href="../library/subprocess.html#module-subprocess" title="subprocess: Subprocess management."><code class="xref py py-mod docutils literal notranslate"><span class="pre">subprocess</span></code></a> module.</p>
-</div>
-<div class="section" id="custom-openssl">
-<h2><span class="section-number">2.5. </span>Custom OpenSSL<a class="headerlink" href="#custom-openssl" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="custom-openssl">
+<span id="unix-custom-openssl"></span><h2><span class="section-number">2.5. </span>Custom OpenSSL<a class="headerlink" href="#custom-openssl" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
 <li><p>To use your vendor’s OpenSSL configuration and system trust store, locate
 the directory with <code class="docutils literal notranslate"><span class="pre">openssl.cnf</span></code> file or symlink in <code class="docutils literal notranslate"><span class="pre">/etc</span></code>. On most
@@ -261,7 +343,8 @@ not <code class="docutils literal notranslate"><span class="pre">install</span><
 </pre></div>
 </div>
 </li>
-<li><p>Build Python with custom OpenSSL</p>
+<li><p>Build Python with custom OpenSSL
+(see the configure <cite>–with-openssl</cite> and <cite>–with-openssl-rpath</cite> options)</p>
 <div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">pushd</span> python-3.x.x
 <span class="gp">$ </span>./configure -C <span class="se">\</span>
 <span class="go">    --with-openssl=/usr/local/custom-openssl \</span>
@@ -279,8 +362,8 @@ not <code class="docutils literal notranslate"><span class="pre">install</span><
 to recompile Python to update OpenSSL. It’s sufficient to replace the
 custom OpenSSL installation with a newer version.</p>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -310,14 +393,14 @@ custom OpenSSL installation with a newer version.</p>
   <p class="topless"><a href="cmdline.html"
                         title="previous chapter"><span class="section-number">1. </span>Command line and environment</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="windows.html"
-                        title="next chapter"><span class="section-number">3. </span>Using Python on Windows</a></p>
+  <p class="topless"><a href="configure.html"
+                        title="next chapter"><span class="section-number">3. </span>Configure Python</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/master/Doc/using/unix.rst"
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/using/unix.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -337,39 +420,50 @@ custom OpenSSL installation with a newer version.</p>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="windows.html" title="3. Using Python on Windows"
+          <a href="configure.html" title="3. Configure Python"
              >next</a> |</li>
         <li class="right" >
           <a href="cmdline.html" title="1. Command line and environment"
              >previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python Setup and Usage</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><span class="section-number">2. </span>Using Python on Unix platforms</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>  
     <div class="footer">
@@ -387,7 +481,7 @@ custom OpenSSL installation with a newer version.</p>
 <br />
     <br />
 
-    Last updated on Mar 24, 2021.
+    Last updated on May 10, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 

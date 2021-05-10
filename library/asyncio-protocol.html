@@ -4,8 +4,10 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Transports and Protocols &#8212; Python 3.10.0a6 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Transports and Protocols &#8212; Python 3.10.0b1 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
@@ -19,7 +21,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.10.0a6 documentation"
+          title="Search within Python 3.10.0b1 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -40,17 +42,103 @@
         }
       }
     </style>
+<link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.svg" />
+            <script type="text/javascript" src="../_static/copybutton.js"></script>
+            <script type="text/javascript" src="../_static/menu.js"></script>
+            <script type="text/javascript" src="../_static/themetoggle.js"></script> 
 
-    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
-    
-    <script type="text/javascript" src="../_static/copybutton.js"></script>
-    <script type="text/javascript" src="../_static/themetoggle.js"></script>
-    
-     
+  </head>
+<body>
+<div class="mobile-nav">
+    <input type="checkbox" id="menuToggler" class="toggler__input" aria-controls="navigation"
+           aria-pressed="false" aria-expanded="false" role="button" aria-label="Menu" />
+    <nav class="nav-content" role="navigation">
+        <label for="menuToggler" class="toggler__label">
+            <span></span>
+        </label>
+        <span class="nav-items-wrapper">
+            <a href="https://www.python.org/" class="nav-logo">
+                <img src="../_static/py.svg" alt="Logo"/>
+            </a>
+            <span class="version_switcher_placeholder"></span>
+            <form id="searchbox" role="search" class="search" action="../search.html" method="get">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="search-icon">
+                    <path fill-rule="nonzero" fill="currentColor" d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 001.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 00-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 005.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                </svg>
+                <input type="search" name="q" aria-label="Quick search"/>
+                <input type="submit" value="Go"/>
+                
+            </form>
+        </span>
+    </nav>
+    <div class="menu-wrapper">
+        <nav class="menu" role="navigation" aria-label="main navigation">
+            <div class="language_switcher_placeholder"></div>
+            
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label>
+  <h3><a href="../contents.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Transports and Protocols</a><ul>
+<li><a class="reference internal" href="#transports">Transports</a><ul>
+<li><a class="reference internal" href="#transports-hierarchy">Transports Hierarchy</a></li>
+<li><a class="reference internal" href="#base-transport">Base Transport</a></li>
+<li><a class="reference internal" href="#read-only-transports">Read-only Transports</a></li>
+<li><a class="reference internal" href="#write-only-transports">Write-only Transports</a></li>
+<li><a class="reference internal" href="#datagram-transports">Datagram Transports</a></li>
+<li><a class="reference internal" href="#subprocess-transports">Subprocess Transports</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#protocols">Protocols</a><ul>
+<li><a class="reference internal" href="#base-protocols">Base Protocols</a></li>
+<li><a class="reference internal" href="#base-protocol">Base Protocol</a></li>
+<li><a class="reference internal" href="#streaming-protocols">Streaming Protocols</a></li>
+<li><a class="reference internal" href="#buffered-streaming-protocols">Buffered Streaming Protocols</a></li>
+<li><a class="reference internal" href="#datagram-protocols">Datagram Protocols</a></li>
+<li><a class="reference internal" href="#subprocess-protocols">Subprocess Protocols</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#examples">Examples</a><ul>
+<li><a class="reference internal" href="#tcp-echo-server">TCP Echo Server</a></li>
+<li><a class="reference internal" href="#tcp-echo-client">TCP Echo Client</a></li>
+<li><a class="reference internal" href="#udp-echo-server">UDP Echo Server</a></li>
+<li><a class="reference internal" href="#udp-echo-client">UDP Echo Client</a></li>
+<li><a class="reference internal" href="#connecting-existing-sockets">Connecting Existing Sockets</a></li>
+<li><a class="reference internal" href="#loop-subprocess-exec-and-subprocessprotocol">loop.subprocess_exec() and SubprocessProtocol</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="asyncio-future.html"
+                        title="previous chapter">Futures</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="asyncio-policy.html"
+                        title="next chapter">Policies</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../bugs.html">Report a Bug</a></li>
+      <li>
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/library/asyncio-protocol.rst"
+            rel="nofollow">Show Source
+        </a>
+      </li>
+    </ul>
+  </div>
+        </nav>
+    </div>
+</div>
 
-  </head><body>
   
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -68,35 +156,46 @@
           <a href="asyncio-future.html" title="Futures"
              accesskey="P">previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="ipc.html" >Networking and Interprocess Communication</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="asyncio.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asyncio</span></code> — Asynchronous I/O</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Transports and Protocols</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>    
 
@@ -105,7 +204,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="transports-and-protocols">
+  <section id="transports-and-protocols">
 <span id="asyncio-transports-protocols"></span><h1>Transports and Protocols<a class="headerlink" href="#transports-and-protocols" title="Permalink to this headline">¶</a></h1>
 <p class="rubric">Preface</p>
 <p>Transports and Protocols are used by the <strong>low-level</strong> event loop
@@ -149,9 +248,9 @@ classes.</p></li>
 <li><p>The <a class="reference internal" href="#examples">Examples</a> section showcases how to work with transports,
 protocols, and low-level event loop APIs.</p></li>
 </ul>
-<div class="section" id="transports">
+<section id="transports">
 <span id="asyncio-transport"></span><h2>Transports<a class="headerlink" href="#transports" title="Permalink to this headline">¶</a></h2>
-<p><strong>Source code:</strong> <a class="reference external" href="https://github.com/python/cpython/tree/master/Lib/asyncio/transports.py">Lib/asyncio/transports.py</a></p>
+<p><strong>Source code:</strong> <a class="reference external" href="https://github.com/python/cpython/tree/3.10/Lib/asyncio/transports.py">Lib/asyncio/transports.py</a></p>
 <hr class="docutils" />
 <p>Transports are classes provided by <a class="reference internal" href="asyncio.html#module-asyncio" title="asyncio: Asynchronous I/O."><code class="xref py py-mod docutils literal notranslate"><span class="pre">asyncio</span></code></a> in order to abstract
 various kinds of communication channels.</p>
@@ -160,7 +259,7 @@ various kinds of communication channels.</p>
 <p>asyncio implements transports for TCP, UDP, SSL, and subprocess pipes.
 The methods available on a transport depend on the transport’s kind.</p>
 <p>The transport classes are <a class="reference internal" href="asyncio-dev.html#asyncio-multithreading"><span class="std std-ref">not thread safe</span></a>.</p>
-<div class="section" id="transports-hierarchy">
+<section id="transports-hierarchy">
 <h3>Transports Hierarchy<a class="headerlink" href="#transports-hierarchy" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="asyncio.BaseTransport">
@@ -221,8 +320,8 @@ event loop methods <a class="reference internal" href="asyncio-eventloop.html#as
 <a class="reference internal" href="asyncio-eventloop.html#asyncio.loop.subprocess_exec" title="asyncio.loop.subprocess_exec"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.subprocess_exec()</span></code></a>.</p>
 </dd></dl>
 
-</div>
-<div class="section" id="base-transport">
+</section>
+<section id="base-transport">
 <h3>Base Transport<a class="headerlink" href="#base-transport" title="Permalink to this headline">¶</a></h3>
 <dl class="py method">
 <dt id="asyncio.BaseTransport.close">
@@ -314,8 +413,8 @@ protocols are documented to support the switch.</p>
 <dd><p>Return the current protocol.</p>
 </dd></dl>
 
-</div>
-<div class="section" id="read-only-transports">
+</section>
+<section id="read-only-transports">
 <h3>Read-only Transports<a class="headerlink" href="#read-only-transports" title="Permalink to this headline">¶</a></h3>
 <dl class="py method">
 <dt id="asyncio.ReadTransport.is_reading">
@@ -350,8 +449,8 @@ transport is already reading.</p>
 </div>
 </dd></dl>
 
-</div>
-<div class="section" id="write-only-transports">
+</section>
+<section id="write-only-transports">
 <h3>Write-only Transports<a class="headerlink" href="#write-only-transports" title="Permalink to this headline">¶</a></h3>
 <dl class="py method">
 <dt id="asyncio.WriteTransport.abort">
@@ -442,8 +541,8 @@ Data may still be received.</p>
 (e.g. SSL) doesn’t support half-closed connections.</p>
 </dd></dl>
 
-</div>
-<div class="section" id="datagram-transports">
+</section>
+<section id="datagram-transports">
 <h3>Datagram Transports<a class="headerlink" href="#datagram-transports" title="Permalink to this headline">¶</a></h3>
 <dl class="py method">
 <dt id="asyncio.DatagramTransport.sendto">
@@ -466,8 +565,8 @@ No more data will be received.  The protocol’s
 method will eventually be called with <a class="reference internal" href="constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a> as its argument.</p>
 </dd></dl>
 
-</div>
-<div class="section" id="subprocess-transports">
+</section>
+<section id="subprocess-transports">
 <span id="asyncio-subprocess-transports"></span><h3>Subprocess Transports<a class="headerlink" href="#subprocess-transports" title="Permalink to this headline">¶</a></h3>
 <dl class="py method">
 <dt id="asyncio.SubprocessTransport.get_pid">
@@ -533,11 +632,11 @@ stop the subprocess.</p>
 <em>stdin</em>, <em>stdout</em>, and <em>stderr</em> pipes.</p>
 </dd></dl>
 
-</div>
-</div>
-<div class="section" id="protocols">
+</section>
+</section>
+<section id="protocols">
 <span id="asyncio-protocol"></span><h2>Protocols<a class="headerlink" href="#protocols" title="Permalink to this headline">¶</a></h2>
-<p><strong>Source code:</strong> <a class="reference external" href="https://github.com/python/cpython/tree/master/Lib/asyncio/protocols.py">Lib/asyncio/protocols.py</a></p>
+<p><strong>Source code:</strong> <a class="reference external" href="https://github.com/python/cpython/tree/3.10/Lib/asyncio/protocols.py">Lib/asyncio/protocols.py</a></p>
 <hr class="docutils" />
 <p>asyncio provides a set of abstract base classes that should be used
 to implement network protocols.  Those classes are meant to be used
@@ -546,7 +645,7 @@ together with <a class="reference internal" href="#asyncio-transport"><span clas
 all methods.  All these methods are callbacks: they are called by
 transports on certain events, for example when some data is received.
 A base protocol method should be called by the corresponding transport.</p>
-<div class="section" id="base-protocols">
+<section id="base-protocols">
 <h3>Base Protocols<a class="headerlink" href="#base-protocols" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="asyncio.BaseProtocol">
@@ -581,8 +680,8 @@ control of the receive buffer.</p>
 processes (unidirectional pipes).</p>
 </dd></dl>
 
-</div>
-<div class="section" id="base-protocol">
+</section>
+<section id="base-protocol">
 <h3>Base Protocol<a class="headerlink" href="#base-protocol" title="Permalink to this headline">¶</a></h3>
 <p>All asyncio protocols can implement Base Protocol callbacks.</p>
 <p class="rubric">Connection Callbacks</p>
@@ -631,8 +730,8 @@ go strictly over.</p>
 buffer size is equal or lower than the low watermark.  These end
 conditions are important to ensure that things go as expected when
 either mark is zero.</p>
-</div>
-<div class="section" id="streaming-protocols">
+</section>
+<section id="streaming-protocols">
 <h3>Streaming Protocols<a class="headerlink" href="#streaming-protocols" title="Permalink to this headline">¶</a></h3>
 <p>Event methods, such as <a class="reference internal" href="asyncio-eventloop.html#asyncio.loop.create_server" title="asyncio.loop.create_server"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.create_server()</span></code></a>,
 <a class="reference internal" href="asyncio-eventloop.html#asyncio.loop.create_unix_server" title="asyncio.loop.create_unix_server"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.create_unix_server()</span></code></a>, <a class="reference internal" href="asyncio-eventloop.html#asyncio.loop.create_connection" title="asyncio.loop.create_connection"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.create_connection()</span></code></a>,
@@ -678,8 +777,8 @@ being closed.</p>
 -&gt; connection_lost -&gt; end
 </pre></div>
 </div>
-</div>
-<div class="section" id="buffered-streaming-protocols">
+</section>
+<section id="buffered-streaming-protocols">
 <h3>Buffered Streaming Protocols<a class="headerlink" href="#buffered-streaming-protocols" title="Permalink to this headline">¶</a></h3>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.7.</span></p>
@@ -732,8 +831,8 @@ and, if called, <a class="reference internal" href="#asyncio.BufferedProtocol.ge
 -&gt; connection_lost -&gt; end
 </pre></div>
 </div>
-</div>
-<div class="section" id="datagram-protocols">
+</section>
+<section id="datagram-protocols">
 <h3>Datagram Protocols<a class="headerlink" href="#datagram-protocols" title="Permalink to this headline">¶</a></h3>
 <p>Datagram Protocol instances should be constructed by protocol
 factories passed to the <a class="reference internal" href="asyncio-eventloop.html#asyncio.loop.create_datagram_endpoint" title="asyncio.loop.create_datagram_endpoint"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.create_datagram_endpoint()</span></code></a> method.</p>
@@ -766,8 +865,8 @@ failures caused by writing too many packets.</p>
 or may not be raised; if it is raised, it will be reported to
 <a class="reference internal" href="#asyncio.DatagramProtocol.error_received" title="asyncio.DatagramProtocol.error_received"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DatagramProtocol.error_received()</span></code></a> but otherwise ignored.</p>
 </div>
-</div>
-<div class="section" id="subprocess-protocols">
+</section>
+<section id="subprocess-protocols">
 <span id="asyncio-subprocess-protocols"></span><h3>Subprocess Protocols<a class="headerlink" href="#subprocess-protocols" title="Permalink to this headline">¶</a></h3>
 <p>Datagram Protocol instances should be constructed by protocol
 factories passed to the <a class="reference internal" href="asyncio-eventloop.html#asyncio.loop.subprocess_exec" title="asyncio.loop.subprocess_exec"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.subprocess_exec()</span></code></a> and
@@ -795,11 +894,11 @@ is closed.</p>
 <dd><p>Called when the child process has exited.</p>
 </dd></dl>
 
-</div>
-</div>
-<div class="section" id="examples">
+</section>
+</section>
+<section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="tcp-echo-server">
+<section id="tcp-echo-server">
 <span id="asyncio-example-tcp-echo-server-protocol"></span><h3>TCP Echo Server<a class="headerlink" href="#tcp-echo-server" title="Permalink to this headline">¶</a></h3>
 <p>Create a TCP echo server using the <a class="reference internal" href="asyncio-eventloop.html#asyncio.loop.create_server" title="asyncio.loop.create_server"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.create_server()</span></code></a> method, send back
 received data, and close the connection:</p>
@@ -844,8 +943,8 @@ received data, and close the connection:</p>
 <p>The <a class="reference internal" href="asyncio-stream.html#asyncio-tcp-echo-server-streams"><span class="std std-ref">TCP echo server using streams</span></a>
 example uses the high-level <a class="reference internal" href="asyncio-stream.html#asyncio.start_server" title="asyncio.start_server"><code class="xref py py-func docutils literal notranslate"><span class="pre">asyncio.start_server()</span></code></a> function.</p>
 </div>
-</div>
-<div class="section" id="tcp-echo-client">
+</section>
+<section id="tcp-echo-client">
 <span id="asyncio-example-tcp-echo-client-protocol"></span><h3>TCP Echo Client<a class="headerlink" href="#tcp-echo-client" title="Permalink to this headline">¶</a></h3>
 <p>A TCP echo client using the <a class="reference internal" href="asyncio-eventloop.html#asyncio.loop.create_connection" title="asyncio.loop.create_connection"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.create_connection()</span></code></a> method, sends
 data, and waits until the connection is closed:</p>
@@ -897,8 +996,8 @@ data, and waits until the connection is closed:</p>
 <p>The <a class="reference internal" href="asyncio-stream.html#asyncio-tcp-echo-client-streams"><span class="std std-ref">TCP echo client using streams</span></a>
 example uses the high-level <a class="reference internal" href="asyncio-stream.html#asyncio.open_connection" title="asyncio.open_connection"><code class="xref py py-func docutils literal notranslate"><span class="pre">asyncio.open_connection()</span></code></a> function.</p>
 </div>
-</div>
-<div class="section" id="udp-echo-server">
+</section>
+<section id="udp-echo-server">
 <span id="asyncio-udp-echo-server-protocol"></span><h3>UDP Echo Server<a class="headerlink" href="#udp-echo-server" title="Permalink to this headline">¶</a></h3>
 <p>A UDP echo server, using the <a class="reference internal" href="asyncio-eventloop.html#asyncio.loop.create_datagram_endpoint" title="asyncio.loop.create_datagram_endpoint"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.create_datagram_endpoint()</span></code></a>
 method, sends back received data:</p>
@@ -938,8 +1037,8 @@ method, sends back received data:</p>
 <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="udp-echo-client">
+</section>
+<section id="udp-echo-client">
 <span id="asyncio-udp-echo-client-protocol"></span><h3>UDP Echo Client<a class="headerlink" href="#udp-echo-client" title="Permalink to this headline">¶</a></h3>
 <p>A UDP echo client, using the <a class="reference internal" href="asyncio-eventloop.html#asyncio.loop.create_datagram_endpoint" title="asyncio.loop.create_datagram_endpoint"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.create_datagram_endpoint()</span></code></a>
 method, sends data and closes the transport when it receives the answer:</p>
@@ -992,8 +1091,8 @@ method, sends data and closes the transport when it receives the answer:</p>
 <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="connecting-existing-sockets">
+</section>
+<section id="connecting-existing-sockets">
 <span id="asyncio-example-create-connection"></span><h3>Connecting Existing Sockets<a class="headerlink" href="#connecting-existing-sockets" title="Permalink to this headline">¶</a></h3>
 <p>Wait until a socket receives data using the
 <a class="reference internal" href="asyncio-eventloop.html#asyncio.loop.create_connection" title="asyncio.loop.create_connection"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.create_connection()</span></code></a> method with a protocol:</p>
@@ -1054,8 +1153,8 @@ method, sends data and closes the transport when it receives the answer:</p>
 <p>The <a class="reference internal" href="asyncio-stream.html#asyncio-example-create-connection-streams"><span class="std std-ref">register an open socket to wait for data using streams</span></a> example uses high-level streams
 created by the <a class="reference internal" href="asyncio-stream.html#asyncio.open_connection" title="asyncio.open_connection"><code class="xref py py-func docutils literal notranslate"><span class="pre">open_connection()</span></code></a> function in a coroutine.</p>
 </div>
-</div>
-<div class="section" id="loop-subprocess-exec-and-subprocessprotocol">
+</section>
+<section id="loop-subprocess-exec-and-subprocessprotocol">
 <span id="asyncio-example-subprocess-proto"></span><h3>loop.subprocess_exec() and SubprocessProtocol<a class="headerlink" href="#loop-subprocess-exec-and-subprocessprotocol" title="Permalink to this headline">¶</a></h3>
 <p>An example of a subprocess protocol used to get the output of a
 subprocess and to wait for the subprocess exit.</p>
@@ -1107,9 +1206,9 @@ subprocess and to wait for the subprocess exit.</p>
 </div>
 <p>See also the <a class="reference internal" href="asyncio-subprocess.html#asyncio-example-create-subprocess-exec"><span class="std std-ref">same example</span></a>
 written using high-level APIs.</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -1163,7 +1262,7 @@ written using high-level APIs.</p>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/master/Doc/library/asyncio-protocol.rst"
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/library/asyncio-protocol.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -1189,35 +1288,46 @@ written using high-level APIs.</p>
           <a href="asyncio-future.html" title="Futures"
              >previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="ipc.html" >Networking and Interprocess Communication</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="asyncio.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">asyncio</span></code> — Asynchronous I/O</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Transports and Protocols</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>  
     <div class="footer">
@@ -1235,7 +1345,7 @@ written using high-level APIs.</p>
 <br />
     <br />
 
-    Last updated on Mar 24, 2021.
+    Last updated on May 10, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 

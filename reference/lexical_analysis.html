@@ -4,8 +4,10 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2. Lexical analysis &#8212; Python 3.10.0a6 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>2. Lexical analysis &#8212; Python 3.10.0b1 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
@@ -19,7 +21,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.10.0a6 documentation"
+          title="Search within Python 3.10.0b1 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -40,17 +42,107 @@
         }
       }
     </style>
+<link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.svg" />
+            <script type="text/javascript" src="../_static/copybutton.js"></script>
+            <script type="text/javascript" src="../_static/menu.js"></script>
+            <script type="text/javascript" src="../_static/themetoggle.js"></script> 
 
-    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
-    
-    <script type="text/javascript" src="../_static/copybutton.js"></script>
-    <script type="text/javascript" src="../_static/themetoggle.js"></script>
-    
-     
+  </head>
+<body>
+<div class="mobile-nav">
+    <input type="checkbox" id="menuToggler" class="toggler__input" aria-controls="navigation"
+           aria-pressed="false" aria-expanded="false" role="button" aria-label="Menu" />
+    <nav class="nav-content" role="navigation">
+        <label for="menuToggler" class="toggler__label">
+            <span></span>
+        </label>
+        <span class="nav-items-wrapper">
+            <a href="https://www.python.org/" class="nav-logo">
+                <img src="../_static/py.svg" alt="Logo"/>
+            </a>
+            <span class="version_switcher_placeholder"></span>
+            <form id="searchbox" role="search" class="search" action="../search.html" method="get">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="search-icon">
+                    <path fill-rule="nonzero" fill="currentColor" d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 001.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 00-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 005.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                </svg>
+                <input type="search" name="q" aria-label="Quick search"/>
+                <input type="submit" value="Go"/>
+                
+            </form>
+        </span>
+    </nav>
+    <div class="menu-wrapper">
+        <nav class="menu" role="navigation" aria-label="main navigation">
+            <div class="language_switcher_placeholder"></div>
+            
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label>
+  <h3><a href="../contents.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">2. Lexical analysis</a><ul>
+<li><a class="reference internal" href="#line-structure">2.1. Line structure</a><ul>
+<li><a class="reference internal" href="#logical-lines">2.1.1. Logical lines</a></li>
+<li><a class="reference internal" href="#physical-lines">2.1.2. Physical lines</a></li>
+<li><a class="reference internal" href="#comments">2.1.3. Comments</a></li>
+<li><a class="reference internal" href="#encoding-declarations">2.1.4. Encoding declarations</a></li>
+<li><a class="reference internal" href="#explicit-line-joining">2.1.5. Explicit line joining</a></li>
+<li><a class="reference internal" href="#implicit-line-joining">2.1.6. Implicit line joining</a></li>
+<li><a class="reference internal" href="#blank-lines">2.1.7. Blank lines</a></li>
+<li><a class="reference internal" href="#indentation">2.1.8. Indentation</a></li>
+<li><a class="reference internal" href="#whitespace-between-tokens">2.1.9. Whitespace between tokens</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#other-tokens">2.2. Other tokens</a></li>
+<li><a class="reference internal" href="#identifiers">2.3. Identifiers and keywords</a><ul>
+<li><a class="reference internal" href="#keywords">2.3.1. Keywords</a></li>
+<li><a class="reference internal" href="#soft-keywords">2.3.2. Soft Keywords</a></li>
+<li><a class="reference internal" href="#reserved-classes-of-identifiers">2.3.3. Reserved classes of identifiers</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#literals">2.4. Literals</a><ul>
+<li><a class="reference internal" href="#string-and-bytes-literals">2.4.1. String and Bytes literals</a></li>
+<li><a class="reference internal" href="#string-literal-concatenation">2.4.2. String literal concatenation</a></li>
+<li><a class="reference internal" href="#formatted-string-literals">2.4.3. Formatted string literals</a></li>
+<li><a class="reference internal" href="#numeric-literals">2.4.4. Numeric literals</a></li>
+<li><a class="reference internal" href="#integer-literals">2.4.5. Integer literals</a></li>
+<li><a class="reference internal" href="#floating-point-literals">2.4.6. Floating point literals</a></li>
+<li><a class="reference internal" href="#imaginary-literals">2.4.7. Imaginary literals</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#operators">2.5. Operators</a></li>
+<li><a class="reference internal" href="#delimiters">2.6. Delimiters</a></li>
+</ul>
+</li>
+</ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="introduction.html"
+                        title="previous chapter"><span class="section-number">1. </span>Introduction</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="datamodel.html"
+                        title="next chapter"><span class="section-number">3. </span>Data model</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../bugs.html">Report a Bug</a></li>
+      <li>
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/reference/lexical_analysis.rst"
+            rel="nofollow">Show Source
+        </a>
+      </li>
+    </ul>
+  </div>
+        </nav>
+    </div>
+</div>
 
-  </head><body>
   
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -68,33 +160,44 @@
           <a href="introduction.html" title="1. Introduction"
              accesskey="P">previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">The Python Language Reference</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><span class="section-number">2. </span>Lexical analysis</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>    
 
@@ -103,7 +206,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="lexical-analysis">
+  <section id="lexical-analysis">
 <span id="lexical"></span><h1><span class="section-number">2. </span>Lexical analysis<a class="headerlink" href="#lexical-analysis" title="Permalink to this headline">¶</a></h1>
 <p id="index-0">A Python program is read by a <em>parser</em>.  Input to the parser is a stream of
 <em>tokens</em>, generated by the <em>lexical analyzer</em>.  This chapter describes how the
@@ -112,18 +215,18 @@ lexical analyzer breaks a file into tokens.</p>
 can be given by an encoding declaration and defaults to UTF-8, see <span class="target" id="index-1"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-3120"><strong>PEP 3120</strong></a>
 for details.  If the source file cannot be decoded, a <a class="reference internal" href="../library/exceptions.html#SyntaxError" title="SyntaxError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SyntaxError</span></code></a> is
 raised.</p>
-<div class="section" id="line-structure">
+<section id="line-structure">
 <span id="id1"></span><h2><span class="section-number">2.1. </span>Line structure<a class="headerlink" href="#line-structure" title="Permalink to this headline">¶</a></h2>
 <p id="index-2">A Python program is divided into a number of <em>logical lines</em>.</p>
-<div class="section" id="logical-lines">
+<section id="logical-lines">
 <span id="id2"></span><h3><span class="section-number">2.1.1. </span>Logical lines<a class="headerlink" href="#logical-lines" title="Permalink to this headline">¶</a></h3>
 <p id="index-3">The end of a logical line is represented by the token NEWLINE.  Statements
 cannot cross logical line boundaries except where NEWLINE is allowed by the
 syntax (e.g., between statements in compound statements). A logical line is
 constructed from one or more <em>physical lines</em> by following the explicit or
 implicit <em>line joining</em> rules.</p>
-</div>
-<div class="section" id="physical-lines">
+</section>
+<section id="physical-lines">
 <span id="id3"></span><h3><span class="section-number">2.1.2. </span>Physical lines<a class="headerlink" href="#physical-lines" title="Permalink to this headline">¶</a></h3>
 <p>A physical line is a sequence of characters terminated by an end-of-line
 sequence.  In source files and strings, any of the standard platform line
@@ -135,15 +238,15 @@ as an implicit terminator for the final physical line.</p>
 <p>When embedding Python, source code strings should be passed to Python APIs using
 the standard C conventions for newline characters (the <code class="docutils literal notranslate"><span class="pre">\n</span></code> character,
 representing ASCII LF, is the line terminator).</p>
-</div>
-<div class="section" id="comments">
+</section>
+<section id="comments">
 <span id="id4"></span><h3><span class="section-number">2.1.3. </span>Comments<a class="headerlink" href="#comments" title="Permalink to this headline">¶</a></h3>
 <p id="index-4">A comment starts with a hash character (<code class="docutils literal notranslate"><span class="pre">#</span></code>) that is not part of a string
 literal, and ends at the end of the physical line.  A comment signifies the end
 of the logical line unless the implicit line joining rules are invoked. Comments
 are ignored by the syntax.</p>
-</div>
-<div class="section" id="encoding-declarations">
+</section>
+<section id="encoding-declarations">
 <span id="encodings"></span><h3><span class="section-number">2.1.4. </span>Encoding declarations<a class="headerlink" href="#encoding-declarations" title="Permalink to this headline">¶</a></h3>
 <p id="index-5">If a comment in the first or second line of the Python script matches the
 regular expression <code class="docutils literal notranslate"><span class="pre">coding[=:]\s*([-\w.]+)</span></code>, this comment is processed as an
@@ -166,8 +269,8 @@ among others, by Microsoft’s <strong class="program">notepad</strong>).</p>
 <p>If an encoding is declared, the encoding name must be recognized by Python. The
 encoding is used for all lexical analysis, including string literals, comments
 and identifiers.</p>
-</div>
-<div class="section" id="explicit-line-joining">
+</section>
+<section id="explicit-line-joining">
 <span id="explicit-joining"></span><h3><span class="section-number">2.1.5. </span>Explicit line joining<a class="headerlink" href="#explicit-line-joining" title="Permalink to this headline">¶</a></h3>
 <p id="index-6">Two or more physical lines may be joined into logical lines using backslash
 characters (<code class="docutils literal notranslate"><span class="pre">\</span></code>), as follows: when a physical line ends in a backslash that is
@@ -185,8 +288,8 @@ continue a comment.  A backslash does not continue a token except for string
 literals (i.e., tokens other than string literals cannot be split across
 physical lines using a backslash).  A backslash is illegal elsewhere on a line
 outside a string literal.</p>
-</div>
-<div class="section" id="implicit-line-joining">
+</section>
+<section id="implicit-line-joining">
 <span id="implicit-joining"></span><h3><span class="section-number">2.1.6. </span>Implicit line joining<a class="headerlink" href="#implicit-line-joining" title="Permalink to this headline">¶</a></h3>
 <p>Expressions in parentheses, square brackets or curly braces can be split over
 more than one physical line without using backslashes. For example:</p>
@@ -201,8 +304,8 @@ continuation lines is not important.  Blank continuation lines are allowed.
 There is no NEWLINE token between implicit continuation lines.  Implicitly
 continued lines can also occur within triple-quoted strings (see below); in that
 case they cannot carry comments.</p>
-</div>
-<div class="section" id="blank-lines">
+</section>
+<section id="blank-lines">
 <span id="id5"></span><h3><span class="section-number">2.1.7. </span>Blank lines<a class="headerlink" href="#blank-lines" title="Permalink to this headline">¶</a></h3>
 <p id="index-7">A logical line that contains only spaces, tabs, formfeeds and possibly a
 comment, is ignored (i.e., no NEWLINE token is generated).  During interactive
@@ -210,8 +313,8 @@ input of statements, handling of a blank line may differ depending on the
 implementation of the read-eval-print loop.  In the standard interactive
 interpreter, an entirely blank logical line (i.e. one containing not even
 whitespace or a comment) terminates a multi-line statement.</p>
-</div>
-<div class="section" id="indentation">
+</section>
+<section id="indentation">
 <span id="id6"></span><h3><span class="section-number">2.1.8. </span>Indentation<a class="headerlink" href="#indentation" title="Permalink to this headline">¶</a></h3>
 <p id="index-8">Leading whitespace (spaces and tabs) at the beginning of a logical line is used
 to compute the indentation level of the line, which in turn is used to determine
@@ -274,25 +377,25 @@ code:</p>
 <p>(Actually, the first three errors are detected by the parser; only the last
 error is found by the lexical analyzer — the indentation of <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">r</span></code> does
 not match a level popped off the stack.)</p>
-</div>
-<div class="section" id="whitespace-between-tokens">
+</section>
+<section id="whitespace-between-tokens">
 <span id="whitespace"></span><h3><span class="section-number">2.1.9. </span>Whitespace between tokens<a class="headerlink" href="#whitespace-between-tokens" title="Permalink to this headline">¶</a></h3>
 <p>Except at the beginning of a logical line or in string literals, the whitespace
 characters space, tab and formfeed can be used interchangeably to separate
 tokens.  Whitespace is needed between two tokens only if their concatenation
 could otherwise be interpreted as a different token (e.g., ab is one token, but
 a b is two tokens).</p>
-</div>
-</div>
-<div class="section" id="other-tokens">
+</section>
+</section>
+<section id="other-tokens">
 <span id="id7"></span><h2><span class="section-number">2.2. </span>Other tokens<a class="headerlink" href="#other-tokens" title="Permalink to this headline">¶</a></h2>
 <p>Besides NEWLINE, INDENT and DEDENT, the following categories of tokens exist:
 <em>identifiers</em>, <em>keywords</em>, <em>literals</em>, <em>operators</em>, and <em>delimiters</em>. Whitespace
 characters (other than line terminators, discussed earlier) are not tokens, but
 serve to delimit tokens. Where ambiguity exists, a token comprises the longest
 possible string that forms a legal token, when read from left to right.</p>
-</div>
-<div class="section" id="identifiers">
+</section>
+<section id="identifiers">
 <span id="identifiers-and-keywords"></span><h2><span class="section-number">2.3. </span>Identifiers and keywords<a class="headerlink" href="#identifiers" title="Permalink to this headline">¶</a></h2>
 <p id="index-10">Identifiers (also referred to as <em>names</em>) are described by the following lexical
 definitions.</p>
@@ -335,7 +438,7 @@ of identifiers is based on NFKC.</p>
 <p>A non-normative HTML file listing all valid identifier characters for Unicode
 4.1 can be found at
 <a class="reference external" href="https://www.unicode.org/Public/13.0.0/ucd/DerivedCoreProperties.txt">https://www.unicode.org/Public/13.0.0/ucd/DerivedCoreProperties.txt</a></p>
-<div class="section" id="keywords">
+<section id="keywords">
 <span id="id8"></span><h3><span class="section-number">2.3.1. </span>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline">¶</a></h3>
 <p id="index-13">The following identifiers are used as reserved words, or <em>keywords</em> of the
 language, and cannot be used as ordinary identifiers.  They must be spelled
@@ -349,8 +452,8 @@ assert     del        global     not        with
 async      elif       if         or         yield
 </pre></div>
 </div>
-</div>
-<div class="section" id="soft-keywords">
+</section>
+<section id="soft-keywords">
 <span id="id9"></span><h3><span class="section-number">2.3.2. </span>Soft Keywords<a class="headerlink" href="#soft-keywords" title="Permalink to this headline">¶</a></h3>
 <div class="versionadded" id="index-14">
 <p><span class="versionmodified added">New in version 3.10.</span></p>
@@ -363,8 +466,8 @@ tokenizing.</p>
 <p>As soft keywords, their use with pattern matching is possible while still
 preserving compatibility with existing code that uses <code class="docutils literal notranslate"><span class="pre">match</span></code>, <code class="docutils literal notranslate"><span class="pre">case</span></code> and <code class="docutils literal notranslate"><span class="pre">_</span></code> as
 identifier names.</p>
-</div>
-<div class="section" id="reserved-classes-of-identifiers">
+</section>
+<section id="reserved-classes-of-identifiers">
 <span id="id-classes"></span><span id="index-15"></span><h3><span class="section-number">2.3.3. </span>Reserved classes of identifiers<a class="headerlink" href="#reserved-classes-of-identifiers" title="Permalink to this headline">¶</a></h3>
 <p>Certain classes of identifiers (besides keywords) have special meanings.  These
 classes are identified by the patterns of leading and trailing underscore
@@ -394,12 +497,12 @@ clashes between “private” attributes of base and derived classes. See sectio
 <a class="reference internal" href="expressions.html#atom-identifiers"><span class="std std-ref">Identifiers (Names)</span></a>.</p>
 </dd>
 </dl>
-</div>
-</div>
-<div class="section" id="literals">
+</section>
+</section>
+<section id="literals">
 <span id="id10"></span><h2><span class="section-number">2.4. </span>Literals<a class="headerlink" href="#literals" title="Permalink to this headline">¶</a></h2>
 <p id="index-16">Literals are notations for constant values of some built-in types.</p>
-<div class="section" id="string-and-bytes-literals">
+<section id="string-and-bytes-literals">
 <span id="strings"></span><span id="index-17"></span><h3><span class="section-number">2.4.1. </span>String and Bytes literals<a class="headerlink" href="#string-and-bytes-literals" title="Permalink to this headline">¶</a></h3>
 <p>String literals are described by the following lexical definitions:</p>
 <pre>
@@ -600,8 +703,8 @@ backslashes).  Specifically, <em>a raw literal cannot end in a single backslash<
 (since the backslash would escape the following quote character).  Note also
 that a single backslash followed by a newline is interpreted as those two
 characters as part of the literal, <em>not</em> as a line continuation.</p>
-</div>
-<div class="section" id="string-literal-concatenation">
+</section>
+<section id="string-literal-concatenation">
 <span id="string-concatenation"></span><h3><span class="section-number">2.4.2. </span>String literal concatenation<a class="headerlink" href="#string-literal-concatenation" title="Permalink to this headline">¶</a></h3>
 <p>Multiple adjacent string or bytes literals (delimited by whitespace), possibly
 using different quoting conventions, are allowed, and their meaning is the same
@@ -619,8 +722,8 @@ compile time.  The ‘+’ operator must be used to concatenate string expressio
 at run time.  Also note that literal concatenation can use different quoting
 styles for each component (even mixing raw strings and triple quoted strings),
 and formatted string literals may be concatenated with plain string literals.</p>
-</div>
-<div class="section" id="formatted-string-literals">
+</section>
+<section id="formatted-string-literals">
 <span id="f-strings"></span><span id="index-25"></span><h3><span class="section-number">2.4.3. </span>Formatted string literals<a class="headerlink" href="#formatted-string-literals" title="Permalink to this headline">¶</a></h3>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.6.</span></p>
@@ -750,17 +853,17 @@ include expressions.</p>
 </div>
 <p>See also <span class="target" id="index-26"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0498"><strong>PEP 498</strong></a> for the proposal that added formatted string literals,
 and <a class="reference internal" href="../library/stdtypes.html#str.format" title="str.format"><code class="xref py py-meth docutils literal notranslate"><span class="pre">str.format()</span></code></a>, which uses a related format string mechanism.</p>
-</div>
-<div class="section" id="numeric-literals">
+</section>
+<section id="numeric-literals">
 <span id="numbers"></span><h3><span class="section-number">2.4.4. </span>Numeric literals<a class="headerlink" href="#numeric-literals" title="Permalink to this headline">¶</a></h3>
 <p id="index-27">There are three types of numeric literals: integers, floating point numbers, and
 imaginary numbers.  There are no complex literals (complex numbers can be formed
 by adding a real number and an imaginary number).</p>
 <p>Note that numeric literals do not include a sign; a phrase like <code class="docutils literal notranslate"><span class="pre">-1</span></code> is
-actually an expression composed of the unary operator ‘<code class="docutils literal notranslate"><span class="pre">-</span></code>‘ and the literal
+actually an expression composed of the unary operator ‘<code class="docutils literal notranslate"><span class="pre">-</span></code>’ and the literal
 <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
-</div>
-<div class="section" id="integer-literals">
+</section>
+<section id="integer-literals">
 <span id="integers"></span><span id="index-28"></span><h3><span class="section-number">2.4.5. </span>Integer literals<a class="headerlink" href="#integer-literals" title="Permalink to this headline">¶</a></h3>
 <p>Integer literals are described by the following lexical definitions:</p>
 <pre>
@@ -792,8 +895,8 @@ for disambiguation with C-style octal literals, which Python used before version
 <div class="versionchanged">
 <p><span class="versionmodified changed">Changed in version 3.6: </span>Underscores are now allowed for grouping purposes in literals.</p>
 </div>
-</div>
-<div class="section" id="floating-point-literals">
+</section>
+<section id="floating-point-literals">
 <span id="floating"></span><span id="index-29"></span><h3><span class="section-number">2.4.6. </span>Floating point literals<a class="headerlink" href="#floating-point-literals" title="Permalink to this headline">¶</a></h3>
 <p>Floating point literals are described by the following lexical definitions:</p>
 <pre>
@@ -809,14 +912,14 @@ For example, <code class="docutils literal notranslate"><span class="pre">077e01
 allowed range of floating point literals is implementation-dependent.  As in
 integer literals, underscores are supported for digit grouping.</p>
 <p>Some examples of floating point literals:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="mf">3.14</span>    <span class="mf">10.</span>    <span class="o">.</span><span class="mi">001</span>    <span class="mf">1e100</span>    <span class="mf">3.14e-10</span>    <span class="mf">0e0</span>    <span class="mf">3.14_15_93</span>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="mf">3.14</span>    <span class="mf">10.</span>    <span class="mf">.001</span>    <span class="mf">1e100</span>    <span class="mf">3.14e-10</span>    <span class="mf">0e0</span>    <span class="mf">3.14_15_93</span>
 </pre></div>
 </div>
 <div class="versionchanged">
 <p><span class="versionmodified changed">Changed in version 3.6: </span>Underscores are now allowed for grouping purposes in literals.</p>
 </div>
-</div>
-<div class="section" id="imaginary-literals">
+</section>
+<section id="imaginary-literals">
 <span id="imaginary"></span><span id="index-30"></span><h3><span class="section-number">2.4.7. </span>Imaginary literals<a class="headerlink" href="#imaginary-literals" title="Permalink to this headline">¶</a></h3>
 <p>Imaginary literals are described by the following lexical definitions:</p>
 <pre>
@@ -827,12 +930,12 @@ numbers are represented as a pair of floating point numbers and have the same
 restrictions on their range.  To create a complex number with a nonzero real
 part, add a floating point number to it, e.g., <code class="docutils literal notranslate"><span class="pre">(3+4j)</span></code>.  Some examples of
 imaginary literals:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="mf">3.14</span><span class="n">j</span>   <span class="mf">10.</span><span class="n">j</span>    <span class="mi">10</span><span class="n">j</span>     <span class="o">.</span><span class="mi">001</span><span class="n">j</span>   <span class="mf">1e100j</span>   <span class="mf">3.14e-10</span><span class="n">j</span>   <span class="mf">3.14_15_93</span><span class="n">j</span>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="mf">3.14</span><span class="n">j</span>   <span class="mf">10.</span><span class="n">j</span>    <span class="mi">10</span><span class="n">j</span>     <span class="mf">.001</span><span class="n">j</span>   <span class="mf">1e100j</span>   <span class="mf">3.14e-10</span><span class="n">j</span>   <span class="mf">3.14_15_93</span><span class="n">j</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="operators">
+</section>
+</section>
+<section id="operators">
 <span id="id12"></span><h2><span class="section-number">2.5. </span>Operators<a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h2>
 <p id="index-31">The following tokens are operators:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>+       -       *       **      /       //      %      @
@@ -840,8 +943,8 @@ imaginary literals:</p>
 &lt;       &gt;       &lt;=      &gt;=      ==      !=
 </pre></div>
 </div>
-</div>
-<div class="section" id="delimiters">
+</section>
+<section id="delimiters">
 <span id="id13"></span><h2><span class="section-number">2.6. </span>Delimiters<a class="headerlink" href="#delimiters" title="Permalink to this headline">¶</a></h2>
 <p id="index-32">The following tokens serve as delimiters in the grammar:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>(       )       [       ]       {       }
@@ -870,8 +973,8 @@ occurrence outside string literals and comments is an unconditional error:</p>
 <dd><p><a class="reference external" href="https://www.unicode.org/Public/11.0.0/ucd/NameAliases.txt">https://www.unicode.org/Public/11.0.0/ucd/NameAliases.txt</a></p>
 </dd>
 </dl>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -929,7 +1032,7 @@ occurrence outside string literals and comments is an unconditional error:</p>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/master/Doc/reference/lexical_analysis.rst"
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/reference/lexical_analysis.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -955,33 +1058,44 @@ occurrence outside string literals and comments is an unconditional error:</p>
           <a href="introduction.html" title="1. Introduction"
              >previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Language Reference</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><span class="section-number">2. </span>Lexical analysis</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>  
     <div class="footer">
@@ -999,7 +1113,7 @@ occurrence outside string literals and comments is an unconditional error:</p>
 <br />
     <br />
 
-    Last updated on Mar 24, 2021.
+    Last updated on May 10, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 

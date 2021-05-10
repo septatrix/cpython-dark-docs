@@ -4,8 +4,10 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>optparse — Parser for command line options &#8212; Python 3.10.0a6 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>optparse — Parser for command line options &#8212; Python 3.10.0b1 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
@@ -19,7 +21,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.10.0a6 documentation"
+          title="Search within Python 3.10.0b1 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -40,17 +42,128 @@
         }
       }
     </style>
+<link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.svg" />
+            <script type="text/javascript" src="../_static/copybutton.js"></script>
+            <script type="text/javascript" src="../_static/menu.js"></script>
+            <script type="text/javascript" src="../_static/themetoggle.js"></script> 
 
-    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
-    
-    <script type="text/javascript" src="../_static/copybutton.js"></script>
-    <script type="text/javascript" src="../_static/themetoggle.js"></script>
-    
-     
+  </head>
+<body>
+<div class="mobile-nav">
+    <input type="checkbox" id="menuToggler" class="toggler__input" aria-controls="navigation"
+           aria-pressed="false" aria-expanded="false" role="button" aria-label="Menu" />
+    <nav class="nav-content" role="navigation">
+        <label for="menuToggler" class="toggler__label">
+            <span></span>
+        </label>
+        <span class="nav-items-wrapper">
+            <a href="https://www.python.org/" class="nav-logo">
+                <img src="../_static/py.svg" alt="Logo"/>
+            </a>
+            <span class="version_switcher_placeholder"></span>
+            <form id="searchbox" role="search" class="search" action="../search.html" method="get">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="search-icon">
+                    <path fill-rule="nonzero" fill="currentColor" d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 001.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 00-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 005.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                </svg>
+                <input type="search" name="q" aria-label="Quick search"/>
+                <input type="submit" value="Go"/>
+                
+            </form>
+        </span>
+    </nav>
+    <div class="menu-wrapper">
+        <nav class="menu" role="navigation" aria-label="main navigation">
+            <div class="language_switcher_placeholder"></div>
+            
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label>
+  <h3><a href="../contents.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">optparse</span></code> — Parser for command line options</a><ul>
+<li><a class="reference internal" href="#background">Background</a><ul>
+<li><a class="reference internal" href="#terminology">Terminology</a></li>
+<li><a class="reference internal" href="#what-are-options-for">What are options for?</a></li>
+<li><a class="reference internal" href="#what-are-positional-arguments-for">What are positional arguments for?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#tutorial">Tutorial</a><ul>
+<li><a class="reference internal" href="#understanding-option-actions">Understanding option actions</a></li>
+<li><a class="reference internal" href="#the-store-action">The store action</a></li>
+<li><a class="reference internal" href="#handling-boolean-flag-options">Handling boolean (flag) options</a></li>
+<li><a class="reference internal" href="#other-actions">Other actions</a></li>
+<li><a class="reference internal" href="#default-values">Default values</a></li>
+<li><a class="reference internal" href="#generating-help">Generating help</a><ul>
+<li><a class="reference internal" href="#grouping-options">Grouping Options</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#printing-a-version-string">Printing a version string</a></li>
+<li><a class="reference internal" href="#how-optparse-handles-errors">How <code class="xref py py-mod docutils literal notranslate"><span class="pre">optparse</span></code> handles errors</a></li>
+<li><a class="reference internal" href="#putting-it-all-together">Putting it all together</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#reference-guide">Reference Guide</a><ul>
+<li><a class="reference internal" href="#creating-the-parser">Creating the parser</a></li>
+<li><a class="reference internal" href="#populating-the-parser">Populating the parser</a></li>
+<li><a class="reference internal" href="#defining-options">Defining options</a></li>
+<li><a class="reference internal" href="#option-attributes">Option attributes</a></li>
+<li><a class="reference internal" href="#standard-option-actions">Standard option actions</a></li>
+<li><a class="reference internal" href="#standard-option-types">Standard option types</a></li>
+<li><a class="reference internal" href="#parsing-arguments">Parsing arguments</a></li>
+<li><a class="reference internal" href="#querying-and-manipulating-your-option-parser">Querying and manipulating your option parser</a></li>
+<li><a class="reference internal" href="#conflicts-between-options">Conflicts between options</a></li>
+<li><a class="reference internal" href="#cleanup">Cleanup</a></li>
+<li><a class="reference internal" href="#other-methods">Other methods</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#option-callbacks">Option Callbacks</a><ul>
+<li><a class="reference internal" href="#defining-a-callback-option">Defining a callback option</a></li>
+<li><a class="reference internal" href="#how-callbacks-are-called">How callbacks are called</a></li>
+<li><a class="reference internal" href="#raising-errors-in-a-callback">Raising errors in a callback</a></li>
+<li><a class="reference internal" href="#callback-example-1-trivial-callback">Callback example 1: trivial callback</a></li>
+<li><a class="reference internal" href="#callback-example-2-check-option-order">Callback example 2: check option order</a></li>
+<li><a class="reference internal" href="#callback-example-3-check-option-order-generalized">Callback example 3: check option order (generalized)</a></li>
+<li><a class="reference internal" href="#callback-example-4-check-arbitrary-condition">Callback example 4: check arbitrary condition</a></li>
+<li><a class="reference internal" href="#callback-example-5-fixed-arguments">Callback example 5: fixed arguments</a></li>
+<li><a class="reference internal" href="#callback-example-6-variable-arguments">Callback example 6: variable arguments</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#extending-optparse">Extending <code class="xref py py-mod docutils literal notranslate"><span class="pre">optparse</span></code></a><ul>
+<li><a class="reference internal" href="#adding-new-types">Adding new types</a></li>
+<li><a class="reference internal" href="#adding-new-actions">Adding new actions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="superseded.html"
+                        title="previous chapter">Superseded Modules</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="imp.html"
+                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">imp</span></code> — Access the <span class="xref std std-ref">import</span> internals</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../bugs.html">Report a Bug</a></li>
+      <li>
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/library/optparse.rst"
+            rel="nofollow">Show Source
+        </a>
+      </li>
+    </ul>
+  </div>
+        </nav>
+    </div>
+</div>
 
-  </head><body>
   
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -68,34 +181,45 @@
           <a href="superseded.html" title="Superseded Modules"
              accesskey="P">previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="superseded.html" accesskey="U">Superseded Modules</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">optparse</span></code> — Parser for command line options</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>    
 
@@ -104,9 +228,9 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="module-optparse">
+  <section id="module-optparse">
 <span id="optparse-parser-for-command-line-options"></span><h1><a class="reference internal" href="#module-optparse" title="optparse: Command-line option parsing library. (deprecated)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">optparse</span></code></a> — Parser for command line options<a class="headerlink" href="#module-optparse" title="Permalink to this headline">¶</a></h1>
-<p><strong>Source code:</strong> <a class="reference external" href="https://github.com/python/cpython/tree/master/Lib/optparse.py">Lib/optparse.py</a></p>
+<p><strong>Source code:</strong> <a class="reference external" href="https://github.com/python/cpython/tree/3.10/Lib/optparse.py">Lib/optparse.py</a></p>
 <div class="deprecated">
 <p><span class="versionmodified deprecated">Deprecated since version 3.2: </span>The <a class="reference internal" href="#module-optparse" title="optparse: Command-line option parsing library. (deprecated)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">optparse</span></code></a> module is deprecated and will not be developed further;
 development will continue with the <a class="reference internal" href="argparse.html#module-argparse" title="argparse: Command-line option and argument parsing library."><code class="xref py py-mod docutils literal notranslate"><span class="pre">argparse</span></code></a> module.</p>
@@ -166,14 +290,14 @@ Options:
 </div>
 <p>where the value of <em>yourscript</em> is determined at runtime (normally from
 <code class="docutils literal notranslate"><span class="pre">sys.argv[0]</span></code>).</p>
-<div class="section" id="background">
+<section id="background">
 <span id="optparse-background"></span><h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference internal" href="#module-optparse" title="optparse: Command-line option parsing library. (deprecated)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">optparse</span></code></a> was explicitly designed to encourage the creation of programs
 with straightforward, conventional command-line interfaces.  To that end, it
 supports only the most common command-line syntax and semantics conventionally
 used under Unix.  If you are unfamiliar with these conventions, read this
 section to acquaint yourself with them.</p>
-<div class="section" id="terminology">
+<section id="terminology">
 <span id="optparse-terminology"></span><h3>Terminology<a class="headerlink" href="#terminology" title="Permalink to this headline">¶</a></h3>
 <dl>
 <dt>argument</dt><dd><p>a string entered on the command-line, and passed by the shell to <code class="docutils literal notranslate"><span class="pre">execl()</span></code>
@@ -187,7 +311,7 @@ also use the term “word”.</p>
 </dd>
 <dt>option</dt><dd><p>an argument used to supply extra information to guide or customize the
 execution of a program.  There are many different syntaxes for options; the
-traditional Unix syntax is a hyphen (“-“) followed by a single letter,
+traditional Unix syntax is a hyphen (“-”) followed by a single letter,
 e.g. <code class="docutils literal notranslate"><span class="pre">-x</span></code> or <code class="docutils literal notranslate"><span class="pre">-F</span></code>.  Also, traditional Unix syntax allows multiple
 options to be merged into a single argument, e.g. <code class="docutils literal notranslate"><span class="pre">-x</span> <span class="pre">-F</span></code> is equivalent
 to <code class="docutils literal notranslate"><span class="pre">-xF</span></code>.  The GNU project introduced <code class="docutils literal notranslate"><span class="pre">--</span></code> followed by a series of
@@ -248,8 +372,8 @@ help at it either.</p>
 <p><code class="docutils literal notranslate"><span class="pre">-v</span></code> and <code class="docutils literal notranslate"><span class="pre">--report</span></code> are both options.  Assuming that <code class="docutils literal notranslate"><span class="pre">--report</span></code>
 takes one argument, <code class="docutils literal notranslate"><span class="pre">report.txt</span></code> is an option argument.  <code class="docutils literal notranslate"><span class="pre">foo</span></code> and
 <code class="docutils literal notranslate"><span class="pre">bar</span></code> are positional arguments.</p>
-</div>
-<div class="section" id="what-are-options-for">
+</section>
+<section id="what-are-options-for">
 <span id="optparse-what-options-for"></span><h3>What are options for?<a class="headerlink" href="#what-are-options-for" title="Permalink to this headline">¶</a></h3>
 <p>Options are used to provide extra information to tune or customize the execution
 of a program.  In case it wasn’t clear, options are usually <em>optional</em>.  A
@@ -277,8 +401,8 @@ mode and modification time, avoid following symlinks, ask before clobbering
 existing files, etc.  But none of this distracts from the core mission of
 <code class="docutils literal notranslate"><span class="pre">cp</span></code>, which is to copy either one file to another, or several files to another
 directory.</p>
-</div>
-<div class="section" id="what-are-positional-arguments-for">
+</section>
+<section id="what-are-positional-arguments-for">
 <span id="optparse-what-positional-arguments-for"></span><h3>What are positional arguments for?<a class="headerlink" href="#what-are-positional-arguments-for" title="Permalink to this headline">¶</a></h3>
 <p>Positional arguments are for those pieces of information that your program
 absolutely, positively requires to run.</p>
@@ -297,9 +421,9 @@ the “Preferences” dialog of a GUI, or command-line options—the more option
 you implement, the more flexible your program is, and the more complicated its
 implementation becomes.  Too much flexibility has drawbacks as well, of course;
 too many options can overwhelm users and make your code much harder to maintain.</p>
-</div>
-</div>
-<div class="section" id="tutorial">
+</section>
+</section>
+<section id="tutorial">
 <span id="optparse-tutorial"></span><h2>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h2>
 <p>While <a class="reference internal" href="#module-optparse" title="optparse: Command-line option parsing library. (deprecated)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">optparse</span></code></a> is quite flexible and powerful, it’s also straightforward
 to use in most cases.  This section covers the code patterns that are common to
@@ -351,7 +475,7 @@ option</p></li>
 <a class="reference internal" href="#optparse.Option.action" title="optparse.Option.action"><code class="xref py py-attr docutils literal notranslate"><span class="pre">action</span></code></a>, <a class="reference internal" href="#optparse.Option.type" title="optparse.Option.type"><code class="xref py py-attr docutils literal notranslate"><span class="pre">type</span></code></a>, <a class="reference internal" href="#optparse.Option.dest" title="optparse.Option.dest"><code class="xref py py-attr docutils literal notranslate"><span class="pre">dest</span></code></a>
 (destination), and <a class="reference internal" href="#optparse.Option.help" title="optparse.Option.help"><code class="xref py py-attr docutils literal notranslate"><span class="pre">help</span></code></a>. Of these, <a class="reference internal" href="#optparse.Option.action" title="optparse.Option.action"><code class="xref py py-attr docutils literal notranslate"><span class="pre">action</span></code></a> is the
 most fundamental.</p>
-<div class="section" id="understanding-option-actions">
+<section id="understanding-option-actions">
 <span id="optparse-understanding-option-actions"></span><h3>Understanding option actions<a class="headerlink" href="#understanding-option-actions" title="Permalink to this headline">¶</a></h3>
 <p>Actions tell <a class="reference internal" href="#module-optparse" title="optparse: Command-line option parsing library. (deprecated)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">optparse</span></code></a> what to do when it encounters an option on the
 command line.  There is a fixed set of actions hard-coded into <a class="reference internal" href="#module-optparse" title="optparse: Command-line option parsing library. (deprecated)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">optparse</span></code></a>;
@@ -360,8 +484,8 @@ adding new actions is an advanced topic covered in section
 a value in some variable—for example, take a string from the command line and
 store it in an attribute of <code class="docutils literal notranslate"><span class="pre">options</span></code>.</p>
 <p>If you don’t specify an option action, <a class="reference internal" href="#module-optparse" title="optparse: Command-line option parsing library. (deprecated)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">optparse</span></code></a> defaults to <code class="docutils literal notranslate"><span class="pre">store</span></code>.</p>
-</div>
-<div class="section" id="the-store-action">
+</section>
+<section id="the-store-action">
 <span id="optparse-store-action"></span><h3>The store action<a class="headerlink" href="#the-store-action" title="Permalink to this headline">¶</a></h3>
 <p>The most common option action is <code class="docutils literal notranslate"><span class="pre">store</span></code>, which tells <a class="reference internal" href="#module-optparse" title="optparse: Command-line option parsing library. (deprecated)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">optparse</span></code></a> to take
 the next argument (or the remainder of the current argument), ensure that it is
@@ -407,8 +531,8 @@ long option strings, <a class="reference internal" href="#module-optparse" title
 default destination for <code class="docutils literal notranslate"><span class="pre">-f</span></code> is <code class="docutils literal notranslate"><span class="pre">f</span></code>.</p>
 <p><a class="reference internal" href="#module-optparse" title="optparse: Command-line option parsing library. (deprecated)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">optparse</span></code></a> also includes the built-in <code class="docutils literal notranslate"><span class="pre">complex</span></code> type.  Adding
 types is covered in section <a class="reference internal" href="#optparse-extending-optparse"><span class="std std-ref">Extending optparse</span></a>.</p>
-</div>
-<div class="section" id="handling-boolean-flag-options">
+</section>
+<section id="handling-boolean-flag-options">
 <span id="optparse-handling-boolean-options"></span><h3>Handling boolean (flag) options<a class="headerlink" href="#handling-boolean-flag-options" title="Permalink to this headline">¶</a></h3>
 <p>Flag options—set a variable to true or false when a particular option is
 seen—are quite common.  <a class="reference internal" href="#module-optparse" title="optparse: Command-line option parsing library. (deprecated)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">optparse</span></code></a> supports them with two separate actions,
@@ -424,8 +548,8 @@ values—see below.)</p>
 <p>When <a class="reference internal" href="#module-optparse" title="optparse: Command-line option parsing library. (deprecated)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">optparse</span></code></a> encounters <code class="docutils literal notranslate"><span class="pre">-v</span></code> on the command line, it sets
 <code class="docutils literal notranslate"><span class="pre">options.verbose</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code>; when it encounters <code class="docutils literal notranslate"><span class="pre">-q</span></code>,
 <code class="docutils literal notranslate"><span class="pre">options.verbose</span></code> is set to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
-</div>
-<div class="section" id="other-actions">
+</section>
+<section id="other-actions">
 <span id="optparse-other-actions"></span><h3>Other actions<a class="headerlink" href="#other-actions" title="Permalink to this headline">¶</a></h3>
 <p>Some other actions supported by <a class="reference internal" href="#module-optparse" title="optparse: Command-line option parsing library. (deprecated)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">optparse</span></code></a> are:</p>
 <dl class="simple">
@@ -440,8 +564,8 @@ values—see below.)</p>
 </dl>
 <p>These are covered in section <a class="reference internal" href="#optparse-reference-guide"><span class="std std-ref">Reference Guide</span></a>,
 and section <a class="reference internal" href="#optparse-option-callbacks"><span class="std std-ref">Option Callbacks</span></a>.</p>
-</div>
-<div class="section" id="default-values">
+</section>
+<section id="default-values">
 <span id="optparse-default-values"></span><h3>Default values<a class="headerlink" href="#default-values" title="Permalink to this headline">¶</a></h3>
 <p>All of the above examples involve setting some variable (the “destination”) when
 certain command-line options are seen.  What happens if those options are never
@@ -479,8 +603,8 @@ OptionParser, which you can call at any time before calling <code class="xref py
 <p>As before, the last value specified for a given option destination is the one
 that counts.  For clarity, try to use one method or the other of setting default
 values, not both.</p>
-</div>
-<div class="section" id="generating-help">
+</section>
+<section id="generating-help">
 <span id="optparse-generating-help"></span><h3>Generating help<a class="headerlink" href="#generating-help" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="#module-optparse" title="optparse: Command-line option parsing library. (deprecated)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">optparse</span></code></a>’s ability to generate help and usage text automatically is
 useful for creating user-friendly command-line interfaces.  All you have to do
@@ -562,7 +686,7 @@ string—<a class="reference internal" href="#module-optparse" title="optparse: 
 default value.  If an option has no default value (or the default value is
 <code class="docutils literal notranslate"><span class="pre">None</span></code>), <code class="docutils literal notranslate"><span class="pre">%default</span></code> expands to <code class="docutils literal notranslate"><span class="pre">none</span></code>.</p></li>
 </ul>
-<div class="section" id="grouping-options">
+<section id="grouping-options">
 <h4>Grouping Options<a class="headerlink" href="#grouping-options" title="Permalink to this headline">¶</a></h4>
 <p>When dealing with many options, it is convenient to group these options for
 better help output.  An <a class="reference internal" href="#optparse.OptionParser" title="optparse.OptionParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">OptionParser</span></code></a> can contain several option groups,
@@ -664,9 +788,9 @@ string <em>opt_str</em> (e.g. <code class="docutils literal notranslate"><span c
 there’s no such <a class="reference internal" href="#optparse.OptionGroup" title="optparse.OptionGroup"><code class="xref py py-class docutils literal notranslate"><span class="pre">OptionGroup</span></code></a>, return <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
 </dd></dl>
 
-</div>
-</div>
-<div class="section" id="printing-a-version-string">
+</section>
+</section>
+<section id="printing-a-version-string">
 <span id="optparse-printing-version-string"></span><h3>Printing a version string<a class="headerlink" href="#printing-a-version-string" title="Permalink to this headline">¶</a></h3>
 <p>Similar to the brief usage string, <a class="reference internal" href="#module-optparse" title="optparse: Command-line option parsing library. (deprecated)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">optparse</span></code></a> can also print a version
 string for your program.  You have to supply the string as the <code class="docutils literal notranslate"><span class="pre">version</span></code>
@@ -701,8 +825,8 @@ program.  Does nothing if <code class="docutils literal notranslate"><span class
 printing it.</p>
 </dd></dl>
 
-</div>
-<div class="section" id="how-optparse-handles-errors">
+</section>
+<section id="how-optparse-handles-errors">
 <span id="optparse-how-optparse-handles-errors"></span><h3>How <a class="reference internal" href="#module-optparse" title="optparse: Command-line option parsing library. (deprecated)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">optparse</span></code></a> handles errors<a class="headerlink" href="#how-optparse-handles-errors" title="Permalink to this headline">¶</a></h3>
 <p>There are two broad classes of errors that <a class="reference internal" href="#module-optparse" title="optparse: Command-line option parsing library. (deprecated)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">optparse</span></code></a> has to worry about:
 programmer errors and user errors.  Programmer errors are usually erroneous
@@ -747,8 +871,8 @@ option involved in the error; be sure to do the same when calling
 <p>If <a class="reference internal" href="#module-optparse" title="optparse: Command-line option parsing library. (deprecated)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">optparse</span></code></a>’s default error-handling behaviour does not suit your needs,
 you’ll need to subclass OptionParser and override its <code class="xref py py-meth docutils literal notranslate"><span class="pre">exit()</span></code>
 and/or <code class="xref py py-meth docutils literal notranslate"><span class="pre">error()</span></code> methods.</p>
-</div>
-<div class="section" id="putting-it-all-together">
+</section>
+<section id="putting-it-all-together">
 <span id="optparse-putting-it-all-together"></span><h3>Putting it all together<a class="headerlink" href="#putting-it-all-together" title="Permalink to this headline">¶</a></h3>
 <p>Here’s what <a class="reference internal" href="#module-optparse" title="optparse: Command-line option parsing library. (deprecated)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">optparse</span></code></a>-based scripts usually look like:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">optparse</span> <span class="kn">import</span> <span class="n">OptionParser</span>
@@ -774,11 +898,11 @@ and/or <code class="xref py py-meth docutils literal notranslate"><span class="p
     <span class="n">main</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="reference-guide">
+</section>
+</section>
+<section id="reference-guide">
 <span id="optparse-reference-guide"></span><h2>Reference Guide<a class="headerlink" href="#reference-guide" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="creating-the-parser">
+<section id="creating-the-parser">
 <span id="optparse-creating-parser"></span><h3>Creating the parser<a class="headerlink" href="#creating-the-parser" title="Permalink to this headline">¶</a></h3>
 <p>The first step in using <a class="reference internal" href="#module-optparse" title="optparse: Command-line option parsing library. (deprecated)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">optparse</span></code></a> is to create an OptionParser instance.</p>
 <dl class="py class">
@@ -831,8 +955,8 @@ instead of <code class="docutils literal notranslate"><span class="pre">os.path.
 </dl>
 </dd></dl>
 
-</div>
-<div class="section" id="populating-the-parser">
+</section>
+<section id="populating-the-parser">
 <span id="optparse-populating-parser"></span><h3>Populating the parser<a class="headerlink" href="#populating-the-parser" title="Permalink to this headline">¶</a></h3>
 <p>There are several ways to populate the parser with options.  The preferred way
 is by using <a class="reference internal" href="#optparse.OptionParser.add_option" title="optparse.OptionParser.add_option"><code class="xref py py-meth docutils literal notranslate"><span class="pre">OptionParser.add_option()</span></code></a>, as shown in section
@@ -858,8 +982,8 @@ the OptionParser constructor, as in:</p>
 currently it is an alias for the Option constructor.  A future version of
 <a class="reference internal" href="#module-optparse" title="optparse: Command-line option parsing library. (deprecated)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">optparse</span></code></a> may split Option into several classes, and <code class="xref py py-func docutils literal notranslate"><span class="pre">make_option()</span></code>
 will pick the right class to instantiate.  Do not instantiate Option directly.)</p>
-</div>
-<div class="section" id="defining-options">
+</section>
+<section id="defining-options">
 <span id="optparse-defining-options"></span><h3>Defining options<a class="headerlink" href="#defining-options" title="Permalink to this headline">¶</a></h3>
 <p>Each Option instance represents a set of synonymous command-line option strings,
 e.g. <code class="docutils literal notranslate"><span class="pre">-f</span></code> and <code class="docutils literal notranslate"><span class="pre">--file</span></code>.  You can specify any number of short or
@@ -943,8 +1067,8 @@ according to the <a class="reference internal" href="#optparse.Option.dest" titl
 <p>The <a class="reference internal" href="#optparse.Option.type" title="optparse.Option.type"><code class="xref py py-attr docutils literal notranslate"><span class="pre">type</span></code></a> and <a class="reference internal" href="#optparse.Option.dest" title="optparse.Option.dest"><code class="xref py py-attr docutils literal notranslate"><span class="pre">dest</span></code></a> option attributes are almost
 as important as <a class="reference internal" href="#optparse.Option.action" title="optparse.Option.action"><code class="xref py py-attr docutils literal notranslate"><span class="pre">action</span></code></a>, but <a class="reference internal" href="#optparse.Option.action" title="optparse.Option.action"><code class="xref py py-attr docutils literal notranslate"><span class="pre">action</span></code></a> is the only
 one that makes sense for <em>all</em> options.</p>
-</div>
-<div class="section" id="option-attributes">
+</section>
+<section id="option-attributes">
 <span id="optparse-option-attributes"></span><h3>Option attributes<a class="headerlink" href="#option-attributes" title="Permalink to this headline">¶</a></h3>
 <p>The following option attributes may be passed as keyword arguments to
 <a class="reference internal" href="#optparse.OptionParser.add_option" title="optparse.OptionParser.add_option"><code class="xref py py-meth docutils literal notranslate"><span class="pre">OptionParser.add_option()</span></code></a>.  If you pass an option attribute that is not
@@ -1039,8 +1163,8 @@ hide this option, use the special value <code class="xref py py-data docutils li
 section <a class="reference internal" href="#optparse-tutorial"><span class="std std-ref">Tutorial</span></a> for an example.</p>
 </dd></dl>
 
-</div>
-<div class="section" id="standard-option-actions">
+</section>
+<section id="standard-option-actions">
 <span id="optparse-standard-option-actions"></span><h3>Standard option actions<a class="headerlink" href="#standard-option-actions" title="Permalink to this headline">¶</a></h3>
 <p>The various option actions all have slightly different requirements and effects.
 Most actions have several relevant option attributes which you may specify to
@@ -1226,8 +1350,8 @@ The version number is actually formatted and printed by the
 since <a class="reference internal" href="#module-optparse" title="optparse: Command-line option parsing library. (deprecated)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">optparse</span></code></a> automatically adds them when needed.</p>
 </li>
 </ul>
-</div>
-<div class="section" id="standard-option-types">
+</section>
+<section id="standard-option-types">
 <span id="optparse-standard-option-types"></span><h3>Standard option types<a class="headerlink" href="#standard-option-types" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="#module-optparse" title="optparse: Command-line option parsing library. (deprecated)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">optparse</span></code></a> has five built-in option types: <code class="docutils literal notranslate"><span class="pre">&quot;string&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;int&quot;</span></code>,
 <code class="docutils literal notranslate"><span class="pre">&quot;choice&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;float&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;complex&quot;</span></code>.  If you need to add new
@@ -1251,8 +1375,8 @@ error message.</p>
 set of allowed option arguments.  <code class="xref py py-func docutils literal notranslate"><span class="pre">optparse.check_choice()</span></code> compares
 user-supplied option arguments against this master list and raises
 <code class="xref py py-exc docutils literal notranslate"><span class="pre">OptionValueError</span></code> if an invalid string is given.</p>
-</div>
-<div class="section" id="parsing-arguments">
+</section>
+<section id="parsing-arguments">
 <span id="optparse-parsing-arguments"></span><h3>Parsing arguments<a class="headerlink" href="#parsing-arguments" title="Permalink to this headline">¶</a></h3>
 <p>The whole point of creating and populating an OptionParser is to call its
 <code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code> method:</p>
@@ -1284,8 +1408,8 @@ for every option argument stored to an option destination) and returned by
 OptionParser’s <code class="xref py py-meth docutils literal notranslate"><span class="pre">error()</span></code> method with an appropriate end-user error message.
 This ultimately terminates your process with an exit status of 2 (the
 traditional Unix exit status for command-line errors).</p>
-</div>
-<div class="section" id="querying-and-manipulating-your-option-parser">
+</section>
+<section id="querying-and-manipulating-your-option-parser">
 <span id="optparse-querying-manipulating-option-parser"></span><h3>Querying and manipulating your option parser<a class="headerlink" href="#querying-and-manipulating-your-option-parser" title="Permalink to this headline">¶</a></h3>
 <p>The default behavior of the option parser can be customized slightly, and you
 can also poke around your option parser and see what’s there.  OptionParser
@@ -1341,8 +1465,8 @@ those option strings become invalid. If <em>opt_str</em> does not occur in any
 option belonging to this <a class="reference internal" href="#optparse.OptionParser" title="optparse.OptionParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">OptionParser</span></code></a>, raises <a class="reference internal" href="exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>.</p>
 </dd></dl>
 
-</div>
-<div class="section" id="conflicts-between-options">
+</section>
+<section id="conflicts-between-options">
 <span id="optparse-conflicts-between-options"></span><h3>Conflicts between options<a class="headerlink" href="#conflicts-between-options" title="Permalink to this headline">¶</a></h3>
 <p>If you’re not careful, it’s easy to define options with conflicting option
 strings:</p>
@@ -1407,8 +1531,8 @@ accessible, so <a class="reference internal" href="#module-optparse" title="optp
   <span class="o">--</span><span class="n">dry</span><span class="o">-</span><span class="n">run</span>     <span class="n">new</span> <span class="n">dry</span><span class="o">-</span><span class="n">run</span> <span class="n">option</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="cleanup">
+</section>
+<section id="cleanup">
 <span id="optparse-cleanup"></span><h3>Cleanup<a class="headerlink" href="#cleanup" title="Permalink to this headline">¶</a></h3>
 <p>OptionParser instances have several cyclic references.  This should not be a
 problem for Python’s garbage collector, but you may wish to break the cyclic
@@ -1416,8 +1540,8 @@ references explicitly by calling <code class="xref py py-meth docutils literal n
 OptionParser once you are done with it.  This is particularly useful in
 long-running applications where large object graphs are reachable from your
 OptionParser.</p>
-</div>
-<div class="section" id="other-methods">
+</section>
+<section id="other-methods">
 <span id="optparse-other-methods"></span><h3>Other methods<a class="headerlink" href="#other-methods" title="Permalink to this headline">¶</a></h3>
 <p>OptionParser supports several other public methods:</p>
 <dl class="py method">
@@ -1470,9 +1594,9 @@ the default, and the last one wins:</p>
 </div>
 </dd></dl>
 
-</div>
-</div>
-<div class="section" id="option-callbacks">
+</section>
+</section>
+<section id="option-callbacks">
 <span id="optparse-option-callbacks"></span><h2>Option Callbacks<a class="headerlink" href="#option-callbacks" title="Permalink to this headline">¶</a></h2>
 <p>When <a class="reference internal" href="#module-optparse" title="optparse: Command-line option parsing library. (deprecated)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">optparse</span></code></a>’s built-in actions and types aren’t quite enough for your
 needs, you have two choices: extend <a class="reference internal" href="#module-optparse" title="optparse: Command-line option parsing library. (deprecated)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">optparse</span></code></a> or define a callback option.
@@ -1484,7 +1608,7 @@ cases.  Quite often a simple callback is all you need.</p>
 <li><p>write the callback; this is a function (or method) that takes at least four
 arguments, as described below</p></li>
 </ul>
-<div class="section" id="defining-a-callback-option">
+<section id="defining-a-callback-option">
 <span id="optparse-defining-callback-option"></span><h3>Defining a callback option<a class="headerlink" href="#defining-a-callback-option" title="Permalink to this headline">¶</a></h3>
 <p>As always, the easiest way to define a callback option is by using the
 <a class="reference internal" href="#optparse.OptionParser.add_option" title="optparse.OptionParser.add_option"><code class="xref py py-meth docutils literal notranslate"><span class="pre">OptionParser.add_option()</span></code></a> method.  Apart from <a class="reference internal" href="#optparse.Option.action" title="optparse.Option.action"><code class="xref py py-attr docutils literal notranslate"><span class="pre">action</span></code></a>, the
@@ -1526,8 +1650,8 @@ callback.</p>
 <dt><a class="reference internal" href="#optparse.Option.callback_kwargs" title="optparse.Option.callback_kwargs"><code class="xref py py-attr docutils literal notranslate"><span class="pre">callback_kwargs</span></code></a></dt><dd><p>a dictionary of extra keyword arguments to pass to the callback</p>
 </dd>
 </dl>
-</div>
-<div class="section" id="how-callbacks-are-called">
+</section>
+<section id="how-callbacks-are-called">
 <span id="optparse-how-callbacks-called"></span><h3>How callbacks are called<a class="headerlink" href="#how-callbacks-are-called" title="Permalink to this headline">¶</a></h3>
 <p>All callbacks are called as follows:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">func</span><span class="p">(</span><span class="n">option</span><span class="p">,</span> <span class="n">opt_str</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">parser</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -1577,16 +1701,16 @@ value(s) of any options already encountered on the command-line.</p>
 <a class="reference internal" href="#optparse.Option.callback_kwargs" title="optparse.Option.callback_kwargs"><code class="xref py py-attr docutils literal notranslate"><span class="pre">callback_kwargs</span></code></a>.</p>
 </dd>
 </dl>
-</div>
-<div class="section" id="raising-errors-in-a-callback">
+</section>
+<section id="raising-errors-in-a-callback">
 <span id="optparse-raising-errors-in-callback"></span><h3>Raising errors in a callback<a class="headerlink" href="#raising-errors-in-a-callback" title="Permalink to this headline">¶</a></h3>
 <p>The callback function should raise <code class="xref py py-exc docutils literal notranslate"><span class="pre">OptionValueError</span></code> if there are any
 problems with the option or its argument(s).  <a class="reference internal" href="#module-optparse" title="optparse: Command-line option parsing library. (deprecated)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">optparse</span></code></a> catches this and
 terminates the program, printing the error message you supply to stderr.  Your
 message should be clear, concise, accurate, and mention the option at fault.
 Otherwise, the user will have a hard time figuring out what they did wrong.</p>
-</div>
-<div class="section" id="callback-example-1-trivial-callback">
+</section>
+<section id="callback-example-1-trivial-callback">
 <span id="optparse-callback-example-1"></span><h3>Callback example 1: trivial callback<a class="headerlink" href="#callback-example-1-trivial-callback" title="Permalink to this headline">¶</a></h3>
 <p>Here’s an example of a callback option that takes no arguments, and simply
 records that the option was seen:</p>
@@ -1597,8 +1721,8 @@ records that the option was seen:</p>
 </pre></div>
 </div>
 <p>Of course, you could do that with the <code class="docutils literal notranslate"><span class="pre">&quot;store_true&quot;</span></code> action.</p>
-</div>
-<div class="section" id="callback-example-2-check-option-order">
+</section>
+<section id="callback-example-2-check-option-order">
 <span id="optparse-callback-example-2"></span><h3>Callback example 2: check option order<a class="headerlink" href="#callback-example-2-check-option-order" title="Permalink to this headline">¶</a></h3>
 <p>Here’s a slightly more interesting example: record the fact that <code class="docutils literal notranslate"><span class="pre">-a</span></code> is
 seen, but blow up if it comes after <code class="docutils literal notranslate"><span class="pre">-b</span></code> in the command-line.</p>
@@ -1611,8 +1735,8 @@ seen, but blow up if it comes after <code class="docutils literal notranslate"><
 <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s2">&quot;-b&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="callback-example-3-check-option-order-generalized">
+</section>
+<section id="callback-example-3-check-option-order-generalized">
 <span id="optparse-callback-example-3"></span><h3>Callback example 3: check option order (generalized)<a class="headerlink" href="#callback-example-3-check-option-order-generalized" title="Permalink to this headline">¶</a></h3>
 <p>If you want to re-use this callback for several similar options (set a flag, but
 blow up if <code class="docutils literal notranslate"><span class="pre">-b</span></code> has already been seen), it needs a bit of work: the error
@@ -1627,8 +1751,8 @@ message and the flag that it sets must be generalized.</p>
 <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s2">&quot;-c&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;callback&quot;</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="n">check_order</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;c&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="callback-example-4-check-arbitrary-condition">
+</section>
+<section id="callback-example-4-check-arbitrary-condition">
 <span id="optparse-callback-example-4"></span><h3>Callback example 4: check arbitrary condition<a class="headerlink" href="#callback-example-4-check-arbitrary-condition" title="Permalink to this headline">¶</a></h3>
 <p>Of course, you could put any condition in there—you’re not limited to checking
 the values of already-defined options.  For example, if you have options that
@@ -1644,8 +1768,8 @@ should not be called when the moon is full, all you have to do is this:</p>
 </pre></div>
 </div>
 <p>(The definition of <code class="docutils literal notranslate"><span class="pre">is_moon_full()</span></code> is left as an exercise for the reader.)</p>
-</div>
-<div class="section" id="callback-example-5-fixed-arguments">
+</section>
+<section id="callback-example-5-fixed-arguments">
 <span id="optparse-callback-example-5"></span><h3>Callback example 5: fixed arguments<a class="headerlink" href="#callback-example-5-fixed-arguments" title="Permalink to this headline">¶</a></h3>
 <p>Things get slightly more interesting when you define callback options that take
 a fixed number of arguments.  Specifying that a callback option takes arguments
@@ -1665,8 +1789,8 @@ option takes <a class="reference internal" href="#optparse.Option.nargs" title="
 <p>Note that <a class="reference internal" href="#module-optparse" title="optparse: Command-line option parsing library. (deprecated)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">optparse</span></code></a> takes care of consuming 3 arguments and converting
 them to integers for you; all you have to do is store them.  (Or whatever;
 obviously you don’t need a callback for this example.)</p>
-</div>
-<div class="section" id="callback-example-6-variable-arguments">
+</section>
+<section id="callback-example-6-variable-arguments">
 <span id="optparse-callback-example-6"></span><h3>Callback example 6: variable arguments<a class="headerlink" href="#callback-example-6-variable-arguments" title="Permalink to this headline">¶</a></h3>
 <p>Things get hairy when you want an option to take a variable number of arguments.
 For this case, you must write a callback, as <a class="reference internal" href="#module-optparse" title="optparse: Command-line option parsing library. (deprecated)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">optparse</span></code></a> doesn’t provide any
@@ -1716,14 +1840,14 @@ arguments:</p>
                   <span class="n">action</span><span class="o">=</span><span class="s2">&quot;callback&quot;</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="n">vararg_callback</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="extending-optparse">
+</section>
+</section>
+<section id="extending-optparse">
 <span id="optparse-extending-optparse"></span><h2>Extending <a class="reference internal" href="#module-optparse" title="optparse: Command-line option parsing library. (deprecated)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">optparse</span></code></a><a class="headerlink" href="#extending-optparse" title="Permalink to this headline">¶</a></h2>
 <p>Since the two major controlling factors in how <a class="reference internal" href="#module-optparse" title="optparse: Command-line option parsing library. (deprecated)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">optparse</span></code></a> interprets
 command-line options are the action and type of each option, the most likely
 direction of extension is to add new actions and new types.</p>
-<div class="section" id="adding-new-types">
+<section id="adding-new-types">
 <span id="optparse-adding-new-types"></span><h3>Adding new types<a class="headerlink" href="#adding-new-types" title="Permalink to this headline">¶</a></h3>
 <p>To add new types, you need to define your own subclass of <a class="reference internal" href="#module-optparse" title="optparse: Command-line option parsing library. (deprecated)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">optparse</span></code></a>’s
 <code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code> class.  This class has a couple of attributes that define
@@ -1801,8 +1925,8 @@ OptionParser which option class to use:</p>
 <span class="n">parser</span> <span class="o">=</span> <span class="n">OptionParser</span><span class="p">(</span><span class="n">option_list</span><span class="o">=</span><span class="n">option_list</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="adding-new-actions">
+</section>
+<section id="adding-new-actions">
 <span id="optparse-adding-new-actions"></span><h3>Adding new actions<a class="headerlink" href="#adding-new-actions" title="Permalink to this headline">¶</a></h3>
 <p>Adding new actions is a bit trickier, because you have to understand that
 <a class="reference internal" href="#module-optparse" title="optparse: Command-line option parsing library. (deprecated)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">optparse</span></code></a> has a couple of classifications for actions:</p>
@@ -1909,9 +2033,9 @@ can just leave the default as <code class="docutils literal notranslate"><span c
 getting it right when it’s needed.</p>
 </li>
 </ul>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -1990,7 +2114,7 @@ getting it right when it’s needed.</p>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/master/Doc/library/optparse.rst"
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/library/optparse.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -2016,34 +2140,45 @@ getting it right when it’s needed.</p>
           <a href="superseded.html" title="Superseded Modules"
              >previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="superseded.html" >Superseded Modules</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">optparse</span></code> — Parser for command line options</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>  
     <div class="footer">
@@ -2061,7 +2196,7 @@ getting it right when it’s needed.</p>
 <br />
     <br />
 
-    Last updated on Mar 24, 2021.
+    Last updated on May 10, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 

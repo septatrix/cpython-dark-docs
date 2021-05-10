@@ -18,7 +18,7 @@
     '(?:dev)',
     '(?:release/\\d.\\d[\\x\\d\\.]*)'];
 
-  var all_versions = {"3.10": "dev (3.10)", "3.9": "3.9", "3.8": "3.8", "3.7": "3.7", "3.6": "3.6", "3.5": "3.5", "2.7": "2.7"};
+  var all_versions = {"3.11": "dev (3.11)", "3.10": "pre (3.10)", "3.9": "3.9", "3.8": "3.8", "3.7": "3.7", "3.6": "3.6", "3.5": "3.5", "2.7": "2.7"};
   var all_languages = {"en": "English", "es": "Spanish", "fr": "French", "ja": "Japanese", "ko": "Korean", "pt-br": "Brazilian Portuguese", "zh-cn": "Simplified Chinese", "zh-tw": "Traditional Chinese"};
 
   function quote_attr(str) {
@@ -26,7 +26,7 @@
   }
 
   function build_version_select(release) {
-    var buf = ['<select>'];
+    var buf = ['<select id="version_select">'];
     var major_minor = release.split(".").slice(0, 2).join(".");
 
     $.each(all_versions, function(version, title) {
@@ -41,7 +41,7 @@
   }
 
   function build_language_select(current_language) {
-    var buf = ['<select>'];
+    var buf = ['<select id="language_select">'];
 
     $.each(all_languages, function(language, title) {
       if (language == current_language)

@@ -4,8 +4,10 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>tracemalloc — Trace memory allocations &#8212; Python 3.10.0a6 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>tracemalloc — Trace memory allocations &#8212; Python 3.10.0b1 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
@@ -19,7 +21,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.10.0a6 documentation"
+          title="Search within Python 3.10.0b1 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -40,17 +42,98 @@
         }
       }
     </style>
+<link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.svg" />
+            <script type="text/javascript" src="../_static/copybutton.js"></script>
+            <script type="text/javascript" src="../_static/menu.js"></script>
+            <script type="text/javascript" src="../_static/themetoggle.js"></script> 
 
-    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
-    
-    <script type="text/javascript" src="../_static/copybutton.js"></script>
-    <script type="text/javascript" src="../_static/themetoggle.js"></script>
-    
-     
+  </head>
+<body>
+<div class="mobile-nav">
+    <input type="checkbox" id="menuToggler" class="toggler__input" aria-controls="navigation"
+           aria-pressed="false" aria-expanded="false" role="button" aria-label="Menu" />
+    <nav class="nav-content" role="navigation">
+        <label for="menuToggler" class="toggler__label">
+            <span></span>
+        </label>
+        <span class="nav-items-wrapper">
+            <a href="https://www.python.org/" class="nav-logo">
+                <img src="../_static/py.svg" alt="Logo"/>
+            </a>
+            <span class="version_switcher_placeholder"></span>
+            <form id="searchbox" role="search" class="search" action="../search.html" method="get">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="search-icon">
+                    <path fill-rule="nonzero" fill="currentColor" d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 001.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 00-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 005.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                </svg>
+                <input type="search" name="q" aria-label="Quick search"/>
+                <input type="submit" value="Go"/>
+                
+            </form>
+        </span>
+    </nav>
+    <div class="menu-wrapper">
+        <nav class="menu" role="navigation" aria-label="main navigation">
+            <div class="language_switcher_placeholder"></div>
+            
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label>
+  <h3><a href="../contents.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tracemalloc</span></code> — Trace memory allocations</a><ul>
+<li><a class="reference internal" href="#examples">Examples</a><ul>
+<li><a class="reference internal" href="#display-the-top-10">Display the top 10</a></li>
+<li><a class="reference internal" href="#compute-differences">Compute differences</a></li>
+<li><a class="reference internal" href="#get-the-traceback-of-a-memory-block">Get the traceback of a memory block</a></li>
+<li><a class="reference internal" href="#pretty-top">Pretty top</a><ul>
+<li><a class="reference internal" href="#record-the-current-and-peak-size-of-all-traced-memory-blocks">Record the current and peak size of all traced memory blocks</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#api">API</a><ul>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#domainfilter">DomainFilter</a></li>
+<li><a class="reference internal" href="#filter">Filter</a></li>
+<li><a class="reference internal" href="#frame">Frame</a></li>
+<li><a class="reference internal" href="#snapshot">Snapshot</a></li>
+<li><a class="reference internal" href="#statistic">Statistic</a></li>
+<li><a class="reference internal" href="#statisticdiff">StatisticDiff</a></li>
+<li><a class="reference internal" href="#trace">Trace</a></li>
+<li><a class="reference internal" href="#traceback">Traceback</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="trace.html"
+                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trace</span></code> — Trace or track Python statement execution</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="distribution.html"
+                        title="next chapter">Software Packaging and Distribution</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../bugs.html">Report a Bug</a></li>
+      <li>
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/library/tracemalloc.rst"
+            rel="nofollow">Show Source
+        </a>
+      </li>
+    </ul>
+  </div>
+        </nav>
+    </div>
+</div>
 
-  </head><body>
   
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -68,34 +151,45 @@
           <a href="trace.html" title="trace — Trace or track Python statement execution"
              accesskey="P">previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="debug.html" accesskey="U">Debugging and Profiling</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">tracemalloc</span></code> — Trace memory allocations</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>    
 
@@ -104,12 +198,12 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="module-tracemalloc">
+  <section id="module-tracemalloc">
 <span id="tracemalloc-trace-memory-allocations"></span><h1><a class="reference internal" href="#module-tracemalloc" title="tracemalloc: Trace memory allocations."><code class="xref py py-mod docutils literal notranslate"><span class="pre">tracemalloc</span></code></a> — Trace memory allocations<a class="headerlink" href="#module-tracemalloc" title="Permalink to this headline">¶</a></h1>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.4.</span></p>
 </div>
-<p><strong>Source code:</strong> <a class="reference external" href="https://github.com/python/cpython/tree/master/Lib/tracemalloc.py">Lib/tracemalloc.py</a></p>
+<p><strong>Source code:</strong> <a class="reference external" href="https://github.com/python/cpython/tree/3.10/Lib/tracemalloc.py">Lib/tracemalloc.py</a></p>
 <hr class="docutils" />
 <p>The tracemalloc module is a debug tool to trace memory blocks allocated by
 Python. It provides the following information:</p>
@@ -128,9 +222,9 @@ start tracing Python memory allocations.</p>
 frame (1 frame). To store 25 frames at startup: set the
 <span class="target" id="index-1"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONTRACEMALLOC"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONTRACEMALLOC</span></code></a> environment variable to <code class="docutils literal notranslate"><span class="pre">25</span></code>, or use the
 <a class="reference internal" href="../using/cmdline.html#cmdoption-X"><code class="xref std std-option docutils literal notranslate"><span class="pre">-X</span></code></a> <code class="docutils literal notranslate"><span class="pre">tracemalloc=25</span></code> command line option.</p>
-<div class="section" id="examples">
+<section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="display-the-top-10">
+<section id="display-the-top-10">
 <h3>Display the top 10<a class="headerlink" href="#display-the-top-10" title="Permalink to this headline">¶</a></h3>
 <p>Display the 10 files allocating the most memory:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tracemalloc</span>
@@ -151,22 +245,22 @@ frame (1 frame). To store 25 frames at startup: set the
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span> <span class="n">Top</span> <span class="mi">10</span> <span class="p">]</span>
 <span class="o">&lt;</span><span class="n">frozen</span> <span class="n">importlib</span><span class="o">.</span><span class="n">_bootstrap</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">716</span><span class="p">:</span> <span class="n">size</span><span class="o">=</span><span class="mi">4855</span> <span class="n">KiB</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">39328</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="mi">126</span> <span class="n">B</span>
 <span class="o">&lt;</span><span class="n">frozen</span> <span class="n">importlib</span><span class="o">.</span><span class="n">_bootstrap</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">284</span><span class="p">:</span> <span class="n">size</span><span class="o">=</span><span class="mi">521</span> <span class="n">KiB</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">3199</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="mi">167</span> <span class="n">B</span>
-<span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">4</span><span class="o">/</span><span class="n">collections</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">368</span><span class="p">:</span> <span class="n">size</span><span class="o">=</span><span class="mi">244</span> <span class="n">KiB</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">2315</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="mi">108</span> <span class="n">B</span>
-<span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">4</span><span class="o">/</span><span class="n">unittest</span><span class="o">/</span><span class="n">case</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">381</span><span class="p">:</span> <span class="n">size</span><span class="o">=</span><span class="mi">185</span> <span class="n">KiB</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">779</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="mi">243</span> <span class="n">B</span>
-<span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">4</span><span class="o">/</span><span class="n">unittest</span><span class="o">/</span><span class="n">case</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">402</span><span class="p">:</span> <span class="n">size</span><span class="o">=</span><span class="mi">154</span> <span class="n">KiB</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">378</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="mi">416</span> <span class="n">B</span>
-<span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">4</span><span class="o">/</span><span class="n">abc</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">133</span><span class="p">:</span> <span class="n">size</span><span class="o">=</span><span class="mf">88.7</span> <span class="n">KiB</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">347</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="mi">262</span> <span class="n">B</span>
+<span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.4</span><span class="o">/</span><span class="n">collections</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">368</span><span class="p">:</span> <span class="n">size</span><span class="o">=</span><span class="mi">244</span> <span class="n">KiB</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">2315</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="mi">108</span> <span class="n">B</span>
+<span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.4</span><span class="o">/</span><span class="n">unittest</span><span class="o">/</span><span class="n">case</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">381</span><span class="p">:</span> <span class="n">size</span><span class="o">=</span><span class="mi">185</span> <span class="n">KiB</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">779</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="mi">243</span> <span class="n">B</span>
+<span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.4</span><span class="o">/</span><span class="n">unittest</span><span class="o">/</span><span class="n">case</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">402</span><span class="p">:</span> <span class="n">size</span><span class="o">=</span><span class="mi">154</span> <span class="n">KiB</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">378</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="mi">416</span> <span class="n">B</span>
+<span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.4</span><span class="o">/</span><span class="n">abc</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">133</span><span class="p">:</span> <span class="n">size</span><span class="o">=</span><span class="mf">88.7</span> <span class="n">KiB</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">347</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="mi">262</span> <span class="n">B</span>
 <span class="o">&lt;</span><span class="n">frozen</span> <span class="n">importlib</span><span class="o">.</span><span class="n">_bootstrap</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">1446</span><span class="p">:</span> <span class="n">size</span><span class="o">=</span><span class="mf">70.4</span> <span class="n">KiB</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">911</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="mi">79</span> <span class="n">B</span>
 <span class="o">&lt;</span><span class="n">frozen</span> <span class="n">importlib</span><span class="o">.</span><span class="n">_bootstrap</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">1454</span><span class="p">:</span> <span class="n">size</span><span class="o">=</span><span class="mf">52.0</span> <span class="n">KiB</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="mi">2131</span> <span class="n">B</span>
 <span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">5</span><span class="p">:</span> <span class="n">size</span><span class="o">=</span><span class="mf">49.7</span> <span class="n">KiB</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">148</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="mi">344</span> <span class="n">B</span>
-<span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">4</span><span class="o">/</span><span class="n">sysconfig</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">411</span><span class="p">:</span> <span class="n">size</span><span class="o">=</span><span class="mf">48.0</span> <span class="n">KiB</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="mf">48.0</span> <span class="n">KiB</span>
+<span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.4</span><span class="o">/</span><span class="n">sysconfig</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">411</span><span class="p">:</span> <span class="n">size</span><span class="o">=</span><span class="mf">48.0</span> <span class="n">KiB</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="mf">48.0</span> <span class="n">KiB</span>
 </pre></div>
 </div>
 <p>We can see that Python loaded <code class="docutils literal notranslate"><span class="pre">4855</span> <span class="pre">KiB</span></code> data (bytecode and constants) from
 modules and that the <a class="reference internal" href="collections.html#module-collections" title="collections: Container datatypes"><code class="xref py py-mod docutils literal notranslate"><span class="pre">collections</span></code></a> module allocated <code class="docutils literal notranslate"><span class="pre">244</span> <span class="pre">KiB</span></code> to build
 <a class="reference internal" href="collections.html#collections.namedtuple" title="collections.namedtuple"><code class="xref py py-class docutils literal notranslate"><span class="pre">namedtuple</span></code></a> types.</p>
 <p>See <a class="reference internal" href="#tracemalloc.Snapshot.statistics" title="tracemalloc.Snapshot.statistics"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Snapshot.statistics()</span></code></a> for more options.</p>
-</div>
-<div class="section" id="compute-differences">
+</section>
+<section id="compute-differences">
 <h3>Compute differences<a class="headerlink" href="#compute-differences" title="Permalink to this headline">¶</a></h3>
 <p>Take two snapshots and display the differences:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tracemalloc</span>
@@ -187,15 +281,15 @@ modules and that the <a class="reference internal" href="collections.html#module
 <p>Example of output before/after running some tests of the Python test suite:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span> <span class="n">Top</span> <span class="mi">10</span> <span class="n">differences</span> <span class="p">]</span>
 <span class="o">&lt;</span><span class="n">frozen</span> <span class="n">importlib</span><span class="o">.</span><span class="n">_bootstrap</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">716</span><span class="p">:</span> <span class="n">size</span><span class="o">=</span><span class="mi">8173</span> <span class="n">KiB</span> <span class="p">(</span><span class="o">+</span><span class="mi">4428</span> <span class="n">KiB</span><span class="p">),</span> <span class="n">count</span><span class="o">=</span><span class="mi">71332</span> <span class="p">(</span><span class="o">+</span><span class="mi">39369</span><span class="p">),</span> <span class="n">average</span><span class="o">=</span><span class="mi">117</span> <span class="n">B</span>
-<span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">4</span><span class="o">/</span><span class="n">linecache</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">127</span><span class="p">:</span> <span class="n">size</span><span class="o">=</span><span class="mi">940</span> <span class="n">KiB</span> <span class="p">(</span><span class="o">+</span><span class="mi">940</span> <span class="n">KiB</span><span class="p">),</span> <span class="n">count</span><span class="o">=</span><span class="mi">8106</span> <span class="p">(</span><span class="o">+</span><span class="mi">8106</span><span class="p">),</span> <span class="n">average</span><span class="o">=</span><span class="mi">119</span> <span class="n">B</span>
-<span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">4</span><span class="o">/</span><span class="n">unittest</span><span class="o">/</span><span class="n">case</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">571</span><span class="p">:</span> <span class="n">size</span><span class="o">=</span><span class="mi">298</span> <span class="n">KiB</span> <span class="p">(</span><span class="o">+</span><span class="mi">298</span> <span class="n">KiB</span><span class="p">),</span> <span class="n">count</span><span class="o">=</span><span class="mi">589</span> <span class="p">(</span><span class="o">+</span><span class="mi">589</span><span class="p">),</span> <span class="n">average</span><span class="o">=</span><span class="mi">519</span> <span class="n">B</span>
+<span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.4</span><span class="o">/</span><span class="n">linecache</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">127</span><span class="p">:</span> <span class="n">size</span><span class="o">=</span><span class="mi">940</span> <span class="n">KiB</span> <span class="p">(</span><span class="o">+</span><span class="mi">940</span> <span class="n">KiB</span><span class="p">),</span> <span class="n">count</span><span class="o">=</span><span class="mi">8106</span> <span class="p">(</span><span class="o">+</span><span class="mi">8106</span><span class="p">),</span> <span class="n">average</span><span class="o">=</span><span class="mi">119</span> <span class="n">B</span>
+<span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.4</span><span class="o">/</span><span class="n">unittest</span><span class="o">/</span><span class="n">case</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">571</span><span class="p">:</span> <span class="n">size</span><span class="o">=</span><span class="mi">298</span> <span class="n">KiB</span> <span class="p">(</span><span class="o">+</span><span class="mi">298</span> <span class="n">KiB</span><span class="p">),</span> <span class="n">count</span><span class="o">=</span><span class="mi">589</span> <span class="p">(</span><span class="o">+</span><span class="mi">589</span><span class="p">),</span> <span class="n">average</span><span class="o">=</span><span class="mi">519</span> <span class="n">B</span>
 <span class="o">&lt;</span><span class="n">frozen</span> <span class="n">importlib</span><span class="o">.</span><span class="n">_bootstrap</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">284</span><span class="p">:</span> <span class="n">size</span><span class="o">=</span><span class="mi">1005</span> <span class="n">KiB</span> <span class="p">(</span><span class="o">+</span><span class="mi">166</span> <span class="n">KiB</span><span class="p">),</span> <span class="n">count</span><span class="o">=</span><span class="mi">7423</span> <span class="p">(</span><span class="o">+</span><span class="mi">1526</span><span class="p">),</span> <span class="n">average</span><span class="o">=</span><span class="mi">139</span> <span class="n">B</span>
-<span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">4</span><span class="o">/</span><span class="n">mimetypes</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">217</span><span class="p">:</span> <span class="n">size</span><span class="o">=</span><span class="mi">112</span> <span class="n">KiB</span> <span class="p">(</span><span class="o">+</span><span class="mi">112</span> <span class="n">KiB</span><span class="p">),</span> <span class="n">count</span><span class="o">=</span><span class="mi">1334</span> <span class="p">(</span><span class="o">+</span><span class="mi">1334</span><span class="p">),</span> <span class="n">average</span><span class="o">=</span><span class="mi">86</span> <span class="n">B</span>
-<span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">4</span><span class="o">/</span><span class="n">http</span><span class="o">/</span><span class="n">server</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">848</span><span class="p">:</span> <span class="n">size</span><span class="o">=</span><span class="mf">96.0</span> <span class="n">KiB</span> <span class="p">(</span><span class="o">+</span><span class="mf">96.0</span> <span class="n">KiB</span><span class="p">),</span> <span class="n">count</span><span class="o">=</span><span class="mi">1</span> <span class="p">(</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">average</span><span class="o">=</span><span class="mf">96.0</span> <span class="n">KiB</span>
-<span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">4</span><span class="o">/</span><span class="n">inspect</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1465</span><span class="p">:</span> <span class="n">size</span><span class="o">=</span><span class="mf">83.5</span> <span class="n">KiB</span> <span class="p">(</span><span class="o">+</span><span class="mf">83.5</span> <span class="n">KiB</span><span class="p">),</span> <span class="n">count</span><span class="o">=</span><span class="mi">109</span> <span class="p">(</span><span class="o">+</span><span class="mi">109</span><span class="p">),</span> <span class="n">average</span><span class="o">=</span><span class="mi">784</span> <span class="n">B</span>
-<span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">4</span><span class="o">/</span><span class="n">unittest</span><span class="o">/</span><span class="n">mock</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">491</span><span class="p">:</span> <span class="n">size</span><span class="o">=</span><span class="mf">77.7</span> <span class="n">KiB</span> <span class="p">(</span><span class="o">+</span><span class="mf">77.7</span> <span class="n">KiB</span><span class="p">),</span> <span class="n">count</span><span class="o">=</span><span class="mi">143</span> <span class="p">(</span><span class="o">+</span><span class="mi">143</span><span class="p">),</span> <span class="n">average</span><span class="o">=</span><span class="mi">557</span> <span class="n">B</span>
-<span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">4</span><span class="o">/</span><span class="n">urllib</span><span class="o">/</span><span class="n">parse</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">476</span><span class="p">:</span> <span class="n">size</span><span class="o">=</span><span class="mf">71.8</span> <span class="n">KiB</span> <span class="p">(</span><span class="o">+</span><span class="mf">71.8</span> <span class="n">KiB</span><span class="p">),</span> <span class="n">count</span><span class="o">=</span><span class="mi">969</span> <span class="p">(</span><span class="o">+</span><span class="mi">969</span><span class="p">),</span> <span class="n">average</span><span class="o">=</span><span class="mi">76</span> <span class="n">B</span>
-<span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">4</span><span class="o">/</span><span class="n">contextlib</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span> <span class="n">size</span><span class="o">=</span><span class="mf">67.2</span> <span class="n">KiB</span> <span class="p">(</span><span class="o">+</span><span class="mf">67.2</span> <span class="n">KiB</span><span class="p">),</span> <span class="n">count</span><span class="o">=</span><span class="mi">126</span> <span class="p">(</span><span class="o">+</span><span class="mi">126</span><span class="p">),</span> <span class="n">average</span><span class="o">=</span><span class="mi">546</span> <span class="n">B</span>
+<span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.4</span><span class="o">/</span><span class="n">mimetypes</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">217</span><span class="p">:</span> <span class="n">size</span><span class="o">=</span><span class="mi">112</span> <span class="n">KiB</span> <span class="p">(</span><span class="o">+</span><span class="mi">112</span> <span class="n">KiB</span><span class="p">),</span> <span class="n">count</span><span class="o">=</span><span class="mi">1334</span> <span class="p">(</span><span class="o">+</span><span class="mi">1334</span><span class="p">),</span> <span class="n">average</span><span class="o">=</span><span class="mi">86</span> <span class="n">B</span>
+<span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.4</span><span class="o">/</span><span class="n">http</span><span class="o">/</span><span class="n">server</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">848</span><span class="p">:</span> <span class="n">size</span><span class="o">=</span><span class="mf">96.0</span> <span class="n">KiB</span> <span class="p">(</span><span class="o">+</span><span class="mf">96.0</span> <span class="n">KiB</span><span class="p">),</span> <span class="n">count</span><span class="o">=</span><span class="mi">1</span> <span class="p">(</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">average</span><span class="o">=</span><span class="mf">96.0</span> <span class="n">KiB</span>
+<span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.4</span><span class="o">/</span><span class="n">inspect</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1465</span><span class="p">:</span> <span class="n">size</span><span class="o">=</span><span class="mf">83.5</span> <span class="n">KiB</span> <span class="p">(</span><span class="o">+</span><span class="mf">83.5</span> <span class="n">KiB</span><span class="p">),</span> <span class="n">count</span><span class="o">=</span><span class="mi">109</span> <span class="p">(</span><span class="o">+</span><span class="mi">109</span><span class="p">),</span> <span class="n">average</span><span class="o">=</span><span class="mi">784</span> <span class="n">B</span>
+<span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.4</span><span class="o">/</span><span class="n">unittest</span><span class="o">/</span><span class="n">mock</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">491</span><span class="p">:</span> <span class="n">size</span><span class="o">=</span><span class="mf">77.7</span> <span class="n">KiB</span> <span class="p">(</span><span class="o">+</span><span class="mf">77.7</span> <span class="n">KiB</span><span class="p">),</span> <span class="n">count</span><span class="o">=</span><span class="mi">143</span> <span class="p">(</span><span class="o">+</span><span class="mi">143</span><span class="p">),</span> <span class="n">average</span><span class="o">=</span><span class="mi">557</span> <span class="n">B</span>
+<span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.4</span><span class="o">/</span><span class="n">urllib</span><span class="o">/</span><span class="n">parse</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">476</span><span class="p">:</span> <span class="n">size</span><span class="o">=</span><span class="mf">71.8</span> <span class="n">KiB</span> <span class="p">(</span><span class="o">+</span><span class="mf">71.8</span> <span class="n">KiB</span><span class="p">),</span> <span class="n">count</span><span class="o">=</span><span class="mi">969</span> <span class="p">(</span><span class="o">+</span><span class="mi">969</span><span class="p">),</span> <span class="n">average</span><span class="o">=</span><span class="mi">76</span> <span class="n">B</span>
+<span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.4</span><span class="o">/</span><span class="n">contextlib</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span> <span class="n">size</span><span class="o">=</span><span class="mf">67.2</span> <span class="n">KiB</span> <span class="p">(</span><span class="o">+</span><span class="mf">67.2</span> <span class="n">KiB</span><span class="p">),</span> <span class="n">count</span><span class="o">=</span><span class="mi">126</span> <span class="p">(</span><span class="o">+</span><span class="mi">126</span><span class="p">),</span> <span class="n">average</span><span class="o">=</span><span class="mi">546</span> <span class="n">B</span>
 </pre></div>
 </div>
 <p>We can see that Python has loaded <code class="docutils literal notranslate"><span class="pre">8173</span> <span class="pre">KiB</span></code> of module data (bytecode and
@@ -206,8 +300,8 @@ of it since the previous snapshot.</p>
 <p>If the system has little free memory, snapshots can be written on disk using
 the <a class="reference internal" href="#tracemalloc.Snapshot.dump" title="tracemalloc.Snapshot.dump"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Snapshot.dump()</span></code></a> method to analyze the snapshot offline. Then use the
 <a class="reference internal" href="#tracemalloc.Snapshot.load" title="tracemalloc.Snapshot.load"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Snapshot.load()</span></code></a> method reload the snapshot.</p>
-</div>
-<div class="section" id="get-the-traceback-of-a-memory-block">
+</section>
+<section id="get-the-traceback-of-a-memory-block">
 <h3>Get the traceback of a memory block<a class="headerlink" href="#get-the-traceback-of-a-memory-block" title="Permalink to this headline">¶</a></h3>
 <p>Code to display the traceback of the biggest memory block:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tracemalloc</span>
@@ -269,8 +363,8 @@ load data (bytecode and constants) from modules: <code class="docutils literal n
 where the <a class="reference internal" href="importlib.html#module-importlib" title="importlib: The implementation of the import machinery."><code class="xref py py-mod docutils literal notranslate"><span class="pre">importlib</span></code></a> loaded data most recently: on the <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">pdb</span></code>
 line of the <a class="reference internal" href="doctest.html#module-doctest" title="doctest: Test pieces of code within docstrings."><code class="xref py py-mod docutils literal notranslate"><span class="pre">doctest</span></code></a> module. The traceback may change if a new module is
 loaded.</p>
-</div>
-<div class="section" id="pretty-top">
+</section>
+<section id="pretty-top">
 <h3>Pretty top<a class="headerlink" href="#pretty-top" title="Permalink to this headline">¶</a></h3>
 <p>Code to display the 10 lines allocating the most memory with a pretty output,
 ignoring <code class="docutils literal notranslate"><span class="pre">&lt;frozen</span> <span class="pre">importlib._bootstrap&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;unknown&gt;</span></code> files:</p>
@@ -335,7 +429,7 @@ ignoring <code class="docutils literal notranslate"><span class="pre">&lt;frozen
 </pre></div>
 </div>
 <p>See <a class="reference internal" href="#tracemalloc.Snapshot.statistics" title="tracemalloc.Snapshot.statistics"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Snapshot.statistics()</span></code></a> for more options.</p>
-<div class="section" id="record-the-current-and-peak-size-of-all-traced-memory-blocks">
+<section id="record-the-current-and-peak-size-of-all-traced-memory-blocks">
 <h4>Record the current and peak size of all traced memory blocks<a class="headerlink" href="#record-the-current-and-peak-size-of-all-traced-memory-blocks" title="Permalink to this headline">¶</a></h4>
 <p>The following code computes two sums like <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">+</span> <span class="pre">1</span> <span class="pre">+</span> <span class="pre">2</span> <span class="pre">+</span> <span class="pre">...</span></code> inefficiently, by
 creating a list of those numbers. This list consumes a lot of memory
@@ -375,12 +469,12 @@ computation <code class="docutils literal notranslate"><span class="pre">large_s
 both peaks are much higher than the final memory usage, and which suggests we
 could optimise (by removing the unnecessary call to <a class="reference internal" href="stdtypes.html#list" title="list"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>, and writing
 <code class="docutils literal notranslate"><span class="pre">sum(range(...))</span></code>).</p>
-</div>
-</div>
-</div>
-<div class="section" id="api">
+</section>
+</section>
+</section>
+<section id="api">
 <h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="functions">
+<section id="functions">
 <h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
 <dt id="tracemalloc.clear_traces">
@@ -496,8 +590,8 @@ snapshot, see the <a class="reference internal" href="#tracemalloc.start" title=
 <p>See also the <a class="reference internal" href="#tracemalloc.get_object_traceback" title="tracemalloc.get_object_traceback"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_object_traceback()</span></code></a> function.</p>
 </dd></dl>
 
-</div>
-<div class="section" id="domainfilter">
+</section>
+<section id="domainfilter">
 <h3>DomainFilter<a class="headerlink" href="#domainfilter" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="tracemalloc.DomainFilter">
@@ -523,8 +617,8 @@ in the address space <a class="reference internal" href="#tracemalloc.DomainFilt
 
 </dd></dl>
 
-</div>
-<div class="section" id="filter">
+</section>
+<section id="filter">
 <h3>Filter<a class="headerlink" href="#filter" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="tracemalloc.Filter">
@@ -591,8 +685,8 @@ attribute.</p>
 
 </dd></dl>
 
-</div>
-<div class="section" id="frame">
+</section>
+<section id="frame">
 <h3>Frame<a class="headerlink" href="#frame" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="tracemalloc.Frame">
@@ -613,8 +707,8 @@ attribute.</p>
 
 </dd></dl>
 
-</div>
-<div class="section" id="snapshot">
+</section>
+<section id="snapshot">
 <h3>Snapshot<a class="headerlink" href="#snapshot" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="tracemalloc.Snapshot">
@@ -717,8 +811,8 @@ method to get a sorted list of statistics.</p>
 
 </dd></dl>
 
-</div>
-<div class="section" id="statistic">
+</section>
+<section id="statistic">
 <h3>Statistic<a class="headerlink" href="#statistic" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="tracemalloc.Statistic">
@@ -747,8 +841,8 @@ instance.</p>
 
 </dd></dl>
 
-</div>
-<div class="section" id="statisticdiff">
+</section>
+<section id="statisticdiff">
 <h3>StatisticDiff<a class="headerlink" href="#statisticdiff" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="tracemalloc.StatisticDiff">
@@ -796,8 +890,8 @@ instance.</p>
 
 </dd></dl>
 
-</div>
-<div class="section" id="trace">
+</section>
+<section id="trace">
 <h3>Trace<a class="headerlink" href="#trace" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="tracemalloc.Trace">
@@ -831,8 +925,8 @@ instance.</p>
 
 </dd></dl>
 
-</div>
-<div class="section" id="traceback">
+</section>
+<section id="traceback">
 <h3>Traceback<a class="headerlink" href="#traceback" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="tracemalloc.Traceback">
@@ -892,9 +986,9 @@ is reversed, returning the most recent frame first instead of last.</p>
 
 </dd></dl>
 
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -943,7 +1037,7 @@ is reversed, returning the most recent frame first instead of last.</p>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/master/Doc/library/tracemalloc.rst"
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/library/tracemalloc.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -969,34 +1063,45 @@ is reversed, returning the most recent frame first instead of last.</p>
           <a href="trace.html" title="trace — Trace or track Python statement execution"
              >previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="debug.html" >Debugging and Profiling</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">tracemalloc</span></code> — Trace memory allocations</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>  
     <div class="footer">
@@ -1014,7 +1119,7 @@ is reversed, returning the most recent frame first instead of last.</p>
 <br />
     <br />
 
-    Last updated on Mar 24, 2021.
+    Last updated on May 10, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 

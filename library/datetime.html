@@ -4,8 +4,10 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>datetime — Basic date and time types &#8212; Python 3.10.0a6 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>datetime — Basic date and time types &#8212; Python 3.10.0b1 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
@@ -19,7 +21,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.10.0a6 documentation"
+          title="Search within Python 3.10.0b1 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -40,17 +42,106 @@
         }
       }
     </style>
+<link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.svg" />
+            <script type="text/javascript" src="../_static/copybutton.js"></script>
+            <script type="text/javascript" src="../_static/menu.js"></script>
+            <script type="text/javascript" src="../_static/themetoggle.js"></script> 
 
-    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
-    
-    <script type="text/javascript" src="../_static/copybutton.js"></script>
-    <script type="text/javascript" src="../_static/themetoggle.js"></script>
-    
-     
+  </head>
+<body>
+<div class="mobile-nav">
+    <input type="checkbox" id="menuToggler" class="toggler__input" aria-controls="navigation"
+           aria-pressed="false" aria-expanded="false" role="button" aria-label="Menu" />
+    <nav class="nav-content" role="navigation">
+        <label for="menuToggler" class="toggler__label">
+            <span></span>
+        </label>
+        <span class="nav-items-wrapper">
+            <a href="https://www.python.org/" class="nav-logo">
+                <img src="../_static/py.svg" alt="Logo"/>
+            </a>
+            <span class="version_switcher_placeholder"></span>
+            <form id="searchbox" role="search" class="search" action="../search.html" method="get">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="search-icon">
+                    <path fill-rule="nonzero" fill="currentColor" d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 001.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 00-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 005.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                </svg>
+                <input type="search" name="q" aria-label="Quick search"/>
+                <input type="submit" value="Go"/>
+                
+            </form>
+        </span>
+    </nav>
+    <div class="menu-wrapper">
+        <nav class="menu" role="navigation" aria-label="main navigation">
+            <div class="language_switcher_placeholder"></div>
+            
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label>
+  <h3><a href="../contents.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">datetime</span></code> — Basic date and time types</a><ul>
+<li><a class="reference internal" href="#aware-and-naive-objects">Aware and Naive Objects</a></li>
+<li><a class="reference internal" href="#constants">Constants</a></li>
+<li><a class="reference internal" href="#available-types">Available Types</a><ul>
+<li><a class="reference internal" href="#common-properties">Common Properties</a></li>
+<li><a class="reference internal" href="#determining-if-an-object-is-aware-or-naive">Determining if an Object is Aware or Naive</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#timedelta-objects"><code class="xref py py-class docutils literal notranslate"><span class="pre">timedelta</span></code> Objects</a><ul>
+<li><a class="reference internal" href="#examples-of-usage-timedelta">Examples of usage: <code class="xref py py-class docutils literal notranslate"><span class="pre">timedelta</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#date-objects"><code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code> Objects</a><ul>
+<li><a class="reference internal" href="#examples-of-usage-date">Examples of Usage: <code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#datetime-objects"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code> Objects</a><ul>
+<li><a class="reference internal" href="#examples-of-usage-datetime">Examples of Usage: <code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#time-objects"><code class="xref py py-class docutils literal notranslate"><span class="pre">time</span></code> Objects</a><ul>
+<li><a class="reference internal" href="#examples-of-usage-time">Examples of Usage: <code class="xref py py-class docutils literal notranslate"><span class="pre">time</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#tzinfo-objects"><code class="xref py py-class docutils literal notranslate"><span class="pre">tzinfo</span></code> Objects</a></li>
+<li><a class="reference internal" href="#timezone-objects"><code class="xref py py-class docutils literal notranslate"><span class="pre">timezone</span></code> Objects</a></li>
+<li><a class="reference internal" href="#strftime-and-strptime-behavior"><code class="xref py py-meth docutils literal notranslate"><span class="pre">strftime()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">strptime()</span></code> Behavior</a><ul>
+<li><a class="reference internal" href="#strftime-and-strptime-format-codes"><code class="xref py py-meth docutils literal notranslate"><span class="pre">strftime()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">strptime()</span></code> Format Codes</a></li>
+<li><a class="reference internal" href="#technical-detail">Technical Detail</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="datatypes.html"
+                        title="previous chapter">Data Types</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="zoneinfo.html"
+                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">zoneinfo</span></code> — IANA time zone support</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../bugs.html">Report a Bug</a></li>
+      <li>
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/library/datetime.rst"
+            rel="nofollow">Show Source
+        </a>
+      </li>
+    </ul>
+  </div>
+        </nav>
+    </div>
+</div>
 
-  </head><body>
   
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -68,34 +159,45 @@
           <a href="datatypes.html" title="Data Types"
              accesskey="P">previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="datatypes.html" accesskey="U">Data Types</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">datetime</span></code> — Basic date and time types</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>    
 
@@ -104,9 +206,9 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="module-datetime">
+  <section id="module-datetime">
 <span id="datetime-basic-date-and-time-types"></span><h1><a class="reference internal" href="#module-datetime" title="datetime: Basic date and time types."><code class="xref py py-mod docutils literal notranslate"><span class="pre">datetime</span></code></a> — Basic date and time types<a class="headerlink" href="#module-datetime" title="Permalink to this headline">¶</a></h1>
-<p><strong>Source code:</strong> <a class="reference external" href="https://github.com/python/cpython/tree/master/Lib/datetime.py">Lib/datetime.py</a></p>
+<p><strong>Source code:</strong> <a class="reference external" href="https://github.com/python/cpython/tree/3.10/Lib/datetime.py">Lib/datetime.py</a></p>
 <hr class="docutils" />
 <p>The <a class="reference internal" href="#module-datetime" title="datetime: Basic date and time types."><code class="xref py py-mod docutils literal notranslate"><span class="pre">datetime</span></code></a> module supplies classes for manipulating dates and times.</p>
 <p>While date and time arithmetic is supported, the focus of the implementation is
@@ -122,7 +224,7 @@ on efficient attribute extraction for output formatting and manipulation.</p>
 </dd>
 </dl>
 </div>
-<div class="section" id="aware-and-naive-objects">
+<section id="aware-and-naive-objects">
 <span id="datetime-naive-aware"></span><h2>Aware and Naive Objects<a class="headerlink" href="#aware-and-naive-objects" title="Permalink to this headline">¶</a></h2>
 <p>Date and time objects may be categorized as “aware” or “naive” depending on
 whether or not they include timezone information.</p>
@@ -149,8 +251,8 @@ North American EST and EDT timezones. Supporting timezones at deeper levels of
 detail is up to the application. The rules for time adjustment across the
 world are more political than rational, change frequently, and there is no
 standard suitable for every application aside from UTC.</p>
-</div>
-<div class="section" id="constants">
+</section>
+<section id="constants">
 <h2>Constants<a class="headerlink" href="#constants" title="Permalink to this headline">¶</a></h2>
 <p>The <a class="reference internal" href="#module-datetime" title="datetime: Basic date and time types."><code class="xref py py-mod docutils literal notranslate"><span class="pre">datetime</span></code></a> module exports the following constants:</p>
 <dl class="py data">
@@ -167,8 +269,8 @@ standard suitable for every application aside from UTC.</p>
 <a class="reference internal" href="#datetime.MAXYEAR" title="datetime.MAXYEAR"><code class="xref py py-const docutils literal notranslate"><span class="pre">MAXYEAR</span></code></a> is <code class="docutils literal notranslate"><span class="pre">9999</span></code>.</p>
 </dd></dl>
 
-</div>
-<div class="section" id="available-types">
+</section>
+<section id="available-types">
 <h2>Available Types<a class="headerlink" href="#available-types" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt>
@@ -232,7 +334,7 @@ fixed offset from the UTC.</p>
         <span class="n">datetime</span>
 </pre></div>
 </div>
-<div class="section" id="common-properties">
+<section id="common-properties">
 <h3>Common Properties<a class="headerlink" href="#common-properties" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="#datetime.date" title="datetime.date"><code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code></a>, <a class="reference internal" href="#datetime.datetime" title="datetime.datetime"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a>, <a class="reference internal" href="#datetime.time" title="datetime.time"><code class="xref py py-class docutils literal notranslate"><span class="pre">time</span></code></a>, and <a class="reference internal" href="#datetime.timezone" title="datetime.timezone"><code class="xref py py-class docutils literal notranslate"><span class="pre">timezone</span></code></a> types
 share these common features:</p>
@@ -242,8 +344,8 @@ share these common features:</p>
 dictionary keys.</p></li>
 <li><p>Objects of these types support efficient pickling via the <a class="reference internal" href="pickle.html#module-pickle" title="pickle: Convert Python objects to streams of bytes and back."><code class="xref py py-mod docutils literal notranslate"><span class="pre">pickle</span></code></a> module.</p></li>
 </ul>
-</div>
-<div class="section" id="determining-if-an-object-is-aware-or-naive">
+</section>
+<section id="determining-if-an-object-is-aware-or-naive">
 <h3>Determining if an Object is Aware or Naive<a class="headerlink" href="#determining-if-an-object-is-aware-or-naive" title="Permalink to this headline">¶</a></h3>
 <p>Objects of the <a class="reference internal" href="#datetime.date" title="datetime.date"><code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code></a> type are always naive.</p>
 <p>An object of type <a class="reference internal" href="#datetime.time" title="datetime.time"><code class="xref py py-class docutils literal notranslate"><span class="pre">time</span></code></a> or <a class="reference internal" href="#datetime.datetime" title="datetime.datetime"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a> may be aware or naive.</p>
@@ -261,9 +363,9 @@ dictionary keys.</p></li>
 <p>Otherwise, <em>t</em> is naive.</p>
 <p>The distinction between aware and naive doesn’t apply to <a class="reference internal" href="#datetime.timedelta" title="datetime.timedelta"><code class="xref py py-class docutils literal notranslate"><span class="pre">timedelta</span></code></a>
 objects.</p>
-</div>
-</div>
-<div class="section" id="timedelta-objects">
+</section>
+</section>
+<section id="timedelta-objects">
 <span id="datetime-timedelta"></span><h2><a class="reference internal" href="#datetime.timedelta" title="datetime.timedelta"><code class="xref py py-class docutils literal notranslate"><span class="pre">timedelta</span></code></a> Objects<a class="headerlink" href="#timedelta-objects" title="Permalink to this headline">¶</a></h2>
 <p>A <a class="reference internal" href="#datetime.timedelta" title="datetime.timedelta"><code class="xref py py-class docutils literal notranslate"><span class="pre">timedelta</span></code></a> object represents a duration, the difference between two
 dates or times.</p>
@@ -524,7 +626,7 @@ most platforms) this method will lose microsecond accuracy.</p>
 </div>
 </dd></dl>
 
-<div class="section" id="examples-of-usage-timedelta">
+<section id="examples-of-usage-timedelta">
 <h3>Examples of usage: <a class="reference internal" href="#datetime.timedelta" title="datetime.timedelta"><code class="xref py py-class docutils literal notranslate"><span class="pre">timedelta</span></code></a><a class="headerlink" href="#examples-of-usage-timedelta" title="Permalink to this headline">¶</a></h3>
 <p>An additional example of normalization:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Components of another_year add up to exactly 365 days</span>
@@ -554,9 +656,9 @@ most platforms) this method will lose microsecond accuracy.</p>
 <span class="go">(datetime.timedelta(days=1095), 3)</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="date-objects">
+</section>
+</section>
+<section id="date-objects">
 <span id="datetime-date"></span><h2><a class="reference internal" href="#datetime.date" title="datetime.date"><code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code></a> Objects<a class="headerlink" href="#date-objects" title="Permalink to this headline">¶</a></h2>
 <p>A <a class="reference internal" href="#datetime.date" title="datetime.date"><code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code></a> object represents a date (year, month and day) in an idealized
 calendar, the current Gregorian calendar indefinitely extended in both
@@ -860,7 +962,7 @@ complete list of formatting directives, see
 <a class="reference internal" href="#strftime-strptime-behavior"><span class="std std-ref">strftime() and strptime() Behavior</span></a>.</p>
 </dd></dl>
 
-<div class="section" id="examples-of-usage-date">
+<section id="examples-of-usage-date">
 <h3>Examples of Usage: <a class="reference internal" href="#datetime.date" title="datetime.date"><code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code></a><a class="headerlink" href="#examples-of-usage-date" title="Permalink to this headline">¶</a></h3>
 <p>Example of counting days to an event:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">time</span>
@@ -923,9 +1025,9 @@ complete list of formatting directives, see
 <span class="go">datetime.date(2005, 3, 11)</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="datetime-objects">
+</section>
+</section>
+<section id="datetime-objects">
 <span id="datetime-datetime"></span><h2><a class="reference internal" href="#datetime.datetime" title="datetime.datetime"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a> Objects<a class="headerlink" href="#datetime-objects" title="Permalink to this headline">¶</a></h2>
 <p>A <a class="reference internal" href="#datetime.datetime" title="datetime.datetime"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a> object is a single object containing all the information
 from a <a class="reference internal" href="#datetime.date" title="datetime.date"><code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code></a> object and a <a class="reference internal" href="#datetime.time" title="datetime.time"><code class="xref py py-class docutils literal notranslate"><span class="pre">time</span></code></a> object.</p>
@@ -1658,7 +1760,7 @@ complete list of formatting directives, see
 <a class="reference internal" href="#strftime-strptime-behavior"><span class="std std-ref">strftime() and strptime() Behavior</span></a>.</p>
 </dd></dl>
 
-<div class="section" id="examples-of-usage-datetime">
+<section id="examples-of-usage-datetime">
 <h3>Examples of Usage: <a class="reference internal" href="#datetime.datetime" title="datetime.datetime"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a><a class="headerlink" href="#examples-of-usage-datetime" title="Permalink to this headline">¶</a></h3>
 <p>Examples of working with <a class="reference internal" href="#datetime.datetime" title="datetime.datetime"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a> objects:</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">timezone</span>
@@ -1781,9 +1883,9 @@ and then +4:30 UTC thereafter:</p>
 <span class="go">True</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="time-objects">
+</section>
+</section>
+<section id="time-objects">
 <span id="datetime-time"></span><h2><a class="reference internal" href="#datetime.time" title="datetime.time"><code class="xref py py-class docutils literal notranslate"><span class="pre">time</span></code></a> Objects<a class="headerlink" href="#time-objects" title="Permalink to this headline">¶</a></h2>
 <p>A <a class="reference internal" href="time.html#module-time" title="time: Time access and conversions."><code class="xref py py-class docutils literal notranslate"><span class="pre">time</span></code></a> object represents a (local) time of day, independent of any particular
 day, and subject to adjustment via a <a class="reference internal" href="#datetime.tzinfo" title="datetime.tzinfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">tzinfo</span></code></a> object.</p>
@@ -2037,7 +2139,7 @@ return <code class="docutils literal notranslate"><span class="pre">None</span><
 return <code class="docutils literal notranslate"><span class="pre">None</span></code> or a string object.</p>
 </dd></dl>
 
-<div class="section" id="examples-of-usage-time">
+<section id="examples-of-usage-time">
 <h3>Examples of Usage: <a class="reference internal" href="#datetime.time" title="datetime.time"><code class="xref py py-class docutils literal notranslate"><span class="pre">time</span></code></a><a class="headerlink" href="#examples-of-usage-time" title="Permalink to this headline">¶</a></h3>
 <p>Examples of working with a <a class="reference internal" href="#datetime.time" title="datetime.time"><code class="xref py py-class docutils literal notranslate"><span class="pre">time</span></code></a> object:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">time</span><span class="p">,</span> <span class="n">tzinfo</span><span class="p">,</span> <span class="n">timedelta</span>
@@ -2066,9 +2168,9 @@ return <code class="docutils literal notranslate"><span class="pre">None</span><
 <span class="go">&#39;The time is 12:10.&#39;</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="tzinfo-objects">
+</section>
+</section>
+<section id="tzinfo-objects">
 <span id="datetime-tzinfo"></span><h2><a class="reference internal" href="#datetime.tzinfo" title="datetime.tzinfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">tzinfo</span></code></a> Objects<a class="headerlink" href="#tzinfo-objects" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="datetime.tzinfo">
@@ -2498,8 +2600,8 @@ daylight-saving rules.</p>
 </dd>
 </dl>
 </div>
-</div>
-<div class="section" id="timezone-objects">
+</section>
+<section id="timezone-objects">
 <span id="datetime-timezone"></span><h2><a class="reference internal" href="#datetime.timezone" title="datetime.timezone"><code class="xref py py-class docutils literal notranslate"><span class="pre">timezone</span></code></a> Objects<a class="headerlink" href="#timezone-objects" title="Permalink to this headline">¶</a></h2>
 <p>The <a class="reference internal" href="#datetime.timezone" title="datetime.timezone"><code class="xref py py-class docutils literal notranslate"><span class="pre">timezone</span></code></a> class is a subclass of <a class="reference internal" href="#datetime.tzinfo" title="datetime.tzinfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">tzinfo</span></code></a>, each
 instance of which represents a timezone defined by a fixed offset from
@@ -2572,8 +2674,8 @@ two digits of <code class="docutils literal notranslate"><span class="pre">offse
 <dd><p>The UTC timezone, <code class="docutils literal notranslate"><span class="pre">timezone(timedelta(0))</span></code>.</p>
 </dd></dl>
 
-</div>
-<div class="section" id="strftime-and-strptime-behavior">
+</section>
+<section id="strftime-and-strptime-behavior">
 <span id="strftime-strptime-behavior"></span><span id="index-0"></span><h2><code class="xref py py-meth docutils literal notranslate"><span class="pre">strftime()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">strptime()</span></code> Behavior<a class="headerlink" href="#strftime-and-strptime-behavior" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference internal" href="#datetime.date" title="datetime.date"><code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code></a>, <a class="reference internal" href="#datetime.datetime" title="datetime.datetime"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a>, and <a class="reference internal" href="#datetime.time" title="datetime.time"><code class="xref py py-class docutils literal notranslate"><span class="pre">time</span></code></a> objects all support a
 <code class="docutils literal notranslate"><span class="pre">strftime(format)</span></code> method, to create a string representing the time under the
@@ -2614,7 +2716,7 @@ versus <code class="xref py py-meth docutils literal notranslate"><span class="p
 </tr>
 </tbody>
 </table>
-<div class="section" id="strftime-and-strptime-format-codes">
+<section id="strftime-and-strptime-format-codes">
 <h3><code class="xref py py-meth docutils literal notranslate"><span class="pre">strftime()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">strptime()</span></code> Format Codes<a class="headerlink" href="#strftime-and-strptime-format-codes" title="Permalink to this headline">¶</a></h3>
 <p>The following is a list of all the format codes that the 1989 C standard
 requires, and these work on all platforms with a standard C implementation.</p>
@@ -2897,8 +2999,8 @@ platform, consult the <em class="manpage"><a class="manpage reference external" 
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.6: </span><code class="docutils literal notranslate"><span class="pre">%G</span></code>, <code class="docutils literal notranslate"><span class="pre">%u</span></code> and <code class="docutils literal notranslate"><span class="pre">%V</span></code> were added.</p>
 </div>
-</div>
-<div class="section" id="technical-detail">
+</section>
+<section id="technical-detail">
 <h3>Technical Detail<a class="headerlink" href="#technical-detail" title="Permalink to this headline">¶</a></h3>
 <p>Broadly speaking, <code class="docutils literal notranslate"><span class="pre">d.strftime(fmt)</span></code> acts like the <a class="reference internal" href="time.html#module-time" title="time: Time access and conversions."><code class="xref py py-mod docutils literal notranslate"><span class="pre">time</span></code></a> module’s
 <code class="docutils literal notranslate"><span class="pre">time.strftime(fmt,</span> <span class="pre">d.timetuple())</span></code> although not all objects support a
@@ -3030,9 +3132,9 @@ for a good explanation.</p>
 <dd><p>Passing <code class="docutils literal notranslate"><span class="pre">datetime.strptime('Feb</span> <span class="pre">29',</span> <span class="pre">'%b</span> <span class="pre">%d')</span></code> will fail since <code class="docutils literal notranslate"><span class="pre">1900</span></code> is not a leap year.</p>
 </dd>
 </dl>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -3089,7 +3191,7 @@ for a good explanation.</p>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/master/Doc/library/datetime.rst"
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/library/datetime.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -3115,34 +3217,45 @@ for a good explanation.</p>
           <a href="datatypes.html" title="Data Types"
              >previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="datatypes.html" >Data Types</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">datetime</span></code> — Basic date and time types</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>  
     <div class="footer">
@@ -3160,7 +3273,7 @@ for a good explanation.</p>
 <br />
     <br />
 
-    Last updated on Mar 24, 2021.
+    Last updated on May 10, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 

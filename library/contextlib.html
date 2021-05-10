@@ -4,8 +4,10 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>contextlib — Utilities for with-statement contexts &#8212; Python 3.10.0a6 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>contextlib — Utilities for with-statement contexts &#8212; Python 3.10.0b1 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
@@ -19,7 +21,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.10.0a6 documentation"
+          title="Search within Python 3.10.0b1 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -40,17 +42,90 @@
         }
       }
     </style>
+<link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.svg" />
+            <script type="text/javascript" src="../_static/copybutton.js"></script>
+            <script type="text/javascript" src="../_static/menu.js"></script>
+            <script type="text/javascript" src="../_static/themetoggle.js"></script> 
 
-    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
-    
-    <script type="text/javascript" src="../_static/copybutton.js"></script>
-    <script type="text/javascript" src="../_static/themetoggle.js"></script>
-    
-     
+  </head>
+<body>
+<div class="mobile-nav">
+    <input type="checkbox" id="menuToggler" class="toggler__input" aria-controls="navigation"
+           aria-pressed="false" aria-expanded="false" role="button" aria-label="Menu" />
+    <nav class="nav-content" role="navigation">
+        <label for="menuToggler" class="toggler__label">
+            <span></span>
+        </label>
+        <span class="nav-items-wrapper">
+            <a href="https://www.python.org/" class="nav-logo">
+                <img src="../_static/py.svg" alt="Logo"/>
+            </a>
+            <span class="version_switcher_placeholder"></span>
+            <form id="searchbox" role="search" class="search" action="../search.html" method="get">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="search-icon">
+                    <path fill-rule="nonzero" fill="currentColor" d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 001.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 00-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 005.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                </svg>
+                <input type="search" name="q" aria-label="Quick search"/>
+                <input type="submit" value="Go"/>
+                
+            </form>
+        </span>
+    </nav>
+    <div class="menu-wrapper">
+        <nav class="menu" role="navigation" aria-label="main navigation">
+            <div class="language_switcher_placeholder"></div>
+            
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label>
+  <h3><a href="../contents.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">contextlib</span></code> — Utilities for <code class="xref std std-keyword docutils literal notranslate"><span class="pre">with</span></code>-statement contexts</a><ul>
+<li><a class="reference internal" href="#utilities">Utilities</a></li>
+<li><a class="reference internal" href="#examples-and-recipes">Examples and Recipes</a><ul>
+<li><a class="reference internal" href="#supporting-a-variable-number-of-context-managers">Supporting a variable number of context managers</a></li>
+<li><a class="reference internal" href="#catching-exceptions-from-enter-methods">Catching exceptions from <code class="docutils literal notranslate"><span class="pre">__enter__</span></code> methods</a></li>
+<li><a class="reference internal" href="#cleaning-up-in-an-enter-implementation">Cleaning up in an <code class="docutils literal notranslate"><span class="pre">__enter__</span></code> implementation</a></li>
+<li><a class="reference internal" href="#replacing-any-use-of-try-finally-and-flag-variables">Replacing any use of <code class="docutils literal notranslate"><span class="pre">try-finally</span></code> and flag variables</a></li>
+<li><a class="reference internal" href="#using-a-context-manager-as-a-function-decorator">Using a context manager as a function decorator</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#single-use-reusable-and-reentrant-context-managers">Single use, reusable and reentrant context managers</a><ul>
+<li><a class="reference internal" href="#reentrant-context-managers">Reentrant context managers</a></li>
+<li><a class="reference internal" href="#reusable-context-managers">Reusable context managers</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="dataclasses.html"
+                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">dataclasses</span></code> — Data Classes</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="abc.html"
+                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">abc</span></code> — Abstract Base Classes</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../bugs.html">Report a Bug</a></li>
+      <li>
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/library/contextlib.rst"
+            rel="nofollow">Show Source
+        </a>
+      </li>
+    </ul>
+  </div>
+        </nav>
+    </div>
+</div>
 
-  </head><body>
   
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -68,34 +143,45 @@
           <a href="dataclasses.html" title="dataclasses — Data Classes"
              accesskey="P">previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="python.html" accesskey="U">Python Runtime Services</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">contextlib</span></code> — Utilities for <code class="xref std std-keyword docutils literal notranslate"><span class="pre">with</span></code>-statement contexts</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>    
 
@@ -104,14 +190,14 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="module-contextlib">
+  <section id="module-contextlib">
 <span id="contextlib-utilities-for-with-statement-contexts"></span><h1><code class="xref py py-mod docutils literal notranslate"><span class="pre">contextlib</span></code> — Utilities for <code class="xref std std-keyword docutils literal notranslate"><span class="pre">with</span></code>-statement contexts<a class="headerlink" href="#module-contextlib" title="Permalink to this headline">¶</a></h1>
-<p><strong>Source code:</strong> <a class="reference external" href="https://github.com/python/cpython/tree/master/Lib/contextlib.py">Lib/contextlib.py</a></p>
+<p><strong>Source code:</strong> <a class="reference external" href="https://github.com/python/cpython/tree/3.10/Lib/contextlib.py">Lib/contextlib.py</a></p>
 <hr class="docutils" />
 <p>This module provides utilities for common tasks involving the <a class="reference internal" href="../reference/compound_stmts.html#with"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">with</span></code></a>
 statement. For more information see also <a class="reference internal" href="stdtypes.html#typecontextmanager"><span class="std std-ref">Context Manager Types</span></a> and
 <a class="reference internal" href="../reference/datamodel.html#context-managers"><span class="std std-ref">With Statement Context Managers</span></a>.</p>
-<div class="section" id="utilities">
+<section id="utilities">
 <h2>Utilities<a class="headerlink" href="#utilities" title="Permalink to this headline">¶</a></h2>
 <p>Functions and classes provided:</p>
 <dl class="py class">
@@ -723,12 +809,12 @@ or a coroutine function.</p>
 </div>
 </dd></dl>
 
-</div>
-<div class="section" id="examples-and-recipes">
+</section>
+<section id="examples-and-recipes">
 <h2>Examples and Recipes<a class="headerlink" href="#examples-and-recipes" title="Permalink to this headline">¶</a></h2>
 <p>This section describes some examples and recipes for making effective use of
 the tools provided by <a class="reference internal" href="#module-contextlib" title="contextlib: Utilities for with-statement contexts."><code class="xref py py-mod docutils literal notranslate"><span class="pre">contextlib</span></code></a>.</p>
-<div class="section" id="supporting-a-variable-number-of-context-managers">
+<section id="supporting-a-variable-number-of-context-managers">
 <h3>Supporting a variable number of context managers<a class="headerlink" href="#supporting-a-variable-number-of-context-managers" title="Permalink to this headline">¶</a></h3>
 <p>The primary use case for <a class="reference internal" href="#contextlib.ExitStack" title="contextlib.ExitStack"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExitStack</span></code></a> is the one given in the class
 documentation: supporting a variable number of context managers and other
@@ -748,8 +834,8 @@ some of the context managers being optional:</p>
 <p>As shown, <a class="reference internal" href="#contextlib.ExitStack" title="contextlib.ExitStack"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExitStack</span></code></a> also makes it quite easy to use <a class="reference internal" href="../reference/compound_stmts.html#with"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">with</span></code></a>
 statements to manage arbitrary resources that don’t natively support the
 context management protocol.</p>
-</div>
-<div class="section" id="catching-exceptions-from-enter-methods">
+</section>
+<section id="catching-exceptions-from-enter-methods">
 <h3>Catching exceptions from <code class="docutils literal notranslate"><span class="pre">__enter__</span></code> methods<a class="headerlink" href="#catching-exceptions-from-enter-methods" title="Permalink to this headline">¶</a></h3>
 <p>It is occasionally desirable to catch exceptions from an <code class="docutils literal notranslate"><span class="pre">__enter__</span></code>
 method implementation, <em>without</em> inadvertently catching exceptions from
@@ -773,8 +859,8 @@ all APIs are well designed in that regard. When a context manager is the
 only resource management API provided, then <a class="reference internal" href="#contextlib.ExitStack" title="contextlib.ExitStack"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExitStack</span></code></a> can make it
 easier to handle various situations that can’t be handled directly in a
 <a class="reference internal" href="../reference/compound_stmts.html#with"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">with</span></code></a> statement.</p>
-</div>
-<div class="section" id="cleaning-up-in-an-enter-implementation">
+</section>
+<section id="cleaning-up-in-an-enter-implementation">
 <h3>Cleaning up in an <code class="docutils literal notranslate"><span class="pre">__enter__</span></code> implementation<a class="headerlink" href="#cleaning-up-in-an-enter-implementation" title="Permalink to this headline">¶</a></h3>
 <p>As noted in the documentation of <a class="reference internal" href="#contextlib.ExitStack.push" title="contextlib.ExitStack.push"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ExitStack.push()</span></code></a>, this
 method can be useful in cleaning up an already allocated resource if later
@@ -817,8 +903,8 @@ and maps them to the context management protocol:</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">release_resource</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="replacing-any-use-of-try-finally-and-flag-variables">
+</section>
+<section id="replacing-any-use-of-try-finally-and-flag-variables">
 <h3>Replacing any use of <code class="docutils literal notranslate"><span class="pre">try-finally</span></code> and flag variables<a class="headerlink" href="#replacing-any-use-of-try-finally-and-flag-variables" title="Permalink to this headline">¶</a></h3>
 <p>A pattern you will sometimes see is a <code class="docutils literal notranslate"><span class="pre">try-finally</span></code> statement with a flag
 variable to indicate whether or not the body of the <code class="docutils literal notranslate"><span class="pre">finally</span></code> clause should
@@ -857,7 +943,7 @@ even further by means of a small helper class:</p>
 
 <span class="k">class</span> <span class="nc">Callback</span><span class="p">(</span><span class="n">ExitStack</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">callback</span><span class="p">,</span> <span class="o">/</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">Callback</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">callback</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">cancel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -887,8 +973,8 @@ advance:</p>
 <p>Due to the way the decorator protocol works, a callback function
 declared this way cannot take any parameters. Instead, any resources to
 be released must be accessed as closure variables.</p>
-</div>
-<div class="section" id="using-a-context-manager-as-a-function-decorator">
+</section>
+<section id="using-a-context-manager-as-a-function-decorator">
 <h3>Using a context manager as a function decorator<a class="headerlink" href="#using-a-context-manager-as-a-function-decorator" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="#contextlib.ContextDecorator" title="contextlib.ContextDecorator"><code class="xref py py-class docutils literal notranslate"><span class="pre">ContextDecorator</span></code></a> makes it possible to use a context manager in
 both an ordinary <code class="docutils literal notranslate"><span class="pre">with</span></code> statement and also as a function decorator.</p>
@@ -938,9 +1024,9 @@ statement.</p>
 </dd>
 </dl>
 </div>
-</div>
-</div>
-<div class="section" id="single-use-reusable-and-reentrant-context-managers">
+</section>
+</section>
+<section id="single-use-reusable-and-reentrant-context-managers">
 <span id="single-use-reusable-and-reentrant-cms"></span><h2>Single use, reusable and reentrant context managers<a class="headerlink" href="#single-use-reusable-and-reentrant-context-managers" title="Permalink to this headline">¶</a></h2>
 <p>Most context managers are written in a way that means they can only be
 used effectively in a <a class="reference internal" href="../reference/compound_stmts.html#with"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">with</span></code></a> statement once. These single use
@@ -977,7 +1063,7 @@ to yield if an attempt is made to use them a second time:</p>
 <span class="gr">RuntimeError</span>: <span class="n">generator didn&#39;t yield</span>
 </pre></div>
 </div>
-<div class="section" id="reentrant-context-managers">
+<section id="reentrant-context-managers">
 <span id="reentrant-cms"></span><h3>Reentrant context managers<a class="headerlink" href="#reentrant-context-managers" title="Permalink to this headline">¶</a></h3>
 <p>More sophisticated context managers may be “reentrant”. These context
 managers can not only be used in multiple <a class="reference internal" href="../reference/compound_stmts.html#with"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">with</span></code></a> statements,
@@ -1009,8 +1095,8 @@ example.</p>
 <a class="reference internal" href="#contextlib.redirect_stdout" title="contextlib.redirect_stdout"><code class="xref py py-func docutils literal notranslate"><span class="pre">redirect_stdout()</span></code></a>, for example, is definitely not thread safe, as it
 makes a global modification to the system state by binding <a class="reference internal" href="sys.html#sys.stdout" title="sys.stdout"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.stdout</span></code></a>
 to a different stream.</p>
-</div>
-<div class="section" id="reusable-context-managers">
+</section>
+<section id="reusable-context-managers">
 <span id="reusable-cms"></span><h3>Reusable context managers<a class="headerlink" href="#reusable-context-managers" title="Permalink to this headline">¶</a></h3>
 <p>Distinct from both single use and reentrant context managers are “reusable”
 context managers (or, to be completely explicit, “reusable, but not
@@ -1072,9 +1158,9 @@ instance avoids that problem:</p>
 <span class="go">Callback: from outer context</span>
 </pre></div>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -1115,7 +1201,7 @@ instance avoids that problem:</p>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/master/Doc/library/contextlib.rst"
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/library/contextlib.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -1141,34 +1227,45 @@ instance avoids that problem:</p>
           <a href="dataclasses.html" title="dataclasses — Data Classes"
              >previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="python.html" >Python Runtime Services</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">contextlib</span></code> — Utilities for <code class="xref std std-keyword docutils literal notranslate"><span class="pre">with</span></code>-statement contexts</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>  
     <div class="footer">
@@ -1186,7 +1283,7 @@ instance avoids that problem:</p>
 <br />
     <br />
 
-    Last updated on Mar 24, 2021.
+    Last updated on May 10, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 

@@ -4,8 +4,10 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>xml.etree.ElementTree — The ElementTree XML API &#8212; Python 3.10.0a6 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>xml.etree.ElementTree — The ElementTree XML API &#8212; Python 3.10.0b1 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
@@ -19,7 +21,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.10.0a6 documentation"
+          title="Search within Python 3.10.0b1 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -40,17 +42,111 @@
         }
       }
     </style>
+<link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.svg" />
+            <script type="text/javascript" src="../_static/copybutton.js"></script>
+            <script type="text/javascript" src="../_static/menu.js"></script>
+            <script type="text/javascript" src="../_static/themetoggle.js"></script> 
 
-    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
-    
-    <script type="text/javascript" src="../_static/copybutton.js"></script>
-    <script type="text/javascript" src="../_static/themetoggle.js"></script>
-    
-     
+  </head>
+<body>
+<div class="mobile-nav">
+    <input type="checkbox" id="menuToggler" class="toggler__input" aria-controls="navigation"
+           aria-pressed="false" aria-expanded="false" role="button" aria-label="Menu" />
+    <nav class="nav-content" role="navigation">
+        <label for="menuToggler" class="toggler__label">
+            <span></span>
+        </label>
+        <span class="nav-items-wrapper">
+            <a href="https://www.python.org/" class="nav-logo">
+                <img src="../_static/py.svg" alt="Logo"/>
+            </a>
+            <span class="version_switcher_placeholder"></span>
+            <form id="searchbox" role="search" class="search" action="../search.html" method="get">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="search-icon">
+                    <path fill-rule="nonzero" fill="currentColor" d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 001.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 00-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 005.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                </svg>
+                <input type="search" name="q" aria-label="Quick search"/>
+                <input type="submit" value="Go"/>
+                
+            </form>
+        </span>
+    </nav>
+    <div class="menu-wrapper">
+        <nav class="menu" role="navigation" aria-label="main navigation">
+            <div class="language_switcher_placeholder"></div>
+            
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label>
+  <h3><a href="../contents.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">xml.etree.ElementTree</span></code> — The ElementTree XML API</a><ul>
+<li><a class="reference internal" href="#tutorial">Tutorial</a><ul>
+<li><a class="reference internal" href="#xml-tree-and-elements">XML tree and elements</a></li>
+<li><a class="reference internal" href="#parsing-xml">Parsing XML</a></li>
+<li><a class="reference internal" href="#pull-api-for-non-blocking-parsing">Pull API for non-blocking parsing</a></li>
+<li><a class="reference internal" href="#finding-interesting-elements">Finding interesting elements</a></li>
+<li><a class="reference internal" href="#modifying-an-xml-file">Modifying an XML File</a></li>
+<li><a class="reference internal" href="#building-xml-documents">Building XML documents</a></li>
+<li><a class="reference internal" href="#parsing-xml-with-namespaces">Parsing XML with Namespaces</a></li>
+<li><a class="reference internal" href="#additional-resources">Additional resources</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#xpath-support">XPath support</a><ul>
+<li><a class="reference internal" href="#example">Example</a></li>
+<li><a class="reference internal" href="#supported-xpath-syntax">Supported XPath syntax</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#reference">Reference</a><ul>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#xinclude-support">XInclude support</a><ul>
+<li><a class="reference internal" href="#id3">Example</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id4">Reference</a><ul>
+<li><a class="reference internal" href="#elementinclude-functions">Functions</a></li>
+<li><a class="reference internal" href="#element-objects">Element Objects</a></li>
+<li><a class="reference internal" href="#elementtree-objects">ElementTree Objects</a></li>
+<li><a class="reference internal" href="#qname-objects">QName Objects</a></li>
+<li><a class="reference internal" href="#treebuilder-objects">TreeBuilder Objects</a></li>
+<li><a class="reference internal" href="#xmlparser-objects">XMLParser Objects</a></li>
+<li><a class="reference internal" href="#xmlpullparser-objects">XMLPullParser Objects</a></li>
+<li><a class="reference internal" href="#exceptions">Exceptions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="xml.html"
+                        title="previous chapter">XML Processing Modules</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="xml.dom.html"
+                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">xml.dom</span></code> — The Document Object Model API</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../bugs.html">Report a Bug</a></li>
+      <li>
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/library/xml.etree.elementtree.rst"
+            rel="nofollow">Show Source
+        </a>
+      </li>
+    </ul>
+  </div>
+        </nav>
+    </div>
+</div>
 
-  </head><body>
   
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -68,34 +164,45 @@
           <a href="xml.html" title="XML Processing Modules"
              accesskey="P">previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="markup.html" accesskey="U">Structured Markup Processing Tools</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">xml.etree.ElementTree</span></code> — The ElementTree XML API</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>    
 
@@ -104,9 +211,9 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="module-xml.etree.ElementTree">
+  <section id="module-xml.etree.ElementTree">
 <span id="xml-etree-elementtree-the-elementtree-xml-api"></span><h1><a class="reference internal" href="#module-xml.etree.ElementTree" title="xml.etree.ElementTree: Implementation of the ElementTree API."><code class="xref py py-mod docutils literal notranslate"><span class="pre">xml.etree.ElementTree</span></code></a> — The ElementTree XML API<a class="headerlink" href="#module-xml.etree.ElementTree" title="Permalink to this headline">¶</a></h1>
-<p><strong>Source code:</strong> <a class="reference external" href="https://github.com/python/cpython/tree/master/Lib/xml/etree/ElementTree.py">Lib/xml/etree/ElementTree.py</a></p>
+<p><strong>Source code:</strong> <a class="reference external" href="https://github.com/python/cpython/tree/3.10/Lib/xml/etree/ElementTree.py">Lib/xml/etree/ElementTree.py</a></p>
 <hr class="docutils" />
 <p>The <a class="reference internal" href="#module-xml.etree.ElementTree" title="xml.etree.ElementTree: Implementation of the ElementTree API."><code class="xref py py-mod docutils literal notranslate"><span class="pre">xml.etree.ElementTree</span></code></a> module implements a simple and efficient API
 for parsing and creating XML data.</p>
@@ -122,12 +229,12 @@ for parsing and creating XML data.</p>
 maliciously constructed data.  If you need to parse untrusted or
 unauthenticated data see <a class="reference internal" href="xml.html#xml-vulnerabilities"><span class="std std-ref">XML vulnerabilities</span></a>.</p>
 </div>
-<div class="section" id="tutorial">
+<section id="tutorial">
 <h2>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h2>
 <p>This is a short tutorial for using <a class="reference internal" href="#module-xml.etree.ElementTree" title="xml.etree.ElementTree: Implementation of the ElementTree API."><code class="xref py py-mod docutils literal notranslate"><span class="pre">xml.etree.ElementTree</span></code></a> (<code class="docutils literal notranslate"><span class="pre">ET</span></code> in
 short).  The goal is to demonstrate some of the building blocks and basic
 concepts of the module.</p>
-<div class="section" id="xml-tree-and-elements">
+<section id="xml-tree-and-elements">
 <h3>XML tree and elements<a class="headerlink" href="#xml-tree-and-elements" title="Permalink to this headline">¶</a></h3>
 <p>XML is an inherently hierarchical data format, and the most natural way to
 represent it is with a tree.  <code class="docutils literal notranslate"><span class="pre">ET</span></code> has two classes for this purpose -
@@ -136,8 +243,8 @@ represent it is with a tree.  <code class="docutils literal notranslate"><span c
 the whole document (reading and writing to/from files) are usually done
 on the <a class="reference internal" href="#xml.etree.ElementTree.ElementTree" title="xml.etree.ElementTree.ElementTree"><code class="xref py py-class docutils literal notranslate"><span class="pre">ElementTree</span></code></a> level.  Interactions with a single XML element
 and its sub-elements are done on the <a class="reference internal" href="#xml.etree.ElementTree.Element" title="xml.etree.ElementTree.Element"><code class="xref py py-class docutils literal notranslate"><span class="pre">Element</span></code></a> level.</p>
-</div>
-<div class="section" id="parsing-xml">
+</section>
+<section id="parsing-xml">
 <span id="elementtree-parsing-xml"></span><h3>Parsing XML<a class="headerlink" href="#parsing-xml" title="Permalink to this headline">¶</a></h3>
 <p>We’ll be using the following XML document as the sample data for this section:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
@@ -211,8 +318,8 @@ output. A document type declaration may be accessed by passing a
 custom <a class="reference internal" href="#xml.etree.ElementTree.TreeBuilder" title="xml.etree.ElementTree.TreeBuilder"><code class="xref py py-class docutils literal notranslate"><span class="pre">TreeBuilder</span></code></a> instance to the <a class="reference internal" href="#xml.etree.ElementTree.XMLParser" title="xml.etree.ElementTree.XMLParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">XMLParser</span></code></a>
 constructor.</p>
 </div>
-</div>
-<div class="section" id="pull-api-for-non-blocking-parsing">
+</section>
+<section id="pull-api-for-non-blocking-parsing">
 <span id="elementtree-pull-parsing"></span><h3>Pull API for non-blocking parsing<a class="headerlink" href="#pull-api-for-non-blocking-parsing" title="Permalink to this headline">¶</a></h3>
 <p>Most parsing functions provided by this module require the whole document
 to be read at once before returning any result.  It is possible to use an
@@ -245,8 +352,8 @@ simpler use-cases.  If you don’t mind your application blocking on reading XML
 data but would still like to have incremental parsing capabilities, take a look
 at <a class="reference internal" href="#xml.etree.ElementTree.iterparse" title="xml.etree.ElementTree.iterparse"><code class="xref py py-func docutils literal notranslate"><span class="pre">iterparse()</span></code></a>.  It can be useful when you’re reading a large XML document
 and don’t want to hold it wholly in memory.</p>
-</div>
-<div class="section" id="finding-interesting-elements">
+</section>
+<section id="finding-interesting-elements">
 <h3>Finding interesting elements<a class="headerlink" href="#finding-interesting-elements" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="#xml.etree.ElementTree.Element" title="xml.etree.ElementTree.Element"><code class="xref py py-class docutils literal notranslate"><span class="pre">Element</span></code></a> has some useful methods that help iterate recursively over all
 the sub-tree below it (its children, their children, and so on).  For example,
@@ -277,8 +384,8 @@ content.  <a class="reference internal" href="#xml.etree.ElementTree.Element.get
 </div>
 <p>More sophisticated specification of which elements to look for is possible by
 using <a class="reference internal" href="#elementtree-xpath"><span class="std std-ref">XPath</span></a>.</p>
-</div>
-<div class="section" id="modifying-an-xml-file">
+</section>
+<section id="modifying-an-xml-file">
 <h3>Modifying an XML File<a class="headerlink" href="#modifying-an-xml-file" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="#xml.etree.ElementTree.ElementTree" title="xml.etree.ElementTree.ElementTree"><code class="xref py py-class docutils literal notranslate"><span class="pre">ElementTree</span></code></a> provides a simple way to build XML documents and write them to files.
 The <a class="reference internal" href="#xml.etree.ElementTree.ElementTree.write" title="xml.etree.ElementTree.ElementTree.write"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ElementTree.write()</span></code></a> method serves this purpose.</p>
@@ -356,8 +463,8 @@ Therefore, the example first collects all matching elements with
 <span class="nt">&lt;/data&gt;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="building-xml-documents">
+</section>
+<section id="building-xml-documents">
 <h3>Building XML documents<a class="headerlink" href="#building-xml-documents" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="#xml.etree.ElementTree.SubElement" title="xml.etree.ElementTree.SubElement"><code class="xref py py-func docutils literal notranslate"><span class="pre">SubElement()</span></code></a> function also provides a convenient way to create new
 sub-elements for a given element:</p>
@@ -369,8 +476,8 @@ sub-elements for a given element:</p>
 <span class="go">&lt;a&gt;&lt;b /&gt;&lt;c&gt;&lt;d /&gt;&lt;/c&gt;&lt;/a&gt;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="parsing-xml-with-namespaces">
+</section>
+<section id="parsing-xml-with-namespaces">
 <h3>Parsing XML with Namespaces<a class="headerlink" href="#parsing-xml-with-namespaces" title="Permalink to this headline">¶</a></h3>
 <p>If the XML input has <a class="reference external" href="https://en.wikipedia.org/wiki/XML_namespace">namespaces</a>, tags and attributes
 with prefixes in the form <code class="docutils literal notranslate"><span class="pre">prefix:sometag</span></code> get expanded to
@@ -429,20 +536,20 @@ dictionary with your own prefixes and use those in the search functions:</p>
  <span class="o">|--&gt;</span> <span class="n">Commander</span> <span class="n">Clement</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="additional-resources">
+</section>
+<section id="additional-resources">
 <h3>Additional resources<a class="headerlink" href="#additional-resources" title="Permalink to this headline">¶</a></h3>
 <p>See <a class="reference external" href="http://effbot.org/zone/element-index.htm">http://effbot.org/zone/element-index.htm</a> for tutorials and links to other
 docs.</p>
-</div>
-</div>
-<div class="section" id="xpath-support">
+</section>
+</section>
+<section id="xpath-support">
 <span id="elementtree-xpath"></span><h2>XPath support<a class="headerlink" href="#xpath-support" title="Permalink to this headline">¶</a></h2>
 <p>This module provides limited support for
 <a class="reference external" href="https://www.w3.org/TR/xpath">XPath expressions</a> for locating elements in a
 tree.  The goal is to support a small subset of the abbreviated syntax; a full
 XPath engine is outside the scope of the module.</p>
-<div class="section" id="example">
+<section id="example">
 <h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
 <p>Here’s an example that demonstrates some of the XPath capabilities of the
 module.  We’ll be using the <code class="docutils literal notranslate"><span class="pre">countrydata</span></code> XML document from the
@@ -473,8 +580,8 @@ module.  We’ll be using the <code class="docutils literal notranslate"><span c
 <span class="n">root</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s2">&quot;.//{http://purl.org/dc/elements/1.1/}title&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="supported-xpath-syntax">
+</section>
+<section id="supported-xpath-syntax">
 <h3>Supported XPath syntax<a class="headerlink" href="#supported-xpath-syntax" title="Permalink to this headline">¶</a></h3>
 <table class="docutils align-default">
 <colgroup>
@@ -585,11 +692,11 @@ the last position (e.g. <code class="docutils literal notranslate"><span class="
 <p>Predicates (expressions within square brackets) must be preceded by a tag
 name, an asterisk, or another predicate.  <code class="docutils literal notranslate"><span class="pre">position</span></code> predicates must be
 preceded by a tag name.</p>
-</div>
-</div>
-<div class="section" id="reference">
+</section>
+</section>
+<section id="reference">
 <h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="functions">
+<section id="functions">
 <span id="elementtree-functions"></span><h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
 <dt id="xml.etree.ElementTree.canonicalize">
@@ -872,13 +979,13 @@ data.  <em>parser</em> is an optional parser instance.  If not given, the standa
 <a class="reference internal" href="#xml.etree.ElementTree.Element" title="xml.etree.ElementTree.Element"><code class="xref py py-class docutils literal notranslate"><span class="pre">Element</span></code></a> instance and a dictionary.</p>
 </dd></dl>
 
-</div>
-</div>
-<div class="section" id="xinclude-support">
+</section>
+</section>
+<section id="xinclude-support">
 <span id="elementtree-xinclude"></span><h2>XInclude support<a class="headerlink" href="#xinclude-support" title="Permalink to this headline">¶</a></h2>
 <p>This module provides limited support for
 <a class="reference external" href="https://www.w3.org/TR/xinclude/">XInclude directives</a>, via the <code class="xref py py-mod docutils literal notranslate"><span class="pre">xml.etree.ElementInclude</span></code> helper module.  This module can be used to insert subtrees and text strings into element trees, based on information in the tree.</p>
-<div class="section" id="id3">
+<section id="id3">
 <h3>Example<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <p>Here’s an example that demonstrates use of the XInclude module. To include an XML document in the current document, use the <code class="docutils literal notranslate"><span class="pre">{http://www.w3.org/2001/XInclude}include</span></code> element and set the <strong>parse</strong> attribute to <code class="docutils literal notranslate"><span class="pre">&quot;xml&quot;</span></code>, and use the <strong>href</strong> attribute to specify the document to include.</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
@@ -917,11 +1024,11 @@ data.  <em>parser</em> is an optional parser instance.  If not given, the standa
 <span class="nt">&lt;/document&gt;</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="id4">
+</section>
+</section>
+<section id="id4">
 <h2>Reference<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="elementinclude-functions">
+<section id="elementinclude-functions">
 <span id="id5"></span><h3>Functions<a class="headerlink" href="#elementinclude-functions" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
 <dt id="xml.etree.ElementTree.xml.etree.ElementInclude.default_loader">
@@ -953,8 +1060,8 @@ raise an exception.</p>
 </div>
 </dd></dl>
 
-</div>
-<div class="section" id="element-objects">
+</section>
+<section id="element-objects">
 <span id="elementtree-element-objects"></span><h3>Element Objects<a class="headerlink" href="#element-objects" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="xml.etree.ElementTree.Element">
@@ -1194,8 +1301,8 @@ an order independently from the Element creation:</p>
 </div>
 </dd></dl>
 
-</div>
-<div class="section" id="elementtree-objects">
+</section>
+<section id="elementtree-objects">
 <span id="elementtree-elementtree-objects"></span><h3>ElementTree Objects<a class="headerlink" href="#elementtree-objects" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="xml.etree.ElementTree.ElementTree">
@@ -1324,8 +1431,8 @@ by the user.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;output.xhtml&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="qname-objects">
+</section>
+<section id="qname-objects">
 <span id="elementtree-qname-objects"></span><h3>QName Objects<a class="headerlink" href="#qname-objects" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="xml.etree.ElementTree.QName">
@@ -1338,8 +1445,8 @@ interpreted as a URI, and this argument is interpreted as a local name.
 <a class="reference internal" href="#xml.etree.ElementTree.QName" title="xml.etree.ElementTree.QName"><code class="xref py py-class docutils literal notranslate"><span class="pre">QName</span></code></a> instances are opaque.</p>
 </dd></dl>
 
-</div>
-<div class="section" id="treebuilder-objects">
+</section>
+<section id="treebuilder-objects">
 <span id="elementtree-treebuilder-objects"></span><h3>TreeBuilder Objects<a class="headerlink" href="#treebuilder-objects" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="xml.etree.ElementTree.TreeBuilder">
@@ -1455,8 +1562,8 @@ using the <em>write</em> function.</p>
 </div>
 </dd></dl>
 
-</div>
-<div class="section" id="xmlparser-objects">
+</section>
+<section id="xmlparser-objects">
 <span id="elementtree-xmlparser-objects"></span><h3>XMLParser Objects<a class="headerlink" href="#xmlparser-objects" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="xml.etree.ElementTree.XMLParser">
@@ -1528,8 +1635,8 @@ of an XML file:</p>
 </div>
 </dd></dl>
 
-</div>
-<div class="section" id="xmlpullparser-objects">
+</section>
+<section id="xmlpullparser-objects">
 <span id="elementtree-xmlpullparser-objects"></span><h3>XMLPullParser Objects<a class="headerlink" href="#xmlpullparser-objects" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="xml.etree.ElementTree.XMLPullParser">
@@ -1596,8 +1703,8 @@ they may or may not be present.</p>
 </div>
 </dd></dl>
 
-</div>
-<div class="section" id="exceptions">
+</section>
+<section id="exceptions">
 <h3>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="xml.etree.ElementTree.ParseError">
@@ -1630,9 +1737,9 @@ not.  See <a class="reference external" href="https://www.w3.org/TR/2006/REC-xml
 and <a class="reference external" href="https://www.iana.org/assignments/character-sets/character-sets.xhtml">https://www.iana.org/assignments/character-sets/character-sets.xhtml</a>.</p>
 </dd>
 </dl>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -1694,7 +1801,7 @@ and <a class="reference external" href="https://www.iana.org/assignments/charact
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/master/Doc/library/xml.etree.elementtree.rst"
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/library/xml.etree.elementtree.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -1720,34 +1827,45 @@ and <a class="reference external" href="https://www.iana.org/assignments/charact
           <a href="xml.html" title="XML Processing Modules"
              >previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="markup.html" >Structured Markup Processing Tools</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">xml.etree.ElementTree</span></code> — The ElementTree XML API</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>  
     <div class="footer">
@@ -1765,7 +1883,7 @@ and <a class="reference external" href="https://www.iana.org/assignments/charact
 <br />
     <br />
 
-    Last updated on Mar 24, 2021.
+    Last updated on May 10, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 

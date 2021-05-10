@@ -4,8 +4,10 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Logging HOWTO &#8212; Python 3.10.0a6 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Logging HOWTO &#8212; Python 3.10.0b1 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
@@ -19,7 +21,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.10.0a6 documentation"
+          title="Search within Python 3.10.0b1 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -40,17 +42,105 @@
         }
       }
     </style>
+<link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.svg" />
+            <script type="text/javascript" src="../_static/copybutton.js"></script>
+            <script type="text/javascript" src="../_static/menu.js"></script>
+            <script type="text/javascript" src="../_static/themetoggle.js"></script> 
 
-    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
-    
-    <script type="text/javascript" src="../_static/copybutton.js"></script>
-    <script type="text/javascript" src="../_static/themetoggle.js"></script>
-    
-     
+  </head>
+<body>
+<div class="mobile-nav">
+    <input type="checkbox" id="menuToggler" class="toggler__input" aria-controls="navigation"
+           aria-pressed="false" aria-expanded="false" role="button" aria-label="Menu" />
+    <nav class="nav-content" role="navigation">
+        <label for="menuToggler" class="toggler__label">
+            <span></span>
+        </label>
+        <span class="nav-items-wrapper">
+            <a href="https://www.python.org/" class="nav-logo">
+                <img src="../_static/py.svg" alt="Logo"/>
+            </a>
+            <span class="version_switcher_placeholder"></span>
+            <form id="searchbox" role="search" class="search" action="../search.html" method="get">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="search-icon">
+                    <path fill-rule="nonzero" fill="currentColor" d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 001.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 00-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 005.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                </svg>
+                <input type="search" name="q" aria-label="Quick search"/>
+                <input type="submit" value="Go"/>
+                
+            </form>
+        </span>
+    </nav>
+    <div class="menu-wrapper">
+        <nav class="menu" role="navigation" aria-label="main navigation">
+            <div class="language_switcher_placeholder"></div>
+            
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label>
+  <h3><a href="../contents.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Logging HOWTO</a><ul>
+<li><a class="reference internal" href="#basic-logging-tutorial">Basic Logging Tutorial</a><ul>
+<li><a class="reference internal" href="#when-to-use-logging">When to use logging</a></li>
+<li><a class="reference internal" href="#a-simple-example">A simple example</a></li>
+<li><a class="reference internal" href="#logging-to-a-file">Logging to a file</a></li>
+<li><a class="reference internal" href="#logging-from-multiple-modules">Logging from multiple modules</a></li>
+<li><a class="reference internal" href="#logging-variable-data">Logging variable data</a></li>
+<li><a class="reference internal" href="#changing-the-format-of-displayed-messages">Changing the format of displayed messages</a></li>
+<li><a class="reference internal" href="#displaying-the-date-time-in-messages">Displaying the date/time in messages</a></li>
+<li><a class="reference internal" href="#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#advanced-logging-tutorial">Advanced Logging Tutorial</a><ul>
+<li><a class="reference internal" href="#logging-flow">Logging Flow</a></li>
+<li><a class="reference internal" href="#loggers">Loggers</a></li>
+<li><a class="reference internal" href="#handlers">Handlers</a></li>
+<li><a class="reference internal" href="#formatters">Formatters</a></li>
+<li><a class="reference internal" href="#configuring-logging">Configuring Logging</a></li>
+<li><a class="reference internal" href="#what-happens-if-no-configuration-is-provided">What happens if no configuration is provided</a></li>
+<li><a class="reference internal" href="#configuring-logging-for-a-library">Configuring Logging for a Library</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#logging-levels">Logging Levels</a><ul>
+<li><a class="reference internal" href="#custom-levels">Custom Levels</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#useful-handlers">Useful Handlers</a></li>
+<li><a class="reference internal" href="#exceptions-raised-during-logging">Exceptions raised during logging</a></li>
+<li><a class="reference internal" href="#using-arbitrary-objects-as-messages">Using arbitrary objects as messages</a></li>
+<li><a class="reference internal" href="#optimization">Optimization</a></li>
+</ul>
+</li>
+</ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="functional.html"
+                        title="previous chapter">Functional Programming HOWTO</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="logging-cookbook.html"
+                        title="next chapter">Logging Cookbook</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../bugs.html">Report a Bug</a></li>
+      <li>
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/howto/logging.rst"
+            rel="nofollow">Show Source
+        </a>
+      </li>
+    </ul>
+  </div>
+        </nav>
+    </div>
+</div>
 
-  </head><body>
   
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -68,33 +158,44 @@
           <a href="functional.html" title="Functional Programming HOWTO"
              accesskey="P">previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python HOWTOs</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Logging HOWTO</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>    
 
@@ -103,14 +204,14 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="logging-howto">
+  <section id="logging-howto">
 <h1>Logging HOWTO<a class="headerlink" href="#logging-howto" title="Permalink to this headline">¶</a></h1>
 <dl class="field-list simple">
 <dt class="field-odd">Author</dt>
 <dd class="field-odd"><p>Vinay Sajip &lt;vinay_sajip at red-dove dot com&gt;</p>
 </dd>
 </dl>
-<div class="section" id="basic-logging-tutorial">
+<section id="basic-logging-tutorial">
 <span id="logging-basic-tutorial"></span><h2>Basic Logging Tutorial<a class="headerlink" href="#basic-logging-tutorial" title="Permalink to this headline">¶</a></h2>
 <p>Logging is a means of tracking events that happen when some software runs. The
 software’s developer adds logging calls to their code to indicate that certain
@@ -119,7 +220,7 @@ optionally contain variable data (i.e. data that is potentially different for
 each occurrence of the event). Events also have an importance which the
 developer ascribes to the event; the importance can also be called the <em>level</em>
 or <em>severity</em>.</p>
-<div class="section" id="when-to-use-logging">
+<section id="when-to-use-logging">
 <h3>When to use logging<a class="headerlink" href="#when-to-use-logging" title="Permalink to this headline">¶</a></h3>
 <p>Logging provides a set of convenience functions for simple logging usage. These
 are <a class="reference internal" href="../library/logging.html#logging.debug" title="logging.debug"><code class="xref py py-func docutils literal notranslate"><span class="pre">debug()</span></code></a>, <a class="reference internal" href="../library/logging.html#logging.info" title="logging.info"><code class="xref py py-func docutils literal notranslate"><span class="pre">info()</span></code></a>, <a class="reference internal" href="../library/logging.html#logging.warning" title="logging.warning"><code class="xref py py-func docutils literal notranslate"><span class="pre">warning()</span></code></a>, <a class="reference internal" href="../library/logging.html#logging.error" title="logging.error"><code class="xref py py-func docutils literal notranslate"><span class="pre">error()</span></code></a> and
@@ -222,8 +323,8 @@ otherwise.</p>
 <p>Events that are tracked can be handled in different ways. The simplest way of
 handling tracked events is to print them to the console. Another common way
 is to write them to a disk file.</p>
-</div>
-<div class="section" id="a-simple-example">
+</section>
+<section id="a-simple-example">
 <span id="howto-minimal-example"></span><h3>A simple example<a class="headerlink" href="#a-simple-example" title="Permalink to this headline">¶</a></h3>
 <p>A very simple example is:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
@@ -241,8 +342,8 @@ the level and the description of the event provided in the logging call, i.e.
 ‘Watch out!’. Don’t worry about the ‘root’ part for now: it will be explained
 later. The actual output can be formatted quite flexibly if you need that;
 formatting options will also be explained later.</p>
-</div>
-<div class="section" id="logging-to-a-file">
+</section>
+<section id="logging-to-a-file">
 <h3>Logging to a file<a class="headerlink" href="#logging-to-a-file" title="Permalink to this headline">¶</a></h3>
 <p>A very common situation is that of recording logging events in a file, so let’s
 look at that next. Be sure to try the following in a newly-started Python
@@ -307,8 +408,8 @@ argument, by changing the call in the above example to:</p>
 </div>
 <p>The output will be the same as before, but the log file is no longer appended
 to, so the messages from earlier runs are lost.</p>
-</div>
-<div class="section" id="logging-from-multiple-modules">
+</section>
+<section id="logging-from-multiple-modules">
 <h3>Logging from multiple modules<a class="headerlink" href="#logging-from-multiple-modules" title="Permalink to this headline">¶</a></h3>
 <p>If your program consists of multiple modules, here’s an example of how you
 could organize logging in it:</p>
@@ -346,8 +447,8 @@ application your messages came from, apart from looking at the event
 description. If you want to track the location of your messages, you’ll need
 to refer to the documentation beyond the tutorial level – see
 <a class="reference internal" href="#logging-advanced-tutorial"><span class="std std-ref">Advanced Logging Tutorial</span></a>.</p>
-</div>
-<div class="section" id="logging-variable-data">
+</section>
+<section id="logging-variable-data">
 <h3>Logging variable data<a class="headerlink" href="#logging-variable-data" title="Permalink to this headline">¶</a></h3>
 <p>To log variable data, use a format string for the event description message and
 append the variable data as arguments. For example:</p>
@@ -365,8 +466,8 @@ compatibility: the logging package pre-dates newer formatting options such as
 <a class="reference internal" href="../library/stdtypes.html#str.format" title="str.format"><code class="xref py py-meth docutils literal notranslate"><span class="pre">str.format()</span></code></a> and <a class="reference internal" href="../library/string.html#string.Template" title="string.Template"><code class="xref py py-class docutils literal notranslate"><span class="pre">string.Template</span></code></a>. These newer formatting
 options <em>are</em> supported, but exploring them is outside the scope of this
 tutorial: see <a class="reference internal" href="logging-cookbook.html#formatting-styles"><span class="std std-ref">Using particular formatting styles throughout your application</span></a> for more information.</p>
-</div>
-<div class="section" id="changing-the-format-of-displayed-messages">
+</section>
+<section id="changing-the-format-of-displayed-messages">
 <h3>Changing the format of displayed messages<a class="headerlink" href="#changing-the-format-of-displayed-messages" title="Permalink to this headline">¶</a></h3>
 <p>To change the format which is used to display messages, you need to
 specify the format you want to use:</p>
@@ -389,8 +490,8 @@ documentation for <a class="reference internal" href="../library/logging.html#lo
 need the <em>levelname</em> (severity), <em>message</em> (event description, including
 variable data) and perhaps to display when the event occurred. This is
 described in the next section.</p>
-</div>
-<div class="section" id="displaying-the-date-time-in-messages">
+</section>
+<section id="displaying-the-date-time-in-messages">
 <h3>Displaying the date/time in messages<a class="headerlink" href="#displaying-the-date-time-in-messages" title="Permalink to this headline">¶</a></h3>
 <p>To display the date and time of an event, you would place ‘%(asctime)s’ in
 your format string:</p>
@@ -417,8 +518,8 @@ a <em>datefmt</em> argument to <code class="docutils literal notranslate"><span 
 </div>
 <p>The format of the <em>datefmt</em> argument is the same as supported by
 <a class="reference internal" href="../library/time.html#time.strftime" title="time.strftime"><code class="xref py py-func docutils literal notranslate"><span class="pre">time.strftime()</span></code></a>.</p>
-</div>
-<div class="section" id="next-steps">
+</section>
+<section id="next-steps">
 <h3>Next Steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">¶</a></h3>
 <p>That concludes the basic tutorial. It should be enough to get you up and
 running with logging. There’s a lot more that the logging package offers, but
@@ -433,9 +534,9 @@ should receive help before too long.</p>
 <p>Still here? You can carry on reading the next few sections, which provide a
 slightly more advanced/in-depth tutorial than the basic one above. After that,
 you can take a look at the <a class="reference internal" href="logging-cookbook.html#logging-cookbook"><span class="std std-ref">Logging Cookbook</span></a>.</p>
-</div>
-</div>
-<div class="section" id="advanced-logging-tutorial">
+</section>
+</section>
+<section id="advanced-logging-tutorial">
 <span id="logging-advanced-tutorial"></span><h2>Advanced Logging Tutorial<a class="headerlink" href="#advanced-logging-tutorial" title="Permalink to this headline">¶</a></h2>
 <p>The logging library takes a modular approach and offers several categories
 of components: loggers, handlers, filters, and formatters.</p>
@@ -487,13 +588,13 @@ message before delegating to the root logger to do the actual message output.</p
 <p>You can change this by passing a format string to <a class="reference internal" href="../library/logging.html#logging.basicConfig" title="logging.basicConfig"><code class="xref py py-func docutils literal notranslate"><span class="pre">basicConfig()</span></code></a> with the
 <em>format</em> keyword argument. For all options regarding how a format string is
 constructed, see <a class="reference internal" href="../library/logging.html#formatter-objects"><span class="std std-ref">Formatter Objects</span></a>.</p>
-<div class="section" id="logging-flow">
+<section id="logging-flow">
 <h3>Logging Flow<a class="headerlink" href="#logging-flow" title="Permalink to this headline">¶</a></h3>
 <p>The flow of log event information in loggers and handlers is illustrated in the
 following diagram.</p>
 <img alt="../_images/logging_flow.png" src="../_images/logging_flow.png" />
-</div>
-<div class="section" id="loggers">
+</section>
+<section id="loggers">
 <h3>Loggers<a class="headerlink" href="#loggers" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="../library/logging.html#logging.Logger" title="logging.Logger"><code class="xref py py-class docutils literal notranslate"><span class="pre">Logger</span></code></a> objects have a threefold job.  First, they expose several
 methods to application code so that applications can log messages at runtime.
@@ -556,8 +657,8 @@ handlers for all the loggers an application uses. It is sufficient to
 configure handlers for a top-level logger and create child loggers as needed.
 (You can, however, turn off propagation by setting the <em>propagate</em>
 attribute of a logger to <code class="docutils literal notranslate"><span class="pre">False</span></code>.)</p>
-</div>
-<div class="section" id="handlers">
+</section>
+<section id="handlers">
 <span id="handler-basic"></span><h3>Handlers<a class="headerlink" href="#handlers" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="../library/logging.html#logging.Handler" title="logging.Handler"><code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code></a> objects are responsible for dispatching the
 appropriate log messages (based on the log messages’ severity) to the handler’s
@@ -590,8 +691,8 @@ configure and deconfigure filter objects on handlers.</p></li>
 <a class="reference internal" href="../library/logging.html#logging.Handler" title="logging.Handler"><code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code></a>.  Instead, the <a class="reference internal" href="../library/logging.html#logging.Handler" title="logging.Handler"><code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code></a> class is a base class that
 defines the interface that all handlers should have and establishes some
 default behavior that child classes can use (or override).</p>
-</div>
-<div class="section" id="formatters">
+</section>
+<section id="formatters">
 <h3>Formatters<a class="headerlink" href="#formatters" title="Permalink to this headline">¶</a></h3>
 <p>Formatter objects configure the final order, structure, and contents of the log
 message.  Unlike the base <a class="reference internal" href="../library/logging.html#logging.Handler" title="logging.Handler"><code class="xref py py-class docutils literal notranslate"><span class="pre">logging.Handler</span></code></a> class, application code may
@@ -609,11 +710,11 @@ raw message.  If there is no date format string, the default date format is:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>%Y-%m-%d %H:%M:%S
 </pre></div>
 </div>
-<p>with the milliseconds tacked on at the end. The <code class="docutils literal notranslate"><span class="pre">style</span></code> is one of <cite>%</cite>, ‘{‘
+<p>with the milliseconds tacked on at the end. The <code class="docutils literal notranslate"><span class="pre">style</span></code> is one of <cite>%</cite>, ‘{’
 or ‘$’. If one of these is not specified, then ‘%’ will be used.</p>
 <p>If the <code class="docutils literal notranslate"><span class="pre">style</span></code> is ‘%’, the message format string uses
 <code class="docutils literal notranslate"><span class="pre">%(&lt;dictionary</span> <span class="pre">key&gt;)s</span></code> styled string substitution; the possible keys are
-documented in <a class="reference internal" href="../library/logging.html#logrecord-attributes"><span class="std std-ref">LogRecord attributes</span></a>. If the style is ‘{‘, the message
+documented in <a class="reference internal" href="../library/logging.html#logrecord-attributes"><span class="std std-ref">LogRecord attributes</span></a>. If the style is ‘{’, the message
 format string is assumed to be compatible with <a class="reference internal" href="../library/stdtypes.html#str.format" title="str.format"><code class="xref py py-meth docutils literal notranslate"><span class="pre">str.format()</span></code></a> (using
 keyword arguments), while if the style is ‘$’ then the message format string
 should conform to what is expected by <a class="reference internal" href="../library/string.html#string.Template.substitute" title="string.Template.substitute"><code class="xref py py-meth docutils literal notranslate"><span class="pre">string.Template.substitute()</span></code></a>.</p>
@@ -633,8 +734,8 @@ instance to a function with the same signature as <a class="reference internal" 
 <a class="reference internal" href="../library/time.html#time.gmtime" title="time.gmtime"><code class="xref py py-func docutils literal notranslate"><span class="pre">time.gmtime()</span></code></a>. To change it for all formatters, for example if you want
 all logging times to be shown in GMT, set the <code class="docutils literal notranslate"><span class="pre">converter</span></code> attribute in the
 Formatter class (to <code class="docutils literal notranslate"><span class="pre">time.gmtime</span></code> for GMT display).</p>
-</div>
-<div class="section" id="configuring-logging">
+</section>
+<section id="configuring-logging">
 <h3>Configuring Logging<a class="headerlink" href="#configuring-logging" title="Permalink to this headline">¶</a></h3>
 <p>Programmers can configure logging in three ways:</p>
 <ol class="arabic simple">
@@ -731,7 +832,6 @@ the names of the objects:</p>
 
 <span class="k">[formatter_simpleFormatter]</span>
 <span class="na">format</span><span class="o">=</span><span class="s">%(asctime)s - %(name)s - %(levelname)s - %(message)s</span>
-<span class="na">datefmt</span><span class="o">=</span>
 </pre></div>
 </div>
 <p>The output is nearly identical to that of the non-config-file-based example:</p>
@@ -804,8 +904,8 @@ the new dictionary-based approach:</p>
 </div>
 <p>For more information about logging using a dictionary, see
 <a class="reference internal" href="../library/logging.config.html#logging-config-api"><span class="std std-ref">Configuration functions</span></a>.</p>
-</div>
-<div class="section" id="what-happens-if-no-configuration-is-provided">
+</section>
+<section id="what-happens-if-no-configuration-is-provided">
 <h3>What happens if no configuration is provided<a class="headerlink" href="#what-happens-if-no-configuration-is-provided" title="Permalink to this headline">¶</a></h3>
 <p>If no logging configuration is provided, it is possible to have a situation
 where a logging event needs to be output, but no handlers can be found to
@@ -830,8 +930,8 @@ The handler’s level is set to <code class="docutils literal notranslate"><span
 greater severities will be output.</p></li>
 </ul>
 <p>To obtain the pre-3.2 behaviour, <code class="docutils literal notranslate"><span class="pre">logging.lastResort</span></code> can be set to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
-</div>
-<div class="section" id="configuring-logging-for-a-library">
+</section>
+<section id="configuring-logging-for-a-library">
 <span id="library-config"></span><h3>Configuring Logging for a Library<a class="headerlink" href="#configuring-logging-for-a-library" title="Permalink to this headline">¶</a></h3>
 <p>When developing a library which uses logging, you should take care to
 document how the library uses logging - for example, the names of loggers
@@ -873,9 +973,9 @@ application: if you add handlers ‘under the hood’, you might well interfere
 with their ability to carry out unit tests and deliver logs which suit their
 requirements.</p>
 </div>
-</div>
-</div>
-<div class="section" id="logging-levels">
+</section>
+</section>
+<section id="logging-levels">
 <h2>Logging Levels<a class="headerlink" href="#logging-levels" title="Permalink to this headline">¶</a></h2>
 <p>The numeric values of logging levels are given in the following table. These are
 primarily of interest if you want to define your own levels, and need them to
@@ -940,7 +1040,7 @@ level acts as a filter in the same way as a logger’s level does. If a handler
 decides to actually dispatch an event, the <a class="reference internal" href="../library/logging.html#logging.Handler.emit" title="logging.Handler.emit"><code class="xref py py-meth docutils literal notranslate"><span class="pre">emit()</span></code></a> method is used
 to send the message to its destination. Most user-defined subclasses of
 <a class="reference internal" href="../library/logging.html#logging.Handler" title="logging.Handler"><code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code></a> will need to override this <a class="reference internal" href="../library/logging.html#logging.Handler.emit" title="logging.Handler.emit"><code class="xref py py-meth docutils literal notranslate"><span class="pre">emit()</span></code></a>.</p>
-<div class="section" id="custom-levels">
+<section id="custom-levels">
 <span id="id1"></span><h3>Custom Levels<a class="headerlink" href="#custom-levels" title="Permalink to this headline">¶</a></h3>
 <p>Defining your own levels is possible, but should not be necessary, as the
 existing levels have been chosen on the basis of practical experience.
@@ -951,9 +1051,9 @@ library authors all define their own custom levels, there is a chance that
 the logging output from such multiple libraries used together will be
 difficult for the using developer to control and/or interpret, because a
 given numeric value might mean different things for different libraries.</p>
-</div>
-</div>
-<div class="section" id="useful-handlers">
+</section>
+</section>
+<section id="useful-handlers">
 <span id="id2"></span><h2>Useful Handlers<a class="headerlink" href="#useful-handlers" title="Permalink to this headline">¶</a></h2>
 <p>In addition to the base <a class="reference internal" href="../library/logging.html#logging.Handler" title="logging.Handler"><code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code></a> class, many useful subclasses are
 provided:</p>
@@ -1021,8 +1121,8 @@ message is not processed further.</p>
 <p>The basic <a class="reference internal" href="../library/logging.html#logging.Filter" title="logging.Filter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Filter</span></code></a> functionality allows filtering by specific logger
 name. If this feature is used, messages sent to the named logger and its
 children are allowed through the filter, and all others dropped.</p>
-</div>
-<div class="section" id="exceptions-raised-during-logging">
+</section>
+<section id="exceptions-raised-during-logging">
 <span id="logging-exceptions"></span><h2>Exceptions raised during logging<a class="headerlink" href="#exceptions-raised-during-logging" title="Permalink to this headline">¶</a></h2>
 <p>The logging package is designed to swallow exceptions which occur while logging
 in production. This is so that errors which occur while handling logging events
@@ -1043,8 +1143,8 @@ because during development, you typically want to be notified of any
 exceptions that occur. It’s advised that you set <code class="xref py py-data docutils literal notranslate"><span class="pre">raiseExceptions</span></code> to
 <code class="docutils literal notranslate"><span class="pre">False</span></code> for production usage.</p>
 </div>
-</div>
-<div class="section" id="using-arbitrary-objects-as-messages">
+</section>
+<section id="using-arbitrary-objects-as-messages">
 <span id="arbitrary-object-messages"></span><h2>Using arbitrary objects as messages<a class="headerlink" href="#using-arbitrary-objects-as-messages" title="Permalink to this headline">¶</a></h2>
 <p>In the preceding sections and examples, it has been assumed that the message
 passed when logging the event is a string. However, this is not the only
@@ -1054,8 +1154,8 @@ convert it to a string representation. In fact, if you want to, you can avoid
 computing a string representation altogether - for example, the
 <a class="reference internal" href="../library/logging.handlers.html#logging.handlers.SocketHandler" title="logging.handlers.SocketHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">SocketHandler</span></code></a> emits an event by pickling it and sending it
 over the wire.</p>
-</div>
-<div class="section" id="optimization">
+</section>
+<section id="optimization">
 <h2>Optimization<a class="headerlink" href="#optimization" title="Permalink to this headline">¶</a></h2>
 <p>Formatting of message arguments is deferred until it cannot be avoided.
 However, computing the arguments passed to the logging method can also be
@@ -1131,8 +1231,8 @@ take up any memory.</p>
 </dl>
 <p><a class="reference internal" href="logging-cookbook.html#logging-cookbook"><span class="std std-ref">A logging cookbook</span></a></p>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -1188,7 +1288,7 @@ take up any memory.</p>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/master/Doc/howto/logging.rst"
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/howto/logging.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -1214,33 +1314,44 @@ take up any memory.</p>
           <a href="functional.html" title="Functional Programming HOWTO"
              >previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python HOWTOs</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Logging HOWTO</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>  
     <div class="footer">
@@ -1258,7 +1369,7 @@ take up any memory.</p>
 <br />
     <br />
 
-    Last updated on Mar 24, 2021.
+    Last updated on May 10, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 

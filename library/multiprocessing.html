@@ -4,8 +4,10 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>multiprocessing — Process-based parallelism &#8212; Python 3.10.0a6 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>multiprocessing — Process-based parallelism &#8212; Python 3.10.0b1 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
@@ -19,7 +21,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.10.0a6 documentation"
+          title="Search within Python 3.10.0b1 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -40,17 +42,120 @@
         }
       }
     </style>
+<link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.svg" />
+            <script type="text/javascript" src="../_static/copybutton.js"></script>
+            <script type="text/javascript" src="../_static/menu.js"></script>
+            <script type="text/javascript" src="../_static/themetoggle.js"></script> 
 
-    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
-    
-    <script type="text/javascript" src="../_static/copybutton.js"></script>
-    <script type="text/javascript" src="../_static/themetoggle.js"></script>
-    
-     
+  </head>
+<body>
+<div class="mobile-nav">
+    <input type="checkbox" id="menuToggler" class="toggler__input" aria-controls="navigation"
+           aria-pressed="false" aria-expanded="false" role="button" aria-label="Menu" />
+    <nav class="nav-content" role="navigation">
+        <label for="menuToggler" class="toggler__label">
+            <span></span>
+        </label>
+        <span class="nav-items-wrapper">
+            <a href="https://www.python.org/" class="nav-logo">
+                <img src="../_static/py.svg" alt="Logo"/>
+            </a>
+            <span class="version_switcher_placeholder"></span>
+            <form id="searchbox" role="search" class="search" action="../search.html" method="get">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="search-icon">
+                    <path fill-rule="nonzero" fill="currentColor" d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 001.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 00-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 005.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                </svg>
+                <input type="search" name="q" aria-label="Quick search"/>
+                <input type="submit" value="Go"/>
+                
+            </form>
+        </span>
+    </nav>
+    <div class="menu-wrapper">
+        <nav class="menu" role="navigation" aria-label="main navigation">
+            <div class="language_switcher_placeholder"></div>
+            
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label>
+  <h3><a href="../contents.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code> — Process-based parallelism</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a><ul>
+<li><a class="reference internal" href="#the-process-class">The <code class="xref py py-class docutils literal notranslate"><span class="pre">Process</span></code> class</a></li>
+<li><a class="reference internal" href="#contexts-and-start-methods">Contexts and start methods</a></li>
+<li><a class="reference internal" href="#exchanging-objects-between-processes">Exchanging objects between processes</a></li>
+<li><a class="reference internal" href="#synchronization-between-processes">Synchronization between processes</a></li>
+<li><a class="reference internal" href="#sharing-state-between-processes">Sharing state between processes</a></li>
+<li><a class="reference internal" href="#using-a-pool-of-workers">Using a pool of workers</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#reference">Reference</a><ul>
+<li><a class="reference internal" href="#process-and-exceptions"><code class="xref py py-class docutils literal notranslate"><span class="pre">Process</span></code> and exceptions</a></li>
+<li><a class="reference internal" href="#pipes-and-queues">Pipes and Queues</a></li>
+<li><a class="reference internal" href="#miscellaneous">Miscellaneous</a></li>
+<li><a class="reference internal" href="#connection-objects">Connection Objects</a></li>
+<li><a class="reference internal" href="#synchronization-primitives">Synchronization primitives</a></li>
+<li><a class="reference internal" href="#shared-ctypes-objects">Shared <code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code> Objects</a><ul>
+<li><a class="reference internal" href="#module-multiprocessing.sharedctypes">The <code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing.sharedctypes</span></code> module</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#managers">Managers</a><ul>
+<li><a class="reference internal" href="#customized-managers">Customized managers</a></li>
+<li><a class="reference internal" href="#using-a-remote-manager">Using a remote manager</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#proxy-objects">Proxy Objects</a><ul>
+<li><a class="reference internal" href="#cleanup">Cleanup</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-multiprocessing.pool">Process Pools</a></li>
+<li><a class="reference internal" href="#module-multiprocessing.connection">Listeners and Clients</a><ul>
+<li><a class="reference internal" href="#address-formats">Address Formats</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#authentication-keys">Authentication keys</a></li>
+<li><a class="reference internal" href="#logging">Logging</a></li>
+<li><a class="reference internal" href="#module-multiprocessing.dummy">The <code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing.dummy</span></code> module</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#programming-guidelines">Programming guidelines</a><ul>
+<li><a class="reference internal" href="#all-start-methods">All start methods</a></li>
+<li><a class="reference internal" href="#the-spawn-and-forkserver-start-methods">The <em>spawn</em> and <em>forkserver</em> start methods</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+</ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="threading.html"
+                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">threading</span></code> — Thread-based parallelism</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="multiprocessing.shared_memory.html"
+                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing.shared_memory</span></code> —  Provides shared memory for direct access across processes</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../bugs.html">Report a Bug</a></li>
+      <li>
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/library/multiprocessing.rst"
+            rel="nofollow">Show Source
+        </a>
+      </li>
+    </ul>
+  </div>
+        </nav>
+    </div>
+</div>
 
-  </head><body>
   
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -68,34 +173,45 @@
           <a href="threading.html" title="threading — Thread-based parallelism"
              accesskey="P">previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="concurrency.html" accesskey="U">Concurrent Execution</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code> — Process-based parallelism</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>    
 
@@ -104,11 +220,11 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="module-multiprocessing">
+  <section id="module-multiprocessing">
 <span id="multiprocessing-process-based-parallelism"></span><h1><a class="reference internal" href="#module-multiprocessing" title="multiprocessing: Process-based parallelism."><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> — Process-based parallelism<a class="headerlink" href="#module-multiprocessing" title="Permalink to this headline">¶</a></h1>
-<p><strong>Source code:</strong> <a class="reference external" href="https://github.com/python/cpython/tree/master/Lib/multiprocessing/">Lib/multiprocessing/</a></p>
+<p><strong>Source code:</strong> <a class="reference external" href="https://github.com/python/cpython/tree/3.10/Lib/multiprocessing/">Lib/multiprocessing/</a></p>
 <hr class="docutils" />
-<div class="section" id="introduction">
+<section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference internal" href="#module-multiprocessing" title="multiprocessing: Process-based parallelism."><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> is a package that supports spawning processes using an
 API similar to the <a class="reference internal" href="threading.html#module-threading" title="threading: Thread-based parallelism."><code class="xref py py-mod docutils literal notranslate"><span class="pre">threading</span></code></a> module.  The <a class="reference internal" href="#module-multiprocessing" title="multiprocessing: Process-based parallelism."><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> package
@@ -140,7 +256,7 @@ of data parallelism using <a class="reference internal" href="#multiprocessing.p
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
 </pre></div>
 </div>
-<div class="section" id="the-process-class">
+<section id="the-process-class">
 <h3>The <a class="reference internal" href="#multiprocessing.Process" title="multiprocessing.Process"><code class="xref py py-class docutils literal notranslate"><span class="pre">Process</span></code></a> class<a class="headerlink" href="#the-process-class" title="Permalink to this headline">¶</a></h3>
 <p>In <a class="reference internal" href="#module-multiprocessing" title="multiprocessing: Process-based parallelism."><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a>, processes are spawned by creating a <a class="reference internal" href="#multiprocessing.Process" title="multiprocessing.Process"><code class="xref py py-class docutils literal notranslate"><span class="pre">Process</span></code></a>
 object and then calling its <a class="reference internal" href="#multiprocessing.Process.start" title="multiprocessing.Process.start"><code class="xref py py-meth docutils literal notranslate"><span class="pre">start()</span></code></a> method.  <a class="reference internal" href="#multiprocessing.Process" title="multiprocessing.Process"><code class="xref py py-class docutils literal notranslate"><span class="pre">Process</span></code></a>
@@ -180,8 +296,8 @@ multiprocess program is</p>
 </div>
 <p>For an explanation of why the <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">'__main__'</span></code> part is
 necessary, see <a class="reference internal" href="#multiprocessing-programming"><span class="std std-ref">Programming guidelines</span></a>.</p>
-</div>
-<div class="section" id="contexts-and-start-methods">
+</section>
+<section id="contexts-and-start-methods">
 <h3>Contexts and start methods<a class="headerlink" href="#contexts-and-start-methods" title="Permalink to this headline">¶</a></h3>
 <p id="multiprocessing-start-methods">Depending on the platform, <a class="reference internal" href="#module-multiprocessing" title="multiprocessing: Process-based parallelism."><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> supports three ways
 to start a process.  These <em>start methods</em> are</p>
@@ -287,8 +403,8 @@ be used with “frozen” executables (i.e., binaries produced by
 packages like <strong>PyInstaller</strong> and <strong>cx_Freeze</strong>) on Unix.
 The <code class="docutils literal notranslate"><span class="pre">'fork'</span></code> start method does work.</p>
 </div>
-</div>
-<div class="section" id="exchanging-objects-between-processes">
+</section>
+<section id="exchanging-objects-between-processes">
 <h3>Exchanging objects between processes<a class="headerlink" href="#exchanging-objects-between-processes" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="#module-multiprocessing" title="multiprocessing: Process-based parallelism."><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> supports two types of communication channel between
 processes:</p>
@@ -337,8 +453,8 @@ to the <em>same</em> end of the pipe at the same time.  Of course there is no ri
 of corruption from processes using different ends of the pipe at the same
 time.</p>
 </div></blockquote>
-</div>
-<div class="section" id="synchronization-between-processes">
+</section>
+<section id="synchronization-between-processes">
 <h3>Synchronization between processes<a class="headerlink" href="#synchronization-between-processes" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="#module-multiprocessing" title="multiprocessing: Process-based parallelism."><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> contains equivalents of all the synchronization
 primitives from <a class="reference internal" href="threading.html#module-threading" title="threading: Thread-based parallelism."><code class="xref py py-mod docutils literal notranslate"><span class="pre">threading</span></code></a>.  For instance one can use a lock to ensure
@@ -361,8 +477,8 @@ that only one process prints to standard output at a time:</p>
 </div>
 <p>Without using the lock output from the different processes is liable to get all
 mixed up.</p>
-</div>
-<div class="section" id="sharing-state-between-processes">
+</section>
+<section id="sharing-state-between-processes">
 <h3>Sharing state between processes<a class="headerlink" href="#sharing-state-between-processes" title="Permalink to this headline">¶</a></h3>
 <p>As mentioned above, when doing concurrent programming it is usually best to
 avoid using shared state as far as possible.  This is particularly true when
@@ -446,8 +562,8 @@ because they can be made to support arbitrary object types.  Also, a single
 manager can be shared by processes on different computers over a network.
 They are, however, slower than using shared memory.</p>
 </div></blockquote>
-</div>
-<div class="section" id="using-a-pool-of-workers">
+</section>
+<section id="using-a-pool-of-workers">
 <h3>Using a pool of workers<a class="headerlink" href="#using-a-pool-of-workers" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="#multiprocessing.pool.Pool" title="multiprocessing.pool.Pool"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pool</span></code></a> class represents a pool of worker
 processes.  It has methods which allows tasks to be offloaded to the worker
@@ -525,13 +641,13 @@ interactive interpreter. For example:</p>
 interleaved in a semi-random fashion, and then you may have to
 stop the parent process somehow.)</p>
 </div>
-</div>
-</div>
-<div class="section" id="reference">
+</section>
+</section>
+<section id="reference">
 <h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
 <p>The <a class="reference internal" href="#module-multiprocessing" title="multiprocessing: Process-based parallelism."><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> package mostly replicates the API of the
 <a class="reference internal" href="threading.html#module-threading" title="threading: Thread-based parallelism."><code class="xref py py-mod docutils literal notranslate"><span class="pre">threading</span></code></a> module.</p>
-<div class="section" id="process-and-exceptions">
+<section id="process-and-exceptions">
 <h3><a class="reference internal" href="#multiprocessing.Process" title="multiprocessing.Process"><code class="xref py py-class docutils literal notranslate"><span class="pre">Process</span></code></a> and exceptions<a class="headerlink" href="#process-and-exceptions" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="multiprocessing.Process">
@@ -756,8 +872,8 @@ the message as a byte string.</p>
 <dd><p>Raised by methods with a timeout when the timeout expires.</p>
 </dd></dl>
 
-</div>
-<div class="section" id="pipes-and-queues">
+</section>
+<section id="pipes-and-queues">
 <h3>Pipes and Queues<a class="headerlink" href="#pipes-and-queues" title="Permalink to this headline">¶</a></h3>
 <p>When using multiple processes, one generally uses message passing for
 communication between processes and avoids having to use any synchronization
@@ -1029,8 +1145,8 @@ it is complete.  When the count of unfinished tasks drops to zero,
 
 </dd></dl>
 
-</div>
-<div class="section" id="miscellaneous">
+</section>
+<section id="miscellaneous">
 <h3>Miscellaneous<a class="headerlink" href="#miscellaneous" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
 <dt id="multiprocessing.active_children">
@@ -1176,8 +1292,8 @@ main module.</p>
 <a class="reference internal" href="threading.html#threading.settrace" title="threading.settrace"><code class="xref py py-func docutils literal notranslate"><span class="pre">threading.settrace()</span></code></a>, <a class="reference internal" href="threading.html#threading.setprofile" title="threading.setprofile"><code class="xref py py-func docutils literal notranslate"><span class="pre">threading.setprofile()</span></code></a>,
 <a class="reference internal" href="threading.html#threading.Timer" title="threading.Timer"><code class="xref py py-class docutils literal notranslate"><span class="pre">threading.Timer</span></code></a>, or <a class="reference internal" href="threading.html#threading.local" title="threading.local"><code class="xref py py-class docutils literal notranslate"><span class="pre">threading.local</span></code></a>.</p>
 </div>
-</div>
-<div class="section" id="connection-objects">
+</section>
+<section id="connection-objects">
 <h3>Connection Objects<a class="headerlink" href="#connection-objects" title="Permalink to this headline">¶</a></h3>
 <p>Connection objects allow the sending and receiving of picklable objects or
 strings.  They can be thought of as message oriented connected sockets.</p>
@@ -1318,8 +1434,8 @@ methods after performing some sort of authentication.  See
 the data in the pipe is likely to become corrupted, because it may become
 impossible to be sure where the message boundaries lie.</p>
 </div>
-</div>
-<div class="section" id="synchronization-primitives">
+</section>
+<section id="synchronization-primitives">
 <h3>Synchronization primitives<a class="headerlink" href="#synchronization-primitives" title="Permalink to this headline">¶</a></h3>
 <p>Generally synchronization primitives are not as necessary in a multiprocess
 program as they are in a multithreaded program.  See the documentation for
@@ -1504,8 +1620,8 @@ implementation on the host operating system. Without one, the
 import it will result in an <a class="reference internal" href="exceptions.html#ImportError" title="ImportError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ImportError</span></code></a>. See
 <a class="reference external" href="https://bugs.python.org/issue3770">bpo-3770</a> for additional information.</p>
 </div>
-</div>
-<div class="section" id="shared-ctypes-objects">
+</section>
+<section id="shared-ctypes-objects">
 <h3>Shared <a class="reference internal" href="ctypes.html#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> Objects<a class="headerlink" href="#shared-ctypes-objects" title="Permalink to this headline">¶</a></h3>
 <p>It is possible to create shared objects using shared memory which can be
 inherited by child processes.</p>
@@ -1561,7 +1677,7 @@ automatically protected by a lock, so it will not necessarily be
 attributes which allow one to use it to store and retrieve strings.</p>
 </dd></dl>
 
-<div class="section" id="module-multiprocessing.sharedctypes">
+<section id="module-multiprocessing.sharedctypes">
 <span id="the-multiprocessing-sharedctypes-module"></span><h4>The <a class="reference internal" href="#module-multiprocessing.sharedctypes" title="multiprocessing.sharedctypes: Allocate ctypes objects from shared memory."><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing.sharedctypes</span></code></a> module<a class="headerlink" href="#module-multiprocessing.sharedctypes" title="Permalink to this headline">¶</a></h4>
 <p>The <a class="reference internal" href="#module-multiprocessing.sharedctypes" title="multiprocessing.sharedctypes: Allocate ctypes objects from shared memory."><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing.sharedctypes</span></code></a> module provides functions for allocating
 <a class="reference internal" href="ctypes.html#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> objects from shared memory which can be inherited by child
@@ -1734,9 +1850,9 @@ HELLO WORLD
 [(3.515625, 39.0625), (33.0625, 4.0), (5.640625, 90.25)]
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="managers">
+</section>
+</section>
+<section id="managers">
 <span id="multiprocessing-managers"></span><h3>Managers<a class="headerlink" href="#managers" title="Permalink to this headline">¶</a></h3>
 <p>Managers provide a way to create data which can be shared between different
 processes, including sharing over a network between processes running on
@@ -1992,7 +2108,7 @@ referent:</p>
 </div>
 </dd></dl>
 
-<div class="section" id="customized-managers">
+<section id="customized-managers">
 <h4>Customized managers<a class="headerlink" href="#customized-managers" title="Permalink to this headline">¶</a></h4>
 <p>To create one’s own manager, one creates a subclass of <a class="reference internal" href="#multiprocessing.managers.BaseManager" title="multiprocessing.managers.BaseManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseManager</span></code></a> and
 uses the <a class="reference internal" href="#multiprocessing.managers.BaseManager.register" title="multiprocessing.managers.BaseManager.register"><code class="xref py py-meth docutils literal notranslate"><span class="pre">register()</span></code></a> classmethod to register new types or
@@ -2017,8 +2133,8 @@ callables with the manager class.  For example:</p>
         <span class="nb">print</span><span class="p">(</span><span class="n">maths</span><span class="o">.</span><span class="n">mul</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>         <span class="c1"># prints 56</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="using-a-remote-manager">
+</section>
+<section id="using-a-remote-manager">
 <h4>Using a remote manager<a class="headerlink" href="#using-a-remote-manager" title="Permalink to this headline">¶</a></h4>
 <p>It is possible to run a manager server on one machine and have clients use it
 from other machines (assuming that the firewalls involved allow it).</p>
@@ -2062,7 +2178,7 @@ client to access it remotely:</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Worker</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
 <span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">q</span> <span class="o">=</span> <span class="n">q</span>
-<span class="gp">... </span>        <span class="nb">super</span><span class="p">(</span><span class="n">Worker</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+<span class="gp">... </span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 <span class="gp">... </span>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">q</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s1">&#39;local hello&#39;</span><span class="p">)</span>
 <span class="gp">...</span>
@@ -2077,9 +2193,9 @@ client to access it remotely:</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="proxy-objects">
+</section>
+</section>
+<section id="proxy-objects">
 <span id="multiprocessing-proxy-objects"></span><h3>Proxy Objects<a class="headerlink" href="#proxy-objects" title="Permalink to this headline">¶</a></h3>
 <p>A proxy is an object which <em>refers</em> to a shared object which lives (presumably)
 in a different process.  The shared object is said to be the <em>referent</em> of the
@@ -2223,15 +2339,15 @@ not been <em>exposed</em>.</p>
 
 </dd></dl>
 
-<div class="section" id="cleanup">
+<section id="cleanup">
 <h4>Cleanup<a class="headerlink" href="#cleanup" title="Permalink to this headline">¶</a></h4>
 <p>A proxy object uses a weakref callback so that when it gets garbage collected it
 deregisters itself from the manager which owns its referent.</p>
 <p>A shared object gets deleted from the manager process when there are no longer
 any proxies referring to it.</p>
-</div>
-</div>
-<div class="section" id="module-multiprocessing.pool">
+</section>
+</section>
+<section id="module-multiprocessing.pool">
 <span id="process-pools"></span><h3>Process Pools<a class="headerlink" href="#module-multiprocessing.pool" title="Permalink to this headline">¶</a></h3>
 <p>One can create a pool of processes which will carry out tasks submitted to it
 with the <a class="reference internal" href="#multiprocessing.pool.Pool" title="multiprocessing.pool.Pool"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pool</span></code></a> class.</p>
@@ -2473,8 +2589,8 @@ raise <a class="reference internal" href="exceptions.html#ValueError" title="Val
         <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>        <span class="c1"># raises multiprocessing.TimeoutError</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="module-multiprocessing.connection">
+</section>
+<section id="module-multiprocessing.connection">
 <span id="listeners-and-clients"></span><span id="multiprocessing-listeners-clients"></span><h3>Listeners and Clients<a class="headerlink" href="#module-multiprocessing.connection" title="Permalink to this headline">¶</a></h3>
 <p>Usually message passing between processes is done using queues or by using
 <a class="reference internal" href="#multiprocessing.connection.Connection" title="multiprocessing.connection.Connection"><code class="xref py py-class docutils literal notranslate"><span class="pre">Connection</span></code></a> objects returned by
@@ -2693,7 +2809,7 @@ wait for messages from multiple processes at once:</p>
                 <span class="nb">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="section" id="address-formats">
+<section id="address-formats">
 <span id="multiprocessing-address-formats"></span><h4>Address Formats<a class="headerlink" href="#address-formats" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li><p>An <code class="docutils literal notranslate"><span class="pre">'AF_INET'</span></code> address is a tuple of the form <code class="docutils literal notranslate"><span class="pre">(hostname,</span> <span class="pre">port)</span></code> where
@@ -2707,9 +2823,9 @@ form <code class="samp docutils literal notranslate"><span class="pre">r'\</span
 </ul>
 <p>Note that any string beginning with two backslashes is assumed by default to be
 an <code class="docutils literal notranslate"><span class="pre">'AF_PIPE'</span></code> address rather than an <code class="docutils literal notranslate"><span class="pre">'AF_UNIX'</span></code> address.</p>
-</div>
-</div>
-<div class="section" id="authentication-keys">
+</section>
+</section>
+<section id="authentication-keys">
 <span id="multiprocessing-auth-keys"></span><h3>Authentication keys<a class="headerlink" href="#authentication-keys" title="Permalink to this headline">¶</a></h3>
 <p>When one uses <a class="reference internal" href="#multiprocessing.connection.Connection.recv" title="multiprocessing.connection.Connection.recv"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Connection.recv</span></code></a>, the
 data received is automatically
@@ -2729,8 +2845,8 @@ This means that (by default) all processes of a multi-process program will share
 a single authentication key which can be used when setting up connections
 between themselves.</p>
 <p>Suitable authentication keys can also be generated by using <a class="reference internal" href="os.html#os.urandom" title="os.urandom"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.urandom()</span></code></a>.</p>
-</div>
-<div class="section" id="logging">
+</section>
+<section id="logging">
 <h3>Logging<a class="headerlink" href="#logging" title="Permalink to this headline">¶</a></h3>
 <p>Some support for logging is available.  Note, however, that the <a class="reference internal" href="logging.html#module-logging" title="logging: Flexible event logging system for applications."><code class="xref py py-mod docutils literal notranslate"><span class="pre">logging</span></code></a>
 package does not use process shared locks so it is possible (depending on the
@@ -2773,8 +2889,8 @@ output to <a class="reference internal" href="sys.html#sys.stderr" title="sys.st
 </pre></div>
 </div>
 <p>For a full table of logging levels, see the <a class="reference internal" href="logging.html#module-logging" title="logging: Flexible event logging system for applications."><code class="xref py py-mod docutils literal notranslate"><span class="pre">logging</span></code></a> module.</p>
-</div>
-<div class="section" id="module-multiprocessing.dummy">
+</section>
+<section id="module-multiprocessing.dummy">
 <span id="the-multiprocessing-dummy-module"></span><h3>The <a class="reference internal" href="#module-multiprocessing.dummy" title="multiprocessing.dummy: Dumb wrapper around threading."><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing.dummy</span></code></a> module<a class="headerlink" href="#module-multiprocessing.dummy" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="#module-multiprocessing.dummy" title="multiprocessing.dummy: Dumb wrapper around threading."><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing.dummy</span></code></a> replicates the API of <a class="reference internal" href="#module-multiprocessing" title="multiprocessing: Process-based parallelism."><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> but is
 no more than a wrapper around the <a class="reference internal" href="threading.html#module-threading" title="threading: Thread-based parallelism."><code class="xref py py-mod docutils literal notranslate"><span class="pre">threading</span></code></a> module.</p>
@@ -2814,13 +2930,13 @@ compatible with many other libraries, including <a class="reference internal" hr
 </div></blockquote>
 </dd></dl>
 
-</div>
-</div>
-<div class="section" id="programming-guidelines">
+</section>
+</section>
+<section id="programming-guidelines">
 <span id="multiprocessing-programming"></span><h2>Programming guidelines<a class="headerlink" href="#programming-guidelines" title="Permalink to this headline">¶</a></h2>
 <p>There are certain guidelines and idioms which should be adhered to when using
 <a class="reference internal" href="#module-multiprocessing" title="multiprocessing: Process-based parallelism."><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a>.</p>
-<div class="section" id="all-start-methods">
+<section id="all-start-methods">
 <h3>All start methods<a class="headerlink" href="#all-start-methods" title="Permalink to this headline">¶</a></h3>
 <p>The following applies to all start methods.</p>
 <p>Avoid shared state</p>
@@ -2970,8 +3086,8 @@ and discarding the cache when the pid changes. For example:</p>
 </div>
 <p>For more information, see <a class="reference external" href="https://bugs.python.org/issue5155">bpo-5155</a>, <a class="reference external" href="https://bugs.python.org/issue5313">bpo-5313</a> and <a class="reference external" href="https://bugs.python.org/issue5331">bpo-5331</a></p>
 </div></blockquote>
-</div>
-<div class="section" id="the-spawn-and-forkserver-start-methods">
+</section>
+<section id="the-spawn-and-forkserver-start-methods">
 <h3>The <em>spawn</em> and <em>forkserver</em> start methods<a class="headerlink" href="#the-spawn-and-forkserver-start-methods" title="Permalink to this headline">¶</a></h3>
 <p>There are a few extra restriction which don’t apply to the <em>fork</em>
 start method.</p>
@@ -3027,9 +3143,9 @@ and then run the module’s <code class="docutils literal notranslate"><span cla
 <p>Similar restrictions apply if a pool or manager is created in the main
 module.</p>
 </div></blockquote>
-</div>
-</div>
-<div class="section" id="examples">
+</section>
+</section>
+<section id="examples">
 <span id="multiprocessing-examples"></span><h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <p>Demonstration of how to create and use customized managers and proxies:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">freeze_support</span>
@@ -3360,8 +3476,8 @@ processes and collect the results:</p>
     <span class="n">test</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -3432,7 +3548,7 @@ processes and collect the results:</p>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/master/Doc/library/multiprocessing.rst"
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/library/multiprocessing.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -3458,34 +3574,45 @@ processes and collect the results:</p>
           <a href="threading.html" title="threading — Thread-based parallelism"
              >previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="concurrency.html" >Concurrent Execution</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code> — Process-based parallelism</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>  
     <div class="footer">
@@ -3503,7 +3630,7 @@ processes and collect the results:</p>
 <br />
     <br />
 
-    Last updated on Mar 24, 2021.
+    Last updated on May 10, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 

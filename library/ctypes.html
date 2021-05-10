@@ -4,8 +4,10 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ctypes — A foreign function library for Python &#8212; Python 3.10.0a6 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>ctypes — A foreign function library for Python &#8212; Python 3.10.0b1 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
@@ -19,7 +21,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.10.0a6 documentation"
+          title="Search within Python 3.10.0b1 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -40,17 +42,111 @@
         }
       }
     </style>
+<link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.svg" />
+            <script type="text/javascript" src="../_static/copybutton.js"></script>
+            <script type="text/javascript" src="../_static/menu.js"></script>
+            <script type="text/javascript" src="../_static/themetoggle.js"></script> 
 
-    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
-    
-    <script type="text/javascript" src="../_static/copybutton.js"></script>
-    <script type="text/javascript" src="../_static/themetoggle.js"></script>
-    
-     
+  </head>
+<body>
+<div class="mobile-nav">
+    <input type="checkbox" id="menuToggler" class="toggler__input" aria-controls="navigation"
+           aria-pressed="false" aria-expanded="false" role="button" aria-label="Menu" />
+    <nav class="nav-content" role="navigation">
+        <label for="menuToggler" class="toggler__label">
+            <span></span>
+        </label>
+        <span class="nav-items-wrapper">
+            <a href="https://www.python.org/" class="nav-logo">
+                <img src="../_static/py.svg" alt="Logo"/>
+            </a>
+            <span class="version_switcher_placeholder"></span>
+            <form id="searchbox" role="search" class="search" action="../search.html" method="get">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="search-icon">
+                    <path fill-rule="nonzero" fill="currentColor" d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 001.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 00-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 005.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                </svg>
+                <input type="search" name="q" aria-label="Quick search"/>
+                <input type="submit" value="Go"/>
+                
+            </form>
+        </span>
+    </nav>
+    <div class="menu-wrapper">
+        <nav class="menu" role="navigation" aria-label="main navigation">
+            <div class="language_switcher_placeholder"></div>
+            
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label>
+  <h3><a href="../contents.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code> — A foreign function library for Python</a><ul>
+<li><a class="reference internal" href="#ctypes-tutorial">ctypes tutorial</a><ul>
+<li><a class="reference internal" href="#loading-dynamic-link-libraries">Loading dynamic link libraries</a></li>
+<li><a class="reference internal" href="#accessing-functions-from-loaded-dlls">Accessing functions from loaded dlls</a></li>
+<li><a class="reference internal" href="#calling-functions">Calling functions</a></li>
+<li><a class="reference internal" href="#fundamental-data-types">Fundamental data types</a></li>
+<li><a class="reference internal" href="#calling-functions-continued">Calling functions, continued</a></li>
+<li><a class="reference internal" href="#calling-functions-with-your-own-custom-data-types">Calling functions with your own custom data types</a></li>
+<li><a class="reference internal" href="#specifying-the-required-argument-types-function-prototypes">Specifying the required argument types (function prototypes)</a></li>
+<li><a class="reference internal" href="#return-types">Return types</a></li>
+<li><a class="reference internal" href="#passing-pointers-or-passing-parameters-by-reference">Passing pointers (or: passing parameters by reference)</a></li>
+<li><a class="reference internal" href="#structures-and-unions">Structures and unions</a></li>
+<li><a class="reference internal" href="#structure-union-alignment-and-byte-order">Structure/union alignment and byte order</a></li>
+<li><a class="reference internal" href="#bit-fields-in-structures-and-unions">Bit fields in structures and unions</a></li>
+<li><a class="reference internal" href="#arrays">Arrays</a></li>
+<li><a class="reference internal" href="#pointers">Pointers</a></li>
+<li><a class="reference internal" href="#type-conversions">Type conversions</a></li>
+<li><a class="reference internal" href="#incomplete-types">Incomplete Types</a></li>
+<li><a class="reference internal" href="#callback-functions">Callback functions</a></li>
+<li><a class="reference internal" href="#accessing-values-exported-from-dlls">Accessing values exported from dlls</a></li>
+<li><a class="reference internal" href="#surprises">Surprises</a></li>
+<li><a class="reference internal" href="#variable-sized-data-types">Variable-sized data types</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ctypes-reference">ctypes reference</a><ul>
+<li><a class="reference internal" href="#finding-shared-libraries">Finding shared libraries</a></li>
+<li><a class="reference internal" href="#loading-shared-libraries">Loading shared libraries</a></li>
+<li><a class="reference internal" href="#foreign-functions">Foreign functions</a></li>
+<li><a class="reference internal" href="#function-prototypes">Function prototypes</a></li>
+<li><a class="reference internal" href="#utility-functions">Utility functions</a></li>
+<li><a class="reference internal" href="#data-types">Data types</a></li>
+<li><a class="reference internal" href="#ctypes-fundamental-data-types-2">Fundamental data types</a></li>
+<li><a class="reference internal" href="#structured-data-types">Structured data types</a></li>
+<li><a class="reference internal" href="#arrays-and-pointers">Arrays and pointers</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="errno.html"
+                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">errno</span></code> — Standard errno system symbols</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="concurrency.html"
+                        title="next chapter">Concurrent Execution</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../bugs.html">Report a Bug</a></li>
+      <li>
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/library/ctypes.rst"
+            rel="nofollow">Show Source
+        </a>
+      </li>
+    </ul>
+  </div>
+        </nav>
+    </div>
+</div>
 
-  </head><body>
   
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -68,34 +164,45 @@
           <a href="errno.html" title="errno — Standard errno system symbols"
              accesskey="P">previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="allos.html" accesskey="U">Generic Operating System Services</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code> — A foreign function library for Python</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>    
 
@@ -104,13 +211,13 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="module-ctypes">
+  <section id="module-ctypes">
 <span id="ctypes-a-foreign-function-library-for-python"></span><h1><a class="reference internal" href="#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> — A foreign function library for Python<a class="headerlink" href="#module-ctypes" title="Permalink to this headline">¶</a></h1>
 <hr class="docutils" />
 <p><a class="reference internal" href="#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> is a foreign function library for Python.  It provides C compatible
 data types, and allows calling functions in DLLs or shared libraries.  It can be
 used to wrap these libraries in pure Python.</p>
-<div class="section" id="ctypes-tutorial">
+<section id="ctypes-tutorial">
 <span id="ctypes-ctypes-tutorial"></span><h2>ctypes tutorial<a class="headerlink" href="#ctypes-tutorial" title="Permalink to this headline">¶</a></h2>
 <p>Note: The code samples in this tutorial use <a class="reference internal" href="doctest.html#module-doctest" title="doctest: Test pieces of code within docstrings."><code class="xref py py-mod docutils literal notranslate"><span class="pre">doctest</span></code></a> to make sure that
 they actually work.  Since some code samples behave differently under Linux,
@@ -119,7 +226,7 @@ Windows, or Mac OS X, they contain doctest directives in comments.</p>
 where <code class="docutils literal notranslate"><span class="pre">sizeof(long)</span> <span class="pre">==</span> <span class="pre">sizeof(int)</span></code> it is an alias to <a class="reference internal" href="#ctypes.c_long" title="ctypes.c_long"><code class="xref py py-class docutils literal notranslate"><span class="pre">c_long</span></code></a>.
 So, you should not be confused if <a class="reference internal" href="#ctypes.c_long" title="ctypes.c_long"><code class="xref py py-class docutils literal notranslate"><span class="pre">c_long</span></code></a> is printed if you would expect
 <a class="reference internal" href="#ctypes.c_int" title="ctypes.c_int"><code class="xref py py-class docutils literal notranslate"><span class="pre">c_int</span></code></a> — they are actually the same type.</p>
-<div class="section" id="loading-dynamic-link-libraries">
+<section id="loading-dynamic-link-libraries">
 <span id="ctypes-loading-dynamic-link-libraries"></span><h3>Loading dynamic link libraries<a class="headerlink" href="#loading-dynamic-link-libraries" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> exports the <em>cdll</em>, and on Windows <em>windll</em> and <em>oledll</em>
 objects, for loading dynamic link libraries.</p>
@@ -166,8 +273,8 @@ the library by creating an instance of CDLL by calling the constructor:</p>
 <span class="go">&gt;&gt;&gt;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="accessing-functions-from-loaded-dlls">
+</section>
+<section id="accessing-functions-from-loaded-dlls">
 <span id="ctypes-accessing-functions-from-loaded-dlls"></span><h3>Accessing functions from loaded dlls<a class="headerlink" href="#accessing-functions-from-loaded-dlls" title="Permalink to this headline">¶</a></h3>
 <p>Functions are accessed as attributes of dll objects:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ctypes</span> <span class="kn">import</span> <span class="o">*</span>
@@ -221,8 +328,8 @@ functions can be accessed by indexing the dll object with the ordinal number:</p
 <span class="go">&gt;&gt;&gt;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="calling-functions">
+</section>
+<section id="calling-functions">
 <span id="ctypes-calling-functions"></span><h3>Calling functions<a class="headerlink" href="#calling-functions" title="Permalink to this headline">¶</a></h3>
 <p>You can call these functions like any other Python callable. This example uses
 the <code class="docutils literal notranslate"><span class="pre">time()</span></code> function, which returns system time in seconds since the Unix
@@ -276,8 +383,8 @@ as pointer to the memory block that contains their data (<span class="xref c c-t
 <span class="xref c c-texpr">int</span> type, their value is masked to fit into the C type.</p>
 <p>Before we move on calling functions with other parameter types, we have to learn
 more about <a class="reference internal" href="#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> data types.</p>
-</div>
-<div class="section" id="fundamental-data-types">
+</section>
+<section id="fundamental-data-types">
 <span id="ctypes-fundamental-data-types"></span><h3>Fundamental data types<a class="headerlink" href="#fundamental-data-types" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> defines a number of primitive C compatible data types:</p>
 <table class="docutils align-default">
@@ -456,8 +563,8 @@ property:</p>
 from earlier ctypes releases.  To create a mutable memory block containing
 unicode characters of the C type <code class="xref c c-type docutils literal notranslate"><span class="pre">wchar_t</span></code> use the
 <a class="reference internal" href="#ctypes.create_unicode_buffer" title="ctypes.create_unicode_buffer"><code class="xref py py-func docutils literal notranslate"><span class="pre">create_unicode_buffer()</span></code></a> function.</p>
-</div>
-<div class="section" id="calling-functions-continued">
+</section>
+<section id="calling-functions-continued">
 <span id="ctypes-calling-functions-continued"></span><h3>Calling functions, continued<a class="headerlink" href="#calling-functions-continued" title="Permalink to this headline">¶</a></h3>
 <p>Note that printf prints to the real standard output channel, <em>not</em> to
 <a class="reference internal" href="sys.html#sys.stdout" title="sys.stdout"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.stdout</span></code></a>, so these examples will only work at the console prompt, not
@@ -488,8 +595,8 @@ that they can be converted to the required C data type:</p>
 <span class="go">&gt;&gt;&gt;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="calling-functions-with-your-own-custom-data-types">
+</section>
+<section id="calling-functions-with-your-own-custom-data-types">
 <span id="ctypes-calling-functions-with-own-custom-data-types"></span><h3>Calling functions with your own custom data types<a class="headerlink" href="#calling-functions-with-your-own-custom-data-types" title="Permalink to this headline">¶</a></h3>
 <p>You can also customize <a class="reference internal" href="#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> argument conversion to allow instances of
 your own classes be used as function arguments.  <a class="reference internal" href="#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> looks for an
@@ -509,8 +616,8 @@ course, it must be one of integer, string, or bytes:</p>
 <p>If you don’t want to store the instance’s data in the <code class="xref py py-attr docutils literal notranslate"><span class="pre">_as_parameter_</span></code>
 instance variable, you could define a <a class="reference internal" href="functions.html#property" title="property"><code class="xref py py-class docutils literal notranslate"><span class="pre">property</span></code></a> which makes the
 attribute available on request.</p>
-</div>
-<div class="section" id="specifying-the-required-argument-types-function-prototypes">
+</section>
+<section id="specifying-the-required-argument-types-function-prototypes">
 <span id="ctypes-specifying-required-argument-types"></span><h3>Specifying the required argument types (function prototypes)<a class="headerlink" href="#specifying-the-required-argument-types-function-prototypes" title="Permalink to this headline">¶</a></h3>
 <p>It is possible to specify the required argument types of functions exported from
 DLLs by setting the <code class="xref py py-attr docutils literal notranslate"><span class="pre">argtypes</span></code> attribute.</p>
@@ -546,8 +653,8 @@ object itself, its <code class="xref py py-attr docutils literal notranslate"><s
 pass as the C function argument in this case. Again, the result should be an
 integer, string, bytes, a <a class="reference internal" href="#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> instance, or an object with an
 <code class="xref py py-attr docutils literal notranslate"><span class="pre">_as_parameter_</span></code> attribute.</p>
-</div>
-<div class="section" id="return-types">
+</section>
+<section id="return-types">
 <span id="ctypes-return-types"></span><h3>Return types<a class="headerlink" href="#return-types" title="Permalink to this headline">¶</a></h3>
 <p>By default functions are assumed to return the C <span class="xref c c-texpr">int</span> type.  Other
 return types can be specified by setting the <code class="xref py py-attr docutils literal notranslate"><span class="pre">restype</span></code> attribute of the
@@ -612,8 +719,8 @@ get the string representation of an error code, and <em>returns</em> an exceptio
 <a class="reference internal" href="#ctypes.GetLastError" title="ctypes.GetLastError"><code class="xref py py-func docutils literal notranslate"><span class="pre">GetLastError()</span></code></a> to retrieve it.</p>
 <p>Please note that a much more powerful error checking mechanism is available
 through the <code class="xref py py-attr docutils literal notranslate"><span class="pre">errcheck</span></code> attribute; see the reference manual for details.</p>
-</div>
-<div class="section" id="passing-pointers-or-passing-parameters-by-reference">
+</section>
+<section id="passing-pointers-or-passing-parameters-by-reference">
 <span id="ctypes-passing-pointers"></span><h3>Passing pointers (or: passing parameters by reference)<a class="headerlink" href="#passing-pointers-or-passing-parameters-by-reference" title="Permalink to this headline">¶</a></h3>
 <p>Sometimes a C api function expects a <em>pointer</em> to a data type as parameter,
 probably to write into the corresponding location, or if the data is too large
@@ -636,8 +743,8 @@ object in Python itself:</p>
 <span class="go">&gt;&gt;&gt;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="structures-and-unions">
+</section>
+<section id="structures-and-unions">
 <span id="ctypes-structures-unions"></span><h3>Structures and unions<a class="headerlink" href="#structures-and-unions" title="Permalink to this headline">¶</a></h3>
 <p>Structures and unions must derive from the <a class="reference internal" href="#ctypes.Structure" title="ctypes.Structure"><code class="xref py py-class docutils literal notranslate"><span class="pre">Structure</span></code></a> and <a class="reference internal" href="#ctypes.Union" title="ctypes.Union"><code class="xref py py-class docutils literal notranslate"><span class="pre">Union</span></code></a>
 base classes which are defined in the <a class="reference internal" href="#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> module. Each subclass must
@@ -702,8 +809,8 @@ to functions by value.  While this may work on 32-bit x86, it’s not
 guaranteed by the library to work in the general case.  Unions and
 structures with bit-fields should always be passed to functions by pointer.</p>
 </div>
-</div>
-<div class="section" id="structure-union-alignment-and-byte-order">
+</section>
+<section id="structure-union-alignment-and-byte-order">
 <h3>Structure/union alignment and byte order<a class="headerlink" href="#structure-union-alignment-and-byte-order" title="Permalink to this headline">¶</a></h3>
 <p>By default, Structure and Union fields are aligned in the same way the C
 compiler does it. It is possible to override this behavior by specifying a
@@ -715,8 +822,8 @@ structures with non-native byte order, you can use one of the
 <a class="reference internal" href="#ctypes.BigEndianStructure" title="ctypes.BigEndianStructure"><code class="xref py py-class docutils literal notranslate"><span class="pre">BigEndianStructure</span></code></a>, <a class="reference internal" href="#ctypes.LittleEndianStructure" title="ctypes.LittleEndianStructure"><code class="xref py py-class docutils literal notranslate"><span class="pre">LittleEndianStructure</span></code></a>,
 <code class="xref py py-class docutils literal notranslate"><span class="pre">BigEndianUnion</span></code>, and <code class="xref py py-class docutils literal notranslate"><span class="pre">LittleEndianUnion</span></code> base classes.  These
 classes cannot contain pointer fields.</p>
-</div>
-<div class="section" id="bit-fields-in-structures-and-unions">
+</section>
+<section id="bit-fields-in-structures-and-unions">
 <span id="ctypes-bit-fields-in-structures-unions"></span><h3>Bit fields in structures and unions<a class="headerlink" href="#bit-fields-in-structures-and-unions" title="Permalink to this headline">¶</a></h3>
 <p>It is possible to create structures and unions containing bit fields. Bit fields
 are only possible for integer fields, the bit width is specified as the third
@@ -732,8 +839,8 @@ item in the <code class="xref py py-attr docutils literal notranslate"><span cla
 <span class="go">&gt;&gt;&gt;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="arrays">
+</section>
+<section id="arrays">
 <span id="ctypes-arrays"></span><h3>Arrays<a class="headerlink" href="#arrays" title="Permalink to this headline">¶</a></h3>
 <p>Arrays are sequences, containing a fixed number of instances of the same type.</p>
 <p>The recommended way to create array types is by multiplying a data type with a
@@ -777,8 +884,8 @@ initialized to zeros.</p>
 <span class="go">&gt;&gt;&gt;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="pointers">
+</section>
+<section id="pointers">
 <span id="ctypes-pointers"></span><h3>Pointers<a class="headerlink" href="#pointers" title="Permalink to this headline">¶</a></h3>
 <p>Pointer instances are created by calling the <a class="reference internal" href="#ctypes.pointer" title="ctypes.pointer"><code class="xref py py-func docutils literal notranslate"><span class="pre">pointer()</span></code></a> function on a
 <a class="reference internal" href="#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> type:</p>
@@ -872,8 +979,8 @@ invalid non-<code class="docutils literal notranslate"><span class="pre">NULL</s
 <span class="go">&gt;&gt;&gt;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="type-conversions">
+</section>
+<section id="type-conversions">
 <span id="ctypes-type-conversions"></span><h3>Type conversions<a class="headerlink" href="#type-conversions" title="Permalink to this headline">¶</a></h3>
 <p>Usually, ctypes does strict type checking.  This means, if you have
 <code class="docutils literal notranslate"><span class="pre">POINTER(c_int)</span></code> in the <code class="xref py py-attr docutils literal notranslate"><span class="pre">argtypes</span></code> list of a function or as the type of
@@ -938,8 +1045,8 @@ structure:</p>
 <span class="go">&gt;&gt;&gt;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="incomplete-types">
+</section>
+<section id="incomplete-types">
 <span id="ctypes-incomplete-types"></span><h3>Incomplete Types<a class="headerlink" href="#incomplete-types" title="Permalink to this headline">¶</a></h3>
 <p><em>Incomplete Types</em> are structures, unions or arrays whose members are not yet
 specified. In C, they are specified by forward declarations, which are defined
@@ -980,9 +1087,9 @@ attribute later, after the class statement:</p>
 <p>Let’s try it. We create two instances of <code class="docutils literal notranslate"><span class="pre">cell</span></code>, and let them point to each
 other, and finally follow the pointer chain a few times:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c1</span> <span class="o">=</span> <span class="n">cell</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">c1</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;foo&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c1</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;foo&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">c2</span> <span class="o">=</span> <span class="n">cell</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">c2</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;bar&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c2</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;bar&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">c1</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">pointer</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">c2</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">pointer</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">c1</span>
@@ -994,8 +1101,8 @@ other, and finally follow the pointer chain a few times:</p>
 <span class="go">&gt;&gt;&gt;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="callback-functions">
+</section>
+<section id="callback-functions">
 <span id="ctypes-callback-functions"></span><h3>Callback functions<a class="headerlink" href="#callback-functions" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> allows creating C callable function pointers from Python callables.
 These are sometimes called <em>callback functions</em>.</p>
@@ -1100,8 +1207,8 @@ behavior is correct for most purposes, but it means that values stored with
 <a class="reference internal" href="threading.html#threading.local" title="threading.local"><code class="xref py py-class docutils literal notranslate"><span class="pre">threading.local</span></code></a> will <em>not</em> survive across different callbacks, even when
 those calls are made from the same C thread.</p>
 </div>
-</div>
-<div class="section" id="accessing-values-exported-from-dlls">
+</section>
+<section id="accessing-values-exported-from-dlls">
 <span id="ctypes-accessing-values-exported-from-dlls"></span><h3>Accessing values exported from dlls<a class="headerlink" href="#accessing-values-exported-from-dlls" title="Permalink to this headline">¶</a></h3>
 <p>Some shared libraries not only export functions, they also export variables. An
 example in the Python library itself is the <a class="reference internal" href="../c-api/init.html#c.Py_OptimizeFlag" title="Py_OptimizeFlag"><code class="xref c c-data docutils literal notranslate"><span class="pre">Py_OptimizeFlag</span></code></a>, an integer
@@ -1168,8 +1275,8 @@ hit the <code class="docutils literal notranslate"><span class="pre">NULL</span>
 <p>The fact that standard Python has a frozen module and a frozen package
 (indicated by the negative <code class="docutils literal notranslate"><span class="pre">size</span></code> member) is not well known, it is only used
 for testing. Try it out with <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">__hello__</span></code> for example.</p>
-</div>
-<div class="section" id="surprises">
+</section>
+<section id="surprises">
 <span id="ctypes-surprises"></span><h3>Surprises<a class="headerlink" href="#surprises" title="Permalink to this headline">¶</a></h3>
 <p>There are some edges in <a class="reference internal" href="#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> where you might expect something other
 than what actually happens.</p>
@@ -1229,8 +1336,8 @@ block plus some <a class="reference internal" href="../glossary.html#term-descri
 Storing a Python object in the memory block does not store the object itself,
 instead the <code class="docutils literal notranslate"><span class="pre">contents</span></code> of the object is stored.  Accessing the contents again
 constructs a new Python object each time!</p>
-</div>
-<div class="section" id="variable-sized-data-types">
+</section>
+<section id="variable-sized-data-types">
 <span id="ctypes-variable-sized-data-types"></span><h3>Variable-sized data types<a class="headerlink" href="#variable-sized-data-types" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> provides some support for variable-sized arrays and structures.</p>
 <p>The <a class="reference internal" href="#ctypes.resize" title="ctypes.resize"><code class="xref py py-func docutils literal notranslate"><span class="pre">resize()</span></code></a> function can be used to resize the memory buffer of an
@@ -1268,11 +1375,11 @@ get errors accessing other elements:</p>
 <p>Another way to use variable-sized data types with <a class="reference internal" href="#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> is to use the
 dynamic nature of Python, and (re-)define the data type after the required size
 is already known, on a case by case basis.</p>
-</div>
-</div>
-<div class="section" id="ctypes-reference">
+</section>
+</section>
+<section id="ctypes-reference">
 <span id="ctypes-ctypes-reference"></span><h2>ctypes reference<a class="headerlink" href="#ctypes-reference" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="finding-shared-libraries">
+<section id="finding-shared-libraries">
 <span id="ctypes-finding-shared-libraries"></span><h3>Finding shared libraries<a class="headerlink" href="#finding-shared-libraries" title="Permalink to this headline">¶</a></h3>
 <p>When programming in a compiled language, shared libraries are accessed when
 compiling/linking a program, and when the program is run.</p>
@@ -1331,8 +1438,8 @@ like <code class="docutils literal notranslate"><span class="pre">find_library(&
 <p>If wrapping a shared library with <a class="reference internal" href="#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a>, it <em>may</em> be better to determine
 the shared library name at development time, and hardcode that into the wrapper
 module instead of using <code class="xref py py-func docutils literal notranslate"><span class="pre">find_library()</span></code> to locate the library at runtime.</p>
-</div>
-<div class="section" id="loading-shared-libraries">
+</section>
+<section id="loading-shared-libraries">
 <span id="ctypes-loading-shared-libraries"></span><h3>Loading shared libraries<a class="headerlink" href="#loading-shared-libraries" title="Permalink to this headline">¶</a></h3>
 <p>There are several ways to load shared libraries into the Python process.  One
 way is to instantiate one of the following classes:</p>
@@ -1545,8 +1652,8 @@ the correct <code class="xref py py-attr docutils literal notranslate"><span cla
 accessing a function raises an auditing event <code class="docutils literal notranslate"><span class="pre">ctypes.dlsym/handle</span></code> with
 arguments <code class="docutils literal notranslate"><span class="pre">handle</span></code> (the raw library handle) and <code class="docutils literal notranslate"><span class="pre">name</span></code>.</p>
 </p>
-</div>
-<div class="section" id="foreign-functions">
+</section>
+<section id="foreign-functions">
 <span id="ctypes-foreign-functions"></span><h3>Foreign functions<a class="headerlink" href="#foreign-functions" title="Permalink to this headline">¶</a></h3>
 <p>As explained in the previous section, foreign functions can be accessed as
 attributes of loaded shared libraries.  The function objects created in this way
@@ -1635,8 +1742,8 @@ audit hook to replace the exception with its own.</p>
 <p class="audit-hook"><p>Some ways to invoke foreign function calls may raise an auditing event
 <code class="docutils literal notranslate"><span class="pre">ctypes.call_function</span></code> with arguments <code class="docutils literal notranslate"><span class="pre">function</span> <span class="pre">pointer</span></code> and <code class="docutils literal notranslate"><span class="pre">arguments</span></code>.</p>
 </p>
-</div>
-<div class="section" id="function-prototypes">
+</section>
+<section id="function-prototypes">
 <span id="ctypes-function-prototypes"></span><h3>Function prototypes<a class="headerlink" href="#function-prototypes" title="Permalink to this headline">¶</a></h3>
 <p>Foreign functions can also be created by instantiating function prototypes.
 Function prototypes are similar to function prototypes in C; they describe a
@@ -1805,8 +1912,8 @@ instead, the normal processing will no longer take place:</p>
 <span class="go">&gt;&gt;&gt;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="utility-functions">
+</section>
+<section id="utility-functions">
 <span id="ctypes-utility-functions"></span><h3>Utility functions<a class="headerlink" href="#utility-functions" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
 <dt id="ctypes.addressof">
@@ -2042,8 +2149,8 @@ zero-terminated.</p>
 <p class="audit-hook">Raises an <a class="reference internal" href="sys.html#auditing"><span class="std std-ref">auditing event</span></a> <code class="docutils literal notranslate"><span class="pre">ctypes.wstring_at</span></code> with arguments <code class="docutils literal notranslate"><span class="pre">address</span></code>, <code class="docutils literal notranslate"><span class="pre">size</span></code>.</p>
 </dd></dl>
 
-</div>
-<div class="section" id="data-types">
+</section>
+<section id="data-types">
 <span id="ctypes-data-types"></span><h3>Data types<a class="headerlink" href="#data-types" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="ctypes._CData">
@@ -2137,8 +2244,8 @@ contents of this dictionary.</p>
 
 </dd></dl>
 
-</div>
-<div class="section" id="ctypes-fundamental-data-types-2">
+</section>
+<section id="ctypes-fundamental-data-types-2">
 <span id="id1"></span><h3>Fundamental data types<a class="headerlink" href="#ctypes-fundamental-data-types-2" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="ctypes._SimpleCData">
@@ -2406,8 +2513,8 @@ argument creates a <code class="docutils literal notranslate"><span class="pre">
 <p>The <code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes.wintypes</span></code> module provides quite some other Windows specific
 data types, for example <code class="xref c c-type docutils literal notranslate"><span class="pre">HWND</span></code>, <code class="xref c c-type docutils literal notranslate"><span class="pre">WPARAM</span></code>, or <code class="xref c c-type docutils literal notranslate"><span class="pre">DWORD</span></code>.  Some
 useful structures like <code class="xref c c-type docutils literal notranslate"><span class="pre">MSG</span></code> or <code class="xref c c-type docutils literal notranslate"><span class="pre">RECT</span></code> are also defined.</p>
-</div>
-<div class="section" id="structured-data-types">
+</section>
+<section id="structured-data-types">
 <span id="ctypes-structured-data-types"></span><h3>Structured data types<a class="headerlink" href="#structured-data-types" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="ctypes.Union">
@@ -2523,8 +2630,8 @@ constructor are interpreted as attribute assignments, so they will initialize
 present in <a class="reference internal" href="#ctypes.Structure._fields_" title="ctypes.Structure._fields_"><code class="xref py py-attr docutils literal notranslate"><span class="pre">_fields_</span></code></a>.</p>
 </dd></dl>
 
-</div>
-<div class="section" id="arrays-and-pointers">
+</section>
+<section id="arrays-and-pointers">
 <span id="ctypes-arrays-pointers"></span><h3>Arrays and pointers<a class="headerlink" href="#arrays-and-pointers" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="ctypes.Array">
@@ -2582,9 +2689,9 @@ attribute changes the pointer to point to the assigned object.</p>
 
 </dd></dl>
 
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -2646,7 +2753,7 @@ attribute changes the pointer to point to the assigned object.</p>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/master/Doc/library/ctypes.rst"
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/library/ctypes.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -2672,34 +2779,45 @@ attribute changes the pointer to point to the assigned object.</p>
           <a href="errno.html" title="errno — Standard errno system symbols"
              >previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="allos.html" >Generic Operating System Services</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code> — A foreign function library for Python</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>  
     <div class="footer">
@@ -2717,7 +2835,7 @@ attribute changes the pointer to point to the assigned object.</p>
 <br />
     <br />
 
-    Last updated on Mar 24, 2021.
+    Last updated on May 10, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 

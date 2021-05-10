@@ -4,8 +4,10 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2. Writing the Setup Script &#8212; Python 3.10.0a6 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>2. Writing the Setup Script &#8212; Python 3.10.0b1 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
@@ -19,7 +21,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.10.0a6 documentation"
+          title="Search within Python 3.10.0b1 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -40,17 +42,92 @@
         }
       }
     </style>
+<link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.svg" />
+            <script type="text/javascript" src="../_static/copybutton.js"></script>
+            <script type="text/javascript" src="../_static/menu.js"></script>
+            <script type="text/javascript" src="../_static/themetoggle.js"></script> 
 
-    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
-    
-    <script type="text/javascript" src="../_static/copybutton.js"></script>
-    <script type="text/javascript" src="../_static/themetoggle.js"></script>
-    
-     
+  </head>
+<body>
+<div class="mobile-nav">
+    <input type="checkbox" id="menuToggler" class="toggler__input" aria-controls="navigation"
+           aria-pressed="false" aria-expanded="false" role="button" aria-label="Menu" />
+    <nav class="nav-content" role="navigation">
+        <label for="menuToggler" class="toggler__label">
+            <span></span>
+        </label>
+        <span class="nav-items-wrapper">
+            <a href="https://www.python.org/" class="nav-logo">
+                <img src="../_static/py.svg" alt="Logo"/>
+            </a>
+            <span class="version_switcher_placeholder"></span>
+            <form id="searchbox" role="search" class="search" action="../search.html" method="get">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="search-icon">
+                    <path fill-rule="nonzero" fill="currentColor" d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 001.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 00-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 005.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                </svg>
+                <input type="search" name="q" aria-label="Quick search"/>
+                <input type="submit" value="Go"/>
+                
+            </form>
+        </span>
+    </nav>
+    <div class="menu-wrapper">
+        <nav class="menu" role="navigation" aria-label="main navigation">
+            <div class="language_switcher_placeholder"></div>
+            
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label>
+  <h3><a href="../contents.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">2. Writing the Setup Script</a><ul>
+<li><a class="reference internal" href="#listing-whole-packages">2.1. Listing whole packages</a></li>
+<li><a class="reference internal" href="#listing-individual-modules">2.2. Listing individual modules</a></li>
+<li><a class="reference internal" href="#describing-extension-modules">2.3. Describing extension modules</a><ul>
+<li><a class="reference internal" href="#extension-names-and-packages">2.3.1. Extension names and packages</a></li>
+<li><a class="reference internal" href="#extension-source-files">2.3.2. Extension source files</a></li>
+<li><a class="reference internal" href="#preprocessor-options">2.3.3. Preprocessor options</a></li>
+<li><a class="reference internal" href="#library-options">2.3.4. Library options</a></li>
+<li><a class="reference internal" href="#other-options">2.3.5. Other options</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#relationships-between-distributions-and-packages">2.4. Relationships between Distributions and Packages</a></li>
+<li><a class="reference internal" href="#installing-scripts">2.5. Installing Scripts</a></li>
+<li><a class="reference internal" href="#installing-package-data">2.6. Installing Package Data</a></li>
+<li><a class="reference internal" href="#installing-additional-files">2.7. Installing Additional Files</a></li>
+<li><a class="reference internal" href="#additional-meta-data">2.8. Additional meta-data</a></li>
+<li><a class="reference internal" href="#debugging-the-setup-script">2.9. Debugging the setup script</a></li>
+</ul>
+</li>
+</ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="introduction.html"
+                        title="previous chapter"><span class="section-number">1. </span>An Introduction to Distutils</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="configfile.html"
+                        title="next chapter"><span class="section-number">3. </span>Writing the Setup Configuration File</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../bugs.html">Report a Bug</a></li>
+      <li>
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/distutils/setupscript.rst"
+            rel="nofollow">Show Source
+        </a>
+      </li>
+    </ul>
+  </div>
+        </nav>
+    </div>
+</div>
 
-  </head><body>
   
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -68,33 +145,44 @@
           <a href="introduction.html" title="1. An Introduction to Distutils"
              accesskey="P">previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Distributing Python Modules (Legacy version)</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><span class="section-number">2. </span>Writing the Setup Script</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>    
 
@@ -103,7 +191,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="writing-the-setup-script">
+  <section id="writing-the-setup-script">
 <span id="setup-script"></span><h1><span class="section-number">2. </span>Writing the Setup Script<a class="headerlink" href="#writing-the-setup-script" title="Permalink to this headline">¶</a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -160,7 +248,7 @@ code instead of hardcoding path separators:</p>
 <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;mydir&#39;</span><span class="p">,</span> <span class="s1">&#39;subdir&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
-<div class="section" id="listing-whole-packages">
+<section id="listing-whole-packages">
 <span id="listing-packages"></span><h2><span class="section-number">2.1. </span>Listing whole packages<a class="headerlink" href="#listing-whole-packages" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">packages</span></code> option tells the Distutils to process (build, distribute,
 install, etc.) all pure Python modules found in each package mentioned in the
@@ -200,8 +288,8 @@ automatically handled here.  In this example, having <code class="docutils liter
 applies recursively, you must explicitly list all packages in
 <code class="docutils literal notranslate"><span class="pre">packages</span></code>: the Distutils will <em>not</em> recursively scan your source tree
 looking for any directory with an <code class="file docutils literal notranslate"><span class="pre">__init__.py</span></code> file.)</p>
-</div>
-<div class="section" id="listing-individual-modules">
+</section>
+<section id="listing-individual-modules">
 <span id="listing-modules"></span><h2><span class="section-number">2.2. </span>Listing individual modules<a class="headerlink" href="#listing-individual-modules" title="Permalink to this headline">¶</a></h2>
 <p>For a small module distribution, you might prefer to list all modules rather
 than listing packages—especially the case of a single module that goes in the
@@ -215,8 +303,8 @@ section <a class="reference internal" href="introduction.html#distutils-simple-e
 these two modules can be found in <code class="file docutils literal notranslate"><span class="pre">mod1.py</span></code> and <code class="file docutils literal notranslate"><span class="pre">pkg/mod2.py</span></code>, and
 that <code class="file docutils literal notranslate"><span class="pre">pkg/__init__.py</span></code> exists as well. And again, you can override the
 package/directory correspondence using the <code class="docutils literal notranslate"><span class="pre">package_dir</span></code> option.</p>
-</div>
-<div class="section" id="describing-extension-modules">
+</section>
+<section id="describing-extension-modules">
 <span id="describing-extensions"></span><h2><span class="section-number">2.3. </span>Describing extension modules<a class="headerlink" href="#describing-extension-modules" title="Permalink to this headline">¶</a></h2>
 <p>Just as writing Python extension modules is a bit more complicated than writing
 pure Python modules, describing them to the Distutils is a bit more complicated.
@@ -248,7 +336,7 @@ contains only this one extension and nothing else might be:</p>
 machinery implemented by the <strong class="command">build_ext</strong> command) supports a great deal
 of flexibility in describing Python extensions, which is explained in the
 following sections.</p>
-<div class="section" id="extension-names-and-packages">
+<section id="extension-names-and-packages">
 <h3><span class="section-number">2.3.1. </span>Extension names and packages<a class="headerlink" href="#extension-names-and-packages" title="Permalink to this headline">¶</a></h3>
 <p>The first argument to the <a class="reference internal" href="apiref.html#distutils.core.Extension" title="distutils.core.Extension"><code class="xref py py-class docutils literal notranslate"><span class="pre">Extension</span></code></a> constructor is
 always the name of the extension, including any package names.  For example,</p>
@@ -275,8 +363,8 @@ same base package), use the <code class="docutils literal notranslate"><span cla
 </div>
 <p>will compile <code class="file docutils literal notranslate"><span class="pre">foo.c</span></code> to the extension <code class="xref py py-mod docutils literal notranslate"><span class="pre">pkg.foo</span></code>, and <code class="file docutils literal notranslate"><span class="pre">bar.c</span></code> to
 <code class="xref py py-mod docutils literal notranslate"><span class="pre">pkg.subpkg.bar</span></code>.</p>
-</div>
-<div class="section" id="extension-source-files">
+</section>
+<section id="extension-source-files">
 <h3><span class="section-number">2.3.2. </span>Extension source files<a class="headerlink" href="#extension-source-files" title="Permalink to this headline">¶</a></h3>
 <p>The second argument to the <a class="reference internal" href="apiref.html#distutils.core.Extension" title="distutils.core.Extension"><code class="xref py py-class docutils literal notranslate"><span class="pre">Extension</span></code></a> constructor is
 a list of source
@@ -306,8 +394,8 @@ compiler and included in your extension.  Currently, this just means Windows
 message text (<code class="file docutils literal notranslate"><span class="pre">.mc</span></code>) files and resource definition (<code class="file docutils literal notranslate"><span class="pre">.rc</span></code>) files for
 Visual C++. These will be compiled to binary resource (<code class="file docutils literal notranslate"><span class="pre">.res</span></code>) files and
 linked into the executable.</p>
-</div>
-<div class="section" id="preprocessor-options">
+</section>
+<section id="preprocessor-options">
 <h3><span class="section-number">2.3.3. </span>Preprocessor options<a class="headerlink" href="#preprocessor-options" title="Permalink to this headline">¶</a></h3>
 <p>Three optional arguments to <a class="reference internal" href="apiref.html#distutils.core.Extension" title="distutils.core.Extension"><code class="xref py py-class docutils literal notranslate"><span class="pre">Extension</span></code></a> will help if
 you need to specify include directories to search or preprocessor macros to
@@ -374,8 +462,8 @@ just a list of macros to undefine.</p>
 <span class="c1">#undef HAVE_BAR</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="library-options">
+</section>
+<section id="library-options">
 <h3><span class="section-number">2.3.4. </span>Library options<a class="headerlink" href="#library-options" title="Permalink to this headline">¶</a></h3>
 <p>You can also specify the libraries to link against when building your extension,
 and the directories to search for those libraries.  The <code class="docutils literal notranslate"><span class="pre">libraries</span></code> option is
@@ -397,8 +485,8 @@ include the location in <code class="docutils literal notranslate"><span class="
 </div>
 <p>(Again, this sort of non-portable construct should be avoided if you intend to
 distribute your code.)</p>
-</div>
-<div class="section" id="other-options">
+</section>
+<section id="other-options">
 <h3><span class="section-number">2.3.5. </span>Other options<a class="headerlink" href="#other-options" title="Permalink to this headline">¶</a></h3>
 <p>There are still some other options which can be used to handle special cases.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">optional</span></code> option is a boolean; if it is true,
@@ -418,9 +506,9 @@ to the list of exported symbols.</p>
 (for example header files). The build command will call the compiler on the
 sources to rebuild extension if any on this files has been modified since the
 previous build.</p>
-</div>
-</div>
-<div class="section" id="relationships-between-distributions-and-packages">
+</section>
+</section>
+<section id="relationships-between-distributions-and-packages">
 <h2><span class="section-number">2.4. </span>Relationships between Distributions and Packages<a class="headerlink" href="#relationships-between-distributions-and-packages" title="Permalink to this headline">¶</a></h2>
 <p>A distribution may relate to packages in three specific ways:</p>
 <ol class="arabic simple">
@@ -505,8 +593,8 @@ package name.</p>
 <p>The versions identified by the qualifiers are those that are obsoleted by the
 distribution being described.  If no qualifiers are given, all versions of the
 named module or package are understood to be obsoleted.</p>
-</div>
-<div class="section" id="installing-scripts">
+</section>
+<section id="installing-scripts">
 <span id="distutils-installing-scripts"></span><h2><span class="section-number">2.5. </span>Installing Scripts<a class="headerlink" href="#installing-scripts" title="Permalink to this headline">¶</a></h2>
 <p>So far we have been dealing with pure and non-pure Python modules, which are
 usually not run by themselves but imported by scripts.</p>
@@ -528,8 +616,8 @@ way.  From the PyXML setup script:</p>
 <p><span class="versionmodified changed">Changed in version 3.1: </span>All the scripts will also be added to the <code class="docutils literal notranslate"><span class="pre">MANIFEST</span></code> file if no template is
 provided.  See <a class="reference internal" href="sourcedist.html#manifest"><span class="std std-ref">Specifying the files to distribute</span></a>.</p>
 </div>
-</div>
-<div class="section" id="installing-package-data">
+</section>
+<section id="installing-package-data">
 <span id="distutils-installing-package-data"></span><h2><span class="section-number">2.6. </span>Installing Package Data<a class="headerlink" href="#installing-package-data" title="Permalink to this headline">¶</a></h2>
 <p>Often, additional files need to be installed into a package.  These files are
 often data that’s closely related to the package’s implementation, or text files
@@ -569,8 +657,8 @@ the files can be arranged like this in the source tree:</p>
 <p><span class="versionmodified changed">Changed in version 3.1: </span>All the files that match <code class="docutils literal notranslate"><span class="pre">package_data</span></code> will be added to the <code class="docutils literal notranslate"><span class="pre">MANIFEST</span></code>
 file if no template is provided.  See <a class="reference internal" href="sourcedist.html#manifest"><span class="std std-ref">Specifying the files to distribute</span></a>.</p>
 </div>
-</div>
-<div class="section" id="installing-additional-files">
+</section>
+<section id="installing-additional-files">
 <span id="distutils-additional-files"></span><h2><span class="section-number">2.7. </span>Installing Additional Files<a class="headerlink" href="#installing-additional-files" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">data_files</span></code> option can be used to specify additional files needed
 by the module distribution: configuration files, message catalogs, data files,
@@ -605,8 +693,8 @@ directory.</p>
 <p><span class="versionmodified changed">Changed in version 3.1: </span>All the files that match <code class="docutils literal notranslate"><span class="pre">data_files</span></code> will be added to the <code class="docutils literal notranslate"><span class="pre">MANIFEST</span></code>
 file if no template is provided.  See <a class="reference internal" href="sourcedist.html#manifest"><span class="std std-ref">Specifying the files to distribute</span></a>.</p>
 </div>
-</div>
-<div class="section" id="additional-meta-data">
+</section>
+<section id="additional-meta-data">
 <span id="meta-data"></span><h2><span class="section-number">2.8. </span>Additional meta-data<a class="headerlink" href="#additional-meta-data" title="Permalink to this headline">¶</a></h2>
 <p>The setup script may include additional meta-data beyond the name and version.
 This information includes:</p>
@@ -774,8 +862,8 @@ information is sometimes used to indicate sub-releases.  These are
 <p><span class="versionmodified changed">Changed in version 3.7: </span><a class="reference internal" href="apiref.html#distutils.core.setup" title="distutils.core.setup"><code class="xref py py-class docutils literal notranslate"><span class="pre">setup</span></code></a> now warns when <code class="docutils literal notranslate"><span class="pre">classifiers</span></code>, <code class="docutils literal notranslate"><span class="pre">keywords</span></code>
 or <code class="docutils literal notranslate"><span class="pre">platforms</span></code> fields are not specified as a list or a string.</p>
 </div>
-</div>
-<div class="section" id="debugging-the-setup-script">
+</section>
+<section id="debugging-the-setup-script">
 <span id="debug-setup-script"></span><h2><span class="section-number">2.9. </span>Debugging the setup script<a class="headerlink" href="#debugging-the-setup-script" title="Permalink to this headline">¶</a></h2>
 <p>Sometimes things go wrong, and the setup script doesn’t do what the developer
 wants.</p>
@@ -792,8 +880,8 @@ to anything except an empty string, and distutils will now print detailed
 information about what it is doing, dump the full traceback when an exception
 occurs, and print the whole command line when an external program (like a C
 compiler) fails.</p>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -836,7 +924,7 @@ compiler) fails.</p>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/master/Doc/distutils/setupscript.rst"
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/distutils/setupscript.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -862,33 +950,44 @@ compiler) fails.</p>
           <a href="introduction.html" title="1. An Introduction to Distutils"
              >previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Distributing Python Modules (Legacy version)</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><span class="section-number">2. </span>Writing the Setup Script</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>  
     <div class="footer">
@@ -906,7 +1005,7 @@ compiler) fails.</p>
 <br />
     <br />
 
-    Last updated on Mar 24, 2021.
+    Last updated on May 10, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 

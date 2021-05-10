@@ -4,8 +4,10 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>sqlite3 — DB-API 2.0 interface for SQLite databases &#8212; Python 3.10.0a6 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>sqlite3 — DB-API 2.0 interface for SQLite databases &#8212; Python 3.10.0b1 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
@@ -19,7 +21,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.10.0a6 documentation"
+          title="Search within Python 3.10.0b1 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -40,17 +42,99 @@
         }
       }
     </style>
+<link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.svg" />
+            <script type="text/javascript" src="../_static/copybutton.js"></script>
+            <script type="text/javascript" src="../_static/menu.js"></script>
+            <script type="text/javascript" src="../_static/themetoggle.js"></script> 
 
-    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
-    
-    <script type="text/javascript" src="../_static/copybutton.js"></script>
-    <script type="text/javascript" src="../_static/themetoggle.js"></script>
-    
-     
+  </head>
+<body>
+<div class="mobile-nav">
+    <input type="checkbox" id="menuToggler" class="toggler__input" aria-controls="navigation"
+           aria-pressed="false" aria-expanded="false" role="button" aria-label="Menu" />
+    <nav class="nav-content" role="navigation">
+        <label for="menuToggler" class="toggler__label">
+            <span></span>
+        </label>
+        <span class="nav-items-wrapper">
+            <a href="https://www.python.org/" class="nav-logo">
+                <img src="../_static/py.svg" alt="Logo"/>
+            </a>
+            <span class="version_switcher_placeholder"></span>
+            <form id="searchbox" role="search" class="search" action="../search.html" method="get">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="search-icon">
+                    <path fill-rule="nonzero" fill="currentColor" d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 001.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 00-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 005.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                </svg>
+                <input type="search" name="q" aria-label="Quick search"/>
+                <input type="submit" value="Go"/>
+                
+            </form>
+        </span>
+    </nav>
+    <div class="menu-wrapper">
+        <nav class="menu" role="navigation" aria-label="main navigation">
+            <div class="language_switcher_placeholder"></div>
+            
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label>
+  <h3><a href="../contents.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sqlite3</span></code> — DB-API 2.0 interface for SQLite databases</a><ul>
+<li><a class="reference internal" href="#module-functions-and-constants">Module functions and constants</a></li>
+<li><a class="reference internal" href="#connection-objects">Connection Objects</a></li>
+<li><a class="reference internal" href="#cursor-objects">Cursor Objects</a></li>
+<li><a class="reference internal" href="#row-objects">Row Objects</a></li>
+<li><a class="reference internal" href="#exceptions">Exceptions</a></li>
+<li><a class="reference internal" href="#sqlite-and-python-types">SQLite and Python types</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#using-adapters-to-store-additional-python-types-in-sqlite-databases">Using adapters to store additional Python types in SQLite databases</a><ul>
+<li><a class="reference internal" href="#letting-your-object-adapt-itself">Letting your object adapt itself</a></li>
+<li><a class="reference internal" href="#registering-an-adapter-callable">Registering an adapter callable</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#converting-sqlite-values-to-custom-python-types">Converting SQLite values to custom Python types</a></li>
+<li><a class="reference internal" href="#default-adapters-and-converters">Default adapters and converters</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#controlling-transactions">Controlling Transactions</a></li>
+<li><a class="reference internal" href="#using-sqlite3-efficiently">Using <code class="xref py py-mod docutils literal notranslate"><span class="pre">sqlite3</span></code> efficiently</a><ul>
+<li><a class="reference internal" href="#using-shortcut-methods">Using shortcut methods</a></li>
+<li><a class="reference internal" href="#accessing-columns-by-name-instead-of-by-index">Accessing columns by name instead of by index</a></li>
+<li><a class="reference internal" href="#using-the-connection-as-a-context-manager">Using the connection as a context manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="dbm.html"
+                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">dbm</span></code> — Interfaces to Unix “databases”</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="archiving.html"
+                        title="next chapter">Data Compression and Archiving</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../bugs.html">Report a Bug</a></li>
+      <li>
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/library/sqlite3.rst"
+            rel="nofollow">Show Source
+        </a>
+      </li>
+    </ul>
+  </div>
+        </nav>
+    </div>
+</div>
 
-  </head><body>
   
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -68,34 +152,45 @@
           <a href="dbm.html" title="dbm — Interfaces to Unix “databases”"
              accesskey="P">previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="persistence.html" accesskey="U">Data Persistence</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">sqlite3</span></code> — DB-API 2.0 interface for SQLite databases</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>    
 
@@ -104,9 +199,9 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="module-sqlite3">
+  <section id="module-sqlite3">
 <span id="sqlite3-db-api-2-0-interface-for-sqlite-databases"></span><h1><a class="reference internal" href="#module-sqlite3" title="sqlite3: A DB-API 2.0 implementation using SQLite 3.x."><code class="xref py py-mod docutils literal notranslate"><span class="pre">sqlite3</span></code></a> — DB-API 2.0 interface for SQLite databases<a class="headerlink" href="#module-sqlite3" title="Permalink to this headline">¶</a></h1>
-<p><strong>Source code:</strong> <a class="reference external" href="https://github.com/python/cpython/tree/master/Lib/sqlite3/">Lib/sqlite3/</a></p>
+<p><strong>Source code:</strong> <a class="reference external" href="https://github.com/python/cpython/tree/3.10/Lib/sqlite3/">Lib/sqlite3/</a></p>
 <hr class="docutils" />
 <p>SQLite is a C library that provides a lightweight disk-based database that
 doesn’t require a separate server process and allows accessing the database
@@ -150,32 +245,6 @@ and call its <a class="reference internal" href="#sqlite3.Cursor.execute" title=
 <span class="n">cur</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>Usually your SQL operations will need to use values from Python variables.  You
-shouldn’t assemble your query using Python’s string operations because doing so
-is insecure; it makes your program vulnerable to an SQL injection attack
-(see <a class="reference external" href="https://xkcd.com/327/">https://xkcd.com/327/</a> for humorous example of what can go wrong).</p>
-<p>Instead, use the DB-API’s parameter substitution.  Put <code class="docutils literal notranslate"><span class="pre">?</span></code> as a placeholder
-wherever you want to use a value, and then provide a tuple of values as the
-second argument to the cursor’s <a class="reference internal" href="#sqlite3.Cursor.execute" title="sqlite3.Cursor.execute"><code class="xref py py-meth docutils literal notranslate"><span class="pre">execute()</span></code></a> method.  (Other database
-modules may use a different placeholder, such as <code class="docutils literal notranslate"><span class="pre">%s</span></code> or <code class="docutils literal notranslate"><span class="pre">:1</span></code>.) For
-example:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Never do this -- insecure!</span>
-<span class="n">symbol</span> <span class="o">=</span> <span class="s1">&#39;RHAT&#39;</span>
-<span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM stocks WHERE symbol = &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span> <span class="o">%</span> <span class="n">symbol</span><span class="p">)</span>
-
-<span class="c1"># Do this instead</span>
-<span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;RHAT&#39;</span><span class="p">,)</span>
-<span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM stocks WHERE symbol=?&#39;</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">cur</span><span class="o">.</span><span class="n">fetchone</span><span class="p">())</span>
-
-<span class="c1"># Larger example that inserts many records at a time</span>
-<span class="n">purchases</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;2006-03-28&#39;</span><span class="p">,</span> <span class="s1">&#39;BUY&#39;</span><span class="p">,</span> <span class="s1">&#39;IBM&#39;</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mf">45.00</span><span class="p">),</span>
-             <span class="p">(</span><span class="s1">&#39;2006-04-05&#39;</span><span class="p">,</span> <span class="s1">&#39;BUY&#39;</span><span class="p">,</span> <span class="s1">&#39;MSFT&#39;</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mf">72.00</span><span class="p">),</span>
-             <span class="p">(</span><span class="s1">&#39;2006-04-06&#39;</span><span class="p">,</span> <span class="s1">&#39;SELL&#39;</span><span class="p">,</span> <span class="s1">&#39;IBM&#39;</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mf">53.00</span><span class="p">),</span>
-            <span class="p">]</span>
-<span class="n">cur</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span><span class="s1">&#39;INSERT INTO stocks VALUES (?,?,?,?,?)&#39;</span><span class="p">,</span> <span class="n">purchases</span><span class="p">)</span>
-</pre></div>
-</div>
 <p>To retrieve data after executing a SELECT statement, you can either treat the
 cursor as an <a class="reference internal" href="../glossary.html#term-iterator"><span class="xref std std-term">iterator</span></a>, call the cursor’s <a class="reference internal" href="#sqlite3.Cursor.fetchone" title="sqlite3.Cursor.fetchone"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fetchone()</span></code></a> method to
 retrieve a single matching row, or call <a class="reference internal" href="#sqlite3.Cursor.fetchall" title="sqlite3.Cursor.fetchall"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fetchall()</span></code></a> to get a list of the
@@ -190,6 +259,52 @@ matching rows.</p>
 <span class="go">(&#39;2006-04-05&#39;, &#39;BUY&#39;, &#39;MSFT&#39;, 1000, 72.0)</span>
 </pre></div>
 </div>
+<p id="sqlite3-placeholders">Usually your SQL operations will need to use values from Python variables.  You
+shouldn’t assemble your query using Python’s string operations because doing so
+is insecure; it makes your program vulnerable to an SQL injection attack
+(see the <a class="reference external" href="https://xkcd.com/327/">xkcd webcomic</a> for a humorous example of
+what can go wrong):</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Never do this -- insecure!</span>
+<span class="n">symbol</span> <span class="o">=</span> <span class="s1">&#39;RHAT&#39;</span>
+<span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM stocks WHERE symbol = &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span> <span class="o">%</span> <span class="n">symbol</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Instead, use the DB-API’s parameter substitution. Put a placeholder wherever
+you want to use a value, and then provide a tuple of values as the second
+argument to the cursor’s <a class="reference internal" href="#sqlite3.Cursor.execute" title="sqlite3.Cursor.execute"><code class="xref py py-meth docutils literal notranslate"><span class="pre">execute()</span></code></a> method. An SQL statement may
+use one of two kinds of placeholders: question marks (qmark style) or named
+placeholders (named style). For the qmark style, <code class="docutils literal notranslate"><span class="pre">parameters</span></code> must be a
+<a class="reference internal" href="../glossary.html#term-sequence"><span class="xref std std-term">sequence</span></a>. For the named style, it can be either a
+<a class="reference internal" href="../glossary.html#term-sequence"><span class="xref std std-term">sequence</span></a> or <a class="reference internal" href="stdtypes.html#dict" title="dict"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> instance. The length of the
+<a class="reference internal" href="../glossary.html#term-sequence"><span class="xref std std-term">sequence</span></a> must match the number of placeholders, or a
+<a class="reference internal" href="#sqlite3.ProgrammingError" title="sqlite3.ProgrammingError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ProgrammingError</span></code></a> is raised. If a <a class="reference internal" href="stdtypes.html#dict" title="dict"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> is given, it must contain
+keys for all named parameters. Any extra items are ignored. Here’s an example
+of both styles:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sqlite3</span>
+
+<span class="n">con</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;:memory:&quot;</span><span class="p">)</span>
+<span class="n">cur</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+<span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;create table lang (lang_name, lang_age)&quot;</span><span class="p">)</span>
+
+<span class="c1"># This is the qmark style:</span>
+<span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;insert into lang values (?, ?)&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="mi">49</span><span class="p">))</span>
+
+<span class="c1"># The qmark style used with executemany():</span>
+<span class="n">lang_list</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;Fortran&quot;</span><span class="p">,</span> <span class="mi">64</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Python&quot;</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Go&quot;</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+<span class="p">]</span>
+<span class="n">cur</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span><span class="s2">&quot;insert into lang values (?, ?)&quot;</span><span class="p">,</span> <span class="n">lang_list</span><span class="p">)</span>
+
+<span class="c1"># And this is the named style:</span>
+<span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;select * from lang where lang_name=:name and lang_age=:age&quot;</span><span class="p">,</span>
+            <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mi">49</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cur</span><span class="o">.</span><span class="n">fetchall</span><span class="p">())</span>
+
+<span class="n">con</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
@@ -202,7 +317,7 @@ available data types for the supported SQL dialect.</p>
 </dd>
 </dl>
 </div>
-<div class="section" id="module-functions-and-constants">
+<section id="module-functions-and-constants">
 <span id="sqlite3-module-contents"></span><h2>Module functions and constants<a class="headerlink" href="#module-functions-and-constants" title="Permalink to this headline">¶</a></h2>
 <dl class="py data">
 <dt id="sqlite3.version">
@@ -306,11 +421,15 @@ you can use:</p>
 <p>More information about this feature, including a list of recognized options, can
 be found in the <a class="reference external" href="https://www.sqlite.org/uri.html">SQLite URI documentation</a>.</p>
 <p class="audit-hook">Raises an <a class="reference internal" href="sys.html#auditing"><span class="std std-ref">auditing event</span></a> <code class="docutils literal notranslate"><span class="pre">sqlite3.connect</span></code> with argument <code class="docutils literal notranslate"><span class="pre">database</span></code>.</p>
+<p class="audit-hook">Raises an <a class="reference internal" href="sys.html#auditing"><span class="std std-ref">auditing event</span></a> <code class="docutils literal notranslate"><span class="pre">sqlite3.connect/handle</span></code> with argument <code class="docutils literal notranslate"><span class="pre">connection_handle</span></code>.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">Changed in version 3.4: </span>Added the <em>uri</em> parameter.</p>
 </div>
 <div class="versionchanged">
 <p><span class="versionmodified changed">Changed in version 3.7: </span><em>database</em> can now also be a <a class="reference internal" href="../glossary.html#term-path-like-object"><span class="xref std std-term">path-like object</span></a>, not only a string.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 3.10: </span>Added the <code class="docutils literal notranslate"><span class="pre">sqlite3.connect/handle</span></code> auditing event.</p>
 </div>
 </dd></dl>
 
@@ -385,8 +504,8 @@ get tracebacks from callbacks on <code class="docutils literal notranslate"><spa
 disable the feature again.</p>
 </dd></dl>
 
-</div>
-<div class="section" id="connection-objects">
+</section>
+<section id="connection-objects">
 <span id="sqlite3-connection-objects"></span><h2>Connection Objects<a class="headerlink" href="#connection-objects" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="sqlite3.Connection">
@@ -646,8 +765,12 @@ from shared libraries.  SQLite extensions can define new functions,
 aggregates or whole new virtual table implementations.  One well-known
 extension is the fulltext-search extension distributed with SQLite.</p>
 <p>Loadable extensions are disabled by default. See <a class="footnote-reference brackets" href="#f1" id="id1">1</a>.</p>
+<p class="audit-hook">Raises an <a class="reference internal" href="sys.html#auditing"><span class="std std-ref">auditing event</span></a> <code class="docutils literal notranslate"><span class="pre">sqlite3.enable_load_extension</span></code> with arguments <code class="docutils literal notranslate"><span class="pre">connection</span></code>, <code class="docutils literal notranslate"><span class="pre">enabled</span></code>.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.2.</span></p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 3.10: </span>Added the <code class="docutils literal notranslate"><span class="pre">sqlite3.enable_load_extension</span></code> auditing event.</p>
 </div>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sqlite3</span>
 
@@ -688,8 +811,12 @@ extension is the fulltext-search extension distributed with SQLite.</p>
 enable extension loading with <a class="reference internal" href="#sqlite3.Connection.enable_load_extension" title="sqlite3.Connection.enable_load_extension"><code class="xref py py-meth docutils literal notranslate"><span class="pre">enable_load_extension()</span></code></a> before you can
 use this routine.</p>
 <p>Loadable extensions are disabled by default. See <a class="footnote-reference brackets" href="#f1" id="id2">1</a>.</p>
+<p class="audit-hook">Raises an <a class="reference internal" href="sys.html#auditing"><span class="std std-ref">auditing event</span></a> <code class="docutils literal notranslate"><span class="pre">sqlite3.load_extension</span></code> with arguments <code class="docutils literal notranslate"><span class="pre">connection</span></code>, <code class="docutils literal notranslate"><span class="pre">path</span></code>.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.2.</span></p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 3.10: </span>Added the <code class="docutils literal notranslate"><span class="pre">sqlite3.load_extension</span></code> auditing event.</p>
 </div>
 </dd></dl>
 
@@ -847,8 +974,8 @@ integer or a floating point value.</p>
 
 </dd></dl>
 
-</div>
-<div class="section" id="cursor-objects">
+</section>
+<section id="cursor-objects">
 <span id="sqlite3-cursor-objects"></span><h2>Cursor Objects<a class="headerlink" href="#cursor-objects" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="sqlite3.Cursor">
@@ -857,31 +984,8 @@ integer or a floating point value.</p>
 <span class="target" id="index-2"></span><span class="target" id="index-3"></span><dl class="py method">
 <dt id="sqlite3.Cursor.execute">
 <code class="sig-name descname">execute</code><span class="sig-paren">(</span><em class="sig-param">sql</em><span class="optional">[</span>, <em class="sig-param">parameters</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#sqlite3.Cursor.execute" title="Permalink to this definition">¶</a></dt>
-<dd><p>Executes an SQL statement. The SQL statement may be parameterized (i. e.
-placeholders instead of SQL literals). The <a class="reference internal" href="#module-sqlite3" title="sqlite3: A DB-API 2.0 implementation using SQLite 3.x."><code class="xref py py-mod docutils literal notranslate"><span class="pre">sqlite3</span></code></a> module supports two
-kinds of placeholders: question marks (qmark style) and named placeholders
-(named style).</p>
-<p>Here’s an example of both styles:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sqlite3</span>
-
-<span class="n">con</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;:memory:&quot;</span><span class="p">)</span>
-<span class="n">cur</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
-<span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;create table people (name_last, age)&quot;</span><span class="p">)</span>
-
-<span class="n">who</span> <span class="o">=</span> <span class="s2">&quot;Yeltsin&quot;</span>
-<span class="n">age</span> <span class="o">=</span> <span class="mi">72</span>
-
-<span class="c1"># This is the qmark style:</span>
-<span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;insert into people values (?, ?)&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">who</span><span class="p">,</span> <span class="n">age</span><span class="p">))</span>
-
-<span class="c1"># And this is the named style:</span>
-<span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;select * from people where name_last=:who and age=:age&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;who&quot;</span><span class="p">:</span> <span class="n">who</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="n">age</span><span class="p">})</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">cur</span><span class="o">.</span><span class="n">fetchone</span><span class="p">())</span>
-
-<span class="n">con</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</pre></div>
-</div>
+<dd><p>Executes an SQL statement. Values may be bound to the statement using
+<a class="reference internal" href="#sqlite3-placeholders"><span class="std std-ref">placeholders</span></a>.</p>
 <p><a class="reference internal" href="#sqlite3.Cursor.execute" title="sqlite3.Cursor.execute"><code class="xref py py-meth docutils literal notranslate"><span class="pre">execute()</span></code></a> will only execute a single SQL statement. If you try to execute
 more than one statement with it, it will raise a <a class="reference internal" href="#sqlite3.Warning" title="sqlite3.Warning"><code class="xref py py-exc docutils literal notranslate"><span class="pre">Warning</span></code></a>. Use
 <a class="reference internal" href="#sqlite3.Cursor.executescript" title="sqlite3.Cursor.executescript"><code class="xref py py-meth docutils literal notranslate"><span class="pre">executescript()</span></code></a> if you want to execute multiple SQL statements with one
@@ -891,9 +995,10 @@ call.</p>
 <dl class="py method">
 <dt id="sqlite3.Cursor.executemany">
 <code class="sig-name descname">executemany</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sql</span></em>, <em class="sig-param"><span class="n">seq_of_parameters</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sqlite3.Cursor.executemany" title="Permalink to this definition">¶</a></dt>
-<dd><p>Executes an SQL command against all parameter sequences or mappings found in
-the sequence <em>seq_of_parameters</em>.  The <a class="reference internal" href="#module-sqlite3" title="sqlite3: A DB-API 2.0 implementation using SQLite 3.x."><code class="xref py py-mod docutils literal notranslate"><span class="pre">sqlite3</span></code></a> module also allows
-using an <a class="reference internal" href="../glossary.html#term-iterator"><span class="xref std std-term">iterator</span></a> yielding parameters instead of a sequence.</p>
+<dd><p>Executes a <a class="reference internal" href="#sqlite3-placeholders"><span class="std std-ref">parameterized</span></a> SQL command
+against all parameter sequences or mappings found in the sequence
+<em>seq_of_parameters</em>. The <a class="reference internal" href="#module-sqlite3" title="sqlite3: A DB-API 2.0 implementation using SQLite 3.x."><code class="xref py py-mod docutils literal notranslate"><span class="pre">sqlite3</span></code></a> module also allows using an
+<a class="reference internal" href="../glossary.html#term-iterator"><span class="xref std std-term">iterator</span></a> yielding parameters instead of a sequence.</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sqlite3</span>
 
 <span class="k">class</span> <span class="nc">IterChars</span><span class="p">:</span>
@@ -1083,8 +1188,8 @@ calling <a class="reference internal" href="#sqlite3.Connection.cursor" title="s
 
 </dd></dl>
 
-</div>
-<div class="section" id="row-objects">
+</section>
+<section id="row-objects">
 <span id="sqlite3-row-objects"></span><h2>Row Objects<a class="headerlink" href="#row-objects" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="sqlite3.Row">
@@ -1148,8 +1253,8 @@ it is the first member of each tuple in <a class="reference internal" href="#sql
 <span class="go">35.14</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="exceptions">
+</section>
+<section id="exceptions">
 <span id="sqlite3-exceptions"></span><h2>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this headline">¶</a></h2>
 <dl class="py exception">
 <dt id="sqlite3.Warning">
@@ -1203,10 +1308,10 @@ method on a connection that does not support transaction or has
 transactions turned off.  It is a subclass of <a class="reference internal" href="#sqlite3.DatabaseError" title="sqlite3.DatabaseError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">DatabaseError</span></code></a>.</p>
 </dd></dl>
 
-</div>
-<div class="section" id="sqlite-and-python-types">
+</section>
+<section id="sqlite-and-python-types">
 <span id="sqlite3-types"></span><h2>SQLite and Python types<a class="headerlink" href="#sqlite-and-python-types" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="introduction">
+<section id="introduction">
 <h3>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h3>
 <p>SQLite natively supports the following types: <code class="docutils literal notranslate"><span class="pre">NULL</span></code>, <code class="docutils literal notranslate"><span class="pre">INTEGER</span></code>,
 <code class="docutils literal notranslate"><span class="pre">REAL</span></code>, <code class="docutils literal notranslate"><span class="pre">TEXT</span></code>, <code class="docutils literal notranslate"><span class="pre">BLOB</span></code>.</p>
@@ -1273,8 +1378,8 @@ transactions turned off.  It is a subclass of <a class="reference internal" href
 store additional Python types in a SQLite database via object adaptation, and
 you can let the <a class="reference internal" href="#module-sqlite3" title="sqlite3: A DB-API 2.0 implementation using SQLite 3.x."><code class="xref py py-mod docutils literal notranslate"><span class="pre">sqlite3</span></code></a> module convert SQLite types to different Python
 types via converters.</p>
-</div>
-<div class="section" id="using-adapters-to-store-additional-python-types-in-sqlite-databases">
+</section>
+<section id="using-adapters-to-store-additional-python-types-in-sqlite-databases">
 <h3>Using adapters to store additional Python types in SQLite databases<a class="headerlink" href="#using-adapters-to-store-additional-python-types-in-sqlite-databases" title="Permalink to this headline">¶</a></h3>
 <p>As described before, SQLite supports only a limited set of types natively. To
 use other Python types with SQLite, you must <strong>adapt</strong> them to one of the
@@ -1282,7 +1387,7 @@ sqlite3 module’s supported types for SQLite: one of NoneType, int, float,
 str, bytes.</p>
 <p>There are two ways to enable the <a class="reference internal" href="#module-sqlite3" title="sqlite3: A DB-API 2.0 implementation using SQLite 3.x."><code class="xref py py-mod docutils literal notranslate"><span class="pre">sqlite3</span></code></a> module to adapt a custom Python
 type to one of the supported ones.</p>
-<div class="section" id="letting-your-object-adapt-itself">
+<section id="letting-your-object-adapt-itself">
 <h4>Letting your object adapt itself<a class="headerlink" href="#letting-your-object-adapt-itself" title="Permalink to this headline">¶</a></h4>
 <p>This is a good approach if you write the class yourself. Let’s suppose you have
 a class like this:</p>
@@ -1316,8 +1421,8 @@ the converted value. The parameter <em>protocol</em> will be <code class="xref p
 <span class="n">con</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="registering-an-adapter-callable">
+</section>
+<section id="registering-an-adapter-callable">
 <h4>Registering an adapter callable<a class="headerlink" href="#registering-an-adapter-callable" title="Permalink to this headline">¶</a></h4>
 <p>The other possibility is to create a function that converts the type to the
 string representation and register the function with <a class="reference internal" href="#sqlite3.register_adapter" title="sqlite3.register_adapter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">register_adapter()</span></code></a>.</p>
@@ -1365,9 +1470,9 @@ but as a Unix timestamp.</p>
 <span class="n">con</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="converting-sqlite-values-to-custom-python-types">
+</section>
+</section>
+<section id="converting-sqlite-values-to-custom-python-types">
 <h3>Converting SQLite values to custom Python types<a class="headerlink" href="#converting-sqlite-values-to-custom-python-types" title="Permalink to this headline">¶</a></h3>
 <p>Writing an adapter lets you send custom Python types to SQLite. But to make it
 really useful we need to make the Python to SQLite to Python roundtrip work.</p>
@@ -1444,8 +1549,8 @@ for the constants <a class="reference internal" href="#sqlite3.PARSE_DECLTYPES" 
 <span class="n">con</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="default-adapters-and-converters">
+</section>
+<section id="default-adapters-and-converters">
 <h3>Default adapters and converters<a class="headerlink" href="#default-adapters-and-converters" title="Permalink to this headline">¶</a></h3>
 <p>There are default adapters for the date and datetime types in the datetime
 module. They will be sent as ISO dates/ISO timestamps to SQLite.</p>
@@ -1483,9 +1588,9 @@ experimental SQLite date/time functions.</p>
 <p>If a timestamp stored in SQLite has a fractional part longer than 6
 numbers, its value will be truncated to microsecond precision by the
 timestamp converter.</p>
-</div>
-</div>
-<div class="section" id="controlling-transactions">
+</section>
+</section>
+<section id="controlling-transactions">
 <span id="sqlite3-controlling-transactions"></span><h2>Controlling Transactions<a class="headerlink" href="#controlling-transactions" title="Permalink to this headline">¶</a></h2>
 <p>The underlying <code class="docutils literal notranslate"><span class="pre">sqlite3</span></code> library operates in <code class="docutils literal notranslate"><span class="pre">autocommit</span></code> mode by default,
 but the Python <a class="reference internal" href="#module-sqlite3" title="sqlite3: A DB-API 2.0 implementation using SQLite 3.x."><code class="xref py py-mod docutils literal notranslate"><span class="pre">sqlite3</span></code></a> module by default does not.</p>
@@ -1511,10 +1616,10 @@ control the transaction state by explicitly issuing <code class="docutils litera
 <p><span class="versionmodified changed">Changed in version 3.6: </span><a class="reference internal" href="#module-sqlite3" title="sqlite3: A DB-API 2.0 implementation using SQLite 3.x."><code class="xref py py-mod docutils literal notranslate"><span class="pre">sqlite3</span></code></a> used to implicitly commit an open transaction before DDL
 statements.  This is no longer the case.</p>
 </div>
-</div>
-<div class="section" id="using-sqlite3-efficiently">
+</section>
+<section id="using-sqlite3-efficiently">
 <h2>Using <a class="reference internal" href="#module-sqlite3" title="sqlite3: A DB-API 2.0 implementation using SQLite 3.x."><code class="xref py py-mod docutils literal notranslate"><span class="pre">sqlite3</span></code></a> efficiently<a class="headerlink" href="#using-sqlite3-efficiently" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="using-shortcut-methods">
+<section id="using-shortcut-methods">
 <h3>Using shortcut methods<a class="headerlink" href="#using-shortcut-methods" title="Permalink to this headline">¶</a></h3>
 <p>Using the nonstandard <code class="xref py py-meth docutils literal notranslate"><span class="pre">execute()</span></code>, <code class="xref py py-meth docutils literal notranslate"><span class="pre">executemany()</span></code> and
 <code class="xref py py-meth docutils literal notranslate"><span class="pre">executescript()</span></code> methods of the <a class="reference internal" href="#sqlite3.Connection" title="sqlite3.Connection"><code class="xref py py-class docutils literal notranslate"><span class="pre">Connection</span></code></a> object, your code can
@@ -1549,8 +1654,8 @@ directly using only a single call on the <a class="reference internal" href="#sq
 <span class="n">con</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="accessing-columns-by-name-instead-of-by-index">
+</section>
+<section id="accessing-columns-by-name-instead-of-by-index">
 <h3>Accessing columns by name instead of by index<a class="headerlink" href="#accessing-columns-by-name-instead-of-by-index" title="Permalink to this headline">¶</a></h3>
 <p>One useful feature of the <a class="reference internal" href="#module-sqlite3" title="sqlite3: A DB-API 2.0 implementation using SQLite 3.x."><code class="xref py py-mod docutils literal notranslate"><span class="pre">sqlite3</span></code></a> module is the built-in
 <a class="reference internal" href="#sqlite3.Row" title="sqlite3.Row"><code class="xref py py-class docutils literal notranslate"><span class="pre">sqlite3.Row</span></code></a> class designed to be used as a row factory.</p>
@@ -1572,8 +1677,8 @@ case-insensitively by name:</p>
 <span class="n">con</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="using-the-connection-as-a-context-manager">
+</section>
+<section id="using-the-connection-as-a-context-manager">
 <h3>Using the connection as a context manager<a class="headerlink" href="#using-the-connection-as-a-context-manager" title="Permalink to this headline">¶</a></h3>
 <p>Connection objects can be used as context managers
 that automatically commit or rollback transactions.  In the event of an
@@ -1607,13 +1712,13 @@ committed:</p>
 <dd><p>The sqlite3 module is not built with loadable extension support by
 default, because some platforms (notably Mac OS X) have SQLite
 libraries which are compiled without this feature. To get loadable
-extension support, you must pass <code class="docutils literal notranslate"><span class="pre">--enable-loadable-sqlite-extensions</span></code> to
-configure.</p>
+extension support, you must pass the
+<a class="reference internal" href="../using/configure.html#cmdoption-enable-loadable-sqlite-extensions"><code class="xref std std-option docutils literal notranslate"><span class="pre">--enable-loadable-sqlite-extensions</span></code></a> option to configure.</p>
 </dd>
 </dl>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -1663,7 +1768,7 @@ configure.</p>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/master/Doc/library/sqlite3.rst"
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/library/sqlite3.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -1689,34 +1794,45 @@ configure.</p>
           <a href="dbm.html" title="dbm — Interfaces to Unix “databases”"
              >previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="persistence.html" >Data Persistence</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">sqlite3</span></code> — DB-API 2.0 interface for SQLite databases</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>  
     <div class="footer">
@@ -1734,7 +1850,7 @@ configure.</p>
 <br />
     <br />
 
-    Last updated on Mar 24, 2021.
+    Last updated on May 10, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 

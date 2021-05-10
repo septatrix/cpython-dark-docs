@@ -4,8 +4,10 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Regular Expression HOWTO &#8212; Python 3.10.0a6 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Regular Expression HOWTO &#8212; Python 3.10.0b1 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
@@ -19,7 +21,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.10.0a6 documentation"
+          title="Search within Python 3.10.0b1 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -40,17 +42,110 @@
         }
       }
     </style>
+<link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.svg" />
+            <script type="text/javascript" src="../_static/copybutton.js"></script>
+            <script type="text/javascript" src="../_static/menu.js"></script>
+            <script type="text/javascript" src="../_static/themetoggle.js"></script> 
 
-    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
-    
-    <script type="text/javascript" src="../_static/copybutton.js"></script>
-    <script type="text/javascript" src="../_static/themetoggle.js"></script>
-    
-     
+  </head>
+<body>
+<div class="mobile-nav">
+    <input type="checkbox" id="menuToggler" class="toggler__input" aria-controls="navigation"
+           aria-pressed="false" aria-expanded="false" role="button" aria-label="Menu" />
+    <nav class="nav-content" role="navigation">
+        <label for="menuToggler" class="toggler__label">
+            <span></span>
+        </label>
+        <span class="nav-items-wrapper">
+            <a href="https://www.python.org/" class="nav-logo">
+                <img src="../_static/py.svg" alt="Logo"/>
+            </a>
+            <span class="version_switcher_placeholder"></span>
+            <form id="searchbox" role="search" class="search" action="../search.html" method="get">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="search-icon">
+                    <path fill-rule="nonzero" fill="currentColor" d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 001.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 00-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 005.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                </svg>
+                <input type="search" name="q" aria-label="Quick search"/>
+                <input type="submit" value="Go"/>
+                
+            </form>
+        </span>
+    </nav>
+    <div class="menu-wrapper">
+        <nav class="menu" role="navigation" aria-label="main navigation">
+            <div class="language_switcher_placeholder"></div>
+            
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label>
+  <h3><a href="../contents.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Regular Expression HOWTO</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#simple-patterns">Simple Patterns</a><ul>
+<li><a class="reference internal" href="#matching-characters">Matching Characters</a></li>
+<li><a class="reference internal" href="#repeating-things">Repeating Things</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#using-regular-expressions">Using Regular Expressions</a><ul>
+<li><a class="reference internal" href="#compiling-regular-expressions">Compiling Regular Expressions</a></li>
+<li><a class="reference internal" href="#the-backslash-plague">The Backslash Plague</a></li>
+<li><a class="reference internal" href="#performing-matches">Performing Matches</a></li>
+<li><a class="reference internal" href="#module-level-functions">Module-Level Functions</a></li>
+<li><a class="reference internal" href="#compilation-flags">Compilation Flags</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#more-pattern-power">More Pattern Power</a><ul>
+<li><a class="reference internal" href="#more-metacharacters">More Metacharacters</a></li>
+<li><a class="reference internal" href="#grouping">Grouping</a></li>
+<li><a class="reference internal" href="#non-capturing-and-named-groups">Non-capturing and Named Groups</a></li>
+<li><a class="reference internal" href="#lookahead-assertions">Lookahead Assertions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modifying-strings">Modifying Strings</a><ul>
+<li><a class="reference internal" href="#splitting-strings">Splitting Strings</a></li>
+<li><a class="reference internal" href="#search-and-replace">Search and Replace</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#common-problems">Common Problems</a><ul>
+<li><a class="reference internal" href="#use-string-methods">Use String Methods</a></li>
+<li><a class="reference internal" href="#match-versus-search">match() versus search()</a></li>
+<li><a class="reference internal" href="#greedy-versus-non-greedy">Greedy versus Non-Greedy</a></li>
+<li><a class="reference internal" href="#using-re-verbose">Using re.VERBOSE</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#feedback">Feedback</a></li>
+</ul>
+</li>
+</ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="logging-cookbook.html"
+                        title="previous chapter">Logging Cookbook</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="sockets.html"
+                        title="next chapter">Socket Programming HOWTO</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../bugs.html">Report a Bug</a></li>
+      <li>
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/howto/regex.rst"
+            rel="nofollow">Show Source
+        </a>
+      </li>
+    </ul>
+  </div>
+        </nav>
+    </div>
+</div>
 
-  </head><body>
   
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -68,33 +163,44 @@
           <a href="logging-cookbook.html" title="Logging Cookbook"
              accesskey="P">previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python HOWTOs</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Regular Expression HOWTO</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>    
 
@@ -103,7 +209,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="regular-expression-howto">
+  <section id="regular-expression-howto">
 <span id="regex-howto"></span><h1>Regular Expression HOWTO<a class="headerlink" href="#regular-expression-howto" title="Permalink to this headline">¶</a></h1>
 <dl class="field-list simple">
 <dt class="field-odd">Author</dt>
@@ -116,7 +222,7 @@
 with the <a class="reference internal" href="../library/re.html#module-re" title="re: Regular expression operations."><code class="xref py py-mod docutils literal notranslate"><span class="pre">re</span></code></a> module.  It provides a gentler introduction than the
 corresponding section in the Library Reference.</p>
 </div>
-<div class="section" id="introduction">
+<section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>Regular expressions (called REs, or regexes, or regex patterns) are essentially
 a tiny, highly specialized programming language embedded inside Python and made
@@ -138,8 +244,8 @@ are also tasks that <em>can</em> be done with regular expressions, but the expre
 turn out to be very complicated.  In these cases, you may be better off writing
 Python code to do the processing; while Python code will be slower than an
 elaborate regular expression, it will also probably be more understandable.</p>
-</div>
-<div class="section" id="simple-patterns">
+</section>
+<section id="simple-patterns">
 <h2>Simple Patterns<a class="headerlink" href="#simple-patterns" title="Permalink to this headline">¶</a></h2>
 <p>We’ll start by learning about the simplest possible regular expressions.  Since
 regular expressions are used to operate on strings, we’ll begin with the most
@@ -147,7 +253,7 @@ common task: matching characters.</p>
 <p>For a detailed explanation of the computer science underlying regular
 expressions (deterministic and non-deterministic finite automata), you can refer
 to almost any textbook on writing compilers.</p>
-<div class="section" id="matching-characters">
+<section id="matching-characters">
 <h3>Matching Characters<a class="headerlink" href="#matching-characters" title="Permalink to this headline">¶</a></h3>
 <p>Most letters and characters will simply match themselves.  For example, the
 regular expression <code class="docutils literal notranslate"><span class="pre">test</span></code> will match the string <code class="docutils literal notranslate"><span class="pre">test</span></code> exactly.  (You can
@@ -227,8 +333,8 @@ category in the Unicode database.</p>
 newline character, and there’s an alternate mode (<a class="reference internal" href="../library/re.html#re.DOTALL" title="re.DOTALL"><code class="xref py py-const docutils literal notranslate"><span class="pre">re.DOTALL</span></code></a>) where it will
 match even a newline.  <code class="docutils literal notranslate"><span class="pre">.</span></code> is often used where you want to match “any
 character”.</p>
-</div>
-<div class="section" id="repeating-things">
+</section>
+<section id="repeating-things">
 <h3>Repeating Things<a class="headerlink" href="#repeating-things" title="Permalink to this headline">¶</a></h3>
 <p>Being able to match varying sets of characters is the first thing regular
 expressions can do that isn’t already possible with the methods available on
@@ -333,15 +439,15 @@ all be expressed using this notation.  <code class="docutils literal notranslate
 is equivalent to <code class="docutils literal notranslate"><span class="pre">+</span></code>, and <code class="docutils literal notranslate"><span class="pre">{0,1}</span></code> is the same as <code class="docutils literal notranslate"><span class="pre">?</span></code>.  It’s better to use
 <code class="docutils literal notranslate"><span class="pre">*</span></code>, <code class="docutils literal notranslate"><span class="pre">+</span></code>, or <code class="docutils literal notranslate"><span class="pre">?</span></code> when you can, simply because they’re shorter and easier
 to read.</p>
-</div>
-</div>
-<div class="section" id="using-regular-expressions">
+</section>
+</section>
+<section id="using-regular-expressions">
 <h2>Using Regular Expressions<a class="headerlink" href="#using-regular-expressions" title="Permalink to this headline">¶</a></h2>
 <p>Now that we’ve looked at some simple regular expressions, how do we actually use
 them in Python?  The <a class="reference internal" href="../library/re.html#module-re" title="re: Regular expression operations."><code class="xref py py-mod docutils literal notranslate"><span class="pre">re</span></code></a> module provides an interface to the regular
 expression engine, allowing you to compile REs into objects and then perform
 matches with them.</p>
-<div class="section" id="compiling-regular-expressions">
+<section id="compiling-regular-expressions">
 <h3>Compiling Regular Expressions<a class="headerlink" href="#compiling-regular-expressions" title="Permalink to this headline">¶</a></h3>
 <p>Regular expressions are compiled into pattern objects, which have
 methods for various operations such as searching for pattern matches or
@@ -366,8 +472,8 @@ including them.) Instead, the <a class="reference internal" href="../library/re.
 included with Python, just like the <a class="reference internal" href="../library/socket.html#module-socket" title="socket: Low-level networking interface."><code class="xref py py-mod docutils literal notranslate"><span class="pre">socket</span></code></a> or <a class="reference internal" href="../library/zlib.html#module-zlib" title="zlib: Low-level interface to compression and decompression routines compatible with gzip."><code class="xref py py-mod docutils literal notranslate"><span class="pre">zlib</span></code></a> modules.</p>
 <p>Putting REs in strings keeps the Python language simpler, but has one
 disadvantage which is the topic of the next section.</p>
-</div>
-<div class="section" id="the-backslash-plague">
+</section>
+<section id="the-backslash-plague">
 <span id="id1"></span><h3>The Backslash Plague<a class="headerlink" href="#the-backslash-plague" title="Permalink to this headline">¶</a></h3>
 <p>As stated earlier, regular expressions use the backslash character (<code class="docutils literal notranslate"><span class="pre">'\'</span></code>) to
 indicate special forms or to allow special characters to be used without
@@ -439,8 +545,8 @@ the backslashes isn’t used.</p>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="performing-matches">
+</section>
+<section id="performing-matches">
 <h3>Performing Matches<a class="headerlink" href="#performing-matches" title="Permalink to this headline">¶</a></h3>
 <p>Once you have an object representing a compiled regular expression, what do you
 do with it?  Pattern objects have several methods and attributes.
@@ -481,7 +587,7 @@ containing information about the match: where it starts and ends, the substring
 it matched, and more.</p>
 <p>You can learn about this by interactively experimenting with the <a class="reference internal" href="../library/re.html#module-re" title="re: Regular expression operations."><code class="xref py py-mod docutils literal notranslate"><span class="pre">re</span></code></a>
 module.  If you have <a class="reference internal" href="../library/tkinter.html#module-tkinter" title="tkinter: Interface to Tcl/Tk for graphical user interfaces"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tkinter</span></code></a> available, you may also want to look at
-<a class="reference external" href="https://github.com/python/cpython/tree/master/Tools/demo/redemo.py">Tools/demo/redemo.py</a>, a demonstration program included with the
+<a class="reference external" href="https://github.com/python/cpython/tree/3.10/Tools/demo/redemo.py">Tools/demo/redemo.py</a>, a demonstration program included with the
 Python distribution.  It allows you to enter REs and strings, and displays
 whether the RE matches or fails. <code class="file docutils literal notranslate"><span class="pre">redemo.py</span></code> can be quite useful when
 trying to debug a complicated RE.</p>
@@ -603,8 +709,8 @@ result.  The <a class="reference internal" href="../library/re.html#re.Pattern.f
 <span class="go">(29, 31)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="module-level-functions">
+</section>
+<section id="module-level-functions">
 <h3>Module-Level Functions<a class="headerlink" href="#module-level-functions" title="Permalink to this headline">¶</a></h3>
 <p>You don’t have to create a pattern object and call its methods; the
 <a class="reference internal" href="../library/re.html#module-re" title="re: Regular expression operations."><code class="xref py py-mod docutils literal notranslate"><span class="pre">re</span></code></a> module also provides top-level functions called <a class="reference internal" href="../library/re.html#re.match" title="re.match"><code class="xref py py-func docutils literal notranslate"><span class="pre">match()</span></code></a>,
@@ -627,8 +733,8 @@ pattern and call its methods yourself?  If you’re accessing a regex
 within a loop, pre-compiling it will save a few function calls.
 Outside of loops, there’s not much difference thanks to the internal
 cache.</p>
-</div>
-<div class="section" id="compilation-flags">
+</section>
+<section id="compilation-flags">
 <h3>Compilation Flags<a class="headerlink" href="#compilation-flags" title="Permalink to this headline">¶</a></h3>
 <p>Compilation flags let you modify some aspects of how regular expressions work.
 Flags are available in the <a class="reference internal" href="../library/re.html#module-re" title="re: Regular expression operations."><code class="xref py py-mod docutils literal notranslate"><span class="pre">re</span></code></a> module under two names, a long name such as
@@ -792,14 +898,14 @@ been used to break up the RE into smaller pieces, but it’s still more difficul
 to understand than the version using <a class="reference internal" href="../library/re.html#re.VERBOSE" title="re.VERBOSE"><code class="xref py py-const docutils literal notranslate"><span class="pre">re.VERBOSE</span></code></a>.</p>
 </dd></dl>
 
-</div>
-</div>
-<div class="section" id="more-pattern-power">
+</section>
+</section>
+<section id="more-pattern-power">
 <h2>More Pattern Power<a class="headerlink" href="#more-pattern-power" title="Permalink to this headline">¶</a></h2>
 <p>So far we’ve only covered a part of the features of regular expressions.  In
 this section, we’ll cover some new metacharacters, and how to use groups to
 retrieve portions of the text that was matched.</p>
-<div class="section" id="more-metacharacters">
+<section id="more-metacharacters">
 <span id="id2"></span><h3>More Metacharacters<a class="headerlink" href="#more-metacharacters" title="Permalink to this headline">¶</a></h3>
 <p>There are some metacharacters that we haven’t covered yet.  Most of them will be
 covered in this section.</p>
@@ -889,8 +995,8 @@ string literals.</p>
 the current position is not at a word boundary.</p>
 </dd>
 </dl>
-</div>
-<div class="section" id="grouping">
+</section>
+<section id="grouping">
 <h3>Grouping<a class="headerlink" href="#grouping" title="Permalink to this headline">¶</a></h3>
 <p>Frequently you need to obtain more information than just whether the RE matched
 or not.  Regular expressions are often used to dissect strings by writing a RE
@@ -974,8 +1080,8 @@ backreferences in a RE.</p>
 <p>Backreferences like this aren’t often useful for just searching through a string
 — there are few text formats which repeat data in this way — but you’ll soon
 find out that they’re <em>very</em> useful when performing string substitutions.</p>
-</div>
-<div class="section" id="non-capturing-and-named-groups">
+</section>
+<section id="non-capturing-and-named-groups">
 <h3>Non-capturing and Named Groups<a class="headerlink" href="#non-capturing-and-named-groups" title="Permalink to this headline">¶</a></h3>
 <p>Elaborate REs may use many groups, both to capture substrings of interest, and
 to group and structure the RE itself.  In complex REs, it becomes difficult to
@@ -1069,8 +1175,8 @@ current point.  The regular expression for finding doubled words,
 <span class="go">&#39;the the&#39;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="lookahead-assertions">
+</section>
+<section id="lookahead-assertions">
 <h3>Lookahead Assertions<a class="headerlink" href="#lookahead-assertions" title="Permalink to this headline">¶</a></h3>
 <p>Another zero-width assertion is the lookahead assertion.  Lookahead assertions
 are available in both positive and negative form, and  look like this:</p>
@@ -1130,9 +1236,9 @@ when there are multiple dots in the filename.</p>
 alternative inside the assertion.  The following pattern excludes filenames that
 end in either <code class="docutils literal notranslate"><span class="pre">bat</span></code> or <code class="docutils literal notranslate"><span class="pre">exe</span></code>:</p>
 <p><code class="docutils literal notranslate"><span class="pre">.*[.](?!bat$|exe$)[^.]*$</span></code></p>
-</div>
-</div>
-<div class="section" id="modifying-strings">
+</section>
+</section>
+<section id="modifying-strings">
 <h2>Modifying Strings<a class="headerlink" href="#modifying-strings" title="Permalink to this headline">¶</a></h2>
 <p>Up to this point, we’ve simply performed searches against a static string.
 Regular expressions are also commonly used to modify strings in various ways,
@@ -1163,7 +1269,7 @@ replacements</p></td>
 </tr>
 </tbody>
 </table>
-<div class="section" id="splitting-strings">
+<section id="splitting-strings">
 <h3>Splitting Strings<a class="headerlink" href="#splitting-strings" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="../library/re.html#re.Pattern.split" title="re.Pattern.split"><code class="xref py py-meth docutils literal notranslate"><span class="pre">split()</span></code></a> method of a pattern splits a string apart
 wherever the RE matches, returning a list of the pieces. It’s similar to the
@@ -1213,8 +1319,8 @@ argument, but is otherwise the same.</p>
 <span class="go">[&#39;Words&#39;, &#39;words, words.&#39;]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="search-and-replace">
+</section>
+<section id="search-and-replace">
 <h3>Search and Replace<a class="headerlink" href="#search-and-replace" title="Permalink to this headline">¶</a></h3>
 <p>Another common task is to find all the matches for a pattern, and replace them
 with a different string.  The <a class="reference internal" href="../library/re.html#re.Pattern.sub" title="re.Pattern.sub"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sub()</span></code></a> method takes a replacement value,
@@ -1306,14 +1412,14 @@ the first argument.  The pattern may be provided as an object or as a string; if
 you need to specify regular expression flags, you must either use a
 pattern object as the first parameter, or use embedded modifiers in the
 pattern string, e.g. <code class="docutils literal notranslate"><span class="pre">sub(&quot;(?i)b+&quot;,</span> <span class="pre">&quot;x&quot;,</span> <span class="pre">&quot;bbbb</span> <span class="pre">BBBB&quot;)</span></code> returns <code class="docutils literal notranslate"><span class="pre">'x</span> <span class="pre">x'</span></code>.</p>
-</div>
-</div>
-<div class="section" id="common-problems">
+</section>
+</section>
+<section id="common-problems">
 <h2>Common Problems<a class="headerlink" href="#common-problems" title="Permalink to this headline">¶</a></h2>
 <p>Regular expressions are a powerful tool for some applications, but in some ways
 their behaviour isn’t intuitive and at times they don’t behave the way you may
 expect them to.  This section will point out some of the most common pitfalls.</p>
-<div class="section" id="use-string-methods">
+<section id="use-string-methods">
 <h3>Use String Methods<a class="headerlink" href="#use-string-methods" title="Permalink to this headline">¶</a></h3>
 <p>Sometimes using the <a class="reference internal" href="../library/re.html#module-re" title="re: Regular expression operations."><code class="xref py py-mod docutils literal notranslate"><span class="pre">re</span></code></a> module is a mistake.  If you’re matching a fixed
 string, or a single character class, and you’re not using any <a class="reference internal" href="../library/re.html#module-re" title="re: Regular expression operations."><code class="xref py py-mod docutils literal notranslate"><span class="pre">re</span></code></a> features
@@ -1337,8 +1443,8 @@ doing both tasks and will be faster than any regular expression operation can
 be.</p>
 <p>In short, before turning to the <a class="reference internal" href="../library/re.html#module-re" title="re: Regular expression operations."><code class="xref py py-mod docutils literal notranslate"><span class="pre">re</span></code></a> module, consider whether your problem
 can be solved with a faster and simpler string method.</p>
-</div>
-<div class="section" id="match-versus-search">
+</section>
+<section id="match-versus-search">
 <h3>match() versus search()<a class="headerlink" href="#match-versus-search" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="../library/re.html#re.match" title="re.match"><code class="xref py py-func docutils literal notranslate"><span class="pre">match()</span></code></a> function only checks if the RE matches at the beginning of the
 string while <a class="reference internal" href="../library/re.html#re.search" title="re.search"><code class="xref py py-func docutils literal notranslate"><span class="pre">search()</span></code></a> will scan forward through the string for a match.
@@ -1370,8 +1476,8 @@ the full match if a <code class="docutils literal notranslate"><span class="pre"
 <p>Adding <code class="docutils literal notranslate"><span class="pre">.*</span></code> defeats this optimization, requiring scanning to the end of the
 string and then backtracking to find a match for the rest of the RE.  Use
 <a class="reference internal" href="../library/re.html#re.search" title="re.search"><code class="xref py py-func docutils literal notranslate"><span class="pre">re.search()</span></code></a> instead.</p>
-</div>
-<div class="section" id="greedy-versus-non-greedy">
+</section>
+<section id="greedy-versus-non-greedy">
 <h3>Greedy versus Non-Greedy<a class="headerlink" href="#greedy-versus-non-greedy" title="Permalink to this headline">¶</a></h3>
 <p>When repeating a regular expression, as in <code class="docutils literal notranslate"><span class="pre">a*</span></code>, the resulting action is to
 consume as much of the pattern as possible.  This fact often bites you when
@@ -1407,8 +1513,8 @@ Quick-and-dirty patterns will handle common cases, but HTML and XML have special
 cases that will break the obvious regular expression; by the time you’ve written
 a regular expression that handles all of the possible cases, the patterns will
 be <em>very</em> complicated.  Use an HTML or XML parser module for such tasks.)</p>
-</div>
-<div class="section" id="using-re-verbose">
+</section>
+<section id="using-re-verbose">
 <h3>Using re.VERBOSE<a class="headerlink" href="#using-re-verbose" title="Permalink to this headline">¶</a></h3>
 <p>By now you’ve probably noticed that regular expressions are a very compact
 notation, but they’re not terribly readable.  REs of moderate complexity can
@@ -1438,9 +1544,9 @@ enables REs to be formatted more neatly:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">pat</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\s*(?P&lt;header&gt;[^:]+)\s*:(?P&lt;value&gt;.*?)\s*$&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="feedback">
+</section>
+</section>
+<section id="feedback">
 <h2>Feedback<a class="headerlink" href="#feedback" title="Permalink to this headline">¶</a></h2>
 <p>Regular expressions are a complicated topic.  Did this document help you
 understand them?  Were there parts that were unclear, or Problems you
@@ -1453,8 +1559,8 @@ and doesn’t contain any Python material at all, so it won’t be useful as a
 reference for programming in Python.  (The first edition covered Python’s
 now-removed <code class="xref py py-mod docutils literal notranslate"><span class="pre">regex</span></code> module, which won’t help you much.)  Consider checking
 it out from your library.</p>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -1515,7 +1621,7 @@ it out from your library.</p>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/master/Doc/howto/regex.rst"
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/howto/regex.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -1541,33 +1647,44 @@ it out from your library.</p>
           <a href="logging-cookbook.html" title="Logging Cookbook"
              >previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python HOWTOs</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Regular Expression HOWTO</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>  
     <div class="footer">
@@ -1585,7 +1702,7 @@ it out from your library.</p>
 <br />
     <br />
 
-    Last updated on Mar 24, 2021.
+    Last updated on May 10, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 

@@ -4,8 +4,10 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>argparse — Parser for command-line options, arguments and sub-commands &#8212; Python 3.10.0a6 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>argparse — Parser for command-line options, arguments and sub-commands &#8212; Python 3.10.0b1 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
@@ -19,7 +21,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.10.0a6 documentation"
+          title="Search within Python 3.10.0b1 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -40,17 +42,136 @@
         }
       }
     </style>
+<link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.svg" />
+            <script type="text/javascript" src="../_static/copybutton.js"></script>
+            <script type="text/javascript" src="../_static/menu.js"></script>
+            <script type="text/javascript" src="../_static/themetoggle.js"></script> 
 
-    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
-    
-    <script type="text/javascript" src="../_static/copybutton.js"></script>
-    <script type="text/javascript" src="../_static/themetoggle.js"></script>
-    
-     
+  </head>
+<body>
+<div class="mobile-nav">
+    <input type="checkbox" id="menuToggler" class="toggler__input" aria-controls="navigation"
+           aria-pressed="false" aria-expanded="false" role="button" aria-label="Menu" />
+    <nav class="nav-content" role="navigation">
+        <label for="menuToggler" class="toggler__label">
+            <span></span>
+        </label>
+        <span class="nav-items-wrapper">
+            <a href="https://www.python.org/" class="nav-logo">
+                <img src="../_static/py.svg" alt="Logo"/>
+            </a>
+            <span class="version_switcher_placeholder"></span>
+            <form id="searchbox" role="search" class="search" action="../search.html" method="get">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="search-icon">
+                    <path fill-rule="nonzero" fill="currentColor" d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 001.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 00-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 005.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                </svg>
+                <input type="search" name="q" aria-label="Quick search"/>
+                <input type="submit" value="Go"/>
+                
+            </form>
+        </span>
+    </nav>
+    <div class="menu-wrapper">
+        <nav class="menu" role="navigation" aria-label="main navigation">
+            <div class="language_switcher_placeholder"></div>
+            
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label>
+  <h3><a href="../contents.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">argparse</span></code> — Parser for command-line options, arguments and sub-commands</a><ul>
+<li><a class="reference internal" href="#example">Example</a><ul>
+<li><a class="reference internal" href="#creating-a-parser">Creating a parser</a></li>
+<li><a class="reference internal" href="#adding-arguments">Adding arguments</a></li>
+<li><a class="reference internal" href="#parsing-arguments">Parsing arguments</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#argumentparser-objects">ArgumentParser objects</a><ul>
+<li><a class="reference internal" href="#prog">prog</a></li>
+<li><a class="reference internal" href="#usage">usage</a></li>
+<li><a class="reference internal" href="#description">description</a></li>
+<li><a class="reference internal" href="#epilog">epilog</a></li>
+<li><a class="reference internal" href="#parents">parents</a></li>
+<li><a class="reference internal" href="#formatter-class">formatter_class</a></li>
+<li><a class="reference internal" href="#prefix-chars">prefix_chars</a></li>
+<li><a class="reference internal" href="#fromfile-prefix-chars">fromfile_prefix_chars</a></li>
+<li><a class="reference internal" href="#argument-default">argument_default</a></li>
+<li><a class="reference internal" href="#allow-abbrev">allow_abbrev</a></li>
+<li><a class="reference internal" href="#conflict-handler">conflict_handler</a></li>
+<li><a class="reference internal" href="#add-help">add_help</a></li>
+<li><a class="reference internal" href="#exit-on-error">exit_on_error</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-add-argument-method">The add_argument() method</a><ul>
+<li><a class="reference internal" href="#name-or-flags">name or flags</a></li>
+<li><a class="reference internal" href="#action">action</a></li>
+<li><a class="reference internal" href="#nargs">nargs</a></li>
+<li><a class="reference internal" href="#const">const</a></li>
+<li><a class="reference internal" href="#default">default</a></li>
+<li><a class="reference internal" href="#type">type</a></li>
+<li><a class="reference internal" href="#choices">choices</a></li>
+<li><a class="reference internal" href="#required">required</a></li>
+<li><a class="reference internal" href="#help">help</a></li>
+<li><a class="reference internal" href="#metavar">metavar</a></li>
+<li><a class="reference internal" href="#dest">dest</a></li>
+<li><a class="reference internal" href="#action-classes">Action classes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-parse-args-method">The parse_args() method</a><ul>
+<li><a class="reference internal" href="#option-value-syntax">Option value syntax</a></li>
+<li><a class="reference internal" href="#invalid-arguments">Invalid arguments</a></li>
+<li><a class="reference internal" href="#arguments-containing">Arguments containing <code class="docutils literal notranslate"><span class="pre">-</span></code></a></li>
+<li><a class="reference internal" href="#argument-abbreviations-prefix-matching">Argument abbreviations (prefix matching)</a></li>
+<li><a class="reference internal" href="#beyond-sys-argv">Beyond <code class="docutils literal notranslate"><span class="pre">sys.argv</span></code></a></li>
+<li><a class="reference internal" href="#the-namespace-object">The Namespace object</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#other-utilities">Other utilities</a><ul>
+<li><a class="reference internal" href="#sub-commands">Sub-commands</a></li>
+<li><a class="reference internal" href="#filetype-objects">FileType objects</a></li>
+<li><a class="reference internal" href="#argument-groups">Argument groups</a></li>
+<li><a class="reference internal" href="#mutual-exclusion">Mutual exclusion</a></li>
+<li><a class="reference internal" href="#parser-defaults">Parser defaults</a></li>
+<li><a class="reference internal" href="#printing-help">Printing help</a></li>
+<li><a class="reference internal" href="#partial-parsing">Partial parsing</a></li>
+<li><a class="reference internal" href="#customizing-file-parsing">Customizing file parsing</a></li>
+<li><a class="reference internal" href="#exiting-methods">Exiting methods</a></li>
+<li><a class="reference internal" href="#intermixed-parsing">Intermixed parsing</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#upgrading-optparse-code">Upgrading optparse code</a></li>
+</ul>
+</li>
+</ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="time.html"
+                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">time</span></code> — Time access and conversions</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="getopt.html"
+                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">getopt</span></code> — C-style parser for command line options</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../bugs.html">Report a Bug</a></li>
+      <li>
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/library/argparse.rst"
+            rel="nofollow">Show Source
+        </a>
+      </li>
+    </ul>
+  </div>
+        </nav>
+    </div>
+</div>
 
-  </head><body>
   
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -68,34 +189,45 @@
           <a href="time.html" title="time — Time access and conversions"
              accesskey="P">previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="allos.html" accesskey="U">Generic Operating System Services</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">argparse</span></code> — Parser for command-line options, arguments and sub-commands</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>    
 
@@ -104,25 +236,25 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="module-argparse">
+  <section id="module-argparse">
 <span id="argparse-parser-for-command-line-options-arguments-and-sub-commands"></span><h1><a class="reference internal" href="#module-argparse" title="argparse: Command-line option and argument parsing library."><code class="xref py py-mod docutils literal notranslate"><span class="pre">argparse</span></code></a> — Parser for command-line options, arguments and sub-commands<a class="headerlink" href="#module-argparse" title="Permalink to this headline">¶</a></h1>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.2.</span></p>
 </div>
-<p><strong>Source code:</strong> <a class="reference external" href="https://github.com/python/cpython/tree/master/Lib/argparse.py">Lib/argparse.py</a></p>
+<p><strong>Source code:</strong> <a class="reference external" href="https://github.com/python/cpython/tree/3.10/Lib/argparse.py">Lib/argparse.py</a></p>
 <hr class="docutils" />
-<div class="sidebar">
+<aside class="sidebar">
 <p class="sidebar-title">Tutorial</p>
 <p>This page contains the API reference information. For a more gentle
 introduction to Python command-line parsing, have a look at the
 <a class="reference internal" href="../howto/argparse.html#id1"><span class="std std-ref">argparse tutorial</span></a>.</p>
-</div>
+</aside>
 <p>The <a class="reference internal" href="#module-argparse" title="argparse: Command-line option and argument parsing library."><code class="xref py py-mod docutils literal notranslate"><span class="pre">argparse</span></code></a> module makes it easy to write user-friendly command-line
 interfaces. The program defines what arguments it requires, and <a class="reference internal" href="#module-argparse" title="argparse: Command-line option and argument parsing library."><code class="xref py py-mod docutils literal notranslate"><span class="pre">argparse</span></code></a>
 will figure out how to parse those out of <a class="reference internal" href="sys.html#sys.argv" title="sys.argv"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.argv</span></code></a>.  The <a class="reference internal" href="#module-argparse" title="argparse: Command-line option and argument parsing library."><code class="xref py py-mod docutils literal notranslate"><span class="pre">argparse</span></code></a>
 module also automatically generates help and usage messages and issues errors
 when users give the program invalid arguments.</p>
-<div class="section" id="example">
+<section id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <p>The following code is a Python program that takes a list of integers and
 produces either the sum or the max:</p>
@@ -170,7 +302,7 @@ the command-line integers:</p>
 </pre></div>
 </div>
 <p>The following sections walk you through this example.</p>
-<div class="section" id="creating-a-parser">
+<section id="creating-a-parser">
 <h3>Creating a parser<a class="headerlink" href="#creating-a-parser" title="Permalink to this headline">¶</a></h3>
 <p>The first step in using the <a class="reference internal" href="#module-argparse" title="argparse: Command-line option and argument parsing library."><code class="xref py py-mod docutils literal notranslate"><span class="pre">argparse</span></code></a> is creating an
 <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> object:</p>
@@ -179,8 +311,8 @@ the command-line integers:</p>
 </div>
 <p>The <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> object will hold all the information necessary to
 parse the command line into Python data types.</p>
-</div>
-<div class="section" id="adding-arguments">
+</section>
+<section id="adding-arguments">
 <h3>Adding arguments<a class="headerlink" href="#adding-arguments" title="Permalink to this headline">¶</a></h3>
 <p>Filling an <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> with information about program arguments is
 done by making calls to the <a class="reference internal" href="#argparse.ArgumentParser.add_argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code></a> method.
@@ -199,8 +331,8 @@ two attributes, <code class="docutils literal notranslate"><span class="pre">int
 will be a list of one or more ints, and the <code class="docutils literal notranslate"><span class="pre">accumulate</span></code> attribute will be
 either the <a class="reference internal" href="functions.html#sum" title="sum"><code class="xref py py-func docutils literal notranslate"><span class="pre">sum()</span></code></a> function, if <code class="docutils literal notranslate"><span class="pre">--sum</span></code> was specified at the command line,
 or the <a class="reference internal" href="functions.html#max" title="max"><code class="xref py py-func docutils literal notranslate"><span class="pre">max()</span></code></a> function if it was not.</p>
-</div>
-<div class="section" id="parsing-arguments">
+</section>
+<section id="parsing-arguments">
 <h3>Parsing arguments<a class="headerlink" href="#parsing-arguments" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> parses arguments through the
 <a class="reference internal" href="#argparse.ArgumentParser.parse_args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> method.  This will inspect the command line,
@@ -214,9 +346,9 @@ attributes parsed out of the command line:</p>
 <p>In a script, <a class="reference internal" href="#argparse.ArgumentParser.parse_args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> will typically be called with no
 arguments, and the <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> will automatically determine the
 command-line arguments from <a class="reference internal" href="sys.html#sys.argv" title="sys.argv"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.argv</span></code></a>.</p>
-</div>
-</div>
-<div class="section" id="argumentparser-objects">
+</section>
+</section>
+<section id="argumentparser-objects">
 <h2>ArgumentParser objects<a class="headerlink" href="#argumentparser-objects" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="argparse.ArgumentParser">
@@ -260,7 +392,7 @@ flags such as <code class="docutils literal notranslate"><span class="pre">-vv</
 </dd></dl>
 
 <p>The following sections describe how each of these are used.</p>
-<div class="section" id="prog">
+<section id="prog">
 <h3>prog<a class="headerlink" href="#prog" title="Permalink to this headline">¶</a></h3>
 <p>By default, <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> objects use <code class="docutils literal notranslate"><span class="pre">sys.argv[0]</span></code> to determine
 how to display the name of the program in help messages.  This default is almost
@@ -313,8 +445,8 @@ specifier.</p>
 <span class="go"> --foo FOO   foo of the myprogram program</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="usage">
+</section>
+<section id="usage">
 <h3>usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h3>
 <p>By default, <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> calculates the usage message from the
 arguments it contains:</p>
@@ -349,8 +481,8 @@ arguments it contains:</p>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">%(prog)s</span></code> format specifier is available to fill in the program name in
 your usage messages.</p>
-</div>
-<div class="section" id="description">
+</section>
+<section id="description">
 <h3>description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h3>
 <p>Most calls to the <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> constructor will use the
 <code class="docutils literal notranslate"><span class="pre">description=</span></code> keyword argument.  This argument gives a brief description of
@@ -369,8 +501,8 @@ various arguments:</p>
 </div>
 <p>By default, the description will be line-wrapped so that it fits within the
 given space.  To change this behavior, see the <a class="reference internal" href="#formatter-class">formatter_class</a> argument.</p>
-</div>
-<div class="section" id="epilog">
+</section>
+<section id="epilog">
 <h3>epilog<a class="headerlink" href="#epilog" title="Permalink to this headline">¶</a></h3>
 <p>Some programs like to display additional description of the program after the
 description of the arguments.  Such text can be specified using the <code class="docutils literal notranslate"><span class="pre">epilog=</span></code>
@@ -392,8 +524,8 @@ argument to <a class="reference internal" href="#argparse.ArgumentParser" title=
 <p>As with the <a class="reference internal" href="#description">description</a> argument, the <code class="docutils literal notranslate"><span class="pre">epilog=</span></code> text is by default
 line-wrapped, but this behavior can be adjusted with the <a class="reference internal" href="#formatter-class">formatter_class</a>
 argument to <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a>.</p>
-</div>
-<div class="section" id="parents">
+</section>
+<section id="parents">
 <h3>parents<a class="headerlink" href="#parents" title="Permalink to this headline">¶</a></h3>
 <p>Sometimes, several parsers share a common set of arguments. Rather than
 repeating the definitions of these arguments, a single parser with all the
@@ -424,8 +556,8 @@ and one in the child) and raise an error.</p>
 If you change the parent parsers after the child parser, those changes will
 not be reflected in the child.</p>
 </div>
-</div>
-<div class="section" id="formatter-class">
+</section>
+<section id="formatter-class">
 <h3>formatter_class<a class="headerlink" href="#formatter-class" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> objects allow the help formatting to be customized by
 specifying an alternate formatting class.  Currently, there are four such
@@ -533,8 +665,8 @@ as the regular formatter does):</p>
 <span class="go">  --foo int</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="prefix-chars">
+</section>
+<section id="prefix-chars">
 <h3>prefix_chars<a class="headerlink" href="#prefix-chars" title="Permalink to this headline">¶</a></h3>
 <p>Most command-line options will use <code class="docutils literal notranslate"><span class="pre">-</span></code> as the prefix, e.g. <code class="docutils literal notranslate"><span class="pre">-f/--foo</span></code>.
 Parsers that need to support different or additional prefix
@@ -551,8 +683,8 @@ to the ArgumentParser constructor:</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">prefix_chars=</span></code> argument defaults to <code class="docutils literal notranslate"><span class="pre">'-'</span></code>. Supplying a set of
 characters that does not include <code class="docutils literal notranslate"><span class="pre">-</span></code> will cause <code class="docutils literal notranslate"><span class="pre">-f/--foo</span></code> options to be
 disallowed.</p>
-</div>
-<div class="section" id="fromfile-prefix-chars">
+</section>
+<section id="fromfile-prefix-chars">
 <h3>fromfile_prefix_chars<a class="headerlink" href="#fromfile-prefix-chars" title="Permalink to this headline">¶</a></h3>
 <p>Sometimes, for example when dealing with a particularly long argument lists, it
 may make sense to keep the list of arguments in a file rather than typing it out
@@ -575,8 +707,8 @@ line.  So in the example above, the expression <code class="docutils literal not
 is considered equivalent to the expression <code class="docutils literal notranslate"><span class="pre">['-f',</span> <span class="pre">'foo',</span> <span class="pre">'-f',</span> <span class="pre">'bar']</span></code>.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">fromfile_prefix_chars=</span></code> argument defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>, meaning that
 arguments will never be treated as file references.</p>
-</div>
-<div class="section" id="argument-default">
+</section>
+<section id="argument-default">
 <h3>argument_default<a class="headerlink" href="#argument-default" title="Permalink to this headline">¶</a></h3>
 <p>Generally, argument defaults are specified either by passing a default to
 <a class="reference internal" href="#argparse.ArgumentParser.add_argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code></a> or by calling the
@@ -595,8 +727,8 @@ calls, we supply <code class="docutils literal notranslate"><span class="pre">ar
 <span class="go">Namespace()</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="allow-abbrev">
+</section>
+<section id="allow-abbrev">
 <span id="id1"></span><h3>allow_abbrev<a class="headerlink" href="#allow-abbrev" title="Permalink to this headline">¶</a></h3>
 <p>Normally, when you pass an argument list to the
 <a class="reference internal" href="#argparse.ArgumentParser.parse_args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> method of an <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a>,
@@ -613,8 +745,8 @@ it <a class="reference internal" href="#prefix-matching"><span class="std std-re
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.5.</span></p>
 </div>
-</div>
-<div class="section" id="conflict-handler">
+</section>
+<section id="conflict-handler">
 <h3>conflict_handler<a class="headerlink" href="#conflict-handler" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> objects do not allow two actions with the same option
 string.  By default, <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> objects raise an exception if an
@@ -648,8 +780,8 @@ older arguments with the same option string.  To get this behavior, the value
 option strings are overridden.  So, in the example above, the old <code class="docutils literal notranslate"><span class="pre">-f/--foo</span></code>
 action is retained as the <code class="docutils literal notranslate"><span class="pre">-f</span></code> action, because only the <code class="docutils literal notranslate"><span class="pre">--foo</span></code> option
 string was overridden.</p>
-</div>
-<div class="section" id="add-help">
+</section>
+<section id="add-help">
 <h3>add_help<a class="headerlink" href="#add-help" title="Permalink to this headline">¶</a></h3>
 <p>By default, ArgumentParser objects add an option which simply displays
 the parser’s help message. For example, consider a file named
@@ -695,12 +827,12 @@ the help options:</p>
 <span class="go">  +h, ++help  show this help message and exit</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="exit-on-error">
+</section>
+<section id="exit-on-error">
 <h3>exit_on_error<a class="headerlink" href="#exit-on-error" title="Permalink to this headline">¶</a></h3>
 <p>Normally, when you pass an invalid argument list to the <a class="reference internal" href="#argparse.ArgumentParser.parse_args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a>
 method of an <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a>, it will exit with error info.</p>
-<p>If the user would like catch errors manually, the feature can be enable by setting
+<p>If the user would like to catch errors manually, the feature can be enabled by setting
 <code class="docutils literal notranslate"><span class="pre">exit_on_error</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code>:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">exit_on_error</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--integers&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
@@ -716,9 +848,9 @@ method of an <a class="reference internal" href="#argparse.ArgumentParser" title
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.9.</span></p>
 </div>
-</div>
-</div>
-<div class="section" id="the-add-argument-method">
+</section>
+</section>
+<section id="the-add-argument-method">
 <h2>The add_argument() method<a class="headerlink" href="#the-add-argument-method" title="Permalink to this headline">¶</a></h2>
 <dl class="py method">
 <dt id="argparse.ArgumentParser.add_argument">
@@ -746,7 +878,7 @@ command line and if it is absent from the namespace object.</p></li>
 </dd></dl>
 
 <p>The following sections describe how each of these are used.</p>
-<div class="section" id="name-or-flags">
+<section id="name-or-flags">
 <h3>name or flags<a class="headerlink" href="#name-or-flags" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="#argparse.ArgumentParser.add_argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code></a> method must know whether an optional
 argument, like <code class="docutils literal notranslate"><span class="pre">-f</span></code> or <code class="docutils literal notranslate"><span class="pre">--foo</span></code>, or a positional argument, like a list of
@@ -776,8 +908,8 @@ be positional:</p>
 <span class="go">PROG: error: the following arguments are required: bar</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="action">
+</section>
+<section id="action">
 <h3>action<a class="headerlink" href="#action" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> objects associate command-line arguments with actions.  These
 actions can do just about anything with the command-line arguments associated with
@@ -898,7 +1030,7 @@ overriding the <code class="docutils literal notranslate"><span class="pre">__ca
 <span class="gp">... </span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option_strings</span><span class="p">,</span> <span class="n">dest</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="gp">... </span>        <span class="k">if</span> <span class="n">nargs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 <span class="gp">... </span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;nargs not allowed&quot;</span><span class="p">)</span>
-<span class="gp">... </span>        <span class="nb">super</span><span class="p">(</span><span class="n">FooAction</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">option_strings</span><span class="p">,</span> <span class="n">dest</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">option_strings</span><span class="p">,</span> <span class="n">dest</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 <span class="gp">... </span>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parser</span><span class="p">,</span> <span class="n">namespace</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">option_string</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="gp">... </span>        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%r</span><span class="s1"> </span><span class="si">%r</span><span class="s1"> </span><span class="si">%r</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">namespace</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">option_string</span><span class="p">))</span>
 <span class="gp">... </span>        <span class="nb">setattr</span><span class="p">(</span><span class="n">namespace</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dest</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span>
@@ -914,8 +1046,8 @@ overriding the <code class="docutils literal notranslate"><span class="pre">__ca
 </pre></div>
 </div>
 <p>For more details, see <a class="reference internal" href="#argparse.Action" title="argparse.Action"><code class="xref py py-class docutils literal notranslate"><span class="pre">Action</span></code></a>.</p>
-</div>
-<div class="section" id="nargs">
+</section>
+<section id="nargs">
 <h3>nargs<a class="headerlink" href="#nargs" title="Permalink to this headline">¶</a></h3>
 <p>ArgumentParser objects usually associate a single command-line argument with a
 single action to be taken.  The <code class="docutils literal notranslate"><span class="pre">nargs</span></code> keyword argument associates a
@@ -1003,8 +1135,8 @@ least one command-line argument present.  For example:</p>
 <p>If the <code class="docutils literal notranslate"><span class="pre">nargs</span></code> keyword argument is not provided, the number of arguments consumed
 is determined by the <a class="reference internal" href="#action">action</a>.  Generally this means a single command-line argument
 will be consumed and a single item (not a list) will be produced.</p>
-</div>
-<div class="section" id="const">
+</section>
+<section id="const">
 <h3>const<a class="headerlink" href="#const" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">const</span></code> argument of <a class="reference internal" href="#argparse.ArgumentParser.add_argument" title="argparse.ArgumentParser.add_argument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code></a> is used to hold
 constant values that are not read from the command line but are required for
@@ -1023,8 +1155,8 @@ See the <a class="reference internal" href="#nargs">nargs</a> description for ex
 </ul>
 <p>With the <code class="docutils literal notranslate"><span class="pre">'store_const'</span></code> and <code class="docutils literal notranslate"><span class="pre">'append_const'</span></code> actions, the <code class="docutils literal notranslate"><span class="pre">const</span></code>
 keyword argument must be given.  For other actions, it defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
-</div>
-<div class="section" id="default">
+</section>
+<section id="default">
 <h3>default<a class="headerlink" href="#default" title="Permalink to this headline">¶</a></h3>
 <p>All optional arguments and some positional arguments may be omitted at the
 command line.  The <code class="docutils literal notranslate"><span class="pre">default</span></code> keyword argument of
@@ -1079,8 +1211,8 @@ command-line argument was not present:</p>
 <span class="go">Namespace(foo=&#39;1&#39;)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="type">
+</section>
+<section id="type">
 <h3>type<a class="headerlink" href="#type" title="Permalink to this headline">¶</a></h3>
 <p>By default, the parser reads command-line arguments in as simple
 strings. However, quite often the command-line string should instead be
@@ -1135,8 +1267,8 @@ would be better to wait until after the parser has run and then use the
 <a class="reference internal" href="../reference/compound_stmts.html#with"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">with</span></code></a>-statement to manage the files.</p>
 <p>For type checkers that simply check against a fixed set of values, consider
 using the <a class="reference internal" href="#choices">choices</a> keyword instead.</p>
-</div>
-<div class="section" id="choices">
+</section>
+<section id="choices">
 <h3>choices<a class="headerlink" href="#choices" title="Permalink to this headline">¶</a></h3>
 <p>Some command-line arguments should be selected from a restricted set of values.
 These can be handled by passing a container object as the <em>choices</em> keyword
@@ -1173,8 +1305,8 @@ control its appearance in usage, help, and error messages.</p>
 from <em>dest</em>.  This is usually what you want because the user never sees the
 <em>dest</em> parameter.  If this display isn’t desirable (perhaps because there are
 many choices), just specify an explicit <a class="reference internal" href="#metavar">metavar</a>.</p>
-</div>
-<div class="section" id="required">
+</section>
+<section id="required">
 <h3>required<a class="headerlink" href="#required" title="Permalink to this headline">¶</a></h3>
 <p>In general, the <a class="reference internal" href="#module-argparse" title="argparse: Command-line option and argument parsing library."><code class="xref py py-mod docutils literal notranslate"><span class="pre">argparse</span></code></a> module assumes that flags like <code class="docutils literal notranslate"><span class="pre">-f</span></code> and <code class="docutils literal notranslate"><span class="pre">--bar</span></code>
 indicate <em>optional</em> arguments, which can always be omitted at the command line.
@@ -1197,8 +1329,8 @@ present at the command line.</p>
 <p>Required options are generally considered bad form because users expect
 <em>options</em> to be <em>optional</em>, and thus they should be avoided when possible.</p>
 </div>
-</div>
-<div class="section" id="help">
+</section>
+<section id="help">
 <h3>help<a class="headerlink" href="#help" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">help</span></code> value is a string containing a brief description of the argument.
 When a user requests help (usually by using <code class="docutils literal notranslate"><span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">--help</span></code> at the
@@ -1250,8 +1382,8 @@ setting the <code class="docutils literal notranslate"><span class="pre">help</s
 <span class="go">  -h, --help  show this help message and exit</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="metavar">
+</section>
+<section id="metavar">
 <h3>metavar<a class="headerlink" href="#metavar" title="Permalink to this headline">¶</a></h3>
 <p>When <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> generates help messages, it needs some way to refer
 to each expected argument.  By default, ArgumentParser objects use the <a class="reference internal" href="#dest">dest</a>
@@ -1312,8 +1444,8 @@ arguments:</p>
 <span class="go"> --foo bar baz</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="dest">
+</section>
+<section id="dest">
 <h3>dest<a class="headerlink" href="#dest" title="Permalink to this headline">¶</a></h3>
 <p>Most <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a> actions add some value as an attribute of the
 object returned by <a class="reference internal" href="#argparse.ArgumentParser.parse_args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a>.  The name of this
@@ -1351,8 +1483,8 @@ behavior:</p>
 <span class="go">Namespace(bar=&#39;XXX&#39;)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="action-classes">
+</section>
+<section id="action-classes">
 <h3>Action classes<a class="headerlink" href="#action-classes" title="Permalink to this headline">¶</a></h3>
 <p>Action classes implement the Action API, a callable which returns a callable
 which processes arguments from the command-line. Any object which follows
@@ -1391,9 +1523,9 @@ attributes on the <code class="docutils literal notranslate"><span class="pre">n
 <p>Action subclasses can define a <code class="docutils literal notranslate"><span class="pre">format_usage</span></code> method that takes no argument
 and return a string which will be used when printing the usage of the program.
 If such method is not provided, a sensible default will be used.</p>
-</div>
-</div>
-<div class="section" id="the-parse-args-method">
+</section>
+</section>
+<section id="the-parse-args-method">
 <h2>The parse_args() method<a class="headerlink" href="#the-parse-args-method" title="Permalink to this headline">¶</a></h2>
 <dl class="py method">
 <dt id="argparse.ArgumentParser.parse_args">
@@ -1411,7 +1543,7 @@ created and how they are assigned. See the documentation for
 </ul>
 </dd></dl>
 
-<div class="section" id="option-value-syntax">
+<section id="option-value-syntax">
 <h3>Option value syntax<a class="headerlink" href="#option-value-syntax" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="#argparse.ArgumentParser.parse_args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> method supports several ways of
 specifying the value of an option (if it takes one).  In the simplest case, the
@@ -1448,8 +1580,8 @@ as long as only the last option (or none of them) requires a value:</p>
 <span class="go">Namespace(x=True, y=True, z=&#39;Z&#39;)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="invalid-arguments">
+</section>
+<section id="invalid-arguments">
 <h3>Invalid arguments<a class="headerlink" href="#invalid-arguments" title="Permalink to this headline">¶</a></h3>
 <p>While parsing the command line, <a class="reference internal" href="#argparse.ArgumentParser.parse_args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> checks for a
 variety of errors, including ambiguous options, invalid types, invalid options,
@@ -1475,8 +1607,8 @@ it exits and prints the error along with a usage message:</p>
 <span class="go">PROG: error: extra arguments found: badger</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="arguments-containing">
+</section>
+<section id="arguments-containing">
 <h3>Arguments containing <code class="docutils literal notranslate"><span class="pre">-</span></code><a class="headerlink" href="#arguments-containing" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="#argparse.ArgumentParser.parse_args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> method attempts to give errors whenever
 the user has clearly made a mistake, but some situations are inherently
@@ -1524,8 +1656,8 @@ argument:</p>
 <span class="go">Namespace(foo=&#39;-f&#39;, one=None)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="argument-abbreviations-prefix-matching">
+</section>
+<section id="argument-abbreviations-prefix-matching">
 <span id="prefix-matching"></span><h3>Argument abbreviations (prefix matching)<a class="headerlink" href="#argument-abbreviations-prefix-matching" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="#argparse.ArgumentParser.parse_args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> method <a class="reference internal" href="#allow-abbrev"><span class="std std-ref">by default</span></a>
 allows long options to be abbreviated to a prefix, if the abbreviation is
@@ -1544,8 +1676,8 @@ unambiguous (the prefix matches a unique option):</p>
 </div>
 <p>An error is produced for arguments that could produce more than one options.
 This feature can be disabled by setting <a class="reference internal" href="#allow-abbrev"><span class="std std-ref">allow_abbrev</span></a> to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
-</div>
-<div class="section" id="beyond-sys-argv">
+</section>
+<section id="beyond-sys-argv">
 <span id="args"></span><h3>Beyond <code class="docutils literal notranslate"><span class="pre">sys.argv</span></code><a class="headerlink" href="#beyond-sys-argv" title="Permalink to this headline">¶</a></h3>
 <p>Sometimes it may be useful to have an ArgumentParser parse arguments other than those
 of <a class="reference internal" href="sys.html#sys.argv" title="sys.argv"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.argv</span></code></a>.  This can be accomplished by passing a list of strings to
@@ -1564,8 +1696,8 @@ interactive prompt:</p>
 <span class="go">Namespace(accumulate=&lt;built-in function sum&gt;, integers=[1, 2, 3, 4])</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="the-namespace-object">
+</section>
+<section id="the-namespace-object">
 <span id="namespace"></span><h3>The Namespace object<a class="headerlink" href="#the-namespace-object" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="argparse.Namespace">
@@ -1598,11 +1730,11 @@ be achieved by specifying the <code class="docutils literal notranslate"><span c
 <span class="go">&#39;BAR&#39;</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="other-utilities">
+</section>
+</section>
+<section id="other-utilities">
 <h2>Other utilities<a class="headerlink" href="#other-utilities" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="sub-commands">
+<section id="sub-commands">
 <h3>Sub-commands<a class="headerlink" href="#sub-commands" title="Permalink to this headline">¶</a></h3>
 <dl class="py method">
 <dt id="argparse.ArgumentParser.add_subparsers">
@@ -1791,8 +1923,8 @@ argument to the <a class="reference internal" href="#argparse.ArgumentParser.add
 </div>
 </dd></dl>
 
-</div>
-<div class="section" id="filetype-objects">
+</section>
+<section id="filetype-objects">
 <h3>FileType objects<a class="headerlink" href="#filetype-objects" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="argparse.FileType">
@@ -1823,8 +1955,8 @@ convert this into <code class="docutils literal notranslate"><span class="pre">s
 </div>
 </dd></dl>
 
-</div>
-<div class="section" id="argument-groups">
+</section>
+<section id="argument-groups">
 <h3>Argument groups<a class="headerlink" href="#argument-groups" title="Permalink to this headline">¶</a></h3>
 <dl class="py method">
 <dt id="argparse.ArgumentParser.add_argument_group">
@@ -1876,8 +2008,8 @@ customize this display:</p>
 in the usual “positional arguments” and “optional arguments” sections.</p>
 </dd></dl>
 
-</div>
-<div class="section" id="mutual-exclusion">
+</section>
+<section id="mutual-exclusion">
 <h3>Mutual exclusion<a class="headerlink" href="#mutual-exclusion" title="Permalink to this headline">¶</a></h3>
 <dl class="py method">
 <dt id="argparse.ArgumentParser.add_mutually_exclusive_group">
@@ -1915,8 +2047,8 @@ is required:</p>
 <a class="reference internal" href="#argparse.ArgumentParser.add_argument_group" title="argparse.ArgumentParser.add_argument_group"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument_group()</span></code></a>.</p>
 </dd></dl>
 
-</div>
-<div class="section" id="parser-defaults">
+</section>
+<section id="parser-defaults">
 <h3>Parser defaults<a class="headerlink" href="#parser-defaults" title="Permalink to this headline">¶</a></h3>
 <dl class="py method">
 <dt id="argparse.ArgumentParser.set_defaults">
@@ -1960,8 +2092,8 @@ example of this type.</p>
 </div>
 </dd></dl>
 
-</div>
-<div class="section" id="printing-help">
+</section>
+<section id="printing-help">
 <h3>Printing help<a class="headerlink" href="#printing-help" title="Permalink to this headline">¶</a></h3>
 <p>In most typical applications, <a class="reference internal" href="#argparse.ArgumentParser.parse_args" title="argparse.ArgumentParser.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a> will take
 care of formatting and printing any usage or error messages.  However, several
@@ -1998,8 +2130,8 @@ printing it:</p>
 information about the arguments registered with the <a class="reference internal" href="#argparse.ArgumentParser" title="argparse.ArgumentParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a>.</p>
 </dd></dl>
 
-</div>
-<div class="section" id="partial-parsing">
+</section>
+<section id="partial-parsing">
 <h3>Partial parsing<a class="headerlink" href="#partial-parsing" title="Permalink to this headline">¶</a></h3>
 <dl class="py method">
 <dt id="argparse.ArgumentParser.parse_known_args">
@@ -2026,8 +2158,8 @@ the populated namespace and the list of remaining argument strings.</p>
 a prefix of one of its known options, instead of leaving it in the remaining
 arguments list.</p>
 </div>
-</div>
-<div class="section" id="customizing-file-parsing">
+</section>
+<section id="customizing-file-parsing">
 <h3>Customizing file parsing<a class="headerlink" href="#customizing-file-parsing" title="Permalink to this headline">¶</a></h3>
 <dl class="py method">
 <dt id="argparse.ArgumentParser.convert_arg_line_to_args">
@@ -2048,8 +2180,8 @@ as an argument.  The following example demonstrates how to do this:</p>
 </div>
 </dd></dl>
 
-</div>
-<div class="section" id="exiting-methods">
+</section>
+<section id="exiting-methods">
 <h3>Exiting methods<a class="headerlink" href="#exiting-methods" title="Permalink to this headline">¶</a></h3>
 <dl class="py method">
 <dt id="argparse.ArgumentParser.exit">
@@ -2073,8 +2205,8 @@ this method to handle these steps differently:</p>
 standard error and terminates the program with a status code of 2.</p>
 </dd></dl>
 
-</div>
-<div class="section" id="intermixed-parsing">
+</section>
+<section id="intermixed-parsing">
 <h3>Intermixed parsing<a class="headerlink" href="#intermixed-parsing" title="Permalink to this headline">¶</a></h3>
 <dl class="py method">
 <dt id="argparse.ArgumentParser.parse_intermixed_args">
@@ -2116,9 +2248,9 @@ remaining unparsed argument strings.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.7.</span></p>
 </div>
-</div>
-</div>
-<div class="section" id="upgrading-optparse-code">
+</section>
+</section>
+<section id="upgrading-optparse-code">
 <span id="id2"></span><h2>Upgrading optparse code<a class="headerlink" href="#upgrading-optparse-code" title="Permalink to this headline">¶</a></h2>
 <p>Originally, the <a class="reference internal" href="#module-argparse" title="argparse: Command-line option and argument parsing library."><code class="xref py py-mod docutils literal notranslate"><span class="pre">argparse</span></code></a> module had attempted to maintain compatibility
 with <a class="reference internal" href="optparse.html#module-optparse" title="optparse: Command-line option parsing library. (deprecated)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">optparse</span></code></a>.  However, <a class="reference internal" href="optparse.html#module-optparse" title="optparse: Command-line option parsing library. (deprecated)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">optparse</span></code></a> was difficult to extend
@@ -2160,8 +2292,8 @@ the standard Python syntax to use dictionaries to format strings, that is,
 <li><p>Replace the OptionParser constructor <code class="docutils literal notranslate"><span class="pre">version</span></code> argument with a call to
 <code class="docutils literal notranslate"><span class="pre">parser.add_argument('--version',</span> <span class="pre">action='version',</span> <span class="pre">version='&lt;the</span> <span class="pre">version&gt;')</span></code>.</p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -2248,7 +2380,7 @@ the standard Python syntax to use dictionaries to format strings, that is,
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/master/Doc/library/argparse.rst"
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/library/argparse.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -2274,34 +2406,45 @@ the standard Python syntax to use dictionaries to format strings, that is,
           <a href="time.html" title="time — Time access and conversions"
              >previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="allos.html" >Generic Operating System Services</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">argparse</span></code> — Parser for command-line options, arguments and sub-commands</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>  
     <div class="footer">
@@ -2319,7 +2462,7 @@ the standard Python syntax to use dictionaries to format strings, that is,
 <br />
     <br />
 
-    Last updated on Mar 24, 2021.
+    Last updated on May 10, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 

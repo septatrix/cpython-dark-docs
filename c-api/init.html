@@ -4,8 +4,10 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Initialization, Finalization, and Threads &#8212; Python 3.10.0a6 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Initialization, Finalization, and Threads &#8212; Python 3.10.0b1 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
@@ -19,7 +21,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.10.0a6 documentation"
+          title="Search within Python 3.10.0b1 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -40,17 +42,104 @@
         }
       }
     </style>
+<link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.svg" />
+            <script type="text/javascript" src="../_static/copybutton.js"></script>
+            <script type="text/javascript" src="../_static/menu.js"></script>
+            <script type="text/javascript" src="../_static/themetoggle.js"></script> 
 
-    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
-    
-    <script type="text/javascript" src="../_static/copybutton.js"></script>
-    <script type="text/javascript" src="../_static/themetoggle.js"></script>
-    
-     
+  </head>
+<body>
+<div class="mobile-nav">
+    <input type="checkbox" id="menuToggler" class="toggler__input" aria-controls="navigation"
+           aria-pressed="false" aria-expanded="false" role="button" aria-label="Menu" />
+    <nav class="nav-content" role="navigation">
+        <label for="menuToggler" class="toggler__label">
+            <span></span>
+        </label>
+        <span class="nav-items-wrapper">
+            <a href="https://www.python.org/" class="nav-logo">
+                <img src="../_static/py.svg" alt="Logo"/>
+            </a>
+            <span class="version_switcher_placeholder"></span>
+            <form id="searchbox" role="search" class="search" action="../search.html" method="get">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="search-icon">
+                    <path fill-rule="nonzero" fill="currentColor" d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 001.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 00-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 005.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                </svg>
+                <input type="search" name="q" aria-label="Quick search"/>
+                <input type="submit" value="Go"/>
+                
+            </form>
+        </span>
+    </nav>
+    <div class="menu-wrapper">
+        <nav class="menu" role="navigation" aria-label="main navigation">
+            <div class="language_switcher_placeholder"></div>
+            
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label>
+  <h3><a href="../contents.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Initialization, Finalization, and Threads</a><ul>
+<li><a class="reference internal" href="#before-python-initialization">Before Python Initialization</a></li>
+<li><a class="reference internal" href="#global-configuration-variables">Global configuration variables</a></li>
+<li><a class="reference internal" href="#initializing-and-finalizing-the-interpreter">Initializing and finalizing the interpreter</a></li>
+<li><a class="reference internal" href="#process-wide-parameters">Process-wide parameters</a></li>
+<li><a class="reference internal" href="#thread-state-and-the-global-interpreter-lock">Thread State and the Global Interpreter Lock</a><ul>
+<li><a class="reference internal" href="#releasing-the-gil-from-extension-code">Releasing the GIL from extension code</a></li>
+<li><a class="reference internal" href="#non-python-created-threads">Non-Python created threads</a></li>
+<li><a class="reference internal" href="#cautions-about-fork">Cautions about fork()</a></li>
+<li><a class="reference internal" href="#high-level-api">High-level API</a></li>
+<li><a class="reference internal" href="#low-level-api">Low-level API</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sub-interpreter-support">Sub-interpreter support</a><ul>
+<li><a class="reference internal" href="#bugs-and-caveats">Bugs and caveats</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#asynchronous-notifications">Asynchronous Notifications</a></li>
+<li><a class="reference internal" href="#profiling-and-tracing">Profiling and Tracing</a></li>
+<li><a class="reference internal" href="#advanced-debugger-support">Advanced Debugger Support</a></li>
+<li><a class="reference internal" href="#thread-local-storage-support">Thread Local Storage Support</a><ul>
+<li><a class="reference internal" href="#thread-specific-storage-tss-api">Thread Specific Storage (TSS) API</a><ul>
+<li><a class="reference internal" href="#dynamic-allocation">Dynamic Allocation</a></li>
+<li><a class="reference internal" href="#methods">Methods</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#thread-local-storage-tls-api">Thread Local Storage (TLS) API</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="datetime.html"
+                        title="previous chapter">DateTime Objects</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="init_config.html"
+                        title="next chapter">Python Initialization Configuration</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../bugs.html">Report a Bug</a></li>
+      <li>
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/c-api/init.rst"
+            rel="nofollow">Show Source
+        </a>
+      </li>
+    </ul>
+  </div>
+        </nav>
+    </div>
+</div>
 
-  </head><body>
   
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -68,33 +157,44 @@
           <a href="datetime.html" title="DateTime Objects"
              accesskey="P">previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python/C API Reference Manual</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Initialization, Finalization, and Threads</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>    
 
@@ -103,10 +203,10 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="initialization-finalization-and-threads">
+  <section id="initialization-finalization-and-threads">
 <span id="initialization"></span><h1>Initialization, Finalization, and Threads<a class="headerlink" href="#initialization-finalization-and-threads" title="Permalink to this headline">¶</a></h1>
 <p>See also <a class="reference internal" href="init_config.html#init-config"><span class="std std-ref">Python Initialization Configuration</span></a>.</p>
-<div class="section" id="before-python-initialization">
+<section id="before-python-initialization">
 <span id="pre-init-safe"></span><h2>Before Python Initialization<a class="headerlink" href="#before-python-initialization" title="Permalink to this headline">¶</a></h2>
 <p>In an application embedding  Python, the <a class="reference internal" href="#c.Py_Initialize" title="Py_Initialize"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_Initialize()</span></code></a> function must
 be called before using any other Python/C API functions; with the exception of
@@ -164,8 +264,8 @@ a few functions and the <a class="reference internal" href="#global-conf-vars"><
 <a class="reference internal" href="#c.Py_GetProgramFullPath" title="Py_GetProgramFullPath"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_GetProgramFullPath()</span></code></a>, <a class="reference internal" href="#c.Py_GetPythonHome" title="Py_GetPythonHome"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_GetPythonHome()</span></code></a>,
 <a class="reference internal" href="#c.Py_GetProgramName" title="Py_GetProgramName"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_GetProgramName()</span></code></a> and <a class="reference internal" href="#c.PyEval_InitThreads" title="PyEval_InitThreads"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyEval_InitThreads()</span></code></a>.</p>
 </div>
-</div>
-<div class="section" id="global-configuration-variables">
+</section>
+<section id="global-configuration-variables">
 <span id="global-conf-vars"></span><h2>Global configuration variables<a class="headerlink" href="#global-configuration-variables" title="Permalink to this headline">¶</a></h2>
 <p>Python has variables for the global configuration to control different features
 and options. By default, these flags are controlled by <a class="reference internal" href="../using/cmdline.html#using-on-interface-options"><span class="std std-ref">command line
@@ -330,8 +430,8 @@ searching for a module. Also provides information on module cleanup at exit.</p>
 variable.</p>
 </dd></dl>
 
-</div>
-<div class="section" id="initializing-and-finalizing-the-interpreter">
+</section>
+<section id="initializing-and-finalizing-the-interpreter">
 <h2>Initializing and finalizing the interpreter<a class="headerlink" href="#initializing-and-finalizing-the-interpreter" title="Permalink to this headline">¶</a></h2>
 <dl class="c function">
 <dt id="c.Py_Initialize">
@@ -410,8 +510,8 @@ void <code class="sig-name descname">Py_Finalize</code><span class="sig-paren">(
 disregards the return value.</p>
 </dd></dl>
 
-</div>
-<div class="section" id="process-wide-parameters">
+</section>
+<section id="process-wide-parameters">
 <h2>Process-wide parameters<a class="headerlink" href="#process-wide-parameters" title="Permalink to this headline">¶</a></h2>
 <dl class="c function">
 <dt id="c.Py_SetStandardStreamEncoding">
@@ -723,8 +823,8 @@ it returns <code class="docutils literal notranslate"><span class="pre">NULL</sp
 </div>
 </dd></dl>
 
-</div>
-<div class="section" id="thread-state-and-the-global-interpreter-lock">
+</section>
+<section id="thread-state-and-the-global-interpreter-lock">
 <span id="threads"></span><h2>Thread State and the Global Interpreter Lock<a class="headerlink" href="#thread-state-and-the-global-interpreter-lock" title="Permalink to this headline">¶</a></h2>
 <p id="index-33">The Python interpreter is not fully thread-safe.  In order to support
 multi-threaded Python programs, there’s a global lock, called the <a class="reference internal" href="../glossary.html#term-global-interpreter-lock"><span class="xref std std-term">global
@@ -743,7 +843,7 @@ a file, so that other Python threads can run in the meantime.</p>
 inside a data structure called <a class="reference internal" href="#c.PyThreadState" title="PyThreadState"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyThreadState</span></code></a>.  There’s also one
 global variable pointing to the current <a class="reference internal" href="#c.PyThreadState" title="PyThreadState"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyThreadState</span></code></a>: it can
 be retrieved using <a class="reference internal" href="#c.PyThreadState_Get" title="PyThreadState_Get"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyThreadState_Get()</span></code></a>.</p>
-<div class="section" id="releasing-the-gil-from-extension-code">
+<section id="releasing-the-gil-from-extension-code">
 <h3>Releasing the GIL from extension code<a class="headerlink" href="#releasing-the-gil-from-extension-code" title="Permalink to this headline">¶</a></h3>
 <p>Most extension code manipulating the <a class="reference internal" href="../glossary.html#term-GIL"><span class="xref std std-term">GIL</span></a> has the following simple
 structure:</p>
@@ -787,8 +887,8 @@ cryptographic functions operating over memory buffers.  For example, the
 standard <a class="reference internal" href="../library/zlib.html#module-zlib" title="zlib: Low-level interface to compression and decompression routines compatible with gzip."><code class="xref py py-mod docutils literal notranslate"><span class="pre">zlib</span></code></a> and <a class="reference internal" href="../library/hashlib.html#module-hashlib" title="hashlib: Secure hash and message digest algorithms."><code class="xref py py-mod docutils literal notranslate"><span class="pre">hashlib</span></code></a> modules release the GIL when
 compressing or hashing data.</p>
 </div>
-</div>
-<div class="section" id="non-python-created-threads">
+</section>
+<section id="non-python-created-threads">
 <span id="gilstate"></span><h3>Non-Python created threads<a class="headerlink" href="#non-python-created-threads" title="Permalink to this headline">¶</a></h3>
 <p>When threads are created using the dedicated Python APIs (such as the
 <a class="reference internal" href="../library/threading.html#module-threading" title="threading: Thread-based parallelism."><code class="xref py py-mod docutils literal notranslate"><span class="pre">threading</span></code></a> module), a thread state is automatically associated to them
@@ -822,8 +922,8 @@ interpreter (created automatically by <a class="reference internal" href="#c.Py_
 supports the creation of additional interpreters (using
 <a class="reference internal" href="#c.Py_NewInterpreter" title="Py_NewInterpreter"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_NewInterpreter()</span></code></a>), but mixing multiple interpreters and the
 <span class="xref c c-texpr">PyGILState_*</span> API is unsupported.</p>
-</div>
-<div class="section" id="cautions-about-fork">
+</section>
+<section id="cautions-about-fork">
 <span id="fork-and-threads"></span><h3>Cautions about fork()<a class="headerlink" href="#cautions-about-fork" title="Permalink to this headline">¶</a></h3>
 <p>Another important thing to note about threads is their behaviour in the face
 of the C <code class="xref c c-func docutils literal notranslate"><span class="pre">fork()</span></code> call. On most systems with <code class="xref c c-func docutils literal notranslate"><span class="pre">fork()</span></code>, after a
@@ -854,8 +954,8 @@ nature of the <a class="reference internal" href="#sub-interpreter-support"><spa
 thread, where the CPython global runtime was originally initialized.
 The only exception is if <code class="xref c c-func docutils literal notranslate"><span class="pre">exec()</span></code> will be called immediately
 after.</p>
-</div>
-<div class="section" id="high-level-api">
+</section>
+<section id="high-level-api">
 <h3>High-level API<a class="headerlink" href="#high-level-api" title="Permalink to this headline">¶</a></h3>
 <p>These are the most commonly used types and functions when writing C extension
 code, or when embedding the Python interpreter:</p>
@@ -1059,8 +1159,8 @@ this macro.</p>
 declaration.</p>
 </dd></dl>
 
-</div>
-<div class="section" id="low-level-api">
+</section>
+<section id="low-level-api">
 <h3>Low-level API<a class="headerlink" href="#low-level-api" title="Permalink to this headline">¶</a></h3>
 <p>All of the following functions must be called after <a class="reference internal" href="#c.Py_Initialize" title="Py_Initialize"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_Initialize()</span></code></a>.</p>
 <div class="versionchanged">
@@ -1324,9 +1424,9 @@ instead.</p>
 </div>
 </dd></dl>
 
-</div>
-</div>
-<div class="section" id="sub-interpreter-support">
+</section>
+</section>
+<section id="sub-interpreter-support">
 <span id="id1"></span><h2>Sub-interpreter support<a class="headerlink" href="#sub-interpreter-support" title="Permalink to this headline">¶</a></h2>
 <p>While in most uses, you will only embed a single Python interpreter, there
 are cases where you need to create several independent interpreters in the
@@ -1401,7 +1501,7 @@ when it returns.)  <a class="reference internal" href="#c.Py_FinalizeEx" title="
 haven’t been explicitly destroyed at that point.</p>
 </dd></dl>
 
-<div class="section" id="bugs-and-caveats">
+<section id="bugs-and-caveats">
 <h3>Bugs and caveats<a class="headerlink" href="#bugs-and-caveats" title="Permalink to this headline">¶</a></h3>
 <p>Because sub-interpreters (and the main interpreter) are part of the same
 process, the insulation between them isn’t perfect — for example, using
@@ -1425,9 +1525,9 @@ of matching <a class="reference internal" href="#c.PyGILState_Ensure" title="PyG
 Furthermore, extensions (such as <a class="reference internal" href="../library/ctypes.html#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a>) using these APIs to allow calling
 of Python code from non-Python created threads will probably be broken when using
 sub-interpreters.</p>
-</div>
-</div>
-<div class="section" id="asynchronous-notifications">
+</section>
+</section>
+<section id="asynchronous-notifications">
 <h2>Asynchronous Notifications<a class="headerlink" href="#asynchronous-notifications" title="Permalink to this headline">¶</a></h2>
 <p>A mechanism is provided to make asynchronous notifications to the main
 interpreter thread.  These notifications take the form of a function
@@ -1476,8 +1576,8 @@ list of scheduled calls.</p>
 </div>
 </dd></dl>
 
-</div>
-<div class="section" id="profiling-and-tracing">
+</section>
+<section id="profiling-and-tracing">
 <span id="profiling"></span><h2>Profiling and Tracing<a class="headerlink" href="#profiling-and-tracing" title="Permalink to this headline">¶</a></h2>
 <p>The Python interpreter provides some low-level support for attaching profiling
 and execution tracing facilities.  These are used for profiling, debugging, and
@@ -1630,8 +1730,8 @@ will not receive <code class="xref py py-const docutils literal notranslate"><sp
 <p>The caller must hold the <a class="reference internal" href="../glossary.html#term-GIL"><span class="xref std std-term">GIL</span></a>.</p>
 </dd></dl>
 
-</div>
-<div class="section" id="advanced-debugger-support">
+</section>
+<section id="advanced-debugger-support">
 <span id="advanced-debugging"></span><h2>Advanced Debugger Support<a class="headerlink" href="#advanced-debugger-support" title="Permalink to this headline">¶</a></h2>
 <p>These functions are only intended to be used by advanced debugging tools.</p>
 <dl class="c function">
@@ -1667,8 +1767,8 @@ threads associated with the interpreter <em>interp</em>.</p>
 objects belonging to the same <a class="reference internal" href="#c.PyInterpreterState" title="PyInterpreterState"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyInterpreterState</span></code></a> object.</p>
 </dd></dl>
 
-</div>
-<div class="section" id="thread-local-storage-support">
+</section>
+<section id="thread-local-storage-support">
 <span id="thread-local-storage"></span><h2>Thread Local Storage Support<a class="headerlink" href="#thread-local-storage-support" title="Permalink to this headline">¶</a></h2>
 <p>The Python interpreter provides low-level support for thread-local storage
 (TLS) which wraps the underlying native TLS implementation to support the
@@ -1687,7 +1787,7 @@ you need to include <code class="file docutils literal notranslate"><span class=
 If the <span class="xref c c-texpr">void*</span> values happen to be <span class="xref c c-texpr"><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a>*</span>, these
 functions don’t do refcount operations on them either.</p>
 </div>
-<div class="section" id="thread-specific-storage-tss-api">
+<section id="thread-specific-storage-tss-api">
 <span id="thread-specific-storage-api"></span><h3>Thread Specific Storage (TSS) API<a class="headerlink" href="#thread-specific-storage-tss-api" title="Permalink to this headline">¶</a></h3>
 <p>TSS API is introduced to supersede the use of the existing TLS API within the
 CPython interpreter.  This API uses a new type <a class="reference internal" href="#c.Py_tss_t" title="Py_tss_t"><code class="xref c c-type docutils literal notranslate"><span class="pre">Py_tss_t</span></code></a> instead of
@@ -1717,7 +1817,7 @@ this type by <a class="reference internal" href="#c.Py_tss_NEEDS_INIT" title="Py
 Note that this macro won’t be defined with <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Py_LIMITED_API</span></a>.</p>
 </dd></dl>
 
-<div class="section" id="dynamic-allocation">
+<section id="dynamic-allocation">
 <h4>Dynamic Allocation<a class="headerlink" href="#dynamic-allocation" title="Permalink to this headline">¶</a></h4>
 <p>Dynamic allocation of the <a class="reference internal" href="#c.Py_tss_t" title="Py_tss_t"><code class="xref c c-type docutils literal notranslate"><span class="pre">Py_tss_t</span></code></a>, required in extension modules
 built with <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Py_LIMITED_API</span></a>, where static allocation of this type
@@ -1744,8 +1844,8 @@ argument is <cite>NULL</cite>.</p>
 </div>
 </dd></dl>
 
-</div>
-<div class="section" id="methods">
+</section>
+<section id="methods">
 <h4>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h4>
 <p>The parameter <em>key</em> of these functions must not be <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.  Moreover, the
 behaviors of <a class="reference internal" href="#c.PyThread_tss_set" title="PyThread_tss_set"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyThread_tss_set()</span></code></a> and <a class="reference internal" href="#c.PyThread_tss_get" title="PyThread_tss_get"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyThread_tss_get()</span></code></a> are
@@ -1794,9 +1894,9 @@ thread.  This returns <code class="docutils literal notranslate"><span class="pr
 current thread.</p>
 </dd></dl>
 
-</div>
-</div>
-<div class="section" id="thread-local-storage-tls-api">
+</section>
+</section>
+<section id="thread-local-storage-tls-api">
 <span id="thread-local-storage-api"></span><h3>Thread Local Storage (TLS) API<a class="headerlink" href="#thread-local-storage-tls-api" title="Permalink to this headline">¶</a></h3>
 <div class="deprecated">
 <p><span class="versionmodified deprecated">Deprecated since version 3.7: </span>This API is superseded by
@@ -1841,9 +1941,9 @@ void <code class="sig-name descname">PyThread_delete_key_value</code><span class
 void <code class="sig-name descname">PyThread_ReInitTLS</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyThread_ReInitTLS" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -1898,7 +1998,7 @@ void <code class="sig-name descname">PyThread_ReInitTLS</code><span class="sig-p
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/master/Doc/c-api/init.rst"
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/c-api/init.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -1924,33 +2024,44 @@ void <code class="sig-name descname">PyThread_ReInitTLS</code><span class="sig-p
           <a href="datetime.html" title="DateTime Objects"
              >previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API Reference Manual</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Initialization, Finalization, and Threads</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>  
     <div class="footer">
@@ -1968,7 +2079,7 @@ void <code class="sig-name descname">PyThread_ReInitTLS</code><span class="sig-p
 <br />
     <br />
 
-    Last updated on Mar 24, 2021.
+    Last updated on May 10, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 

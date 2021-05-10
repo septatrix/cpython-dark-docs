@@ -4,8 +4,10 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Python Initialization Configuration &#8212; Python 3.10.0a6 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Python Initialization Configuration &#8212; Python 3.10.0b1 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
@@ -19,7 +21,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.10.0a6 documentation"
+          title="Search within Python 3.10.0b1 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -40,17 +42,89 @@
         }
       }
     </style>
+<link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.svg" />
+            <script type="text/javascript" src="../_static/copybutton.js"></script>
+            <script type="text/javascript" src="../_static/menu.js"></script>
+            <script type="text/javascript" src="../_static/themetoggle.js"></script> 
 
-    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
-    
-    <script type="text/javascript" src="../_static/copybutton.js"></script>
-    <script type="text/javascript" src="../_static/themetoggle.js"></script>
-    
-     
+  </head>
+<body>
+<div class="mobile-nav">
+    <input type="checkbox" id="menuToggler" class="toggler__input" aria-controls="navigation"
+           aria-pressed="false" aria-expanded="false" role="button" aria-label="Menu" />
+    <nav class="nav-content" role="navigation">
+        <label for="menuToggler" class="toggler__label">
+            <span></span>
+        </label>
+        <span class="nav-items-wrapper">
+            <a href="https://www.python.org/" class="nav-logo">
+                <img src="../_static/py.svg" alt="Logo"/>
+            </a>
+            <span class="version_switcher_placeholder"></span>
+            <form id="searchbox" role="search" class="search" action="../search.html" method="get">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="search-icon">
+                    <path fill-rule="nonzero" fill="currentColor" d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 001.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 00-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 005.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                </svg>
+                <input type="search" name="q" aria-label="Quick search"/>
+                <input type="submit" value="Go"/>
+                
+            </form>
+        </span>
+    </nav>
+    <div class="menu-wrapper">
+        <nav class="menu" role="navigation" aria-label="main navigation">
+            <div class="language_switcher_placeholder"></div>
+            
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label>
+  <h3><a href="../contents.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Python Initialization Configuration</a><ul>
+<li><a class="reference internal" href="#example">Example</a></li>
+<li><a class="reference internal" href="#pywidestringlist">PyWideStringList</a></li>
+<li><a class="reference internal" href="#pystatus">PyStatus</a></li>
+<li><a class="reference internal" href="#pypreconfig">PyPreConfig</a></li>
+<li><a class="reference internal" href="#preinitialize-python-with-pypreconfig">Preinitialize Python with PyPreConfig</a></li>
+<li><a class="reference internal" href="#pyconfig">PyConfig</a></li>
+<li><a class="reference internal" href="#initialization-with-pyconfig">Initialization with PyConfig</a></li>
+<li><a class="reference internal" href="#isolated-configuration">Isolated Configuration</a></li>
+<li><a class="reference internal" href="#python-configuration">Python Configuration</a></li>
+<li><a class="reference internal" href="#python-path-configuration">Python Path Configuration</a></li>
+<li><a class="reference internal" href="#py-runmain">Py_RunMain()</a></li>
+<li><a class="reference internal" href="#py-getargcargv">Py_GetArgcArgv()</a></li>
+<li><a class="reference internal" href="#multi-phase-initialization-private-provisional-api">Multi-Phase Initialization Private Provisional API</a></li>
+</ul>
+</li>
+</ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="init.html"
+                        title="previous chapter">Initialization, Finalization, and Threads</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="memory.html"
+                        title="next chapter">Memory Management</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../bugs.html">Report a Bug</a></li>
+      <li>
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/c-api/init_config.rst"
+            rel="nofollow">Show Source
+        </a>
+      </li>
+    </ul>
+  </div>
+        </nav>
+    </div>
+</div>
 
-  </head><body>
   
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -68,33 +142,44 @@
           <a href="init.html" title="Initialization, Finalization, and Threads"
              accesskey="P">previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python/C API Reference Manual</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Python Initialization Configuration</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>    
 
@@ -103,7 +188,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="python-initialization-configuration">
+  <section id="python-initialization-configuration">
 <span id="init-config"></span><h1>Python Initialization Configuration<a class="headerlink" href="#python-initialization-configuration" title="Permalink to this headline">¶</a></h1>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.8.</span></p>
@@ -129,7 +214,7 @@ program.</p>
 <p class="admonition-title">See also</p>
 <p><span class="target" id="index-0"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0587"><strong>PEP 587</strong></a> “Python Initialization Configuration”.</p>
 </div>
-<div class="section" id="example">
+<section id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <p>Example of customized Python always running in isolated mode:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
@@ -166,8 +251,8 @@ program.</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="pywidestringlist">
+</section>
+<section id="pywidestringlist">
 <h2>PyWideStringList<a class="headerlink" href="#pywidestringlist" title="Permalink to this headline">¶</a></h2>
 <dl class="c type">
 <dt id="c.PyWideStringList">
@@ -208,8 +293,8 @@ wchar_t **<code class="sig-name descname">items</code><a class="headerlink" href
 
 </dd></dl>
 
-</div>
-<div class="section" id="pystatus">
+</section>
+<section id="pystatus">
 <h2>PyStatus<a class="headerlink" href="#pystatus" title="Permalink to this headline">¶</a></h2>
 <dl class="c type">
 <dt id="c.PyStatus">
@@ -319,8 +404,8 @@ whereas functions to create a status set <code class="docutils literal notransla
 <span class="p">}</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="pypreconfig">
+</section>
+<section id="pypreconfig">
 <h2>PyPreConfig<a class="headerlink" href="#pypreconfig" title="Permalink to this headline">¶</a></h2>
 <dl class="c type">
 <dt id="c.PyPreConfig">
@@ -346,20 +431,19 @@ int <code class="sig-name descname">allocator</code><a class="headerlink" href="
 <dd><p>Name of the Python memory allocators:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">PYMEM_ALLOCATOR_NOT_SET</span></code> (<code class="docutils literal notranslate"><span class="pre">0</span></code>): don’t change memory allocators
-(use defaults)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">PYMEM_ALLOCATOR_DEFAULT</span></code> (<code class="docutils literal notranslate"><span class="pre">1</span></code>): default memory allocators</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">PYMEM_ALLOCATOR_DEBUG</span></code> (<code class="docutils literal notranslate"><span class="pre">2</span></code>): default memory allocators with
-debug hooks</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">PYMEM_ALLOCATOR_MALLOC</span></code> (<code class="docutils literal notranslate"><span class="pre">3</span></code>): force usage of <code class="docutils literal notranslate"><span class="pre">malloc()</span></code></p></li>
+(use defaults).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PYMEM_ALLOCATOR_DEFAULT</span></code> (<code class="docutils literal notranslate"><span class="pre">1</span></code>): <a class="reference internal" href="memory.html#default-memory-allocators"><span class="std std-ref">default memory allocators</span></a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PYMEM_ALLOCATOR_DEBUG</span></code> (<code class="docutils literal notranslate"><span class="pre">2</span></code>): <a class="reference internal" href="memory.html#default-memory-allocators"><span class="std std-ref">default memory allocators</span></a> with <a class="reference internal" href="memory.html#pymem-debug-hooks"><span class="std std-ref">debug hooks</span></a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PYMEM_ALLOCATOR_MALLOC</span></code> (<code class="docutils literal notranslate"><span class="pre">3</span></code>): use <code class="docutils literal notranslate"><span class="pre">malloc()</span></code> of the C library.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">PYMEM_ALLOCATOR_MALLOC_DEBUG</span></code> (<code class="docutils literal notranslate"><span class="pre">4</span></code>): force usage of
-<code class="docutils literal notranslate"><span class="pre">malloc()</span></code> with debug hooks</p></li>
+<code class="docutils literal notranslate"><span class="pre">malloc()</span></code> with <a class="reference internal" href="memory.html#pymem-debug-hooks"><span class="std std-ref">debug hooks</span></a>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">PYMEM_ALLOCATOR_PYMALLOC</span></code> (<code class="docutils literal notranslate"><span class="pre">5</span></code>): <a class="reference internal" href="memory.html#pymalloc"><span class="std std-ref">Python pymalloc memory
-allocator</span></a></p></li>
+allocator</span></a>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">PYMEM_ALLOCATOR_PYMALLOC_DEBUG</span></code> (<code class="docutils literal notranslate"><span class="pre">6</span></code>): <a class="reference internal" href="memory.html#pymalloc"><span class="std std-ref">Python pymalloc
-memory allocator</span></a> with debug hooks</p></li>
+memory allocator</span></a> with <a class="reference internal" href="memory.html#pymem-debug-hooks"><span class="std std-ref">debug hooks</span></a>.</p></li>
 </ul>
-<p><code class="docutils literal notranslate"><span class="pre">PYMEM_ALLOCATOR_PYMALLOC</span></code> and <code class="docutils literal notranslate"><span class="pre">PYMEM_ALLOCATOR_PYMALLOC_DEBUG</span></code>
-are not supported if Python is configured using <code class="docutils literal notranslate"><span class="pre">--without-pymalloc</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">PYMEM_ALLOCATOR_PYMALLOC</span></code> and <code class="docutils literal notranslate"><span class="pre">PYMEM_ALLOCATOR_PYMALLOC_DEBUG</span></code> are
+not supported if Python is <a class="reference internal" href="../using/configure.html#cmdoption-without-pymalloc"><code class="xref std std-option docutils literal notranslate"><span class="pre">configured</span> <span class="pre">using</span> <span class="pre">--without-pymalloc</span></code></a>.</p>
 <p>See <a class="reference internal" href="memory.html#memory"><span class="std std-ref">Memory Management</span></a>.</p>
 <p>Default: <code class="docutils literal notranslate"><span class="pre">PYMEM_ALLOCATOR_NOT_SET</span></code>.</p>
 </dd></dl>
@@ -451,8 +535,8 @@ int <code class="sig-name descname">utf8_mode</code><a class="headerlink" href="
 
 </dd></dl>
 
-</div>
-<div class="section" id="preinitialize-python-with-pypreconfig">
+</section>
+<section id="preinitialize-python-with-pypreconfig">
 <span id="c-preinit"></span><h2>Preinitialize Python with PyPreConfig<a class="headerlink" href="#preinitialize-python-with-pypreconfig" title="Permalink to this headline">¶</a></h2>
 <p>The preinitialization of Python:</p>
 <ul class="simple">
@@ -525,8 +609,8 @@ the <a class="reference internal" href="../library/os.html#utf8-mode"><span clas
 <span class="n">Py_Finalize</span><span class="p">();</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="pyconfig">
+</section>
+<section id="pyconfig">
 <h2>PyConfig<a class="headerlink" href="#pyconfig" title="Permalink to this headline">¶</a></h2>
 <dl class="c type">
 <dt id="c.PyConfig">
@@ -693,6 +777,17 @@ cases.</p>
 </dd></dl>
 
 <dl class="c member">
+<dt id="c.PyConfig.warn_default_encoding">
+int <code class="sig-name descname">warn_default_encoding</code><a class="headerlink" href="#c.PyConfig.warn_default_encoding" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>If non-zero, emit a <a class="reference internal" href="../library/exceptions.html#EncodingWarning" title="EncodingWarning"><code class="xref py py-exc docutils literal notranslate"><span class="pre">EncodingWarning</span></code></a> warning when <a class="reference internal" href="../library/io.html#io.TextIOWrapper" title="io.TextIOWrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">io.TextIOWrapper</span></code></a>
+uses its default encoding. See <a class="reference internal" href="../library/io.html#io-encoding-warning"><span class="std std-ref">Opt-in EncodingWarning</span></a> for details.</p>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 3.10.</span></p>
+</div>
+</dd></dl>
+
+<dl class="c member">
 <dt id="c.PyConfig.check_hash_pycs_mode">
 wchar_t *<code class="sig-name descname">check_hash_pycs_mode</code><a class="headerlink" href="#c.PyConfig.check_hash_pycs_mode" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Control the validation behavior of hash-based <code class="docutils literal notranslate"><span class="pre">.pyc</span></code> files:
@@ -737,7 +832,8 @@ int <code class="sig-name descname">dump_refs</code><a class="headerlink" href="
 <dd><p>Dump Python refererences?</p>
 <p>If non-zero, dump all objects which are still alive at exit.</p>
 <p>Set to <code class="docutils literal notranslate"><span class="pre">1</span></code> by the <span class="target" id="index-6"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONDUMPREFS"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONDUMPREFS</span></code></a> environment variable.</p>
-<p>Need a special build of Python with the <code class="docutils literal notranslate"><span class="pre">Py_TRACE_REFS</span></code> macro defined.</p>
+<p>Need a special build of Python with the <code class="docutils literal notranslate"><span class="pre">Py_TRACE_REFS</span></code> macro defined:
+see the <a class="reference internal" href="../using/configure.html#cmdoption-with-trace-refs"><code class="xref std std-option docutils literal notranslate"><span class="pre">configure</span> <span class="pre">--with-trace-refs</span> <span class="pre">option</span></code></a>.</p>
 <p>Default: <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
 </dd></dl>
 
@@ -912,7 +1008,8 @@ Windows specific code.</p>
 int <code class="sig-name descname">malloc_stats</code><a class="headerlink" href="#c.PyConfig.malloc_stats" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>If non-zero, dump statistics on <a class="reference internal" href="memory.html#pymalloc"><span class="std std-ref">Python pymalloc memory allocator</span></a> at exit.</p>
 <p>Set to <code class="docutils literal notranslate"><span class="pre">1</span></code> by the <span class="target" id="index-14"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONMALLOCSTATS"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONMALLOCSTATS</span></code></a> environment variable.</p>
-<p>The option is ignored if Python is built using <code class="docutils literal notranslate"><span class="pre">--without-pymalloc</span></code>.</p>
+<p>The option is ignored if Python is <a class="reference internal" href="../using/configure.html#cmdoption-without-pymalloc"><code class="xref std std-option docutils literal notranslate"><span class="pre">configured</span> <span class="pre">using</span>
+<span class="pre">the</span> <span class="pre">--without-pymalloc</span> <span class="pre">option</span></code></a>.</p>
 <p>Default: <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
 </dd></dl>
 
@@ -921,8 +1018,9 @@ int <code class="sig-name descname">malloc_stats</code><a class="headerlink" hre
 wchar_t *<code class="sig-name descname">platlibdir</code><a class="headerlink" href="#c.PyConfig.platlibdir" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Platform library directory name: <a class="reference internal" href="../library/sys.html#sys.platlibdir" title="sys.platlibdir"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.platlibdir</span></code></a>.</p>
 <p>Set by the <span class="target" id="index-15"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONPLATLIBDIR"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONPLATLIBDIR</span></code></a> environment variable.</p>
-<p>Default: value of the <code class="docutils literal notranslate"><span class="pre">PLATLIBDIR</span></code> macro which is set at configure time
-by <code class="docutils literal notranslate"><span class="pre">--with-platlibdir</span></code> (default: <code class="docutils literal notranslate"><span class="pre">&quot;lib&quot;</span></code>).</p>
+<p>Default: value of the <code class="docutils literal notranslate"><span class="pre">PLATLIBDIR</span></code> macro which is set by the
+<a class="reference internal" href="../using/configure.html#cmdoption-with-platlibdir"><code class="xref std std-option docutils literal notranslate"><span class="pre">configure</span> <span class="pre">--with-platlibdir</span> <span class="pre">option</span></code></a>
+(default: <code class="docutils literal notranslate"><span class="pre">&quot;lib&quot;</span></code>).</p>
 <p>Part of the <a class="reference internal" href="#init-path-config"><span class="std std-ref">Python Path Configuration</span></a> input.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.9.</span></p>
@@ -1109,7 +1207,8 @@ wchar_t *<code class="sig-name descname">run_module</code><a class="headerlink" 
 int <code class="sig-name descname">show_ref_count</code><a class="headerlink" href="#c.PyConfig.show_ref_count" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Show total reference count at exit?</p>
 <p>Set to 1 by <a class="reference internal" href="../using/cmdline.html#cmdoption-X"><code class="xref std std-option docutils literal notranslate"><span class="pre">-X</span> <span class="pre">showrefcount</span></code></a> command line option.</p>
-<p>Need a debug build of Python (<code class="docutils literal notranslate"><span class="pre">Py_REF_DEBUG</span></code> macro must be defined).</p>
+<p>Need a <a class="reference internal" href="../using/configure.html#debug-build"><span class="std std-ref">debug build of Python</span></a> (the <code class="docutils literal notranslate"><span class="pre">Py_REF_DEBUG</span></code>
+macro must be defined).</p>
 <p>Default: <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
 </dd></dl>
 
@@ -1217,6 +1316,11 @@ to highest priority: <a class="reference internal" href="../library/sys.html#sys
 order: the last <a class="reference internal" href="#c.PyConfig.warnoptions" title="PyConfig.warnoptions"><code class="xref c c-member docutils literal notranslate"><span class="pre">PyConfig.warnoptions</span></code></a> item becomes the first
 item of <code class="xref py py-data docutils literal notranslate"><span class="pre">warnings.filters</span></code> which is checked first (highest
 priority).</p>
+<p>The <a class="reference internal" href="../using/cmdline.html#cmdoption-W"><code class="xref std std-option docutils literal notranslate"><span class="pre">-W</span></code></a> command line options adds its value to
+<a class="reference internal" href="#c.PyConfig.warnoptions" title="PyConfig.warnoptions"><code class="xref c c-member docutils literal notranslate"><span class="pre">warnoptions</span></code></a>, it can be used multiple times.</p>
+<p>The <span class="target" id="index-26"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONWARNINGS"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONWARNINGS</span></code></a> environment variable can also be used to add
+warning options. Multiple options can be specified, separated by commas
+(<code class="docutils literal notranslate"><span class="pre">,</span></code>).</p>
 <p>Default: empty list.</p>
 </dd></dl>
 
@@ -1226,7 +1330,7 @@ int <code class="sig-name descname">write_bytecode</code><a class="headerlink" h
 <dd><p>If equal to 0, Python won’t try to write <code class="docutils literal notranslate"><span class="pre">.pyc</span></code> files on the import of
 source modules.</p>
 <p>Set to <code class="docutils literal notranslate"><span class="pre">0</span></code> by the <a class="reference internal" href="../using/cmdline.html#cmdoption-B"><code class="xref std std-option docutils literal notranslate"><span class="pre">-B</span></code></a> command line option and the
-<span class="target" id="index-26"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONDONTWRITEBYTECODE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONDONTWRITEBYTECODE</span></code></a> environment variable.</p>
+<span class="target" id="index-27"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONDONTWRITEBYTECODE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONDONTWRITEBYTECODE</span></code></a> environment variable.</p>
 <p><a class="reference internal" href="../library/sys.html#sys.dont_write_bytecode" title="sys.dont_write_bytecode"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.dont_write_bytecode</span></code></a> is initialized to the inverted value of
 <a class="reference internal" href="#c.PyConfig.write_bytecode" title="PyConfig.write_bytecode"><code class="xref c c-member docutils literal notranslate"><span class="pre">write_bytecode</span></code></a>.</p>
 <p>Default: <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
@@ -1250,8 +1354,8 @@ the <a class="reference internal" href="../using/cmdline.html#cmdoption-X"><code
 <div class="versionchanged">
 <p><span class="versionmodified changed">Changed in version 3.9: </span>The <code class="docutils literal notranslate"><span class="pre">show_alloc_count</span></code> field has been removed.</p>
 </div>
-</div>
-<div class="section" id="initialization-with-pyconfig">
+</section>
+<section id="initialization-with-pyconfig">
 <h2>Initialization with PyConfig<a class="headerlink" href="#initialization-with-pyconfig" title="Permalink to this headline">¶</a></h2>
 <p>Function to initialize Python:</p>
 <dl class="c function">
@@ -1342,8 +1446,8 @@ configuration, and then override some parameters:</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="isolated-configuration">
+</section>
+<section id="isolated-configuration">
 <span id="init-isolated-conf"></span><h2>Isolated Configuration<a class="headerlink" href="#isolated-configuration" title="Permalink to this headline">¶</a></h2>
 <p><code class="xref c c-func docutils literal notranslate"><span class="pre">PyPreConfig_InitIsolatedConfig()</span></code> and
 <code class="xref c c-func docutils literal notranslate"><span class="pre">PyConfig_InitIsolatedConfig()</span></code> functions create a configuration to
@@ -1357,20 +1461,20 @@ LC_CTYPE locale are left unchanged. Signal handlers are not installed.</p>
 <a class="reference internal" href="#init-path-config"><span class="std std-ref">Python Path Configuration</span></a> (“output fields”) to ignore these
 configuration files and avoid the function computing the default path
 configuration.</p>
-</div>
-<div class="section" id="python-configuration">
+</section>
+<section id="python-configuration">
 <span id="init-python-config"></span><h2>Python Configuration<a class="headerlink" href="#python-configuration" title="Permalink to this headline">¶</a></h2>
 <p><code class="xref c c-func docutils literal notranslate"><span class="pre">PyPreConfig_InitPythonConfig()</span></code> and <code class="xref c c-func docutils literal notranslate"><span class="pre">PyConfig_InitPythonConfig()</span></code>
 functions create a configuration to build a customized Python which behaves as
 the regular Python.</p>
 <p>Environments variables and command line arguments are used to configure
 Python, whereas global configuration variables are ignored.</p>
-<p>This function enables C locale coercion (<span class="target" id="index-27"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0538"><strong>PEP 538</strong></a>)
+<p>This function enables C locale coercion (<span class="target" id="index-28"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0538"><strong>PEP 538</strong></a>)
 and <a class="reference internal" href="../library/os.html#utf8-mode"><span class="std std-ref">Python UTF-8 Mode</span></a>
-(<span class="target" id="index-28"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0540"><strong>PEP 540</strong></a>) depending on the LC_CTYPE locale, <span class="target" id="index-29"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONUTF8"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONUTF8</span></code></a> and
-<span class="target" id="index-30"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONCOERCECLOCALE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONCOERCECLOCALE</span></code></a> environment variables.</p>
-</div>
-<div class="section" id="python-path-configuration">
+(<span class="target" id="index-29"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0540"><strong>PEP 540</strong></a>) depending on the LC_CTYPE locale, <span class="target" id="index-30"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONUTF8"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONUTF8</span></code></a> and
+<span class="target" id="index-31"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONCOERCECLOCALE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONCOERCECLOCALE</span></code></a> environment variables.</p>
+</section>
+<section id="python-path-configuration">
 <span id="init-path-config"></span><h2>Python Path Configuration<a class="headerlink" href="#python-path-configuration" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference internal" href="#c.PyConfig" title="PyConfig"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyConfig</span></code></a> contains multiple fields for the path configuration:</p>
 <ul class="simple">
@@ -1447,8 +1551,8 @@ site-package directory to <a class="reference internal" href="../library/sys.htm
 </ul>
 <p>The <code class="docutils literal notranslate"><span class="pre">__PYVENV_LAUNCHER__</span></code> environment variable is used to set
 <a class="reference internal" href="#c.PyConfig.base_executable" title="PyConfig.base_executable"><code class="xref c c-member docutils literal notranslate"><span class="pre">PyConfig.base_executable</span></code></a></p>
-</div>
-<div class="section" id="py-runmain">
+</section>
+<section id="py-runmain">
 <h2>Py_RunMain()<a class="headerlink" href="#py-runmain" title="Permalink to this headline">¶</a></h2>
 <dl class="c function">
 <dt id="c.Py_RunMain">
@@ -1465,8 +1569,8 @@ the <code class="docutils literal notranslate"><span class="pre">exit()</span></
 <p>See <a class="reference internal" href="#init-python-config"><span class="std std-ref">Python Configuration</span></a> for an example of
 customized Python always running in isolated mode using
 <a class="reference internal" href="#c.Py_RunMain" title="Py_RunMain"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_RunMain()</span></code></a>.</p>
-</div>
-<div class="section" id="py-getargcargv">
+</section>
+<section id="py-getargcargv">
 <h2>Py_GetArgcArgv()<a class="headerlink" href="#py-getargcargv" title="Permalink to this headline">¶</a></h2>
 <dl class="c function">
 <dt id="c.Py_GetArgcArgv">
@@ -1475,11 +1579,11 @@ void <code class="sig-name descname">Py_GetArgcArgv</code><span class="sig-paren
 <p>See also <a class="reference internal" href="#c.PyConfig.orig_argv" title="PyConfig.orig_argv"><code class="xref c c-member docutils literal notranslate"><span class="pre">PyConfig.orig_argv</span></code></a> member.</p>
 </dd></dl>
 
-</div>
-<div class="section" id="multi-phase-initialization-private-provisional-api">
+</section>
+<section id="multi-phase-initialization-private-provisional-api">
 <h2>Multi-Phase Initialization Private Provisional API<a class="headerlink" href="#multi-phase-initialization-private-provisional-api" title="Permalink to this headline">¶</a></h2>
 <p>This section is a private provisional API introducing multi-phase
-initialization, the core feature of the <span class="target" id="index-31"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0432"><strong>PEP 432</strong></a>:</p>
+initialization, the core feature of the <span class="target" id="index-32"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0432"><strong>PEP 432</strong></a>:</p>
 <ul class="simple">
 <li><p>“Core” initialization phase, “bare minimum Python”:</p>
 <ul>
@@ -1522,7 +1626,7 @@ applied during the “Main” phase. It may allow to customize Python in Python 
 override or tune the <a class="reference internal" href="#init-path-config"><span class="std std-ref">Path Configuration</span></a>, maybe
 install a custom <a class="reference internal" href="../library/sys.html#sys.meta_path" title="sys.meta_path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.meta_path</span></code></a> importer or an import hook, etc.</p>
 <p>It may become possible to calculatin the <a class="reference internal" href="#init-path-config"><span class="std std-ref">Path Configuration</span></a> in Python, after the Core phase and before the Main phase,
-which is one of the <span class="target" id="index-32"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0432"><strong>PEP 432</strong></a> motivation.</p>
+which is one of the <span class="target" id="index-33"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0432"><strong>PEP 432</strong></a> motivation.</p>
 <p>The “Core” phase is not properly defined: what should be and what should
 not be available at this phase is not specified yet. The API is marked
 as private and provisional: the API can be modified or even be removed
@@ -1564,8 +1668,8 @@ phases:</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -1605,7 +1709,7 @@ phases:</p>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/master/Doc/c-api/init_config.rst"
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/c-api/init_config.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -1631,33 +1735,44 @@ phases:</p>
           <a href="init.html" title="Initialization, Finalization, and Threads"
              >previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API Reference Manual</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Python Initialization Configuration</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>  
     <div class="footer">
@@ -1675,7 +1790,7 @@ phases:</p>
 <br />
     <br />
 
-    Last updated on Mar 24, 2021.
+    Last updated on May 10, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 

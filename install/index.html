@@ -4,8 +4,10 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Installing Python Modules (Legacy version) &#8212; Python 3.10.0a6 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Installing Python Modules (Legacy version) &#8212; Python 3.10.0b1 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
@@ -19,7 +21,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.10.0a6 documentation"
+          title="Search within Python 3.10.0b1 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -39,17 +41,112 @@
         }
       }
     </style>
+<link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.svg" />
+            <script type="text/javascript" src="../_static/copybutton.js"></script>
+            <script type="text/javascript" src="../_static/menu.js"></script>
+            <script type="text/javascript" src="../_static/themetoggle.js"></script> 
 
-    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
-    
-    <script type="text/javascript" src="../_static/copybutton.js"></script>
-    <script type="text/javascript" src="../_static/themetoggle.js"></script>
-    
-     
+  </head>
+<body>
+<div class="mobile-nav">
+    <input type="checkbox" id="menuToggler" class="toggler__input" aria-controls="navigation"
+           aria-pressed="false" aria-expanded="false" role="button" aria-label="Menu" />
+    <nav class="nav-content" role="navigation">
+        <label for="menuToggler" class="toggler__label">
+            <span></span>
+        </label>
+        <span class="nav-items-wrapper">
+            <a href="https://www.python.org/" class="nav-logo">
+                <img src="../_static/py.svg" alt="Logo"/>
+            </a>
+            <span class="version_switcher_placeholder"></span>
+            <form id="searchbox" role="search" class="search" action="../search.html" method="get">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="search-icon">
+                    <path fill-rule="nonzero" fill="currentColor" d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 001.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 00-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 005.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                </svg>
+                <input type="search" name="q" aria-label="Quick search"/>
+                <input type="submit" value="Go"/>
+                
+            </form>
+        </span>
+    </nav>
+    <div class="menu-wrapper">
+        <nav class="menu" role="navigation" aria-label="main navigation">
+            <div class="language_switcher_placeholder"></div>
+            
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label>
+  <h3><a href="../contents.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Installing Python Modules (Legacy version)</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a><ul>
+<li><a class="reference internal" href="#distutils-based-source-distributions">Distutils based source distributions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#standard-build-and-install">Standard Build and Install</a><ul>
+<li><a class="reference internal" href="#platform-variations">Platform variations</a></li>
+<li><a class="reference internal" href="#splitting-the-job-up">Splitting the job up</a></li>
+<li><a class="reference internal" href="#how-building-works">How building works</a></li>
+<li><a class="reference internal" href="#how-installation-works">How installation works</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#alternate-installation">Alternate Installation</a><ul>
+<li><a class="reference internal" href="#alternate-installation-the-user-scheme">Alternate installation: the user scheme</a></li>
+<li><a class="reference internal" href="#alternate-installation-the-home-scheme">Alternate installation: the home scheme</a></li>
+<li><a class="reference internal" href="#alternate-installation-unix-the-prefix-scheme">Alternate installation: Unix (the prefix scheme)</a></li>
+<li><a class="reference internal" href="#alternate-installation-windows-the-prefix-scheme">Alternate installation: Windows (the prefix scheme)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#custom-installation">Custom Installation</a><ul>
+<li><a class="reference internal" href="#modifying-python-s-search-path">Modifying Python’s Search Path</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#distutils-configuration-files">Distutils Configuration Files</a><ul>
+<li><a class="reference internal" href="#location-and-names-of-config-files">Location and names of config files</a></li>
+<li><a class="reference internal" href="#syntax-of-config-files">Syntax of config files</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#building-extensions-tips-and-tricks">Building Extensions: Tips and Tricks</a><ul>
+<li><a class="reference internal" href="#tweaking-compiler-linker-flags">Tweaking compiler/linker flags</a></li>
+<li><a class="reference internal" href="#using-non-microsoft-compilers-on-windows">Using non-Microsoft compilers on Windows</a><ul>
+<li><a class="reference internal" href="#borland-codegear-c">Borland/CodeGear C++</a></li>
+<li><a class="reference internal" href="#gnu-c-cygwin-mingw">GNU C / Cygwin / MinGW</a><ul>
+<li><a class="reference internal" href="#older-versions-of-python-and-mingw">Older Versions of Python and MinGW</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../distutils/apiref.html"
+                        title="previous chapter"><span class="section-number">9. </span>API Reference</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../bugs.html">Report a Bug</a></li>
+      <li>
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/install/index.rst"
+            rel="nofollow">Show Source
+        </a>
+      </li>
+    </ul>
+  </div>
+        </nav>
+    </div>
+</div>
 
-  </head><body>
   
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -64,32 +161,43 @@
           <a href="../distutils/apiref.html" title="9. API Reference"
              accesskey="P">previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
         <li class="nav-item nav-item-this"><a href="">Installing Python Modules (Legacy version)</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>    
 
@@ -98,7 +206,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="installing-python-modules-legacy-version">
+  <section id="installing-python-modules-legacy-version">
 <span id="install-index"></span><h1>Installing Python Modules (Legacy version)<a class="headerlink" href="#installing-python-modules-legacy-version" title="Permalink to this headline">¶</a></h1>
 <dl class="field-list simple">
 <dt class="field-odd">Author</dt>
@@ -134,7 +242,7 @@ tools offer easier to use and more secure alternatives. Refer to the <a class="r
 recommendations section</a>
 in the Python Packaging User Guide for more information.</p>
 </div>
-<div class="section" id="introduction">
+<section id="introduction">
 <span id="inst-intro"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>In Python 2.0, the <code class="docutils literal notranslate"><span class="pre">distutils</span></code> API was first added to the standard library.
 This provided Linux distro maintainers with a standard way of converting
@@ -148,7 +256,7 @@ using <code class="docutils literal notranslate"><span class="pre">distutils</sp
 <p>See <a class="reference internal" href="../installing/index.html#installing-index"><span class="std std-ref">Installing Python Modules</span></a> and <a class="reference internal" href="../distributing/index.html#distributing-index"><span class="std std-ref">Distributing Python Modules</span></a> for more details.</p>
 <p>This legacy documentation is being retained only until we’re confident that the
 <code class="docutils literal notranslate"><span class="pre">setuptools</span></code> documentation covers everything needed.</p>
-<div class="section" id="distutils-based-source-distributions">
+<section id="distutils-based-source-distributions">
 <span id="inst-new-standard"></span><h3>Distutils based source distributions<a class="headerlink" href="#distutils-based-source-distributions" title="Permalink to this headline">¶</a></h3>
 <p>If you download a module source distribution, you can tell pretty quickly if it
 was packaged and distributed in the standard way, i.e. using the Distutils.
@@ -173,9 +281,9 @@ modules you’ve just downloaded:  Run the command above. Unless you need to
 install things in a non-standard way or customize the build process, you don’t
 really need this manual.  Or rather, the above command is everything you need to
 get out of this manual.</p>
-</div>
-</div>
-<div class="section" id="standard-build-and-install">
+</section>
+</section>
+<section id="standard-build-and-install">
 <span id="inst-standard-install"></span><h2>Standard Build and Install<a class="headerlink" href="#standard-build-and-install" title="Permalink to this headline">¶</a></h2>
 <p>As described in section <a class="reference internal" href="#inst-new-standard"><span class="std std-ref">Distutils based source distributions</span></a>, building and installing a module
 distribution using the Distutils is usually one simple command to run from a
@@ -183,7 +291,7 @@ terminal:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>python setup.py install
 </pre></div>
 </div>
-<div class="section" id="platform-variations">
+<section id="platform-variations">
 <span id="inst-platform-variations"></span><h3>Platform variations<a class="headerlink" href="#platform-variations" title="Permalink to this headline">¶</a></h3>
 <p>You should always run the setup command from the distribution root directory,
 i.e. the top-level subdirectory that the module source distribution unpacks
@@ -204,8 +312,8 @@ command prompt window and run:</p>
 python setup.py install
 </pre></div>
 </div>
-</div>
-<div class="section" id="splitting-the-job-up">
+</section>
+<section id="splitting-the-job-up">
 <span id="inst-splitting-up"></span><h3>Splitting the job up<a class="headerlink" href="#splitting-the-job-up" title="Permalink to this headline">¶</a></h3>
 <p>Running <code class="docutils literal notranslate"><span class="pre">setup.py</span> <span class="pre">install</span></code> builds and installs all modules in one run.  If you
 prefer to work incrementally—especially useful if you want to customize the
@@ -228,8 +336,8 @@ up-to-date.</p>
 install modules downloaded off the ‘net, but it’s very handy for more advanced
 tasks.  If you get into distributing your own Python modules and extensions,
 you’ll run lots of individual Distutils commands on their own.</p>
-</div>
-<div class="section" id="how-building-works">
+</section>
+<section id="how-building-works">
 <span id="inst-how-build-works"></span><h3>How building works<a class="headerlink" href="#how-building-works" title="Permalink to this headline">¶</a></h3>
 <p>As implied above, the <strong class="command">build</strong> command is responsible for putting the
 files to install into a <em>build directory</em>.  By default, this is <code class="file docutils literal notranslate"><span class="pre">build</span></code>
@@ -261,8 +369,8 @@ contains all Python modules (pure Python and extensions) that will be installed.
 <p>In the future, more directories will be added to handle Python scripts,
 documentation, binary executables, and whatever else is needed to handle the job
 of installing Python modules and applications.</p>
-</div>
-<div class="section" id="how-installation-works">
+</section>
+<section id="how-installation-works">
 <span id="inst-how-install-works"></span><h3>How installation works<a class="headerlink" href="#how-installation-works" title="Permalink to this headline">¶</a></h3>
 <p>After the <strong class="command">build</strong> command runs (whether you run it explicitly, or the
 <strong class="command">install</strong> command does it for you), the work of the <strong class="command">install</strong>
@@ -348,9 +456,9 @@ have permission to write there, then you need to read about alternate
 installations in section <a class="reference internal" href="#inst-alt-install"><span class="std std-ref">Alternate Installation</span></a>.  If you want to customize your
 installation directories more heavily, see section <a class="reference internal" href="#inst-custom-install"><span class="std std-ref">Custom Installation</span></a> on
 custom installations.</p>
-</div>
-</div>
-<div class="section" id="alternate-installation">
+</section>
+</section>
+<section id="alternate-installation">
 <span id="inst-alt-install"></span><h2>Alternate Installation<a class="headerlink" href="#alternate-installation" title="Permalink to this headline">¶</a></h2>
 <p>Often, it is necessary or desirable to install modules to a location other than
 the standard location for third-party Python modules.  For example, on a Unix
@@ -370,7 +478,7 @@ you.</p>
 can pass <code class="docutils literal notranslate"><span class="pre">--user</span></code>, or <code class="docutils literal notranslate"><span class="pre">--home</span></code>, or <code class="docutils literal notranslate"><span class="pre">--prefix</span></code> and <code class="docutils literal notranslate"><span class="pre">--exec-prefix</span></code>, or
 <code class="docutils literal notranslate"><span class="pre">--install-base</span></code> and <code class="docutils literal notranslate"><span class="pre">--install-platbase</span></code>, but you can’t mix from these
 groups.</p>
-<div class="section" id="alternate-installation-the-user-scheme">
+<section id="alternate-installation-the-user-scheme">
 <span id="inst-alt-install-user"></span><h3>Alternate installation: the user scheme<a class="headerlink" href="#alternate-installation-the-user-scheme" title="Permalink to this headline">¶</a></h3>
 <p>This scheme is designed to be the most convenient solution for users that don’t
 have write permission to the global site-packages directory or don’t want to
@@ -442,8 +550,8 @@ to finalize the installation.</p>
 <code class="file docutils literal notranslate"><em><span class="pre">userbase</span></em><span class="pre">/include</span></code> to the compiler search path for header files and
 <code class="file docutils literal notranslate"><em><span class="pre">userbase</span></em><span class="pre">/lib</span></code> to the compiler search path for libraries as well as to
 the runtime search path for shared C libraries (rpath).</p>
-</div>
-<div class="section" id="alternate-installation-the-home-scheme">
+</section>
+<section id="alternate-installation-the-home-scheme">
 <span id="inst-alt-install-home"></span><h3>Alternate installation: the home scheme<a class="headerlink" href="#alternate-installation-the-home-scheme" title="Permalink to this headline">¶</a></h3>
 <p>The idea behind the “home scheme” is that you build and maintain a personal
 stash of Python modules.  This scheme’s name is derived from the idea of a
@@ -493,8 +601,8 @@ installed to the following directories under the installation base as follows:</
 </tbody>
 </table>
 <p>(Mentally replace slashes with backslashes if you’re on Windows.)</p>
-</div>
-<div class="section" id="alternate-installation-unix-the-prefix-scheme">
+</section>
+<section id="alternate-installation-unix-the-prefix-scheme">
 <span id="inst-alt-install-prefix-unix"></span><h3>Alternate installation: Unix (the prefix scheme)<a class="headerlink" href="#alternate-installation-unix-the-prefix-scheme" title="Permalink to this headline">¶</a></h3>
 <p>The “prefix scheme” is useful when you wish to use one Python installation to
 perform the build/install (i.e., to run the setup script), but install modules
@@ -573,8 +681,8 @@ to do this is to ensure that the two interpreters are the same version of Python
 (possibly different builds, or possibly copies of the same build).  (Of course,
 if your <code class="xref std std-option docutils literal notranslate"><span class="pre">--prefix</span></code> and <code class="xref std std-option docutils literal notranslate"><span class="pre">--exec-prefix</span></code> don’t even point to an
 alternate Python installation, this is immaterial.)</p>
-</div>
-<div class="section" id="alternate-installation-windows-the-prefix-scheme">
+</section>
+<section id="alternate-installation-windows-the-prefix-scheme">
 <span id="inst-alt-install-prefix-windows"></span><h3>Alternate installation: Windows (the prefix scheme)<a class="headerlink" href="#alternate-installation-windows-the-prefix-scheme" title="Permalink to this headline">¶</a></h3>
 <p>Windows has no concept of a user’s home directory, and since the standard Python
 installation under Windows is simpler than under Unix, the <code class="xref std std-option docutils literal notranslate"><span class="pre">--prefix</span></code>
@@ -613,9 +721,9 @@ Files are installed as follows:</p>
 </tr>
 </tbody>
 </table>
-</div>
-</div>
-<div class="section" id="custom-installation">
+</section>
+</section>
+<section id="custom-installation">
 <span id="inst-custom-install"></span><h2>Custom Installation<a class="headerlink" href="#custom-installation" title="Permalink to this headline">¶</a></h2>
 <p>Sometimes, the alternate installation schemes described in section
 <a class="reference internal" href="#inst-alt-install"><span class="std std-ref">Alternate Installation</span></a> just don’t do what you want.  You might want to tweak just
@@ -766,7 +874,7 @@ that change the installation path will be ignored from all distutils configurati
 files to prevent inadvertently installing projects outside of the virtual
 environment.</p>
 </div>
-<div class="section" id="modifying-python-s-search-path">
+<section id="modifying-python-s-search-path">
 <span id="inst-search-path"></span><h3>Modifying Python’s Search Path<a class="headerlink" href="#modifying-python-s-search-path" title="Permalink to this headline">¶</a></h3>
 <p>When the Python interpreter executes an <a class="reference internal" href="../reference/simple_stmts.html#import"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">import</span></code></a> statement, it searches
 for both Python code and extension modules along a search path.  A default value
@@ -829,9 +937,9 @@ be added to <code class="docutils literal notranslate"><span class="pre">sys.pat
 exist.)</p>
 <p>Finally, <code class="docutils literal notranslate"><span class="pre">sys.path</span></code> is just a regular Python list, so any Python application
 can modify it by adding or removing entries.</p>
-</div>
-</div>
-<div class="section" id="distutils-configuration-files">
+</section>
+</section>
+<section id="distutils-configuration-files">
 <span id="inst-config-files"></span><h2>Distutils Configuration Files<a class="headerlink" href="#distutils-configuration-files" title="Permalink to this headline">¶</a></h2>
 <p>As mentioned above, you can use Distutils configuration files to record personal
 or site preferences for any Distutils options.  That is, any option to any
@@ -841,7 +949,7 @@ This means that configuration files will override default values, and the
 command-line will in turn override configuration files.  Furthermore, if
 multiple configuration files apply, values from “earlier” files are overridden
 by “later” files.</p>
-<div class="section" id="location-and-names-of-config-files">
+<section id="location-and-names-of-config-files">
 <span id="inst-config-filenames"></span><h3>Location and names of config files<a class="headerlink" href="#location-and-names-of-config-files" title="Permalink to this headline">¶</a></h3>
 <p>The names and locations of the configuration files vary slightly across
 platforms.  On Unix and Mac OS X, the three configuration files (in the order
@@ -927,8 +1035,8 @@ part of the standard library—so the system configuration file would be
 be tried. This is done by the <a class="reference internal" href="../library/os.path.html#os.path.expanduser" title="os.path.expanduser"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.path.expanduser()</span></code></a> function used
 by Distutils.</p></li>
 </ol>
-</div>
-<div class="section" id="syntax-of-config-files">
+</section>
+<section id="syntax-of-config-files">
 <span id="inst-config-syntax"></span><h3>Syntax of config files<a class="headerlink" href="#syntax-of-config-files" title="Permalink to this headline">¶</a></h3>
 <p>The Distutils configuration files all have the same syntax.  The config files
 are grouped into sections.  There is one section for each Distutils command,
@@ -974,9 +1082,9 @@ run, they will use the values in the config file.)</p>
 </pre></div>
 </div>
 <p>See also the “Reference” section of the “Distributing Python Modules” manual.</p>
-</div>
-</div>
-<div class="section" id="building-extensions-tips-and-tricks">
+</section>
+</section>
+<section id="building-extensions-tips-and-tricks">
 <span id="inst-building-ext"></span><h2>Building Extensions: Tips and Tricks<a class="headerlink" href="#building-extensions-tips-and-tricks" title="Permalink to this headline">¶</a></h2>
 <p>Whenever possible, the Distutils try to use the configuration information made
 available by the Python interpreter used to run the <code class="file docutils literal notranslate"><span class="pre">setup.py</span></code> script.
@@ -984,7 +1092,7 @@ For example, the same compiler and linker flags used to compile Python will also
 be used for compiling extensions.  Usually this will work well, but in
 complicated situations this might be inappropriate.  This section discusses how
 to override the usual Distutils behaviour.</p>
-<div class="section" id="tweaking-compiler-linker-flags">
+<section id="tweaking-compiler-linker-flags">
 <span id="inst-tweak-flags"></span><h3>Tweaking compiler/linker flags<a class="headerlink" href="#tweaking-compiler-linker-flags" title="Permalink to this headline">¶</a></h3>
 <p>Compiling a Python extension written in C or C++ will sometimes require
 specifying custom flags for the compiler and linker in order to use a particular
@@ -1039,13 +1147,13 @@ be passed the <code class="xref std std-option docutils literal notranslate"><sp
 <code class="xref std std-option docutils literal notranslate"><span class="pre">-shared</span></code>.  If a compiler option requires an argument, you’ll have to
 supply multiple <code class="xref std std-option docutils literal notranslate"><span class="pre">-Xcompiler</span></code> options; for example, to pass <code class="docutils literal notranslate"><span class="pre">-x</span> <span class="pre">c++</span></code>
 the <code class="file docutils literal notranslate"><span class="pre">Setup</span></code> file would have to contain <code class="docutils literal notranslate"><span class="pre">-Xcompiler</span> <span class="pre">-x</span> <span class="pre">-Xcompiler</span> <span class="pre">c++</span></code>.</p>
-<p>Compiler flags can also be supplied through setting the <span class="target" id="index-9"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">CFLAGS</span></code>
-environment variable.  If set, the contents of <span class="target" id="index-10"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">CFLAGS</span></code> will be added to
+<p>Compiler flags can also be supplied through setting the <span class="target" id="index-9"></span><a class="reference internal" href="../using/configure.html#envvar-CFLAGS"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">CFLAGS</span></code></a>
+environment variable.  If set, the contents of <span class="target" id="index-10"></span><a class="reference internal" href="../using/configure.html#envvar-CFLAGS"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">CFLAGS</span></code></a> will be added to
 the compiler flags specified in the  <code class="file docutils literal notranslate"><span class="pre">Setup</span></code> file.</p>
-</div>
-<div class="section" id="using-non-microsoft-compilers-on-windows">
+</section>
+<section id="using-non-microsoft-compilers-on-windows">
 <span id="inst-non-ms-compilers"></span><h3>Using non-Microsoft compilers on Windows<a class="headerlink" href="#using-non-microsoft-compilers-on-windows" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="borland-codegear-c">
+<section id="borland-codegear-c">
 <h4>Borland/CodeGear C++<a class="headerlink" href="#borland-codegear-c" title="Permalink to this headline">¶</a></h4>
 <p>This subsection describes the necessary steps to use Distutils with the Borland
 C++ compiler version 5.5.  First you have to know that Borland’s object file
@@ -1086,8 +1194,8 @@ Python.</p>
 </dd>
 </dl>
 </div>
-</div>
-<div class="section" id="gnu-c-cygwin-mingw">
+</section>
+<section id="gnu-c-cygwin-mingw">
 <h4>GNU C / Cygwin / MinGW<a class="headerlink" href="#gnu-c-cygwin-mingw" title="Permalink to this headline">¶</a></h4>
 <p>This section describes the necessary steps to use Distutils with the GNU C/C++
 compilers in their Cygwin and MinGW distributions. <a class="footnote-reference brackets" href="#id5" id="id2">2</a> For a Python interpreter
@@ -1107,7 +1215,7 @@ extensions.</p>
 <p>If you want to use any of these options/compilers as default, you should
 consider writing it in your personal or system-wide configuration file for
 Distutils (see section <a class="reference internal" href="#inst-config-files"><span class="std std-ref">Distutils Configuration Files</span></a>.)</p>
-<div class="section" id="older-versions-of-python-and-mingw">
+<section id="older-versions-of-python-and-mingw">
 <h5>Older Versions of Python and MinGW<a class="headerlink" href="#older-versions-of-python-and-mingw" title="Permalink to this headline">¶</a></h5>
 <p>The following instructions only apply if you’re using a version of Python
 inferior to 2.4.1 with a MinGW inferior to 3.0.0 (with
@@ -1155,11 +1263,11 @@ of the same name.</p>
 <code class="file docutils literal notranslate"><span class="pre">cygwin1.dll</span></code>.</p>
 </dd>
 </dl>
-</div>
-</div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -1222,7 +1330,7 @@ of the same name.</p>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/master/Doc/install/index.rst"
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/install/index.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -1245,32 +1353,43 @@ of the same name.</p>
           <a href="../distutils/apiref.html" title="9. API Reference"
              >previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
         <li class="nav-item nav-item-this"><a href="">Installing Python Modules (Legacy version)</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>  
     <div class="footer">
@@ -1288,7 +1407,7 @@ of the same name.</p>
 <br />
     <br />
 
-    Last updated on Mar 24, 2021.
+    Last updated on May 10, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 

@@ -4,8 +4,10 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Descriptor HowTo Guide &#8212; Python 3.10.0a6 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Descriptor HowTo Guide &#8212; Python 3.10.0b1 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
@@ -19,13 +21,13 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.10.0a6 documentation"
+          title="Search within Python 3.10.0b1 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="copyright" title="Copyright" href="../copyright.html" />
-    <link rel="next" title="Functional Programming HOWTO" href="functional.html" />
+    <link rel="next" title="Enum HOWTO" href="enum.html" />
     <link rel="prev" title="Curses Programming with Python" href="curses.html" />
     <link rel="canonical" href="https://docs.python.org/3/howto/descriptor.html" />
     
@@ -40,17 +42,112 @@
         }
       }
     </style>
+<link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.svg" />
+            <script type="text/javascript" src="../_static/copybutton.js"></script>
+            <script type="text/javascript" src="../_static/menu.js"></script>
+            <script type="text/javascript" src="../_static/themetoggle.js"></script> 
 
-    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
-    
-    <script type="text/javascript" src="../_static/copybutton.js"></script>
-    <script type="text/javascript" src="../_static/themetoggle.js"></script>
-    
-     
+  </head>
+<body>
+<div class="mobile-nav">
+    <input type="checkbox" id="menuToggler" class="toggler__input" aria-controls="navigation"
+           aria-pressed="false" aria-expanded="false" role="button" aria-label="Menu" />
+    <nav class="nav-content" role="navigation">
+        <label for="menuToggler" class="toggler__label">
+            <span></span>
+        </label>
+        <span class="nav-items-wrapper">
+            <a href="https://www.python.org/" class="nav-logo">
+                <img src="../_static/py.svg" alt="Logo"/>
+            </a>
+            <span class="version_switcher_placeholder"></span>
+            <form id="searchbox" role="search" class="search" action="../search.html" method="get">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="search-icon">
+                    <path fill-rule="nonzero" fill="currentColor" d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 001.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 00-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 005.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                </svg>
+                <input type="search" name="q" aria-label="Quick search"/>
+                <input type="submit" value="Go"/>
+                
+            </form>
+        </span>
+    </nav>
+    <div class="menu-wrapper">
+        <nav class="menu" role="navigation" aria-label="main navigation">
+            <div class="language_switcher_placeholder"></div>
+            
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label>
+  <h3><a href="../contents.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Descriptor HowTo Guide</a><ul>
+<li><a class="reference internal" href="#primer">Primer</a><ul>
+<li><a class="reference internal" href="#simple-example-a-descriptor-that-returns-a-constant">Simple example: A descriptor that returns a constant</a></li>
+<li><a class="reference internal" href="#dynamic-lookups">Dynamic lookups</a></li>
+<li><a class="reference internal" href="#managed-attributes">Managed attributes</a></li>
+<li><a class="reference internal" href="#customized-names">Customized names</a></li>
+<li><a class="reference internal" href="#closing-thoughts">Closing thoughts</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#complete-practical-example">Complete Practical Example</a><ul>
+<li><a class="reference internal" href="#validator-class">Validator class</a></li>
+<li><a class="reference internal" href="#custom-validators">Custom validators</a></li>
+<li><a class="reference internal" href="#practical-application">Practical application</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#technical-tutorial">Technical Tutorial</a><ul>
+<li><a class="reference internal" href="#abstract">Abstract</a></li>
+<li><a class="reference internal" href="#definition-and-introduction">Definition and introduction</a></li>
+<li><a class="reference internal" href="#descriptor-protocol">Descriptor protocol</a></li>
+<li><a class="reference internal" href="#overview-of-descriptor-invocation">Overview of descriptor invocation</a></li>
+<li><a class="reference internal" href="#invocation-from-an-instance">Invocation from an instance</a></li>
+<li><a class="reference internal" href="#invocation-from-a-class">Invocation from a class</a></li>
+<li><a class="reference internal" href="#invocation-from-super">Invocation from super</a></li>
+<li><a class="reference internal" href="#summary-of-invocation-logic">Summary of invocation logic</a></li>
+<li><a class="reference internal" href="#automatic-name-notification">Automatic name notification</a></li>
+<li><a class="reference internal" href="#orm-example">ORM example</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pure-python-equivalents">Pure Python Equivalents</a><ul>
+<li><a class="reference internal" href="#properties">Properties</a></li>
+<li><a class="reference internal" href="#functions-and-methods">Functions and methods</a></li>
+<li><a class="reference internal" href="#kinds-of-methods">Kinds of methods</a></li>
+<li><a class="reference internal" href="#static-methods">Static methods</a></li>
+<li><a class="reference internal" href="#class-methods">Class methods</a></li>
+<li><a class="reference internal" href="#member-objects-and-slots">Member objects and __slots__</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="curses.html"
+                        title="previous chapter">Curses Programming with Python</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="enum.html"
+                        title="next chapter">Enum HOWTO</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../bugs.html">Report a Bug</a></li>
+      <li>
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/howto/descriptor.rst"
+            rel="nofollow">Show Source
+        </a>
+      </li>
+    </ul>
+  </div>
+        </nav>
+    </div>
+</div>
 
-  </head><body>
   
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -62,39 +159,50 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="functional.html" title="Functional Programming HOWTO"
+          <a href="enum.html" title="Enum HOWTO"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="curses.html" title="Curses Programming with Python"
              accesskey="P">previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python HOWTOs</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Descriptor HowTo Guide</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>    
 
@@ -103,7 +211,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="descriptor-howto-guide">
+  <section id="descriptor-howto-guide">
 <span id="descriptorhowto"></span><h1><a class="toc-backref" href="#id1">Descriptor HowTo Guide</a><a class="headerlink" href="#descriptor-howto-guide" title="Permalink to this headline">¶</a></h1>
 <dl class="field-list simple">
 <dt class="field-odd">Author</dt>
@@ -152,7 +260,7 @@
 <ul>
 <li><p><a class="reference internal" href="#properties" id="id24">Properties</a></p></li>
 <li><p><a class="reference internal" href="#functions-and-methods" id="id25">Functions and methods</a></p></li>
-<li><p><a class="reference internal" href="#other-kinds-of-methods" id="id26">Other kinds of methods</a></p></li>
+<li><p><a class="reference internal" href="#kinds-of-methods" id="id26">Kinds of methods</a></p></li>
 <li><p><a class="reference internal" href="#static-methods" id="id27">Static methods</a></p></li>
 <li><p><a class="reference internal" href="#class-methods" id="id28">Class methods</a></p></li>
 <li><p><a class="reference internal" href="#member-objects-and-slots" id="id29">Member objects and __slots__</a></p></li>
@@ -179,11 +287,11 @@ into bound methods or about the implementation of common tools like
 <a class="reference internal" href="../library/functions.html#classmethod" title="classmethod"><code class="xref py py-func docutils literal notranslate"><span class="pre">classmethod()</span></code></a>, <a class="reference internal" href="../library/functions.html#staticmethod" title="staticmethod"><code class="xref py py-func docutils literal notranslate"><span class="pre">staticmethod()</span></code></a>, <a class="reference internal" href="../library/functions.html#property" title="property"><code class="xref py py-func docutils literal notranslate"><span class="pre">property()</span></code></a>, and
 <a class="reference internal" href="../glossary.html#term-__slots__"><span class="xref std std-term">__slots__</span></a>.</p></li>
 </ol>
-<div class="section" id="primer">
+<section id="primer">
 <h2><a class="toc-backref" href="#id2">Primer</a><a class="headerlink" href="#primer" title="Permalink to this headline">¶</a></h2>
 <p>In this primer, we start with the most basic possible example and then we’ll
 add new capabilities one by one.</p>
-<div class="section" id="simple-example-a-descriptor-that-returns-a-constant">
+<section id="simple-example-a-descriptor-that-returns-a-constant">
 <h3><a class="toc-backref" href="#id3">Simple example: A descriptor that returns a constant</a><a class="headerlink" href="#simple-example-a-descriptor-that-returns-a-constant" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">Ten</span></code> class is a descriptor whose <code class="xref py py-meth docutils literal notranslate"><span class="pre">__get__()</span></code> method always
 returns the constant <code class="docutils literal notranslate"><span class="pre">10</span></code>:</p>
@@ -216,8 +324,8 @@ instance dictionary.  Instead, the value <code class="docutils literal notransla
 <p>This example shows how a simple descriptor works, but it isn’t very useful.
 For retrieving constants, normal attribute lookup would be better.</p>
 <p>In the next section, we’ll create something more useful, a dynamic lookup.</p>
-</div>
-<div class="section" id="dynamic-lookups">
+</section>
+<section id="dynamic-lookups">
 <h3><a class="toc-backref" href="#id4">Dynamic lookups</a><a class="headerlink" href="#dynamic-lookups" title="Permalink to this headline">¶</a></h3>
 <p>Interesting descriptors typically run computations instead of returning
 constants:</p>
@@ -244,9 +352,9 @@ different, updated answers each time:</p>
 <span class="go">20</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">size</span>                              <span class="c1"># The games directory has three files</span>
 <span class="go">3</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;games/newfile&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>       <span class="c1"># Add a fourth file to the directory</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;games/chess&#39;</span><span class="p">)</span>            <span class="c1"># Delete a game</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">size</span>                              <span class="c1"># File count is automatically updated</span>
-<span class="go">4</span>
+<span class="go">2</span>
 </pre></div>
 </div>
 <p>Besides showing how descriptors can run computations, this example also
@@ -255,8 +363,8 @@ parameter is <em>size</em>, an instance of <em>DirectorySize</em>.  The <em>obj<
 either <em>g</em> or <em>s</em>, an instance of <em>Directory</em>.  It is the <em>obj</em> parameter that
 lets the <code class="xref py py-meth docutils literal notranslate"><span class="pre">__get__()</span></code> method learn the target directory.  The <em>objtype</em>
 parameter is the class <em>Directory</em>.</p>
-</div>
-<div class="section" id="managed-attributes">
+</section>
+<section id="managed-attributes">
 <h3><a class="toc-backref" href="#id5">Managed attributes</a><a class="headerlink" href="#managed-attributes" title="Permalink to this headline">¶</a></h3>
 <p>A popular use for descriptors is managing access to instance data.  The
 descriptor is assigned to a public attribute in the class dictionary while the
@@ -323,8 +431,8 @@ logged, but that the regular attribute <em>name</em> is not logged:</p>
 the <em>LoggedAgeAccess</em> class.  That means that each instance can only have one
 logged attribute and that its name is unchangeable.  In the next example,
 we’ll fix that problem.</p>
-</div>
-<div class="section" id="customized-names">
+</section>
+<section id="customized-names">
 <h3><a class="toc-backref" href="#id6">Customized names</a><a class="headerlink" href="#customized-names" title="Permalink to this headline">¶</a></h3>
 <p>When a class uses descriptors, it can inform each descriptor about which
 variable name was used.</p>
@@ -383,14 +491,14 @@ we call <a class="reference internal" href="../library/functions.html#vars" titl
 </pre></div>
 </div>
 <p>The two <em>Person</em> instances contain only the private names:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">vars</span><span class="p">(</span><span class="n">pete</span><span class="p">)</span>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">vars</span><span class="p">(</span><span class="n">pete</span><span class="p">)</span>
 <span class="go">{&#39;_name&#39;: &#39;Peter P&#39;, &#39;_age&#39;: 10}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">vars</span><span class="p">(</span><span class="n">kate</span><span class="p">)</span>
 <span class="go">{&#39;_name&#39;: &#39;Catherine C&#39;, &#39;_age&#39;: 20}</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="closing-thoughts">
+</section>
+<section id="closing-thoughts">
 <h3><a class="toc-backref" href="#id7">Closing thoughts</a><a class="headerlink" href="#closing-thoughts" title="Permalink to this headline">¶</a></h3>
 <p>A <a class="reference internal" href="../glossary.html#term-descriptor"><span class="xref std std-term">descriptor</span></a> is what we call any object that defines <code class="xref py py-meth docutils literal notranslate"><span class="pre">__get__()</span></code>,
 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__set__()</span></code>, or <code class="xref py py-meth docutils literal notranslate"><span class="pre">__delete__()</span></code>.</p>
@@ -412,13 +520,13 @@ have a say in the matter.</p>
 bound methods.  Common tools like <a class="reference internal" href="../library/functions.html#classmethod" title="classmethod"><code class="xref py py-func docutils literal notranslate"><span class="pre">classmethod()</span></code></a>, <a class="reference internal" href="../library/functions.html#staticmethod" title="staticmethod"><code class="xref py py-func docutils literal notranslate"><span class="pre">staticmethod()</span></code></a>,
 <a class="reference internal" href="../library/functions.html#property" title="property"><code class="xref py py-func docutils literal notranslate"><span class="pre">property()</span></code></a>, and <a class="reference internal" href="../library/functools.html#functools.cached_property" title="functools.cached_property"><code class="xref py py-func docutils literal notranslate"><span class="pre">functools.cached_property()</span></code></a> are all implemented as
 descriptors.</p>
-</div>
-</div>
-<div class="section" id="complete-practical-example">
+</section>
+</section>
+<section id="complete-practical-example">
 <h2><a class="toc-backref" href="#id8">Complete Practical Example</a><a class="headerlink" href="#complete-practical-example" title="Permalink to this headline">¶</a></h2>
 <p>In this example, we create a practical and powerful tool for locating
 notoriously hard to find data corruption bugs.</p>
-<div class="section" id="validator-class">
+<section id="validator-class">
 <h3><a class="toc-backref" href="#id9">Validator class</a><a class="headerlink" href="#validator-class" title="Permalink to this headline">¶</a></h3>
 <p>A validator is a descriptor for managed attribute access.  Prior to storing
 any data, it verifies that the new value meets various type and range
@@ -447,8 +555,8 @@ managed attribute descriptor:</p>
 </div>
 <p>Custom validators need to inherit from <code class="xref py py-class docutils literal notranslate"><span class="pre">Validator</span></code> and must supply a
 <code class="xref py py-meth docutils literal notranslate"><span class="pre">validate()</span></code> method to test various restrictions as needed.</p>
-</div>
-<div class="section" id="custom-validators">
+</section>
+<section id="custom-validators">
 <h3><a class="toc-backref" href="#id10">Custom validators</a><a class="headerlink" href="#custom-validators" title="Permalink to this headline">¶</a></h3>
 <p>Here are three practical data validation utilities:</p>
 <ol class="arabic simple">
@@ -511,8 +619,8 @@ user-defined <a class="reference external" href="https://en.wikipedia.org/wiki/P
             <span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="practical-application">
+</section>
+<section id="practical-application">
 <h3><a class="toc-backref" href="#id11">Practical application</a><a class="headerlink" href="#practical-application" title="Permalink to this headline">¶</a></h3>
 <p>Here’s how the data validators can be used in a real class:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Component</span><span class="p">:</span>
@@ -550,20 +658,20 @@ user-defined <a class="reference external" href="https://en.wikipedia.org/wiki/P
 <span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="s1">&#39;WIDGET&#39;</span><span class="p">,</span> <span class="s1">&#39;metal&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>  <span class="c1"># Allowed:  The inputs are valid</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="technical-tutorial">
+</section>
+</section>
+<section id="technical-tutorial">
 <h2><a class="toc-backref" href="#id12">Technical Tutorial</a><a class="headerlink" href="#technical-tutorial" title="Permalink to this headline">¶</a></h2>
 <p>What follows is a more technical tutorial for the mechanics and details of how
 descriptors work.</p>
-<div class="section" id="abstract">
+<section id="abstract">
 <h3><a class="toc-backref" href="#id13">Abstract</a><a class="headerlink" href="#abstract" title="Permalink to this headline">¶</a></h3>
 <p>Defines descriptors, summarizes the protocol, and shows how descriptors are
 called.  Provides an example showing how object relational mappings work.</p>
 <p>Learning about descriptors not only provides access to a larger toolset, it
 creates a deeper understanding of how Python works.</p>
-</div>
-<div class="section" id="definition-and-introduction">
+</section>
+<section id="definition-and-introduction">
 <h3><a class="toc-backref" href="#id14">Definition and introduction</a><a class="headerlink" href="#definition-and-introduction" title="Permalink to this headline">¶</a></h3>
 <p>In general, a descriptor is an attribute value that has one of the methods in
 the descriptor protocol.  Those methods are <code class="xref py py-meth docutils literal notranslate"><span class="pre">__get__()</span></code>, <code class="xref py py-meth docutils literal notranslate"><span class="pre">__set__()</span></code>,
@@ -582,8 +690,8 @@ behind properties, methods, static methods, class methods, and
 <a class="reference internal" href="../library/functions.html#super" title="super"><code class="xref py py-func docutils literal notranslate"><span class="pre">super()</span></code></a>.  They are used throughout Python itself.  Descriptors
 simplify the underlying C code and offer a flexible set of new tools for
 everyday Python programs.</p>
-</div>
-<div class="section" id="descriptor-protocol">
+</section>
+<section id="descriptor-protocol">
 <h3><a class="toc-backref" href="#id15">Descriptor protocol</a><a class="headerlink" href="#descriptor-protocol" title="Permalink to this headline">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">descr.__get__(self,</span> <span class="pre">obj,</span> <span class="pre">type=None)</span> <span class="pre">-&gt;</span> <span class="pre">value</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">descr.__set__(self,</span> <span class="pre">obj,</span> <span class="pre">value)</span> <span class="pre">-&gt;</span> <span class="pre">None</span></code></p>
@@ -604,8 +712,8 @@ name as a non-data descriptor, the dictionary entry takes precedence.</p>
 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__set__()</span></code> with the <code class="xref py py-meth docutils literal notranslate"><span class="pre">__set__()</span></code> raising an <a class="reference internal" href="../library/exceptions.html#AttributeError" title="AttributeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">AttributeError</span></code></a> when
 called.  Defining the <code class="xref py py-meth docutils literal notranslate"><span class="pre">__set__()</span></code> method with an exception raising
 placeholder is enough to make it a data descriptor.</p>
-</div>
-<div class="section" id="overview-of-descriptor-invocation">
+</section>
+<section id="overview-of-descriptor-invocation">
 <h3><a class="toc-backref" href="#id16">Overview of descriptor invocation</a><a class="headerlink" href="#overview-of-descriptor-invocation" title="Permalink to this headline">¶</a></h3>
 <p>A descriptor can be called directly with <code class="docutils literal notranslate"><span class="pre">desc.__get__(obj)</span></code> or
 <code class="docutils literal notranslate"><span class="pre">desc.__get__(None,</span> <span class="pre">cls)</span></code>.</p>
@@ -617,8 +725,8 @@ instance <code class="docutils literal notranslate"><span class="pre">__dict__</
 precedence rules listed below.</p>
 <p>The details of invocation depend on whether <code class="docutils literal notranslate"><span class="pre">obj</span></code> is an object, class, or
 instance of super.</p>
-</div>
-<div class="section" id="invocation-from-an-instance">
+</section>
+<section id="invocation-from-an-instance">
 <h3><a class="toc-backref" href="#id17">Invocation from an instance</a><a class="headerlink" href="#invocation-from-an-instance" title="Permalink to this headline">¶</a></h3>
 <p>Instance lookup scans through a chain of namespaces giving data descriptors
 the highest priority, followed by instance variables, then non-data
@@ -664,8 +772,8 @@ perform attribute lookup by way of a helper function:</p>
 raises <a class="reference internal" href="../library/exceptions.html#AttributeError" title="AttributeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">AttributeError</span></code></a> (either directly or in one of the descriptor calls).</p>
 <p>Also, if a user calls <a class="reference internal" href="../reference/datamodel.html#object.__getattribute__" title="object.__getattribute__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">object.__getattribute__()</span></code></a> directly, the
 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__getattr__()</span></code> hook is bypassed entirely.</p>
-</div>
-<div class="section" id="invocation-from-a-class">
+</section>
+<section id="invocation-from-a-class">
 <h3><a class="toc-backref" href="#id18">Invocation from a class</a><a class="headerlink" href="#invocation-from-a-class" title="Permalink to this headline">¶</a></h3>
 <p>The logic for a dotted lookup such as <code class="docutils literal notranslate"><span class="pre">A.x</span></code> is in
 <code class="xref py py-meth docutils literal notranslate"><span class="pre">type.__getattribute__()</span></code>.  The steps are similar to those for
@@ -673,9 +781,9 @@ raises <a class="reference internal" href="../library/exceptions.html#AttributeE
 by a search through the class’s <a class="reference internal" href="../glossary.html#term-method-resolution-order"><span class="xref std std-term">method resolution order</span></a>.</p>
 <p>If a descriptor is found, it is invoked with <code class="docutils literal notranslate"><span class="pre">desc.__get__(None,</span> <span class="pre">A)</span></code>.</p>
 <p>The full C implementation can be found in <code class="xref c c-func docutils literal notranslate"><span class="pre">type_getattro()</span></code> and
-<code class="xref c c-func docutils literal notranslate"><span class="pre">_PyType_Lookup()</span></code> in <a class="reference external" href="https://github.com/python/cpython/tree/master/Objects/typeobject.c">Objects/typeobject.c</a>.</p>
-</div>
-<div class="section" id="invocation-from-super">
+<code class="xref c c-func docutils literal notranslate"><span class="pre">_PyType_Lookup()</span></code> in <a class="reference external" href="https://github.com/python/cpython/tree/3.10/Objects/typeobject.c">Objects/typeobject.c</a>.</p>
+</section>
+<section id="invocation-from-super">
 <h3><a class="toc-backref" href="#id19">Invocation from super</a><a class="headerlink" href="#invocation-from-super" title="Permalink to this headline">¶</a></h3>
 <p>The logic for super’s dotted lookup is in the <code class="xref py py-meth docutils literal notranslate"><span class="pre">__getattribute__()</span></code> method for
 object returned by <a class="reference internal" href="../library/functions.html#super" title="super"><code class="xref py py-class docutils literal notranslate"><span class="pre">super()</span></code></a>.</p>
@@ -684,10 +792,10 @@ for the base class <code class="docutils literal notranslate"><span class="pre">
 <code class="docutils literal notranslate"><span class="pre">B.__dict__['m'].__get__(obj,</span> <span class="pre">A)</span></code>.  If not a descriptor, <code class="docutils literal notranslate"><span class="pre">m</span></code> is returned
 unchanged.</p>
 <p>The full C implementation can be found in <code class="xref c c-func docutils literal notranslate"><span class="pre">super_getattro()</span></code> in
-<a class="reference external" href="https://github.com/python/cpython/tree/master/Objects/typeobject.c">Objects/typeobject.c</a>.  A pure Python equivalent can be found in
+<a class="reference external" href="https://github.com/python/cpython/tree/3.10/Objects/typeobject.c">Objects/typeobject.c</a>.  A pure Python equivalent can be found in
 <a class="reference external" href="https://www.python.org/download/releases/2.2.3/descrintro/#cooperation">Guido’s Tutorial</a>.</p>
-</div>
-<div class="section" id="summary-of-invocation-logic">
+</section>
+<section id="summary-of-invocation-logic">
 <h3><a class="toc-backref" href="#id20">Summary of invocation logic</a><a class="headerlink" href="#summary-of-invocation-logic" title="Permalink to this headline">¶</a></h3>
 <p>The mechanism for descriptors is embedded in the <code class="xref py py-meth docutils literal notranslate"><span class="pre">__getattribute__()</span></code>
 methods for <a class="reference internal" href="../library/functions.html#object" title="object"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a>, <a class="reference internal" href="../library/functions.html#type" title="type"><code class="xref py py-class docutils literal notranslate"><span class="pre">type</span></code></a>, and <a class="reference internal" href="../library/functions.html#super" title="super"><code class="xref py py-func docutils literal notranslate"><span class="pre">super()</span></code></a>.</p>
@@ -705,8 +813,8 @@ includes the class.</p></li>
 <li><p>Data descriptors always override instance dictionaries.</p></li>
 <li><p>Non-data descriptors may be overridden by instance dictionaries.</p></li>
 </ul>
-</div>
-<div class="section" id="automatic-name-notification">
+</section>
+<section id="automatic-name-notification">
 <h3><a class="toc-backref" href="#id21">Automatic name notification</a><a class="headerlink" href="#automatic-name-notification" title="Permalink to this headline">¶</a></h3>
 <p>Sometimes it is desirable for a descriptor to know what class variable name it
 was assigned to.  When a new class is created, the <a class="reference internal" href="../library/functions.html#type" title="type"><code class="xref py py-class docutils literal notranslate"><span class="pre">type</span></code></a> metaclass
@@ -715,12 +823,12 @@ and if they define <code class="xref py py-meth docutils literal notranslate"><s
 arguments.  The <em>owner</em> is the class where the descriptor is used, and the
 <em>name</em> is the class variable the descriptor was assigned to.</p>
 <p>The implementation details are in <code class="xref c c-func docutils literal notranslate"><span class="pre">type_new()</span></code> and
-<code class="xref c c-func docutils literal notranslate"><span class="pre">set_names()</span></code> in <a class="reference external" href="https://github.com/python/cpython/tree/master/Objects/typeobject.c">Objects/typeobject.c</a>.</p>
+<code class="xref c c-func docutils literal notranslate"><span class="pre">set_names()</span></code> in <a class="reference external" href="https://github.com/python/cpython/tree/3.10/Objects/typeobject.c">Objects/typeobject.c</a>.</p>
 <p>Since the update logic is in <code class="xref py py-meth docutils literal notranslate"><span class="pre">type.__new__()</span></code>, notifications only take
 place at the time of class creation.  If descriptors are added to the class
 afterwards, <code class="xref py py-meth docutils literal notranslate"><span class="pre">__set_name__()</span></code> will need to be called manually.</p>
-</div>
-<div class="section" id="orm-example">
+</section>
+<section id="orm-example">
 <h3><a class="toc-backref" href="#id22">ORM example</a><a class="headerlink" href="#orm-example" title="Permalink to this headline">¶</a></h3>
 <p>The following code is simplified skeleton showing how data descriptors could
 be used to implement an <a class="reference external" href="https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping">object relational mapping</a>.</p>
@@ -784,15 +892,15 @@ it can be updated:</p>
 <span class="go">&#39;J.J. Abrams&#39;</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="pure-python-equivalents">
+</section>
+</section>
+<section id="pure-python-equivalents">
 <h2><a class="toc-backref" href="#id23">Pure Python Equivalents</a><a class="headerlink" href="#pure-python-equivalents" title="Permalink to this headline">¶</a></h2>
 <p>The descriptor protocol is simple and offers exciting possibilities.  Several
 use cases are so common that they have been prepackaged into built-in tools.
 Properties, bound methods, static methods, class methods, and __slots__ are
 all based on the descriptor protocol.</p>
-<div class="section" id="properties">
+<section id="properties">
 <h3><a class="toc-backref" href="#id24">Properties</a><a class="headerlink" href="#properties" title="Permalink to this headline">¶</a></h3>
 <p>Calling <a class="reference internal" href="../library/functions.html#property" title="property"><code class="xref py py-func docutils literal notranslate"><span class="pre">property()</span></code></a> is a succinct way of building a data descriptor that
 triggers a function call upon access to an attribute.  Its signature is:</p>
@@ -877,8 +985,8 @@ to wrap access to the value attribute in a property data descriptor:</p>
 </div>
 <p>Either the built-in <a class="reference internal" href="../library/functions.html#property" title="property"><code class="xref py py-func docutils literal notranslate"><span class="pre">property()</span></code></a> or our <code class="xref py py-func docutils literal notranslate"><span class="pre">Property()</span></code> equivalent would
 work in this example.</p>
-</div>
-<div class="section" id="functions-and-methods">
+</section>
+<section id="functions-and-methods">
 <h3><a class="toc-backref" href="#id25">Functions and methods</a><a class="headerlink" href="#functions-and-methods" title="Permalink to this headline">¶</a></h3>
 <p>Python’s object oriented features are built upon a function based environment.
 Using non-data descriptors, the two are merged seamlessly.</p>
@@ -889,7 +997,7 @@ prepended to the other arguments.  By convention, the instance is called
 <p>Methods can be created manually with <a class="reference internal" href="../library/types.html#types.MethodType" title="types.MethodType"><code class="xref py py-class docutils literal notranslate"><span class="pre">types.MethodType</span></code></a> which is
 roughly equivalent to:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MethodType</span><span class="p">:</span>
-    <span class="s2">&quot;Emulate Py_MethodType in Objects/classobject.c&quot;</span>
+    <span class="s2">&quot;Emulate PyMethod_Type in Objects/classobject.c&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="vm">__func__</span> <span class="o">=</span> <span class="n">func</span>
@@ -957,9 +1065,9 @@ instance:</p>
 </div>
 <p>If you have ever wondered where <em>self</em> comes from in regular methods or where
 <em>cls</em> comes from in class methods, this is it!</p>
-</div>
-<div class="section" id="other-kinds-of-methods">
-<h3><a class="toc-backref" href="#id26">Other kinds of methods</a><a class="headerlink" href="#other-kinds-of-methods" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="kinds-of-methods">
+<h3><a class="toc-backref" href="#id26">Kinds of methods</a><a class="headerlink" href="#kinds-of-methods" title="Permalink to this headline">¶</a></h3>
 <p>Non-data descriptors provide a simple mechanism for variations on the usual
 patterns of binding functions into methods.</p>
 <p>To recap, functions have a <code class="xref py py-meth docutils literal notranslate"><span class="pre">__get__()</span></code> method so that they can be converted
@@ -998,8 +1106,8 @@ class</p></th>
 </tbody>
 </table>
 </div></blockquote>
-</div>
-<div class="section" id="static-methods">
+</section>
+<section id="static-methods">
 <h3><a class="toc-backref" href="#id27">Static methods</a><a class="headerlink" href="#static-methods" title="Permalink to this headline">¶</a></h3>
 <p>Static methods return the underlying function without changes.  Calling either
 <code class="docutils literal notranslate"><span class="pre">c.f</span></code> or <code class="docutils literal notranslate"><span class="pre">C.f</span></code> is the equivalent of a direct lookup into
@@ -1021,29 +1129,29 @@ example calls are unexciting:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">E</span><span class="p">:</span>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">10</span>
 </pre></div>
 </div>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">E</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="go">3</span>
+<span class="go">30</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">E</span><span class="p">()</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="go">3</span>
+<span class="go">30</span>
 </pre></div>
 </div>
 <p>Using the non-data descriptor protocol, a pure Python version of
 <a class="reference internal" href="../library/functions.html#staticmethod" title="staticmethod"><code class="xref py py-func docutils literal notranslate"><span class="pre">staticmethod()</span></code></a> would look like this:</p>
-<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="go">class StaticMethod:</span>
-<span class="go">    &quot;Emulate PyStaticMethod_Type() in Objects/funcobject.c&quot;</span>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">StaticMethod</span><span class="p">:</span>
+    <span class="s2">&quot;Emulate PyStaticMethod_Type() in Objects/funcobject.c&quot;</span>
 
-<span class="go">    def __init__(self, f):</span>
-<span class="go">        self.f = f</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">f</span> <span class="o">=</span> <span class="n">f</span>
 
-<span class="go">    def __get__(self, obj, objtype=None):</span>
-<span class="go">        return self.f</span>
+    <span class="k">def</span> <span class="fm">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">objtype</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">f</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="class-methods">
+</section>
+<section id="class-methods">
 <h3><a class="toc-backref" href="#id28">Class methods</a><a class="headerlink" href="#class-methods" title="Permalink to this headline">¶</a></h3>
 <p>Unlike static methods, class methods prepend the class reference to the
 argument list before calling the function.  This format is the same
@@ -1094,14 +1202,15 @@ keys.  The pure Python equivalent is:</p>
     <span class="k">def</span> <span class="fm">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">cls</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">cls</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s1">&#39;__get__&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">),</span> <span class="s1">&#39;__get__&#39;</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="o">.</span><span class="fm">__get__</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">MethodType</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The code path for <code class="docutils literal notranslate"><span class="pre">hasattr(obj,</span> <span class="pre">'__get__')</span></code> was added in Python 3.9 and
-makes it possible for <a class="reference internal" href="../library/functions.html#classmethod" title="classmethod"><code class="xref py py-func docutils literal notranslate"><span class="pre">classmethod()</span></code></a> to support chained decorators.
-For example, a classmethod and property could be chained together:</p>
+<p>The code path for <code class="docutils literal notranslate"><span class="pre">hasattr(type(self.f),</span> <span class="pre">'__get__')</span></code> was added in
+Python 3.9 and makes it possible for <a class="reference internal" href="../library/functions.html#classmethod" title="classmethod"><code class="xref py py-func docutils literal notranslate"><span class="pre">classmethod()</span></code></a> to support
+chained decorators.  For example, a classmethod and property could be
+chained together:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">G</span><span class="p">:</span>
     <span class="nd">@classmethod</span>
     <span class="nd">@property</span>
@@ -1113,8 +1222,8 @@ For example, a classmethod and property could be chained together:</p>
 <span class="go">&quot;A doc for &#39;G&#39;&quot;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="member-objects-and-slots">
+</section>
+<section id="member-objects-and-slots">
 <h3><a class="toc-backref" href="#id29">Member objects and __slots__</a><a class="headerlink" href="#member-objects-and-slots" title="Permalink to this headline">¶</a></h3>
 <p>When a class defines <code class="docutils literal notranslate"><span class="pre">__slots__</span></code>, it replaces instance dictionaries with a
 fixed-length array of slot values.  From a user point of view that has
@@ -1317,9 +1426,9 @@ attributes are stored:</p>
 <span class="gr">AttributeError</span>: <span class="n">&#39;H&#39; object has no attribute &#39;xz&#39;</span>
 </pre></div>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -1361,7 +1470,7 @@ attributes are stored:</p>
 <li><a class="reference internal" href="#pure-python-equivalents">Pure Python Equivalents</a><ul>
 <li><a class="reference internal" href="#properties">Properties</a></li>
 <li><a class="reference internal" href="#functions-and-methods">Functions and methods</a></li>
-<li><a class="reference internal" href="#other-kinds-of-methods">Other kinds of methods</a></li>
+<li><a class="reference internal" href="#kinds-of-methods">Kinds of methods</a></li>
 <li><a class="reference internal" href="#static-methods">Static methods</a></li>
 <li><a class="reference internal" href="#class-methods">Class methods</a></li>
 <li><a class="reference internal" href="#member-objects-and-slots">Member objects and __slots__</a></li>
@@ -1375,14 +1484,14 @@ attributes are stored:</p>
   <p class="topless"><a href="curses.html"
                         title="previous chapter">Curses Programming with Python</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="functional.html"
-                        title="next chapter">Functional Programming HOWTO</a></p>
+  <p class="topless"><a href="enum.html"
+                        title="next chapter">Enum HOWTO</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/master/Doc/howto/descriptor.rst"
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/howto/descriptor.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -1402,39 +1511,50 @@ attributes are stored:</p>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="functional.html" title="Functional Programming HOWTO"
+          <a href="enum.html" title="Enum HOWTO"
              >next</a> |</li>
         <li class="right" >
           <a href="curses.html" title="Curses Programming with Python"
              >previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python HOWTOs</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Descriptor HowTo Guide</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>  
     <div class="footer">
@@ -1452,7 +1572,7 @@ attributes are stored:</p>
 <br />
     <br />
 
-    Last updated on Mar 24, 2021.
+    Last updated on May 10, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 

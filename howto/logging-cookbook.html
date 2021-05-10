@@ -4,8 +4,10 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Logging Cookbook &#8212; Python 3.10.0a6 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Logging Cookbook &#8212; Python 3.10.0b1 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
@@ -19,7 +21,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.10.0a6 documentation"
+          title="Search within Python 3.10.0b1 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -40,17 +42,119 @@
         }
       }
     </style>
+<link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.svg" />
+            <script type="text/javascript" src="../_static/copybutton.js"></script>
+            <script type="text/javascript" src="../_static/menu.js"></script>
+            <script type="text/javascript" src="../_static/themetoggle.js"></script> 
 
-    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
-    
-    <script type="text/javascript" src="../_static/copybutton.js"></script>
-    <script type="text/javascript" src="../_static/themetoggle.js"></script>
-    
-     
+  </head>
+<body>
+<div class="mobile-nav">
+    <input type="checkbox" id="menuToggler" class="toggler__input" aria-controls="navigation"
+           aria-pressed="false" aria-expanded="false" role="button" aria-label="Menu" />
+    <nav class="nav-content" role="navigation">
+        <label for="menuToggler" class="toggler__label">
+            <span></span>
+        </label>
+        <span class="nav-items-wrapper">
+            <a href="https://www.python.org/" class="nav-logo">
+                <img src="../_static/py.svg" alt="Logo"/>
+            </a>
+            <span class="version_switcher_placeholder"></span>
+            <form id="searchbox" role="search" class="search" action="../search.html" method="get">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="search-icon">
+                    <path fill-rule="nonzero" fill="currentColor" d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 001.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 00-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 005.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                </svg>
+                <input type="search" name="q" aria-label="Quick search"/>
+                <input type="submit" value="Go"/>
+                
+            </form>
+        </span>
+    </nav>
+    <div class="menu-wrapper">
+        <nav class="menu" role="navigation" aria-label="main navigation">
+            <div class="language_switcher_placeholder"></div>
+            
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label>
+  <h3><a href="../contents.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Logging Cookbook</a><ul>
+<li><a class="reference internal" href="#using-logging-in-multiple-modules">Using logging in multiple modules</a></li>
+<li><a class="reference internal" href="#logging-from-multiple-threads">Logging from multiple threads</a></li>
+<li><a class="reference internal" href="#multiple-handlers-and-formatters">Multiple handlers and formatters</a></li>
+<li><a class="reference internal" href="#logging-to-multiple-destinations">Logging to multiple destinations</a></li>
+<li><a class="reference internal" href="#configuration-server-example">Configuration server example</a></li>
+<li><a class="reference internal" href="#dealing-with-handlers-that-block">Dealing with handlers that block</a></li>
+<li><a class="reference internal" href="#sending-and-receiving-logging-events-across-a-network">Sending and receiving logging events across a network</a></li>
+<li><a class="reference internal" href="#adding-contextual-information-to-your-logging-output">Adding contextual information to your logging output</a><ul>
+<li><a class="reference internal" href="#using-loggeradapters-to-impart-contextual-information">Using LoggerAdapters to impart contextual information</a><ul>
+<li><a class="reference internal" href="#using-objects-other-than-dicts-to-pass-contextual-information">Using objects other than dicts to pass contextual information</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#using-filters-to-impart-contextual-information">Using Filters to impart contextual information</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#logging-to-a-single-file-from-multiple-processes">Logging to a single file from multiple processes</a><ul>
+<li><a class="reference internal" href="#using-concurrent-futures-processpoolexecutor">Using concurrent.futures.ProcessPoolExecutor</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#using-file-rotation">Using file rotation</a></li>
+<li><a class="reference internal" href="#use-of-alternative-formatting-styles">Use of alternative formatting styles</a></li>
+<li><a class="reference internal" href="#customizing-logrecord">Customizing <code class="docutils literal notranslate"><span class="pre">LogRecord</span></code></a></li>
+<li><a class="reference internal" href="#subclassing-queuehandler-a-zeromq-example">Subclassing QueueHandler - a ZeroMQ example</a></li>
+<li><a class="reference internal" href="#subclassing-queuelistener-a-zeromq-example">Subclassing QueueListener - a ZeroMQ example</a></li>
+<li><a class="reference internal" href="#an-example-dictionary-based-configuration">An example dictionary-based configuration</a></li>
+<li><a class="reference internal" href="#using-a-rotator-and-namer-to-customize-log-rotation-processing">Using a rotator and namer to customize log rotation processing</a></li>
+<li><a class="reference internal" href="#a-more-elaborate-multiprocessing-example">A more elaborate multiprocessing example</a></li>
+<li><a class="reference internal" href="#inserting-a-bom-into-messages-sent-to-a-sysloghandler">Inserting a BOM into messages sent to a SysLogHandler</a></li>
+<li><a class="reference internal" href="#implementing-structured-logging">Implementing structured logging</a></li>
+<li><a class="reference internal" href="#customizing-handlers-with-dictconfig">Customizing handlers with <code class="xref py py-func docutils literal notranslate"><span class="pre">dictConfig()</span></code></a></li>
+<li><a class="reference internal" href="#using-particular-formatting-styles-throughout-your-application">Using particular formatting styles throughout your application</a><ul>
+<li><a class="reference internal" href="#using-logrecord-factories">Using LogRecord factories</a></li>
+<li><a class="reference internal" href="#using-custom-message-objects">Using custom message objects</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#configuring-filters-with-dictconfig">Configuring filters with <code class="xref py py-func docutils literal notranslate"><span class="pre">dictConfig()</span></code></a></li>
+<li><a class="reference internal" href="#customized-exception-formatting">Customized exception formatting</a></li>
+<li><a class="reference internal" href="#speaking-logging-messages">Speaking logging messages</a></li>
+<li><a class="reference internal" href="#buffering-logging-messages-and-outputting-them-conditionally">Buffering logging messages and outputting them conditionally</a></li>
+<li><a class="reference internal" href="#formatting-times-using-utc-gmt-via-configuration">Formatting times using UTC (GMT) via configuration</a></li>
+<li><a class="reference internal" href="#using-a-context-manager-for-selective-logging">Using a context manager for selective logging</a></li>
+<li><a class="reference internal" href="#a-cli-application-starter-template">A CLI application starter template</a></li>
+<li><a class="reference internal" href="#a-qt-gui-for-logging">A Qt GUI for logging</a></li>
+</ul>
+</li>
+</ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="logging.html"
+                        title="previous chapter">Logging HOWTO</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="regex.html"
+                        title="next chapter">Regular Expression HOWTO</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../bugs.html">Report a Bug</a></li>
+      <li>
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/howto/logging-cookbook.rst"
+            rel="nofollow">Show Source
+        </a>
+      </li>
+    </ul>
+  </div>
+        </nav>
+    </div>
+</div>
 
-  </head><body>
   
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -68,33 +172,44 @@
           <a href="logging.html" title="Logging HOWTO"
              accesskey="P">previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python HOWTOs</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Logging Cookbook</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>    
 
@@ -103,7 +218,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="logging-cookbook">
+  <section id="logging-cookbook">
 <span id="id1"></span><h1>Logging Cookbook<a class="headerlink" href="#logging-cookbook" title="Permalink to this headline">¶</a></h1>
 <dl class="field-list simple">
 <dt class="field-odd">Author</dt>
@@ -112,7 +227,7 @@
 </dl>
 <p>This page contains a number of recipes related to logging, which have been found
 useful in the past.</p>
-<div class="section" id="using-logging-in-multiple-modules">
+<section id="using-logging-in-multiple-modules">
 <h2>Using logging in multiple modules<a class="headerlink" href="#using-logging-in-multiple-modules" title="Permalink to this headline">¶</a></h2>
 <p>Multiple calls to <code class="docutils literal notranslate"><span class="pre">logging.getLogger('someLogger')</span></code> return a reference to the
 same logger object.  This is true not only within the same module, but also
@@ -195,8 +310,8 @@ child will pass up to the parent.  Here is a main module:</p>
    done with auxiliary_module.some_function()
 </pre></div>
 </div>
-</div>
-<div class="section" id="logging-from-multiple-threads">
+</section>
+<section id="logging-from-multiple-threads">
 <h2>Logging from multiple threads<a class="headerlink" href="#logging-from-multiple-threads" title="Permalink to this headline">¶</a></h2>
 <p>Logging from multiple threads requires no special effort. The following example
 shows logging from the main (initial) thread and another thread:</p>
@@ -249,8 +364,8 @@ shows logging from the main (initial) thread and another thread:</p>
 </div>
 <p>This shows the logging output interspersed as one might expect. This approach
 works for more threads than shown here, of course.</p>
-</div>
-<div class="section" id="multiple-handlers-and-formatters">
+</section>
+<section id="multiple-handlers-and-formatters">
 <h2>Multiple handlers and formatters<a class="headerlink" href="#multiple-handlers-and-formatters" title="Permalink to this headline">¶</a></h2>
 <p>Loggers are plain Python objects.  The <a class="reference internal" href="../library/logging.html#logging.Logger.addHandler" title="logging.Logger.addHandler"><code class="xref py py-meth docutils literal notranslate"><span class="pre">addHandler()</span></code></a> method has no
 minimum or maximum quota for the number of handlers you may add.  Sometimes it
@@ -294,8 +409,8 @@ statements, which you will have to delete or comment out later, the logger.debug
 statements can remain intact in the source code and remain dormant until you
 need them again.  At that time, the only change that needs to happen is to
 modify the severity level of the logger and/or handler to debug.</p>
-</div>
-<div class="section" id="logging-to-multiple-destinations">
+</section>
+<section id="logging-to-multiple-destinations">
 <span id="multiple-destinations"></span><h2>Logging to multiple destinations<a class="headerlink" href="#logging-to-multiple-destinations" title="Permalink to this headline">¶</a></h2>
 <p>Let’s say you want to log to console and file with different message formats and
 in differing circumstances. Say you want to log messages with levels of DEBUG
@@ -354,8 +469,8 @@ myapp.area2 : ERROR    The five boxing wizards jump quickly.
 are sent to both destinations.</p>
 <p>This example uses console and file handlers, but you can use any number and
 combination of handlers you choose.</p>
-</div>
-<div class="section" id="configuration-server-example">
+</section>
+<section id="configuration-server-example">
 <h2>Configuration server example<a class="headerlink" href="#configuration-server-example" title="Permalink to this headline">¶</a></h2>
 <p>Here is an example of a module using the logging configuration server:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
@@ -409,8 +524,8 @@ configuration:</p>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="dealing-with-handlers-that-block">
+</section>
+<section id="dealing-with-handlers-that-block">
 <h2>Dealing with handlers that block<a class="headerlink" href="#dealing-with-handlers-that-block" title="Permalink to this headline">¶</a></h2>
 <p>Sometimes you have to get your logging handlers to do their work without
 blocking the thread you’re logging from. This is common in Web applications,
@@ -475,8 +590,8 @@ listener’s constructor. When this is done, the listener compares the level
 of each message with the handler’s level, and only passes a message to a
 handler if it’s appropriate to do so.</p>
 </div>
-</div>
-<div class="section" id="sending-and-receiving-logging-events-across-a-network">
+</section>
+<section id="sending-and-receiving-logging-events-across-a-network">
 <span id="network-logging"></span><h2>Sending and receiving logging events across a network<a class="headerlink" href="#sending-and-receiving-logging-events-across-a-network" title="Permalink to this headline">¶</a></h2>
 <p>Let’s say you want to send logging events across a network, and handle them at
 the receiving end. A simple way of doing this is attaching a
@@ -609,8 +724,8 @@ these affect you, you can use an alternative serialization scheme by overriding
 the <code class="xref py py-meth docutils literal notranslate"><span class="pre">makePickle()</span></code> method and implementing your
 alternative there, as well as adapting the above script to use your alternative
 serialization.</p>
-</div>
-<div class="section" id="adding-contextual-information-to-your-logging-output">
+</section>
+<section id="adding-contextual-information-to-your-logging-output">
 <span id="context-info"></span><h2>Adding contextual information to your logging output<a class="headerlink" href="#adding-contextual-information-to-your-logging-output" title="Permalink to this headline">¶</a></h2>
 <p>Sometimes you want logging output to contain contextual information in
 addition to the parameters passed to the logging call. For example, in a
@@ -624,7 +739,7 @@ in practice, when the number of <code class="xref py py-class docutils literal n
 level of granularity you want to use in logging an application, it could
 be hard to manage if the number of <code class="xref py py-class docutils literal notranslate"><span class="pre">Logger</span></code> instances becomes
 effectively unbounded.</p>
-<div class="section" id="using-loggeradapters-to-impart-contextual-information">
+<section id="using-loggeradapters-to-impart-contextual-information">
 <h3>Using LoggerAdapters to impart contextual information<a class="headerlink" href="#using-loggeradapters-to-impart-contextual-information" title="Permalink to this headline">¶</a></h3>
 <p>An easy way in which you can pass contextual information to be output along
 with logging event information is to use the <code class="xref py py-class docutils literal notranslate"><span class="pre">LoggerAdapter</span></code> class.
@@ -680,15 +795,15 @@ you just need to subclass <code class="xref py py-class docutils literal notrans
 </div>
 <p>Then any events that you log to the adapter will have the value of
 <code class="docutils literal notranslate"><span class="pre">some_conn_id</span></code> prepended to the log messages.</p>
-<div class="section" id="using-objects-other-than-dicts-to-pass-contextual-information">
+<section id="using-objects-other-than-dicts-to-pass-contextual-information">
 <h4>Using objects other than dicts to pass contextual information<a class="headerlink" href="#using-objects-other-than-dicts-to-pass-contextual-information" title="Permalink to this headline">¶</a></h4>
 <p>You don’t need to pass an actual dict to a <code class="xref py py-class docutils literal notranslate"><span class="pre">LoggerAdapter</span></code> - you could
 pass an instance of a class which implements <code class="docutils literal notranslate"><span class="pre">__getitem__</span></code> and <code class="docutils literal notranslate"><span class="pre">__iter__</span></code> so
 that it looks like a dict to logging. This would be useful if you want to
 generate values dynamically (whereas the values in a dict would be constant).</p>
-</div>
-</div>
-<div class="section" id="using-filters-to-impart-contextual-information">
+</section>
+</section>
+<section id="using-filters-to-impart-contextual-information">
 <span id="filters-contextual"></span><h3>Using Filters to impart contextual information<a class="headerlink" href="#using-filters-to-impart-contextual-information" title="Permalink to this headline">¶</a></h3>
 <p>You can also add contextual information to log output using a user-defined
 <code class="xref py py-class docutils literal notranslate"><span class="pre">Filter</span></code>. <code class="docutils literal notranslate"><span class="pre">Filter</span></code> instances are allowed to modify the <code class="docutils literal notranslate"><span class="pre">LogRecords</span></code>
@@ -755,9 +870,9 @@ script:</p>
 2010-09-06 22:38:15,301 d.e.f INFO     IP: 123.231.231.123 User: fred     A message at INFO level with 2 parameters
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="logging-to-a-single-file-from-multiple-processes">
+</section>
+</section>
+<section id="logging-to-a-single-file-from-multiple-processes">
 <span id="multiple-processes"></span><h2>Logging to a single file from multiple processes<a class="headerlink" href="#logging-to-a-single-file-from-multiple-processes" title="Permalink to this headline">¶</a></h2>
 <p>Although logging is thread-safe, and logging to a single file from multiple
 threads in a single process <em>is</em> supported, logging to a single file from
@@ -994,7 +1109,7 @@ separate thread:</p>
 <code class="docutils literal notranslate"><span class="pre">foo</span></code> subsystem in a file <code class="docutils literal notranslate"><span class="pre">mplog-foo.log</span></code>. This will be used by the logging
 machinery in the main process (even though the logging events are generated in
 the worker processes) to direct the messages to the appropriate destinations.</p>
-<div class="section" id="using-concurrent-futures-processpoolexecutor">
+<section id="using-concurrent-futures-processpoolexecutor">
 <h3>Using concurrent.futures.ProcessPoolExecutor<a class="headerlink" href="#using-concurrent-futures-processpoolexecutor" title="Permalink to this headline">¶</a></h3>
 <p>If you want to use <a class="reference internal" href="../library/concurrent.futures.html#concurrent.futures.ProcessPoolExecutor" title="concurrent.futures.ProcessPoolExecutor"><code class="xref py py-class docutils literal notranslate"><span class="pre">concurrent.futures.ProcessPoolExecutor</span></code></a> to start
 your worker processes, you need to create the queue slightly differently.
@@ -1023,9 +1138,9 @@ Instead of</p>
         <span class="n">executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">worker_process</span><span class="p">,</span> <span class="n">queue</span><span class="p">,</span> <span class="n">worker_configurer</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="using-file-rotation">
+</section>
+</section>
+<section id="using-file-rotation">
 <h2>Using file rotation<a class="headerlink" href="#using-file-rotation" title="Permalink to this headline">¶</a></h2>
 <p>Sometimes you want to let a log file grow to a certain size, then open a new
 file and log to that. You may want to keep a certain number of these files, and
@@ -1075,8 +1190,8 @@ and each time it reaches the size limit it is renamed with the suffix
 (<code class="docutils literal notranslate"><span class="pre">.1</span></code> becomes <code class="docutils literal notranslate"><span class="pre">.2</span></code>, etc.)  and the <code class="docutils literal notranslate"><span class="pre">.6</span></code> file is erased.</p>
 <p>Obviously this example sets the log length much too small as an extreme
 example.  You would want to set <em>maxBytes</em> to an appropriate value.</p>
-</div>
-<div class="section" id="use-of-alternative-formatting-styles">
+</section>
+<section id="use-of-alternative-formatting-styles">
 <span id="format-styles"></span><h2>Use of alternative formatting styles<a class="headerlink" href="#use-of-alternative-formatting-styles" title="Permalink to this headline">¶</a></h2>
 <p>When logging was added to the Python standard library, the only way of
 formatting messages with variable content was to use the %-formatting
@@ -1210,7 +1325,7 @@ to the above, as in the following example:</p>
 
 <span class="k">class</span> <span class="nc">StyleAdapter</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">LoggerAdapter</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">StyleAdapter</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">logger</span><span class="p">,</span> <span class="n">extra</span> <span class="ow">or</span> <span class="p">{})</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">logger</span><span class="p">,</span> <span class="n">extra</span> <span class="ow">or</span> <span class="p">{})</span>
 
     <span class="k">def</span> <span class="nf">log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="o">/</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">isEnabledFor</span><span class="p">(</span><span class="n">level</span><span class="p">):</span>
@@ -1229,8 +1344,8 @@ to the above, as in the following example:</p>
 </div>
 <p>The above script should log the message <code class="docutils literal notranslate"><span class="pre">Hello,</span> <span class="pre">world!</span></code> when run with
 Python 3.2 or later.</p>
-</div>
-<div class="section" id="customizing-logrecord">
+</section>
+<section id="customizing-logrecord">
 <span id="custom-logrecord"></span><h2>Customizing <code class="docutils literal notranslate"><span class="pre">LogRecord</span></code><a class="headerlink" href="#customizing-logrecord" title="Permalink to this headline">¶</a></h2>
 <p>Every logging event is represented by a <a class="reference internal" href="../library/logging.html#logging.LogRecord" title="logging.LogRecord"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogRecord</span></code></a> instance.
 When an event is logged and not filtered out by a logger’s level, a
@@ -1300,8 +1415,8 @@ overwrite the attributes provided as standard, there should be no surprises.
 However, it should be borne in mind that each link in the chain adds run-time
 overhead to all logging operations, and the technique should only be used when
 the use of a <a class="reference internal" href="../library/logging.html#logging.Filter" title="logging.Filter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Filter</span></code></a> does not provide the desired result.</p>
-</div>
-<div class="section" id="subclassing-queuehandler-a-zeromq-example">
+</section>
+<section id="subclassing-queuehandler-a-zeromq-example">
 <span id="zeromq-handlers"></span><h2>Subclassing QueueHandler - a ZeroMQ example<a class="headerlink" href="#subclassing-queuehandler-a-zeromq-example" title="Permalink to this headline">¶</a></h2>
 <p>You can use a <code class="xref py py-class docutils literal notranslate"><span class="pre">QueueHandler</span></code> subclass to send messages to other kinds
 of queues, for example a ZeroMQ ‘publish’ socket. In the example below,the
@@ -1337,8 +1452,8 @@ data needed by the handler to create the socket:</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="subclassing-queuelistener-a-zeromq-example">
+</section>
+<section id="subclassing-queuelistener-a-zeromq-example">
 <h2>Subclassing QueueListener - a ZeroMQ example<a class="headerlink" href="#subclassing-queuelistener-a-zeromq-example" title="Permalink to this headline">¶</a></h2>
 <p>You can also subclass <code class="xref py py-class docutils literal notranslate"><span class="pre">QueueListener</span></code> to get messages from other kinds
 of queues, for example a ZeroMQ ‘subscribe’ socket. Here’s an example:</p>
@@ -1368,8 +1483,8 @@ of queues, for example a ZeroMQ ‘subscribe’ socket. Here’s an example:</p>
 <p><a class="reference internal" href="logging.html#logging-basic-tutorial"><span class="std std-ref">A basic logging tutorial</span></a></p>
 <p><a class="reference internal" href="logging.html#logging-advanced-tutorial"><span class="std std-ref">A more advanced logging tutorial</span></a></p>
 </div>
-</div>
-<div class="section" id="an-example-dictionary-based-configuration">
+</section>
+<section id="an-example-dictionary-based-configuration">
 <h2>An example dictionary-based configuration<a class="headerlink" href="#an-example-dictionary-based-configuration" title="Permalink to this headline">¶</a></h2>
 <p>Below is an example of a logging configuration dictionary - it’s taken from
 the <a class="reference external" href="https://docs.djangoproject.com/en/stable/topics/logging/#configuring-logging">documentation on the Django project</a>.
@@ -1430,8 +1545,8 @@ This dictionary is passed to <a class="reference internal" href="../library/logg
 <p>For more information about this configuration, you can see the <a class="reference external" href="https://docs.djangoproject.com/en/stable/topics/logging/#configuring-logging">relevant
 section</a>
 of the Django documentation.</p>
-</div>
-<div class="section" id="using-a-rotator-and-namer-to-customize-log-rotation-processing">
+</section>
+<section id="using-a-rotator-and-namer-to-customize-log-rotation-processing">
 <span id="cookbook-rotator-namer"></span><h2>Using a rotator and namer to customize log rotation processing<a class="headerlink" href="#using-a-rotator-and-namer-to-customize-log-rotation-processing" title="Permalink to this headline">¶</a></h2>
 <p>An example of how you can define a namer and rotator is given in the following
 snippet, which shows zlib-based compression of the log file:</p>
@@ -1454,8 +1569,8 @@ snippet, which shows zlib-based compression of the log file:</p>
 <p>These are not “true” .gz files, as they are bare compressed data, with no
 “container” such as you’d find in an actual gzip file. This snippet is just
 for illustration purposes.</p>
-</div>
-<div class="section" id="a-more-elaborate-multiprocessing-example">
+</section>
+<section id="a-more-elaborate-multiprocessing-example">
 <h2>A more elaborate multiprocessing example<a class="headerlink" href="#a-more-elaborate-multiprocessing-example" title="Permalink to this headline">¶</a></h2>
 <p>The following working example shows how logging can be used with multiprocessing
 using configuration files. The configurations are fairly simple, but serve to
@@ -1680,8 +1795,8 @@ works:</p>
     <span class="n">main</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="inserting-a-bom-into-messages-sent-to-a-sysloghandler">
+</section>
+<section id="inserting-a-bom-into-messages-sent-to-a-sysloghandler">
 <h2>Inserting a BOM into messages sent to a SysLogHandler<a class="headerlink" href="#inserting-a-bom-into-messages-sent-to-a-sysloghandler" title="Permalink to this headline">¶</a></h2>
 <p><span class="target" id="index-0"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc5424.html"><strong>RFC 5424</strong></a> requires that a
 Unicode message be sent to a syslog daemon as a set of bytes which have the
@@ -1719,8 +1834,8 @@ range, that’s fine – it will be encoded using UTF-8.</p></li>
 <code class="docutils literal notranslate"><span class="pre">SysLogHandler</span></code>. If you follow the above rules, you should be able to produce
 <span class="target" id="index-3"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc5424.html"><strong>RFC 5424</strong></a>-compliant messages. If you don’t, logging may not complain, but your
 messages will not be RFC 5424-compliant, and your syslog daemon may complain.</p>
-</div>
-<div class="section" id="implementing-structured-logging">
+</section>
+<section id="implementing-structured-logging">
 <h2>Implementing structured logging<a class="headerlink" href="#implementing-structured-logging" title="Permalink to this headline">¶</a></h2>
 <p>Although most logging messages are intended for reading by humans, and thus not
 readily machine-parseable, there might be circumstances where you want to output
@@ -1771,7 +1886,7 @@ as in the following complete example:</p>
             <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">o</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">unicode</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">o</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;unicode_escape&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">Encoder</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">default</span><span class="p">(</span><span class="n">o</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">default</span><span class="p">(</span><span class="n">o</span><span class="p">)</span>
 
 <span class="k">class</span> <span class="nc">StructuredMessage</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="o">/</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -1798,8 +1913,8 @@ as in the following complete example:</p>
 </div>
 <p>Note that the order of items might be different according to the version of
 Python used.</p>
-</div>
-<div class="section" id="customizing-handlers-with-dictconfig">
+</section>
+<section id="customizing-handlers-with-dictconfig">
 <span id="custom-handlers"></span><h2>Customizing handlers with <a class="reference internal" href="../library/logging.config.html#logging.config.dictConfig" title="logging.config.dictConfig"><code class="xref py py-func docutils literal notranslate"><span class="pre">dictConfig()</span></code></a><a class="headerlink" href="#customizing-handlers-with-dictconfig" title="Permalink to this headline">¶</a></h2>
 <p>There are times when you want to customize logging handlers in particular ways,
 and if you use <a class="reference internal" href="../library/logging.config.html#logging.config.dictConfig" title="logging.config.dictConfig"><code class="xref py py-func docutils literal notranslate"><span class="pre">dictConfig()</span></code></a> you may be able to do this without
@@ -1927,8 +2042,8 @@ same way, using <a class="reference internal" href="../library/os.html#os.chmod"
 <p>Of course, the approach could also be extended to types of handler other than a
 <a class="reference internal" href="../library/logging.handlers.html#logging.FileHandler" title="logging.FileHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileHandler</span></code></a> - for example, one of the rotating file handlers,
 or a different type of handler altogether.</p>
-</div>
-<div class="section" id="using-particular-formatting-styles-throughout-your-application">
+</section>
+<section id="using-particular-formatting-styles-throughout-your-application">
 <span id="formatting-styles"></span><h2>Using particular formatting styles throughout your application<a class="headerlink" href="#using-particular-formatting-styles-throughout-your-application" title="Permalink to this headline">¶</a></h2>
 <p>In Python 3.2, the <a class="reference internal" href="../library/logging.html#logging.Formatter" title="logging.Formatter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Formatter</span></code></a> gained a <code class="docutils literal notranslate"><span class="pre">style</span></code> keyword
 parameter which, while defaulting to <code class="docutils literal notranslate"><span class="pre">%</span></code> for backward compatibility, allowed
@@ -1954,7 +2069,7 @@ existing code could be using a given logger name and using %-formatting.</p>
 code, decisions about formatting need to be made at the level of the
 individual logging call. This opens up a couple of ways in which alternative
 formatting styles can be accommodated.</p>
-<div class="section" id="using-logrecord-factories">
+<section id="using-logrecord-factories">
 <h3>Using LogRecord factories<a class="headerlink" href="#using-logrecord-factories" title="Permalink to this headline">¶</a></h3>
 <p>In Python 3.2, along with the <a class="reference internal" href="../library/logging.html#logging.Formatter" title="logging.Formatter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Formatter</span></code></a> changes mentioned
 above, the logging package gained the ability to allow users to set their own
@@ -1968,8 +2083,8 @@ the default, to ensure interoperability with other code. Care should also be
 taken to call <code class="docutils literal notranslate"><span class="pre">str(self.msg)</span></code>, just as the base implementation does.</p>
 <p>Refer to the reference documentation on <a class="reference internal" href="../library/logging.html#logging.setLogRecordFactory" title="logging.setLogRecordFactory"><code class="xref py py-func docutils literal notranslate"><span class="pre">setLogRecordFactory()</span></code></a> and
 <a class="reference internal" href="../library/logging.html#logging.LogRecord" title="logging.LogRecord"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogRecord</span></code></a> for more information.</p>
-</div>
-<div class="section" id="using-custom-message-objects">
+</section>
+<section id="using-custom-message-objects">
 <h3>Using custom message objects<a class="headerlink" href="#using-custom-message-objects" title="Permalink to this headline">¶</a></h3>
 <p>There is another, perhaps simpler way that you can use {}- and $- formatting to
 construct your individual log messages. You may recall (from
@@ -2031,9 +2146,9 @@ handler. So the only slightly unusual thing which might trip you up is that the
 parentheses go around the format string and the arguments, not just the format
 string. That’s because the __ notation is just syntax sugar for a constructor
 call to one of the <code class="docutils literal notranslate"><span class="pre">XXXMessage</span></code> classes shown above.</p>
-</div>
-</div>
-<div class="section" id="configuring-filters-with-dictconfig">
+</section>
+</section>
+<section id="configuring-filters-with-dictconfig">
 <span id="filters-dictconfig"></span><h2>Configuring filters with <a class="reference internal" href="../library/logging.config.html#logging.config.dictConfig" title="logging.config.dictConfig"><code class="xref py py-func docutils literal notranslate"><span class="pre">dictConfig()</span></code></a><a class="headerlink" href="#configuring-filters-with-dictconfig" title="Permalink to this headline">¶</a></h2>
 <p>You <em>can</em> configure filters using <a class="reference internal" href="../library/logging.config.html#logging.config.dictConfig" title="logging.config.dictConfig"><code class="xref py py-func docutils literal notranslate"><span class="pre">dictConfig()</span></code></a>, though it
 might not be obvious at first glance how to do it (hence this recipe). Since
@@ -2108,8 +2223,8 @@ handlers and formatters. See <a class="reference internal" href="../library/logg
 information on how logging supports using user-defined objects in its
 configuration, and see the other cookbook recipe <a class="reference internal" href="#custom-handlers"><span class="std std-ref">Customizing handlers with dictConfig()</span></a> above.</p></li>
 </ul>
-</div>
-<div class="section" id="customized-exception-formatting">
+</section>
+<section id="customized-exception-formatting">
 <span id="custom-format-exception"></span><h2>Customized exception formatting<a class="headerlink" href="#customized-exception-formatting" title="Permalink to this headline">¶</a></h2>
 <p>There might be times when you want to do customized exception formatting - for
 argument’s sake, let’s say you want exactly one line per logged event, even
@@ -2122,11 +2237,11 @@ class, as shown in the following example:</p>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Format an exception so that it prints on a single line.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">OneLineExceptionFormatter</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">formatException</span><span class="p">(</span><span class="n">exc_info</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">formatException</span><span class="p">(</span><span class="n">exc_info</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">repr</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># or format into one line however you want to</span>
 
     <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">record</span><span class="p">):</span>
-        <span class="n">s</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">OneLineExceptionFormatter</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">record</span><span class="p">)</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">record</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">record</span><span class="o">.</span><span class="n">exc_text</span><span class="p">:</span>
             <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;|&#39;</span>
         <span class="k">return</span> <span class="n">s</span>
@@ -2160,8 +2275,8 @@ class, as shown in the following example:</p>
 <p>While the above treatment is simplistic, it points the way to how exception
 information can be formatted to your liking. The <a class="reference internal" href="../library/traceback.html#module-traceback" title="traceback: Print or retrieve a stack traceback."><code class="xref py py-mod docutils literal notranslate"><span class="pre">traceback</span></code></a> module may be
 helpful for more specialized needs.</p>
-</div>
-<div class="section" id="speaking-logging-messages">
+</section>
+<section id="speaking-logging-messages">
 <span id="spoken-messages"></span><h2>Speaking logging messages<a class="headerlink" href="#speaking-logging-messages" title="Permalink to this headline">¶</a></h2>
 <p>There might be situations when it is desirable to have logging messages rendered
 in an audible rather than a visible format. This is easy to do if you have
@@ -2209,8 +2324,8 @@ the approach, which assumes that the <code class="docutils literal notranslate">
 <p>The above approach can, of course, be adapted to other TTS systems and even
 other systems altogether which can process messages via external programs run
 from a command line.</p>
-</div>
-<div class="section" id="buffering-logging-messages-and-outputting-them-conditionally">
+</section>
+<section id="buffering-logging-messages-and-outputting-them-conditionally">
 <span id="buffered-logging"></span><h2>Buffering logging messages and outputting them conditionally<a class="headerlink" href="#buffering-logging-messages-and-outputting-them-conditionally" title="Permalink to this headline">¶</a></h2>
 <p>There might be situations where you want to log messages in a temporary area
 and only output them if a certain condition occurs. For example, you may want to
@@ -2339,8 +2454,8 @@ severities are also logged.</p>
     <span class="o">...</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="formatting-times-using-utc-gmt-via-configuration">
+</section>
+<section id="formatting-times-using-utc-gmt-via-configuration">
 <span id="utc-formatting"></span><h2>Formatting times using UTC (GMT) via configuration<a class="headerlink" href="#formatting-times-using-utc-gmt-via-configuration" title="Permalink to this headline">¶</a></h2>
 <p>Sometimes you want to format times using UTC, which can be done using a class
 such as <cite>UTCFormatter</cite>, shown below:</p>
@@ -2401,8 +2516,8 @@ the following complete example:</p>
 </div>
 <p>showing how the time is formatted both as local time and UTC, one for each
 handler.</p>
-</div>
-<div class="section" id="using-a-context-manager-for-selective-logging">
+</section>
+<section id="using-a-context-manager-for-selective-logging">
 <span id="context-manager"></span><h2>Using a context manager for selective logging<a class="headerlink" href="#using-a-context-manager-for-selective-logging" title="Permalink to this headline">¶</a></h2>
 <p>There are times when it would be useful to temporarily change the logging
 configuration and revert it back after doing something. For this, a context
@@ -2496,8 +2611,8 @@ which is the only message written to <code class="docutils literal notranslate">
 <p>Of course, the approach described here can be generalised, for example to attach
 logging filters temporarily. Note that the above code works in Python 2 as well
 as Python 3.</p>
-</div>
-<div class="section" id="a-cli-application-starter-template">
+</section>
+<section id="a-cli-application-starter-template">
 <span id="starter-template"></span><h2>A CLI application starter template<a class="headerlink" href="#a-cli-application-starter-template" title="Permalink to this headline">¶</a></h2>
 <p>Here’s an example which shows how you can:</p>
 <ul class="simple">
@@ -2646,8 +2761,8 @@ log. For example, if we want more information:</p>
 </div>
 <p>In this case, the commands don’t print anything to the console, since nothing
 at <code class="docutils literal notranslate"><span class="pre">WARNING</span></code> level or above is logged by them.</p>
-</div>
-<div class="section" id="a-qt-gui-for-logging">
+</section>
+<section id="a-qt-gui-for-logging">
 <span id="qt-gui"></span><h2>A Qt GUI for logging<a class="headerlink" href="#a-qt-gui-for-logging" title="Permalink to this headline">¶</a></h2>
 <p>A question that comes up from time to time is about how to log to a GUI
 application. The <a class="reference external" href="https://www.qt.io/">Qt</a> framework is a popular
@@ -2704,7 +2819,7 @@ refer to the comments in the code snippet for more detailed information.</p>
 <span class="c1">#</span>
 <span class="k">class</span> <span class="nc">QtHandler</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">Handler</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">slotfunc</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">QtHandler</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">signaller</span> <span class="o">=</span> <span class="n">Signaller</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">signaller</span><span class="o">.</span><span class="n">signal</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">slotfunc</span><span class="p">)</span>
 
@@ -2774,7 +2889,7 @@ refer to the comments in the code snippet for more detailed information.</p>
     <span class="p">}</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">Window</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">app</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">textedit</span> <span class="o">=</span> <span class="n">te</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QPlainTextEdit</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="c1"># Set whatever the default monospace font is for the platform</span>
@@ -2872,8 +2987,8 @@ refer to the comments in the code snippet for more detailed information.</p>
     <span class="n">main</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -2943,7 +3058,7 @@ refer to the comments in the code snippet for more detailed information.</p>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/master/Doc/howto/logging-cookbook.rst"
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/howto/logging-cookbook.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -2969,33 +3084,44 @@ refer to the comments in the code snippet for more detailed information.</p>
           <a href="logging.html" title="Logging HOWTO"
              >previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python HOWTOs</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Logging Cookbook</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>  
     <div class="footer">
@@ -3013,7 +3139,7 @@ refer to the comments in the code snippet for more detailed information.</p>
 <br />
     <br />
 
-    Last updated on Mar 24, 2021.
+    Last updated on May 10, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 

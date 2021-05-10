@@ -4,8 +4,10 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>threading — Thread-based parallelism &#8212; Python 3.10.0a6 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>threading — Thread-based parallelism &#8212; Python 3.10.0b1 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
@@ -19,7 +21,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.10.0a6 documentation"
+          title="Search within Python 3.10.0b1 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -40,17 +42,89 @@
         }
       }
     </style>
+<link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.svg" />
+            <script type="text/javascript" src="../_static/copybutton.js"></script>
+            <script type="text/javascript" src="../_static/menu.js"></script>
+            <script type="text/javascript" src="../_static/themetoggle.js"></script> 
 
-    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
-    
-    <script type="text/javascript" src="../_static/copybutton.js"></script>
-    <script type="text/javascript" src="../_static/themetoggle.js"></script>
-    
-     
+  </head>
+<body>
+<div class="mobile-nav">
+    <input type="checkbox" id="menuToggler" class="toggler__input" aria-controls="navigation"
+           aria-pressed="false" aria-expanded="false" role="button" aria-label="Menu" />
+    <nav class="nav-content" role="navigation">
+        <label for="menuToggler" class="toggler__label">
+            <span></span>
+        </label>
+        <span class="nav-items-wrapper">
+            <a href="https://www.python.org/" class="nav-logo">
+                <img src="../_static/py.svg" alt="Logo"/>
+            </a>
+            <span class="version_switcher_placeholder"></span>
+            <form id="searchbox" role="search" class="search" action="../search.html" method="get">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="search-icon">
+                    <path fill-rule="nonzero" fill="currentColor" d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 001.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 00-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 005.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                </svg>
+                <input type="search" name="q" aria-label="Quick search"/>
+                <input type="submit" value="Go"/>
+                
+            </form>
+        </span>
+    </nav>
+    <div class="menu-wrapper">
+        <nav class="menu" role="navigation" aria-label="main navigation">
+            <div class="language_switcher_placeholder"></div>
+            
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label>
+  <h3><a href="../contents.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">threading</span></code> — Thread-based parallelism</a><ul>
+<li><a class="reference internal" href="#thread-local-data">Thread-Local Data</a></li>
+<li><a class="reference internal" href="#thread-objects">Thread Objects</a></li>
+<li><a class="reference internal" href="#lock-objects">Lock Objects</a></li>
+<li><a class="reference internal" href="#rlock-objects">RLock Objects</a></li>
+<li><a class="reference internal" href="#condition-objects">Condition Objects</a></li>
+<li><a class="reference internal" href="#semaphore-objects">Semaphore Objects</a><ul>
+<li><a class="reference internal" href="#semaphore-example"><code class="xref py py-class docutils literal notranslate"><span class="pre">Semaphore</span></code> Example</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#event-objects">Event Objects</a></li>
+<li><a class="reference internal" href="#timer-objects">Timer Objects</a></li>
+<li><a class="reference internal" href="#barrier-objects">Barrier Objects</a></li>
+<li><a class="reference internal" href="#using-locks-conditions-and-semaphores-in-the-with-statement">Using locks, conditions, and semaphores in the <code class="xref std std-keyword docutils literal notranslate"><span class="pre">with</span></code> statement</a></li>
+</ul>
+</li>
+</ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="concurrency.html"
+                        title="previous chapter">Concurrent Execution</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="multiprocessing.html"
+                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code> — Process-based parallelism</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../bugs.html">Report a Bug</a></li>
+      <li>
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/library/threading.rst"
+            rel="nofollow">Show Source
+        </a>
+      </li>
+    </ul>
+  </div>
+        </nav>
+    </div>
+</div>
 
-  </head><body>
   
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -68,34 +142,45 @@
           <a href="concurrency.html" title="Concurrent Execution"
              accesskey="P">previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="concurrency.html" accesskey="U">Concurrent Execution</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">threading</span></code> — Thread-based parallelism</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>    
 
@@ -104,9 +189,9 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="module-threading">
+  <section id="module-threading">
 <span id="threading-thread-based-parallelism"></span><h1><a class="reference internal" href="#module-threading" title="threading: Thread-based parallelism."><code class="xref py py-mod docutils literal notranslate"><span class="pre">threading</span></code></a> — Thread-based parallelism<a class="headerlink" href="#module-threading" title="Permalink to this headline">¶</a></h1>
-<p><strong>Source code:</strong> <a class="reference external" href="https://github.com/python/cpython/tree/master/Lib/threading.py">Lib/threading.py</a></p>
+<p><strong>Source code:</strong> <a class="reference external" href="https://github.com/python/cpython/tree/3.10/Lib/threading.py">Lib/threading.py</a></p>
 <hr class="docutils" />
 <p>This module constructs higher-level threading interfaces on top of the lower
 level <a class="reference internal" href="_thread.html#module-_thread" title="_thread: Low-level threading API."><code class="xref py py-mod docutils literal notranslate"><span class="pre">_thread</span></code></a> module.  See also the <a class="reference internal" href="queue.html#module-queue" title="queue: A synchronized queue class."><code class="xref py py-mod docutils literal notranslate"><span class="pre">queue</span></code></a> module.</p>
@@ -115,9 +200,9 @@ level <a class="reference internal" href="_thread.html#module-_thread" title="_t
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>While they are not listed below, the <code class="docutils literal notranslate"><span class="pre">camelCase</span></code> names used for some
-methods and functions in this module in the Python 2.x series are still
-supported by this module.</p>
+<p>In the Python 2.x series, this module contained <code class="docutils literal notranslate"><span class="pre">camelCase</span></code> names
+for some methods and functions. These are deprecated as of Python 3.10,
+but they are still supported for compatibility with Python 2.5 and lower.</p>
 </div>
 <div class="impl-detail compound">
 <p><strong>CPython implementation detail:</strong> In CPython, due to the <a class="reference internal" href="../glossary.html#term-global-interpreter-lock"><span class="xref std std-term">Global Interpreter Lock</span></a>, only one thread
@@ -135,6 +220,7 @@ multiple I/O-bound tasks simultaneously.</p>
 <code class="sig-prename descclassname">threading.</code><code class="sig-name descname">active_count</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#threading.active_count" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the number of <a class="reference internal" href="#threading.Thread" title="threading.Thread"><code class="xref py py-class docutils literal notranslate"><span class="pre">Thread</span></code></a> objects currently alive.  The returned
 count is equal to the length of the list returned by <a class="reference internal" href="#threading.enumerate" title="threading.enumerate"><code class="xref py py-func docutils literal notranslate"><span class="pre">enumerate()</span></code></a>.</p>
+<p>The function <code class="docutils literal notranslate"><span class="pre">activeCount</span></code> is a deprecated alias for this function.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -144,6 +230,7 @@ count is equal to the length of the list returned by <a class="reference interna
 of control.  If the caller’s thread of control was not created through the
 <a class="reference internal" href="#module-threading" title="threading: Thread-based parallelism."><code class="xref py py-mod docutils literal notranslate"><span class="pre">threading</span></code></a> module, a dummy thread object with limited functionality is
 returned.</p>
+<p>The function <code class="docutils literal notranslate"><span class="pre">currentThread</span></code> is a deprecated alias for this function.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -312,7 +399,7 @@ priorities, no thread groups, and threads cannot be destroyed, stopped,
 suspended, resumed, or interrupted.  The static methods of Java’s Thread class,
 when implemented, are mapped to module-level functions.</p>
 <p>All of the methods described below are executed atomically.</p>
-<div class="section" id="thread-local-data">
+<section id="thread-local-data">
 <h2>Thread-Local Data<a class="headerlink" href="#thread-local-data" title="Permalink to this headline">¶</a></h2>
 <p>Thread-local data is data whose values are thread specific.  To manage
 thread-local data, just create an instance of <a class="reference internal" href="#threading.local" title="threading.local"><code class="xref py py-class docutils literal notranslate"><span class="pre">local</span></code></a> (or a
@@ -330,8 +417,8 @@ subclass) and store attributes on it:</p>
 <code class="xref py py-mod docutils literal notranslate"><span class="pre">_threading_local</span></code> module.</p>
 </dd></dl>
 
-</div>
-<div class="section" id="thread-objects">
+</section>
+<section id="thread-objects">
 <span id="id1"></span><h2>Thread Objects<a class="headerlink" href="#thread-objects" title="Permalink to this headline">¶</a></h2>
 <p>The <a class="reference internal" href="#threading.Thread" title="threading.Thread"><code class="xref py py-class docutils literal notranslate"><span class="pre">Thread</span></code></a> class represents an activity that is run in a separate
 thread of control.  There are two ways to specify the activity: by passing a
@@ -458,8 +545,11 @@ the constructor.</p>
 <code class="sig-name descname">getName</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#threading.Thread.getName" title="Permalink to this definition">¶</a></dt>
 <dt id="threading.Thread.setName">
 <code class="sig-name descname">setName</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#threading.Thread.setName" title="Permalink to this definition">¶</a></dt>
-<dd><p>Old getter/setter API for <a class="reference internal" href="#threading.Thread.name" title="threading.Thread.name"><code class="xref py py-attr docutils literal notranslate"><span class="pre">name</span></code></a>; use it directly as a
+<dd><p>Deprecated getter/setter API for <a class="reference internal" href="#threading.Thread.name" title="threading.Thread.name"><code class="xref py py-attr docutils literal notranslate"><span class="pre">name</span></code></a>; use it directly as a
 property instead.</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 3.10.</span></p>
+</div>
 </dd></dl>
 
 <dl class="py attribute">
@@ -519,14 +609,17 @@ therefore all threads created in the main thread default to
 <code class="sig-name descname">isDaemon</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#threading.Thread.isDaemon" title="Permalink to this definition">¶</a></dt>
 <dt id="threading.Thread.setDaemon">
 <code class="sig-name descname">setDaemon</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#threading.Thread.setDaemon" title="Permalink to this definition">¶</a></dt>
-<dd><p>Old getter/setter API for <a class="reference internal" href="#threading.Thread.daemon" title="threading.Thread.daemon"><code class="xref py py-attr docutils literal notranslate"><span class="pre">daemon</span></code></a>; use it directly as a
+<dd><p>Deprecated getter/setter API for <a class="reference internal" href="#threading.Thread.daemon" title="threading.Thread.daemon"><code class="xref py py-attr docutils literal notranslate"><span class="pre">daemon</span></code></a>; use it directly as a
 property instead.</p>
-</dd></dl>
-
-</dd></dl>
-
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 3.10.</span></p>
 </div>
-<div class="section" id="lock-objects">
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="lock-objects">
 <span id="id2"></span><h2>Lock Objects<a class="headerlink" href="#lock-objects" title="Permalink to this headline">¶</a></h2>
 <p>A primitive lock is a synchronization primitive that is not owned by a
 particular thread when locked.  In Python, it is currently the lowest level
@@ -602,8 +695,8 @@ to proceed.</p>
 
 </dd></dl>
 
-</div>
-<div class="section" id="rlock-objects">
+</section>
+<section id="rlock-objects">
 <span id="id3"></span><h2>RLock Objects<a class="headerlink" href="#rlock-objects" title="Permalink to this headline">¶</a></h2>
 <p>A reentrant lock is a synchronization primitive that may be acquired multiple
 times by the same thread.  Internally, it uses the concepts of “owning thread”
@@ -668,8 +761,8 @@ unlocked.</p>
 
 </dd></dl>
 
-</div>
-<div class="section" id="condition-objects">
+</section>
+<section id="condition-objects">
 <span id="id4"></span><h2>Condition Objects<a class="headerlink" href="#condition-objects" title="Permalink to this headline">¶</a></h2>
 <p>A condition variable is always associated with some kind of lock; this can be
 passed in or one will be created by default.  Passing one in is useful when
@@ -829,12 +922,13 @@ release the lock, its caller should.</p>
 <a class="reference internal" href="#threading.Condition.notify" title="threading.Condition.notify"><code class="xref py py-meth docutils literal notranslate"><span class="pre">notify()</span></code></a>, but wakes up all waiting threads instead of one. If the
 calling thread has not acquired the lock when this method is called, a
 <a class="reference internal" href="exceptions.html#RuntimeError" title="RuntimeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RuntimeError</span></code></a> is raised.</p>
+<p>The method <code class="docutils literal notranslate"><span class="pre">notifyAll</span></code> is a deprecated alias for this method.</p>
 </dd></dl>
 
 </dd></dl>
 
-</div>
-<div class="section" id="semaphore-objects">
+</section>
+<section id="semaphore-objects">
 <span id="id5"></span><h2>Semaphore Objects<a class="headerlink" href="#semaphore-objects" title="Permalink to this headline">¶</a></h2>
 <p>This is one of the oldest synchronization primitives in the history of computer
 science, invented by the early Dutch computer scientist Edsger W. Dijkstra (he
@@ -911,7 +1005,7 @@ it’s a sign of a bug.  If not given, <em>value</em> defaults to 1.</p>
 </div>
 </dd></dl>
 
-<div class="section" id="semaphore-example">
+<section id="semaphore-example">
 <span id="semaphore-examples"></span><h3><a class="reference internal" href="#threading.Semaphore" title="threading.Semaphore"><code class="xref py py-class docutils literal notranslate"><span class="pre">Semaphore</span></code></a> Example<a class="headerlink" href="#semaphore-example" title="Permalink to this headline">¶</a></h3>
 <p>Semaphores are often used to guard resources with limited capacity, for example,
 a database server.  In any situation where the size of the resource is fixed,
@@ -934,9 +1028,9 @@ when they need to connect to the server:</p>
 </div>
 <p>The use of a bounded semaphore reduces the chance that a programming error which
 causes the semaphore to be released more than it’s acquired will go undetected.</p>
-</div>
-</div>
-<div class="section" id="event-objects">
+</section>
+</section>
+<section id="event-objects">
 <span id="id6"></span><h2>Event Objects<a class="headerlink" href="#event-objects" title="Permalink to this headline">¶</a></h2>
 <p>This is one of the simplest mechanisms for communication between threads: one
 thread signals an event and other threads wait for it.</p>
@@ -957,6 +1051,7 @@ The flag is initially false.</p>
 <dt id="threading.Event.is_set">
 <code class="sig-name descname">is_set</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#threading.Event.is_set" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return <code class="docutils literal notranslate"><span class="pre">True</span></code> if and only if the internal flag is true.</p>
+<p>The method <code class="docutils literal notranslate"><span class="pre">isSet</span></code> is a deprecated alias for this method.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -995,8 +1090,8 @@ times out.</p>
 
 </dd></dl>
 
-</div>
-<div class="section" id="timer-objects">
+</section>
+<section id="timer-objects">
 <span id="id7"></span><h2>Timer Objects<a class="headerlink" href="#timer-objects" title="Permalink to this headline">¶</a></h2>
 <p>This class represents an action that should be run only after a certain amount
 of time has passed — a timer.  <a class="reference internal" href="#threading.Timer" title="threading.Timer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Timer</span></code></a> is a subclass of <a class="reference internal" href="#threading.Thread" title="threading.Thread"><code class="xref py py-class docutils literal notranslate"><span class="pre">Thread</span></code></a>
@@ -1033,8 +1128,8 @@ only work if the timer is still in its waiting stage.</p>
 
 </dd></dl>
 
-</div>
-<div class="section" id="barrier-objects">
+</section>
+<section id="barrier-objects">
 <h2>Barrier Objects<a class="headerlink" href="#barrier-objects" title="Permalink to this headline">¶</a></h2>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.2.</span></p>
@@ -1142,8 +1237,8 @@ awry.</p>
 <a class="reference internal" href="#threading.Barrier" title="threading.Barrier"><code class="xref py py-class docutils literal notranslate"><span class="pre">Barrier</span></code></a> object is reset or broken.</p>
 </dd></dl>
 
-</div>
-<div class="section" id="using-locks-conditions-and-semaphores-in-the-with-statement">
+</section>
+<section id="using-locks-conditions-and-semaphores-in-the-with-statement">
 <span id="with-locks"></span><h2>Using locks, conditions, and semaphores in the <code class="xref std std-keyword docutils literal notranslate"><span class="pre">with</span></code> statement<a class="headerlink" href="#using-locks-conditions-and-semaphores-in-the-with-statement" title="Permalink to this headline">¶</a></h2>
 <p>All of the objects provided by this module that have <code class="xref py py-meth docutils literal notranslate"><span class="pre">acquire()</span></code> and
 <code class="xref py py-meth docutils literal notranslate"><span class="pre">release()</span></code> methods can be used as context managers for a <a class="reference internal" href="../reference/compound_stmts.html#with"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">with</span></code></a>
@@ -1165,8 +1260,8 @@ the following snippet:</p>
 <p>Currently, <a class="reference internal" href="#threading.Lock" title="threading.Lock"><code class="xref py py-class docutils literal notranslate"><span class="pre">Lock</span></code></a>, <a class="reference internal" href="#threading.RLock" title="threading.RLock"><code class="xref py py-class docutils literal notranslate"><span class="pre">RLock</span></code></a>, <a class="reference internal" href="#threading.Condition" title="threading.Condition"><code class="xref py py-class docutils literal notranslate"><span class="pre">Condition</span></code></a>,
 <a class="reference internal" href="#threading.Semaphore" title="threading.Semaphore"><code class="xref py py-class docutils literal notranslate"><span class="pre">Semaphore</span></code></a>, and <a class="reference internal" href="#threading.BoundedSemaphore" title="threading.BoundedSemaphore"><code class="xref py py-class docutils literal notranslate"><span class="pre">BoundedSemaphore</span></code></a> objects may be used as
 <a class="reference internal" href="../reference/compound_stmts.html#with"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">with</span></code></a> statement context managers.</p>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -1206,7 +1301,7 @@ the following snippet:</p>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/master/Doc/library/threading.rst"
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/library/threading.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -1232,34 +1327,45 @@ the following snippet:</p>
           <a href="concurrency.html" title="Concurrent Execution"
              >previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="concurrency.html" >Concurrent Execution</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">threading</span></code> — Thread-based parallelism</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>  
     <div class="footer">
@@ -1277,7 +1383,7 @@ the following snippet:</p>
 <br />
     <br />
 
-    Last updated on Mar 24, 2021.
+    Last updated on May 10, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 

@@ -4,8 +4,10 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Instrumenting CPython with DTrace and SystemTap &#8212; Python 3.10.0a6 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Instrumenting CPython with DTrace and SystemTap &#8212; Python 3.10.0b1 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
@@ -19,13 +21,13 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.10.0a6 documentation"
+          title="Search within Python 3.10.0b1 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="copyright" title="Copyright" href="../copyright.html" />
-    <link rel="next" title="Python Frequently Asked Questions" href="../faq/index.html" />
+    <link rel="next" title="Annotations Best Practices" href="annotations.html" />
     <link rel="prev" title="Argument Clinic How-To" href="clinic.html" />
     <link rel="canonical" href="https://docs.python.org/3/howto/instrumentation.html" />
     
@@ -40,17 +42,82 @@
         }
       }
     </style>
+<link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.svg" />
+            <script type="text/javascript" src="../_static/copybutton.js"></script>
+            <script type="text/javascript" src="../_static/menu.js"></script>
+            <script type="text/javascript" src="../_static/themetoggle.js"></script> 
 
-    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
-    
-    <script type="text/javascript" src="../_static/copybutton.js"></script>
-    <script type="text/javascript" src="../_static/themetoggle.js"></script>
-    
-     
+  </head>
+<body>
+<div class="mobile-nav">
+    <input type="checkbox" id="menuToggler" class="toggler__input" aria-controls="navigation"
+           aria-pressed="false" aria-expanded="false" role="button" aria-label="Menu" />
+    <nav class="nav-content" role="navigation">
+        <label for="menuToggler" class="toggler__label">
+            <span></span>
+        </label>
+        <span class="nav-items-wrapper">
+            <a href="https://www.python.org/" class="nav-logo">
+                <img src="../_static/py.svg" alt="Logo"/>
+            </a>
+            <span class="version_switcher_placeholder"></span>
+            <form id="searchbox" role="search" class="search" action="../search.html" method="get">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="search-icon">
+                    <path fill-rule="nonzero" fill="currentColor" d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 001.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 00-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 005.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                </svg>
+                <input type="search" name="q" aria-label="Quick search"/>
+                <input type="submit" value="Go"/>
+                
+            </form>
+        </span>
+    </nav>
+    <div class="menu-wrapper">
+        <nav class="menu" role="navigation" aria-label="main navigation">
+            <div class="language_switcher_placeholder"></div>
+            
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label>
+  <h3><a href="../contents.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Instrumenting CPython with DTrace and SystemTap</a><ul>
+<li><a class="reference internal" href="#enabling-the-static-markers">Enabling the static markers</a></li>
+<li><a class="reference internal" href="#static-dtrace-probes">Static DTrace probes</a></li>
+<li><a class="reference internal" href="#static-systemtap-markers">Static SystemTap markers</a></li>
+<li><a class="reference internal" href="#available-static-markers">Available static markers</a></li>
+<li><a class="reference internal" href="#systemtap-tapsets">SystemTap Tapsets</a></li>
+<li><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+</ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="clinic.html"
+                        title="previous chapter">Argument Clinic How-To</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="annotations.html"
+                        title="next chapter">Annotations Best Practices</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../bugs.html">Report a Bug</a></li>
+      <li>
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/howto/instrumentation.rst"
+            rel="nofollow">Show Source
+        </a>
+      </li>
+    </ul>
+  </div>
+        </nav>
+    </div>
+</div>
 
-  </head><body>
   
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -62,39 +129,50 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../faq/index.html" title="Python Frequently Asked Questions"
+          <a href="annotations.html" title="Annotations Best Practices"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="clinic.html" title="Argument Clinic How-To"
              accesskey="P">previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python HOWTOs</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Instrumenting CPython with DTrace and SystemTap</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>    
 
@@ -103,7 +181,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="instrumenting-cpython-with-dtrace-and-systemtap">
+  <section id="instrumenting-cpython-with-dtrace-and-systemtap">
 <span id="instrumentation"></span><h1>Instrumenting CPython with DTrace and SystemTap<a class="headerlink" href="#instrumenting-cpython-with-dtrace-and-systemtap" title="Permalink to this headline">¶</a></h1>
 <dl class="field-list simple">
 <dt class="field-odd">author</dt>
@@ -133,7 +211,7 @@ No guarantees are made about probe compatibility between versions of
 CPython. DTrace scripts can stop working or work incorrectly without
 warning when changing CPython versions.</p>
 </div>
-<div class="section" id="enabling-the-static-markers">
+<section id="enabling-the-static-markers">
 <h2>Enabling the static markers<a class="headerlink" href="#enabling-the-static-markers" title="Permalink to this headline">¶</a></h2>
 <p>macOS comes with built-in support for DTrace.  On Linux, in order to
 build CPython with the embedded markers for SystemTap, the SystemTap
@@ -146,7 +224,7 @@ development tools must be installed.</p>
 <div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo apt-get install systemtap-sdt-dev
 </pre></div>
 </div>
-<p>CPython must then be configured <code class="docutils literal notranslate"><span class="pre">--with-dtrace</span></code>:</p>
+<p>CPython must then be <a class="reference internal" href="../using/configure.html#cmdoption-with-dtrace"><code class="xref std std-option docutils literal notranslate"><span class="pre">configured</span> <span class="pre">with</span> <span class="pre">the</span> <span class="pre">--with-dtrace</span> <span class="pre">option</span></code></a>:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>checking for --with-dtrace... yes
 </pre></div>
 </div>
@@ -173,7 +251,8 @@ the built binary by seeing if it contains a “.note.stapsdt” section.</p>
 <span class="go">[30] .note.stapsdt        NOTE         0000000000000000 00308d78</span>
 </pre></div>
 </div>
-<p>If you’ve built Python as a shared library (with –enable-shared), you
+<p>If you’ve built Python as a shared library
+(with the <a class="reference internal" href="../using/configure.html#cmdoption-enable-shared"><code class="xref std std-option docutils literal notranslate"><span class="pre">--enable-shared</span></code></a> configure option), you
 need to look instead within the shared library.  For example:</p>
 <div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>readelf -S libpython3.3dm.so.1.0 <span class="p">|</span> grep .note.stapsdt
 <span class="go">[29] .note.stapsdt        NOTE         0000000000000000 00365b68</span>
@@ -219,8 +298,8 @@ need to look instead within the shared library.  For example:</p>
 <p>The above metadata contains information for SystemTap describing how it
 can patch strategically-placed machine code instructions to enable the
 tracing hooks used by a SystemTap script.</p>
-</div>
-<div class="section" id="static-dtrace-probes">
+</section>
+<section id="static-dtrace-probes">
 <h2>Static DTrace probes<a class="headerlink" href="#static-dtrace-probes" title="Permalink to this headline">¶</a></h2>
 <p>The following example DTrace script can be used to show the call/return
 hierarchy of a Python script, only tracing within the invocation of
@@ -284,8 +363,8 @@ python$target:::function-return
 156641360747370 function-return:call_stack.py:start:28
 </pre></div>
 </div>
-</div>
-<div class="section" id="static-systemtap-markers">
+</section>
+<section id="static-systemtap-markers">
 <h2>Static SystemTap markers<a class="headerlink" href="#static-systemtap-markers" title="Permalink to this headline">¶</a></h2>
 <p>The low-level way to use the SystemTap integration is to use the static
 markers directly.  This requires you to explicitly state the binary file
@@ -335,7 +414,7 @@ probe process(&quot;python&quot;).mark(&quot;function__return&quot;) {
 </ul>
 </div></blockquote>
 <p>and the remainder indicates the call/return hierarchy as the script executes.</p>
-<p>For a <cite>–enable-shared</cite> build of CPython, the markers are contained within the
+<p>For a <a class="reference internal" href="../using/configure.html#cmdoption-enable-shared"><code class="xref std std-option docutils literal notranslate"><span class="pre">--enable-shared</span></code></a> build of CPython, the markers are contained within the
 libpython shared library, and the probe’s dotted path needs to reflect this. For
 example, this line from the above example:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>probe process(&quot;python&quot;).mark(&quot;function__entry&quot;) {
@@ -345,9 +424,9 @@ example, this line from the above example:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>probe process(&quot;python&quot;).library(&quot;libpython3.6dm.so.1.0&quot;).mark(&quot;function__entry&quot;) {
 </pre></div>
 </div>
-<p>(assuming a debug build of CPython 3.6)</p>
-</div>
-<div class="section" id="available-static-markers">
+<p>(assuming a <a class="reference internal" href="../using/configure.html#debug-build"><span class="std std-ref">debug build</span></a> of CPython 3.6)</p>
+</section>
+<section id="available-static-markers">
 <h2>Available static markers<a class="headerlink" href="#available-static-markers" title="Permalink to this headline">¶</a></h2>
 <dl class="object">
 <dt>
@@ -431,8 +510,8 @@ pointer to a tuple object.</p>
 </div>
 </dd></dl>
 
-</div>
-<div class="section" id="systemtap-tapsets">
+</section>
+<section id="systemtap-tapsets">
 <h2>SystemTap Tapsets<a class="headerlink" href="#systemtap-tapsets" title="Permalink to this headline">¶</a></h2>
 <p>The higher-level way to use the SystemTap integration is to use a “tapset”:
 SystemTap’s equivalent of a library, which hides some of the lower-level
@@ -477,8 +556,8 @@ indicates that execution of a Python function has ended (either via
 (bytecode) functions.</p>
 </dd></dl>
 
-</div>
-<div class="section" id="examples">
+</section>
+<section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <p>This SystemTap script uses the tapset above to more cleanly implement the
 example given above of tracing the Python function-call hierarchy, without
@@ -519,8 +598,8 @@ probe timer.ms(1000) {
 }
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -546,14 +625,14 @@ probe timer.ms(1000) {
   <p class="topless"><a href="clinic.html"
                         title="previous chapter">Argument Clinic How-To</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="../faq/index.html"
-                        title="next chapter">Python Frequently Asked Questions</a></p>
+  <p class="topless"><a href="annotations.html"
+                        title="next chapter">Annotations Best Practices</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/master/Doc/howto/instrumentation.rst"
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/howto/instrumentation.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -573,39 +652,50 @@ probe timer.ms(1000) {
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../faq/index.html" title="Python Frequently Asked Questions"
+          <a href="annotations.html" title="Annotations Best Practices"
              >next</a> |</li>
         <li class="right" >
           <a href="clinic.html" title="Argument Clinic How-To"
              >previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python HOWTOs</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Instrumenting CPython with DTrace and SystemTap</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>  
     <div class="footer">
@@ -623,7 +713,7 @@ probe timer.ms(1000) {
 <br />
     <br />
 
-    Last updated on Mar 24, 2021.
+    Last updated on May 10, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 

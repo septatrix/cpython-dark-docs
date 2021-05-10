@@ -4,8 +4,10 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>socket — Low-level networking interface &#8212; Python 3.10.0a6 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>socket — Low-level networking interface &#8212; Python 3.10.0b1 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
@@ -19,7 +21,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.10.0a6 documentation"
+          title="Search within Python 3.10.0b1 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -40,17 +42,94 @@
         }
       }
     </style>
+<link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.svg" />
+            <script type="text/javascript" src="../_static/copybutton.js"></script>
+            <script type="text/javascript" src="../_static/menu.js"></script>
+            <script type="text/javascript" src="../_static/themetoggle.js"></script> 
 
-    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
-    
-    <script type="text/javascript" src="../_static/copybutton.js"></script>
-    <script type="text/javascript" src="../_static/themetoggle.js"></script>
-    
-     
+  </head>
+<body>
+<div class="mobile-nav">
+    <input type="checkbox" id="menuToggler" class="toggler__input" aria-controls="navigation"
+           aria-pressed="false" aria-expanded="false" role="button" aria-label="Menu" />
+    <nav class="nav-content" role="navigation">
+        <label for="menuToggler" class="toggler__label">
+            <span></span>
+        </label>
+        <span class="nav-items-wrapper">
+            <a href="https://www.python.org/" class="nav-logo">
+                <img src="../_static/py.svg" alt="Logo"/>
+            </a>
+            <span class="version_switcher_placeholder"></span>
+            <form id="searchbox" role="search" class="search" action="../search.html" method="get">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="search-icon">
+                    <path fill-rule="nonzero" fill="currentColor" d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 001.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 00-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 005.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                </svg>
+                <input type="search" name="q" aria-label="Quick search"/>
+                <input type="submit" value="Go"/>
+                
+            </form>
+        </span>
+    </nav>
+    <div class="menu-wrapper">
+        <nav class="menu" role="navigation" aria-label="main navigation">
+            <div class="language_switcher_placeholder"></div>
+            
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label>
+  <h3><a href="../contents.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">socket</span></code> — Low-level networking interface</a><ul>
+<li><a class="reference internal" href="#socket-families">Socket families</a></li>
+<li><a class="reference internal" href="#module-contents">Module contents</a><ul>
+<li><a class="reference internal" href="#exceptions">Exceptions</a></li>
+<li><a class="reference internal" href="#constants">Constants</a></li>
+<li><a class="reference internal" href="#functions">Functions</a><ul>
+<li><a class="reference internal" href="#creating-sockets">Creating sockets</a></li>
+<li><a class="reference internal" href="#other-functions">Other functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#socket-objects">Socket Objects</a></li>
+<li><a class="reference internal" href="#notes-on-socket-timeouts">Notes on socket timeouts</a><ul>
+<li><a class="reference internal" href="#timeouts-and-the-connect-method">Timeouts and the <code class="docutils literal notranslate"><span class="pre">connect</span></code> method</a></li>
+<li><a class="reference internal" href="#timeouts-and-the-accept-method">Timeouts and the <code class="docutils literal notranslate"><span class="pre">accept</span></code> method</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
+</ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="asyncio-dev.html"
+                        title="previous chapter">Developing with asyncio</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="ssl.html"
+                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ssl</span></code> — TLS/SSL wrapper for socket objects</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../bugs.html">Report a Bug</a></li>
+      <li>
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/library/socket.rst"
+            rel="nofollow">Show Source
+        </a>
+      </li>
+    </ul>
+  </div>
+        </nav>
+    </div>
+</div>
 
-  </head><body>
   
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -68,34 +147,45 @@
           <a href="asyncio-dev.html" title="Developing with asyncio"
              accesskey="P">previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="ipc.html" accesskey="U">Networking and Interprocess Communication</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">socket</span></code> — Low-level networking interface</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>    
 
@@ -104,9 +194,9 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="module-socket">
+  <section id="module-socket">
 <span id="socket-low-level-networking-interface"></span><h1><a class="reference internal" href="#module-socket" title="socket: Low-level networking interface."><code class="xref py py-mod docutils literal notranslate"><span class="pre">socket</span></code></a> — Low-level networking interface<a class="headerlink" href="#module-socket" title="Permalink to this headline">¶</a></h1>
-<p><strong>Source code:</strong> <a class="reference external" href="https://github.com/python/cpython/tree/master/Lib/socket.py">Lib/socket.py</a></p>
+<p><strong>Source code:</strong> <a class="reference external" href="https://github.com/python/cpython/tree/3.10/Lib/socket.py">Lib/socket.py</a></p>
 <hr class="docutils" />
 <p>This module provides access to the BSD <em>socket</em> interface. It is available on
 all modern Unix systems, Windows, MacOS, and probably additional platforms.</p>
@@ -131,7 +221,7 @@ is implicit on send operations.</p>
 </dd>
 </dl>
 </div>
-<div class="section" id="socket-families">
+<section id="socket-families">
 <h2>Socket families<a class="headerlink" href="#socket-families" title="Permalink to this headline">¶</a></h2>
 <p>Depending on the system and the build options, various socket families
 are supported by this module.</p>
@@ -331,11 +421,11 @@ subclasses (they used to raise <a class="reference internal" href="#socket.error
 <p>Non-blocking mode is supported through <a class="reference internal" href="#socket.socket.setblocking" title="socket.socket.setblocking"><code class="xref py py-meth docutils literal notranslate"><span class="pre">setblocking()</span></code></a>.  A
 generalization of this based on timeouts is supported through
 <a class="reference internal" href="#socket.socket.settimeout" title="socket.socket.settimeout"><code class="xref py py-meth docutils literal notranslate"><span class="pre">settimeout()</span></code></a>.</p>
-</div>
-<div class="section" id="module-contents">
+</section>
+<section id="module-contents">
 <h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
 <p>The module <a class="reference internal" href="#module-socket" title="socket: Low-level networking interface."><code class="xref py py-mod docutils literal notranslate"><span class="pre">socket</span></code></a> exports the following elements.</p>
-<div class="section" id="exceptions">
+<section id="exceptions">
 <h3>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this headline">¶</a></h3>
 <dl class="py exception">
 <dt id="socket.error">
@@ -393,8 +483,8 @@ whose value is currently always “timed out”.</p>
 </div>
 </dd></dl>
 
-</div>
-<div class="section" id="constants">
+</section>
+<section id="constants">
 <h3>Constants<a class="headerlink" href="#constants" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><p>The AF_* and SOCK_* constants are now <code class="xref py py-class docutils literal notranslate"><span class="pre">AddressFamily</span></code> and
@@ -714,10 +804,10 @@ service providing remote processors.</p>
 <p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Linux &gt;= 4.7.</p>
 </dd></dl>
 
-</div>
-<div class="section" id="functions">
+</section>
+<section id="functions">
 <h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="creating-sockets">
+<section id="creating-sockets">
 <h4>Creating sockets<a class="headerlink" href="#creating-sockets" title="Permalink to this headline">¶</a></h4>
 <p>The following functions all create <a class="reference internal" href="#socket-objects"><span class="std std-ref">socket objects</span></a>.</p>
 <dl class="py function">
@@ -903,8 +993,8 @@ method.  The socket is assumed to be in blocking mode.</p>
 same as <code class="docutils literal notranslate"><span class="pre">type(socket(...))</span></code>.</p>
 </dd></dl>
 
-</div>
-<div class="section" id="other-functions">
+</section>
+<section id="other-functions">
 <h4>Other functions<a class="headerlink" href="#other-functions" title="Permalink to this headline">¶</a></h4>
 <p>The <a class="reference internal" href="#module-socket" title="socket: Low-level networking interface."><code class="xref py py-mod docutils literal notranslate"><span class="pre">socket</span></code></a> module also offers various network-related services:</p>
 <dl class="py function">
@@ -950,9 +1040,9 @@ method.</p>
 connection to <code class="docutils literal notranslate"><span class="pre">example.org</span></code> on port 80 (results may differ on your
 system if IPv6 isn’t enabled):</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">socket</span><span class="o">.</span><span class="n">getaddrinfo</span><span class="p">(</span><span class="s2">&quot;example.org&quot;</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="n">proto</span><span class="o">=</span><span class="n">socket</span><span class="o">.</span><span class="n">IPPROTO_TCP</span><span class="p">)</span>
-<span class="go">[(&lt;AddressFamily.AF_INET6: 10&gt;, &lt;SocketType.SOCK_STREAM: 1&gt;,</span>
+<span class="go">[(socket.AF_INET6, socket.SOCK_STREAM,</span>
 <span class="go"> 6, &#39;&#39;, (&#39;2606:2800:220:1:248:1893:25c8:1946&#39;, 80, 0, 0)),</span>
-<span class="go"> (&lt;AddressFamily.AF_INET: 2&gt;, &lt;SocketType.SOCK_STREAM: 1&gt;,</span>
+<span class="go"> (socket.AF_INET, socket.SOCK_STREAM,</span>
 <span class="go"> 6, &#39;&#39;, (&#39;93.184.216.34&#39;, 80))]</span>
 </pre></div>
 </div>
@@ -1313,10 +1403,38 @@ interface index number.
 </div>
 </dd></dl>
 
+<dl class="py function">
+<dt id="socket.send_fds">
+<code class="sig-prename descclassname">socket.</code><code class="sig-name descname">send_fds</code><span class="sig-paren">(</span><em class="sig-param">sock</em>, <em class="sig-param">buffers</em>, <em class="sig-param">fds</em><span class="optional">[</span>, <em class="sig-param">flags</em><span class="optional">[</span>, <em class="sig-param">address</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#socket.send_fds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send the list of file descriptors <em>fds</em> over an <a class="reference internal" href="#socket.AF_UNIX" title="socket.AF_UNIX"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_UNIX</span></code></a> socket <em>sock</em>.
+The <em>fds</em> parameter is a sequence of file descriptors.
+Consult <code class="xref py py-meth docutils literal notranslate"><span class="pre">sendmsg()</span></code> for the documentation of these parameters.</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Unix supporting <a class="reference internal" href="#socket.socket.sendmsg" title="socket.socket.sendmsg"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sendmsg()</span></code></a> and <code class="xref py py-const docutils literal notranslate"><span class="pre">SCM_RIGHTS</span></code> mechanism.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 3.9.</span></p>
 </div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="socket.recv_fds">
+<code class="sig-prename descclassname">socket.</code><code class="sig-name descname">recv_fds</code><span class="sig-paren">(</span><em class="sig-param">sock</em>, <em class="sig-param">bufsize</em>, <em class="sig-param">maxfds</em><span class="optional">[</span>, <em class="sig-param">flags</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#socket.recv_fds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receive up to <em>maxfds</em> file descriptors from an <a class="reference internal" href="#socket.AF_UNIX" title="socket.AF_UNIX"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_UNIX</span></code></a> socket <em>sock</em>.
+Return <code class="docutils literal notranslate"><span class="pre">(msg,</span> <span class="pre">list(fds),</span> <span class="pre">flags,</span> <span class="pre">addr)</span></code>.
+Consult <code class="xref py py-meth docutils literal notranslate"><span class="pre">recvmsg()</span></code> for the documentation of these parameters.</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Unix supporting <a class="reference internal" href="#socket.socket.recvmsg" title="socket.socket.recvmsg"><code class="xref py py-meth docutils literal notranslate"><span class="pre">recvmsg()</span></code></a> and <code class="xref py py-const docutils literal notranslate"><span class="pre">SCM_RIGHTS</span></code> mechanism.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 3.9.</span></p>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Any truncated integers at the end of the list of file descriptors.</p>
 </div>
-<div class="section" id="socket-objects">
+</dd></dl>
+
+</section>
+</section>
+</section>
+<section id="socket-objects">
 <span id="id1"></span><h2>Socket Objects<a class="headerlink" href="#socket-objects" title="Permalink to this headline">¶</a></h2>
 <p>Socket objects have the following methods.  Except for
 <a class="reference internal" href="#socket.socket.makefile" title="socket.socket.makefile"><code class="xref py py-meth docutils literal notranslate"><span class="pre">makefile()</span></code></a>, these correspond to Unix system calls applicable
@@ -1826,33 +1944,6 @@ Set mode, IV, AEAD associated data length and flags for <a class="reference inte
 </dd></dl>
 
 <dl class="py method">
-<dt id="socket.socket.send_fds">
-<code class="sig-prename descclassname">socket.</code><code class="sig-name descname">send_fds</code><span class="sig-paren">(</span><em class="sig-param">sock</em>, <em class="sig-param">buffers</em>, <em class="sig-param">fds</em><span class="optional">[</span>, <em class="sig-param">flags</em><span class="optional">[</span>, <em class="sig-param">address</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#socket.socket.send_fds" title="Permalink to this definition">¶</a></dt>
-<dd><p>Send the list of file descriptors <em>fds</em> over an <a class="reference internal" href="#socket.AF_UNIX" title="socket.AF_UNIX"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_UNIX</span></code></a> socket.
-The <em>fds</em> parameter is a sequence of file descriptors.
-Consult <a class="reference internal" href="#socket.socket.sendmsg" title="socket.socket.sendmsg"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sendmsg()</span></code></a> for the documentation of these parameters.</p>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Unix supporting <a class="reference internal" href="#socket.socket.sendmsg" title="socket.socket.sendmsg"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sendmsg()</span></code></a> and <code class="xref py py-const docutils literal notranslate"><span class="pre">SCM_RIGHTS</span></code> mechanism.</p>
-<div class="versionadded">
-<p><span class="versionmodified added">New in version 3.9.</span></p>
-</div>
-</dd></dl>
-
-<dl class="py method">
-<dt id="socket.socket.recv_fds">
-<code class="sig-prename descclassname">socket.</code><code class="sig-name descname">recv_fds</code><span class="sig-paren">(</span><em class="sig-param">sock</em>, <em class="sig-param">bufsize</em>, <em class="sig-param">maxfds</em><span class="optional">[</span>, <em class="sig-param">flags</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#socket.socket.recv_fds" title="Permalink to this definition">¶</a></dt>
-<dd><p>Receive up to <em>maxfds</em> file descriptors. Return <code class="docutils literal notranslate"><span class="pre">(msg,</span> <span class="pre">list(fds),</span> <span class="pre">flags,</span> <span class="pre">addr)</span></code>. Consult
-<a class="reference internal" href="#socket.socket.recvmsg" title="socket.socket.recvmsg"><code class="xref py py-meth docutils literal notranslate"><span class="pre">recvmsg()</span></code></a> for the documentation of these parameters.</p>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Unix supporting <a class="reference internal" href="#socket.socket.recvmsg" title="socket.socket.recvmsg"><code class="xref py py-meth docutils literal notranslate"><span class="pre">recvmsg()</span></code></a> and <code class="xref py py-const docutils literal notranslate"><span class="pre">SCM_RIGHTS</span></code> mechanism.</p>
-<div class="versionadded">
-<p><span class="versionmodified added">New in version 3.9.</span></p>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Any truncated integers at the end of the list of file descriptors.</p>
-</div>
-</dd></dl>
-
-<dl class="py method">
 <dt id="socket.socket.sendfile">
 <code class="sig-prename descclassname">socket.</code><code class="sig-name descname">sendfile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">file</span></em>, <em class="sig-param"><span class="n">offset</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">count</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#socket.socket.sendfile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Send a file until EOF is reached by using high-performance
@@ -1989,8 +2080,8 @@ values given to the <a class="reference internal" href="#socket.socket" title="s
 <dd><p>The socket protocol.</p>
 </dd></dl>
 
-</div>
-<div class="section" id="notes-on-socket-timeouts">
+</section>
+<section id="notes-on-socket-timeouts">
 <span id="socket-timeouts"></span><h2>Notes on socket timeouts<a class="headerlink" href="#notes-on-socket-timeouts" title="Permalink to this headline">¶</a></h2>
 <p>A socket object can be in one of three modes: blocking, non-blocking, or
 timeout.  Sockets are by default always created in blocking mode, but this
@@ -2014,7 +2105,7 @@ file descriptors and socket objects that refer to the same network endpoint.
 This implementation detail can have visible consequences if e.g. you decide
 to use the <a class="reference internal" href="#socket.socket.fileno" title="socket.socket.fileno"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fileno()</span></code></a> of a socket.</p>
 </div>
-<div class="section" id="timeouts-and-the-connect-method">
+<section id="timeouts-and-the-connect-method">
 <h3>Timeouts and the <code class="docutils literal notranslate"><span class="pre">connect</span></code> method<a class="headerlink" href="#timeouts-and-the-connect-method" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="#socket.socket.connect" title="socket.socket.connect"><code class="xref py py-meth docutils literal notranslate"><span class="pre">connect()</span></code></a> operation is also subject to the timeout
 setting, and in general it is recommended to call <a class="reference internal" href="#socket.socket.settimeout" title="socket.socket.settimeout"><code class="xref py py-meth docutils literal notranslate"><span class="pre">settimeout()</span></code></a>
@@ -2022,8 +2113,8 @@ before calling <a class="reference internal" href="#socket.socket.connect" title
 <a class="reference internal" href="#socket.create_connection" title="socket.create_connection"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_connection()</span></code></a>.  However, the system network stack may also
 return a connection timeout error of its own regardless of any Python socket
 timeout setting.</p>
-</div>
-<div class="section" id="timeouts-and-the-accept-method">
+</section>
+<section id="timeouts-and-the-accept-method">
 <h3>Timeouts and the <code class="docutils literal notranslate"><span class="pre">accept</span></code> method<a class="headerlink" href="#timeouts-and-the-accept-method" title="Permalink to this headline">¶</a></h3>
 <p>If <a class="reference internal" href="#socket.getdefaulttimeout" title="socket.getdefaulttimeout"><code class="xref py py-func docutils literal notranslate"><span class="pre">getdefaulttimeout()</span></code></a> is not <a class="reference internal" href="constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a>, sockets returned by
 the <a class="reference internal" href="#socket.socket.accept" title="socket.socket.accept"><code class="xref py py-meth docutils literal notranslate"><span class="pre">accept()</span></code></a> method inherit that timeout.  Otherwise, the
@@ -2036,9 +2127,9 @@ returned by <a class="reference internal" href="#socket.socket.accept" title="so
 is operating system-dependent.  If you want to ensure cross-platform
 behaviour, it is recommended you manually override this setting.</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="example">
+</section>
+</section>
+<section id="example">
 <span id="socket-example"></span><h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <p>Here are four minimal example programs using the TCP/IP protocol: a server that
 echoes all data that it receives back (servicing only one client), and a client
@@ -2255,8 +2346,8 @@ details of socket semantics.  For Unix, refer to the manual pages; for Windows,
 see the WinSock (or Winsock 2) specification.  For IPv6-ready APIs, readers may
 want to refer to <span class="target" id="index-15"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc3493.html"><strong>RFC 3493</strong></a> titled Basic Socket Interface Extensions for IPv6.</p>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -2301,7 +2392,7 @@ want to refer to <span class="target" id="index-15"></span><a class="rfc referen
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/master/Doc/library/socket.rst"
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/library/socket.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -2327,34 +2418,45 @@ want to refer to <span class="target" id="index-15"></span><a class="rfc referen
           <a href="asyncio-dev.html" title="Developing with asyncio"
              >previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="ipc.html" >Networking and Interprocess Communication</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">socket</span></code> — Low-level networking interface</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>  
     <div class="footer">
@@ -2372,7 +2474,7 @@ want to refer to <span class="target" id="index-15"></span><a class="rfc referen
 <br />
     <br />
 
-    Last updated on Mar 24, 2021.
+    Last updated on May 10, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 

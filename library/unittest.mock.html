@@ -4,8 +4,10 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>unittest.mock — mock object library &#8212; Python 3.10.0a6 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>unittest.mock — mock object library &#8212; Python 3.10.0b1 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
@@ -19,7 +21,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.10.0a6 documentation"
+          title="Search within Python 3.10.0b1 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -40,17 +42,114 @@
         }
       }
     </style>
+<link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
+    <link rel="shortcut icon" type="image/png" href="../_static/py.svg" />
+            <script type="text/javascript" src="../_static/copybutton.js"></script>
+            <script type="text/javascript" src="../_static/menu.js"></script>
+            <script type="text/javascript" src="../_static/themetoggle.js"></script> 
 
-    <link rel="stylesheet" href="../_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
-    <link rel="shortcut icon" type="image/png" href="../_static/py.png">
-    
-    <script type="text/javascript" src="../_static/copybutton.js"></script>
-    <script type="text/javascript" src="../_static/themetoggle.js"></script>
-    
-     
+  </head>
+<body>
+<div class="mobile-nav">
+    <input type="checkbox" id="menuToggler" class="toggler__input" aria-controls="navigation"
+           aria-pressed="false" aria-expanded="false" role="button" aria-label="Menu" />
+    <nav class="nav-content" role="navigation">
+        <label for="menuToggler" class="toggler__label">
+            <span></span>
+        </label>
+        <span class="nav-items-wrapper">
+            <a href="https://www.python.org/" class="nav-logo">
+                <img src="../_static/py.svg" alt="Logo"/>
+            </a>
+            <span class="version_switcher_placeholder"></span>
+            <form id="searchbox" role="search" class="search" action="../search.html" method="get">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="search-icon">
+                    <path fill-rule="nonzero" fill="currentColor" d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 001.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 00-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 005.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                </svg>
+                <input type="search" name="q" aria-label="Quick search"/>
+                <input type="submit" value="Go"/>
+                
+            </form>
+        </span>
+    </nav>
+    <div class="menu-wrapper">
+        <nav class="menu" role="navigation" aria-label="main navigation">
+            <div class="language_switcher_placeholder"></div>
+            
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label>
+  <h3><a href="../contents.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">unittest.mock</span></code> — mock object library</a><ul>
+<li><a class="reference internal" href="#quick-guide">Quick Guide</a></li>
+<li><a class="reference internal" href="#the-mock-class">The Mock Class</a><ul>
+<li><a class="reference internal" href="#calling">Calling</a></li>
+<li><a class="reference internal" href="#deleting-attributes">Deleting Attributes</a></li>
+<li><a class="reference internal" href="#mock-names-and-the-name-attribute">Mock names and the name attribute</a></li>
+<li><a class="reference internal" href="#attaching-mocks-as-attributes">Attaching Mocks as Attributes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-patchers">The patchers</a><ul>
+<li><a class="reference internal" href="#patch">patch</a></li>
+<li><a class="reference internal" href="#patch-object">patch.object</a></li>
+<li><a class="reference internal" href="#patch-dict">patch.dict</a></li>
+<li><a class="reference internal" href="#patch-multiple">patch.multiple</a></li>
+<li><a class="reference internal" href="#patch-methods-start-and-stop">patch methods: start and stop</a></li>
+<li><a class="reference internal" href="#patch-builtins">patch builtins</a></li>
+<li><a class="reference internal" href="#test-prefix">TEST_PREFIX</a></li>
+<li><a class="reference internal" href="#nesting-patch-decorators">Nesting Patch Decorators</a></li>
+<li><a class="reference internal" href="#where-to-patch">Where to patch</a></li>
+<li><a class="reference internal" href="#patching-descriptors-and-proxy-objects">Patching Descriptors and Proxy Objects</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#magicmock-and-magic-method-support">MagicMock and magic method support</a><ul>
+<li><a class="reference internal" href="#mocking-magic-methods">Mocking Magic Methods</a></li>
+<li><a class="reference internal" href="#magic-mock">Magic Mock</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#helpers">Helpers</a><ul>
+<li><a class="reference internal" href="#sentinel">sentinel</a></li>
+<li><a class="reference internal" href="#default">DEFAULT</a></li>
+<li><a class="reference internal" href="#call">call</a></li>
+<li><a class="reference internal" href="#create-autospec">create_autospec</a></li>
+<li><a class="reference internal" href="#any">ANY</a></li>
+<li><a class="reference internal" href="#filter-dir">FILTER_DIR</a></li>
+<li><a class="reference internal" href="#mock-open">mock_open</a></li>
+<li><a class="reference internal" href="#autospeccing">Autospeccing</a></li>
+<li><a class="reference internal" href="#sealing-mocks">Sealing mocks</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="unittest.html"
+                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">unittest</span></code> — Unit testing framework</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="unittest.mock-examples.html"
+                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">unittest.mock</span></code> — getting started</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../bugs.html">Report a Bug</a></li>
+      <li>
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/library/unittest.mock.rst"
+            rel="nofollow">Show Source
+        </a>
+      </li>
+    </ul>
+  </div>
+        </nav>
+    </div>
+</div>
 
-  </head><body>
   
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -68,34 +167,45 @@
           <a href="unittest.html" title="unittest — Unit testing framework"
              accesskey="P">previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="development.html" accesskey="U">Development Tools</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">unittest.mock</span></code> — mock object library</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>    
 
@@ -104,12 +214,12 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="module-unittest.mock">
+  <section id="module-unittest.mock">
 <span id="unittest-mock-mock-object-library"></span><h1><a class="reference internal" href="#module-unittest.mock" title="unittest.mock: Mock object library."><code class="xref py py-mod docutils literal notranslate"><span class="pre">unittest.mock</span></code></a> — mock object library<a class="headerlink" href="#module-unittest.mock" title="Permalink to this headline">¶</a></h1>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.3.</span></p>
 </div>
-<p><strong>Source code:</strong> <a class="reference external" href="https://github.com/python/cpython/tree/master/Lib/unittest/mock.py">Lib/unittest/mock.py</a></p>
+<p><strong>Source code:</strong> <a class="reference external" href="https://github.com/python/cpython/tree/3.10/Lib/unittest/mock.py">Lib/unittest/mock.py</a></p>
 <hr class="docutils" />
 <p><a class="reference internal" href="#module-unittest.mock" title="unittest.mock: Mock object library."><code class="xref py py-mod docutils literal notranslate"><span class="pre">unittest.mock</span></code></a> is a library for testing in Python. It allows you to
 replace parts of your system under test with mock objects and make assertions
@@ -129,7 +239,7 @@ is based on the ‘action -&gt; assertion’ pattern instead of ‘record -&gt; 
 used by many mocking frameworks.</p>
 <p>There is a backport of <a class="reference internal" href="#module-unittest.mock" title="unittest.mock: Mock object library."><code class="xref py py-mod docutils literal notranslate"><span class="pre">unittest.mock</span></code></a> for earlier versions of Python,
 available as <a class="reference external" href="https://pypi.org/project/mock">mock on PyPI</a>.</p>
-<div class="section" id="quick-guide">
+<section id="quick-guide">
 <h2>Quick Guide<a class="headerlink" href="#quick-guide" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference internal" href="#unittest.mock.Mock" title="unittest.mock.Mock"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mock</span></code></a> and <a class="reference internal" href="#unittest.mock.MagicMock" title="unittest.mock.MagicMock"><code class="xref py py-class docutils literal notranslate"><span class="pre">MagicMock</span></code></a> objects create all attributes and
 methods as you access them and store details of how they have been used. You
@@ -263,8 +373,8 @@ code if they are used incorrectly:</p>
 <p><a class="reference internal" href="#unittest.mock.create_autospec" title="unittest.mock.create_autospec"><code class="xref py py-func docutils literal notranslate"><span class="pre">create_autospec()</span></code></a> can also be used on classes, where it copies the signature of
 the <code class="docutils literal notranslate"><span class="pre">__init__</span></code> method, and on callable objects where it copies the signature of
 the <code class="docutils literal notranslate"><span class="pre">__call__</span></code> method.</p>
-</div>
-<div class="section" id="the-mock-class">
+</section>
+<section id="the-mock-class">
 <h2>The Mock Class<a class="headerlink" href="#the-mock-class" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference internal" href="#unittest.mock.Mock" title="unittest.mock.Mock"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mock</span></code></a> is a flexible mock object intended to replace the use of stubs and
 test doubles throughout your code. Mocks are callable and create attributes as
@@ -1217,7 +1327,7 @@ awaits have been made it is an empty list.</p>
 
 </dd></dl>
 
-<div class="section" id="calling">
+<section id="calling">
 <h3>Calling<a class="headerlink" href="#calling" title="Permalink to this headline">¶</a></h3>
 <p>Mock objects are callable. The call will return the value set as the
 <a class="reference internal" href="#unittest.mock.Mock.return_value" title="unittest.mock.Mock.return_value"><code class="xref py py-attr docutils literal notranslate"><span class="pre">return_value</span></code></a> attribute. The default return value is a new Mock
@@ -1326,8 +1436,8 @@ returned:</p>
 <span class="go">66</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="deleting-attributes">
+</section>
+<section id="deleting-attributes">
 <span id="id2"></span><h3>Deleting Attributes<a class="headerlink" href="#deleting-attributes" title="Permalink to this headline">¶</a></h3>
 <p>Mock objects create attributes on demand. This allows them to pretend to be
 objects of any type.</p>
@@ -1349,8 +1459,8 @@ will raise an <a class="reference internal" href="exceptions.html#AttributeError
 <span class="gr">AttributeError</span>: <span class="n">f</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="mock-names-and-the-name-attribute">
+</section>
+<section id="mock-names-and-the-name-attribute">
 <h3>Mock names and the name attribute<a class="headerlink" href="#mock-names-and-the-name-attribute" title="Permalink to this headline">¶</a></h3>
 <p>Since “name” is an argument to the <a class="reference internal" href="#unittest.mock.Mock" title="unittest.mock.Mock"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mock</span></code></a> constructor, if you want your
 mock object to have a “name” attribute you can’t just pass it in at creation
@@ -1367,8 +1477,8 @@ time. There are two alternatives. One option is to use
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mock</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;foo&quot;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="attaching-mocks-as-attributes">
+</section>
+<section id="attaching-mocks-as-attributes">
 <h3>Attaching Mocks as Attributes<a class="headerlink" href="#attaching-mocks-as-attributes" title="Permalink to this headline">¶</a></h3>
 <p>When you attach a mock as an attribute of another mock (or as the return
 value) it becomes a “child” of that mock. Calls to the child are recorded in
@@ -1426,15 +1536,15 @@ get a new Mock object when it expects a magic method. If you need magic
 method support see <a class="reference internal" href="#magic-methods"><span class="std std-ref">magic methods</span></a>.</p>
 </dd>
 </dl>
-</div>
-</div>
-<div class="section" id="the-patchers">
+</section>
+</section>
+<section id="the-patchers">
 <h2>The patchers<a class="headerlink" href="#the-patchers" title="Permalink to this headline">¶</a></h2>
 <p>The patch decorators are used for patching objects only within the scope of
 the function they decorate. They automatically handle the unpatching for you,
 even if exceptions are raised. All of these functions can also be used in with
 statements or as class decorators.</p>
-<div class="section" id="patch">
+<section id="patch">
 <h3>patch<a class="headerlink" href="#patch" title="Permalink to this headline">¶</a></h3>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1626,8 +1736,8 @@ work as expected:</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">Changed in version 3.8: </span><a class="reference internal" href="#unittest.mock.patch" title="unittest.mock.patch"><code class="xref py py-func docutils literal notranslate"><span class="pre">patch()</span></code></a> now returns an <a class="reference internal" href="#unittest.mock.AsyncMock" title="unittest.mock.AsyncMock"><code class="xref py py-class docutils literal notranslate"><span class="pre">AsyncMock</span></code></a> if the target is an async function.</p>
 </div>
-</div>
-<div class="section" id="patch-object">
+</section>
+<section id="patch-object">
 <h3>patch.object<a class="headerlink" href="#patch-object" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
 <dt id="unittest.mock.patch.object">
@@ -1659,8 +1769,8 @@ function:</p>
 </div>
 <p><em>spec</em>, <em>create</em> and the other arguments to <a class="reference internal" href="#unittest.mock.patch.object" title="unittest.mock.patch.object"><code class="xref py py-func docutils literal notranslate"><span class="pre">patch.object()</span></code></a> have the same
 meaning as they do for <a class="reference internal" href="#unittest.mock.patch" title="unittest.mock.patch"><code class="xref py py-func docutils literal notranslate"><span class="pre">patch()</span></code></a>.</p>
-</div>
-<div class="section" id="patch-dict">
+</section>
+<section id="patch-dict">
 <h3>patch.dict<a class="headerlink" href="#patch-dict" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
 <dt id="unittest.mock.patch.dict">
@@ -1767,8 +1877,8 @@ magic methods <code class="xref py py-meth docutils literal notranslate"><span c
 <span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="nb">list</span><span class="p">(</span><span class="n">thing</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span><span class="s1">&#39;one&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="patch-multiple">
+</section>
+<section id="patch-multiple">
 <h3>patch.multiple<a class="headerlink" href="#patch-multiple" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
 <dt id="unittest.mock.patch.multiple">
@@ -1828,8 +1938,8 @@ context manager is a dictionary where created mocks are keyed by name:</p>
 <span class="gp">...</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="patch-methods-start-and-stop">
+</section>
+<section id="patch-methods-start-and-stop">
 <span id="start-and-stop"></span><h3>patch methods: start and stop<a class="headerlink" href="#patch-methods-start-and-stop" title="Permalink to this headline">¶</a></h3>
 <p>All the patchers have <code class="xref py py-meth docutils literal notranslate"><span class="pre">start()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">stop()</span></code> methods. These make it simpler to do
 patching in <code class="docutils literal notranslate"><span class="pre">setUp</span></code> methods or where you want to do multiple patches without
@@ -1898,8 +2008,8 @@ object.</p>
 <dd><p>Stop all active patches. Only stops patches started with <code class="docutils literal notranslate"><span class="pre">start</span></code>.</p>
 </dd></dl>
 
-</div>
-<div class="section" id="patch-builtins">
+</section>
+<section id="patch-builtins">
 <span id="id4"></span><h3>patch builtins<a class="headerlink" href="#patch-builtins" title="Permalink to this headline">¶</a></h3>
 <p>You can patch any builtins within a module. The following example patches
 builtin <a class="reference internal" href="functions.html#ord" title="ord"><code class="xref py py-func docutils literal notranslate"><span class="pre">ord()</span></code></a>:</p>
@@ -1912,8 +2022,8 @@ builtin <a class="reference internal" href="functions.html#ord" title="ord"><cod
 <span class="go">101</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="test-prefix">
+</section>
+<section id="test-prefix">
 <span id="id5"></span><h3>TEST_PREFIX<a class="headerlink" href="#test-prefix" title="Permalink to this headline">¶</a></h3>
 <p>All of the patchers can be used as class decorators. When used in this way
 they wrap every test method on the class. The patchers recognise methods that
@@ -1940,8 +2050,8 @@ inform the patchers of the different prefix by setting <code class="docutils lit
 <span class="go">3</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="nesting-patch-decorators">
+</section>
+<section id="nesting-patch-decorators">
 <h3>Nesting Patch Decorators<a class="headerlink" href="#nesting-patch-decorators" title="Permalink to this headline">¶</a></h3>
 <p>If you want to perform multiple patches then you can simply stack up the
 decorators.</p>
@@ -1963,8 +2073,8 @@ decorators.</p>
 <p>Note that the decorators are applied from the bottom upwards. This is the
 standard way that Python applies decorators. The order of the created mocks
 passed into your test function matches this order.</p>
-</div>
-<div class="section" id="where-to-patch">
+</section>
+<section id="where-to-patch">
 <span id="id6"></span><h3>Where to patch<a class="headerlink" href="#where-to-patch" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="#unittest.mock.patch" title="unittest.mock.patch"><code class="xref py py-func docutils literal notranslate"><span class="pre">patch()</span></code></a> works by (temporarily) changing the object that a <em>name</em> points to with
 another one. There can be many names pointing to any individual object, so
@@ -2001,18 +2111,18 @@ being looked up in the module and so we have to patch <code class="docutils lite
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;a.SomeClass&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="patching-descriptors-and-proxy-objects">
+</section>
+<section id="patching-descriptors-and-proxy-objects">
 <h3>Patching Descriptors and Proxy Objects<a class="headerlink" href="#patching-descriptors-and-proxy-objects" title="Permalink to this headline">¶</a></h3>
 <p>Both <a class="reference internal" href="#patch">patch</a> and <a class="reference internal" href="#patch-object">patch.object</a> correctly patch and restore descriptors: class
 methods, static methods and properties. You should patch these on the <em>class</em>
 rather than an instance. They also work with <em>some</em> objects
 that proxy attribute access, like the <a class="reference external" href="http://www.voidspace.org.uk/python/weblog/arch_d7_2010_12_04.shtml#e1198">django settings object</a>.</p>
-</div>
-</div>
-<div class="section" id="magicmock-and-magic-method-support">
+</section>
+</section>
+<section id="magicmock-and-magic-method-support">
 <h2>MagicMock and magic method support<a class="headerlink" href="#magicmock-and-magic-method-support" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="mocking-magic-methods">
+<section id="mocking-magic-methods">
 <span id="magic-methods"></span><h3>Mocking Magic Methods<a class="headerlink" href="#mocking-magic-methods" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="#unittest.mock.Mock" title="unittest.mock.Mock"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mock</span></code></a> supports mocking the Python protocol methods, also known as
 “magic methods”. This allows mock objects to replace containers or other
@@ -2101,8 +2211,8 @@ by mock, can’t be set dynamically, or can cause problems:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">__getattr__</span></code>, <code class="docutils literal notranslate"><span class="pre">__setattr__</span></code>, <code class="docutils literal notranslate"><span class="pre">__init__</span></code> and <code class="docutils literal notranslate"><span class="pre">__new__</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">__prepare__</span></code>, <code class="docutils literal notranslate"><span class="pre">__instancecheck__</span></code>, <code class="docutils literal notranslate"><span class="pre">__subclasscheck__</span></code>, <code class="docutils literal notranslate"><span class="pre">__del__</span></code></p></li>
 </ul>
-</div>
-<div class="section" id="magic-mock">
+</section>
+<section id="magic-mock">
 <h3>Magic Mock<a class="headerlink" href="#magic-mock" title="Permalink to this headline">¶</a></h3>
 <p>There are two <code class="docutils literal notranslate"><span class="pre">MagicMock</span></code> variants: <a class="reference internal" href="#unittest.mock.MagicMock" title="unittest.mock.MagicMock"><code class="xref py py-class docutils literal notranslate"><span class="pre">MagicMock</span></code></a> and <a class="reference internal" href="#unittest.mock.NonCallableMagicMock" title="unittest.mock.NonCallableMagicMock"><code class="xref py py-class docutils literal notranslate"><span class="pre">NonCallableMagicMock</span></code></a>.</p>
 <dl class="py class">
@@ -2230,11 +2340,11 @@ of Python.</p>
 instance is kept isolated from the others.</p>
 </dd>
 </dl>
-</div>
-</div>
-<div class="section" id="helpers">
+</section>
+</section>
+<section id="helpers">
 <h2>Helpers<a class="headerlink" href="#helpers" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="sentinel">
+<section id="sentinel">
 <h3>sentinel<a class="headerlink" href="#sentinel" title="Permalink to this headline">¶</a></h3>
 <dl class="py data">
 <dt id="unittest.mock.sentinel">
@@ -2264,8 +2374,8 @@ creating and testing the identity of objects like this.</p>
 <span class="go">sentinel.some_object</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="default">
+</section>
+<section id="default">
 <h3>DEFAULT<a class="headerlink" href="#default" title="Permalink to this headline">¶</a></h3>
 <dl class="py data">
 <dt id="unittest.mock.DEFAULT">
@@ -2275,8 +2385,8 @@ creating and testing the identity of objects like this.</p>
 functions to indicate that the normal return value should be used.</p>
 </dd></dl>
 
-</div>
-<div class="section" id="call">
+</section>
+<section id="call">
 <h3>call<a class="headerlink" href="#call" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
 <dt id="unittest.mock.call">
@@ -2363,8 +2473,8 @@ arguments are a dictionary:</p>
 <span class="go">True</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="create-autospec">
+</section>
+<section id="create-autospec">
 <h3>create_autospec<a class="headerlink" href="#create-autospec" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
 <dt id="unittest.mock.create_autospec">
@@ -2390,8 +2500,8 @@ the constructor of the created mock.</p>
 <p><span class="versionmodified changed">Changed in version 3.8: </span><a class="reference internal" href="#unittest.mock.create_autospec" title="unittest.mock.create_autospec"><code class="xref py py-func docutils literal notranslate"><span class="pre">create_autospec()</span></code></a> now returns an <a class="reference internal" href="#unittest.mock.AsyncMock" title="unittest.mock.AsyncMock"><code class="xref py py-class docutils literal notranslate"><span class="pre">AsyncMock</span></code></a> if the target is
 an async function.</p>
 </div>
-</div>
-<div class="section" id="any">
+</section>
+<section id="any">
 <h3>ANY<a class="headerlink" href="#any" title="Permalink to this headline">¶</a></h3>
 <dl class="py data">
 <dt id="unittest.mock.ANY">
@@ -2421,8 +2531,8 @@ passed in.</p>
 <span class="go">True</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="filter-dir">
+</section>
+<section id="filter-dir">
 <h3>FILTER_DIR<a class="headerlink" href="#filter-dir" title="Permalink to this headline">¶</a></h3>
 <dl class="py data">
 <dt id="unittest.mock.FILTER_DIR">
@@ -2479,8 +2589,8 @@ behaviour you can switch it off by setting the module level switch
 <p>Alternatively you can just use <code class="docutils literal notranslate"><span class="pre">vars(my_mock)</span></code> (instance members) and
 <code class="docutils literal notranslate"><span class="pre">dir(type(my_mock))</span></code> (type members) to bypass the filtering irrespective of
 <code class="xref py py-data docutils literal notranslate"><span class="pre">mock.FILTER_DIR</span></code>.</p>
-</div>
-<div class="section" id="mock-open">
+</section>
+<section id="mock-open">
 <h3>mock_open<a class="headerlink" href="#mock-open" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
 <dt id="unittest.mock.mock_open">
@@ -2547,8 +2657,8 @@ enough that a helper function is useful.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">result</span> <span class="o">==</span> <span class="s1">&#39;bibble&#39;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="autospeccing">
+</section>
+<section id="autospeccing">
 <span id="auto-speccing"></span><h3>Autospeccing<a class="headerlink" href="#autospeccing" title="Permalink to this headline">¶</a></h3>
 <p>Autospeccing is based on the existing <code class="xref py py-attr docutils literal notranslate"><span class="pre">spec</span></code> feature of mock. It limits the
 api of mocks to the api of an original object (the spec), but it is recursive
@@ -2765,8 +2875,8 @@ a mocked class to create a mock instance <em>does not</em> create a real instanc
 It is only attribute lookups - along with calls to <a class="reference internal" href="functions.html#dir" title="dir"><code class="xref py py-func docutils literal notranslate"><span class="pre">dir()</span></code></a> - that are done.</p>
 </dd>
 </dl>
-</div>
-<div class="section" id="sealing-mocks">
+</section>
+<section id="sealing-mocks">
 <h3>Sealing mocks<a class="headerlink" href="#sealing-mocks" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
 <dt id="unittest.mock.seal">
@@ -2790,9 +2900,9 @@ fixing part of the mock object.</p>
 </div>
 </dd></dl>
 
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -2857,7 +2967,7 @@ fixing part of the mock object.</p>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/master/Doc/library/unittest.mock.rst"
+        <a href="https://github.com/python/cpython/blob/3.10/Doc/library/unittest.mock.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -2883,34 +2993,45 @@ fixing part of the mock object.</p>
           <a href="unittest.html" title="unittest — Unit testing framework"
              >previous</a> |</li>
 
-    <li><img src="../_static/py.png" alt=""
-             style="vertical-align: middle; margin-top: -1px"/></li>
-    <li><a href="https://www.python.org/">Python</a> &#187;</li>
-    
-
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0a6 Documentation</a> &#187;
+      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="development.html" >Development Tools</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">unittest.mock</span></code> — mock object library</a></li>
-    <li class="right">
-        
+                <li class="right">
+                    
 
-    <div class="inline-search" style="display: none" role="search">
+    <div class="inline-search" role="search">
         <form class="inline-search" action="../search.html" method="get">
-          <input placeholder="Quick search" type="text" name="q" />
+          <input placeholder="Quick search" aria-label="Quick search" type="text" name="q" />
           <input type="submit" value="Go" />
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
     </div>
-    <script type="text/javascript">$('.inline-search').show(0);</script>
-         |
-    </li>
-    <li class="right"><input type="button" value="Toggle theme" class="theme-toggle" onclick="toggleTheme()"> |</li>
-
+                     |
+                </li>
+            <li class="right">
+<label class="theme-selector-label">
+    Color theme
+    <select class="theme-selector" oninput="activateTheme(this.value)">
+        <option value="auto" selected>Auto (default)</option>
+        <option value="light">Light theme</option>
+        <option value="dark">Dark theme</option>
+    </select>
+</label> |</li>
+            
       </ul>
     </div>  
     <div class="footer">
@@ -2928,7 +3049,7 @@ fixing part of the mock object.</p>
 <br />
     <br />
 
-    Last updated on Mar 24, 2021.
+    Last updated on May 10, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
