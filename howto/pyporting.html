@@ -6,22 +6,21 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Porting Python 2 Code to Python 3 &#8212; Python 3.10.0b1 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Porting Python 2 Code to Python 3 &#8212; Python 3.11.0 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
     
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
     
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.10.0b1 documentation"
+          title="Search within Python 3.11.0 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -77,15 +76,16 @@
             <div class="language_switcher_placeholder"></div>
             
 <label class="theme-selector-label">
-    Color theme
+    Theme
     <select class="theme-selector" oninput="activateTheme(this.value)">
-        <option value="auto" selected>Auto (default)</option>
-        <option value="light">Light theme</option>
-        <option value="dark">Dark theme</option>
+        <option value="auto" selected>Auto</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
     </select>
 </label>
-  <h3><a href="../contents.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">Table of Contents</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">Porting Python 2 Code to Python 3</a><ul>
 <li><a class="reference internal" href="#the-short-explanation">The Short Explanation</a></li>
 <li><a class="reference internal" href="#details">Details</a><ul>
@@ -110,18 +110,23 @@
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="index.html"
-                        title="previous chapter">Python HOWTOs</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="cporting.html"
-                        title="next chapter">Porting Extension Modules to Python 3</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="index.html"
+                          title="previous chapter">Python HOWTOs</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="cporting.html"
+                          title="next chapter">Porting Extension Modules to Python 3</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/3.10/Doc/howto/pyporting.rst"
+        <a href="https://github.com/python/cpython/blob/main/Doc/howto/pyporting.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -158,7 +163,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
+      <a href="../index.html">3.11.0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python HOWTOs</a> &#187;</li>
@@ -178,11 +183,11 @@
                 </li>
             <li class="right">
 <label class="theme-selector-label">
-    Color theme
+    Theme
     <select class="theme-selector" oninput="activateTheme(this.value)">
-        <option value="auto" selected>Auto (default)</option>
-        <option value="light">Light theme</option>
-        <option value="dark">Dark theme</option>
+        <option value="auto" selected>Auto</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
     </select>
 </label> |</li>
             
@@ -212,8 +217,7 @@ please see <a class="reference internal" href="cporting.html#cporting-howto"><sp
 <p>If you would like to read one core Python developer’s take on why Python 3
 came into existence, you can read Nick Coghlan’s <a class="reference external" href="https://ncoghlan-devs-python-notes.readthedocs.io/en/latest/python3/questions_and_answers.html">Python 3 Q &amp; A</a> or
 Brett Cannon’s <a class="reference external" href="https://snarky.ca/why-python-3-exists">Why Python 3 exists</a>.</p>
-<p>For help with porting, you can email the <a class="reference external" href="https://mail.python.org/mailman/listinfo/python-porting">python-porting</a> mailing list with
-questions.</p>
+<p>For help with porting, you can view the archived <a class="reference external" href="https://mail.python.org/pipermail/python-porting/">python-porting</a> mailing list.</p>
 </div>
 <section id="the-short-explanation">
 <h2>The Short Explanation<a class="headerlink" href="#the-short-explanation" title="Permalink to this headline">¶</a></h2>
@@ -224,7 +228,7 @@ are:</p>
 <li><p>Make sure you have good test coverage (<a class="reference external" href="https://pypi.org/project/coverage">coverage.py</a> can help;
 <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">coverage</span></code>)</p></li>
 <li><p>Learn the differences between Python 2 &amp; 3</p></li>
-<li><p>Use <a class="reference external" href="http://python-future.org/automatic_conversion.html">Futurize</a> (or <a class="reference external" href="https://python-modernize.readthedocs.io/">Modernize</a>) to update your code (e.g. <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">future</span></code>)</p></li>
+<li><p>Use <a class="reference external" href="https://python-future.org/automatic_conversion.html">Futurize</a> (or <a class="reference external" href="https://python-modernize.readthedocs.io/">Modernize</a>) to update your code (e.g. <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">future</span></code>)</p></li>
 <li><p>Use <a class="reference external" href="https://pypi.org/project/pylint">Pylint</a> to help make sure you don’t regress on your Python 3 support
 (<code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">pylint</span></code>)</p></li>
 <li><p>Use <a class="reference external" href="https://pypi.org/project/caniusepython3">caniusepython3</a> to find out which of your dependencies are blocking your
@@ -305,14 +309,14 @@ you want to look out for while you code, you will want to learn what changes
 Python 3 makes in terms of Python 2. Typically the two best ways of doing that
 is reading the <a class="reference internal" href="../whatsnew/index.html#whatsnew-index"><span class="std std-ref">“What’s New”</span></a> doc for each release of Python 3 and the
 <a class="reference external" href="http://python3porting.com/">Porting to Python 3</a> book (which is free online). There is also a handy
-<a class="reference external" href="http://python-future.org/compatible_idioms.html">cheat sheet</a> from the Python-Future project.</p>
+<a class="reference external" href="https://python-future.org/compatible_idioms.html">cheat sheet</a> from the Python-Future project.</p>
 </section>
 <section id="update-your-code">
 <h3>Update your code<a class="headerlink" href="#update-your-code" title="Permalink to this headline">¶</a></h3>
 <p>Once you feel like you know what is different in Python 3 compared to Python 2,
 it’s time to update your code! You have a choice between two tools in porting
-your code automatically: <a class="reference external" href="http://python-future.org/automatic_conversion.html">Futurize</a> and <a class="reference external" href="https://python-modernize.readthedocs.io/">Modernize</a>. Which tool you choose will
-depend on how much like Python 3 you want your code to be. <a class="reference external" href="http://python-future.org/automatic_conversion.html">Futurize</a> does its
+your code automatically: <a class="reference external" href="https://python-future.org/automatic_conversion.html">Futurize</a> and <a class="reference external" href="https://python-modernize.readthedocs.io/">Modernize</a>. Which tool you choose will
+depend on how much like Python 3 you want your code to be. <a class="reference external" href="https://python-future.org/automatic_conversion.html">Futurize</a> does its
 best to make Python 3 idioms and practices exist in Python 2, e.g. backporting
 the <code class="docutils literal notranslate"><span class="pre">bytes</span></code> type from Python 3 so that you have semantic parity between the
 major versions of Python. <a class="reference external" href="https://python-modernize.readthedocs.io/">Modernize</a>,
@@ -533,7 +537,7 @@ into errors with <code class="docutils literal notranslate"><span class="pre">-W
 miss a warning.</p>
 <p>You can also use the <a class="reference external" href="https://pypi.org/project/pylint">Pylint</a> project and its <code class="docutils literal notranslate"><span class="pre">--py3k</span></code> flag to lint your code
 to receive warnings when your code begins to deviate from Python 3
-compatibility. This also prevents you from having to run <a class="reference external" href="https://python-modernize.readthedocs.io/">Modernize</a> or <a class="reference external" href="http://python-future.org/automatic_conversion.html">Futurize</a>
+compatibility. This also prevents you from having to run <a class="reference external" href="https://python-modernize.readthedocs.io/">Modernize</a> or <a class="reference external" href="https://python-future.org/automatic_conversion.html">Futurize</a>
 over your code regularly to catch compatibility regressions. This does require
 you only support Python 2.7 and Python 3.4 or newer as that is Pylint’s
 minimum Python version support.</p>
@@ -599,8 +603,9 @@ to make sure everything functions as expected in both versions of Python.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../contents.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">Table of Contents</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">Porting Python 2 Code to Python 3</a><ul>
 <li><a class="reference internal" href="#the-short-explanation">The Short Explanation</a></li>
 <li><a class="reference internal" href="#details">Details</a><ul>
@@ -625,18 +630,23 @@ to make sure everything functions as expected in both versions of Python.</p>
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="index.html"
-                        title="previous chapter">Python HOWTOs</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="cporting.html"
-                        title="next chapter">Porting Extension Modules to Python 3</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="index.html"
+                          title="previous chapter">Python HOWTOs</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="cporting.html"
+                          title="next chapter">Porting Extension Modules to Python 3</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/3.10/Doc/howto/pyporting.rst"
+        <a href="https://github.com/python/cpython/blob/main/Doc/howto/pyporting.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -672,7 +682,7 @@ to make sure everything functions as expected in both versions of Python.</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
+      <a href="../index.html">3.11.0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python HOWTOs</a> &#187;</li>
@@ -692,36 +702,36 @@ to make sure everything functions as expected in both versions of Python.</p>
                 </li>
             <li class="right">
 <label class="theme-selector-label">
-    Color theme
+    Theme
     <select class="theme-selector" oninput="activateTheme(this.value)">
-        <option value="auto" selected>Auto (default)</option>
-        <option value="light">Light theme</option>
-        <option value="dark">Dark theme</option>
+        <option value="auto" selected>Auto</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
     </select>
 </label> |</li>
             
       </ul>
     </div>  
     <div class="footer">
-    &copy; <a href="../copyright.html">Copyright</a> 2001-2021, Python Software Foundation.
+    &copy; <a href="../copyright.html">Copyright</a> 2001-2022, Python Software Foundation.
     <br />
     This page is licensed under the Python Software Foundation License Version 2.
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    See <a href="">History and License</a> for more information.
-    <br /><br />
+    See <a href="/license.html">History and License</a> for more information.<br />
+    <br />
 
     The Python Software Foundation is a non-profit corporation.
 <a href="https://www.python.org/psf/donations/">Please donate.</a>
 <br />
     <br />
 
-    Last updated on May 10, 2021.
-    <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
+    Last updated on Nov 19, 2022.
+    <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
     </div>
 
     <script type="text/javascript" src="../_static/switchers.js"></script>

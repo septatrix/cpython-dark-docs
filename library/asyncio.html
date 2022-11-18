@@ -6,28 +6,27 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>asyncio — Asynchronous I/O &#8212; Python 3.10.0b1 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>asyncio — Asynchronous I/O &#8212; Python 3.11.0 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
     
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
     
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.10.0b1 documentation"
+          title="Search within Python 3.11.0 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="copyright" title="Copyright" href="../copyright.html" />
-    <link rel="next" title="Coroutines and Tasks" href="asyncio-task.html" />
+    <link rel="next" title="Runners" href="asyncio-runner.html" />
     <link rel="prev" title="Networking and Interprocess Communication" href="ipc.html" />
     <link rel="canonical" href="https://docs.python.org/3/library/asyncio.html" />
     
@@ -77,25 +76,29 @@
             <div class="language_switcher_placeholder"></div>
             
 <label class="theme-selector-label">
-    Color theme
+    Theme
     <select class="theme-selector" oninput="activateTheme(this.value)">
-        <option value="auto" selected>Auto (default)</option>
-        <option value="light">Light theme</option>
-        <option value="dark">Dark theme</option>
+        <option value="auto" selected>Auto</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
     </select>
 </label>
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="ipc.html"
-                        title="previous chapter">Networking and Interprocess Communication</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="asyncio-task.html"
-                        title="next chapter">Coroutines and Tasks</a></p>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="ipc.html"
+                          title="previous chapter">Networking and Interprocess Communication</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="asyncio-runner.html"
+                          title="next chapter">Runners</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/3.10/Doc/library/asyncio.rst"
+        <a href="https://github.com/python/cpython/blob/main/Doc/library/asyncio.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -116,7 +119,7 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="asyncio-task.html" title="Coroutines and Tasks"
+          <a href="asyncio-runner.html" title="Runners"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="ipc.html" title="Networking and Interprocess Communication"
@@ -132,7 +135,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
+      <a href="../index.html">3.11.0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
@@ -153,11 +156,11 @@
                 </li>
             <li class="right">
 <label class="theme-selector-label">
-    Color theme
+    Theme
     <select class="theme-selector" oninput="activateTheme(this.value)">
-        <option value="auto" selected>Auto (default)</option>
-        <option value="light">Light theme</option>
-        <option value="dark">Dark theme</option>
+        <option value="auto" selected>Auto</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
     </select>
 </label> |</li>
             
@@ -181,7 +184,6 @@
     <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;... World!&#39;</span><span class="p">)</span>
 
-<span class="c1"># Python 3.7+</span>
 <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
 </pre></div>
 </div>
@@ -214,10 +216,15 @@ handling <a class="reference internal" href="asyncio-eventloop.html#asyncio.loop
 <li><p><a class="reference internal" href="asyncio-future.html#asyncio-futures"><span class="std std-ref">bridge</span></a> callback-based libraries and code
 with async/await syntax.</p></li>
 </ul>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: not Emscripten, not WASI.<p>This module does not work or is not available on WebAssembly platforms
+<code class="docutils literal notranslate"><span class="pre">wasm32-emscripten</span></code> and <code class="docutils literal notranslate"><span class="pre">wasm32-wasi</span></code>. See
+<a class="reference internal" href="intro.html#wasm-availability"><span class="std std-ref">WebAssembly platforms</span></a> for more information.</p>
+</p>
 <p class="rubric">Reference</p>
 <div class="toctree-wrapper compound">
-<p><span class="caption-text">High-level APIs</span></p>
+<p class="caption" role="heading"><span class="caption-text">High-level APIs</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="asyncio-runner.html">Runners</a></li>
 <li class="toctree-l1"><a class="reference internal" href="asyncio-task.html">Coroutines and Tasks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="asyncio-stream.html">Streams</a></li>
 <li class="toctree-l1"><a class="reference internal" href="asyncio-sync.html">Synchronization Primitives</a></li>
@@ -227,17 +234,18 @@ with async/await syntax.</p></li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
-<p><span class="caption-text">Low-level APIs</span></p>
+<p class="caption" role="heading"><span class="caption-text">Low-level APIs</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="asyncio-eventloop.html">Event Loop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="asyncio-future.html">Futures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="asyncio-protocol.html">Transports and Protocols</a></li>
 <li class="toctree-l1"><a class="reference internal" href="asyncio-policy.html">Policies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="asyncio-platforms.html">Platform Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asyncio-extending.html">Extending</a></li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
-<p><span class="caption-text">Guides and Tutorials</span></p>
+<p class="caption" role="heading"><span class="caption-text">Guides and Tutorials</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="asyncio-api-index.html">High-level API Index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="asyncio-llapi-index.html">Low-level API Index</a></li>
@@ -246,7 +254,7 @@ with async/await syntax.</p></li>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The source code for asyncio can be found in <a class="reference external" href="https://github.com/python/cpython/tree/3.10/Lib/asyncio/">Lib/asyncio/</a>.</p>
+<p>The source code for asyncio can be found in <a class="reference external" href="https://github.com/python/cpython/tree/3.11/Lib/asyncio/">Lib/asyncio/</a>.</p>
 </div>
 </section>
 
@@ -257,18 +265,22 @@ with async/await syntax.</p></li>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="ipc.html"
-                        title="previous chapter">Networking and Interprocess Communication</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="asyncio-task.html"
-                        title="next chapter">Coroutines and Tasks</a></p>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="ipc.html"
+                          title="previous chapter">Networking and Interprocess Communication</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="asyncio-runner.html"
+                          title="next chapter">Runners</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/3.10/Doc/library/asyncio.rst"
+        <a href="https://github.com/python/cpython/blob/main/Doc/library/asyncio.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -288,7 +300,7 @@ with async/await syntax.</p></li>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="asyncio-task.html" title="Coroutines and Tasks"
+          <a href="asyncio-runner.html" title="Runners"
              >next</a> |</li>
         <li class="right" >
           <a href="ipc.html" title="Networking and Interprocess Communication"
@@ -304,7 +316,7 @@ with async/await syntax.</p></li>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
+      <a href="../index.html">3.11.0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
@@ -325,36 +337,36 @@ with async/await syntax.</p></li>
                 </li>
             <li class="right">
 <label class="theme-selector-label">
-    Color theme
+    Theme
     <select class="theme-selector" oninput="activateTheme(this.value)">
-        <option value="auto" selected>Auto (default)</option>
-        <option value="light">Light theme</option>
-        <option value="dark">Dark theme</option>
+        <option value="auto" selected>Auto</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
     </select>
 </label> |</li>
             
       </ul>
     </div>  
     <div class="footer">
-    &copy; <a href="../copyright.html">Copyright</a> 2001-2021, Python Software Foundation.
+    &copy; <a href="../copyright.html">Copyright</a> 2001-2022, Python Software Foundation.
     <br />
     This page is licensed under the Python Software Foundation License Version 2.
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    See <a href="">History and License</a> for more information.
-    <br /><br />
+    See <a href="/license.html">History and License</a> for more information.<br />
+    <br />
 
     The Python Software Foundation is a non-profit corporation.
 <a href="https://www.python.org/psf/donations/">Please donate.</a>
 <br />
     <br />
 
-    Last updated on May 10, 2021.
-    <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
+    Last updated on Nov 19, 2022.
+    <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
     </div>
 
     <script type="text/javascript" src="../_static/switchers.js"></script>

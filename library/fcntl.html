@@ -6,28 +6,27 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>fcntl — The fcntl and ioctl system calls &#8212; Python 3.10.0b1 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fcntl — The fcntl and ioctl system calls &#8212; Python 3.11.0 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
     
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
     
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.10.0b1 documentation"
+          title="Search within Python 3.11.0 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="copyright" title="Copyright" href="../copyright.html" />
-    <link rel="next" title="pipes — Interface to shell pipelines" href="pipes.html" />
+    <link rel="next" title="resource — Resource usage information" href="resource.html" />
     <link rel="prev" title="pty — Pseudo-terminal utilities" href="pty.html" />
     <link rel="canonical" href="https://docs.python.org/3/library/fcntl.html" />
     
@@ -77,25 +76,29 @@
             <div class="language_switcher_placeholder"></div>
             
 <label class="theme-selector-label">
-    Color theme
+    Theme
     <select class="theme-selector" oninput="activateTheme(this.value)">
-        <option value="auto" selected>Auto (default)</option>
-        <option value="light">Light theme</option>
-        <option value="dark">Dark theme</option>
+        <option value="auto" selected>Auto</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
     </select>
 </label>
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="pty.html"
-                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pty</span></code> — Pseudo-terminal utilities</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="pipes.html"
-                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pipes</span></code> — Interface to shell pipelines</a></p>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="pty.html"
+                          title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pty</span></code> — Pseudo-terminal utilities</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="resource.html"
+                          title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">resource</span></code> — Resource usage information</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/3.10/Doc/library/fcntl.rst"
+        <a href="https://github.com/python/cpython/blob/main/Doc/library/fcntl.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -116,7 +119,7 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="pipes.html" title="pipes — Interface to shell pipelines"
+          <a href="resource.html" title="resource — Resource usage information"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="pty.html" title="pty — Pseudo-terminal utilities"
@@ -132,7 +135,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
+      <a href="../index.html">3.11.0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
@@ -153,11 +156,11 @@
                 </li>
             <li class="right">
 <label class="theme-selector-label">
-    Color theme
+    Theme
     <select class="theme-selector" oninput="activateTheme(this.value)">
-        <option value="auto" selected>Auto (default)</option>
-        <option value="light">Light theme</option>
-        <option value="dark">Dark theme</option>
+        <option value="auto" selected>Auto</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
     </select>
 </label> |</li>
             
@@ -176,6 +179,10 @@
 interface to the <code class="xref c c-func docutils literal notranslate"><span class="pre">fcntl()</span></code> and <code class="xref c c-func docutils literal notranslate"><span class="pre">ioctl()</span></code> Unix routines.  For a
 complete description of these calls, see <em class="manpage"><a class="manpage reference external" href="https://manpages.debian.org/fcntl(2)">fcntl(2)</a></em> and
 <em class="manpage"><a class="manpage reference external" href="https://manpages.debian.org/ioctl(2)">ioctl(2)</a></em> Unix manual pages.</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: not Emscripten, not WASI.<p>This module does not work or is not available on WebAssembly platforms
+<code class="docutils literal notranslate"><span class="pre">wasm32-emscripten</span></code> and <code class="docutils literal notranslate"><span class="pre">wasm32-wasi</span></code>. See
+<a class="reference internal" href="intro.html#wasm-availability"><span class="std std-ref">WebAssembly platforms</span></a> for more information.</p>
+</p>
 <p>All functions in this module take a file descriptor <em>fd</em> as their first
 argument.  This can be an integer file descriptor, such as returned by
 <code class="docutils literal notranslate"><span class="pre">sys.stdin.fileno()</span></code>, or an <a class="reference internal" href="io.html#io.IOBase" title="io.IOBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">io.IOBase</span></code></a> object, such as <code class="docutils literal notranslate"><span class="pre">sys.stdin</span></code>
@@ -194,17 +201,23 @@ descriptors.</p>
 <p><span class="versionmodified changed">Changed in version 3.9: </span>On macOS, the fcntl module exposes the <code class="docutils literal notranslate"><span class="pre">F_GETPATH</span></code> constant, which obtains
 the path of a file from a file descriptor.
 On Linux(&gt;=3.15), the fcntl module exposes the <code class="docutils literal notranslate"><span class="pre">F_OFD_GETLK</span></code>, <code class="docutils literal notranslate"><span class="pre">F_OFD_SETLK</span></code>
-and <code class="docutils literal notranslate"><span class="pre">F_OFD_SETLKW</span></code> constants, which working with open file description locks.</p>
+and <code class="docutils literal notranslate"><span class="pre">F_OFD_SETLKW</span></code> constants, which are used when working with open file
+description locks.</p>
 </div>
 <div class="versionchanged">
 <p><span class="versionmodified changed">Changed in version 3.10: </span>On Linux &gt;= 2.6.11, the fcntl module exposes the <code class="docutils literal notranslate"><span class="pre">F_GETPIPE_SZ</span></code> and
 <code class="docutils literal notranslate"><span class="pre">F_SETPIPE_SZ</span></code> constants, which allow to check and modify a pipe’s size
 respectively.</p>
 </div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 3.11: </span>On FreeBSD, the fcntl module exposes the <code class="docutils literal notranslate"><span class="pre">F_DUP2FD</span></code> and <code class="docutils literal notranslate"><span class="pre">F_DUP2FD_CLOEXEC</span></code>
+constants, which allow to duplicate a file descriptor, the latter setting
+<code class="docutils literal notranslate"><span class="pre">FD_CLOEXEC</span></code> flag in addition.</p>
+</div>
 <p>The module defines the following functions:</p>
 <dl class="py function">
-<dt id="fcntl.fcntl">
-<code class="sig-prename descclassname">fcntl.</code><code class="sig-name descname">fcntl</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fd</span></em>, <em class="sig-param"><span class="n">cmd</span></em>, <em class="sig-param"><span class="n">arg</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#fcntl.fcntl" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="fcntl.fcntl">
+<span class="sig-prename descclassname"><span class="pre">fcntl.</span></span><span class="sig-name descname"><span class="pre">fcntl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fcntl.fcntl" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform the operation <em>cmd</em> on file descriptor <em>fd</em> (file objects providing
 a <a class="reference internal" href="io.html#io.IOBase.fileno" title="io.IOBase.fileno"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fileno()</span></code></a> method are accepted as well).  The values used
 for <em>cmd</em> are operating system dependent, and are available as constants
@@ -226,8 +239,8 @@ corruption.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="fcntl.ioctl">
-<code class="sig-prename descclassname">fcntl.</code><code class="sig-name descname">ioctl</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fd</span></em>, <em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">arg</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">mutate_flag</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#fcntl.ioctl" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="fcntl.ioctl">
+<span class="sig-prename descclassname"><span class="pre">fcntl.</span></span><span class="sig-name descname"><span class="pre">ioctl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mutate_flag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fcntl.ioctl" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function is identical to the <a class="reference internal" href="#fcntl.fcntl" title="fcntl.fcntl"><code class="xref py py-func docutils literal notranslate"><span class="pre">fcntl()</span></code></a> function, except
 that the argument handling is even more complicated.</p>
 <p>The <em>request</em> parameter is limited to values that can fit in 32-bits.
@@ -270,8 +283,8 @@ into the supplied buffer.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="fcntl.flock">
-<code class="sig-prename descclassname">fcntl.</code><code class="sig-name descname">flock</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fd</span></em>, <em class="sig-param"><span class="n">operation</span></em><span class="sig-paren">)</span><a class="headerlink" href="#fcntl.flock" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="fcntl.flock">
+<span class="sig-prename descclassname"><span class="pre">fcntl.</span></span><span class="sig-name descname"><span class="pre">flock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">operation</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fcntl.flock" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform the lock operation <em>operation</em> on file descriptor <em>fd</em> (file objects providing
 a <a class="reference internal" href="io.html#io.IOBase.fileno" title="io.IOBase.fileno"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fileno()</span></code></a> method are accepted as well). See the Unix manual
 <em class="manpage"><a class="manpage reference external" href="https://manpages.debian.org/flock(2)">flock(2)</a></em> for details.  (On some systems, this function is emulated
@@ -281,8 +294,8 @@ using <code class="xref c c-func docutils literal notranslate"><span class="pre"
 </dd></dl>
 
 <dl class="py function">
-<dt id="fcntl.lockf">
-<code class="sig-prename descclassname">fcntl.</code><code class="sig-name descname">lockf</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fd</span></em>, <em class="sig-param"><span class="n">cmd</span></em>, <em class="sig-param"><span class="n">len</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">start</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">whence</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#fcntl.lockf" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="fcntl.lockf">
+<span class="sig-prename descclassname"><span class="pre">fcntl.</span></span><span class="sig-name descname"><span class="pre">lockf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">len</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">whence</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fcntl.lockf" title="Permalink to this definition">¶</a></dt>
 <dd><p>This is essentially a wrapper around the <a class="reference internal" href="#fcntl.fcntl" title="fcntl.fcntl"><code class="xref py py-func docutils literal notranslate"><span class="pre">fcntl()</span></code></a> locking calls.
 <em>fd</em> is the file descriptor (file objects providing a <a class="reference internal" href="io.html#io.IOBase.fileno" title="io.IOBase.fileno"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fileno()</span></code></a>
 method are accepted as well) of the file to lock or unlock, and <em>cmd</em>
@@ -347,18 +360,22 @@ functions.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="pty.html"
-                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pty</span></code> — Pseudo-terminal utilities</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="pipes.html"
-                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pipes</span></code> — Interface to shell pipelines</a></p>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="pty.html"
+                          title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pty</span></code> — Pseudo-terminal utilities</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="resource.html"
+                          title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">resource</span></code> — Resource usage information</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/3.10/Doc/library/fcntl.rst"
+        <a href="https://github.com/python/cpython/blob/main/Doc/library/fcntl.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -378,7 +395,7 @@ functions.</p>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="pipes.html" title="pipes — Interface to shell pipelines"
+          <a href="resource.html" title="resource — Resource usage information"
              >next</a> |</li>
         <li class="right" >
           <a href="pty.html" title="pty — Pseudo-terminal utilities"
@@ -394,7 +411,7 @@ functions.</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
+      <a href="../index.html">3.11.0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
@@ -415,36 +432,36 @@ functions.</p>
                 </li>
             <li class="right">
 <label class="theme-selector-label">
-    Color theme
+    Theme
     <select class="theme-selector" oninput="activateTheme(this.value)">
-        <option value="auto" selected>Auto (default)</option>
-        <option value="light">Light theme</option>
-        <option value="dark">Dark theme</option>
+        <option value="auto" selected>Auto</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
     </select>
 </label> |</li>
             
       </ul>
     </div>  
     <div class="footer">
-    &copy; <a href="../copyright.html">Copyright</a> 2001-2021, Python Software Foundation.
+    &copy; <a href="../copyright.html">Copyright</a> 2001-2022, Python Software Foundation.
     <br />
     This page is licensed under the Python Software Foundation License Version 2.
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    See <a href="">History and License</a> for more information.
-    <br /><br />
+    See <a href="/license.html">History and License</a> for more information.<br />
+    <br />
 
     The Python Software Foundation is a non-profit corporation.
 <a href="https://www.python.org/psf/donations/">Please donate.</a>
 <br />
     <br />
 
-    Last updated on May 10, 2021.
-    <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
+    Last updated on Nov 19, 2022.
+    <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
     </div>
 
     <script type="text/javascript" src="../_static/switchers.js"></script>

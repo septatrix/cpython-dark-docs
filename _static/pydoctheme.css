@@ -82,8 +82,16 @@ form.inline-search input[type='submit'] {
     width: 40px;
 }
 
+div.document {
+    display: flex;
+}
+
 div.sphinxsidebar {
-    color: #444444;
+    float: none;
+    position: sticky;
+    top: 0;
+    max-height: 100vh;
+    color: #444;
     background-color: #eee;
     border-radius: 5px;
     line-height: 130%;
@@ -93,6 +101,13 @@ div.sphinxsidebar {
 div.sphinxsidebar h3,
 div.sphinxsidebar h4 {
     margin-top: 1.5em;
+}
+
+div.sphinxsidebarwrapper {
+    box-sizing: border-box;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 div.sphinxsidebarwrapper > h3:first-child {
@@ -124,16 +139,11 @@ div.body {
     padding: 0 0 0 1.2em;
 }
 
-div.body p {
-    line-height: 140%;
+div.body p, div.body dd, div.body li, div.body blockquote {
+    text-align: left;
+    line-height: 1.4;
 }
-
-div.body h1,
-div.body h2,
-div.body h3,
-div.body h4,
-div.body h5,
-div.body h6 {
+div.body h1, div.body h2, div.body h3, div.body h4, div.body h5, div.body h6 {
     margin: 0;
     border: 0;
     padding: 0.3em 0;
@@ -175,10 +185,8 @@ div.body a:hover {
     color: #00b0e4;
 }
 
-tt,
-code,
-pre {
-    font-family: monospace, sans-serif;
+tt, code, pre {
+    font-family: "monospace", monospace;
     font-size: 96.5%;
 }
 
@@ -249,7 +257,7 @@ div.footer a:hover {
 }
 
 dl > dt span ~ em {
-    font-family: monospace, sans-serif;
+    font-family: "monospace", monospace;
 }
 
 .toctree-wrapper ul {
@@ -279,6 +287,14 @@ dl > dt span ~ em {
     }
     div.body h3, div.body h4, div.body h5 {
         font-size: 1rem;
+    }
+    /* Override default styles to make more readable */
+    div.body ul {
+        padding-inline-start: 1rem;
+    }
+    div.body blockquote {
+        margin-inline-start: 1rem;
+        margin-inline-end: 0;
     }
     /* Remove sidebar and top related bar */
     div.related, .sphinxsidebar {
@@ -314,11 +330,13 @@ dl > dt span ~ em {
     .nav-items-wrapper {
         display: flex;
         flex: auto;
-        padding: .5rem;
+        padding: .25rem;
+        align-items: stretch;
     }
     .nav-logo {
         margin-right: 1rem;
         flex-shrink: 0;
+        align-self: center;
     }
     .nav-content img {
         display: block;
@@ -334,24 +352,25 @@ dl > dt span ~ em {
         display: flex;
         flex: auto;
         border: 1px solid #a9a9a9;
-    }
-    .nav-content .search:hover {
-        box-shadow: 0 1px 6px 0 rgba(32,33,36,0.28);
-        border-color: rgba(223,225,229,0);
+        align-items: stretch;
     }
     .nav-content .search input[type=search] {
         border: 0;
-        outline: 0;
-        padding-left: 20px;
+        padding-left: 24px;
         flex: 1;
     }
     .nav-content .search input[type=submit] {
+        height: 100%;
+        box-shadow: none;
         border: 0;
-        outline: 1px solid #999;
+        border-left: 1px solid #a9a9a9;
         cursor: pointer;
+        margin-right: 0;
     }
     .nav-content .search svg {
         position: absolute;
+        align-self: center;
+        padding-left: 4px;
     }
     .toggler__input {
         display: none;
@@ -359,30 +378,21 @@ dl > dt span ~ em {
     .toggler__label {
         width: 40px;
         cursor: pointer;
-        background-color: transparent;
-        border: 1px solid white;
         display: flex;
         align-items: center;
         justify-content: center;
         padding: 8px;
         flex-shrink: 0;
     }
-    .toggler__label:focus {
-        background-color: #eee;
-        border: 1px solid #ededed;
-        box-shadow: rgba(0, 0, 0, 0.25) 1px 0 2px 0;
-    }
-    .toggler__label:hover {
-        background-color: #eee;
-        border: 1px solid #ededed;
-        box-shadow: rgba(0, 0, 0, 0.25) 1px 0 2px 0;
+    .toggler__label:hover, .toggler__label:focus {
+        background-color: rgba(127 127 127 / 50%);
     }
     .toggler__label > span {
         position: relative;
         flex: none;
         height: 2px;
         width: 100%;
-        background: #444;
+        background: currentColor;
         transition: all 400ms ease;
     }
     .toggler__label > span::before,
@@ -470,7 +480,7 @@ dl > dt span ~ em {
         margin-bottom: 0.5rem;
     }
     .language_switcher_placeholder {
-        margin-top: 1.5rem;
+        margin-top: 2rem;
     }
     .language_switcher_placeholder select {
         width: 100%;

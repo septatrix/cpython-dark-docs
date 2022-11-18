@@ -6,22 +6,21 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Functional Programming HOWTO &#8212; Python 3.10.0b1 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Functional Programming HOWTO &#8212; Python 3.11.0 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
     
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
     
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.10.0b1 documentation"
+          title="Search within Python 3.11.0 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -77,15 +76,16 @@
             <div class="language_switcher_placeholder"></div>
             
 <label class="theme-selector-label">
-    Color theme
+    Theme
     <select class="theme-selector" oninput="activateTheme(this.value)">
-        <option value="auto" selected>Auto (default)</option>
-        <option value="light">Light theme</option>
-        <option value="dark">Dark theme</option>
+        <option value="auto" selected>Auto</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
     </select>
 </label>
-  <h3><a href="../contents.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">Table of Contents</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">Functional Programming HOWTO</a><ul>
 <li><a class="reference internal" href="#introduction">Introduction</a><ul>
 <li><a class="reference internal" href="#formal-provability">Formal provability</a></li>
@@ -128,18 +128,23 @@
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="enum.html"
-                        title="previous chapter">Enum HOWTO</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="logging.html"
-                        title="next chapter">Logging HOWTO</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="enum.html"
+                          title="previous chapter">Enum HOWTO</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="logging.html"
+                          title="next chapter">Logging HOWTO</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/3.10/Doc/howto/functional.rst"
+        <a href="https://github.com/python/cpython/blob/main/Doc/howto/functional.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -176,7 +181,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
+      <a href="../index.html">3.11.0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python HOWTOs</a> &#187;</li>
@@ -196,11 +201,11 @@
                 </li>
             <li class="right">
 <label class="theme-selector-label">
-    Color theme
+    Theme
     <select class="theme-selector" oninput="activateTheme(this.value)">
-        <option value="auto" selected>Auto (default)</option>
-        <option value="light">Light theme</option>
-        <option value="dark">Dark theme</option>
+        <option value="auto" selected>Auto</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
     </select>
 </label> |</li>
             
@@ -273,11 +278,10 @@ not using data structures that get updated as a program runs; every function’s
 output must only depend on its input.</p>
 <p>Some languages are very strict about purity and don’t even have assignment
 statements such as <code class="docutils literal notranslate"><span class="pre">a=3</span></code> or <code class="docutils literal notranslate"><span class="pre">c</span> <span class="pre">=</span> <span class="pre">a</span> <span class="pre">+</span> <span class="pre">b</span></code>, but it’s difficult to avoid all
-side effects.  Printing to the screen or writing to a disk file are side
-effects, for example.  For example, in Python a call to the <a class="reference internal" href="../library/functions.html#print" title="print"><code class="xref py py-func docutils literal notranslate"><span class="pre">print()</span></code></a> or
-<a class="reference internal" href="../library/time.html#time.sleep" title="time.sleep"><code class="xref py py-func docutils literal notranslate"><span class="pre">time.sleep()</span></code></a> function both return no useful value; they’re only called for
-their side effects of sending some text to the screen or pausing execution for a
-second.</p>
+side effects, such as printing to the screen or writing to a disk file. Another
+example is a call to the <a class="reference internal" href="../library/functions.html#print" title="print"><code class="xref py py-func docutils literal notranslate"><span class="pre">print()</span></code></a> or <a class="reference internal" href="../library/time.html#time.sleep" title="time.sleep"><code class="xref py py-func docutils literal notranslate"><span class="pre">time.sleep()</span></code></a> function, neither
+of which returns a useful value. Both are called only for their side effects
+of sending some text to the screen or pausing execution for a second.</p>
 <p>Python programs written in functional style usually won’t go to the extreme of
 avoiding all I/O or all assignments; instead, they’ll provide a
 functional-appearing interface but will use non-functional features internally.
@@ -490,9 +494,15 @@ line of a file like this:</p>
 </div>
 <p>Sets can take their contents from an iterable and let you iterate over the set’s
 elements:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">S</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">}</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">S</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">S</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">S</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="go">2</span>
+<span class="go">3</span>
+<span class="go">5</span>
+<span class="go">7</span>
+<span class="go">11</span>
+<span class="go">13</span>
 </pre></div>
 </div>
 </section>
@@ -508,18 +518,18 @@ substring.</p>
 “genexps”) are a concise notation for such operations, borrowed from the
 functional programming language Haskell (<a class="reference external" href="https://www.haskell.org/">https://www.haskell.org/</a>).  You can strip
 all the whitespace from a stream of strings with the following code:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">line_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;  line 1</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;line 2  </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">line_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;  line 1</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;line 2  </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39; </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">]</span>
 
-<span class="c1"># Generator expression -- returns iterator</span>
-<span class="n">stripped_iter</span> <span class="o">=</span> <span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">line_list</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Generator expression -- returns iterator</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stripped_iter</span> <span class="o">=</span> <span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">line_list</span><span class="p">)</span>
 
-<span class="c1"># List comprehension -- returns list</span>
-<span class="n">stripped_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">line_list</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># List comprehension -- returns list</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stripped_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">line_list</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>You can select only certain elements by adding an <code class="docutils literal notranslate"><span class="pre">&quot;if&quot;</span></code> condition:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">stripped_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">line_list</span>
-                 <span class="k">if</span> <span class="n">line</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">]</span>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stripped_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">line_list</span>
+<span class="gp">... </span>                 <span class="k">if</span> <span class="n">line</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>With a list comprehension, you get back a Python list; <code class="docutils literal notranslate"><span class="pre">stripped_list</span></code> is a
@@ -535,7 +545,8 @@ have the form:</p>
              <span class="k">if</span> <span class="n">condition1</span>
              <span class="k">for</span> <span class="n">expr2</span> <span class="ow">in</span> <span class="n">sequence2</span>
              <span class="k">if</span> <span class="n">condition2</span>
-             <span class="k">for</span> <span class="n">expr3</span> <span class="ow">in</span> <span class="n">sequence3</span> <span class="o">...</span>
+             <span class="k">for</span> <span class="n">expr3</span> <span class="ow">in</span> <span class="n">sequence3</span>
+             <span class="o">...</span>
              <span class="k">if</span> <span class="n">condition3</span>
              <span class="k">for</span> <span class="n">exprN</span> <span class="ow">in</span> <span class="n">sequenceN</span>
              <span class="k">if</span> <span class="n">conditionN</span> <span class="p">)</span>
@@ -657,7 +668,7 @@ return it.
 However, for a moderately complicated generator, writing a corresponding class
 can be much messier.</p>
 <p>The test suite included with Python’s library,
-<a class="reference external" href="https://github.com/python/cpython/tree/3.10/Lib/test/test_generators.py">Lib/test/test_generators.py</a>, contains
+<a class="reference external" href="https://github.com/python/cpython/tree/3.11/Lib/test/test_generators.py">Lib/test/test_generators.py</a>, contains
 a number of more interesting examples.  Here’s one generator that implements an
 in-order traversal of a tree using generators recursively.</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># A recursive generator that generates Tree leaves in in-order.</span>
@@ -694,7 +705,7 @@ a variable or otherwise operated on:</p>
 when you’re doing something with the returned value, as in the above example.
 The parentheses aren’t always necessary, but it’s easier to always add them
 instead of having to remember when they’re needed.</p>
-<p>(<span class="target" id="index-0"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0342"><strong>PEP 342</strong></a> explains the exact rules, which are that a <code class="docutils literal notranslate"><span class="pre">yield</span></code>-expression must
+<p>(<span class="target" id="index-0"></span><a class="pep reference external" href="https://peps.python.org/pep-0342/"><strong>PEP 342</strong></a> explains the exact rules, which are that a <code class="docutils literal notranslate"><span class="pre">yield</span></code>-expression must
 always be parenthesized except when it occurs at the top-level expression on the
 right-hand side of an assignment.  This means you can write <code class="docutils literal notranslate"><span class="pre">val</span> <span class="pre">=</span> <span class="pre">yield</span> <span class="pre">i</span></code>
 but have to use parentheses when there’s an operation, as in <code class="docutils literal notranslate"><span class="pre">val</span> <span class="pre">=</span> <span class="pre">(yield</span> <span class="pre">i)</span>
@@ -739,7 +750,7 @@ generator function.</p>
 <p>In addition to <a class="reference internal" href="../reference/expressions.html#generator.send" title="generator.send"><code class="xref py py-meth docutils literal notranslate"><span class="pre">send()</span></code></a>, there are two other methods on
 generators:</p>
 <ul>
-<li><p><a class="reference internal" href="../reference/expressions.html#generator.throw" title="generator.throw"><code class="xref py py-meth docutils literal notranslate"><span class="pre">throw(type,</span> <span class="pre">value=None,</span> <span class="pre">traceback=None)</span></code></a> is used to
+<li><p><a class="reference internal" href="../reference/expressions.html#generator.throw" title="generator.throw"><code class="xref py py-meth docutils literal notranslate"><span class="pre">throw(value)</span></code></a> is used to
 raise an exception inside the generator; the exception is raised by the
 <code class="docutils literal notranslate"><span class="pre">yield</span></code> expression where the generator’s execution is paused.</p></li>
 <li><p><a class="reference internal" href="../reference/expressions.html#generator.close" title="generator.close"><code class="xref py py-meth docutils literal notranslate"><span class="pre">close()</span></code></a> raises a <a class="reference internal" href="../library/exceptions.html#GeneratorExit" title="GeneratorExit"><code class="xref py py-exc docutils literal notranslate"><span class="pre">GeneratorExit</span></code></a> exception inside the
@@ -873,7 +884,7 @@ further because you risk skipping a discarded element.</p>
 </section>
 <section id="the-itertools-module">
 <h2>The itertools module<a class="headerlink" href="#the-itertools-module" title="Permalink to this headline">¶</a></h2>
-<p>The <a class="reference internal" href="../library/itertools.html#module-itertools" title="itertools: Functions creating iterators for efficient looping."><code class="xref py py-mod docutils literal notranslate"><span class="pre">itertools</span></code></a> module contains a number of commonly-used iterators as well
+<p>The <a class="reference internal" href="../library/itertools.html#module-itertools" title="itertools: Functions creating iterators for efficient looping."><code class="xref py py-mod docutils literal notranslate"><span class="pre">itertools</span></code></a> module contains a number of commonly used iterators as well
 as functions for combining several iterators.  This section will introduce the
 module’s contents by showing small examples.</p>
 <p>The module’s functions fall into a few broad classes:</p>
@@ -1111,7 +1122,7 @@ requesting iterator-2 and its corresponding key.</p>
 </section>
 <section id="the-functools-module">
 <h2>The functools module<a class="headerlink" href="#the-functools-module" title="Permalink to this headline">¶</a></h2>
-<p>The <a class="reference internal" href="../library/functools.html#module-functools" title="functools: Higher-order functions and operations on callable objects."><code class="xref py py-mod docutils literal notranslate"><span class="pre">functools</span></code></a> module in Python 2.5 contains some higher-order functions.
+<p>The <a class="reference internal" href="../library/functools.html#module-functools" title="functools: Higher-order functions and operations on callable objects."><code class="xref py py-mod docutils literal notranslate"><span class="pre">functools</span></code></a> module contains some higher-order functions.
 A <strong>higher-order function</strong> takes one or more functions as input and returns a
 new function.  The most useful tool in this module is the
 <a class="reference internal" href="../library/functools.html#functools.partial" title="functools.partial"><code class="xref py py-func docutils literal notranslate"><span class="pre">functools.partial()</span></code></a> function.</p>
@@ -1310,7 +1321,7 @@ chapters 2 and 3 discuss the use of sequences and streams to organize the data
 flow inside a program.  The book uses Scheme for its examples, but many of the
 design approaches described in these chapters are applicable to functional-style
 Python code.</p>
-<p><a class="reference external" href="http://www.defmacro.org/ramblings/fp.html">http://www.defmacro.org/ramblings/fp.html</a>: A general introduction to functional
+<p><a class="reference external" href="https://www.defmacro.org/ramblings/fp.html">https://www.defmacro.org/ramblings/fp.html</a>: A general introduction to functional
 programming that uses Java examples and has a lengthy historical introduction.</p>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/Functional_programming">https://en.wikipedia.org/wiki/Functional_programming</a>: General Wikipedia entry
 describing functional programming.</p>
@@ -1319,7 +1330,7 @@ describing functional programming.</p>
 </section>
 <section id="python-specific">
 <h3>Python-specific<a class="headerlink" href="#python-specific" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference external" href="http://gnosis.cx/TPiP/">http://gnosis.cx/TPiP/</a>: The first chapter of David Mertz’s book
+<p><a class="reference external" href="https://gnosis.cx/TPiP/">https://gnosis.cx/TPiP/</a>: The first chapter of David Mertz’s book
 <cite>Text Processing in Python</cite> discusses functional programming
 for text processing, in the section titled “Utilizing Higher-Order Functions in
 Text Processing”.</p>
@@ -1334,8 +1345,8 @@ for IBM’s DeveloperWorks site; see
 <p>Documentation for the <a class="reference internal" href="../library/itertools.html#module-itertools" title="itertools: Functions creating iterators for efficient looping."><code class="xref py py-mod docutils literal notranslate"><span class="pre">itertools</span></code></a> module.</p>
 <p>Documentation for the <a class="reference internal" href="../library/functools.html#module-functools" title="functools: Higher-order functions and operations on callable objects."><code class="xref py py-mod docutils literal notranslate"><span class="pre">functools</span></code></a> module.</p>
 <p>Documentation for the <a class="reference internal" href="../library/operator.html#module-operator" title="operator: Functions corresponding to the standard operators."><code class="xref py py-mod docutils literal notranslate"><span class="pre">operator</span></code></a> module.</p>
-<p><span class="target" id="index-1"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0289"><strong>PEP 289</strong></a>: “Generator Expressions”</p>
-<p><span class="target" id="index-2"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0342"><strong>PEP 342</strong></a>: “Coroutines via Enhanced Generators” describes the new generator
+<p><span class="target" id="index-1"></span><a class="pep reference external" href="https://peps.python.org/pep-0289/"><strong>PEP 289</strong></a>: “Generator Expressions”</p>
+<p><span class="target" id="index-2"></span><a class="pep reference external" href="https://peps.python.org/pep-0342/"><strong>PEP 342</strong></a>: “Coroutines via Enhanced Generators” describes the new generator
 features in Python 2.5.</p>
 </section>
 </section>
@@ -1348,8 +1359,9 @@ features in Python 2.5.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../contents.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">Table of Contents</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">Functional Programming HOWTO</a><ul>
 <li><a class="reference internal" href="#introduction">Introduction</a><ul>
 <li><a class="reference internal" href="#formal-provability">Formal provability</a></li>
@@ -1392,18 +1404,23 @@ features in Python 2.5.</p>
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="enum.html"
-                        title="previous chapter">Enum HOWTO</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="logging.html"
-                        title="next chapter">Logging HOWTO</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="enum.html"
+                          title="previous chapter">Enum HOWTO</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="logging.html"
+                          title="next chapter">Logging HOWTO</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/3.10/Doc/howto/functional.rst"
+        <a href="https://github.com/python/cpython/blob/main/Doc/howto/functional.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -1439,7 +1456,7 @@ features in Python 2.5.</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
+      <a href="../index.html">3.11.0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python HOWTOs</a> &#187;</li>
@@ -1459,36 +1476,36 @@ features in Python 2.5.</p>
                 </li>
             <li class="right">
 <label class="theme-selector-label">
-    Color theme
+    Theme
     <select class="theme-selector" oninput="activateTheme(this.value)">
-        <option value="auto" selected>Auto (default)</option>
-        <option value="light">Light theme</option>
-        <option value="dark">Dark theme</option>
+        <option value="auto" selected>Auto</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
     </select>
 </label> |</li>
             
       </ul>
     </div>  
     <div class="footer">
-    &copy; <a href="../copyright.html">Copyright</a> 2001-2021, Python Software Foundation.
+    &copy; <a href="../copyright.html">Copyright</a> 2001-2022, Python Software Foundation.
     <br />
     This page is licensed under the Python Software Foundation License Version 2.
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    See <a href="">History and License</a> for more information.
-    <br /><br />
+    See <a href="/license.html">History and License</a> for more information.<br />
+    <br />
 
     The Python Software Foundation is a non-profit corporation.
 <a href="https://www.python.org/psf/donations/">Please donate.</a>
 <br />
     <br />
 
-    Last updated on May 10, 2021.
-    <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
+    Last updated on Nov 19, 2022.
+    <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
     </div>
 
     <script type="text/javascript" src="../_static/switchers.js"></script>

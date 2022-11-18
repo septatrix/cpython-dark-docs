@@ -6,28 +6,27 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>pwd — The password database &#8212; Python 3.10.0b1 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pwd — The password database &#8212; Python 3.11.0 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
     
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
     
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.10.0b1 documentation"
+          title="Search within Python 3.11.0 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="copyright" title="Copyright" href="../copyright.html" />
-    <link rel="next" title="spwd — The shadow password database" href="spwd.html" />
+    <link rel="next" title="grp — The group database" href="grp.html" />
     <link rel="prev" title="posix — The most common POSIX system calls" href="posix.html" />
     <link rel="canonical" href="https://docs.python.org/3/library/pwd.html" />
     
@@ -77,25 +76,29 @@
             <div class="language_switcher_placeholder"></div>
             
 <label class="theme-selector-label">
-    Color theme
+    Theme
     <select class="theme-selector" oninput="activateTheme(this.value)">
-        <option value="auto" selected>Auto (default)</option>
-        <option value="light">Light theme</option>
-        <option value="dark">Dark theme</option>
+        <option value="auto" selected>Auto</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
     </select>
 </label>
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="posix.html"
-                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">posix</span></code> — The most common POSIX system calls</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="spwd.html"
-                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">spwd</span></code> — The shadow password database</a></p>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="posix.html"
+                          title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">posix</span></code> — The most common POSIX system calls</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="grp.html"
+                          title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">grp</span></code> — The group database</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/3.10/Doc/library/pwd.rst"
+        <a href="https://github.com/python/cpython/blob/main/Doc/library/pwd.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -116,7 +119,7 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="spwd.html" title="spwd — The shadow password database"
+          <a href="grp.html" title="grp — The group database"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="posix.html" title="posix — The most common POSIX system calls"
@@ -132,7 +135,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
+      <a href="../index.html">3.11.0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
@@ -153,11 +156,11 @@
                 </li>
             <li class="right">
 <label class="theme-selector-label">
-    Color theme
+    Theme
     <select class="theme-selector" oninput="activateTheme(this.value)">
-        <option value="auto" selected>Auto (default)</option>
-        <option value="light">Light theme</option>
-        <option value="dark">Dark theme</option>
+        <option value="auto" selected>Auto</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
     </select>
 </label> |</li>
             
@@ -174,6 +177,10 @@
 <hr class="docutils" />
 <p>This module provides access to the Unix user account and password database.  It
 is available on all Unix versions.</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: not Emscripten, not WASI.<p>This module does not work or is not available on WebAssembly platforms
+<code class="docutils literal notranslate"><span class="pre">wasm32-emscripten</span></code> and <code class="docutils literal notranslate"><span class="pre">wasm32-wasi</span></code>. See
+<a class="reference internal" href="intro.html#wasm-availability"><span class="std std-ref">WebAssembly platforms</span></a> for more information.</p>
+</p>
 <p>Password database entries are reported as a tuple-like object, whose attributes
 correspond to the members of the <code class="docutils literal notranslate"><span class="pre">passwd</span></code> structure (Attribute field below,
 see <code class="docutils literal notranslate"><span class="pre">&lt;pwd.h&gt;</span></code>):</p>
@@ -225,30 +232,30 @@ raised if the entry asked for cannot be found.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p id="index-0">In traditional Unix the field <code class="docutils literal notranslate"><span class="pre">pw_passwd</span></code> usually contains a password
-encrypted with a DES derived algorithm (see module <a class="reference internal" href="crypt.html#module-crypt" title="crypt: The crypt() function used to check Unix passwords. (Unix)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">crypt</span></code></a>).  However most
+encrypted with a DES derived algorithm (see module <a class="reference internal" href="crypt.html#module-crypt" title="crypt: The crypt() function used to check Unix passwords. (deprecated) (Unix)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">crypt</span></code></a>).  However most
 modern unices  use a so-called <em>shadow password</em> system.  On those unices the
 <em>pw_passwd</em> field only contains an asterisk (<code class="docutils literal notranslate"><span class="pre">'*'</span></code>) or the  letter <code class="docutils literal notranslate"><span class="pre">'x'</span></code>
 where the encrypted password is stored in a file <code class="file docutils literal notranslate"><span class="pre">/etc/shadow</span></code> which is
 not world readable.  Whether the <em>pw_passwd</em> field contains anything useful is
-system-dependent.  If available, the <a class="reference internal" href="spwd.html#module-spwd" title="spwd: The shadow password database (getspnam() and friends). (Unix)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">spwd</span></code></a> module should be used where
+system-dependent.  If available, the <a class="reference internal" href="spwd.html#module-spwd" title="spwd: The shadow password database (getspnam() and friends). (deprecated) (Unix)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">spwd</span></code></a> module should be used where
 access to the encrypted password is required.</p>
 </div>
 <p>It defines the following items:</p>
 <dl class="py function">
-<dt id="pwd.getpwuid">
-<code class="sig-prename descclassname">pwd.</code><code class="sig-name descname">getpwuid</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">uid</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pwd.getpwuid" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pwd.getpwuid">
+<span class="sig-prename descclassname"><span class="pre">pwd.</span></span><span class="sig-name descname"><span class="pre">getpwuid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uid</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pwd.getpwuid" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the password database entry for the given numeric user ID.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="pwd.getpwnam">
-<code class="sig-prename descclassname">pwd.</code><code class="sig-name descname">getpwnam</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pwd.getpwnam" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pwd.getpwnam">
+<span class="sig-prename descclassname"><span class="pre">pwd.</span></span><span class="sig-name descname"><span class="pre">getpwnam</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pwd.getpwnam" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the password database entry for the given user name.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="pwd.getpwall">
-<code class="sig-prename descclassname">pwd.</code><code class="sig-name descname">getpwall</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pwd.getpwall" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pwd.getpwall">
+<span class="sig-prename descclassname"><span class="pre">pwd.</span></span><span class="sig-name descname"><span class="pre">getpwall</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pwd.getpwall" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a list of all available password database entries, in arbitrary order.</p>
 </dd></dl>
 
@@ -257,7 +264,7 @@ access to the encrypted password is required.</p>
 <dl class="simple">
 <dt>Module <a class="reference internal" href="grp.html#module-grp" title="grp: The group database (getgrnam() and friends). (Unix)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">grp</span></code></a></dt><dd><p>An interface to the group database, similar to this.</p>
 </dd>
-<dt>Module <a class="reference internal" href="spwd.html#module-spwd" title="spwd: The shadow password database (getspnam() and friends). (Unix)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">spwd</span></code></a></dt><dd><p>An interface to the shadow password database, similar to this.</p>
+<dt>Module <a class="reference internal" href="spwd.html#module-spwd" title="spwd: The shadow password database (getspnam() and friends). (deprecated) (Unix)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">spwd</span></code></a></dt><dd><p>An interface to the shadow password database, similar to this.</p>
 </dd>
 </dl>
 </div>
@@ -270,18 +277,22 @@ access to the encrypted password is required.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="posix.html"
-                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">posix</span></code> — The most common POSIX system calls</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="spwd.html"
-                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">spwd</span></code> — The shadow password database</a></p>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="posix.html"
+                          title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">posix</span></code> — The most common POSIX system calls</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="grp.html"
+                          title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">grp</span></code> — The group database</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/3.10/Doc/library/pwd.rst"
+        <a href="https://github.com/python/cpython/blob/main/Doc/library/pwd.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -301,7 +312,7 @@ access to the encrypted password is required.</p>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="spwd.html" title="spwd — The shadow password database"
+          <a href="grp.html" title="grp — The group database"
              >next</a> |</li>
         <li class="right" >
           <a href="posix.html" title="posix — The most common POSIX system calls"
@@ -317,7 +328,7 @@ access to the encrypted password is required.</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
+      <a href="../index.html">3.11.0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
@@ -338,36 +349,36 @@ access to the encrypted password is required.</p>
                 </li>
             <li class="right">
 <label class="theme-selector-label">
-    Color theme
+    Theme
     <select class="theme-selector" oninput="activateTheme(this.value)">
-        <option value="auto" selected>Auto (default)</option>
-        <option value="light">Light theme</option>
-        <option value="dark">Dark theme</option>
+        <option value="auto" selected>Auto</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
     </select>
 </label> |</li>
             
       </ul>
     </div>  
     <div class="footer">
-    &copy; <a href="../copyright.html">Copyright</a> 2001-2021, Python Software Foundation.
+    &copy; <a href="../copyright.html">Copyright</a> 2001-2022, Python Software Foundation.
     <br />
     This page is licensed under the Python Software Foundation License Version 2.
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    See <a href="">History and License</a> for more information.
-    <br /><br />
+    See <a href="/license.html">History and License</a> for more information.<br />
+    <br />
 
     The Python Software Foundation is a non-profit corporation.
 <a href="https://www.python.org/psf/donations/">Please donate.</a>
 <br />
     <br />
 
-    Last updated on May 10, 2021.
-    <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
+    Last updated on Nov 19, 2022.
+    <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
     </div>
 
     <script type="text/javascript" src="../_static/switchers.js"></script>

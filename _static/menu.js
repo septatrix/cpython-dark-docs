@@ -18,14 +18,14 @@ document.addEventListener('DOMContentLoaded', function () {
         sideMenu.setAttribute("aria-expanded", 'false');
         sideMenu.setAttribute('aria-hidden', 'true');
         togglerLabel.setAttribute('aria-pressed', 'false');
-        // body.style.overflow = 'visible';
+        body.style.overflow = 'visible';
     }
     function openMenu() {
         togglerInput.checked = true;
         sideMenu.setAttribute("aria-expanded", 'true');
         sideMenu.setAttribute('aria-hidden', 'false');
         togglerLabel.setAttribute('aria-pressed', 'true');
-        // body.style.overflow = 'hidden';
+        body.style.overflow = 'hidden';
     }
 
     // Close menu when link on the sideMenu is clicked

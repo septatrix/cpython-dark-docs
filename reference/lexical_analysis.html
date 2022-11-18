@@ -6,22 +6,21 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>2. Lexical analysis &#8212; Python 3.10.0b1 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2. Lexical analysis &#8212; Python 3.11.0 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
     
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
     
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.10.0b1 documentation"
+          title="Search within Python 3.11.0 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -77,15 +76,16 @@
             <div class="language_switcher_placeholder"></div>
             
 <label class="theme-selector-label">
-    Color theme
+    Theme
     <select class="theme-selector" oninput="activateTheme(this.value)">
-        <option value="auto" selected>Auto (default)</option>
-        <option value="light">Light theme</option>
-        <option value="dark">Dark theme</option>
+        <option value="auto" selected>Auto</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
     </select>
 </label>
-  <h3><a href="../contents.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">Table of Contents</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">2. Lexical analysis</a><ul>
 <li><a class="reference internal" href="#line-structure">2.1. Line structure</a><ul>
 <li><a class="reference internal" href="#logical-lines">2.1.1. Logical lines</a></li>
@@ -122,18 +122,23 @@
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="introduction.html"
-                        title="previous chapter"><span class="section-number">1. </span>Introduction</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="datamodel.html"
-                        title="next chapter"><span class="section-number">3. </span>Data model</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="introduction.html"
+                          title="previous chapter"><span class="section-number">1. </span>Introduction</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="datamodel.html"
+                          title="next chapter"><span class="section-number">3. </span>Data model</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/3.10/Doc/reference/lexical_analysis.rst"
+        <a href="https://github.com/python/cpython/blob/main/Doc/reference/lexical_analysis.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -170,7 +175,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
+      <a href="../index.html">3.11.0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">The Python Language Reference</a> &#187;</li>
@@ -190,11 +195,11 @@
                 </li>
             <li class="right">
 <label class="theme-selector-label">
-    Color theme
+    Theme
     <select class="theme-selector" oninput="activateTheme(this.value)">
-        <option value="auto" selected>Auto (default)</option>
-        <option value="light">Light theme</option>
-        <option value="dark">Dark theme</option>
+        <option value="auto" selected>Auto</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
     </select>
 </label> |</li>
             
@@ -212,7 +217,7 @@
 <em>tokens</em>, generated by the <em>lexical analyzer</em>.  This chapter describes how the
 lexical analyzer breaks a file into tokens.</p>
 <p>Python reads program text as Unicode code points; the encoding of a source file
-can be given by an encoding declaration and defaults to UTF-8, see <span class="target" id="index-1"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-3120"><strong>PEP 3120</strong></a>
+can be given by an encoding declaration and defaults to UTF-8, see <span class="target" id="index-1"></span><a class="pep reference external" href="https://peps.python.org/pep-3120/"><strong>PEP 3120</strong></a>
 for details.  If the source file cannot be decoded, a <a class="reference internal" href="../library/exceptions.html#SyntaxError" title="SyntaxError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SyntaxError</span></code></a> is
 raised.</p>
 <section id="line-structure">
@@ -266,7 +271,8 @@ The recommended forms of an encoding expression are</p>
 addition, if the first bytes of the file are the UTF-8 byte-order mark
 (<code class="docutils literal notranslate"><span class="pre">b'\xef\xbb\xbf'</span></code>), the declared file encoding is UTF-8 (this is supported,
 among others, by Microsoft’s <strong class="program">notepad</strong>).</p>
-<p>If an encoding is declared, the encoding name must be recognized by Python. The
+<p>If an encoding is declared, the encoding name must be recognized by Python
+(see <a class="reference internal" href="../library/codecs.html#standard-encodings"><span class="std std-ref">Standard Encodings</span></a>). The
 encoding is used for all lexical analysis, including string literals, comments
 and identifiers.</p>
 </section>
@@ -400,14 +406,14 @@ possible string that forms a legal token, when read from left to right.</p>
 <p id="index-10">Identifiers (also referred to as <em>names</em>) are described by the following lexical
 definitions.</p>
 <p>The syntax of identifiers in Python is based on the Unicode standard annex
-UAX-31, with elaboration and changes as defined below; see also <span class="target" id="index-11"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-3131"><strong>PEP 3131</strong></a> for
+UAX-31, with elaboration and changes as defined below; see also <span class="target" id="index-11"></span><a class="pep reference external" href="https://peps.python.org/pep-3131/"><strong>PEP 3131</strong></a> for
 further details.</p>
 <p>Within the ASCII range (U+0001..U+007F), the valid characters for identifiers
 are the same as in Python 2.x: the uppercase and lowercase letters <code class="docutils literal notranslate"><span class="pre">A</span></code> through
 <code class="docutils literal notranslate"><span class="pre">Z</span></code>, the underscore <code class="docutils literal notranslate"><span class="pre">_</span></code> and, except for the first character, the digits
 <code class="docutils literal notranslate"><span class="pre">0</span></code> through <code class="docutils literal notranslate"><span class="pre">9</span></code>.</p>
 <p>Python 3.0 introduces additional characters from outside the ASCII range (see
-<span class="target" id="index-12"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-3131"><strong>PEP 3131</strong></a>).  For these characters, the classification uses the version of the
+<span class="target" id="index-12"></span><a class="pep reference external" href="https://peps.python.org/pep-3131/"><strong>PEP 3131</strong></a>).  For these characters, the classification uses the version of the
 Unicode Character Database as included in the <a class="reference internal" href="../library/unicodedata.html#module-unicodedata" title="unicodedata: Access the Unicode Database."><code class="xref py py-mod docutils literal notranslate"><span class="pre">unicodedata</span></code></a> module.</p>
 <p>Identifiers are unlimited in length.  Case is significant.</p>
 <pre>
@@ -429,15 +435,15 @@ Unicode Character Database as included in the <a class="reference internal" href
 <li><p><em>Mc</em> - spacing combining marks</p></li>
 <li><p><em>Nd</em> - decimal numbers</p></li>
 <li><p><em>Pc</em> - connector punctuations</p></li>
-<li><p><em>Other_ID_Start</em> - explicit list of characters in <a class="reference external" href="https://www.unicode.org/Public/13.0.0/ucd/PropList.txt">PropList.txt</a> to support backwards
+<li><p><em>Other_ID_Start</em> - explicit list of characters in <a class="reference external" href="https://www.unicode.org/Public/14.0.0/ucd/PropList.txt">PropList.txt</a> to support backwards
 compatibility</p></li>
 <li><p><em>Other_ID_Continue</em> - likewise</p></li>
 </ul>
 <p>All identifiers are converted into the normal form NFKC while parsing; comparison
 of identifiers is based on NFKC.</p>
 <p>A non-normative HTML file listing all valid identifier characters for Unicode
-4.1 can be found at
-<a class="reference external" href="https://www.unicode.org/Public/13.0.0/ucd/DerivedCoreProperties.txt">https://www.unicode.org/Public/13.0.0/ucd/DerivedCoreProperties.txt</a></p>
+14.0.0 can be found at
+<a class="reference external" href="https://www.unicode.org/Public/14.0.0/ucd/DerivedCoreProperties.txt">https://www.unicode.org/Public/14.0.0/ucd/DerivedCoreProperties.txt</a></p>
 <section id="keywords">
 <span id="id8"></span><h3><span class="section-number">2.3.1. </span>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline">¶</a></h3>
 <p id="index-13">The following identifiers are used as reserved words, or <em>keywords</em> of the
@@ -473,15 +479,23 @@ identifier names.</p>
 classes are identified by the patterns of leading and trailing underscore
 characters:</p>
 <dl>
-<dt><code class="docutils literal notranslate"><span class="pre">_*</span></code></dt><dd><p>Not imported by <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">module</span> <span class="pre">import</span> <span class="pre">*</span></code>.  The special identifier <code class="docutils literal notranslate"><span class="pre">_</span></code> is used
-in the interactive interpreter to store the result of the last evaluation; it is
-stored in the <a class="reference internal" href="../library/builtins.html#module-builtins" title="builtins: The module that provides the built-in namespace."><code class="xref py py-mod docutils literal notranslate"><span class="pre">builtins</span></code></a> module.  When not in interactive mode, <code class="docutils literal notranslate"><span class="pre">_</span></code>
-has no special meaning and is not defined. See section <a class="reference internal" href="simple_stmts.html#import"><span class="std std-ref">The import statement</span></a>.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">_*</span></code></dt><dd><p>Not imported by <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">module</span> <span class="pre">import</span> <span class="pre">*</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">_</span></code></dt><dd><p>In a <code class="docutils literal notranslate"><span class="pre">case</span></code> pattern within a <a class="reference internal" href="compound_stmts.html#match"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">match</span></code></a> statement, <code class="docutils literal notranslate"><span class="pre">_</span></code> is a
+<a class="reference internal" href="#soft-keywords"><span class="std std-ref">soft keyword</span></a> that denotes a
+<a class="reference internal" href="compound_stmts.html#wildcard-patterns"><span class="std std-ref">wildcard</span></a>.</p>
+<p>Separately, the interactive interpreter makes the result of the last evaluation
+available in the variable <code class="docutils literal notranslate"><span class="pre">_</span></code>.
+(It is stored in the <a class="reference internal" href="../library/builtins.html#module-builtins" title="builtins: The module that provides the built-in namespace."><code class="xref py py-mod docutils literal notranslate"><span class="pre">builtins</span></code></a> module, alongside built-in
+functions like <code class="docutils literal notranslate"><span class="pre">print</span></code>.)</p>
+<p>Elsewhere, <code class="docutils literal notranslate"><span class="pre">_</span></code> is a regular identifier. It is often used to name
+“special” items, but it is not special to Python itself.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The name <code class="docutils literal notranslate"><span class="pre">_</span></code> is often used in conjunction with internationalization;
 refer to the documentation for the <a class="reference internal" href="../library/gettext.html#module-gettext" title="gettext: Multilingual internationalization services."><code class="xref py py-mod docutils literal notranslate"><span class="pre">gettext</span></code></a> module for more
 information on this convention.</p>
+<p>It is also commonly used for unused variables.</p>
 </div>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">__*__</span></code></dt><dd><p>System-defined names, informally known as “dunder” names. These names are
@@ -529,10 +543,10 @@ clashes between “private” attributes of base and derived classes. See sectio
 <strong id="grammar-token-python-grammar-bytesescapeseq"><span id="grammar-token-bytesescapeseq"></span>bytesescapeseq</strong> ::=  &quot;\&quot; &lt;any ASCII character&gt;
 </pre>
 <p>One syntactic restriction not indicated by these productions is that whitespace
-is not allowed between the <code class="xref std std-token docutils literal notranslate"><span class="pre">stringprefix</span></code> or <code class="xref std std-token docutils literal notranslate"><span class="pre">bytesprefix</span></code> and the
-rest of the literal. The source character set is defined by the encoding
-declaration; it is UTF-8 if no encoding declaration is given in the source file;
-see section <a class="reference internal" href="#encodings"><span class="std std-ref">Encoding declarations</span></a>.</p>
+is not allowed between the <a class="reference internal" href="#grammar-token-python-grammar-stringprefix"><code class="xref std std-token docutils literal notranslate"><span class="pre">stringprefix</span></code></a> or
+<a class="reference internal" href="#grammar-token-python-grammar-bytesprefix"><code class="xref std std-token docutils literal notranslate"><span class="pre">bytesprefix</span></code></a> and the rest of the literal. The source
+character set is defined by the encoding declaration; it is UTF-8 if no encoding
+declaration is given in the source file; see section <a class="reference internal" href="#encodings"><span class="std std-ref">Encoding declarations</span></a>.</p>
 <p id="index-18">In plain English: Both types of literals can be enclosed in matching single quotes
 (<code class="docutils literal notranslate"><span class="pre">'</span></code>) or double quotes (<code class="docutils literal notranslate"><span class="pre">&quot;</span></code>).  They can also be enclosed in matching groups
 of three single or double quotes (these are generally referred to as
@@ -556,7 +570,7 @@ of <code class="docutils literal notranslate"><span class="pre">'br'</span></cod
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.3: </span>Support for the unicode legacy literal (<code class="docutils literal notranslate"><span class="pre">u'value'</span></code>) was reintroduced
 to simplify the maintenance of dual Python 2.x and 3.x codebases.
-See <span class="target" id="index-21"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0414"><strong>PEP 414</strong></a> for more information.</p>
+See <span class="target" id="index-21"></span><a class="pep reference external" href="https://peps.python.org/pep-0414/"><strong>PEP 414</strong></a> for more information.</p>
 </div>
 <p id="index-22">A string literal with <code class="docutils literal notranslate"><span class="pre">'f'</span></code> or <code class="docutils literal notranslate"><span class="pre">'F'</span></code> in its prefix is a
 <em class="dfn">formatted string literal</em>; see <a class="reference internal" href="#f-strings"><span class="std std-ref">Formatted string literals</span></a>.  The <code class="docutils literal notranslate"><span class="pre">'f'</span></code> may be
@@ -581,9 +595,9 @@ Standard C.  The recognized escape sequences are:</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">\newline</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">\</span></code>&lt;newline&gt;</p></td>
 <td><p>Backslash and newline ignored</p></td>
-<td></td>
+<td><p>(1)</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">\\</span></code></p></td>
 <td><p>Backslash (<code class="docutils literal notranslate"><span class="pre">\</span></code>)</p></td>
@@ -628,11 +642,11 @@ Standard C.  The recognized escape sequences are:</p>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">\ooo</span></code></p></td>
 <td><p>Character with octal value
 <em>ooo</em></p></td>
-<td><p>(1,3)</p></td>
+<td><p>(2,4)</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">\xhh</span></code></p></td>
 <td><p>Character with hex value <em>hh</em></p></td>
-<td><p>(2,3)</p></td>
+<td><p>(3,4)</p></td>
 </tr>
 </tbody>
 </table>
@@ -653,23 +667,38 @@ Standard C.  The recognized escape sequences are:</p>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">\N{name}</span></code></p></td>
 <td><p>Character named <em>name</em> in the
 Unicode database</p></td>
-<td><p>(4)</p></td>
+<td><p>(5)</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">\uxxxx</span></code></p></td>
 <td><p>Character with 16-bit hex value
 <em>xxxx</em></p></td>
-<td><p>(5)</p></td>
+<td><p>(6)</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">\Uxxxxxxxx</span></code></p></td>
 <td><p>Character with 32-bit hex value
 <em>xxxxxxxx</em></p></td>
-<td><p>(6)</p></td>
+<td><p>(7)</p></td>
 </tr>
 </tbody>
 </table>
 <p>Notes:</p>
 <ol class="arabic">
-<li><p>As in Standard C, up to three octal digits are accepted.</p></li>
+<li><p>A backslash can be added at the end of a line to ignore the newline:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s1">&#39;This string will not include </span><span class="se">\</span>
+<span class="gp">... </span><span class="s1">backslashes or newline characters.&#39;</span>
+<span class="go">&#39;This string will not include backslashes or newline characters.&#39;</span>
+</pre></div>
+</div>
+<p>The same result can be achieved using <a class="reference internal" href="#strings"><span class="std std-ref">triple-quoted strings</span></a>,
+or parentheses and <a class="reference internal" href="#string-concatenation"><span class="std std-ref">string literal concatenation</span></a>.</p>
+</li>
+<li><p>As in Standard C, up to three octal digits are accepted.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 3.11: </span>Octal escapes with value larger than <code class="docutils literal notranslate"><span class="pre">0o377</span></code> produce a <a class="reference internal" href="../library/exceptions.html#DeprecationWarning" title="DeprecationWarning"><code class="xref py py-exc docutils literal notranslate"><span class="pre">DeprecationWarning</span></code></a>.
+In a future Python version they will be a <a class="reference internal" href="../library/exceptions.html#SyntaxWarning" title="SyntaxWarning"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SyntaxWarning</span></code></a> and
+eventually a <a class="reference internal" href="../library/exceptions.html#SyntaxError" title="SyntaxError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SyntaxError</span></code></a>.</p>
+</div>
+</li>
 <li><p>Unlike in Standard C, exactly two hex digits are required.</p></li>
 <li><p>In a bytes literal, hexadecimal and octal escapes denote the byte with the
 given value. In a string literal, these escapes denote a Unicode character
@@ -787,7 +816,7 @@ expression or conversion result.  An empty string is passed when the
 format specifier is omitted.  The formatted result is then included in
 the final value of the whole string.</p>
 <p>Top-level format specifiers may include nested replacement fields. These nested
-fields may include their own conversion fields and <a class="reference internal" href="../library/string.html#formatspec"><span class="std std-ref">format specifiers</span></a>, but may not include more deeply-nested replacement fields. The
+fields may include their own conversion fields and <a class="reference internal" href="../library/string.html#formatspec"><span class="std std-ref">format specifiers</span></a>, but may not include more deeply nested replacement fields. The
 <a class="reference internal" href="../library/string.html#formatspec"><span class="std std-ref">format specifier mini-language</span></a> is the same as that used by
 the <a class="reference internal" href="../library/stdtypes.html#str.format" title="str.format"><code class="xref py py-meth docutils literal notranslate"><span class="pre">str.format()</span></code></a> method.</p>
 <p>Formatted string literals may be concatenated, but replacement fields
@@ -851,7 +880,7 @@ include expressions.</p>
 <span class="go">True</span>
 </pre></div>
 </div>
-<p>See also <span class="target" id="index-26"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0498"><strong>PEP 498</strong></a> for the proposal that added formatted string literals,
+<p>See also <span class="target" id="index-26"></span><a class="pep reference external" href="https://peps.python.org/pep-0498/"><strong>PEP 498</strong></a> for the proposal that added formatted string literals,
 and <a class="reference internal" href="../library/stdtypes.html#str.format" title="str.format"><code class="xref py py-meth docutils literal notranslate"><span class="pre">str.format()</span></code></a>, which uses a related format string mechanism.</p>
 </section>
 <section id="numeric-literals">
@@ -983,8 +1012,9 @@ occurrence outside string literals and comments is an unconditional error:</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../contents.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">Table of Contents</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">2. Lexical analysis</a><ul>
 <li><a class="reference internal" href="#line-structure">2.1. Line structure</a><ul>
 <li><a class="reference internal" href="#logical-lines">2.1.1. Logical lines</a></li>
@@ -1021,18 +1051,23 @@ occurrence outside string literals and comments is an unconditional error:</p>
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="introduction.html"
-                        title="previous chapter"><span class="section-number">1. </span>Introduction</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="datamodel.html"
-                        title="next chapter"><span class="section-number">3. </span>Data model</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="introduction.html"
+                          title="previous chapter"><span class="section-number">1. </span>Introduction</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="datamodel.html"
+                          title="next chapter"><span class="section-number">3. </span>Data model</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/3.10/Doc/reference/lexical_analysis.rst"
+        <a href="https://github.com/python/cpython/blob/main/Doc/reference/lexical_analysis.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -1068,7 +1103,7 @@ occurrence outside string literals and comments is an unconditional error:</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
+      <a href="../index.html">3.11.0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Language Reference</a> &#187;</li>
@@ -1088,36 +1123,36 @@ occurrence outside string literals and comments is an unconditional error:</p>
                 </li>
             <li class="right">
 <label class="theme-selector-label">
-    Color theme
+    Theme
     <select class="theme-selector" oninput="activateTheme(this.value)">
-        <option value="auto" selected>Auto (default)</option>
-        <option value="light">Light theme</option>
-        <option value="dark">Dark theme</option>
+        <option value="auto" selected>Auto</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
     </select>
 </label> |</li>
             
       </ul>
     </div>  
     <div class="footer">
-    &copy; <a href="../copyright.html">Copyright</a> 2001-2021, Python Software Foundation.
+    &copy; <a href="../copyright.html">Copyright</a> 2001-2022, Python Software Foundation.
     <br />
     This page is licensed under the Python Software Foundation License Version 2.
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    See <a href="">History and License</a> for more information.
-    <br /><br />
+    See <a href="/license.html">History and License</a> for more information.<br />
+    <br />
 
     The Python Software Foundation is a non-profit corporation.
 <a href="https://www.python.org/psf/donations/">Please donate.</a>
 <br />
     <br />
 
-    Last updated on May 10, 2021.
-    <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
+    Last updated on Nov 19, 2022.
+    <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
     </div>
 
     <script type="text/javascript" src="../_static/switchers.js"></script>

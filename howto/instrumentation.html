@@ -6,22 +6,21 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Instrumenting CPython with DTrace and SystemTap &#8212; Python 3.10.0b1 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instrumenting CPython with DTrace and SystemTap &#8212; Python 3.11.0 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
     
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
     
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.10.0b1 documentation"
+          title="Search within Python 3.11.0 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -77,15 +76,16 @@
             <div class="language_switcher_placeholder"></div>
             
 <label class="theme-selector-label">
-    Color theme
+    Theme
     <select class="theme-selector" oninput="activateTheme(this.value)">
-        <option value="auto" selected>Auto (default)</option>
-        <option value="light">Light theme</option>
-        <option value="dark">Dark theme</option>
+        <option value="auto" selected>Auto</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
     </select>
 </label>
-  <h3><a href="../contents.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">Table of Contents</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">Instrumenting CPython with DTrace and SystemTap</a><ul>
 <li><a class="reference internal" href="#enabling-the-static-markers">Enabling the static markers</a></li>
 <li><a class="reference internal" href="#static-dtrace-probes">Static DTrace probes</a></li>
@@ -97,18 +97,23 @@
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="clinic.html"
-                        title="previous chapter">Argument Clinic How-To</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="annotations.html"
-                        title="next chapter">Annotations Best Practices</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="clinic.html"
+                          title="previous chapter">Argument Clinic How-To</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="annotations.html"
+                          title="next chapter">Annotations Best Practices</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/3.10/Doc/howto/instrumentation.rst"
+        <a href="https://github.com/python/cpython/blob/main/Doc/howto/instrumentation.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -145,7 +150,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
+      <a href="../index.html">3.11.0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python HOWTOs</a> &#187;</li>
@@ -165,11 +170,11 @@
                 </li>
             <li class="right">
 <label class="theme-selector-label">
-    Color theme
+    Theme
     <select class="theme-selector" oninput="activateTheme(this.value)">
-        <option value="auto" selected>Auto (default)</option>
-        <option value="light">Light theme</option>
-        <option value="dark">Dark theme</option>
+        <option value="auto" selected>Auto</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
     </select>
 </label> |</li>
             
@@ -296,7 +301,7 @@ need to look instead within the shared library.  For example:</p>
 </pre></div>
 </div>
 <p>The above metadata contains information for SystemTap describing how it
-can patch strategically-placed machine code instructions to enable the
+can patch strategically placed machine code instructions to enable the
 tracing hooks used by a SystemTap script.</p>
 </section>
 <section id="static-dtrace-probes">
@@ -392,8 +397,8 @@ probe process(&quot;python&quot;).mark(&quot;function__return&quot;) {
 </div>
 <p>It can be invoked like this:</p>
 <div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>stap <span class="se">\</span>
-<span class="go">  show-call-hierarchy.stp \</span>
-<span class="go">  -c &quot;./python test.py&quot;</span>
+  show-call-hierarchy.stp <span class="se">\</span>
+  -c <span class="s2">&quot;./python test.py&quot;</span>
 </pre></div>
 </div>
 <p>The output looks like this:</p>
@@ -429,8 +434,8 @@ example, this line from the above example:</p>
 <section id="available-static-markers">
 <h2>Available static markers<a class="headerlink" href="#available-static-markers" title="Permalink to this headline">¶</a></h2>
 <dl class="object">
-<dt>
-<code class="sig-name descname">function__entry(str filename, str funcname, int lineno)</code></dt>
+<dt class="sig sig-object">
+<span class="sig-name descname"><span class="pre">function__entry(str</span> <span class="pre">filename,</span> <span class="pre">str</span> <span class="pre">funcname,</span> <span class="pre">int</span> <span class="pre">lineno)</span></span></dt>
 <dd><p>This marker indicates that execution of a Python function has begun.
 It is only triggered for pure-Python (bytecode) functions.</p>
 <p>The filename, function name, and line number are provided back to the
@@ -447,8 +452,8 @@ tracing script as positional arguments, which must be accessed using
 </dd></dl>
 
 <dl class="object">
-<dt>
-<code class="sig-name descname">function__return(str filename, str funcname, int lineno)</code></dt>
+<dt class="sig sig-object">
+<span class="sig-name descname"><span class="pre">function__return(str</span> <span class="pre">filename,</span> <span class="pre">str</span> <span class="pre">funcname,</span> <span class="pre">int</span> <span class="pre">lineno)</span></span></dt>
 <dd><p>This marker is the converse of <code class="xref c c-func docutils literal notranslate"><span class="pre">function__entry()</span></code>, and indicates that
 execution of a Python function has ended (either via <code class="docutils literal notranslate"><span class="pre">return</span></code>, or via an
 exception).  It is only triggered for pure-Python (bytecode) functions.</p>
@@ -456,8 +461,8 @@ exception).  It is only triggered for pure-Python (bytecode) functions.</p>
 </dd></dl>
 
 <dl class="object">
-<dt>
-<code class="sig-name descname">line(str filename, str funcname, int lineno)</code></dt>
+<dt class="sig sig-object">
+<span class="sig-name descname"><span class="pre">line(str</span> <span class="pre">filename,</span> <span class="pre">str</span> <span class="pre">funcname,</span> <span class="pre">int</span> <span class="pre">lineno)</span></span></dt>
 <dd><p>This marker indicates a Python line is about to be executed.  It is
 the equivalent of line-by-line tracing with a Python profiler.  It is
 not triggered within C functions.</p>
@@ -465,22 +470,22 @@ not triggered within C functions.</p>
 </dd></dl>
 
 <dl class="object">
-<dt>
-<code class="sig-name descname">gc__start(int generation)</code></dt>
+<dt class="sig sig-object">
+<span class="sig-name descname"><span class="pre">gc__start(int</span> <span class="pre">generation)</span></span></dt>
 <dd><p>Fires when the Python interpreter starts a garbage collection cycle.
 <code class="docutils literal notranslate"><span class="pre">arg0</span></code> is the generation to scan, like <a class="reference internal" href="../library/gc.html#gc.collect" title="gc.collect"><code class="xref py py-func docutils literal notranslate"><span class="pre">gc.collect()</span></code></a>.</p>
 </dd></dl>
 
 <dl class="object">
-<dt>
-<code class="sig-name descname">gc__done(long collected)</code></dt>
+<dt class="sig sig-object">
+<span class="sig-name descname"><span class="pre">gc__done(long</span> <span class="pre">collected)</span></span></dt>
 <dd><p>Fires when the Python interpreter finishes a garbage collection
 cycle. <code class="docutils literal notranslate"><span class="pre">arg0</span></code> is the number of collected objects.</p>
 </dd></dl>
 
 <dl class="object">
-<dt>
-<code class="sig-name descname">import__find__load__start(str modulename)</code></dt>
+<dt class="sig sig-object">
+<span class="sig-name descname"><span class="pre">import__find__load__start(str</span> <span class="pre">modulename)</span></span></dt>
 <dd><p>Fires before <a class="reference internal" href="../library/importlib.html#module-importlib" title="importlib: The implementation of the import machinery."><code class="xref py py-mod docutils literal notranslate"><span class="pre">importlib</span></code></a> attempts to find and load the module.
 <code class="docutils literal notranslate"><span class="pre">arg0</span></code> is the module name.</p>
 <div class="versionadded">
@@ -489,8 +494,8 @@ cycle. <code class="docutils literal notranslate"><span class="pre">arg0</span><
 </dd></dl>
 
 <dl class="object">
-<dt>
-<code class="sig-name descname">import__find__load__done(str modulename, int found)</code></dt>
+<dt class="sig sig-object">
+<span class="sig-name descname"><span class="pre">import__find__load__done(str</span> <span class="pre">modulename,</span> <span class="pre">int</span> <span class="pre">found)</span></span></dt>
 <dd><p>Fires after <a class="reference internal" href="../library/importlib.html#module-importlib" title="importlib: The implementation of the import machinery."><code class="xref py py-mod docutils literal notranslate"><span class="pre">importlib</span></code></a>’s find_and_load function is called.
 <code class="docutils literal notranslate"><span class="pre">arg0</span></code> is the module name, <code class="docutils literal notranslate"><span class="pre">arg1</span></code> indicates if module was
 successfully loaded.</p>
@@ -500,8 +505,8 @@ successfully loaded.</p>
 </dd></dl>
 
 <dl class="object">
-<dt>
-<code class="sig-name descname">audit(str event, void *tuple)</code></dt>
+<dt class="sig sig-object">
+<span class="sig-name descname"><span class="pre">audit(str</span> <span class="pre">event,</span> <span class="pre">void</span> <span class="pre">*tuple)</span></span></dt>
 <dd><p>Fires when <a class="reference internal" href="../library/sys.html#sys.audit" title="sys.audit"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys.audit()</span></code></a> or <a class="reference internal" href="../c-api/sys.html#c.PySys_Audit" title="PySys_Audit"><code class="xref c c-func docutils literal notranslate"><span class="pre">PySys_Audit()</span></code></a> is called.
 <code class="docutils literal notranslate"><span class="pre">arg0</span></code> is the event name as C string, <code class="docutils literal notranslate"><span class="pre">arg1</span></code> is a <a class="reference internal" href="../c-api/structures.html#c.PyObject" title="PyObject"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyObject</span></code></a>
 pointer to a tuple object.</p>
@@ -541,15 +546,15 @@ probe python.function.return = process(&quot;python&quot;).mark(&quot;function__
 <code class="docutils literal notranslate"><span class="pre">/usr/share/systemtap/tapset</span></code>), then these additional probepoints become
 available:</p>
 <dl class="object">
-<dt>
-<code class="sig-name descname">python.function.entry(str filename, str funcname, int lineno, frameptr)</code></dt>
+<dt class="sig sig-object">
+<span class="sig-name descname"><span class="pre">python.function.entry(str</span> <span class="pre">filename,</span> <span class="pre">str</span> <span class="pre">funcname,</span> <span class="pre">int</span> <span class="pre">lineno,</span> <span class="pre">frameptr)</span></span></dt>
 <dd><p>This probe point indicates that execution of a Python function has begun.
 It is only triggered for pure-Python (bytecode) functions.</p>
 </dd></dl>
 
 <dl class="object">
-<dt>
-<code class="sig-name descname">python.function.return(str filename, str funcname, int lineno, frameptr)</code></dt>
+<dt class="sig sig-object">
+<span class="sig-name descname"><span class="pre">python.function.return(str</span> <span class="pre">filename,</span> <span class="pre">str</span> <span class="pre">funcname,</span> <span class="pre">int</span> <span class="pre">lineno,</span> <span class="pre">frameptr)</span></span></dt>
 <dd><p>This probe point is the converse of <code class="docutils literal notranslate"><span class="pre">python.function.return</span></code>, and
 indicates that execution of a Python function has ended (either via
 <code class="docutils literal notranslate"><span class="pre">return</span></code>, or via an exception).  It is only triggered for pure-Python
@@ -576,7 +581,7 @@ probe python.function.return
 </pre></div>
 </div>
 <p>The following script uses the tapset above to provide a top-like view of all
-running CPython code, showing the top 20 most frequently-entered bytecode
+running CPython code, showing the top 20 most frequently entered bytecode
 frames, each second, across the whole system:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>global fn_calls;
 
@@ -608,8 +613,9 @@ probe timer.ms(1000) {
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../contents.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">Table of Contents</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">Instrumenting CPython with DTrace and SystemTap</a><ul>
 <li><a class="reference internal" href="#enabling-the-static-markers">Enabling the static markers</a></li>
 <li><a class="reference internal" href="#static-dtrace-probes">Static DTrace probes</a></li>
@@ -621,18 +627,23 @@ probe timer.ms(1000) {
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="clinic.html"
-                        title="previous chapter">Argument Clinic How-To</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="annotations.html"
-                        title="next chapter">Annotations Best Practices</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="clinic.html"
+                          title="previous chapter">Argument Clinic How-To</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="annotations.html"
+                          title="next chapter">Annotations Best Practices</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/3.10/Doc/howto/instrumentation.rst"
+        <a href="https://github.com/python/cpython/blob/main/Doc/howto/instrumentation.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -668,7 +679,7 @@ probe timer.ms(1000) {
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
+      <a href="../index.html">3.11.0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python HOWTOs</a> &#187;</li>
@@ -688,36 +699,36 @@ probe timer.ms(1000) {
                 </li>
             <li class="right">
 <label class="theme-selector-label">
-    Color theme
+    Theme
     <select class="theme-selector" oninput="activateTheme(this.value)">
-        <option value="auto" selected>Auto (default)</option>
-        <option value="light">Light theme</option>
-        <option value="dark">Dark theme</option>
+        <option value="auto" selected>Auto</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
     </select>
 </label> |</li>
             
       </ul>
     </div>  
     <div class="footer">
-    &copy; <a href="../copyright.html">Copyright</a> 2001-2021, Python Software Foundation.
+    &copy; <a href="../copyright.html">Copyright</a> 2001-2022, Python Software Foundation.
     <br />
     This page is licensed under the Python Software Foundation License Version 2.
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    See <a href="">History and License</a> for more information.
-    <br /><br />
+    See <a href="/license.html">History and License</a> for more information.<br />
+    <br />
 
     The Python Software Foundation is a non-profit corporation.
 <a href="https://www.python.org/psf/donations/">Please donate.</a>
 <br />
     <br />
 
-    Last updated on May 10, 2021.
-    <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
+    Last updated on Nov 19, 2022.
+    <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
     </div>
 
     <script type="text/javascript" src="../_static/switchers.js"></script>

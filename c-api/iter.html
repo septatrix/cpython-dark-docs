@@ -6,22 +6,21 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Iterator Protocol &#8212; Python 3.10.0b1 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iterator Protocol &#8212; Python 3.11.0 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
     
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
     
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.10.0b1 documentation"
+          title="Search within Python 3.11.0 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -77,25 +76,29 @@
             <div class="language_switcher_placeholder"></div>
             
 <label class="theme-selector-label">
-    Color theme
+    Theme
     <select class="theme-selector" oninput="activateTheme(this.value)">
-        <option value="auto" selected>Auto (default)</option>
-        <option value="light">Light theme</option>
-        <option value="dark">Dark theme</option>
+        <option value="auto" selected>Auto</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
     </select>
 </label>
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="mapping.html"
-                        title="previous chapter">Mapping Protocol</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="buffer.html"
-                        title="next chapter">Buffer Protocol</a></p>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="mapping.html"
+                          title="previous chapter">Mapping Protocol</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="buffer.html"
+                          title="next chapter">Buffer Protocol</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/3.10/Doc/c-api/iter.rst"
+        <a href="https://github.com/python/cpython/blob/main/Doc/c-api/iter.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -132,7 +135,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
+      <a href="../index.html">3.11.0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API Reference Manual</a> &#187;</li>
@@ -153,11 +156,11 @@
                 </li>
             <li class="right">
 <label class="theme-selector-label">
-    Color theme
+    Theme
     <select class="theme-selector" oninput="activateTheme(this.value)">
-        <option value="auto" selected>Auto (default)</option>
-        <option value="light">Light theme</option>
-        <option value="dark">Dark theme</option>
+        <option value="auto" selected>Auto</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
     </select>
 </label> |</li>
             
@@ -173,60 +176,61 @@
 <span id="iterator"></span><h1>Iterator Protocol<a class="headerlink" href="#iterator-protocol" title="Permalink to this headline">¶</a></h1>
 <p>There are two functions specifically for working with iterators.</p>
 <dl class="c function">
-<dt id="c.PyIter_Check">
-int <code class="sig-name descname">PyIter_Check</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>o</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyIter_Check" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Return non-zero if the object <em>o</em> supports the iterator protocol, and <code class="docutils literal notranslate"><span class="pre">0</span></code>
-otherwise.  This function always succeeds.</p>
+<dt class="sig sig-object c" id="c.PyIter_Check">
+<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PyIter_Check</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">o</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyIter_Check" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a> since version 3.8.</em><p>Return non-zero if the object <em>o</em> can be safely passed to
+<a class="reference internal" href="#c.PyIter_Next" title="PyIter_Next"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyIter_Next()</span></code></a>, and <code class="docutils literal notranslate"><span class="pre">0</span></code> otherwise.  This function always succeeds.</p>
 </dd></dl>
 
 <dl class="c function">
-<dt id="c.PyAiter_Check">
-int <code class="sig-name descname">PyAiter_Check</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>o</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyAiter_Check" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Returns non-zero if the object ‘obj’ provides <code class="xref py py-class docutils literal notranslate"><span class="pre">AsyncIterator</span></code>
-protocols, and <code class="docutils literal notranslate"><span class="pre">0</span></code> otherwise.  This function always succeeds.</p>
+<dt class="sig sig-object c" id="c.PyAIter_Check">
+<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PyAIter_Check</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">o</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyAIter_Check" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a> since version 3.10.</em><p>Return non-zero if the object <em>o</em> provides the <code class="xref py py-class docutils literal notranslate"><span class="pre">AsyncIterator</span></code>
+protocol, and <code class="docutils literal notranslate"><span class="pre">0</span></code> otherwise.  This function always succeeds.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.10.</span></p>
 </div>
 </dd></dl>
 
 <dl class="c function">
-<dt id="c.PyIter_Next">
-<a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<code class="sig-name descname">PyIter_Next</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>o</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyIter_Next" title="Permalink to this definition">¶</a><br /></dt>
-<dd><em class="refcount">Return value: New reference.</em><p>Return the next value from the iteration <em>o</em>.  The object must be an iterator
-(it is up to the caller to check this).  If there are no remaining values,
-returns <code class="docutils literal notranslate"><span class="pre">NULL</span></code> with no exception set.  If an error occurs while retrieving
-the item, returns <code class="docutils literal notranslate"><span class="pre">NULL</span></code> and passes along the exception.</p>
+<dt class="sig sig-object c" id="c.PyIter_Next">
+<a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">PyIter_Next</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">o</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyIter_Next" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em class="refcount">Return value: New reference.</em><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>Return the next value from the iterator <em>o</em>.  The object must be an iterator
+according to <a class="reference internal" href="#c.PyIter_Check" title="PyIter_Check"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyIter_Check()</span></code></a> (it is up to the caller to check this).
+If there are no remaining values, returns <code class="docutils literal notranslate"><span class="pre">NULL</span></code> with no exception set.
+If an error occurs while retrieving the item, returns <code class="docutils literal notranslate"><span class="pre">NULL</span></code> and passes
+along the exception.</p>
 </dd></dl>
 
 <p>To write a loop which iterates over an iterator, the C code should look
 something like this:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">PyObject</span> <span class="o">*</span><span class="n">iterator</span> <span class="o">=</span> <span class="n">PyObject_GetIter</span><span class="p">(</span><span class="n">obj</span><span class="p">);</span>
-<span class="n">PyObject</span> <span class="o">*</span><span class="n">item</span><span class="p">;</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">PyObject</span><span class="w"> </span><span class="o">*</span><span class="n">iterator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PyObject_GetIter</span><span class="p">(</span><span class="n">obj</span><span class="p">);</span><span class="w"></span>
+<span class="n">PyObject</span><span class="w"> </span><span class="o">*</span><span class="n">item</span><span class="p">;</span><span class="w"></span>
 
-<span class="k">if</span> <span class="p">(</span><span class="n">iterator</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
-    <span class="cm">/* propagate error */</span>
-<span class="p">}</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">iterator</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="cm">/* propagate error */</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="k">while</span> <span class="p">((</span><span class="n">item</span> <span class="o">=</span> <span class="n">PyIter_Next</span><span class="p">(</span><span class="n">iterator</span><span class="p">)))</span> <span class="p">{</span>
-    <span class="cm">/* do something with item */</span>
-    <span class="p">...</span>
-    <span class="cm">/* release reference when done */</span>
-    <span class="n">Py_DECREF</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="k">while</span><span class="w"> </span><span class="p">((</span><span class="n">item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PyIter_Next</span><span class="p">(</span><span class="n">iterator</span><span class="p">)))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="cm">/* do something with item */</span><span class="w"></span>
+<span class="w">    </span><span class="p">...</span><span class="w"></span>
+<span class="w">    </span><span class="cm">/* release reference when done */</span><span class="w"></span>
+<span class="w">    </span><span class="n">Py_DECREF</span><span class="p">(</span><span class="n">item</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="n">Py_DECREF</span><span class="p">(</span><span class="n">iterator</span><span class="p">);</span>
+<span class="n">Py_DECREF</span><span class="p">(</span><span class="n">iterator</span><span class="p">);</span><span class="w"></span>
 
-<span class="k">if</span> <span class="p">(</span><span class="n">PyErr_Occurred</span><span class="p">())</span> <span class="p">{</span>
-    <span class="cm">/* propagate error */</span>
-<span class="p">}</span>
-<span class="k">else</span> <span class="p">{</span>
-    <span class="cm">/* continue doing useful work */</span>
-<span class="p">}</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">PyErr_Occurred</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="cm">/* propagate error */</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="cm">/* continue doing useful work */</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <dl class="c type">
-<dt id="c.PySendResult">
-<em class="property">type </em><code class="sig-name descname">PySendResult</code><a class="headerlink" href="#c.PySendResult" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.PySendResult">
+<span class="k"><span class="pre">type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PySendResult</span></span></span><a class="headerlink" href="#c.PySendResult" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>The enum value used to represent different results of <a class="reference internal" href="#c.PyIter_Send" title="PyIter_Send"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyIter_Send()</span></code></a>.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 3.10.</span></p>
@@ -234,9 +238,9 @@ something like this:</p>
 </dd></dl>
 
 <dl class="c function">
-<dt id="c.PyIter_Send">
-<a class="reference internal" href="#c.PySendResult" title="PySendResult">PySendResult</a> <code class="sig-name descname">PyIter_Send</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>iter</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>arg</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> **<em>presult</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyIter_Send" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Sends the <em>arg</em> value into the iterator <em>iter</em>. Returns:</p>
+<dt class="sig sig-object c" id="c.PyIter_Send">
+<a class="reference internal" href="#c.PySendResult" title="PySendResult"><span class="n"><span class="pre">PySendResult</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PyIter_Send</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">iter</span></span>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">presult</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyIter_Send" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a> since version 3.10.</em><p>Sends the <em>arg</em> value into the iterator <em>iter</em>. Returns:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">PYGEN_RETURN</span></code> if iterator returns. Return value is returned via <em>presult</em>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">PYGEN_NEXT</span></code> if iterator yields. Yielded value is returned via <em>presult</em>.</p></li>
@@ -256,18 +260,22 @@ something like this:</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="mapping.html"
-                        title="previous chapter">Mapping Protocol</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="buffer.html"
-                        title="next chapter">Buffer Protocol</a></p>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="mapping.html"
+                          title="previous chapter">Mapping Protocol</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="buffer.html"
+                          title="next chapter">Buffer Protocol</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/3.10/Doc/c-api/iter.rst"
+        <a href="https://github.com/python/cpython/blob/main/Doc/c-api/iter.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -303,7 +311,7 @@ something like this:</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
+      <a href="../index.html">3.11.0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API Reference Manual</a> &#187;</li>
@@ -324,36 +332,36 @@ something like this:</p>
                 </li>
             <li class="right">
 <label class="theme-selector-label">
-    Color theme
+    Theme
     <select class="theme-selector" oninput="activateTheme(this.value)">
-        <option value="auto" selected>Auto (default)</option>
-        <option value="light">Light theme</option>
-        <option value="dark">Dark theme</option>
+        <option value="auto" selected>Auto</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
     </select>
 </label> |</li>
             
       </ul>
     </div>  
     <div class="footer">
-    &copy; <a href="../copyright.html">Copyright</a> 2001-2021, Python Software Foundation.
+    &copy; <a href="../copyright.html">Copyright</a> 2001-2022, Python Software Foundation.
     <br />
     This page is licensed under the Python Software Foundation License Version 2.
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    See <a href="">History and License</a> for more information.
-    <br /><br />
+    See <a href="/license.html">History and License</a> for more information.<br />
+    <br />
 
     The Python Software Foundation is a non-profit corporation.
 <a href="https://www.python.org/psf/donations/">Please donate.</a>
 <br />
     <br />
 
-    Last updated on May 10, 2021.
-    <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
+    Last updated on Nov 19, 2022.
+    <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
     </div>
 
     <script type="text/javascript" src="../_static/switchers.js"></script>

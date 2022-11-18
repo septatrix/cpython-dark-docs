@@ -6,22 +6,21 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>faulthandler — Dump the Python traceback &#8212; Python 3.10.0b1 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>faulthandler — Dump the Python traceback &#8212; Python 3.11.0 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
     
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
     
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.10.0b1 documentation"
+          title="Search within Python 3.11.0 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -77,15 +76,16 @@
             <div class="language_switcher_placeholder"></div>
             
 <label class="theme-selector-label">
-    Color theme
+    Theme
     <select class="theme-selector" oninput="activateTheme(this.value)">
-        <option value="auto" selected>Auto (default)</option>
-        <option value="light">Light theme</option>
-        <option value="dark">Dark theme</option>
+        <option value="auto" selected>Auto</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
     </select>
 </label>
-  <h3><a href="../contents.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">Table of Contents</a></h3>
+    <ul>
 <li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">faulthandler</span></code> — Dump the Python traceback</a><ul>
 <li><a class="reference internal" href="#dumping-the-traceback">Dumping the traceback</a></li>
 <li><a class="reference internal" href="#fault-handler-state">Fault handler state</a></li>
@@ -97,18 +97,23 @@
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="bdb.html"
-                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">bdb</span></code> — Debugger framework</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="pdb.html"
-                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pdb</span></code> — The Python Debugger</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="bdb.html"
+                          title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">bdb</span></code> — Debugger framework</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="pdb.html"
+                          title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pdb</span></code> — The Python Debugger</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/3.10/Doc/library/faulthandler.rst"
+        <a href="https://github.com/python/cpython/blob/main/Doc/library/faulthandler.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -145,7 +150,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
+      <a href="../index.html">3.11.0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
@@ -166,11 +171,11 @@
                 </li>
             <li class="right">
 <label class="theme-selector-label">
-    Color theme
+    Theme
     <select class="theme-selector" oninput="activateTheme(this.value)">
-        <option value="auto" selected>Auto (default)</option>
-        <option value="light">Light theme</option>
-        <option value="dark">Dark theme</option>
+        <option value="auto" selected>Auto</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
     </select>
 </label> |</li>
             
@@ -221,8 +226,8 @@ at Python startup.</p>
 <section id="dumping-the-traceback">
 <h2>Dumping the traceback<a class="headerlink" href="#dumping-the-traceback" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
-<dt id="faulthandler.dump_traceback">
-<code class="sig-prename descclassname">faulthandler.</code><code class="sig-name descname">dump_traceback</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">file</span><span class="o">=</span><span class="default_value">sys.stderr</span></em>, <em class="sig-param"><span class="n">all_threads</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#faulthandler.dump_traceback" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="faulthandler.dump_traceback">
+<span class="sig-prename descclassname"><span class="pre">faulthandler.</span></span><span class="sig-name descname"><span class="pre">dump_traceback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">sys.stderr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_threads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#faulthandler.dump_traceback" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dump the tracebacks of all threads into <em>file</em>. If <em>all_threads</em> is
 <code class="docutils literal notranslate"><span class="pre">False</span></code>, dump only the current thread.</p>
 <div class="versionchanged">
@@ -234,8 +239,8 @@ at Python startup.</p>
 <section id="fault-handler-state">
 <h2>Fault handler state<a class="headerlink" href="#fault-handler-state" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
-<dt id="faulthandler.enable">
-<code class="sig-prename descclassname">faulthandler.</code><code class="sig-name descname">enable</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">file</span><span class="o">=</span><span class="default_value">sys.stderr</span></em>, <em class="sig-param"><span class="n">all_threads</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#faulthandler.enable" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="faulthandler.enable">
+<span class="sig-prename descclassname"><span class="pre">faulthandler.</span></span><span class="sig-name descname"><span class="pre">enable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">sys.stderr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_threads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#faulthandler.enable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Enable the fault handler: install handlers for the <code class="xref py py-const docutils literal notranslate"><span class="pre">SIGSEGV</span></code>,
 <code class="xref py py-const docutils literal notranslate"><span class="pre">SIGFPE</span></code>, <code class="xref py py-const docutils literal notranslate"><span class="pre">SIGABRT</span></code>, <code class="xref py py-const docutils literal notranslate"><span class="pre">SIGBUS</span></code> and <code class="xref py py-const docutils literal notranslate"><span class="pre">SIGILL</span></code>
 signals to dump the Python traceback. If <em>all_threads</em> is <code class="docutils literal notranslate"><span class="pre">True</span></code>,
@@ -249,18 +254,22 @@ thread.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">Changed in version 3.6: </span>On Windows, a handler for Windows exception is also installed.</p>
 </div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 3.10: </span>The dump now mentions if a garbage collector collection is running
+if <em>all_threads</em> is true.</p>
+</div>
 </dd></dl>
 
 <dl class="py function">
-<dt id="faulthandler.disable">
-<code class="sig-prename descclassname">faulthandler.</code><code class="sig-name descname">disable</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#faulthandler.disable" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="faulthandler.disable">
+<span class="sig-prename descclassname"><span class="pre">faulthandler.</span></span><span class="sig-name descname"><span class="pre">disable</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#faulthandler.disable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Disable the fault handler: uninstall the signal handlers installed by
 <a class="reference internal" href="#faulthandler.enable" title="faulthandler.enable"><code class="xref py py-func docutils literal notranslate"><span class="pre">enable()</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="faulthandler.is_enabled">
-<code class="sig-prename descclassname">faulthandler.</code><code class="sig-name descname">is_enabled</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#faulthandler.is_enabled" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="faulthandler.is_enabled">
+<span class="sig-prename descclassname"><span class="pre">faulthandler.</span></span><span class="sig-name descname"><span class="pre">is_enabled</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#faulthandler.is_enabled" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if the fault handler is enabled.</p>
 </dd></dl>
 
@@ -268,8 +277,8 @@ thread.</p>
 <section id="dumping-the-tracebacks-after-a-timeout">
 <h2>Dumping the tracebacks after a timeout<a class="headerlink" href="#dumping-the-tracebacks-after-a-timeout" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
-<dt id="faulthandler.dump_traceback_later">
-<code class="sig-prename descclassname">faulthandler.</code><code class="sig-name descname">dump_traceback_later</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">timeout</span></em>, <em class="sig-param"><span class="n">repeat</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">file</span><span class="o">=</span><span class="default_value">sys.stderr</span></em>, <em class="sig-param"><span class="n">exit</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#faulthandler.dump_traceback_later" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="faulthandler.dump_traceback_later">
+<span class="sig-prename descclassname"><span class="pre">faulthandler.</span></span><span class="sig-name descname"><span class="pre">dump_traceback_later</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repeat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">sys.stderr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#faulthandler.dump_traceback_later" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dump the tracebacks of all threads, after a timeout of <em>timeout</em> seconds, or
 every <em>timeout</em> seconds if <em>repeat</em> is <code class="docutils literal notranslate"><span class="pre">True</span></code>.  If <em>exit</em> is <code class="docutils literal notranslate"><span class="pre">True</span></code>, call
 <code class="xref c c-func docutils literal notranslate"><span class="pre">_exit()</span></code> with status=1 after dumping the tracebacks.  (Note
@@ -290,8 +299,8 @@ descriptors</span></a>.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="faulthandler.cancel_dump_traceback_later">
-<code class="sig-prename descclassname">faulthandler.</code><code class="sig-name descname">cancel_dump_traceback_later</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#faulthandler.cancel_dump_traceback_later" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="faulthandler.cancel_dump_traceback_later">
+<span class="sig-prename descclassname"><span class="pre">faulthandler.</span></span><span class="sig-name descname"><span class="pre">cancel_dump_traceback_later</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#faulthandler.cancel_dump_traceback_later" title="Permalink to this definition">¶</a></dt>
 <dd><p>Cancel the last call to <a class="reference internal" href="#faulthandler.dump_traceback_later" title="faulthandler.dump_traceback_later"><code class="xref py py-func docutils literal notranslate"><span class="pre">dump_traceback_later()</span></code></a>.</p>
 </dd></dl>
 
@@ -299,8 +308,8 @@ descriptors</span></a>.</p>
 <section id="dumping-the-traceback-on-a-user-signal">
 <h2>Dumping the traceback on a user signal<a class="headerlink" href="#dumping-the-traceback-on-a-user-signal" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
-<dt id="faulthandler.register">
-<code class="sig-prename descclassname">faulthandler.</code><code class="sig-name descname">register</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">signum</span></em>, <em class="sig-param"><span class="n">file</span><span class="o">=</span><span class="default_value">sys.stderr</span></em>, <em class="sig-param"><span class="n">all_threads</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">chain</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#faulthandler.register" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="faulthandler.register">
+<span class="sig-prename descclassname"><span class="pre">faulthandler.</span></span><span class="sig-name descname"><span class="pre">register</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signum</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">sys.stderr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_threads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#faulthandler.register" title="Permalink to this definition">¶</a></dt>
 <dd><p>Register a user signal: install a handler for the <em>signum</em> signal to dump
 the traceback of all threads, or of the current thread if <em>all_threads</em> is
 <code class="docutils literal notranslate"><span class="pre">False</span></code>, into <em>file</em>. Call the previous handler if chain is <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
@@ -313,8 +322,8 @@ the traceback of all threads, or of the current thread if <em>all_threads</em> i
 </dd></dl>
 
 <dl class="py function">
-<dt id="faulthandler.unregister">
-<code class="sig-prename descclassname">faulthandler.</code><code class="sig-name descname">unregister</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">signum</span></em><span class="sig-paren">)</span><a class="headerlink" href="#faulthandler.unregister" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="faulthandler.unregister">
+<span class="sig-prename descclassname"><span class="pre">faulthandler.</span></span><span class="sig-name descname"><span class="pre">unregister</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signum</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#faulthandler.unregister" title="Permalink to this definition">¶</a></dt>
 <dd><p>Unregister a user signal: uninstall the handler of the <em>signum</em> signal
 installed by <a class="reference internal" href="#faulthandler.register" title="faulthandler.register"><code class="xref py py-func docutils literal notranslate"><span class="pre">register()</span></code></a>. Return <code class="docutils literal notranslate"><span class="pre">True</span></code> if the signal was registered,
 <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
@@ -358,8 +367,9 @@ handler:</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../contents.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">Table of Contents</a></h3>
+    <ul>
 <li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">faulthandler</span></code> — Dump the Python traceback</a><ul>
 <li><a class="reference internal" href="#dumping-the-traceback">Dumping the traceback</a></li>
 <li><a class="reference internal" href="#fault-handler-state">Fault handler state</a></li>
@@ -371,18 +381,23 @@ handler:</p>
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="bdb.html"
-                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">bdb</span></code> — Debugger framework</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="pdb.html"
-                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pdb</span></code> — The Python Debugger</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="bdb.html"
+                          title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">bdb</span></code> — Debugger framework</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="pdb.html"
+                          title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pdb</span></code> — The Python Debugger</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/3.10/Doc/library/faulthandler.rst"
+        <a href="https://github.com/python/cpython/blob/main/Doc/library/faulthandler.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -418,7 +433,7 @@ handler:</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
+      <a href="../index.html">3.11.0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
@@ -439,36 +454,36 @@ handler:</p>
                 </li>
             <li class="right">
 <label class="theme-selector-label">
-    Color theme
+    Theme
     <select class="theme-selector" oninput="activateTheme(this.value)">
-        <option value="auto" selected>Auto (default)</option>
-        <option value="light">Light theme</option>
-        <option value="dark">Dark theme</option>
+        <option value="auto" selected>Auto</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
     </select>
 </label> |</li>
             
       </ul>
     </div>  
     <div class="footer">
-    &copy; <a href="../copyright.html">Copyright</a> 2001-2021, Python Software Foundation.
+    &copy; <a href="../copyright.html">Copyright</a> 2001-2022, Python Software Foundation.
     <br />
     This page is licensed under the Python Software Foundation License Version 2.
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    See <a href="">History and License</a> for more information.
-    <br /><br />
+    See <a href="/license.html">History and License</a> for more information.<br />
+    <br />
 
     The Python Software Foundation is a non-profit corporation.
 <a href="https://www.python.org/psf/donations/">Please donate.</a>
 <br />
     <br />
 
-    Last updated on May 10, 2021.
-    <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
+    Last updated on Nov 19, 2022.
+    <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
     </div>
 
     <script type="text/javascript" src="../_static/switchers.js"></script>

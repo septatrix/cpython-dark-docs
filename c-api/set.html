@@ -6,22 +6,21 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Set Objects &#8212; Python 3.10.0b1 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Objects &#8212; Python 3.11.0 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
     
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
     
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.10.0b1 documentation"
+          title="Search within Python 3.11.0 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -77,25 +76,29 @@
             <div class="language_switcher_placeholder"></div>
             
 <label class="theme-selector-label">
-    Color theme
+    Theme
     <select class="theme-selector" oninput="activateTheme(this.value)">
-        <option value="auto" selected>Auto (default)</option>
-        <option value="light">Light theme</option>
-        <option value="dark">Dark theme</option>
+        <option value="auto" selected>Auto</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
     </select>
 </label>
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="dict.html"
-                        title="previous chapter">Dictionary Objects</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="function.html"
-                        title="next chapter">Function Objects</a></p>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="dict.html"
+                          title="previous chapter">Dictionary Objects</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="function.html"
+                          title="next chapter">Function Objects</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/3.10/Doc/c-api/set.rst"
+        <a href="https://github.com/python/cpython/blob/main/Doc/c-api/set.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -132,7 +135,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
+      <a href="../index.html">3.11.0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API Reference Manual</a> &#187;</li>
@@ -153,11 +156,11 @@
                 </li>
             <li class="right">
 <label class="theme-selector-label">
-    Color theme
+    Theme
     <select class="theme-selector" oninput="activateTheme(this.value)">
-        <option value="auto" selected>Auto (default)</option>
-        <option value="light">Light theme</option>
-        <option value="dark">Dark theme</option>
+        <option value="auto" selected>Auto</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
     </select>
 </label> |</li>
             
@@ -172,7 +175,7 @@
   <section id="set-objects">
 <span id="setobjects"></span><h1>Set Objects<a class="headerlink" href="#set-objects" title="Permalink to this headline">¶</a></h1>
 <p id="index-0">This section details the public API for <a class="reference internal" href="../library/stdtypes.html#set" title="set"><code class="xref py py-class docutils literal notranslate"><span class="pre">set</span></code></a> and <a class="reference internal" href="../library/stdtypes.html#frozenset" title="frozenset"><code class="xref py py-class docutils literal notranslate"><span class="pre">frozenset</span></code></a>
-objects.  Any functionality not listed below is best accessed using the either
+objects.  Any functionality not listed below is best accessed using either
 the abstract object protocol (including <a class="reference internal" href="call.html#c.PyObject_CallMethod" title="PyObject_CallMethod"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_CallMethod()</span></code></a>,
 <a class="reference internal" href="object.html#c.PyObject_RichCompareBool" title="PyObject_RichCompareBool"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_RichCompareBool()</span></code></a>, <a class="reference internal" href="object.html#c.PyObject_Hash" title="PyObject_Hash"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_Hash()</span></code></a>,
 <a class="reference internal" href="object.html#c.PyObject_Repr" title="PyObject_Repr"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_Repr()</span></code></a>, <a class="reference internal" href="object.html#c.PyObject_IsTrue" title="PyObject_IsTrue"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_IsTrue()</span></code></a>, <a class="reference internal" href="object.html#c.PyObject_Print" title="PyObject_Print"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_Print()</span></code></a>, and
@@ -182,57 +185,57 @@ the abstract object protocol (including <a class="reference internal" href="call
 <a class="reference internal" href="number.html#c.PyNumber_InPlaceSubtract" title="PyNumber_InPlaceSubtract"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyNumber_InPlaceSubtract()</span></code></a>, <a class="reference internal" href="number.html#c.PyNumber_InPlaceOr" title="PyNumber_InPlaceOr"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyNumber_InPlaceOr()</span></code></a>, and
 <a class="reference internal" href="number.html#c.PyNumber_InPlaceXor" title="PyNumber_InPlaceXor"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyNumber_InPlaceXor()</span></code></a>).</p>
 <dl class="c type">
-<dt id="c.PySetObject">
-<em class="property">type </em><code class="sig-name descname">PySetObject</code><a class="headerlink" href="#c.PySetObject" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.PySetObject">
+<span class="k"><span class="pre">type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PySetObject</span></span></span><a class="headerlink" href="#c.PySetObject" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>This subtype of <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyObject</span></code></a> is used to hold the internal data for both
 <a class="reference internal" href="../library/stdtypes.html#set" title="set"><code class="xref py py-class docutils literal notranslate"><span class="pre">set</span></code></a> and <a class="reference internal" href="../library/stdtypes.html#frozenset" title="frozenset"><code class="xref py py-class docutils literal notranslate"><span class="pre">frozenset</span></code></a> objects.  It is like a <a class="reference internal" href="dict.html#c.PyDictObject" title="PyDictObject"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyDictObject</span></code></a>
 in that it is a fixed size for small sets (much like tuple storage) and will
 point to a separate, variable sized block of memory for medium and large sized
 sets (much like list storage). None of the fields of this structure should be
-considered public and are subject to change.  All access should be done through
+considered public and all are subject to change.  All access should be done through
 the documented API rather than by manipulating the values in the structure.</p>
 </dd></dl>
 
 <dl class="c var">
-<dt id="c.PySet_Type">
-<a class="reference internal" href="type.html#c.PyTypeObject" title="PyTypeObject">PyTypeObject</a> <code class="sig-name descname">PySet_Type</code><a class="headerlink" href="#c.PySet_Type" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>This is an instance of <a class="reference internal" href="type.html#c.PyTypeObject" title="PyTypeObject"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyTypeObject</span></code></a> representing the Python
+<dt class="sig sig-object c" id="c.PySet_Type">
+<a class="reference internal" href="type.html#c.PyTypeObject" title="PyTypeObject"><span class="n"><span class="pre">PyTypeObject</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PySet_Type</span></span></span><a class="headerlink" href="#c.PySet_Type" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>This is an instance of <a class="reference internal" href="type.html#c.PyTypeObject" title="PyTypeObject"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyTypeObject</span></code></a> representing the Python
 <a class="reference internal" href="../library/stdtypes.html#set" title="set"><code class="xref py py-class docutils literal notranslate"><span class="pre">set</span></code></a> type.</p>
 </dd></dl>
 
 <dl class="c var">
-<dt id="c.PyFrozenSet_Type">
-<a class="reference internal" href="type.html#c.PyTypeObject" title="PyTypeObject">PyTypeObject</a> <code class="sig-name descname">PyFrozenSet_Type</code><a class="headerlink" href="#c.PyFrozenSet_Type" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>This is an instance of <a class="reference internal" href="type.html#c.PyTypeObject" title="PyTypeObject"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyTypeObject</span></code></a> representing the Python
+<dt class="sig sig-object c" id="c.PyFrozenSet_Type">
+<a class="reference internal" href="type.html#c.PyTypeObject" title="PyTypeObject"><span class="n"><span class="pre">PyTypeObject</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PyFrozenSet_Type</span></span></span><a class="headerlink" href="#c.PyFrozenSet_Type" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>This is an instance of <a class="reference internal" href="type.html#c.PyTypeObject" title="PyTypeObject"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyTypeObject</span></code></a> representing the Python
 <a class="reference internal" href="../library/stdtypes.html#frozenset" title="frozenset"><code class="xref py py-class docutils literal notranslate"><span class="pre">frozenset</span></code></a> type.</p>
 </dd></dl>
 
 <p>The following type check macros work on pointers to any Python object. Likewise,
 the constructor functions work with any iterable Python object.</p>
 <dl class="c function">
-<dt id="c.PySet_Check">
-int <code class="sig-name descname">PySet_Check</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>p</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PySet_Check" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.PySet_Check">
+<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PySet_Check</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">p</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PySet_Check" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Return true if <em>p</em> is a <a class="reference internal" href="../library/stdtypes.html#set" title="set"><code class="xref py py-class docutils literal notranslate"><span class="pre">set</span></code></a> object or an instance of a subtype.
 This function always succeeds.</p>
 </dd></dl>
 
 <dl class="c function">
-<dt id="c.PyFrozenSet_Check">
-int <code class="sig-name descname">PyFrozenSet_Check</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>p</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyFrozenSet_Check" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.PyFrozenSet_Check">
+<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PyFrozenSet_Check</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">p</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyFrozenSet_Check" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Return true if <em>p</em> is a <a class="reference internal" href="../library/stdtypes.html#frozenset" title="frozenset"><code class="xref py py-class docutils literal notranslate"><span class="pre">frozenset</span></code></a> object or an instance of a
 subtype.  This function always succeeds.</p>
 </dd></dl>
 
 <dl class="c function">
-<dt id="c.PyAnySet_Check">
-int <code class="sig-name descname">PyAnySet_Check</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>p</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyAnySet_Check" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.PyAnySet_Check">
+<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PyAnySet_Check</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">p</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyAnySet_Check" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Return true if <em>p</em> is a <a class="reference internal" href="../library/stdtypes.html#set" title="set"><code class="xref py py-class docutils literal notranslate"><span class="pre">set</span></code></a> object, a <a class="reference internal" href="../library/stdtypes.html#frozenset" title="frozenset"><code class="xref py py-class docutils literal notranslate"><span class="pre">frozenset</span></code></a> object, or an
 instance of a subtype.  This function always succeeds.</p>
 </dd></dl>
 
 <dl class="c function">
-<dt id="c.PySet_CheckExact">
-int <code class="sig-name descname">PySet_CheckExact</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>p</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PySet_CheckExact" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.PySet_CheckExact">
+<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PySet_CheckExact</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">p</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PySet_CheckExact" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Return true if <em>p</em> is a <a class="reference internal" href="../library/stdtypes.html#set" title="set"><code class="xref py py-class docutils literal notranslate"><span class="pre">set</span></code></a> object but not an instance of a
 subtype.  This function always succeeds.</p>
 <div class="versionadded">
@@ -241,23 +244,23 @@ subtype.  This function always succeeds.</p>
 </dd></dl>
 
 <dl class="c function">
-<dt id="c.PyAnySet_CheckExact">
-int <code class="sig-name descname">PyAnySet_CheckExact</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>p</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyAnySet_CheckExact" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.PyAnySet_CheckExact">
+<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PyAnySet_CheckExact</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">p</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyAnySet_CheckExact" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Return true if <em>p</em> is a <a class="reference internal" href="../library/stdtypes.html#set" title="set"><code class="xref py py-class docutils literal notranslate"><span class="pre">set</span></code></a> object or a <a class="reference internal" href="../library/stdtypes.html#frozenset" title="frozenset"><code class="xref py py-class docutils literal notranslate"><span class="pre">frozenset</span></code></a> object but
 not an instance of a subtype.  This function always succeeds.</p>
 </dd></dl>
 
 <dl class="c function">
-<dt id="c.PyFrozenSet_CheckExact">
-int <code class="sig-name descname">PyFrozenSet_CheckExact</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>p</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyFrozenSet_CheckExact" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.PyFrozenSet_CheckExact">
+<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PyFrozenSet_CheckExact</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">p</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyFrozenSet_CheckExact" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Return true if <em>p</em> is a <a class="reference internal" href="../library/stdtypes.html#frozenset" title="frozenset"><code class="xref py py-class docutils literal notranslate"><span class="pre">frozenset</span></code></a> object but not an instance of a
 subtype.  This function always succeeds.</p>
 </dd></dl>
 
 <dl class="c function">
-<dt id="c.PySet_New">
-<a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<code class="sig-name descname">PySet_New</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>iterable</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PySet_New" title="Permalink to this definition">¶</a><br /></dt>
-<dd><em class="refcount">Return value: New reference.</em><p>Return a new <a class="reference internal" href="../library/stdtypes.html#set" title="set"><code class="xref py py-class docutils literal notranslate"><span class="pre">set</span></code></a> containing objects returned by the <em>iterable</em>.  The
+<dt class="sig sig-object c" id="c.PySet_New">
+<a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">PySet_New</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">iterable</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PySet_New" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em class="refcount">Return value: New reference.</em><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>Return a new <a class="reference internal" href="../library/stdtypes.html#set" title="set"><code class="xref py py-class docutils literal notranslate"><span class="pre">set</span></code></a> containing objects returned by the <em>iterable</em>.  The
 <em>iterable</em> may be <code class="docutils literal notranslate"><span class="pre">NULL</span></code> to create a new empty set.  Return the new set on
 success or <code class="docutils literal notranslate"><span class="pre">NULL</span></code> on failure.  Raise <a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> if <em>iterable</em> is not
 actually iterable.  The constructor is also useful for copying a set
@@ -265,9 +268,9 @@ actually iterable.  The constructor is also useful for copying a set
 </dd></dl>
 
 <dl class="c function">
-<dt id="c.PyFrozenSet_New">
-<a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<code class="sig-name descname">PyFrozenSet_New</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>iterable</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PyFrozenSet_New" title="Permalink to this definition">¶</a><br /></dt>
-<dd><em class="refcount">Return value: New reference.</em><p>Return a new <a class="reference internal" href="../library/stdtypes.html#frozenset" title="frozenset"><code class="xref py py-class docutils literal notranslate"><span class="pre">frozenset</span></code></a> containing objects returned by the <em>iterable</em>.
+<dt class="sig sig-object c" id="c.PyFrozenSet_New">
+<a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">PyFrozenSet_New</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">iterable</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyFrozenSet_New" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em class="refcount">Return value: New reference.</em><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>Return a new <a class="reference internal" href="../library/stdtypes.html#frozenset" title="frozenset"><code class="xref py py-class docutils literal notranslate"><span class="pre">frozenset</span></code></a> containing objects returned by the <em>iterable</em>.
 The <em>iterable</em> may be <code class="docutils literal notranslate"><span class="pre">NULL</span></code> to create a new empty frozenset.  Return the new
 set on success or <code class="docutils literal notranslate"><span class="pre">NULL</span></code> on failure.  Raise <a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> if <em>iterable</em> is
 not actually iterable.</p>
@@ -276,23 +279,23 @@ not actually iterable.</p>
 <p>The following functions and macros are available for instances of <a class="reference internal" href="../library/stdtypes.html#set" title="set"><code class="xref py py-class docutils literal notranslate"><span class="pre">set</span></code></a>
 or <a class="reference internal" href="../library/stdtypes.html#frozenset" title="frozenset"><code class="xref py py-class docutils literal notranslate"><span class="pre">frozenset</span></code></a> or instances of their subtypes.</p>
 <dl class="c function">
-<dt id="c.PySet_Size">
-Py_ssize_t <code class="sig-name descname">PySet_Size</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>anyset</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PySet_Size" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p id="index-1">Return the length of a <a class="reference internal" href="../library/stdtypes.html#set" title="set"><code class="xref py py-class docutils literal notranslate"><span class="pre">set</span></code></a> or <a class="reference internal" href="../library/stdtypes.html#frozenset" title="frozenset"><code class="xref py py-class docutils literal notranslate"><span class="pre">frozenset</span></code></a> object. Equivalent to
+<dt class="sig sig-object c" id="c.PySet_Size">
+<a class="reference internal" href="intro.html#c.Py_ssize_t" title="Py_ssize_t"><span class="n"><span class="pre">Py_ssize_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PySet_Size</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">anyset</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PySet_Size" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p id="index-1">Return the length of a <a class="reference internal" href="../library/stdtypes.html#set" title="set"><code class="xref py py-class docutils literal notranslate"><span class="pre">set</span></code></a> or <a class="reference internal" href="../library/stdtypes.html#frozenset" title="frozenset"><code class="xref py py-class docutils literal notranslate"><span class="pre">frozenset</span></code></a> object. Equivalent to
 <code class="docutils literal notranslate"><span class="pre">len(anyset)</span></code>.  Raises a <code class="xref py py-exc docutils literal notranslate"><span class="pre">PyExc_SystemError</span></code> if <em>anyset</em> is not a
 <a class="reference internal" href="../library/stdtypes.html#set" title="set"><code class="xref py py-class docutils literal notranslate"><span class="pre">set</span></code></a>, <a class="reference internal" href="../library/stdtypes.html#frozenset" title="frozenset"><code class="xref py py-class docutils literal notranslate"><span class="pre">frozenset</span></code></a>, or an instance of a subtype.</p>
 </dd></dl>
 
 <dl class="c function">
-<dt id="c.PySet_GET_SIZE">
-Py_ssize_t <code class="sig-name descname">PySet_GET_SIZE</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>anyset</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PySet_GET_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.PySet_GET_SIZE">
+<a class="reference internal" href="intro.html#c.Py_ssize_t" title="Py_ssize_t"><span class="n"><span class="pre">Py_ssize_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PySet_GET_SIZE</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">anyset</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PySet_GET_SIZE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Macro form of <a class="reference internal" href="#c.PySet_Size" title="PySet_Size"><code class="xref c c-func docutils literal notranslate"><span class="pre">PySet_Size()</span></code></a> without error checking.</p>
 </dd></dl>
 
 <dl class="c function">
-<dt id="c.PySet_Contains">
-int <code class="sig-name descname">PySet_Contains</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>anyset</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PySet_Contains" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Return <code class="docutils literal notranslate"><span class="pre">1</span></code> if found, <code class="docutils literal notranslate"><span class="pre">0</span></code> if not found, and <code class="docutils literal notranslate"><span class="pre">-1</span></code> if an error is encountered.  Unlike
+<dt class="sig sig-object c" id="c.PySet_Contains">
+<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PySet_Contains</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">anyset</span></span>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">key</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PySet_Contains" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>Return <code class="docutils literal notranslate"><span class="pre">1</span></code> if found, <code class="docutils literal notranslate"><span class="pre">0</span></code> if not found, and <code class="docutils literal notranslate"><span class="pre">-1</span></code> if an error is encountered.  Unlike
 the Python <code class="xref py py-meth docutils literal notranslate"><span class="pre">__contains__()</span></code> method, this function does not automatically
 convert unhashable sets into temporary frozensets.  Raise a <a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> if
 the <em>key</em> is unhashable. Raise <code class="xref py py-exc docutils literal notranslate"><span class="pre">PyExc_SystemError</span></code> if <em>anyset</em> is not a
@@ -300,10 +303,10 @@ the <em>key</em> is unhashable. Raise <code class="xref py py-exc docutils liter
 </dd></dl>
 
 <dl class="c function">
-<dt id="c.PySet_Add">
-int <code class="sig-name descname">PySet_Add</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>set</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PySet_Add" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Add <em>key</em> to a <a class="reference internal" href="../library/stdtypes.html#set" title="set"><code class="xref py py-class docutils literal notranslate"><span class="pre">set</span></code></a> instance.  Also works with <a class="reference internal" href="../library/stdtypes.html#frozenset" title="frozenset"><code class="xref py py-class docutils literal notranslate"><span class="pre">frozenset</span></code></a>
-instances (like <a class="reference internal" href="tuple.html#c.PyTuple_SetItem" title="PyTuple_SetItem"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyTuple_SetItem()</span></code></a> it can be used to fill-in the values
+<dt class="sig sig-object c" id="c.PySet_Add">
+<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PySet_Add</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">set</span></span>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">key</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PySet_Add" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>Add <em>key</em> to a <a class="reference internal" href="../library/stdtypes.html#set" title="set"><code class="xref py py-class docutils literal notranslate"><span class="pre">set</span></code></a> instance.  Also works with <a class="reference internal" href="../library/stdtypes.html#frozenset" title="frozenset"><code class="xref py py-class docutils literal notranslate"><span class="pre">frozenset</span></code></a>
+instances (like <a class="reference internal" href="tuple.html#c.PyTuple_SetItem" title="PyTuple_SetItem"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyTuple_SetItem()</span></code></a> it can be used to fill in the values
 of brand new frozensets before they are exposed to other code).  Return <code class="docutils literal notranslate"><span class="pre">0</span></code> on
 success or <code class="docutils literal notranslate"><span class="pre">-1</span></code> on failure. Raise a <a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> if the <em>key</em> is
 unhashable. Raise a <a class="reference internal" href="../library/exceptions.html#MemoryError" title="MemoryError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">MemoryError</span></code></a> if there is no room to grow.  Raise a
@@ -314,9 +317,9 @@ subtype.</p>
 <p>The following functions are available for instances of <a class="reference internal" href="../library/stdtypes.html#set" title="set"><code class="xref py py-class docutils literal notranslate"><span class="pre">set</span></code></a> or its
 subtypes but not for instances of <a class="reference internal" href="../library/stdtypes.html#frozenset" title="frozenset"><code class="xref py py-class docutils literal notranslate"><span class="pre">frozenset</span></code></a> or its subtypes.</p>
 <dl class="c function">
-<dt id="c.PySet_Discard">
-int <code class="sig-name descname">PySet_Discard</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>set</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PySet_Discard" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Return <code class="docutils literal notranslate"><span class="pre">1</span></code> if found and removed, <code class="docutils literal notranslate"><span class="pre">0</span></code> if not found (no action taken), and <code class="docutils literal notranslate"><span class="pre">-1</span></code> if an
+<dt class="sig sig-object c" id="c.PySet_Discard">
+<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PySet_Discard</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">set</span></span>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">key</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PySet_Discard" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>Return <code class="docutils literal notranslate"><span class="pre">1</span></code> if found and removed, <code class="docutils literal notranslate"><span class="pre">0</span></code> if not found (no action taken), and <code class="docutils literal notranslate"><span class="pre">-1</span></code> if an
 error is encountered.  Does not raise <a class="reference internal" href="../library/exceptions.html#KeyError" title="KeyError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">KeyError</span></code></a> for missing keys.  Raise a
 <a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> if the <em>key</em> is unhashable.  Unlike the Python <code class="xref py py-meth docutils literal notranslate"><span class="pre">discard()</span></code>
 method, this function does not automatically convert unhashable sets into
@@ -325,18 +328,18 @@ instance of <a class="reference internal" href="../library/stdtypes.html#set" ti
 </dd></dl>
 
 <dl class="c function">
-<dt id="c.PySet_Pop">
-<a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<code class="sig-name descname">PySet_Pop</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>set</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PySet_Pop" title="Permalink to this definition">¶</a><br /></dt>
-<dd><em class="refcount">Return value: New reference.</em><p>Return a new reference to an arbitrary object in the <em>set</em>, and removes the
+<dt class="sig sig-object c" id="c.PySet_Pop">
+<a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">PySet_Pop</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">set</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PySet_Pop" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em class="refcount">Return value: New reference.</em><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>Return a new reference to an arbitrary object in the <em>set</em>, and removes the
 object from the <em>set</em>.  Return <code class="docutils literal notranslate"><span class="pre">NULL</span></code> on failure.  Raise <a class="reference internal" href="../library/exceptions.html#KeyError" title="KeyError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">KeyError</span></code></a> if the
 set is empty. Raise a <a class="reference internal" href="../library/exceptions.html#SystemError" title="SystemError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SystemError</span></code></a> if <em>set</em> is not an instance of
 <a class="reference internal" href="../library/stdtypes.html#set" title="set"><code class="xref py py-class docutils literal notranslate"><span class="pre">set</span></code></a> or its subtype.</p>
 </dd></dl>
 
 <dl class="c function">
-<dt id="c.PySet_Clear">
-int <code class="sig-name descname">PySet_Clear</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a> *<em>set</em><span class="sig-paren">)</span><a class="headerlink" href="#c.PySet_Clear" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Empty an existing set of all elements.</p>
+<dt class="sig sig-object c" id="c.PySet_Clear">
+<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PySet_Clear</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">set</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PySet_Clear" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>Empty an existing set of all elements.</p>
 </dd></dl>
 
 </section>
@@ -348,18 +351,22 @@ int <code class="sig-name descname">PySet_Clear</code><span class="sig-paren">(<
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="dict.html"
-                        title="previous chapter">Dictionary Objects</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="function.html"
-                        title="next chapter">Function Objects</a></p>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="dict.html"
+                          title="previous chapter">Dictionary Objects</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="function.html"
+                          title="next chapter">Function Objects</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/3.10/Doc/c-api/set.rst"
+        <a href="https://github.com/python/cpython/blob/main/Doc/c-api/set.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -395,7 +402,7 @@ int <code class="sig-name descname">PySet_Clear</code><span class="sig-paren">(<
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
+      <a href="../index.html">3.11.0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API Reference Manual</a> &#187;</li>
@@ -416,36 +423,36 @@ int <code class="sig-name descname">PySet_Clear</code><span class="sig-paren">(<
                 </li>
             <li class="right">
 <label class="theme-selector-label">
-    Color theme
+    Theme
     <select class="theme-selector" oninput="activateTheme(this.value)">
-        <option value="auto" selected>Auto (default)</option>
-        <option value="light">Light theme</option>
-        <option value="dark">Dark theme</option>
+        <option value="auto" selected>Auto</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
     </select>
 </label> |</li>
             
       </ul>
     </div>  
     <div class="footer">
-    &copy; <a href="../copyright.html">Copyright</a> 2001-2021, Python Software Foundation.
+    &copy; <a href="../copyright.html">Copyright</a> 2001-2022, Python Software Foundation.
     <br />
     This page is licensed under the Python Software Foundation License Version 2.
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    See <a href="">History and License</a> for more information.
-    <br /><br />
+    See <a href="/license.html">History and License</a> for more information.<br />
+    <br />
 
     The Python Software Foundation is a non-profit corporation.
 <a href="https://www.python.org/psf/donations/">Please donate.</a>
 <br />
     <br />
 
-    Last updated on May 10, 2021.
-    <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
+    Last updated on Nov 19, 2022.
+    <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
     </div>
 
     <script type="text/javascript" src="../_static/switchers.js"></script>

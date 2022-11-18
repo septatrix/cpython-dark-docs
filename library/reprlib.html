@@ -6,22 +6,21 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>reprlib — Alternate repr() implementation &#8212; Python 3.10.0b1 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>reprlib — Alternate repr() implementation &#8212; Python 3.11.0 documentation</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
     <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
     
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
     
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Python 3.10.0b1 documentation"
+          title="Search within Python 3.11.0 documentation"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -77,15 +76,16 @@
             <div class="language_switcher_placeholder"></div>
             
 <label class="theme-selector-label">
-    Color theme
+    Theme
     <select class="theme-selector" oninput="activateTheme(this.value)">
-        <option value="auto" selected>Auto (default)</option>
-        <option value="light">Light theme</option>
-        <option value="dark">Dark theme</option>
+        <option value="auto" selected>Auto</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
     </select>
 </label>
-  <h3><a href="../contents.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">Table of Contents</a></h3>
+    <ul>
 <li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">reprlib</span></code> — Alternate <code class="xref py py-func docutils literal notranslate"><span class="pre">repr()</span></code> implementation</a><ul>
 <li><a class="reference internal" href="#repr-objects">Repr Objects</a></li>
 <li><a class="reference internal" href="#subclassing-repr-objects">Subclassing Repr Objects</a></li>
@@ -93,18 +93,23 @@
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="pprint.html"
-                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pprint</span></code> — Data pretty printer</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="enum.html"
-                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">enum</span></code> — Support for enumerations</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="pprint.html"
+                          title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pprint</span></code> — Data pretty printer</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="enum.html"
+                          title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">enum</span></code> — Support for enumerations</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/3.10/Doc/library/reprlib.rst"
+        <a href="https://github.com/python/cpython/blob/main/Doc/library/reprlib.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -141,7 +146,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
+      <a href="../index.html">3.11.0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
@@ -162,11 +167,11 @@
                 </li>
             <li class="right">
 <label class="theme-selector-label">
-    Color theme
+    Theme
     <select class="theme-selector" oninput="activateTheme(this.value)">
-        <option value="auto" selected>Auto (default)</option>
-        <option value="light">Light theme</option>
-        <option value="dark">Dark theme</option>
+        <option value="auto" selected>Auto</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
     </select>
 </label> |</li>
             
@@ -180,23 +185,23 @@
             
   <section id="module-reprlib">
 <span id="reprlib-alternate-repr-implementation"></span><h1><a class="reference internal" href="#module-reprlib" title="reprlib: Alternate repr() implementation with size limits."><code class="xref py py-mod docutils literal notranslate"><span class="pre">reprlib</span></code></a> — Alternate <a class="reference internal" href="functions.html#repr" title="repr"><code class="xref py py-func docutils literal notranslate"><span class="pre">repr()</span></code></a> implementation<a class="headerlink" href="#module-reprlib" title="Permalink to this headline">¶</a></h1>
-<p><strong>Source code:</strong> <a class="reference external" href="https://github.com/python/cpython/tree/3.10/Lib/reprlib.py">Lib/reprlib.py</a></p>
+<p><strong>Source code:</strong> <a class="reference external" href="https://github.com/python/cpython/tree/3.11/Lib/reprlib.py">Lib/reprlib.py</a></p>
 <hr class="docutils" />
 <p>The <a class="reference internal" href="#module-reprlib" title="reprlib: Alternate repr() implementation with size limits."><code class="xref py py-mod docutils literal notranslate"><span class="pre">reprlib</span></code></a> module provides a means for producing object representations
 with limits on the size of the resulting strings. This is used in the Python
 debugger and may be useful in other contexts as well.</p>
 <p>This module provides a class, an instance, and a function:</p>
 <dl class="py class">
-<dt id="reprlib.Repr">
-<em class="property">class </em><code class="sig-prename descclassname">reprlib.</code><code class="sig-name descname">Repr</code><a class="headerlink" href="#reprlib.Repr" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reprlib.Repr">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">reprlib.</span></span><span class="sig-name descname"><span class="pre">Repr</span></span><a class="headerlink" href="#reprlib.Repr" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class which provides formatting services useful in implementing functions
 similar to the built-in <a class="reference internal" href="functions.html#repr" title="repr"><code class="xref py py-func docutils literal notranslate"><span class="pre">repr()</span></code></a>; size limits for  different object types
 are added to avoid the generation of representations which are excessively long.</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="reprlib.aRepr">
-<code class="sig-prename descclassname">reprlib.</code><code class="sig-name descname">aRepr</code><a class="headerlink" href="#reprlib.aRepr" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reprlib.aRepr">
+<span class="sig-prename descclassname"><span class="pre">reprlib.</span></span><span class="sig-name descname"><span class="pre">aRepr</span></span><a class="headerlink" href="#reprlib.aRepr" title="Permalink to this definition">¶</a></dt>
 <dd><p>This is an instance of <a class="reference internal" href="#reprlib.Repr" title="reprlib.Repr"><code class="xref py py-class docutils literal notranslate"><span class="pre">Repr</span></code></a> which is used to provide the
 <a class="reference internal" href="#reprlib.repr" title="reprlib.repr"><code class="xref py py-func docutils literal notranslate"><span class="pre">repr()</span></code></a> function described below.  Changing the attributes of this
 object will affect the size limits used by <a class="reference internal" href="#reprlib.repr" title="reprlib.repr"><code class="xref py py-func docutils literal notranslate"><span class="pre">repr()</span></code></a> and the Python
@@ -204,8 +209,8 @@ debugger.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="reprlib.repr">
-<code class="sig-prename descclassname">reprlib.</code><code class="sig-name descname">repr</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reprlib.repr" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reprlib.repr">
+<span class="sig-prename descclassname"><span class="pre">reprlib.</span></span><span class="sig-name descname"><span class="pre">repr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reprlib.repr" title="Permalink to this definition">¶</a></dt>
 <dd><p>This is the <a class="reference internal" href="#reprlib.Repr.repr" title="reprlib.Repr.repr"><code class="xref py py-meth docutils literal notranslate"><span class="pre">repr()</span></code></a> method of <code class="docutils literal notranslate"><span class="pre">aRepr</span></code>.  It returns a string
 similar to that returned by the built-in function of the same name, but with
 limits on most sizes.</p>
@@ -215,8 +220,8 @@ limits on most sizes.</p>
 detecting recursive calls to <code class="xref py py-meth docutils literal notranslate"><span class="pre">__repr__()</span></code> and substituting a placeholder
 string instead.</p>
 <span class="target" id="index-0"></span><dl class="py function">
-<dt id="reprlib.recursive_repr">
-<code class="sig-prename descclassname">&#64;</code><code class="sig-prename descclassname">reprlib.</code><code class="sig-name descname">recursive_repr</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fillvalue</span><span class="o">=</span><span class="default_value">'...'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reprlib.recursive_repr" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reprlib.recursive_repr">
+<span class="sig-prename descclassname"><span class="pre">&#64;</span></span><span class="sig-prename descclassname"><span class="pre">reprlib.</span></span><span class="sig-name descname"><span class="pre">recursive_repr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fillvalue</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'...'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reprlib.recursive_repr" title="Permalink to this definition">¶</a></dt>
 <dd><p>Decorator for <code class="xref py py-meth docutils literal notranslate"><span class="pre">__repr__()</span></code> methods to detect recursive calls within the
 same thread.  If a recursive call is made, the <em>fillvalue</em> is returned,
 otherwise, the usual <code class="xref py py-meth docutils literal notranslate"><span class="pre">__repr__()</span></code> call is made.  For example:</p>
@@ -244,41 +249,51 @@ otherwise, the usual <code class="xref py py-meth docutils literal notranslate">
 size limits for the representations of different object types,  and methods
 which format specific object types.</p>
 <dl class="py attribute">
-<dt id="reprlib.Repr.maxlevel">
-<code class="sig-prename descclassname">Repr.</code><code class="sig-name descname">maxlevel</code><a class="headerlink" href="#reprlib.Repr.maxlevel" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reprlib.Repr.fillvalue">
+<span class="sig-prename descclassname"><span class="pre">Repr.</span></span><span class="sig-name descname"><span class="pre">fillvalue</span></span><a class="headerlink" href="#reprlib.Repr.fillvalue" title="Permalink to this definition">¶</a></dt>
+<dd><p>This string is displayed for recursive references. It defaults to
+<code class="docutils literal notranslate"><span class="pre">...</span></code>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 3.11.</span></p>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="reprlib.Repr.maxlevel">
+<span class="sig-prename descclassname"><span class="pre">Repr.</span></span><span class="sig-name descname"><span class="pre">maxlevel</span></span><a class="headerlink" href="#reprlib.Repr.maxlevel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Depth limit on the creation of recursive representations.  The default is <code class="docutils literal notranslate"><span class="pre">6</span></code>.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="reprlib.Repr.maxdict">
-<code class="sig-prename descclassname">Repr.</code><code class="sig-name descname">maxdict</code><a class="headerlink" href="#reprlib.Repr.maxdict" title="Permalink to this definition">¶</a></dt>
-<dt id="reprlib.Repr.maxlist">
-<code class="sig-prename descclassname">Repr.</code><code class="sig-name descname">maxlist</code><a class="headerlink" href="#reprlib.Repr.maxlist" title="Permalink to this definition">¶</a></dt>
-<dt id="reprlib.Repr.maxtuple">
-<code class="sig-prename descclassname">Repr.</code><code class="sig-name descname">maxtuple</code><a class="headerlink" href="#reprlib.Repr.maxtuple" title="Permalink to this definition">¶</a></dt>
-<dt id="reprlib.Repr.maxset">
-<code class="sig-prename descclassname">Repr.</code><code class="sig-name descname">maxset</code><a class="headerlink" href="#reprlib.Repr.maxset" title="Permalink to this definition">¶</a></dt>
-<dt id="reprlib.Repr.maxfrozenset">
-<code class="sig-prename descclassname">Repr.</code><code class="sig-name descname">maxfrozenset</code><a class="headerlink" href="#reprlib.Repr.maxfrozenset" title="Permalink to this definition">¶</a></dt>
-<dt id="reprlib.Repr.maxdeque">
-<code class="sig-prename descclassname">Repr.</code><code class="sig-name descname">maxdeque</code><a class="headerlink" href="#reprlib.Repr.maxdeque" title="Permalink to this definition">¶</a></dt>
-<dt id="reprlib.Repr.maxarray">
-<code class="sig-prename descclassname">Repr.</code><code class="sig-name descname">maxarray</code><a class="headerlink" href="#reprlib.Repr.maxarray" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reprlib.Repr.maxdict">
+<span class="sig-prename descclassname"><span class="pre">Repr.</span></span><span class="sig-name descname"><span class="pre">maxdict</span></span><a class="headerlink" href="#reprlib.Repr.maxdict" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reprlib.Repr.maxlist">
+<span class="sig-prename descclassname"><span class="pre">Repr.</span></span><span class="sig-name descname"><span class="pre">maxlist</span></span><a class="headerlink" href="#reprlib.Repr.maxlist" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reprlib.Repr.maxtuple">
+<span class="sig-prename descclassname"><span class="pre">Repr.</span></span><span class="sig-name descname"><span class="pre">maxtuple</span></span><a class="headerlink" href="#reprlib.Repr.maxtuple" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reprlib.Repr.maxset">
+<span class="sig-prename descclassname"><span class="pre">Repr.</span></span><span class="sig-name descname"><span class="pre">maxset</span></span><a class="headerlink" href="#reprlib.Repr.maxset" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reprlib.Repr.maxfrozenset">
+<span class="sig-prename descclassname"><span class="pre">Repr.</span></span><span class="sig-name descname"><span class="pre">maxfrozenset</span></span><a class="headerlink" href="#reprlib.Repr.maxfrozenset" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reprlib.Repr.maxdeque">
+<span class="sig-prename descclassname"><span class="pre">Repr.</span></span><span class="sig-name descname"><span class="pre">maxdeque</span></span><a class="headerlink" href="#reprlib.Repr.maxdeque" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reprlib.Repr.maxarray">
+<span class="sig-prename descclassname"><span class="pre">Repr.</span></span><span class="sig-name descname"><span class="pre">maxarray</span></span><a class="headerlink" href="#reprlib.Repr.maxarray" title="Permalink to this definition">¶</a></dt>
 <dd><p>Limits on the number of entries represented for the named object type.  The
 default is <code class="docutils literal notranslate"><span class="pre">4</span></code> for <a class="reference internal" href="#reprlib.Repr.maxdict" title="reprlib.Repr.maxdict"><code class="xref py py-attr docutils literal notranslate"><span class="pre">maxdict</span></code></a>, <code class="docutils literal notranslate"><span class="pre">5</span></code> for <a class="reference internal" href="#reprlib.Repr.maxarray" title="reprlib.Repr.maxarray"><code class="xref py py-attr docutils literal notranslate"><span class="pre">maxarray</span></code></a>, and  <code class="docutils literal notranslate"><span class="pre">6</span></code> for
 the others.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="reprlib.Repr.maxlong">
-<code class="sig-prename descclassname">Repr.</code><code class="sig-name descname">maxlong</code><a class="headerlink" href="#reprlib.Repr.maxlong" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reprlib.Repr.maxlong">
+<span class="sig-prename descclassname"><span class="pre">Repr.</span></span><span class="sig-name descname"><span class="pre">maxlong</span></span><a class="headerlink" href="#reprlib.Repr.maxlong" title="Permalink to this definition">¶</a></dt>
 <dd><p>Maximum number of characters in the representation for an integer.  Digits
 are dropped from the middle.  The default is <code class="docutils literal notranslate"><span class="pre">40</span></code>.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="reprlib.Repr.maxstring">
-<code class="sig-prename descclassname">Repr.</code><code class="sig-name descname">maxstring</code><a class="headerlink" href="#reprlib.Repr.maxstring" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reprlib.Repr.maxstring">
+<span class="sig-prename descclassname"><span class="pre">Repr.</span></span><span class="sig-name descname"><span class="pre">maxstring</span></span><a class="headerlink" href="#reprlib.Repr.maxstring" title="Permalink to this definition">¶</a></dt>
 <dd><p>Limit on the number of characters in the representation of the string.  Note
 that the “normal” representation of the string is used as the character source:
 if escape sequences are needed in the representation, these may be mangled when
@@ -286,23 +301,23 @@ the representation is shortened.  The default is <code class="docutils literal n
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="reprlib.Repr.maxother">
-<code class="sig-prename descclassname">Repr.</code><code class="sig-name descname">maxother</code><a class="headerlink" href="#reprlib.Repr.maxother" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reprlib.Repr.maxother">
+<span class="sig-prename descclassname"><span class="pre">Repr.</span></span><span class="sig-name descname"><span class="pre">maxother</span></span><a class="headerlink" href="#reprlib.Repr.maxother" title="Permalink to this definition">¶</a></dt>
 <dd><p>This limit is used to control the size of object types for which no specific
 formatting method is available on the <a class="reference internal" href="#reprlib.Repr" title="reprlib.Repr"><code class="xref py py-class docutils literal notranslate"><span class="pre">Repr</span></code></a> object. It is applied in a
 similar manner as <a class="reference internal" href="#reprlib.Repr.maxstring" title="reprlib.Repr.maxstring"><code class="xref py py-attr docutils literal notranslate"><span class="pre">maxstring</span></code></a>.  The default is <code class="docutils literal notranslate"><span class="pre">20</span></code>.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="reprlib.Repr.repr">
-<code class="sig-prename descclassname">Repr.</code><code class="sig-name descname">repr</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reprlib.Repr.repr" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reprlib.Repr.repr">
+<span class="sig-prename descclassname"><span class="pre">Repr.</span></span><span class="sig-name descname"><span class="pre">repr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reprlib.Repr.repr" title="Permalink to this definition">¶</a></dt>
 <dd><p>The equivalent to the built-in <a class="reference internal" href="functions.html#repr" title="repr"><code class="xref py py-func docutils literal notranslate"><span class="pre">repr()</span></code></a> that uses the formatting imposed by
 the instance.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="reprlib.Repr.repr1">
-<code class="sig-prename descclassname">Repr.</code><code class="sig-name descname">repr1</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj</span></em>, <em class="sig-param"><span class="n">level</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reprlib.Repr.repr1" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reprlib.Repr.repr1">
+<span class="sig-prename descclassname"><span class="pre">Repr.</span></span><span class="sig-name descname"><span class="pre">repr1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reprlib.Repr.repr1" title="Permalink to this definition">¶</a></dt>
 <dd><p>Recursive implementation used by <a class="reference internal" href="#reprlib.Repr.repr" title="reprlib.Repr.repr"><code class="xref py py-meth docutils literal notranslate"><span class="pre">repr()</span></code></a>.  This uses the type of <em>obj</em> to
 determine which formatting method to call, passing it <em>obj</em> and <em>level</em>.  The
 type-specific methods should call <a class="reference internal" href="#reprlib.Repr.repr1" title="reprlib.Repr.repr1"><code class="xref py py-meth docutils literal notranslate"><span class="pre">repr1()</span></code></a> to perform recursive formatting,
@@ -310,8 +325,8 @@ with <code class="docutils literal notranslate"><span class="pre">level</span> <
 </dd></dl>
 
 <dl class="py method">
-<dt>
-<code class="sig-prename descclassname">Repr.</code><code class="sig-name descname">repr_TYPE</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj</span></em>, <em class="sig-param"><span class="n">level</span></em><span class="sig-paren">)</span></dt>
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">Repr.</span></span><span class="sig-name descname"><span class="pre">repr_TYPE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Formatting methods for specific types are implemented as methods with a name
 based on the type name.  In the method name, <strong>TYPE</strong> is replaced by
 <code class="docutils literal notranslate"><span class="pre">'_'.join(type(obj).__name__.split())</span></code>. Dispatch to these methods is
@@ -350,8 +365,9 @@ for file objects could be added:</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../contents.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">Table of Contents</a></h3>
+    <ul>
 <li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">reprlib</span></code> — Alternate <code class="xref py py-func docutils literal notranslate"><span class="pre">repr()</span></code> implementation</a><ul>
 <li><a class="reference internal" href="#repr-objects">Repr Objects</a></li>
 <li><a class="reference internal" href="#subclassing-repr-objects">Subclassing Repr Objects</a></li>
@@ -359,18 +375,23 @@ for file objects could be added:</p>
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="pprint.html"
-                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pprint</span></code> — Data pretty printer</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="enum.html"
-                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">enum</span></code> — Support for enumerations</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="pprint.html"
+                          title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pprint</span></code> — Data pretty printer</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="enum.html"
+                          title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">enum</span></code> — Support for enumerations</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
       <li><a href="../bugs.html">Report a Bug</a></li>
       <li>
-        <a href="https://github.com/python/cpython/blob/3.10/Doc/library/reprlib.rst"
+        <a href="https://github.com/python/cpython/blob/main/Doc/library/reprlib.rst"
             rel="nofollow">Show Source
         </a>
       </li>
@@ -406,7 +427,7 @@ for file objects could be added:</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.10.0b1 Documentation</a> &#187;
+      <a href="../index.html">3.11.0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
@@ -427,36 +448,36 @@ for file objects could be added:</p>
                 </li>
             <li class="right">
 <label class="theme-selector-label">
-    Color theme
+    Theme
     <select class="theme-selector" oninput="activateTheme(this.value)">
-        <option value="auto" selected>Auto (default)</option>
-        <option value="light">Light theme</option>
-        <option value="dark">Dark theme</option>
+        <option value="auto" selected>Auto</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
     </select>
 </label> |</li>
             
       </ul>
     </div>  
     <div class="footer">
-    &copy; <a href="../copyright.html">Copyright</a> 2001-2021, Python Software Foundation.
+    &copy; <a href="../copyright.html">Copyright</a> 2001-2022, Python Software Foundation.
     <br />
     This page is licensed under the Python Software Foundation License Version 2.
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    See <a href="">History and License</a> for more information.
-    <br /><br />
+    See <a href="/license.html">History and License</a> for more information.<br />
+    <br />
 
     The Python Software Foundation is a non-profit corporation.
 <a href="https://www.python.org/psf/donations/">Please donate.</a>
 <br />
     <br />
 
-    Last updated on May 10, 2021.
-    <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
+    Last updated on Nov 19, 2022.
+    <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
     </div>
 
     <script type="text/javascript" src="../_static/switchers.js"></script>
